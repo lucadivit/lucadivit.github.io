@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Bit Di Vita - Metaeuristica</title><link href="https://lucadivit.github.io/it/" rel="alternate"></link><link href="https://lucadivit.github.io/feeds/metaeuristica.atom.xml" rel="self"></link><id>https://lucadivit.github.io/it/</id><updated>2025-04-07T00:00:00+02:00</updated><entry><title>Crystal Structure Algorithm</title><link href="https://lucadivit.github.io/it/metaeuristica/crystal-structure-algorithm/" rel="alternate"></link><published>2025-04-07T00:00:00+02:00</published><updated>2025-04-07T00:00:00+02:00</updated><author><name>Luca Di Vita</name></author><id>tag:lucadivit.github.io,2025-04-07:/it/metaeuristica/crystal-structure-algorithm/</id><summary type="html">&lt;p&gt;Per questo mio primo articolo vorrei parlare di un argomento che mi sta molto a cuore: la &lt;strong&gt;Metaeuristica&lt;/strong&gt;, che non è il nome di un demone assiro
+ma una famiglia di algoritmi per la risoluzione di problemi computazionali e di ottimizzazione ossia di massimo o di minimo.&lt;/p&gt;
+&lt;p&gt;Quando ci troviamo …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Per questo mio primo articolo vorrei parlare di un argomento che mi sta molto a cuore: la &lt;strong&gt;Metaeuristica&lt;/strong&gt;, che non è il nome di un demone assiro
+ma una famiglia di algoritmi per la risoluzione di problemi computazionali e di ottimizzazione ossia di massimo o di minimo.&lt;/p&gt;
+&lt;p&gt;Quando ci troviamo davanti a un problema molto grande o complesso — come i problemi &lt;strong&gt;&lt;a href="https://it.wikipedia.org/wiki/NP-completo"&gt;NP-Completi&lt;/a&gt;&lt;/strong&gt; — trovare la soluzione 
+perfetta richiederebbe tempi biblici.&lt;br&gt;
+Ed è qui che entrano in gioco loro: le metaeuristiche. Questi algoritmi non promettono l’ottimo assoluto, ma fanno del loro meglio per trovare 
+&lt;strong&gt;soluzioni molto buone&lt;/strong&gt;, in tempi ragionevoli e con approcci spesso ispirati alla natura ed ai suoi processi.&lt;br&gt;
+Basti pensare ad &lt;strong&gt;&lt;a href="https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche"&gt;ACO&lt;/a&gt;&lt;/strong&gt; che si basa sul comportamento delle formiche, o &lt;strong&gt;&lt;a href="https://it.wikipedia.org/wiki/Particle_Swarm_Optimization"&gt;PSO&lt;/a&gt;&lt;/strong&gt; ispirato al movimento degli sciami.&lt;/p&gt;
+&lt;p&gt;Tra i tanti algoritmi metaeuristici, ce n'è uno che mi ha colpito particolarmente, sia per la sua eleganza che per l’originalità dell’ispirazione: il &lt;strong&gt;Crystal Structure Algorithm&lt;/strong&gt; o &lt;strong&gt;CryStAl&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Questo algoritmo è ispirato ai processi di formazione di &lt;strong&gt;strutture cristalline&lt;/strong&gt; dove gli elementi — atomi, molecole o ioni — si dispongono in modo ordinato e simmetrico, come avviene
+ad esempio nei cristalli di quarzo.&lt;br&gt;
+CryStAl si distingue per una caratteristica piuttosto interessante: è un &lt;strong&gt;algoritmo senza parametri&lt;/strong&gt;.
+A differenza di molti altri approcci, &lt;strong&gt;non richiede di settare valori a mano&lt;/strong&gt; per controllare il comportamento dell’ottimizzazione, 
+e gestisce da solo il bilanciamento tra &lt;strong&gt;esplorazione&lt;/strong&gt; (cercare nuove soluzioni in aree diverse) e &lt;strong&gt;sfruttamento&lt;/strong&gt; (raffinare le soluzioni già promettenti), 
+adattandosi dinamicamente durante il processo.&lt;br&gt;
+Il cuore dell’algoritmo si basa su &lt;strong&gt;quattro fasi distinte&lt;/strong&gt; di aggiornamento delle soluzioni, 
+che permettono di combinare &lt;strong&gt;ricerca locale&lt;/strong&gt; (cioè il miglioramento delle soluzioni vicine a quelle già trovate) e &lt;strong&gt;globale&lt;/strong&gt;
+(l’esplorazione di nuove aree nello spazio delle possibili soluzioni) in modo efficace.&lt;/p&gt;
+&lt;h3&gt;Da dove nasce l’idea&lt;/h3&gt;
+&lt;p&gt;I minerali solidi i cui componenti costitutivi sono disposti in modo regolare e ripetuto nelle tre direzioni spaziali, sono chiamati cristalli.
+Alla base di questa struttura ordinata c’è il &lt;strong&gt;reticolo&lt;/strong&gt; o &lt;strong&gt;lattice&lt;/strong&gt;: una specie di &lt;strong&gt;griglia tridimensionale&lt;/strong&gt; fatta di punti, che si ripete nello spazio.&lt;br&gt;
+Di per sé, però, il reticolo non ci dice dove si trovano esattamente gli atomi. Per quello serve un altro pezzo del puzzle: la &lt;strong&gt;base&lt;/strong&gt;, 
+cioè l’insieme di atomi che si ripete su ogni punto del reticolo. In altre parole: il lattice dice &lt;strong&gt;dove&lt;/strong&gt; mettere qualcosa, 
+la base dice &lt;strong&gt;cosa&lt;/strong&gt; ci va e &lt;strong&gt;come&lt;/strong&gt; è orientato nello spazio. Eccone un esempio usando &lt;strong&gt;puntini blu e orsetti gommosi&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Base e Lattice" class="image-with-caption" src="https://lucadivit.github.io/it/images/metaeuristica/crystal/base_lattice.png"&gt;
+&lt;em class="image-with-caption"&gt;Figura 1. Base + Lattice&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Grazie ai concetti di reticolo e base, è possibile generare un’infinità di &lt;strong&gt;strutture cristalline&lt;/strong&gt; diverse.
+Il reticolo, con la sua disposizione regolare di punti, definisce la forma generale del cristallo, mentre 
+la base — cioè l’insieme di atomi che si ripete — ne determina la &lt;strong&gt;configurazione interna&lt;/strong&gt;. Combinando questi due elementi in modi differenti,
+possiamo ottenere cristalli con geometrie molto varie, alcune regolari e ben note, altre più complesse.
+Qui sotto trovi alcuni esempi di come queste strutture possono variare:&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Esempi Cristalli" class="image-with-caption" src="https://lucadivit.github.io/it/images/metaeuristica/crystal/esempi_cristalli.png"&gt;
+&lt;em class="image-with-caption"&gt;Figura 2. Esempi di Cristalli Cubici&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Il lattice, con la sua base, è la &lt;strong&gt;struttura ordinata&lt;/strong&gt; ed &lt;strong&gt;ideale&lt;/strong&gt; che i nostri &lt;em&gt;cristalli artificiali&lt;/em&gt; — come vedremo a breve — dovranno 
+cercare di &lt;strong&gt;replicare&lt;/strong&gt; durante l’ottimizzazione.&lt;/p&gt;
+&lt;h3&gt;Il Modello Matematico&lt;/h3&gt;
+&lt;p&gt;Il &lt;strong&gt;modello matematico&lt;/strong&gt; utilizzato dagli autori di questo algoritmo è il &lt;strong&gt;&lt;a href="https://it.wikipedia.org/wiki/Reticolo_di_Bravais"&gt;modello di Bravais&lt;/a&gt;&lt;/strong&gt; che 
+permette di descrivere tutti i possibili reticoli che possono esistere nello spazio tridimensionale.&lt;br&gt;
+Ogni punto del reticolo si può raggiungere partendo dall’origine e facendo un certo numero intero di passi lungo ciascuna delle tre direzioni:
+destra|sinistra, avanti|indietro, sopra|sotto.&lt;br&gt;
+Si definisce quindi un &lt;strong&gt;vettore posizione&lt;/strong&gt; tramite la seguente formula:&lt;/p&gt;
+&lt;p&gt;&lt;span class="math center-math"&gt;\(\overrightarrow{r} = \sum_{i=1}^{d}n_i \overrightarrow{a_i}\)&lt;/span&gt;
+Dove:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(d\)&lt;/span&gt; è il numero di dimensioni del cristallo, che è solitamente 3 (a meno che non vivi in un mondo di
+4 dimensioni spaziali — in quel caso, &lt;strong&gt;invitami a casa tua per favore&lt;/strong&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(n_i\)&lt;/span&gt; è un numero intero che indica quanti passi facciamo lungo la direzione &lt;span class="math"&gt;\(a_i\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(a_i\)&lt;/span&gt; indica la "direzione movimento".&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ora che abbiamo definito &lt;span class="math"&gt;\(\overrightarrow{r}\)&lt;/span&gt; mettiamolo da parte, ma non preoccupatevi tornerà presto.&lt;br&gt;
+&lt;strong&gt;Thor mi fulmini&lt;/strong&gt; se dovessi mai farvi rinunciare alle vostre &lt;span class="math"&gt;\(\overrightarrow{r}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Torniamo a noi e diamo un’occhiata alle &lt;strong&gt;soluzioni candidate&lt;/strong&gt;.&lt;br&gt;
+Ebbene sì: negli algoritmi metaeuristici non c’è una sola soluzione, ma un insieme di soluzioni candidate, 
+da cui andremo a prendere la &lt;strong&gt;migliore&lt;/strong&gt;.... Ehm dicevo, ogni soluzione candidata (o "cristallo") viene rappresentata come un &lt;strong&gt;vettore numerico&lt;/strong&gt; a 
+&lt;span class="math"&gt;\(d\)&lt;/span&gt; dimensioni, cioè una lista di valori:&lt;/p&gt;
+&lt;p&gt;&lt;span class="math center-math"&gt;\(C_i = \left[x_{i}^{1}, x_{i}^{2}, \dots, x_{i}^{d}  \right]\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Dove: &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(C_i\)&lt;/span&gt; è l'&lt;span class="math"&gt;\(i\)&lt;/span&gt;-esimo cristallo.&lt;/li&gt;
+&lt;li&gt;Ogni &lt;span class="math"&gt;\(x_{i}^{j}\)&lt;/span&gt; indica il valore che assume la variabile &lt;span class="math"&gt;\(j\)&lt;/span&gt;-esima nei cristallo &lt;span class="math"&gt;\(i\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Per cui la &lt;strong&gt;popolazione di cristalli&lt;/strong&gt; è definita come:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+C_r = \left[C_{r_1}, C_{r_2}, \dots, C_{r_n}  \right]^{T} =
+\begin{bmatrix}
+ x_{1}^{1} &amp;amp; x_{1}^{2} &amp;amp; \dots &amp;amp; x_{1}^{d} \\
+ x_{2}^{1} &amp;amp; x_{2}^{2} &amp;amp; \dots &amp;amp; x_{2}^{d} \\
+ \vdots &amp;amp; \vdots &amp;amp; \ddots &amp;amp; \vdots \\
+ x_{n}^{1} &amp;amp; x_{n}^{2} &amp;amp; \dots &amp;amp; x_{n}^{d} \\
+\end{bmatrix}
+$$&lt;/div&gt;
+&lt;p&gt;In altre parole, abbiamo una popolazione di &lt;span class="math"&gt;\(n\)&lt;/span&gt; cristalli, ognuno con &lt;span class="math"&gt;\(d\)&lt;/span&gt; variabili. Questa matrice — dove ogni riga è un cristallo
+e ogni colonna una variabile — rappresenta l'intero spazio di ricerca da cui l’algoritmo cercherà di tirare fuori il miglior candidato.&lt;/p&gt;
+&lt;p&gt;Ok fin qui chiaro (spero)! Ma ora la domanda è... &lt;strong&gt;Come diamine si creano questi cristalli?&lt;/strong&gt;&lt;br&gt;
+Presto detto.&lt;br&gt;
+Data una &lt;strong&gt;funzione di fitness&lt;/strong&gt; &lt;span class="math"&gt;\(f\)&lt;/span&gt; che rappresenta il problema da risolvere, i singoli cristalli vengono creati usando 
+una semplice formula: ogni valore del cristallo viene generato in modo &lt;strong&gt;casuale&lt;/strong&gt; all’interno di un intervallo.&lt;/p&gt;
+&lt;div class="math"&gt;$$
+x_{i}^{j} = v_{min} + \xi \cdot \left(v_{max} - v_{min} \right)
+$$&lt;/div&gt;
+&lt;p&gt;Con:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(v_{min}\)&lt;/span&gt;: Valore minimo che possono assumere le variabili della &lt;span class="math"&gt;\(f\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(v_{max}\)&lt;/span&gt;: Valore massimo che possono assumere le variabili della &lt;span class="math"&gt;\(f\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(\xi\)&lt;/span&gt;: Valore casuale in &lt;span class="math"&gt;\(\left[0, 1\right]\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Detta in parole povere: &lt;strong&gt;ogni valore all’interno del cristallo viene scelto casualmente&lt;/strong&gt; in un intervallo predefinito, 
+stabilito in base al dominio del problema.
+Ognuno di questi cristalli è una soluzione candidata al problema &lt;span class="math"&gt;\(f\)&lt;/span&gt;.&lt;br&gt;
+Essere una soluzione candidata, vuol dire che &lt;strong&gt;sostituendo gli elementi del cristallo
+alle variabili della funzione&lt;/strong&gt; &lt;span class="math"&gt;\(f\)&lt;/span&gt;, otteniamo un risultato numerico.  E ciò che vogliamo è trovare il &lt;strong&gt;massimo&lt;/strong&gt; o il &lt;strong&gt;minimo&lt;/strong&gt; di &lt;span class="math"&gt;\(f\)&lt;/span&gt;, a seconda del problema.&lt;/p&gt;
+&lt;p&gt;In cristallografia, le basi presenti negli angoli del lattice — ad esempio come le basi presenti ai vertici del cubo in Figura 1 — hanno un ruolo fondamentale: 
+sono &lt;strong&gt;l’origine della struttura cristallina&lt;/strong&gt;. Per analogia, i primi cristalli creati (quelli casuali) vengono chiamati &lt;strong&gt;main crystals&lt;/strong&gt; e
+sono indicati con &lt;span class="math"&gt;\(C_{r_{main}}\)&lt;/span&gt;.&lt;br&gt;
+Questi main crystals sono il &lt;strong&gt;punto di partenza&lt;/strong&gt; dell’algoritmo, che — come anticipato — si articola in &lt;strong&gt;quattro fasi di aggiornamento&lt;/strong&gt; delle soluzioni.&lt;br&gt;
+Ognuna corrisponde a una variante della struttura cubica:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Cubico semplice&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class="math center-math"&gt;\(C_{r_{new}} = C_{r_{old}} + r C_{r_{main}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Cubico con il cristallo migliore&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class="math center-math"&gt;\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}}\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Cubico con il cristallo medio&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class="math center-math"&gt;\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} F_{c}\)&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Cubico con il cristallo medio e quello migliore&lt;/strong&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class="math center-math"&gt;\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}} + r_{3} F_{c}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Come detto all’inizio, questo algoritmo &lt;strong&gt;non usa parametri esterni&lt;/strong&gt; per bilanciare l’esplorazione (trovare nuove soluzioni) e lo sfruttamento (raffinare quelle buone).
+Il bilanciamento avviene in modo naturale, proprio grazie alle equazioni di aggiornamento che abbiamo appena visto.&lt;br&gt;
+Ma torniamo a noi... abbiamo creato &lt;strong&gt;quattro nuovi cristalli&lt;/strong&gt; partendo dai precedenti. E cosa farne? Lo vedremo tra poco. Prima, lasciate che vi spieghi le stregonerie dietro quei nomi misteriosi:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(C_{r_{main}}\)&lt;/span&gt;: E' un cristallo vecchio selezionato casualmente.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(C_{r_{new}}\)&lt;/span&gt;: E' il nuovo cristallo creato a partire dai precedenti.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(C_{r_{old}}\)&lt;/span&gt;: E' il cristallo originale, prima dell’aggiornamento.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(C_{r_{b}}\)&lt;/span&gt;: E' il cristallo con la configurazione migliore, cioè quello che fornisce il miglior valore per la funzione &lt;span class="math"&gt;\(f\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(F_{c}\)&lt;/span&gt;: E' una media dei valori di un cristallo scelto a caso tra quelli esistenti.&lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(r, r_{1}, r_{2}, r_{3}\)&lt;/span&gt;: Eccole qui, le nostre vecchie conoscenze! Queste &lt;span class="math"&gt;\(r\)&lt;/span&gt; non sono più vettori direzionali, ma numeri interi casuali. Così hanno deciso gli autori del paper... e chi sono io per contraddirli?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I cristalli appena creati si utilizzano, come si vedrà nello pseudocodice, per sostituire quelli "vecchi ed imperfetti" con qualcosa di più nuovo e raffinato. 
+Applicando queste formule per &lt;span class="math"&gt;\(n\)&lt;/span&gt; volte sugli &lt;span class="math"&gt;\(m\)&lt;/span&gt; cristalli, l’algoritmo cerca — in modo probabilistico — di trovare quel cristallo che ottimizza al meglio il problema.&lt;br&gt;
+Siamo cosi arrivati alla conclusione del modello matematico.&lt;/p&gt;
+&lt;h3&gt;Visione Di Insieme&lt;/h3&gt;
+&lt;p&gt;A questo punto cerchiamo di mettere insieme tutto quanto in pseudocodice:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Calcolo la prima generazione casuale di cristalli&lt;/span&gt;
+&lt;span class="n"&gt;crystals&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;create_crystals&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;min_value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_crystal&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Calcolo il fitness di ogni cristallo&lt;/span&gt;
+&lt;span class="n"&gt;crystal_fitnesses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_fitnesses&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;crystals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;problem_to_solve&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Prendo il cristallo migliore in base al fitness&lt;/span&gt;
+&lt;span class="n"&gt;Cr_b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_best_crystal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;crystals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;crystal_fitnesses&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Inizio Ottimizzazione&lt;/span&gt;
+&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;n_iter&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;current_crystal&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;crystals&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;new_crystals&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Calcolo gli r&lt;/span&gt;
+        &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_random_r&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Prendo un cristallo casuale dalla famiglia&lt;/span&gt;
+        &lt;span class="n"&gt;Cr_main&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;take_random_crystal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;crystals&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Prendo un cristallo casuale dalla famiglia e calcolo la media&lt;/span&gt;
+        &lt;span class="n"&gt;Fc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;take_random_crystal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;crystals&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Cubico semplice&lt;/span&gt;
+        &lt;span class="n"&gt;Cr_new&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_simple_cubicle&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_old&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cr_main&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;new_crystals&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_new&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Cubico con il migliore&lt;/span&gt;
+        &lt;span class="n"&gt;Cr_new&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_cubicle_with_best&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_old&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cr_main&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cr_b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;new_crystals&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_new&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Cubico con media&lt;/span&gt;
+        &lt;span class="n"&gt;Cr_new&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_cubicle_with_mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_old&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cr_main&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Fc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;new_crystals&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_new&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Cubico con migliore e media&lt;/span&gt;
+        &lt;span class="n"&gt;Cr_new&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_cubicle_with_best_and_mean&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_old&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cr_main&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cr_b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Fc&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;r3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;new_crystals&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_new&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Clipping per tenere i valori nel range valido&lt;/span&gt;
+        &lt;span class="n"&gt;new_crystals&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;clip_to_min_max&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_crystals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;min_value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;max_value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Calcolo il fitness dei nuovi cristalli&lt;/span&gt;
+        &lt;span class="n"&gt;new_crystal_fitnesses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_fitnesses&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_crystals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;problem_to_solve&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Seleziono il migliore tra i nuovi&lt;/span&gt;
+        &lt;span class="n"&gt;Cr_b_new&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_best_crystal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;new_crystals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;new_crystal_fitnesses&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# Se il nuovo migliore è meglio dell’attuale, lo sostituisco&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;is_new_crystal_fitness_better&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Cr_b_new&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fitness&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;current_crystal&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fitness&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="n"&gt;substitute_current_crystal_with_new_best_one&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;crystals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;current_crystal&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cr_b_new&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="c1"&gt;# Aggiorno i fitness globali e il cristallo migliore&lt;/span&gt;
+    &lt;span class="n"&gt;crystal_fitnesses&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;compute_fitnesses&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;crystals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;problem_to_solve&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;Cr_b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_best_crystal&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;crystals&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;crystal_fitnesses&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Abbiamo quindi definito tutti gli &lt;strong&gt;step dell’algoritmo&lt;/strong&gt;, che permettono — metaforicamente parlando — ai cristalli di 
+&lt;strong&gt;modificare la loro struttura interna&lt;/strong&gt; (cioè i valori numerici) per ottenere la disposizione ottimale della base nel reticolo.&lt;/p&gt;
+&lt;p&gt;Voglio chiudere con un esempio applicativo di CryStAl su una funzione chiamata &lt;strong&gt;&lt;a href="https://www.indusmic.com/post/bird-function"&gt;Bird Function&lt;/a&gt;&lt;/strong&gt;.
+che ha questa forma:&lt;/p&gt;
+&lt;div class="math"&gt;$$
+f(x, y) = sin(x) \cdot e^{(1-cos(y))^2} + cos(x) \cdot e^{(1-sin(x))^2} + (x-y)^2
+$$&lt;/div&gt;
+&lt;p&gt;dove:&lt;/p&gt;
+&lt;p&gt;&lt;span class="math center-math"&gt;\(x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Il grafico della funzione è piuttosto complesso (vedi Figura 3), e trovare il minimo &lt;strong&gt;non è affatto banale&lt;/strong&gt; dal punto di vista analitico.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Bird Function" class="image-with-caption" src="https://lucadivit.github.io/it/images/metaeuristica/crystal/bird.png"&gt;
+&lt;em class="image-with-caption"&gt;Figura 3. Bird Function&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Il suo &lt;strong&gt;minimo globale&lt;/strong&gt; è circa &lt;span class="math"&gt;\(f(x, y) = −106.764\)&lt;/span&gt; nei punti&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(p_1 = (4.701, 3.152)\)&lt;/span&gt; &lt;/li&gt;
+&lt;li&gt;&lt;span class="math"&gt;\(p_2 = (−1.582, −3.130)\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Vediamo cosa succede se proviamo a risolverla con CryStAl:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Definizione della Bird Function&lt;/span&gt;
+&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cos&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cos&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exp&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;
+
+&lt;span class="n"&gt;crystal&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;CryStAl&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function_to_optimize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;problem_dimension&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;approach&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;min&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+                  &lt;span class="n"&gt;lower_bound&lt;/span&gt;&lt;span class="o"&gt;=-&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pi&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;upper_bound&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pi&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;num_crystals&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; 
+                  &lt;span class="n"&gt;num_iterations&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;best_fitness&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Cr_b&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;_&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;crystal&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;start_crystals_construction&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;save_history&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;verbose&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;task_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;bird_function&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Best Crystal Is &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;Cr_b&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt; with fitness &lt;/span&gt;&lt;span class="si"&gt;{&lt;/span&gt;&lt;span class="n"&gt;best_fitness&lt;/span&gt;&lt;span class="si"&gt;}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;L’output sarà qualcosa tipo:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;Best&lt;/span&gt; &lt;span class="n"&gt;Crystal&lt;/span&gt; &lt;span class="n"&gt;Is&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;1.58090168&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;3.14616277&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;fitness&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mf"&gt;106.73618458034184&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Non male, vero? Il risultato è &lt;strong&gt;molto vicino&lt;/strong&gt; al minimo teorico, e lo otteniamo con un algoritmo senza parametri, ispirato alla cristallografia, e — ammettiamolo — pure &lt;strong&gt;stiloso&lt;/strong&gt;.&lt;/p&gt;
+&lt;h3&gt;Per concludere&lt;/h3&gt;
+&lt;p&gt;Spero che questo primo articolo ti abbia incuriosito e magari anche fatto scoprire qualcosa di nuovo!
+Se vuoi smanettare con l’algoritmo, trovi il &lt;strong&gt;codice sorgente completo&lt;/strong&gt; a &lt;a href="https://github.com/lucadivit/CrystalStructureAlgorithm"&gt;questo link&lt;/a&gt;.
+E se ti sei innamorato o innamorata di CryStAl come è successo a me, ti consiglio di dare un’occhiata anche al &lt;strong&gt;&lt;a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method"&gt;paper&lt;/a&gt;&lt;/strong&gt;
+da cui tutto è partito.&lt;/p&gt;
+&lt;p&gt;Alla prossima.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="Metaeuristica"></category><category term="crystal_structure_algorithm"></category><category term="algoritmi_evolutivi"></category><category term="metaeuristica"></category><category term="ottimizzazione"></category></entry></feed>

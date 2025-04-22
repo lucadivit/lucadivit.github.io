@@ -1,0 +1,97 @@
+
+/*
+.navbar .nav.pull-right {
+    float: right !important;
+    margin-right: 0 !important;
+    display: flex !important;
+    height: 3rem !important;
+}
+
+
+.navbar .nav>li>a, .navbar .nav>li {
+    padding: 0px 10px 0px !important;
+    align-content: center !important;
+    height: 100% !important;
+}
+*/
+
+.nav-item-separator {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#bio-pic {
+    max-width: 15em;
+    float: left;
+    margin: 1em 1em 1em 0; /* spazio a destra dell'immagine */
+}
+
+.contact-logo {
+  width: 1.5em;
+  margin-left: 0.5em;
+  vertical-align: middle;
+  border: 0.5em solid #eeeeee00 !important;
+  outline: none;
+}
+
+.image-with-caption {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+/* Gli elementi em con la specifica classe */
+em.image-with-caption {
+  font-style: italic;
+  margin-top: 1rem;
+  text-align: center !important;
+  font-size: 0.9em !important;
+}
+
+/* Gli elementi pre che sono sotto un elemento con classe highlight */
+.highlight pre {
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    max-width: 100% !important;
+    max-height: 100em !important;
+    box-sizing: border-box !important;
+    word-break: break-all !important;
+}
+
+pre code {
+    white-space: pre !important;
+}
+
+/* Gli elementi con entrambe le classi */
+.math.center-math{
+    /* font-size: medium !important; */
+    display: block !important;
+    text-align: center !important;
+    margin: 1em auto !important;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.MathJax_Display {
+    /* font-size: medium !important; */
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.5em 0;
+    display: block;
+    white-space: nowrap;
+}
+
+
+@media (max-width: 767px) {
+    #bio-pic {
+        display: block;
+        float: unset;
+        margin: 0 auto;
+    }
+}
