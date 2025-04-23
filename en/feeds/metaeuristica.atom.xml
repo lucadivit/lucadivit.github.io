@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Bit Di Vita - Metaeuristica</title><link href="https://lucadivit.github.io/en/" rel="alternate"></link><link href="https://lucadivit.github.io/feeds/metaeuristica.atom.xml" rel="self"></link><id>https://lucadivit.github.io/en/</id><updated>2025-04-07T00:00:00+02:00</updated><entry><title>Crystal Structure Algorithm</title><link href="https://lucadivit.github.io/en/metaeuristica/crystal-structure-algorithm/" rel="alternate"></link><published>2025-04-07T00:00:00+02:00</published><updated>2025-04-07T00:00:00+02:00</updated><author><name>Luca Di Vita</name></author><id>tag:lucadivit.github.io,2025-04-07:/en/metaeuristica/crystal-structure-algorithm/</id><summary type="html">&lt;p&gt;For my first article, I’d like to talk about a topic that’s very close to my heart: &lt;strong&gt;Metaheuristics&lt;/strong&gt;. Despite the name, it’s not 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Bit Di Vita - Metaeuristica</title><link href="https://www.lucadivita.it/en/" rel="alternate"></link><link href="https://www.lucadivita.it/feeds/metaeuristica.atom.xml" rel="self"></link><id>https://www.lucadivita.it/en/</id><updated>2025-04-07T00:00:00+02:00</updated><entry><title>Crystal Structure Algorithm</title><link href="https://www.lucadivita.it/en/metaeuristica/crystal-structure-algorithm/" rel="alternate"></link><published>2025-04-07T00:00:00+02:00</published><updated>2025-04-07T00:00:00+02:00</updated><author><name>Luca Di Vita</name></author><id>tag:www.lucadivita.it,2025-04-07:/en/metaeuristica/crystal-structure-algorithm/</id><summary type="html">&lt;p&gt;For my first article, I’d like to talk about a topic that’s very close to my heart: &lt;strong&gt;Metaheuristics&lt;/strong&gt;. Despite the name, it’s not 
 some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems — that is, 
 problems involving finding a maximum …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For my first article, I’d like to talk about a topic that’s very close to my heart: &lt;strong&gt;Metaheuristics&lt;/strong&gt;. Despite the name, it’s not 
 some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems — that is, 
@@ -24,14 +24,14 @@ At the heart of this orderly structure lies the &lt;strong&gt;lattice&lt;/strong
 By itself, though, the lattice doesn’t tell us exactly where the atoms are. That’s where another piece of the puzzle comes in: the &lt;strong&gt;basis&lt;/strong&gt;,
 meaning the set of atoms that repeats at each point of the lattice. In other words: the lattice tells us &lt;strong&gt;where&lt;/strong&gt; to place something, 
 the basis tells us &lt;strong&gt;what&lt;/strong&gt; goes there and &lt;strong&gt;how&lt;/strong&gt; it’s oriented in space. Here’s an example using &lt;strong&gt;blue dots and gummy bears&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Basis and Lattice" class="image-with-caption" src="https://lucadivit.github.io/en/images/metaeuristica/crystal/base_lattice.png"&gt;
+&lt;p&gt;&lt;img alt="Basis and Lattice" class="image-with-caption" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/base_lattice.png"&gt;
 &lt;em class="image-with-caption"&gt;Figure 1. Basis + Lattice&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Thanks to the concepts of &lt;strong&gt;lattice&lt;/strong&gt; and &lt;strong&gt;basis&lt;/strong&gt;, it’s possible to generate an infinite number of &lt;strong&gt;crystal structures&lt;/strong&gt;.
 The lattice, with its regular arrangement of points, defines the overall shape of the crystal, while
 the basis — that is, the repeating set of atoms — determines its &lt;strong&gt;internal configuration&lt;/strong&gt;.
 By combining these two elements in different ways, we can obtain crystals with a wide range of geometries, some regular and well-known, others more complex.
 Below are a few examples of how these structures can vary:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Examples Of Crystals" class="image-with-caption" src="https://lucadivit.github.io/en/images/metaeuristica/crystal/esempi_cristalli.png"&gt;
+&lt;p&gt;&lt;img alt="Examples Of Crystals" class="image-with-caption" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/esempi_cristalli.png"&gt;
 &lt;em class="image-with-caption"&gt;Figure 2. Examples of Cubicle Crystals&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;The lattice, together with its basis, is the &lt;strong&gt;ordered&lt;/strong&gt; and &lt;strong&gt;ideal&lt;/strong&gt; structure that our &lt;em&gt;artificial crystals&lt;/em&gt; — as we’ll soon see — will 
 have to try to &lt;strong&gt;replicate&lt;/strong&gt; during optimization.&lt;/p&gt;
@@ -198,7 +198,7 @@ $$&lt;/div&gt;
 &lt;p&gt;where:&lt;/p&gt;
 &lt;p&gt;&lt;span class="math center-math"&gt;\(x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]\)&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;The plot of the function is quite complex (see Figure 3), and finding the minimum is &lt;strong&gt;anything but trivial&lt;/strong&gt; from an analytical point of view.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Bird Function" class="image-with-caption" src="https://lucadivit.github.io/en/images/metaeuristica/crystal/bird.png"&gt;
+&lt;p&gt;&lt;img alt="Bird Function" class="image-with-caption" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/bird.png"&gt;
 &lt;em class="image-with-caption"&gt;Figura 3. Bird Function&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;Its &lt;strong&gt;global minimum&lt;/strong&gt; is approximately &lt;span class="math"&gt;\(f(x, y) = -106.764\)&lt;/span&gt; at the points:&lt;/p&gt;
 &lt;ul&gt;
