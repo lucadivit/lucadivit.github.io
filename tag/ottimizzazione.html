@@ -9,20 +9,13 @@
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 
         <meta name="author" content="Luca Di Vita" />
 
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
         <title>Bit Di Vita - ottimizzazione tag</title>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2C5BFJFM0C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-2C5BFJFM0C');
-</script>
 
 
 
@@ -134,6 +127,19 @@ ma una famiglia di algoritmi per la risoluzione di problemi computazionali e di 
         <script src="/js/MathJax.js"></script>
         <script src="/js/MathMenu.js"></script>
         <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
     </body>
     <!-- Theme: Elegant built for Pelican
         License : MIT -->
