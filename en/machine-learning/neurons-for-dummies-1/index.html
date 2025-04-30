@@ -11,7 +11,6 @@
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
-
         <meta name="author" content="Luca Di Vita" />
 
         <meta property="og:type" content="article" />
@@ -267,7 +266,8 @@ $$</div>
 <p>Why the Heaviside step function, you might be wondering?<br>
 Well, as mentioned earlier, there are many technical factors to consider, but suffice it to say that it’s the one that best fits our purpose:<br>
 the problem requires a solution that is either <span class="math">\(0\)</span> o <span class="math">\(1\)</span>, and the Heaviside step function returns exactly an output of <span class="math">\(0\)</span> o <span class="math">\(1\)</span>.
-I'd say it's a perfect match, wouldn't you agree!?</p>
+I'd say it's a perfect match, wouldn't you agree!?
+<strong>But nope</strong>. For now for the sake of <strong>simplicity</strong>, we’ll settle for this, and the reason why... we’ll discover it later.</p>
 <p>At this point, all that's left is to see how a neural network makes its predictions. And how do we see it? With a simple substitution of variables.<br>
 There are four possible cases. Remember that</p>
 <div class="math">$$
