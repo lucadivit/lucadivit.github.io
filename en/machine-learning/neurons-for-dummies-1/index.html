@@ -13,6 +13,8 @@
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
         <meta name="author" content="Luca Di Vita" />
 
+        <meta name="description" content="If you have ever heard about neural networks and thought: &#34;how the heck do they learn?&#34; you have landed in the right place. Let&#39;s start immediately with a fresh spoiler of the day: there is no magic, just tons of multiplications, sums, and derivatives. In this article, I want to …
+" />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
@@ -20,12 +22,12 @@
 
 <meta property="og:title" content="Neurons for Dummies - 1 "/>
 <meta property="og:url" content="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/" />
-<meta property="og:description" content="If you have ever heard about neural networks and thought: &#34;how the heck do they learn?&#34; you have landed in the right place. Let&#39;s start immediately with a fresh spoiler of the day: there is no magic — just tons of multiplications, sums, and derivatives. In this article, I want to …" />
+<meta property="og:description" content="If you have ever heard about neural networks and thought: &#34;how the heck do they learn?&#34; you have landed in the right place. Let&#39;s start immediately with a fresh spoiler of the day: there is no magic, just tons of multiplications, sums, and derivatives. In this article, I want to …" />
 <meta property="og:site_name" content="Bit Di Vita" />
 <meta property="og:article:author" content="Luca Di Vita" />
 <meta property="og:article:published_time" content="2025-04-30T00:00:00+02:00" />
 <meta name="twitter:title" content="Neurons for Dummies - 1 ">
-<meta name="twitter:description" content="If you have ever heard about neural networks and thought: &#34;how the heck do they learn?&#34; you have landed in the right place. Let&#39;s start immediately with a fresh spoiler of the day: there is no magic — just tons of multiplications, sums, and derivatives. In this article, I want to …">
+<meta name="twitter:description" content="If you have ever heard about neural networks and thought: &#34;how the heck do they learn?&#34; you have landed in the right place. Let&#39;s start immediately with a fresh spoiler of the day: there is no magic, just tons of multiplications, sums, and derivatives. In this article, I want to …">
 
         <title>Neurons for Dummies - 1  · Bit Di Vita
 </title>
@@ -113,20 +115,34 @@
 </div>
 
 <div class="row-fluid">
-        <div class="span8 offset2 article-content">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <div class="toc">
+<ul>
+<li><a href="#anatomy-of-a-neural-network">Anatomy of a Neural Network</a></li>
+<li><a href="#from-the-network-to-the-neuron">From the Network to the Neuron</a></li>
+<li><a href="#a-numerical-example-the-and-problem">A Numerical Example. The AND Problem.</a></li>
+<li><a href="#to-wrap-up">To Wrap Up</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
             
-            <p>If you have ever heard about neural networks and thought: <em>"how the heck do they learn?"</em> you have landed in the right place.<br>
-Let's start immediately with a fresh spoiler of the day: there is no <strong>magic</strong> — just tons of <strong>multiplications</strong>, <strong>sums</strong>, and <strong>derivatives</strong>.<br>
-In this article, I want to tell you — calmly and without panic — what happens inside an <strong>artificial neuron</strong>, and how it <strong>learns from its mistakes</strong>, 
+            
+<p>If you have ever heard about neural networks and thought: <em>"how the heck do they learn?"</em> you have landed in the right place.<br/>
+Let's start immediately with a fresh spoiler of the day: there is no <strong>magic</strong>, just tons of <strong>multiplications</strong>, <strong>sums</strong>, and <strong>derivatives</strong>.<br/>
+In this article, I want to tell you with calm and without panic, what happens inside an <strong>artificial neuron</strong> and how it <strong>learns from its mistakes</strong>, 
 and we will do it step by step, with a practical example.</p>
-<h3>Anatomy of a Neural Network</h3>
+<h3 id="anatomy-of-a-neural-network">Anatomy of a Neural Network<a class="headerlink" href="#anatomy-of-a-neural-network" title="Permanent link"> </a></h3>
 <p>Before understanding <em>how</em> a neural network works, we first need to clarify <em>what</em> a neural network actually is.
 Let's start by saying that there are different types of neural networks: <strong>convolutional</strong>, <strong>recurrent</strong>, and many others.
 One or the other is chosen depending on the problem to be solved.
 In this article, we will focus on <strong>Multi Layer Perceptron</strong> networks (or <strong>MLP</strong>), which are usually represented like this:</p>
-<p><img alt="MLP" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/mlp.png">
+<p><img alt="MLP" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/mlp.png"/>
 <em class="image-with-caption">Figure 1. Multi Layer Perceptron</em></p>
-<p>The image may look simple, but behind that simplicity hides a number of concepts enough to make you want to commit harakiri.<br>
+<p>The image may look simple, but behind that simplicity hides a number of concepts enough to make you want to commit harakiri.<br/>
 And from this plethora of concepts... we will only scratch the surface.
 Let's start by talking about what we have in front of our eyes:</p>
 <ul>
@@ -144,17 +160,17 @@ This already explains why these architectures are called <strong>MLP</strong>, o
 </ul>
 <p>To give a practical example, let's suppose <strong>we can't recognize</strong> whether a picture shows a dog or a cat (and I sincerely hope this is just a supposition),
 we feed our picture into the input layer, which receives the data.
-This data is then processed by the hidden layers, and finally we get the result — <strong>dog or cat</strong> — in the output layer.<br>
+This data is then processed by the hidden layers, and finally we get the result — <strong>dog or cat</strong> — in the output layer.<br/>
 But before the network can say "dog" or "cat," it needs <strong>to be trained</strong>.
 Training a neural network simply means giving it lots of pictures of dogs and cats, and <em>correcting</em> it every time it makes a mistake, in order to adjust the aim for future predictions.
 If you’ve made it this far, you might be wondering:
 <em>"Ok, but how...?"</em>
 Hold your horses, cowboy — we’ll get there.</p>
-<h3>From the Network to the Neuron</h3>
-<p>We have talked about networks, layers, arrows, and dots.<br>
-But to truly understand how a neural network makes decisions (and how it learns from its mistakes), we need to go down a level. Down to the level of the dot.<br>
+<h3 id="from-the-network-to-the-neuron">From the Network to the Neuron<a class="headerlink" href="#from-the-network-to-the-neuron" title="Permanent link"> </a></h3>
+<p>We have talked about networks, layers, arrows, and dots.<br/>
+But to truly understand how a neural network makes decisions (and how it learns from its mistakes), we need to go down a level. Down to the level of the dot.<br/>
 Let's start by looking at the stylization of a biological neuron.</p>
-<p><img alt="Biological Neuron" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/natural_neuron.png">
+<p><img alt="Biological Neuron" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/natural_neuron.png"/>
 <em class="image-with-caption">Figura 2. Biological Neuron</em></p>
 <p>In life, I have few certainties, but one of them is that I am not a neurologist, so I hope the experts will forgive the simplification that follows.
 The dendrites are <strong>stimulated</strong> by incoming electrical signals. The nucleus, together with the soma, <strong>processes</strong> the information, and the axon <strong>propagates</strong> it
@@ -162,7 +178,7 @@ toward the synaptic connections, linking to the next neurons.</p>
 <p><strong>Does it ring a bell?</strong></p>
 <p>Now that we know how a biological neuron "works" (yes, the quotation marks are intentional), let's take a big leap of imagination and see how an <strong>artificial neuron</strong> is represented, 
 the now famous little dot:</p>
-<p><img alt="Artificial Neuron" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/artificial_neuron.png">
+<p><img alt="Artificial Neuron" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/artificial_neuron.png"/>
 <em class="image-with-caption">Figura 3. Artificial Neuron</em></p>
 <p>From this image, we can introduce many of the concepts necessary for our purpose:</p>
 <ul>
@@ -176,20 +192,20 @@ the now famous little dot:</p>
 <p>Putting all the individual pieces together, we have that: the inputs <span class="math">\(x_i\)</span> and the weights <span class="math">\(w_i\)</span> pass through the transfer function <strong><span class="math">\(H\)</span></strong>, defined as:
 </p>
 <div class="math">$$
-H = \sum{x_i \cdot w_i} + b = x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b
+net = H(w_i, x_i) = \sum{x_i \cdot w_i} + b = x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b
 $$</div>
-<p>performing what is called a <strong>weighted sum</strong>: each input is multiplied by its weight, everything is summed up, and the bias is added.<br>
-The result of the weighted sum is then passed through the activation function <span class="math">\(\varphi(H)\)</span>.<br>
+<p>performing what is called a <strong>weighted sum</strong>: each input is multiplied by its weight, everything is summed up, and the bias is added.<br/>
+The result of the weighted sum is then passed through the activation function <span class="math">\(\sigma(H)\)</span>.<br/>
 The <strong>output</strong> of the single neuron is therefore:</p>
 <div class="math">$$
-Out = \varphi(H) = \varphi(x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) 
+p = \sigma(H) = \sigma(x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) 
 $$</div>
-<p>There are many <a href="https://en.wikipedia.org/wiki/Activation_function">activation functions</a>, and their selection depends on various technical factors.<br>
-While it would be worth dedicating a full article to them, for now it’s enough to know that they are fundamental for introducing <a href="https://en.wikipedia.org/wiki/Nonlinear_system">non-linearity</a>.<br>
+<p>There are many <a href="https://en.wikipedia.org/wiki/Activation_function">activation functions</a>, and their selection depends on various technical factors.<br/>
+While it would be worth dedicating a full article to them, for now it’s enough to know that they are fundamental for introducing <a href="https://en.wikipedia.org/wiki/Nonlinear_system">non-linearity</a>.<br/>
 Which, for friends, simply means: without them, the network wouldn't even be able to correctly predict a dog from a cat.</p>
 <p>Confused?</p>
 <p>I would be surprised if you weren't. But don't worry, because now we have all the ingredients to see how a neuron works mathematically, and everything will become much clearer with a numerical example.</p>
-<h3>A Numerical Example. The AND Problem.</h3>
+<h3 id="a-numerical-example-the-and-problem">A Numerical Example. The AND Problem.<a class="headerlink" href="#a-numerical-example-the-and-problem" title="Permanent link"> </a></h3>
 <p>Let's start this new paragraph by introducing the problem to solve, the <strong>AND problem</strong>. The AND between two binary variables is a simple logical operation: 
 the result is <span class="math">\(1\)</span> only if both variables are <span class="math">\(1\)</span> in all other cases, it is <span class="math">\(0\)</span>.
 To be more formal, let's consider two variables <span class="math">\(A \in \{0, 1\}\)</span> and <span class="math">\(B \in \{0, 1\}\)</span> the result of <span class="math">\(AND(x_1, x_2)\)</span> is summarized in the following table, called <strong>the truth table</strong>:</p>
@@ -206,7 +222,7 @@ A &amp; B &amp; AND(A, B) \\
 \hline  
 \end{array}
 $$</div>
-<p>Here we presented the simplest case of the AND problem, but there’s no restriction on the number of variables.<br>
+<p>Here we presented the simplest case of the AND problem, but there’s no restriction on the number of variables.<br/>
 For example, with three variables, we would get the following truth table:</p>
 <div class="math">$$
 \begin{array} 
@@ -228,7 +244,7 @@ $$</div>
 <p>Let's now consider a neural network, the <strong>simplest possible</strong>: composed of a single perceptron. The goal is to solve the two-variable AND problem, that is: given the inputs
 <span class="math">\(x_1\)</span> and <span class="math">\(x_2\)</span>, predict what the output of <span class="math">\(AND(x_1, x_2)\)</span> which can be <span class="math">\(0\)</span> or <span class="math">\(1\)</span>. Since the output can take only two distinct values, <strong>either salt or pepper</strong>,
 the problem we are dealing with is a typical <strong>classification problem</strong>.</p>
-<p>Good: we have defined the problem and the architecture of the neural network.<br>
+<p>Good: we have defined the problem and the architecture of the neural network.<br/>
 Now, three things remain to be established:</p>
 <ol>
 <li>How many inputs do we have?</li>
@@ -248,7 +264,7 @@ the neuron will have two inputs <span class="math">\(x_1\)</span> e <span class=
 <li>We choose the <a href="https://en.wikipedia.org/wiki/Heaviside_step_function">Heaviside step function</a> as the activation function</li>
 </ol>
 <p>The <strong>Heaviside step</strong> is a simple function whose graph is as follows:</p>
-<p><img alt="Step Function" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/step.png">
+<p><img alt="Step Function" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/step.png"/>
 <em class="image-with-caption">Figura 4. Heaviside Step</em></p>
 <p>In short, given any value <span class="math">\(x\)</span> as input, the Heaviside step function returns:</p>
 <ul>
@@ -257,33 +273,33 @@ the neuron will have two inputs <span class="math">\(x_1\)</span> e <span class=
 </ul>
 <p>Mathematically:</p>
 <div class="math">$$
-\varphi(x) = 
+\sigma(x) = 
 \begin{cases} 
-0 &amp; \text{se } x &lt; 0 \\
-1 &amp; \text{se } x \geq 0
+0 &amp; \text{if } x &lt; 0 \\
+1 &amp; \text{if } x \geq 0
 \end{cases}
 $$</div>
-<p>Why the Heaviside step function, you might be wondering?<br>
-Well, as mentioned earlier, there are many technical factors to consider, but suffice it to say that it’s the one that best fits our purpose:<br>
+<p>Why the Heaviside step function, you might be wondering?<br/>
+Well, as mentioned earlier, there are many technical factors to consider, but suffice it to say that it’s the one that best fits our purpose:<br/>
 the problem requires a solution that is either <span class="math">\(0\)</span> o <span class="math">\(1\)</span>, and the Heaviside step function returns exactly an output of <span class="math">\(0\)</span> o <span class="math">\(1\)</span>.
 I'd say it's a perfect match, wouldn't you agree!?
 <strong>But nope</strong>. For now for the sake of <strong>simplicity</strong>, we’ll settle for this, and the reason why... we’ll discover it later.</p>
-<p>At this point, all that's left is to see how a neural network makes its predictions. And how do we see it? With a simple substitution of variables.<br>
+<p>At this point, all that's left is to see how a neural network makes its predictions. And how do we see it? With a simple substitution of variables.<br/>
 There are four possible cases. Remember that</p>
 <div class="math">$$
 H = x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b
 $$</div>
-<p>that <span class="math">\(w_1 = 0.5, w_2 = 0.5, b = 1\)</span> and <span class="math">\(\varphi(H) = 1\)</span> only if <span class="math">\(H \geq 0\)</span></p>
+<p>that <span class="math">\(w_1 = 0.5, w_2 = 0.5, b = 1\)</span> and <span class="math">\(\sigma(H) = 1\)</span> only if <span class="math">\(H \geq 0\)</span></p>
 <p>We have:</p>
 <ul>
 <li><strong>Case 1</strong>: <span class="math">\(x_1 = 0, x_2 = 0\)</span>
-<span class="math center-math">\(H= 0 \cdot 0.5 + 0 \cdot 0.5 + 1 = 1 \Rightarrow \varphi(H) = \varphi(1) = 1\)</span></li>
+<span class="math center-math">\(H= 0 \cdot 0.5 + 0 \cdot 0.5 + 1 = 1 \Rightarrow p = \sigma(H) = \sigma(1) = 1\)</span></li>
 <li><strong>Case 2</strong>: <span class="math">\(x_1 = 1, x_2 = 0\)</span>
-<span class="math center-math">\(H= 1 \cdot 0.5 + 0 \cdot 0.5 + 1 = 1.5 \Rightarrow \varphi(H) = \varphi(1.5) = 1\)</span></li>
+<span class="math center-math">\(H= 1 \cdot 0.5 + 0 \cdot 0.5 + 1 = 1.5 \Rightarrow p = \sigma(H) = \sigma(1.5) = 1\)</span></li>
 <li><strong>Case 3</strong>: <span class="math">\(x_1 = 0, x_2 = 1\)</span>
-<span class="math center-math">\(H= 0 \cdot 0.5 + 1 \cdot 0.5 + 1 = 1.5 \Rightarrow \varphi(H) = \varphi(1.5) = 1\)</span></li>
+<span class="math center-math">\(H= 0 \cdot 0.5 + 1 \cdot 0.5 + 1 = 1.5 \Rightarrow p = \sigma(H) = \sigma(1.5) = 1\)</span></li>
 <li><strong>Case 4</strong>: <span class="math">\(x_1 = 1, x_2 = 1\)</span>
-<span class="math center-math">\(H= 1 \cdot 0.5 + 1 \cdot 0.5 + 1 = 2 \Rightarrow \varphi(H) = \varphi(2) = 1\)</span></li>
+<span class="math center-math">\(H= 1 \cdot 0.5 + 1 \cdot 0.5 + 1 = 2 \Rightarrow p = \sigma(H) = \sigma(2) = 1\)</span></li>
 </ul>
 <p>Let's now repeat the truth table, also showing the predictions made by the created perceptron, 
 with incorrect ones highlighted in red and correct ones in green:</p>
@@ -291,7 +307,7 @@ with incorrect ones highlighted in red and correct ones in green:</p>
 \begin{array} 
 {|r|r|r|}
 \hline 
-x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \varphi(H) \\ 
+x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; p \\ 
 \hline 
 0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
 \hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
@@ -301,11 +317,11 @@ x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \varphi(H) \\
 \end{array}
 $$</div>
 <p>As we can see, our perceptron made <strong>only one correct prediction out of four</strong>. We can say it without mincing words: <strong>it sucks quite a bit</strong>, right?! 
-So why all this fuss to reach such a poor result? Simple: because this is just the foundation.<br>
-Now, we still need to understand <strong>how to improve</strong> the results — that is, how to train the neural network so that it stops sucking and starts making sensible predictions...<br>
-But in the meantime, you've already achieved an important milestone:<br>
+So why all this fuss to reach such a poor result? Simple: because this is just the foundation.<br/>
+Now, we still need to understand <strong>how to improve</strong> the results — that is, how to train the neural network so that it stops sucking and starts making sensible predictions...<br/>
+But in the meantime, you've already achieved an important milestone:<br/>
 Now you know that the "magic" behind predictions, or at least a good chunk of it, <strong>isn't that magical after all</strong>.</p>
-<h3>To Wrap Up</h3>
+<h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>Let me say goodbye with this short <strong>code snippet</strong>, which simply replicates exactly what we have seen together.  </p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Definition of the Heaviside step function</span>
 <span class="k">class</span> <span class="nc">Heaviside</span><span class="p">(</span><span class="n">Activation</span><span class="p">):</span>
@@ -332,23 +348,22 @@ Now you know that the "magic" behind predictions, or at least a good chunk of it
         <span class="k">return</span> <span class="n">result</span>
 
 <span class="c1"># Code execution</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">dimension</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">Heaviside</span><span class="p">())</span>
-<span class="n">p</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
-<span class="n">p</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">perceptron</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">dimension</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">Heaviside</span><span class="p">())</span>
+<span class="n">perceptron</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">perceptron</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="mf">1.</span>
 
 <span class="n">cases</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">case</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">cases</span><span class="p">):</span>
-    <span class="n">prediction</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">case</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Case </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">. Input = </span><span class="si">{</span><span class="n">case</span><span class="si">}</span><span class="s2">, Prediction = </span><span class="si">{</span><span class="n">prediction</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">case</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cases</span><span class="p">,</span> <span class="n">true</span><span class="p">)):</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">perceptron</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">case</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Case </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">. Input = </span><span class="si">{</span><span class="n">case</span><span class="si">}</span><span class="s2">, True Result = </span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s2">, Predicted Result = </span><span class="si">{</span><span class="n">prediction</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
-
 <p>The output should be as follows:  </p>
-<div class="highlight"><pre><span></span><code>Case 1. Input = [0, 0], Prediction = 1
-Case 2. Input = [0, 1], Prediction = 1
-Case 3. Input = [1, 0], Prediction = 1
-Case 4. Input = [1, 1], Prediction = 1
+<div class="highlight"><pre><span></span><code>Case 1. Input = [0, 0], True Result = 0, Predicted Result = 1
+Case 2. Input = [0, 1], True Result = 0, Predicted Result = 1
+Case 3. Input = [1, 0], True Result = 0, Predicted Result = 1
+Case 4. Input = [1, 1], True Result = 1, Predicted Result = 1
 </code></pre></div>
-
 <p>If you're curious, I invite you to check out the full code <a href="https://github.com/lucadivit/neurons_for_dummies">here</a>.</p>
 <p>And to wrap it up... you thought I had forgotten, didn't you?! That I had sold you some nonsense. But no, my friends, I invite you to read the <strong>second part</strong>.
 Surely you don't want to stop at just <em>how</em> the network predicts, right?!
@@ -433,6 +448,14 @@ While waiting for the second part, I bid you farewell.</p>
 
 
             <hr/>
+<section>
+    <h2>Related Posts</h2>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
+<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3">Neurons for Dummies - 3</a></li>
+</ul>
+<hr />
+</section>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
@@ -442,19 +465,19 @@ While waiting for the second part, I bid you farewell.</p>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/en/tags.html#backpropagation-ref">backpropagation
-                    <span class="superscript">1</span>
+                    <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">1</span>
+                    <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#mathematics-ref">mathematics
-                    <span class="superscript">1</span>
+                    <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neural_network-ref">neural_network
-                    <span class="superscript">1</span>
+                    <span class="superscript">2</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neurons-ref">neurons
-                    <span class="superscript">1</span>
+                    <span class="superscript">3</span>
 </a></li>
             </ul>
 <h4>Contacts</h4>
@@ -632,6 +655,4 @@ While waiting for the second part, I bid you farewell.</p>
 </script>
 
     </body>
-    <!-- Theme: Elegant built for Pelican
-        License : MIT -->
 </html>

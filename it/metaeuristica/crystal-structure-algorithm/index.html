@@ -13,6 +13,8 @@
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
         <meta name="author" content="Luca Di Vita" />
 
+        <meta name="description" content="Per questo mio primo articolo vorrei parlare di un argomento che mi sta molto a cuore: la Metaeuristica, che non è il nome di un demone assiro ma una famiglia di algoritmi per la risoluzione di problemi computazionali e di ottimizzazione ossia di massimo o di minimo. Quando ci troviamo …
+" />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
@@ -113,47 +115,61 @@
 </div>
 
 <div class="row-fluid">
-        <div class="span8 offset2 article-content">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contenuti</h4>
+        <div class="toc">
+<ul>
+<li><a href="#da-dove-nasce-lidea">Da Dove Nasce L’idea</a></li>
+<li><a href="#il-modello-matematico">Il Modello Matematico</a></li>
+<li><a href="#visione-di-insieme">Visione Di Insieme</a></li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
             
-            <p>Per questo mio primo articolo vorrei parlare di un argomento che mi sta molto a cuore: la <strong>Metaeuristica</strong>, che non è il nome di un demone assiro
+            
+<p>Per questo mio primo articolo vorrei parlare di un argomento che mi sta molto a cuore: la <strong>Metaeuristica</strong>, che non è il nome di un demone assiro
 ma una famiglia di algoritmi per la risoluzione di problemi computazionali e di ottimizzazione ossia di massimo o di minimo.</p>
 <p>Quando ci troviamo davanti a un problema molto grande o complesso — come i problemi <strong><a href="https://it.wikipedia.org/wiki/NP-completo">NP-Completi</a></strong> — trovare la soluzione 
-perfetta richiederebbe tempi biblici.<br>
+perfetta richiederebbe tempi biblici.<br/>
 Ed è qui che entrano in gioco loro: le metaeuristiche. Questi algoritmi non promettono l’ottimo assoluto, ma fanno del loro meglio per trovare 
-<strong>soluzioni molto buone</strong>, in tempi ragionevoli e con approcci spesso ispirati alla natura ed ai suoi processi.<br>
+<strong>soluzioni molto buone</strong>, in tempi ragionevoli e con approcci spesso ispirati alla natura ed ai suoi processi.<br/>
 Basti pensare ad <strong><a href="https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche">ACO</a></strong> che si basa sul comportamento delle formiche, o <strong><a href="https://it.wikipedia.org/wiki/Particle_Swarm_Optimization">PSO</a></strong> ispirato al movimento degli sciami.</p>
 <p>Tra i tanti algoritmi metaeuristici, ce n'è uno che mi ha colpito particolarmente, sia per la sua eleganza che per l’originalità dell’ispirazione: il <strong>Crystal Structure Algorithm</strong> o <strong>CryStAl</strong>.</p>
 <p>Questo algoritmo è ispirato ai processi di formazione di <strong>strutture cristalline</strong> dove gli elementi — atomi, molecole o ioni — si dispongono in modo ordinato e simmetrico, come avviene
-ad esempio nei cristalli di quarzo.<br>
+ad esempio nei cristalli di quarzo.<br/>
 CryStAl si distingue per una caratteristica piuttosto interessante: è un <strong>algoritmo senza parametri</strong>.
 A differenza di molti altri approcci, <strong>non richiede di settare valori a mano</strong> per controllare il comportamento dell’ottimizzazione, 
 e gestisce da solo il bilanciamento tra <strong>esplorazione</strong> (cercare nuove soluzioni in aree diverse) e <strong>sfruttamento</strong> (raffinare le soluzioni già promettenti), 
-adattandosi dinamicamente durante il processo.<br>
+adattandosi dinamicamente durante il processo.<br/>
 Il cuore dell’algoritmo si basa su <strong>quattro fasi distinte</strong> di aggiornamento delle soluzioni, 
 che permettono di combinare <strong>ricerca locale</strong> (cioè il miglioramento delle soluzioni vicine a quelle già trovate) e <strong>globale</strong>
 (l’esplorazione di nuove aree nello spazio delle possibili soluzioni) in modo efficace.</p>
-<h3>Da Dove Nasce L’idea</h3>
+<h3 id="da-dove-nasce-lidea">Da Dove Nasce L’idea<a class="headerlink" href="#da-dove-nasce-lidea" title="Permanent link"> </a></h3>
 <p>I minerali solidi i cui componenti costitutivi sono disposti in modo regolare e ripetuto nelle tre direzioni spaziali, sono chiamati cristalli.
-Alla base di questa struttura ordinata c’è il <strong>reticolo</strong> o <strong>lattice</strong>: una specie di <strong>griglia tridimensionale</strong> fatta di punti, che si ripete nello spazio.<br>
+Alla base di questa struttura ordinata c’è il <strong>reticolo</strong> o <strong>lattice</strong>: una specie di <strong>griglia tridimensionale</strong> fatta di punti, che si ripete nello spazio.<br/>
 Di per sé, però, il reticolo non ci dice dove si trovano esattamente gli atomi. Per quello serve un altro pezzo del puzzle: la <strong>base</strong>, 
 cioè l’insieme di atomi che si ripete su ogni punto del reticolo. In altre parole: il lattice dice <strong>dove</strong> mettere qualcosa, 
 la base dice <strong>cosa</strong> ci va e <strong>come</strong> è orientato nello spazio. Eccone un esempio usando <strong>puntini blu e orsetti gommosi</strong>.</p>
-<p><img alt="Base e Lattice" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/base_lattice.png">
+<p><img alt="Base e Lattice" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/base_lattice.png"/>
 <em class="image-with-caption">Figura 1. Base + Lattice</em></p>
 <p>Grazie ai concetti di reticolo e base, è possibile generare un’infinità di <strong>strutture cristalline</strong> diverse.
 Il reticolo, con la sua disposizione regolare di punti, definisce la forma generale del cristallo, mentre 
 la base — cioè l’insieme di atomi che si ripete — ne determina la <strong>configurazione interna</strong>. Combinando questi due elementi in modi differenti,
 possiamo ottenere cristalli con geometrie molto varie, alcune regolari e ben note, altre più complesse.
 Qui sotto trovi alcuni esempi di come queste strutture possono variare:</p>
-<p><img alt="Esempi Cristalli" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/esempi_cristalli.png">
+<p><img alt="Esempi Cristalli" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/esempi_cristalli.png"/>
 <em class="image-with-caption">Figura 2. Esempi di Cristalli Cubici</em></p>
 <p>Il lattice, con la sua base, è la <strong>struttura ordinata</strong> ed <strong>ideale</strong> che i nostri <em>cristalli artificiali</em> — come vedremo a breve — dovranno 
 cercare di <strong>replicare</strong> durante l’ottimizzazione.</p>
-<h3>Il Modello Matematico</h3>
+<h3 id="il-modello-matematico">Il Modello Matematico<a class="headerlink" href="#il-modello-matematico" title="Permanent link"> </a></h3>
 <p>Il <strong>modello matematico</strong> utilizzato dagli autori di questo algoritmo è il <strong><a href="https://it.wikipedia.org/wiki/Reticolo_di_Bravais">modello di Bravais</a></strong> che 
-permette di descrivere tutti i possibili reticoli che possono esistere nello spazio tridimensionale.<br>
+permette di descrivere tutti i possibili reticoli che possono esistere nello spazio tridimensionale.<br/>
 Ogni punto del reticolo si può raggiungere partendo dall’origine e facendo un certo numero intero di passi lungo ciascuna delle tre direzioni:
-destra|sinistra, avanti|indietro, sopra|sotto.<br>
+destra|sinistra, avanti|indietro, sopra|sotto.<br/>
 Si definisce quindi un <strong>vettore posizione</strong> tramite la seguente formula:</p>
 <p><span class="math center-math">\(\overrightarrow{r} = \sum_{i=1}^{d}n_i \overrightarrow{a_i}\)</span>
 Dove:</p>
@@ -163,9 +179,9 @@ Dove:</p>
 <li><span class="math">\(n_i\)</span> è un numero intero che indica quanti passi facciamo lungo la direzione <span class="math">\(a_i\)</span>.</li>
 <li><span class="math">\(a_i\)</span> indica la "direzione movimento".</li>
 </ul>
-<p>Ora che abbiamo definito <span class="math">\(\overrightarrow{r}\)</span> mettiamolo da parte, ma non preoccupatevi tornerà presto.<br>
+<p>Ora che abbiamo definito <span class="math">\(\overrightarrow{r}\)</span> mettiamolo da parte, ma non preoccupatevi tornerà presto.<br/>
 <strong>Thor mi fulmini</strong> se dovessi mai farvi rinunciare alle vostre <span class="math">\(\overrightarrow{r}\)</span>.</p>
-<p>Torniamo a noi e diamo un’occhiata alle <strong>soluzioni candidate</strong>.<br>
+<p>Torniamo a noi e diamo un’occhiata alle <strong>soluzioni candidate</strong>.<br/>
 Ebbene sì: negli algoritmi metaeuristici non c’è una sola soluzione, ma un insieme di soluzioni candidate, 
 da cui andremo a prendere la <strong>migliore</strong>.... Ehm dicevo, ogni soluzione candidata (o "cristallo") viene rappresentata come un <strong>vettore numerico</strong> a 
 <span class="math">\(d\)</span> dimensioni, cioè una lista di valori:</p>
@@ -187,8 +203,8 @@ C_r = \left[C_{r_1}, C_{r_2}, \dots, C_{r_n}  \right]^{T} =
 $$</div>
 <p>In altre parole, abbiamo una popolazione di <span class="math">\(n\)</span> cristalli, ognuno con <span class="math">\(d\)</span> variabili. Questa matrice — dove ogni riga è un cristallo
 e ogni colonna una variabile — rappresenta l'intero spazio di ricerca da cui l’algoritmo cercherà di tirare fuori il miglior candidato.</p>
-<p>Ok fin qui chiaro (spero)! Ma ora la domanda è... <strong>Come diamine si creano questi cristalli?</strong><br>
-Presto detto.<br>
+<p>Ok fin qui chiaro (spero)! Ma ora la domanda è... <strong>Come diamine si creano questi cristalli?</strong><br/>
+Presto detto.<br/>
 Data una <strong>funzione di fitness</strong> <span class="math">\(f\)</span> che rappresenta il problema da risolvere, i singoli cristalli vengono creati usando 
 una semplice formula: ogni valore del cristallo viene generato in modo <strong>casuale</strong> all’interno di un intervallo.</p>
 <div class="math">$$
@@ -202,13 +218,13 @@ $$</div>
 </ul>
 <p>Detta in parole povere: <strong>ogni valore all’interno del cristallo viene scelto casualmente</strong> in un intervallo predefinito, 
 stabilito in base al dominio del problema.
-Ognuno di questi cristalli è una soluzione candidata al problema <span class="math">\(f\)</span>.<br>
+Ognuno di questi cristalli è una soluzione candidata al problema <span class="math">\(f\)</span>.<br/>
 Essere una soluzione candidata, vuol dire che <strong>sostituendo gli elementi del cristallo
 alle variabili della funzione</strong> <span class="math">\(f\)</span>, otteniamo un risultato numerico.  E ciò che vogliamo è trovare il <strong>massimo</strong> o il <strong>minimo</strong> di <span class="math">\(f\)</span>, a seconda del problema.</p>
 <p>In cristallografia, le basi presenti negli angoli del lattice — ad esempio come le basi presenti ai vertici del cubo in Figura 1 — hanno un ruolo fondamentale: 
 sono <strong>l’origine della struttura cristallina</strong>. Per analogia, i primi cristalli creati (quelli casuali) vengono chiamati <strong>main crystals</strong> e
-sono indicati con <span class="math">\(C_{r_{main}}\)</span>.<br>
-Questi main crystals sono il <strong>punto di partenza</strong> dell’algoritmo, che — come anticipato — si articola in <strong>quattro fasi di aggiornamento</strong> delle soluzioni.<br>
+sono indicati con <span class="math">\(C_{r_{main}}\)</span>.<br/>
+Questi main crystals sono il <strong>punto di partenza</strong> dell’algoritmo, che — come anticipato — si articola in <strong>quattro fasi di aggiornamento</strong> delle soluzioni.<br/>
 Ognuna corrisponde a una variante della struttura cubica:</p>
 <ul>
 <li><strong>Cubico semplice</strong>:</li>
@@ -227,7 +243,7 @@ Ognuna corrisponde a una variante della struttura cubica:</p>
 </ul>
 <p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}} + r_{3} F_{c}\)</span></p>
 <p>Come detto all’inizio, questo algoritmo <strong>non usa parametri esterni</strong> per bilanciare l’esplorazione (trovare nuove soluzioni) e lo sfruttamento (raffinare quelle buone).
-Il bilanciamento avviene in modo naturale, proprio grazie alle equazioni di aggiornamento che abbiamo appena visto.<br>
+Il bilanciamento avviene in modo naturale, proprio grazie alle equazioni di aggiornamento che abbiamo appena visto.<br/>
 Ma torniamo a noi... abbiamo creato <strong>quattro nuovi cristalli</strong> partendo dai precedenti. E cosa farne? Lo vedremo tra poco. Prima, lasciate che vi spieghi le stregonerie dietro quei nomi misteriosi:</p>
 <ul>
 <li><span class="math">\(C_{r_{main}}\)</span>: E' un cristallo vecchio selezionato casualmente.</li>
@@ -238,9 +254,9 @@ Ma torniamo a noi... abbiamo creato <strong>quattro nuovi cristalli</strong> par
 <li><span class="math">\(r, r_{1}, r_{2}, r_{3}\)</span>: Eccole qui, le nostre vecchie conoscenze! Queste <span class="math">\(r\)</span> non sono più vettori direzionali, ma numeri interi casuali. Così hanno deciso gli autori del paper... e chi sono io per contraddirli?</li>
 </ul>
 <p>I cristalli appena creati si utilizzano, come si vedrà nello pseudocodice, per sostituire quelli "vecchi ed imperfetti" con qualcosa di più nuovo e raffinato. 
-Applicando queste formule per <span class="math">\(n\)</span> volte sugli <span class="math">\(m\)</span> cristalli, l’algoritmo cerca — in modo probabilistico — di trovare quel cristallo che ottimizza al meglio il problema.<br>
+Applicando queste formule per <span class="math">\(n\)</span> volte sugli <span class="math">\(m\)</span> cristalli, l’algoritmo cerca — in modo probabilistico — di trovare quel cristallo che ottimizza al meglio il problema.<br/>
 Siamo cosi arrivati alla conclusione del modello matematico.</p>
-<h3>Visione Di Insieme</h3>
+<h3 id="visione-di-insieme">Visione Di Insieme<a class="headerlink" href="#visione-di-insieme" title="Permanent link"> </a></h3>
 <p>A questo punto cerchiamo di mettere insieme tutto quanto in pseudocodice:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Calcolo la prima generazione casuale di cristalli</span>
 <span class="n">crystals</span> <span class="o">=</span> <span class="n">create_crystals</span><span class="p">(</span><span class="n">min_value</span><span class="p">,</span> <span class="n">max_value</span><span class="p">,</span> <span class="n">num_crystal</span><span class="p">)</span>
@@ -298,7 +314,6 @@ Siamo cosi arrivati alla conclusione del modello matematico.</p>
     <span class="n">crystal_fitnesses</span> <span class="o">=</span> <span class="n">compute_fitnesses</span><span class="p">(</span><span class="n">crystals</span><span class="p">,</span> <span class="n">problem_to_solve</span><span class="p">)</span>
     <span class="n">Cr_b</span> <span class="o">=</span> <span class="n">get_best_crystal</span><span class="p">(</span><span class="n">crystals</span><span class="p">,</span> <span class="n">crystal_fitnesses</span><span class="p">)</span>
 </code></pre></div>
-
 <p>Abbiamo quindi definito tutti gli <strong>step dell’algoritmo</strong>, che permettono — metaforicamente parlando — ai cristalli di 
 <strong>modificare la loro struttura interna</strong> (cioè i valori numerici) per ottenere la disposizione ottimale della base nel reticolo.</p>
 <p>Voglio chiudere con un esempio applicativo di CryStAl su una funzione chiamata <strong><a href="https://www.indusmic.com/post/bird-function">Bird Function</a></strong>.
@@ -309,7 +324,7 @@ $$</div>
 <p>dove:</p>
 <p><span class="math center-math">\(x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]\)</span></p>
 <p>Il grafico della funzione è piuttosto complesso (vedi Figura 3), e trovare il minimo <strong>non è affatto banale</strong> dal punto di vista analitico.</p>
-<p><img alt="Bird Function" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/bird.png">
+<p><img alt="Bird Function" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/bird.png"/>
 <em class="image-with-caption">Figura 3. Bird Function</em></p>
 <p>Il suo <strong>minimo globale</strong> è circa <span class="math">\(f(x, y) = −106.764\)</span> nei punti</p>
 <ul>
@@ -320,20 +335,18 @@ $$</div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Definizione della Bird Function</span>
 <span class="n">function</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
 
-<span class="n">crystal</span> <span class="o">=</span> <span class="n">CryStAl</span><span class="p">(</span><span class="n">function_to_optimize</span><span class="o">=</span><span class="n">function</span><span class="p">,</span> <span class="n">problem_dimension</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> 
+<span class="n">crystal</span> <span class="o">=</span> <span class="n">CryStAl</span><span class="p">(</span><span class="n">function_to_optimize</span><span class="o">=</span><span class="n">function</span><span class="p">,</span> <span class="n">problem_dimension</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s2">"min"</span><span class="p">,</span> 
                   <span class="n">lower_bound</span><span class="o">=-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">upper_bound</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">num_crystals</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
                   <span class="n">num_iterations</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
-<span class="n">best_fitness</span><span class="p">,</span> <span class="n">Cr_b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">crystal</span><span class="o">.</span><span class="n">start_crystals_construction</span><span class="p">(</span><span class="n">save_history</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="s2">&quot;bird_function&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best Crystal Is </span><span class="si">{</span><span class="n">Cr_b</span><span class="si">}</span><span class="s2"> with fitness </span><span class="si">{</span><span class="n">best_fitness</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">best_fitness</span><span class="p">,</span> <span class="n">Cr_b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">crystal</span><span class="o">.</span><span class="n">start_crystals_construction</span><span class="p">(</span><span class="n">save_history</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="s2">"bird_function"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Best Crystal Is </span><span class="si">{</span><span class="n">Cr_b</span><span class="si">}</span><span class="s2"> with fitness </span><span class="si">{</span><span class="n">best_fitness</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </code></pre></div>
-
 <p>L’output sarà qualcosa tipo:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Best</span> <span class="n">Crystal</span> <span class="n">Is</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.58090168</span> <span class="o">-</span><span class="mf">3.14616277</span><span class="p">]</span> <span class="k">with</span> <span class="n">fitness</span> <span class="o">-</span><span class="mf">106.73618458034184</span>
 </code></pre></div>
-
 <p>Non male, vero? Il risultato è <strong>molto vicino</strong> al minimo teorico, e lo otteniamo con un algoritmo senza parametri, ispirato alla cristallografia, e — ammettiamolo — pure <strong>stiloso</strong>.</p>
-<h3>Per concludere</h3>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Spero che questo primo articolo ti abbia incuriosito e magari anche fatto scoprire qualcosa di nuovo!
 Se vuoi smanettare con l’algoritmo, trovi il <strong>codice sorgente completo</strong> a <a href="https://github.com/lucadivit/CrystalStructureAlgorithm">questo link</a>.
 E se ti sei innamorato o innamorata di CryStAl come è successo a me, ti consiglio di dare un’occhiata anche al <strong><a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method">paper</a></strong>
@@ -612,6 +625,4 @@ da cui tutto è partito.</p>
 </script>
 
     </body>
-    <!-- Theme: Elegant built for Pelican
-        License : MIT -->
 </html>
