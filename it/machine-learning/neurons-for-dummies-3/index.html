@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="Ed eccoci qui, con la terza parte dell&#39;articolo dedicato al neurone. Inizialmente ne avevo preventivate due ma che volete che vi dica, mi sono lasciato prendere la mano. Non potevo mica lasciarvi senza spiegare perché le reti sono composte da tanti neuroni o come si arriva alla formulazione dell&#39;aggiornamento dei …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="deep_learning, matematica, backpropagazione, reti_neurali, neuroni, Machine Learning, " />
+
+<meta property="og:title" content="Neurons for Dummies - 3 "/>
+<meta property="og:url" content="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-3/" />
+<meta property="og:description" content="Ed eccoci qui, con la terza parte dell&#39;articolo dedicato al neurone. Inizialmente ne avevo preventivate due ma che volete che vi dica, mi sono lasciato prendere la mano. Non potevo mica lasciarvi senza spiegare perché le reti sono composte da tanti neuroni o come si arriva alla formulazione dell&#39;aggiornamento dei …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-05-16T00:00:00+02:00" />
+<meta name="twitter:title" content="Neurons for Dummies - 3 ">
+<meta name="twitter:description" content="Ed eccoci qui, con la terza parte dell&#39;articolo dedicato al neurone. Inizialmente ne avevo preventivate due ma che volete che vi dica, mi sono lasciato prendere la mano. Non potevo mica lasciarvi senza spiegare perché le reti sono composte da tanti neuroni o come si arriva alla formulazione dell&#39;aggiornamento dei …">
+
+        <title>Neurons for Dummies - 3  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/it/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/index.html">Bio</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/latest.html">
+                                        Recenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/categories.html">
+                                            Argomenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/archives.html">
+                                            Archivio
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/it/pages/contatti/">Contatti</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li class="active">
+                                            <a href="/it/machine-learning/neurons-for-dummies-3/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li>
+                                            <a href="/en/machine-learning/neurons-for-dummies-3/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-3/">
+                Neurons for Dummies - 3
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contenuti</h4>
+        <div class="toc">
+<ul>
+<li><a href="#la-regola-della-catena">La Regola Della Catena</a></li>
+<li><a href="#la-discesa-del-gradiente">La Discesa Del Gradiente</a></li>
+<li><a href="#sulle-funzioni-di-attivazione">Sulle Funzioni Di Attivazione</a></li>
+<li><a href="#da-uno-a-molti">Da Uno A Molti</a></li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Ed eccoci qui, con la <strong>terza parte</strong> dell'articolo dedicato al neurone. Inizialmente ne avevo preventivate due ma che volete che vi dica, 
+mi sono lasciato prendere la mano. Non potevo mica lasciarvi senza spiegare perché le reti sono composte da <strong>tanti neuroni</strong> o come si arriva alla 
+<strong>formulazione dell'aggiornamento dei pesi</strong>. <strong>Non me lo sarei mai perdonato</strong>. In ogni caso, nella <a href="/it/machine-learning/neurons-for-dummies-1/">prima parte</a> 
+ho spiegato <strong>come un neurone predice</strong>, nella <a href="/it/machine-learning/neurons-for-dummies-2/">seconda parte</a> ho spiegato <strong>come avviene l'apprendimento</strong>. 
+Questa terza parte invece è dedicata ad alcuni aspetti che avevo lasciato fuori, ma che possono tornare <strong>utili</strong>. Come si suol dire tutto fa brodo no!?</p>
+<h3 id="la-regola-della-catena">La Regola Della Catena<a class="headerlink" href="#la-regola-della-catena" title="Permanent link"> </a></h3>
+<p>La <a href="https://it.wikipedia.org/wiki/Regola_della_catena">regola della catena</a> è una regola di derivazione per funzioni <strong>composte</strong>, cioè funzioni
+che <strong>incapsulano</strong> altre funzioni al loro interno.
+In parole povere:</p>
+<blockquote>
+<p>La derivata di una funzione composta si ottiene derivando la funzione esterna e moltiplicando per la derivata della funzione interna.</p>
+</blockquote>
+<p>Tradotto in formule, se abbiamo due funzioni:
+<span class="math center-math">\(v = h(z), u = g(v), y = f(u) \Rightarrow y = f(g(h(z)))\)</span>
+derivando si ha:
+</p>
+<div class="math">$$
+\frac{\partial y }{\partial z} = \frac{\partial f(g(h(z))) }{\partial z}=\frac{\partial f }{\partial u} \cdot \frac{\partial u }{\partial v} \cdot \frac{\partial v }{\partial z}
+$$</div>
+<p>
+Una rappresentazione alternativa è la seguente:
+</p>
+<div class="math">$$
+\frac{\partial y }{\partial z} = f'(g(h(z))) \cdot g'(h(z)) \cdot h'(z)
+$$</div>
+<p>
+<strong>Ad esempio</strong>, dati:
+</p>
+<div class="math">$$
+h(z) = z^2
+$$</div>
+<div class="math">$$
+g(v) = 3v + 1
+$$</div>
+<div class="math">$$
+f(u) = sin(u)
+$$</div>
+<p>La funzione è:
+</p>
+<div class="math">$$
+y = f(g(h(z))) = sin(3z^2 + 1) 
+$$</div>
+<div class="math">$$
+\frac{\partial v }{\partial z} = 2z
+$$</div>
+<div class="math">$$
+\frac{\partial u }{\partial v} = 3
+$$</div>
+<div class="math">$$
+\frac{\partial f }{\partial u} = cos(u)
+$$</div>
+<p>e la sua derivata:
+</p>
+<div class="math">$$
+\frac{\partial y }{\partial z} = cos(u) \cdot 3 \cdot 2z = 6z \cdot cos(3z^2 + 1)
+$$</div>
+<h3 id="la-discesa-del-gradiente">La Discesa Del Gradiente<a class="headerlink" href="#la-discesa-del-gradiente" title="Permanent link"> </a></h3>
+<p>In questa sezione vediamo <strong>come si arriva</strong> alla formulazione della discesa del gradiente. Non vuole essere un trattato di matematica, ma solo fornire <strong>un’idea generale</strong> del perché funziona, quindi ometterò molti dettagli tecnici per non 
+appesantire la trattazione.<br/>
+<strong>I puristi della matematica tra voi mi perdoneranno</strong>.<br/>
+Prima di tutto introduciamo la <strong><a href="https://it.wikipedia.org/wiki/Serie_di_Taylor">Serie di Taylor</a></strong>. Questa permette di <strong>approssimare una funzione</strong> <span class="math">\(f(x)\)</span> 
+in un punto vicino uno noto <span class="math">\(x_0\)</span>, utilizzando le derivate di <span class="math">\(f\)</span> calcolate in quel punto. E non è proprio quello che facciamo con la funzione di errore?! 
+<strong>Valutiamo</strong> la funzione nei dintorni di dove ci troviamo, per <strong>scegliere</strong> dove andare.<br/>
+Ma torniamo a noi. Matematicamente si scrive così:
+</p>
+<div class="math">$$
+f(x) \approx \sum_{i=0}^{\infty} \frac{f^{(n)}(x_0)}{n!} \cdot (x - x_0)^n = f(x_0) + \frac{f'(x_0)}{1!} \cdot (x - x_0)^1 + \frac{f''(x_0)}{2!} \cdot (x - x_0)^2 + \cdots
+$$</div>
+<p>Facciamo un esempio numerico e consideriamo:</p>
+<div class="math">$$
+f(x) = x^2 \quad \text{con} quad x_0 = 1
+$$</div>
+<p>
+Le derivate sono:</p>
+<div class="math">$$
+f(x) = x^2 \Rightarrow f(x_0) = f(1) = x_0^2 = 1^2 = 1
+$$</div>
+<div class="math">$$
+f'(x) = 2x \Rightarrow f'(x_0) = f'(1) = 2 \cdot x_0 = 2 \cdot 1 = 2
+$$</div>
+<div class="math">$$
+f''(x) = 2 \Rightarrow f''(x_0) = f''(1) = 2
+$$</div>
+<div class="math">$$
+f^{(n)}(x) = 0 quad \forall quad n \geq 3 
+$$</div>
+<p>e quindi con le dovute sostituzioni scriviamo:</p>
+<div class="math">$$
+x^2 \approx f(x_0) + \frac{f'(x_0)}{1!} \cdot (x - x_0)^1 + \frac{f''(x_0)}{2!} \cdot (x - x_0)^2 = 1 + 2 \cdot (x - 1) + (x - 1)^2
+$$</div>
+<p>Compariamo i grafici di:</p>
+<div class="math">$$
+g(x) = 1 + 2 \cdot (x - 1) + (x - 1)^2 \quad \text{e} \quad f(x) = x^2
+$$</div>
+<p><img alt="Taylor" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_3/taylor.png"/>
+<em class="image-with-caption">Figura 1. Approssimazione di Taylor</em></p>
+<p>Come si può vedere, le due funzioni <strong>hanno lo stesso andamento</strong> nell’intorno di <span class="math">\(x_0=1\)</span>, quindi <span class="math">\(g(x)\)</span> 
+approssima correttamente <span class="math">\(f(x)\)</span> in quel punto.</p>
+<p>Nella serie di Taylor, più termini (cioè <strong>più derivate</strong>) consideriamo, <strong>migliore</strong> sarà l’approssimazione della funzione.
+Ma per i nostri scopi, ci accontentiamo di fermarci alla <strong>prima derivata</strong>.</p>
+<div class="math">$$
+f(x) \approx f(x_0) + f'(x_0) \cdot (x-x_0)
+$$</div>
+<p>Questa formula ci dice come si comporta <strong>localmente</strong> la funzione <span class="math">\(f(x)\)</span>. La derivata prima, <span class="math">\(f'(x_0)\)</span> ci indica la <strong>velocità</strong> e la <strong>direzione</strong> con cui la funzione cresce, 
+mentre <span class="math">\((x-x_0)\)</span> rappresenta uno <strong>spostamento</strong> rispetto al punto di partenza. 
+Ma ricordiamoci il nostro obiettivo: <strong>minimizzare</strong>. Non vogliamo andare nella direzione di crescita, ma in quella <strong>opposta</strong>, e vogliamo farlo con un <strong>passo piccolo</strong>, scelto a piacere. 
+Per questo, possiamo scrivere lo spostamento come:</p>
+<div class="math">$$
+x-x_0 = -\eta \cdot f'(x_0)
+$$</div>
+<p>dove:</p>
+<ul>
+<li><span class="math">\(\eta\)</span> è <strong>l’ampiezza</strong> del passo</li>
+<li><span class="math">\(-f'(x_0)\)</span> è la <strong>direzione opposta</strong> alla crescita</li>
+</ul>
+<p>Quindi possiamo scrivere:
+</p>
+<div class="math">$$
+x = x_0 -\eta \cdot f'(x_0)
+$$</div>
+<p><strong>Vi ricorda qualcosa?</strong></p>
+<p>Ma torniamo a noi. Sostituendo questo nella formula di Taylor, otteniamo:</p>
+<div class="math">$$
+f(x_0 -\eta \cdot f'(x_0)) \approx f(x_0) -\eta \cdot f'(x_0)^2
+$$</div>
+<p>Per semplicità di notazione scriviamo:</p>
+<div class="math">$$
+x_0 = x_t
+$$</div>
+<p>e</p>
+<div class="math">$$
+x_t -\eta \cdot f'(x_t) = x_{t+1}
+$$</div>
+<p>dove:</p>
+<ul>
+<li><span class="math">\(x_t\)</span> è il <strong>punto di partenza</strong></li>
+<li><span class="math">\(x_{t+1}\)</span> è il <strong>punto di arrivo</strong></li>
+</ul>
+<p>Per cui:</p>
+<div class="math">$$
+f(x_{t+1}) \approx f(x_t) -\eta \cdot f'(x_t)^2
+$$</div>
+<p>A questo punto supponiamo che <span class="math">\(f\)</span> sia una <strong><a href="https://it.wikipedia.org/wiki/Funzione_convessa">Funzione Convessa</a></strong> e <strong><a href="https://it.wikipedia.org/wiki/Funzione_lipschitziana">Lipschitziana</a></strong>, 
+possiamo affermare la seguente <strong>disuguaglianza</strong>:</p>
+<div class="math">$$
+f(x_{t+1}) \leq f(x_t) - \frac{\eta}{2} \cdot f'(x_t)^2
+$$</div>
+<p>con </p>
+<div class="math">$$
+0 &lt; \eta \leq \frac{1}{L}
+$$</div>
+<p>dove <span class="math">\(L\)</span> è una <strong>costante Lipschitz</strong>.</p>
+<p>A parole: <em>la funzione <span class="math">\(f\)</span>, passando dal punto</em> <span class="math">\(x_t\)</span> <em>al punto</em> <span class="math">\(x_{t+1}\)</span>, <em>diminuisce</em>, a patto di scegliere
+il valore <span class="math">\(\eta\)</span> <strong>sufficientemente piccolo</strong>. Ed è proprio quello che volevamo!<br/>
+Con la legge </p>
+<div class="math">$$
+x = x_0 -\eta \cdot f'(x_0)
+$$</div>
+<p>la funzione <strong>si riduce</strong> a ogni passo.</p>
+<p>Quindi, se poniamo <span class="math">\(f\)</span> come la <strong>funzione di errore</strong> e <span class="math">\(x\)</span> come un <strong>generico peso</strong>,
+abbiamo appena <strong>dimostrato</strong> la formula della discesa del gradiente.</p>
+<p>Questa dissertazione è solo per fornire una "semplice" <strong>intuizione</strong>.
+Se cercate una dimostrazione formale e rigorosa, vi consiglio di dare un’occhiata <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf">qui</a>.</p>
+<h3 id="sulle-funzioni-di-attivazione">Sulle Funzioni Di Attivazione<a class="headerlink" href="#sulle-funzioni-di-attivazione" title="Permanent link"> </a></h3>
+<p>In questa sezione rispondiamo finalmente al perché il <strong>Gradino di Heaviside</strong> è stato spietatamente <strong>scartato</strong> come funzione di attivazione.
+Se avete letto tutto l'articolo avete anche visto che la <strong>backpropagation</strong> richiede questo calcolo:</p>
+<div class="math">$$
+\frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i}=\frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_i}
+$$</div>
+<p>dove:</p>
+<ul>
+<li><span class="math large-math">\(\frac{\partial p }{\partial net}\)</span> è la <strong>derivata della funzione di attivazione</strong> rispetto l'output della funzione di trasferimento.</li>
+<li><span class="math large-math">\(\frac{\partial L }{\partial p}\)</span> è la <strong>derivata dell'errore</strong> rispetto la predizione. </li>
+</ul>
+<p>Per poter calcolare queste derivate, sia la funzione di errore <span class="math">\(L\)</span>, sia la funzione di attivazione <span class="math">\(\sigma\)</span> <strong>devono essere derivabili</strong>.
+Il problema è che il <strong>gradino di Heaviside</strong> ha una <strong>discontinuità</strong> in <span class="math">\(x=0\)</span>, per cui non è derivabile e questo è un problema. O meglio, per essere onesti, non è derivabile nel senso classico
+ma lo è nella <strong>teoria delle distribuzioni</strong>. Difatti la sua derivata è la <strong><a href="https://it.wikipedia.org/wiki/Delta_di_Dirac">Delta di Dirac</a></strong>. Ma senza perderci in troppe astrazioni, diciamo che non è una derivata che 
+possiamo usare direttamente nel nostro algoritmo. Infatti anche la funzione di attivazione <strong><a href="https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)">ReLu</a></strong> non è derivabile in <span class="math">\(x=0\)</span>, ma nessuno la scarta per questo.
+Nell'immagine seguente potete vedere il suo <strong>andamento</strong>:</p>
+<p><img alt="ReLu" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_3/relu.png"/>
+<em class="image-with-caption">Figura 2. ReLu</em></p>
+<p><strong>Quindi, perché tutta questa avversione verso Heaviside?</strong></p>
+<p>Presto detto: sebbene ReLu non sia derivabile in <span class="math">\(x=0\)</span>, <strong>non è discontinua</strong> in quel punto. Possiamo quindi assegnare <strong>artificialmente</strong> un valore di derivata tra 0 e 1: la funzione è <strong><a href="https://it.wikipedia.org/wiki/Subdifferenziale">subderivabile</a></strong>.
+Con Heaviside, invece, questo <strong>non è possibile</strong>. E anche se (per assurdo) decidessimo di usare la Delta di Dirac come derivata... guardate qui:</p>
+<p><img alt="ReLu" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
+<em class="image-with-caption">Figura 3. Delta di Dirac</em></p>
+<p>Come potete vedere, è nulla <strong>ovunque</strong>, tranne che in <span class="math">\(x=0\)</span>. Questo significa che il gradiente sarebbe <strong>sempre nullo</strong>, che i pesi <strong>non cambierebbero mai</strong> e <em>la rete neurale non imparerebbe nulla</em>.<br/>
+C'è infine un'ultima, seppur secondaria, criticità: la <strong>Binary Cross Entropy</strong> divergerebbe ad <strong>infinito</strong> se la predizione fosse esattamente <span class="math">\(0\)</span> o <span class="math">\(1\)</span>. Questo non succede con la <strong>sigmoide</strong> perchè 
+assume quei valori solo <strong>asintoticamente</strong>.</p>
+<h3 id="da-uno-a-molti">Da Uno A Molti<a class="headerlink" href="#da-uno-a-molti" title="Permanent link"> </a></h3>
+<p>Quest'ultima sezione vuol fornire un'idea <strong>generale</strong> del perché nasce l'esigenza di usare reti con <strong>molti neuroni</strong>. In fondo, abbiamo visto che un singolo <strong>percettrone</strong> 
+è effettivamente in grado di arrivare a una <strong>soluzione</strong>, no!? Avete visto coi vostri occhi: continuando l'addestramento, i pesi vengono i pesi si modificano fino a risolvere correttamente il problema AND.
+Quindi... <strong>perché aggiungere complessità</strong>?<br/>
+Iniziamo il ragionamento guardando alla <strong>funzione di trasferimento</strong>. Per il problema AND in <strong>due dimensioni</strong> abbiamo:
+</p>
+<div class="math">$$
+net = w_1 \cdot x_1 + w_2 \cdot x_2 + b
+$$</div>
+<p>
+Ad alcuni di voi questa formula non dirà nulla. Ad altri farà riaffiorare brutti ricordi legati all'<strong><a href="https://it.wikipedia.org/wiki/Retta_nel_piano_cartesiano">equazione della retta</a></strong>, in forma implicita. 
+Quindi di fatto quello che sta facendo la backpropagation è trovare i <strong>coefficienti della retta</strong> per permettere questo:</p>
+<p><img alt="RettaAND" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_3/retta_and.png"/>
+<em class="image-with-caption">Figura 4. Retta su Problema AND</em></p>
+<p>Cioè <strong>separare i casi in cui la soluzione è <span class="math">\(0\)</span> da quelli in cui è <span class="math">\(1\)</span></strong>. Riuscire a fare questo significa che possiamo <strong>separare linearmente</strong> le soluzioni del problema e abbiamo visto 
+che un singolo percettrone è perfettamente in grado di farlo.<br/>
+Consideriamo un altro problema ora, chiamato <strong><a href="https://it.wikipedia.org/wiki/Disgiunzione_esclusiva">problema XOR</a></strong>. E' un'<strong>operazione logica</strong> come il problema AND, ma ha una tabella di verità diversa:</p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; XOR(x_1, x_2) \\ 
+\hline 
+0 &amp; 0 &amp; 0 \\ 
+\hline 0 &amp; 1 &amp; 1 \\ 
+\hline 1 &amp; 0 &amp; 1 \\ 
+\hline 1 &amp; 1 &amp; 0 \\ 
+\hline  
+\end{array}
+$$</div>
+<p>Vediamo <strong>geometricamente</strong> cosa succede:</p>
+<p><img alt="RettaXOR" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_3/retta_xor.png"/>
+<em class="image-with-caption">Figura 5. Retta su Problema XOR</em></p>
+<p>Sbattete pure la testa, imprecate quanto volete, ma non <strong>riuscirete mai</strong> a trovare una retta che separi gli <span class="math">\(0\)</span> dagli <span class="math">\(1\)</span>. E' <strong>impossibile</strong>. 
+Ed è proprio per questo che il problema XOR si dice <strong>non linearmente separabile</strong>. Ahimè potessimo <strong>aggiungere un'altra retta</strong>, allora sì che potremmo fare questo:</p>
+<p><img alt="BoundaryXOR" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_3/boundary_xor.png"/>
+<em class="image-with-caption">Figura 6. Due rette su Problema XOR</em></p>
+<p>Ma un momento... chi ci dice che <strong>non possiamo</strong>!? Dopotutto, <strong>un neurone crea una retta</strong> quindi... <strong>due neuroni creano due rette</strong>, no?
+Ed ecco qui che abbiamo <strong>giustificato</strong> il perché abbiamo bisogno di più neuroni. Ma questo quanto cambio tutto quello visto finora!? 
+Prima di rispondere, guardiamo come diventa la nostra rete neurale:</p>
+<p><img alt="NNXOR" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_3/xor_nn.png"/>
+<em class="image-with-caption">Figura 7. Rete Neurale per Problema XOR</em></p>
+<p>Se vi state chiedendo: <em>"ma come Luca, hai detto che bastava l'aggiunta di un solo neurone! <strong>Sono indignato</strong>!1!!</em> La risposta è si, confermo che è vero.
+Ma le reti feed-forward classiche <strong>pretendono</strong> che il numero di neuroni in ingresso sia <strong>pari al numero di features</strong> quindi ve lo tenete così. Magari in futuro vi racconterò 
+la bellissima storia della <strong>neuroevoluzione</strong> dove le cose cambiano parecchio. Ma torniamo a noi...<br/>
+Le cose in realtà rimangono le stesse, l'unica differenza è che dobbiamo scendere in profondità nell'equazione della <strong>derivata dell'errore rispetto al peso</strong>, perchè ora l'uscita 
+di un neurone diventa l'ingresso del successivo. Concentrandoci sui neuroni <span class="math">\(Y\)</span> e <span class="math">\(H_1\)</span>, l'output di <span class="math">\(H_1\)</span> è:</p>
+<div class="math">$$
+h_1 = \sigma_{H_1}(net_{H_1}) = \sigma(w_1 \cdot x_1 + b_1)
+$$</div>
+<p>quello di <span class="math">\(Y\)</span> è:</p>
+<div class="math">$$
+\sigma_{Y}(net_Y) = \sigma(w_5 \cdot \sigma_{H_1}(net_{H_1}) + b_3) = \sigma(w_5 \cdot \sigma(w_1 \cdot x_1 + b_1) + b_3)
+$$</div>
+<p>Riscrivendo in una forma che abbiamo già visto abbiamo che:</p>
+<div class="math">$$
+\frac{\partial L}{\partial w_5} = \frac{\partial L}{\partial p} \cdot \frac{\partial p}{\partial net_Y} \cdot \frac{\partial net_Y}{\partial w_5}
+$$</div>
+<div class="math">$$
+\frac{\partial L}{\partial w_1} = \frac{\partial L}{\partial p} \cdot \frac{\partial p}{\partial net_Y} \cdot \frac{\partial net_Y}{\partial w_5} = \frac{\partial L}{\partial p} \cdot \frac{\partial p}{\partial net_Y} \cdot \left( \frac{\partial net_Y}{\partial h_1} \cdot \frac{\partial h_1}{\partial net_{H_1}} \cdot \frac{\partial net_{H_1}}{\partial w_1} \right)
+$$</div>
+<p>dove:</p>
+<ul>
+<li><span class="math large-math">\(\frac{\partial net_Y}{\partial h_1}\)</span> è la derivata della funzione di trasferimento di <span class="math">\(Y\)</span> rispetto la funzione di attivazione di <span class="math">\(H_1\)</span></li>
+<li><span class="math large-math">\(\frac{\partial h_1}{\partial net_{H_1}}\)</span> è la derivata della funzione di attivazione di <span class="math">\(H_1\)</span> rispetto la sua funzione di trasferimento</li>
+<li><span class="math large-math">\(\frac{\partial net_{H_1}}{\partial w_1}\)</span> è la derivata della funzione di trasferimento di <span class="math">\(H_1\)</span> rispetto il peso <span class="math">\(w_1\)</span></li>
+</ul>
+<p>E direi, per la nostra <strong>sanità mentale</strong>, che possiamo fermarci qui ma lo stesso identico ragionamento vale per:
+</p>
+<div class="math">$$
+\frac{\partial L}{\partial w_2} \quad \text{e} \quad \frac{\partial L}{\partial w_6}
+$$</div>
+<p>E con <span class="math">\(n\)</span> neuroni? E' come avere <span class="math">\(n\)</span> rette (o <strong>spezzate</strong>) che, tutte insieme, formano una <strong>curva</strong> che è in grado di separare i dati <strong>non linearmente separabili</strong>.
+Insomma... è tranquillamente in grado di fare questa <strong>mostruosità</strong></p>
+<p><img alt="N_Bound" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_3/n_layer.png"/>
+<em class="image-with-caption">Figura 8. Confine Decisionale della Rete con Tanti Neuroni</em></p>
+<p><strong>Ultima nota</strong> prima di passare alle conclusioni. Per semplicità, abbiamo considerato il caso <strong>bidimensionale</strong> e quindi abbiamo parlato di <strong>rette</strong>, ma il discorso resta valido anche per spazi a 
+più dimensioni. In quel caso non parliamo di rette ma di <strong><a href="https://it.wikipedia.org/wiki/Iperpiano">iperpiani</a></strong>.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Bene ragazzi, eccoci arrivati alla <strong>fine</strong> della serie di articoli relativi al neurone. Per fare una grande citazione: </p>
+<blockquote>
+<p>Qui infine si scioglie la nostra compagnia... non vi dirò non piangete, perché non tutte le lacrime sono un male. </p>
+</blockquote>
+<p>Ovviamente intendo la <strong>compagnia del neurone</strong> eh, perché altri articoli vi aspettano. Nella 
+vita ci sono poche cose certe: <strong>morte, tasse e un altro mio articolo</strong>. Spero che questa serie vi sia piaciuta almeno quanto è piaciuto a me scriverla.</p>
+<p>Alla Prossima.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h2>Consigliati</h2>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1">Neurons for Dummies - 1</a></li>
+<li><a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
+</ul>
+<hr />
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Pubblicato</h4>
+            <time itemprop="dateCreated" datetime="2025-05-16T00:00:00+02:00">16 maggio 2025</time>
+            <h4>Argomento</h4>
+            <a class="category-link" href="https://www.lucadivita.it/it/categories.html#machine-learning-ref">Machine Learning</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/it/tags.html#backpropagazione-ref">backpropagazione
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#deep_learning-ref">deep_learning
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#matematica-ref">matematica
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#neuroni-ref">neuroni
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#reti_neurali-ref">reti_neurali
+                    <span class="superscript">3</span>
+</a></li>
+            </ul>
+<h4>Contatti</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>

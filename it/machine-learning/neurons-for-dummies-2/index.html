@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="Rieccoci qui per la seconda parte dell&#39;articolo dedicato al neurone. Se sei capitato qui per sbaglio... SCAPPA! No scherzo, ovviamente sei invitato a leggere la prima parte qui. Detto questo, nella prima parte vi ho lasciato con più domande che risposte. Oggi, finalmente, proviamo a fare un po’ di chiarezza …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="deep_learning, matematica, backpropagazione, reti_neurali, neuroni, Machine Learning, " />
+
+<meta property="og:title" content="Neurons for Dummies - 2 "/>
+<meta property="og:url" content="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-2/" />
+<meta property="og:description" content="Rieccoci qui per la seconda parte dell&#39;articolo dedicato al neurone. Se sei capitato qui per sbaglio... SCAPPA! No scherzo, ovviamente sei invitato a leggere la prima parte qui. Detto questo, nella prima parte vi ho lasciato con più domande che risposte. Oggi, finalmente, proviamo a fare un po’ di chiarezza …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-05-15T00:00:00+02:00" />
+<meta name="twitter:title" content="Neurons for Dummies - 2 ">
+<meta name="twitter:description" content="Rieccoci qui per la seconda parte dell&#39;articolo dedicato al neurone. Se sei capitato qui per sbaglio... SCAPPA! No scherzo, ovviamente sei invitato a leggere la prima parte qui. Detto questo, nella prima parte vi ho lasciato con più domande che risposte. Oggi, finalmente, proviamo a fare un po’ di chiarezza …">
+
+        <title>Neurons for Dummies - 2  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/it/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/index.html">Bio</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/latest.html">
+                                        Recenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/categories.html">
+                                            Argomenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/archives.html">
+                                            Archivio
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/it/pages/contatti/">Contatti</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li class="active">
+                                            <a href="/it/machine-learning/neurons-for-dummies-2/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li>
+                                            <a href="/en/machine-learning/neurons-for-dummies-2/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-2/">
+                Neurons for Dummies - 2
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contenuti</h4>
+        <div class="toc">
+<ul>
+<li><a href="#capire-dove-si-sbaglia">Capire Dove Si Sbaglia</a></li>
+<li><a href="#errare-errare-errare-preferisco-ottimizzare">Errare Errare Errare... Preferisco Ottimizzare</a></li>
+<li><a href="#ritorno-al-fut-ehm-al-problema-and">Ritorno Al Fut... Ehm Al Problema AND</a></li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Rieccoci qui per la seconda parte dell'articolo dedicato al neurone.<br/>
+Se sei capitato qui per sbaglio... <strong>SCAPPA</strong>!<br/>
+No scherzo, ovviamente sei invitato a leggere la <strong>prima parte</strong> <a href="/it/machine-learning/neurons-for-dummies-1/">qui</a>.<br/>
+Detto questo, nella prima parte vi ho lasciato con più domande che risposte.
+Oggi, finalmente, proviamo a fare un po’ di chiarezza.</p>
+<h3 id="capire-dove-si-sbaglia">Capire Dove Si Sbaglia<a class="headerlink" href="#capire-dove-si-sbaglia" title="Permanent link"> </a></h3>
+<p>Iniziamo questo paragrafo ricordando una cosa fondamentale: <strong>al centro di tutto ci sono i pesi</strong>. Perchè!?<br/>
+Perché sono l’unico punto su cui possiamo intervenire. Non possiamo certo modificare l'input. Quello arriva dal problema e ce lo becchiamo
+cosi com'è. Quindi se vogliamo cambiare il valore della <strong>funzione di trasferimento</strong>, e quindi anche <strong>l'output</strong>, dobbiamo per forza agire su di loro.
+Tenendo presente questa premessa e tenendo presente le predizioni fatte nella prima parte, l'obiettivo da raggiungere è passare da questi risultati:</p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
+\hline 
+0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+\hline  
+\end{array}
+$$</div>
+<p>a questi:</p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
+\hline 
+0 &amp; 0 &amp; 0 &amp; \color{green}{\mathbf{0}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \color{green}{\mathbf{0}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \color{green}{\mathbf{0}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+\hline  
+\end{array}
+$$</div>
+<p>In altre parole, vogliamo che tutte le predizioni siano corrette oppure, detto in termini più tecnici, che <strong>l'errore nelle predizioni sia il più piccolo possibile</strong>.
+Quindi il primo passo da fare è evidente: <strong>misurare l'errore</strong>.<br/>
+Per fare questo è necessario definire una <strong>Funzione di Errore</strong> o <strong><a href="https://it.wikipedia.org/wiki/Funzione_obiettivo">Funzione di Loss</a></strong>, cioè un qualcosa che ci dice quanto siamo lontani dalla situazione ideale, che per semplicità, 
+considereremo come quella in cui l’errore è pari a zero.</p>
+<p>Ci sono tantissime funzioni di errore, ognuna pensata per un tipo specifico di problema.
+Nel nostro caso, che vi ricordo essere il <strong>problema AND</strong>, siamo in presenza di un problema di <strong>classificazione binaria</strong> e quindi la funzione più adatta non può che
+essere la <strong>Binary Cross Entropy - BCE</strong>.</p>
+<p>Andiamo quindi a scrivere la formula:</p>
+<div class="math">$$
+BCE_i = -[y_i \cdot ln(p_i) + (1 - y_i) \cdot ln(1 - p_i)]
+$$</div>
+<p>
+Dove:</p>
+<ul>
+<li><span class="math">\(ln(\cdot)\)</span> Logaritmo Naturale</li>
+<li><span class="math">\(y_i\)</span> Risultato del problema (o <em>True Label</em>) relativo all'i-esimo input.</li>
+<li><span class="math">\(p_i\)</span> Probabilità predetta dal percettrone per quello stesso input.</li>
+</ul>
+<p>Applichiamo questa formula alla seguente tabella di verità:</p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
+\hline 
+0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+\hline  
+\end{array}
+$$</div>
+<p>Per la prima riga abbiamo:</p>
+<p><span class="math center-math">\(y_0 = 0, p_0 = 1 \Rightarrow BCE_0 = -[0 \cdot ln(1) + (1 - 0) \cdot ln(1 - 1)] = -\infty\)</span></p>
+<p>Come si può vedere, <strong>l’errore è massimo</strong> e in effetti, la predizione è <strong>l’opposto esatto</strong> del risultato reale.</p>
+<p>Applicandola sull'ultima invece si ha:</p>
+<p><span class="math center-math">\(y_3 = 1, p_3 = 1 \Rightarrow BCE_3 = -[1 \cdot ln(1) + (1 - 1) \cdot ln(1 - 1)] = 0\)</span></p>
+<p>In questo caso <strong>l'errore è nullo</strong> dato che la predizione è <strong>esattamente quella attesa</strong>.</p>
+<p>Sommando tutte le componenti dell'errore, otteniamo l'errore totale:</p>
+<p><span class="math center-math">\(BCE = \sum_{i}{BCE_i}\)</span></p>
+<p>Ma attenzione: in questo caso l’errore risulta <strong>infinito</strong> e questo può avere senso... ma anche no.
+Ma tranquilli, tra poco sistemiamo anche questo dettaglio. Per ora, continuiamo così.</p>
+<p>Ora che abbiamo introdotto il concetto di errore, sarà più chiaro perché i pesi sono davvero al centro di tutto.
+Vi ricordate quando vi ho detto che sono l’unico punto su cui possiamo intervenire? Bene...<br/>
+Ora la vera domanda è: <strong>come si modificano i pesi per far sì che l'errore sia il più piccolo possibile?</strong> <br/>
+<em>Imparare</em>, nel contesto delle reti neurali, vuol dire esattamente rispondere a questa domanda. E non solo vogliamo modificare i pesi, ma vogliamo che
+venga fatto in autonomia. Altrimenti, che <strong>intelligenza artificiale</strong> sarebbe!? Ma torniamo a noi...<br/>
+Matematicamente, quale è lo strumento che ci permette di minimizzare o massimizzare una funzione in più variabili?<br/>
+Ok lo ammetto: è una domanda po' tosta se non avete dimestichezza di <strong>analisi matematica</strong>. Quindi ve la risparmio e vi do subito la risposta, 
+senza farvi sudare troppo.
+Parliamo del <strong>Gradiente</strong> o, per i più facinorosi, il vettore delle <strong>Derivate Parziali</strong>. 
+Indicando con <span class="math">\(L\)</span> la funzione di errore e con <span class="math">\(w_i\)</span> un peso generico, possiamo scrivere:</p>
+<div class="math">$$\nabla L = \left (\frac{\partial L}{\partial w_0}, \frac{\partial L}{\partial w_1}, \dots, \frac{\partial L}{\partial w_n} \right)$$</div>
+<p>Sì, lo so. Sembra ostrogoto. E forse, in questo momento, mi volete anche un po’ picchiare. Ma in realtà, quello che dice ogni componente 
+della formula, in soldoni, è molto semplice:<br/>
+<strong>Quanto incide un generico <span class="math">\(w_i\)</span> sul valore dell'errore, se lo variassi?</strong><br/>
+E guardando all’intero gradiente, la domanda diventa:<br/>
+<strong>Quale è il valore delle singole <span class="math">\(w_i\)</span> per ottenere il minimo (o massimo) dell’errore?</strong></p>
+<p>Se pensate che la complessità finisca qui... mi spiace deludervi, ci sono ancora un paio di step da affrontare.</p>
+<h3 id="errare-errare-errare-preferisco-ottimizzare">Errare Errare Errare... Preferisco Ottimizzare<a class="headerlink" href="#errare-errare-errare-preferisco-ottimizzare" title="Permanent link"> </a></h3>
+<p>Giusto perché ci piace complicarci la vita, riprendiamo tutta la catena di calcoli che un percettrone esegue, dall’<strong>input</strong> fino alla misura dell’<strong>errore</strong>:</p>
+<ul>
+<li>Calcoliamo la <strong>somma pesata degli ingressi</strong> tramite <strong>funzione di trasferimento</strong>: 
+<span class="math center-math">\(net=H(x_i, w_i)\)</span></li>
+<li>Calcoliamo la <strong>predizione</strong> applicando una <strong>funzione di attivazione</strong> <span class="math">\(\sigma\)</span> all'output della funzione di trasferimento: 
+<span class="math center-math">\(p=\sigma(net)=\sigma(H(x_i, w_i))\)</span></li>
+<li>Calcoliamo l'<strong>errore</strong> tramite una <strong>funzione di errore</strong> <span class="math">\(L\)</span> sull'output della funzione di attivazione:
+<span class="math center-math">\(loss =L(p) = L(\sigma(net))=L(\sigma(H(x_i, w_i)))\)</span></li>
+</ul>
+<p>Quindi tutta la catena è rappresentata da questa formula:
+<span class="math center-math">\(L(\sigma(H(x_i, w_i)))\)</span>
+Dal paragrafo precedente inoltre, sapete che:</p>
+<ol>
+<li>Vogliamo <strong>minimizzare</strong> <span class="math">\(L\)</span>.</li>
+<li>Lo facciamo <strong>derivando rispetto i pesi</strong>.</li>
+</ol>
+<p>Che <strong>matematicamente</strong> vuol dire scrivere questo:</p>
+<div class="math">$$\frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i}$$</div>
+<p>Per derivare questo mostro, dobbiamo alla <strong>regola della catena</strong>. Lungi da me scrivere un trattato di analisi matematica, se vuoi trovi una <strong>spiegazione rapida</strong>
+<a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">qui</a>. Applicando la regola alla nostra <strong>funzione composta di errore</strong>, otteniamo:
+</p>
+<div class="math">$$
+\frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i}=\frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_i}
+$$</div>
+<p>
+Dove:</p>
+<ul>
+<li><span class="math large-math">\(\frac{\partial L }{\partial p}\)</span>: E' la derivata <strong>dell'errore rispetto alla predizione</strong>.</li>
+<li><span class="math large-math">\(\frac{\partial p }{\partial net}\)</span>: E' la derivata della <strong>funzione di attivazione rispetto l'output della funzione di trasferimento</strong>.</li>
+<li><span class="math large-math">\(\frac{\partial net }{\partial w_i}\)</span>: E' la derivata della <strong>funzione di trasferimento rispetto un generico peso</strong> <span class="math">\(w_i\)</span>.</li>
+</ul>
+<p>Ragazzi, ci siamo quasi, siamo in <strong>dirittura di arrivo</strong>. Un ultimo sforzo concettuale...</p>
+<p>Sappiamo come <strong>calcolare l’errore</strong>.<br/>
+Sappiamo come <strong>esprimerlo in funzione dei pesi</strong>.<br/>
+Ora non ci resta che <strong>minimizzare</strong>.<br/>
+A scuola, al liceo, all’università, vi insegnano che per trovare un minimo (o un massimo) si usa la <strong>derivata prima</strong>, ed è ovviamente vero <strong>analiticamente</strong> parlando. Non sono nessuno per riscrivere le regole della matematica. Ma lasciate che vi faccia una domanda...
+Come facciamo a minimizzare, analiticamente, una funzione con <strong>milioni di parametri</strong>?
+Perché sì, è proprio questo che succede: vogliamo minimizzare l’errore, ma quell’errore è una funzione che <strong>dipende da milioni di pesi</strong>.
+Io sono buono e vi faccio vedere l’esempio con <strong>un solo</strong> percettrone... ma nella realtà, ci sono <strong>centinaia e centinaia</strong> di percettroni, disposti su più <strong>layer</strong>, ognuno con <strong>molti ingressi</strong>.</p>
+<p>Non solo non sapremmo calcolarla, ma ci metteremmo una vita e non è nemmeno detto che esista un minimo globale. Quindi vi chiedo: <strong>ne vale la pena!?</strong><br/>
+Ed è qui che intervengono i <strong>metodi numerici</strong>.<br/>
+Non saranno <strong>eleganti</strong> come i metodi analitici, ma <strong>diamine se funzionano</strong>.<br/>
+Arriviamo così all'ultimo ingrediente di questo piatto luculliano. La <strong><a href="https://it.wikipedia.org/wiki/Discesa_del_gradiente">Discesa del Gradiente</a></strong>. Che nel contesto del machine 
+learning è uno (dei tanti) <strong><a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Extensions_and_variants">Ottimizzatori</a></strong>. L'idea alla base è semplice e lasciate che ve la spieghi con l’esempio più usato in questi casi:
+ quello dello <strong>scalatore bendato</strong>. Supponete di trovarvi su una montagna, bendati, e con l’obiettivo di <strong>scendere</strong> a valle.<br/>
+Come procedete?<br/>
+Se sentite che in una direzione il terreno sale, andate nella direzione <strong>opposta</strong>. E lo fate con <strong>passi molto piccoli</strong>, perché non sapendo com’è fatto il terreno mica vi mettete a correre giù alla cieca... vero? (Se poi volete farlo non sarò di certo io a fermarvi.)
+Quello che state facendo è sostanzialmente un controllo locale, per piccoli passi, e non uno globale. Perchè per fare quello globale dovreste conoscere perfettamente la montagna e voi siete bendati.
+Ecco: <strong>la discesa del gradiente è esattamente questo</strong>. Procedere per <strong>piccoli step</strong> la volta perchè non abbiamo <strong>conoscenza globale</strong> della funzione di errore ma sappiamo <strong>localmente</strong>, con i <strong>pesi a disposizione</strong>, come stiamo andando.
+In formule si scrive così:</p>
+<div class="math">$$w_i^{new} \leftarrow w_i - \eta \cdot \frac{\partial L }{\partial w_i}$$</div>
+<p>Dove:</p>
+<ul>
+<li><span class="math">\(w_i^{new}\)</span>: E' il nuovo peso trovato facendo una piccola variazione di quello corrente. <em>La nuova posizione dello scalatore</em>.</li>
+<li><span class="math">\(w_i\)</span>: E' il peso corrente. <em>La posizione attuale dello scalatore</em>.</li>
+<li><span class="math">\(\eta\)</span>: Si chiama <strong>learning rate</strong> e indica di quanto <strong>variare il peso</strong>. Rappresenta <em>l'ampiezza del passo dello scalatore</em>.
+Se <span class="math">\(\eta = 0\)</span> lo scalatore rimane immobile ed il nuovo peso è uguale al vecchio. Se <span class="math">\(\eta\)</span> è troppo grande è pericoloso perchè non sai dove metti i piedi
+ che matematicamente vuol dire <em>superare la zona dove l'errore era basso</em>.</li>
+<li><span class="math">\(-\frac{\partial L }{\partial w_i}\)</span>: E' la derivata dell'errore rispetto al peso, cioè la direzione in cui l’errore cresce o diminuisce.
+Il segno <strong>meno</strong> indica che vogliamo andare nella direzione che fa <strong>diminuire l’errore</strong>.
+Rappresenta la <em>capacità dello scalatore di intuire dove si scende e dove si sale</em>.</li>
+</ul>
+<p>Graficamente possiamo rappresentarlo così, una <em>entità</em> che cerca sempre di puntare alle zone più basse del grafico.</p>
+<p><img alt="GD" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_2/gd.png"/>
+<em class="image-with-caption">Figura 1. Discesa Del Gradiente</em></p>
+<p>Se volete una infarinatura molto a grandi linee di <strong>come</strong> si arriva alla formula della discesa del gradiente, fate un salto su
+ <a href="/it/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente">questo paragrafo</a>, altrimenti passate al successivo e vediamo (finalmente, aggiungerei) un <strong>esempio con i numeri</strong>.</p>
+<h3 id="ritorno-al-fut-ehm-al-problema-and">Ritorno Al Fut... Ehm Al Problema AND<a class="headerlink" href="#ritorno-al-fut-ehm-al-problema-and" title="Permanent link"> </a></h3>
+<p>Ed eccoci qui signori, finalmente, a vedere <strong>come impara</strong> una rete neurale. Vi ricordate del problema AND? Se sì prosegui pure, altrimenti rinfrescati la memoria 
+<a href="/it/machine-learning/neurons-for-dummies-1/#un-esempio-numerico-il-problema-and">qui</a>.
+Vi avevo o no anticipato di non affezionarvi al gradino di Heaviside? E' arrivato il momento di <strong>abbandonarlo</strong>. Sapete come si dice, morta un'attivazione se ne fa un'altra,
+e noi prendiamo la funzione <strong><a href="https://it.wikipedia.org/wiki/Funzione_sigmoidea">Sigmoide</a></strong>. Siete curiosi di sapere il perchè Heaviside <strong>non è adatto</strong>? Fate un salto <a href="/it/machine-learning/neurons-for-dummies-3/#sulle-funzioni-di-attivazione">qui</a>.</p>
+<p>La funzione Sigmoidea ha questa formulazione:</p>
+<div class="math">$$\sigma(x)=\frac{1}{1+e^{-x}}$$</div>
+<p>
+Ed ha questo andamento grafico:</p>
+<p><img alt="SIGMOID" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_2/sigmoid.png"/>
+<em class="image-with-caption">Figura 2. Funzione Sigmoide</em>
+Come potete vedere, l'output è sempre compreso nel range <span class="math">\((0, 1)\)</span>.<br/>
+Voi date <span class="math">\(x=\infty\)</span>? La sigmoide se ne frega e vi da <span class="math">\(1.\)</span><br/>
+Voi date <span class="math">\(x=-\infty\)</span>? La sigmoide se ne frega e vi da <span class="math">\(0\)</span>.<br/>
+La sigmoide è troppo forte. Non sfidate la sigmoide perchè tanto perdete.</p>
+<p>Prove di forza a parte, ne converrete che la sigmoide è la funzione ideale per rappresentare una <strong>probabilità</strong>. Una probabilità, in fondo, 
+non è altro che un <strong>numero decimale</strong> compreso tra <span class="math">\([0, 1]\)</span> dove:</p>
+<ul>
+<li><span class="math">\(1\)</span> indica <em>sicuramente sì</em> </li>
+<li><span class="math">\(0\)</span> indica <em>sicuramente no</em></li>
+<li><span class="math">\(0.5\)</span> indica <em>boh</em></li>
+</ul>
+<p>Ora che siamo ormai esperti di <strong>sigmoidi</strong>, riprendiamo in mano il nostro caro <strong>percettrone</strong>:</p>
+<p><img alt="Artificial Neuron" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_2/artificial_neuron.png"/>
+<em class="image-with-caption">Figura 3. Neurone Artificiale</em></p>
+<p>e, riprendiamo i nostri pesi e bias:</p>
+<ul>
+<li><span class="math">\(w_1 = 0.5\)</span></li>
+<li><span class="math">\(w_2 = 0.5\)</span></li>
+<li><span class="math">\(b=1\)</span></li>
+</ul>
+<p>Consideriamo il caso 
+<span class="math center-math">\(x_1 = 0, x_2 = 1 \Rightarrow y=0\)</span>
+L'output della funzione di attivazione sarà:
+<span class="math center-math">\(net = 0 \cdot 0.5 + 1 \cdot 0.5 + 1 = 1.5\)</span>
+e di conseguenza l'output della sigmoide è:
+<span class="math center-math">\( p = \sigma(1.5) \approx 0.817\)</span>
+Vogliamo calcolare la derivata dell'errore rispetto i pesi (e del bias) giusto?! Ossia:</p>
+<div class="math">$$\frac{\partial L }{\partial w_1} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_1}$$</div>
+<div class="math">$$\frac{\partial L }{\partial w_2} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_2}$$</div>
+<div class="math">$$\frac{\partial L }{\partial b} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial b}$$</div>
+<p>Ora sappiamo come si calcola un errore, giusto? Abbiamo introdotto la <strong>Binary Cross Entropy (BCE)</strong> proprio per questo. Quindi, vediamo <strong>passo dopo passo</strong> cosa succede davvero.</p>
+<ul>
+<li><span class="math large-math">\(\frac{\partial L }{\partial p}\)</span>: E' la derivata della funzione di errore rispetto la predizione. Dall’analisi matematica sappiamo che per la Binary Cross Entropy, si calcola così:
+<div class="math">$$\left( \frac{y}{p} + \frac{ 1 - y}{ 1 - p} \right)$$</div>
+Sostituendo con <span class="math">\(p=0.817\)</span> e <span class="math">\(y=0\)</span>, otteniamo:
+<div class="math">$$\left( \frac{0}{0.817} + \frac{ 1 - 0}{ 1 - 0.817} \right) \approx 5.481$$</div>
+</li>
+<li><span class="math large-math">\(\frac{\partial p }{\partial net}\)</span>: E' la derivata della funzione di attivazione rispetto l'output della funzione di trasferimento. Nel caso della sigmoide, l’analisi matematica ci dice che:
+<div class="math">$$\frac{\partial p }{\partial net} = \sigma(net) \cdot (1 - \sigma(net)) = p \cdot (1 - p)$$</div>
+Sostituendo con <span class="math">\(p=0.817\)</span>, otteniamo:
+<div class="math">$$\frac{\partial p }{\partial net} = p \cdot (1 - p) = 0.817 \cdot (1-0.817) \approx 0.149$$</div>
+</li>
+<li><span class="math large-math">\(\frac{\partial net }{\partial w_i}\)</span>: E' la derivata della funzione di trasferimento rispetto un generico peso. Dall'analisi matematica sappiamo che la sua derivata 
+è:
+<div class="math">$$ \frac{\partial net }{\partial w_i} = \frac{\partial (x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) }{\partial w_i} = x_i$$</div> 
+Insomma, è molto semplice: la derivata è il <strong>valore dell’ingresso associato a quel peso</strong>.
+Nel nostro caso:
+<div class="math">$$\frac{\partial net }{\partial w_1} = x_1 = 0$$</div>
+<div class="math">$$\frac{\partial net }{\partial w_2} = x_2 = 1$$</div>
+</li>
+<li><span class="math large-math">\(\frac{\partial net }{\partial b}\)</span>: E' la derivata della funzione di trasferimento rispetto il bias. Dall'analisi matematica sappiamo che la sua derivata 
+è:
+<div class="math">$$ \frac{\partial net }{\partial b} = \frac{\partial (x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) }{\partial b} = 1$$</div> 
+Come puoi vedere, il bias è sempre <strong>derivabile con valore 1</strong>, perché è una <strong>costante additiva indipendente</strong> dagli ingressi.</li>
+</ul>
+<p>Ora abbiamo <strong>tutto quello che ci serve</strong> per calcolare la derivata dell’errore rispetto ai pesi.</p>
+<div class="math">$$\frac{\partial L }{\partial w_1} = 5.481 \cdot 0.149 \cdot 0 = 0$$</div>
+<div class="math">$$\frac{\partial L }{\partial w_2} = 5.481 \cdot 0.149 \cdot 1 \approx 0.8175$$</div>
+<div class="math">$$\frac{\partial L }{\partial b} = 5.481 \cdot 0.149 \cdot 1 \approx 0.8175$$</div>
+<p>Ed infine, ponendo <span class="math">\(\eta = 0.5\)</span>, possiamo calcolare i <strong>nuovi pesi aggiornati</strong>:</p>
+<div class="math">$$
+w_1 = w_1 - \eta \cdot \frac{\partial L }{\partial w_1} = 0.5 - 0.5 \cdot 0 = 0.5
+$$</div>
+<div class="math">$$
+w_2 = w_2 - \eta \cdot \frac{\partial L }{\partial w_2} = 0.5 - 0.5 \cdot 0.817 \approx 0.091
+$$</div>
+<div class="math">$$
+b = b - \eta \cdot \frac{\partial L }{\partial b} = 1. - 0.5 \cdot 0.817 \approx 0.591
+$$</div>
+<p>Questi nuovi pesi sostituiscono i vecchi, e a quel punto ci ritroviamo con una <strong>rete neurale aggiornata</strong>.
+Questo processo si ripete per <span class="math">\(n\)</span> iterazioni (o <strong>epoche</strong>). 
+E in ogni epoca, addestriamo il percettrone con lo stesso procedimento su <strong>tutti i casi</strong> del problema.<br/>
+Ora, senza rifare i calcoli per ogni singolo campione, vediamo cosa succede con lo stesso esempio ma alla seconda epoca.
+Fate un piccolo <em>atto di fede</em> quando vi dico che i pesi valgono: 
+<span class="math center-math">\(w_1 = 0.356\)</span>
+<span class="math center-math">\(w_2 = 0.3216\)</span>
+<span class="math center-math">\(b = 0.1703\)</span>
+e quindi la funzione di trasferimento vale:
+<span class="math center-math">\(net = 0 \cdot 0.356 + 1 \cdot 0.3216 + 0.1703 \approx 0.49\)</span>
+da cui:
+<span class="math center-math">\( p = \sigma(0.49) \approx 0.66\)</span>
+Avete visto cos’è successo?<br/>
+Siamo passati da <span class="math">\(p=0.81\)</span> a <span class="math">\(p=0.66\)</span>.<br/>
+Questo vuol dire che il percettrone ha <em>capito</em> che <span class="math">\(p=0.81\)</span> non era la risposta giusta, e ha iniziato ad <strong>abbassare la probabilità</strong> che l'output sia <span class="math">\(1\)</span>. 
+Con il proseguire dell’addestramento, quel valore <strong>continuerà a scendere</strong> fino ad arrivare sotto la soglia 
+<span class="math">\(p &lt; 0.5\)</span> cioè: è <strong>più probabile che la risposta</strong> sia <span class="math">\(0\)</span>, che guarda caso è la predizione corretta per quella casistica nel problema AND.<br/>
+Quello che avete appena visto si chiama <strong>Propagazione dell'Errore</strong> o, per gli amici, <strong>Backpropagation</strong>.
+Ora che siete arrivati fin qui, immaginate questi passaggi, semplici o complessi giudicatelo voi, non su un singolo percettrone ma su <a href="/it/machine-learning/neurons-for-dummies-3/#da-uno-a-molti">centinaia</a> disposti su più layer. 
+<strong>Da spararsi vero!?</strong><br/>
+Ma almeno ci spariamo sapendo come funziona un algoritmo che <strong>aggiorna automaticamente</strong> i pesi, 
+si <strong>adatta al problema</strong> da risolvere, e <strong>impara</strong> dai propri errori.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Se siete arrivati qui, <strong>i miei complimenti</strong>.<br/>
+Non solo avete capito (almeno spero!) un argomento che non è certo una passeggiata di salute (anche se l’abbiamo affrontato con migliaia di <strong>semplificazioni e approssimazioni</strong>) 
+ma ora sapete <em>perchè</em> dietro le reti neurali non c'è magia... solo molta matematica. Ovviamente <strong>non è tutto qui</strong>, c'è un mondo intero da scoprire. Ma per il momento <strong>accontentiamoci</strong> e portiamo a casa questo risultato.</p>
+<p>Voglio concludere questo articolo lasciandovi con: </p>
+<ul>
+<li>una tabella di verità arricchita con <strong>l’evoluzione</strong> dei pesi a ogni epoca </li>
+<li>uno <strong>snippet di codice</strong> che mette insieme tutto quanto</li>
+</ul>
+<p>Considerando come pesi di partenza:</p>
+<div class="math">$$
+w_1=0.5, w_2=0.5, b = 1.
+$$</div>
+<p>come funzione di attivazione una Sigmoide, e un learning rate pari a:</p>
+<div class="math">$$
+\eta = 0.5
+$$</div>
+<p>definiamo la <strong>predizione binaria</strong> nel seguente modo:</p>
+<div class="math">$$
+\overline{p} = 
+\begin{cases}
+1 &amp; \text{se } p \geq 0.5 \\
+0 &amp; \text{se } p &lt; 0.5
+\end{cases}
+$$</div>
+<p>ed indichiamo infine con:</p>
+<ul>
+<li><span class="math">\(p_{old}/p\)</span> la <strong>probabilità predetta</strong> prima e dopo dell'aggiornamento dei pesi</li>
+<li><span class="math">\(\overline{p_{old}}/\overline{p}\)</span> la <strong>predizione binaria</strong> prima e dopo dell'aggiornamento dei pesi</li>
+<li><span class="math">\(w_i^{old}/w_i\)</span> i <strong>pesi</strong> prima e dopo dell'aggiornamento</li>
+<li><span class="math">\(b^{old}/b\)</span> il <strong>bias</strong> prima e dopo dell'aggiornamento</li>
+</ul>
+<p>I risultati ottenuti su <strong>3 epoche</strong> sono i seguenti:</p>
+<p><strong>Epoca 1</strong></p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|r|r|r|r|r|r|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
+\hline 
+0 &amp; 1 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.5 &amp; 0.5 &amp; 1.0 &amp; 0.81 &amp; 0.66 &amp; \color{red}{\mathbf{1}} &amp; \color{red}{\mathbf{1}} &amp; 0 \\ 
+\hline 
+1 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.74 &amp; 0.58 &amp; \color{red}{\mathbf{1}} &amp; \color{red}{\mathbf{1}} &amp; 0 \\ 
+\hline 
+0 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.55 &amp; 0.48 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+\hline 
+1 &amp; 1 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.53 &amp; 0.70 &amp; \color{green}{\mathbf{1}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
+\hline  
+\end{array}
+$$</div>
+<p><strong>Epoca 2</strong></p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|r|r|r|r|r|r|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
+\hline 
+0 &amp; 1 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.62 &amp; 0.46 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+\hline 
+1 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.55 &amp; 0.41 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+\hline 
+0 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.39 &amp; 0.35 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+\hline 
+1 &amp; 1 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.37 &amp; 0.60 &amp; \color{red}{\mathbf{0}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
+\hline  
+\end{array}
+$$</div>
+<p><strong>Epoca 3</strong></p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|r|r|r|r|r|r|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
+\hline 
+0 &amp; 1 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.50 &amp; 0.38 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+\hline 
+1 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.45 &amp; 0.34 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+\hline 
+0 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.31 &amp; 0.28 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+\hline 
+1 &amp; 1 &amp; 0.49 &amp; 0.40 &amp; -0.60 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.33 &amp; 0.57 &amp; \color{red}{\mathbf{0}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
+\hline  
+\end{array}
+$$</div>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">Perceptron</span> <span class="kn">import</span> <span class="n">Perceptron</span>
+
+<span class="k">class</span> <span class="nc">WeightedSum</span><span class="p">(</span><span class="n">TransferFunction</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">bias</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span> <span class="o">+</span> <span class="n">bias</span>
+
+    <span class="k">def</span> <span class="nf">derive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">w</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="mf">1.</span>
+
+<span class="k">class</span> <span class="nc">Sigmoid</span><span class="p">(</span><span class="n">Activation</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="mi">700</span>
+        <span class="c1"># Clip per evitare valori estremi</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">threshold</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)))</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">derive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">BinaryCrossEntropy</span><span class="p">(</span><span class="n">Error</span><span class="p">):</span>
+
+     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">true</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">pred</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">true</span><span class="p">,</span> <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_values</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+        <span class="c1"># Clip per evitare valori estremi</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clip_prediction</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">true</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">true</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pred</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">derive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">true</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">pred</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">true</span><span class="p">,</span> <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_values</span><span class="p">(</span><span class="n">true</span><span class="p">,</span> <span class="n">pred</span><span class="p">)</span>
+        <span class="c1"># Clip per evitare valori estremi</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clip_prediction</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span> <span class="n">true</span> <span class="o">/</span> <span class="n">pred</span> <span class="o">-</span> <span class="p">(</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">true</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">pred</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">class</span> <span class="nc">GradientDescent</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perceptron</span><span class="p">:</span> <span class="n">Perceptron</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">outputs</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">case</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">):</span>
+            <span class="n">case</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">case</span><span class="p">)</span>
+
+            <span class="n">net_output</span> <span class="o">=</span> <span class="n">perceptron</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">case</span><span class="p">,</span> <span class="n">call_activation</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">prediction</span> <span class="o">=</span> <span class="n">perceptron</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">net_output</span><span class="p">)</span>
+
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">perceptron</span><span class="o">.</span><span class="n">weights</span>
+            <span class="n">bias</span> <span class="o">=</span> <span class="n">perceptron</span><span class="o">.</span><span class="n">bias</span>
+
+            <span class="c1"># Derivata dell'errore rispetto la predizione</span>
+            <span class="n">dL_dpred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error</span><span class="o">.</span><span class="n">derive</span><span class="p">(</span><span class="n">true</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">pred</span><span class="o">=</span><span class="n">prediction</span><span class="p">)</span>
+            <span class="c1"># Derivata della funzione di attivazione rispetto la funzione di trasferimento</span>
+            <span class="n">dpred_dz</span> <span class="o">=</span> <span class="n">perceptron</span><span class="o">.</span><span class="n">activation</span><span class="o">.</span><span class="n">derive</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">net_output</span><span class="p">)</span>
+            <span class="n">dL_dz</span> <span class="o">=</span> <span class="n">dL_dpred</span> <span class="o">*</span> <span class="n">dpred_dz</span>
+
+            <span class="n">dL_dwi</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dL_dbi</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+                <span class="n">bias</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">bias</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">))]</span>
+
+            <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">case</span><span class="p">,</span> <span class="n">bias</span><span class="p">):</span>
+
+                <span class="c1"># Derivata dei pesi e del bias rispetto la funzione di trasferimento</span>
+                <span class="n">dz_dw</span><span class="p">,</span> <span class="n">dz_db</span> <span class="o">=</span> <span class="n">perceptron</span><span class="o">.</span><span class="n">transfer_function</span><span class="o">.</span><span class="n">derive</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+
+                <span class="c1"># Derivata dell'errore rispetto ai pesi</span>
+                <span class="n">dL_dw</span> <span class="o">=</span> <span class="n">dL_dz</span> <span class="o">*</span> <span class="n">dz_dw</span>
+                <span class="n">dL_dwi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dL_dw</span><span class="p">)</span>
+
+                <span class="c1"># Derivata dell'errore rispetto al bias</span>
+                <span class="n">dL_db</span> <span class="o">=</span> <span class="n">dL_dz</span> <span class="o">*</span> <span class="n">dz_db</span>
+                <span class="n">dL_dbi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dL_db</span><span class="p">)</span>
+
+            <span class="n">bias</span> <span class="o">=</span> <span class="n">bias</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">dL_db</span> <span class="o">=</span> <span class="n">dL_dbi</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Calcolo del nuovo bias</span>
+            <span class="n">new_bias</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">bias</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lr</span> <span class="o">*</span> <span class="n">dL_db</span><span class="p">)</span>
+
+            <span class="n">new_weights</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">dL_dw</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">dL_dwi</span><span class="p">):</span>
+                <span class="c1"># Calcolo dei nuovi pesi</span>
+                <span class="n">new_w</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lr</span> <span class="o">*</span> <span class="n">dL_dw</span><span class="p">)</span>
+                <span class="n">new_weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_w</span><span class="p">)</span>
+
+            <span class="c1"># Aggiornamento del percettrone</span>
+            <span class="n">perceptron</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">new_weights</span><span class="p">)</span>
+            <span class="n">perceptron</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="n">new_bias</span>
+            <span class="n">error</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error</span><span class="p">(</span><span class="n">true</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">pred</span><span class="o">=</span><span class="n">perceptron</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">case</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">error</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">GradientDescent</span><span class="p">(</span><span class="n">lr</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">error_function</span><span class="o">=</span><span class="n">BinaryCrossEntropy</span><span class="p">())</span>
+
+<span class="n">perceptron</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="n">dimension</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">Sigmoid</span><span class="p">())</span>
+<span class="n">perceptron</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+<span class="n">perceptron</span><span class="o">.</span><span class="n">bias</span> <span class="o">=</span> <span class="mf">1.</span>
+
+<span class="n">cases</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+<span class="n">true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">(</span><span class="n">perceptron</span><span class="o">=</span><span class="n">perceptron</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">cases</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">true</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>Siete curiosi di vedere il <strong>codice completo</strong>? Potete trovarlo <strong><a href="https://github.com/lucadivit/neurons_for_dummies">qui</a></strong>.<br/>
+Ultimissima nota prima di chiudere. Questo codice è da considerarsi meramente <strong>educativo</strong>. Nella realtà si utilizzano librerie come PyTorch o Keras, per <strong>astrarre</strong> questo livello 
+di complessità. Sappiate in ogni caso che non è finita qui, c'è la <strong>parte tre</strong> ad attendervi...</p>
+<p>Alla Prossima.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h2>Consigliati</h2>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1">Neurons for Dummies - 1</a></li>
+<li><a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3">Neurons for Dummies - 3</a></li>
+</ul>
+<hr />
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Pubblicato</h4>
+            <time itemprop="dateCreated" datetime="2025-05-15T00:00:00+02:00">15 maggio 2025</time>
+            <h4>Argomento</h4>
+            <a class="category-link" href="https://www.lucadivita.it/it/categories.html#machine-learning-ref">Machine Learning</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/it/tags.html#backpropagazione-ref">backpropagazione
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#deep_learning-ref">deep_learning
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#matematica-ref">matematica
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#neuroni-ref">neuroni
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#reti_neurali-ref">reti_neurali
+                    <span class="superscript">3</span>
+</a></li>
+            </ul>
+<h4>Contatti</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>
