@@ -309,14 +309,14 @@ $$</div>
 <p>Per poter calcolare queste derivate, sia la funzione di errore <span class="math">\(L\)</span>, sia la funzione di attivazione <span class="math">\(\sigma\)</span> <strong>devono essere derivabili</strong>.
 Il problema è che il <strong>gradino di Heaviside</strong> ha una <strong>discontinuità</strong> in <span class="math">\(x=0\)</span>, per cui non è derivabile e questo è un problema. O meglio, per essere onesti, non è derivabile nel senso classico
 ma lo è nella <strong>teoria delle distribuzioni</strong>. Difatti la sua derivata è la <strong><a href="https://it.wikipedia.org/wiki/Delta_di_Dirac">Delta di Dirac</a></strong>. Ma senza perderci in troppe astrazioni, diciamo che non è una derivata che 
-possiamo usare direttamente nel nostro algoritmo. Infatti anche la funzione di attivazione <strong><a href="https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)">ReLu</a></strong> non è derivabile in <span class="math">\(x=0\)</span>, ma nessuno la scarta per questo.
+possiamo usare direttamente nel nostro algoritmo. Infatti anche la funzione di attivazione <strong><a href="https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)">ReLU</a></strong> non è derivabile in <span class="math">\(x=0\)</span>, ma nessuno la scarta per questo.
 Nell'immagine seguente potete vedere il suo <strong>andamento</strong>:</p>
-<p><img alt="ReLu" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/relu.png"/>
-<em class="image-with-caption">Figura 2. ReLu</em></p>
+<p><img alt="ReLU" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/relu.png"/>
+<em class="image-with-caption">Figura 2. ReLU</em></p>
 <p><strong>Quindi, perché tutta questa avversione verso Heaviside?</strong></p>
-<p>Presto detto: sebbene ReLu non sia derivabile in <span class="math">\(x=0\)</span>, <strong>non è discontinua</strong> in quel punto. Possiamo quindi assegnare <strong>artificialmente</strong> un valore di derivata tra 0 e 1: la funzione è <strong><a href="https://it.wikipedia.org/wiki/Subdifferenziale">subderivabile</a></strong>.
+<p>Presto detto: sebbene ReLU non sia derivabile in <span class="math">\(x=0\)</span>, <strong>non è discontinua</strong> in quel punto. Possiamo quindi assegnare <strong>artificialmente</strong> un valore di derivata tra 0 e 1: la funzione è <strong><a href="https://it.wikipedia.org/wiki/Subdifferenziale">subderivabile</a></strong>.
 Con Heaviside, invece, questo <strong>non è possibile</strong>. E anche se (per assurdo) decidessimo di usare la Delta di Dirac come derivata... guardate qui:</p>
-<p><img alt="ReLu" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
+<p><img alt="Dirac Delta" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
 <em class="image-with-caption">Figura 3. Delta di Dirac</em></p>
 <p>Come potete vedere, è nulla <strong>ovunque</strong>, tranne che in <span class="math">\(x=0\)</span>. Questo significa che il gradiente sarebbe <strong>sempre nullo</strong>, che i pesi <strong>non cambierebbero mai</strong> e <em>la rete neurale non imparerebbe nulla</em>.<br/>
 C'è infine un'ultima, seppur secondaria, criticità: la <strong>Binary Cross Entropy</strong> divergerebbe ad <strong>infinito</strong> se la predizione fosse esattamente <span class="math">\(0\)</span> o <span class="math">\(1\)</span>. Questo non succede con la <strong>sigmoide</strong> perchè 
