@@ -56,6 +56,7 @@ pre code {
 
 code {
     white-space: pre-wrap !important;
+    word-break: break-word !important;
 }
 
 /* Gli elementi con entrambe le classi */
