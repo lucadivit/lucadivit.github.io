@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="Vi capita mai di svegliarvi al mattino e pensare: Cavolo, oggi ho proprio voglia di retropropagare l’errore... ma dovrei stare attento alla linea! No!? Strano, ma contenti voi. In ogni caso, anche se nessuno l&#39;ha chiesto, ho la soluzione che fa per voi: il compromesso giusto tra godimento e …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="crystal_structure_algorithm, retropropagazione, reti_neurali, metaeuristica, Metaeuristica, " />
+
+<meta property="og:title" content="BackProp? Anche No "/>
+<meta property="og:url" content="https://www.lucadivita.it/metaeuristica/not-only-backprop/" />
+<meta property="og:description" content="Vi capita mai di svegliarvi al mattino e pensare: Cavolo, oggi ho proprio voglia di retropropagare l’errore... ma dovrei stare attento alla linea! No!? Strano, ma contenti voi. In ogni caso, anche se nessuno l&#39;ha chiesto, ho la soluzione che fa per voi: il compromesso giusto tra godimento e …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-05-27T00:00:00+02:00" />
+<meta name="twitter:title" content="BackProp? Anche No ">
+<meta name="twitter:description" content="Vi capita mai di svegliarvi al mattino e pensare: Cavolo, oggi ho proprio voglia di retropropagare l’errore... ma dovrei stare attento alla linea! No!? Strano, ma contenti voi. In ogni caso, anche se nessuno l&#39;ha chiesto, ho la soluzione che fa per voi: il compromesso giusto tra godimento e …">
+
+        <title>BackProp? Anche No  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/index.html">Bio</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/latest.html">
+                                        Recenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/categories.html">
+                                            Argomenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/archives.html">
+                                            Archivio
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/pages/contatti/">Contatti</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li class="active">
+                                            <a href="/it/metaeuristica/not-only-backprop/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li>
+                                            <a href="/en/metaeuristica/not-only-backprop/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/metaeuristica/not-only-backprop/">
+                BackProp? Anche No
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contenuti</h4>
+        <div class="toc">
+<ul>
+<li><a href="#ma-perche">Ma Perche!?</a></li>
+<li><a href="#ma-come">Ma Come!?</a><ul>
+<li><a href="#i-dati">I Dati</a></li>
+<li><a href="#la-rete">La Rete</a></li>
+<li><a href="#tutto-il-resto">Tutto Il Resto</a></li>
+</ul>
+</li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Vi capita mai di svegliarvi al mattino e pensare:<br/>
+<em>Cavolo, oggi ho proprio voglia di retropropagare l’errore... ma dovrei stare attento alla linea!</em> <br/>
+No!? <strong>Strano</strong>, ma contenti voi. In ogni caso, anche se nessuno l'ha chiesto, ho la <strong>soluzione</strong> che fa per voi: il <em>compromesso giusto tra godimento e gusto</em>.
+Scherzi a parte, questo articolo è più un <strong>esercizio concettuale</strong>. Dedicato a chi, come me, pensa che le case siano fatte per starci dentro
+e azzera la batteria sociale dopo le 20:00. Quest'oggi parlerò di come ho utilizzato l'algoritmo <strong>Crystal</strong> al posto della backpropagation
+per modificare, e quindi <strong>addestrare</strong>, una rete neurale. Non sapete cos'è il Crystal? <strong>Male</strong>, molto male. Vuol dire che non avete letto il mio articolo a riguardo. 
+Ma tranquilli, potete recuperarlo <a href="/it/metaeuristica/crystal-structure-algorithm/">qui</a>. E se invece vi manca questa fantomatica <strong>backpropagation</strong>, niente paura:
+trovate tutta la saga del neurone <a href="/it/machine-learning/neurons-for-dummies-1/">qui</a>.</p>
+<h3 id="ma-perche">Ma Perche!?<a class="headerlink" href="#ma-perche" title="Permanent link"> </a></h3>
+<p>Se è questa la vostra domanda, vi ho già detto che l'accoppiata <strong>asocialità-20:00</strong> porta a cose strane. <strong>Perchè</strong> mai dovremmo voler addestrare una rete neurale 
+<strong>senza</strong> backpropagation che funziona già così bene...?<br/>
+Vuoi la risposta...?<br/>
+<strong>Perchè posso</strong>.<br/>
+Ironia a parte non è una cosa così infondata. Ripensiamo ai <strong>limiti</strong> della backpropagation:</p>
+<ul>
+<li>Richiede la <strong>derivabilità</strong> della funzione di errore e di attivazione.</li>
+<li>Guarda solo <strong>localmente</strong> la funzione di errore, non globalmente. Questo può portare a <strong>minimi locali</strong> dove pensate che l'errore sia basso ma solo 
+perchè non potete guardare aldilà del vostro naso.</li>
+<li><strong>Overfitting</strong>: Cioè quella situazione in cui avete esagerato con l'addestramento e la rete ha <strong>smesso di generalizzare</strong>. Conosce benissimo i dati di train, 
+ma <strong>non sa gestire</strong> quelli nuovi. Per capirci: una cosa è insegnarvi come si fanno le <strong>addizioni</strong> (generalizzazione), un'altra è insegnarvi solo quanto fa <strong>2+2</strong> (memorizzazione).</li>
+<li><strong>Vanishing/Explosion Gradient</strong>: Il gradiente può:<ul>
+<li>Diventare <strong>nullo</strong>. In questo caso i pesi non variano e la rete <strong>smette</strong> di imparare.</li>
+<li>Assumere un valore <strong>troppo grande</strong>. In questo caso i pesi saranno a loro volta grandi e la rete diventa <strong>troppo sensibile</strong> agli input. A una piccola variazione
+dell'ingresso, l'output va in tilt.</li>
+</ul>
+</li>
+</ul>
+<p>Ma basta a parlare male della backpropagation, ditegli le cose in faccia se avete il <strong>coraggio</strong>. In ogni caso perchè si continua a usarla nonostante tutti questi 
+<strong>limiti</strong>? Beh perché per ognuno di questi problemi esiste una <strong>soluzione per mitigarli</strong>. A parte sulla derivabilità, da quella <strong>non si scappa</strong>. Però puntiamo i piedi e 
+proviamo a guardare una <strong>alternativa</strong>. Perchè utilizzare la metaeuristica, e in questo caso particolare il Crystal, può <strong>superare</strong> i limiti sollevati? Vediamoli uno per uno:</p>
+<ul>
+<li>Utilizzando un algoritmo metaeuritisto, <strong>non serve calcolare derivate</strong>. Quindi potete usare la funzione di errore (e di attivazione) che più vi aggrada. Anche quella pubblicata
+dall'amico del cugino dello zio su Facebook, quello che sostiene che i poteri forti volevano tenerla nascosta. E si, potete usare anche il <strong>gradino di Heaviside</strong>.</li>
+<li>Il processo di modifica dei pesi è profondamente diverso da quello della backpropagation. Ricordate lo scalatore che scendeva la montagna a piccoli passi? Bene, qui non vale più. 
+La modifica dei pesi mira a ridurre la funzione di errore <strong>globalmente</strong>, non localmente. Quindi il rischio di restare bloccati in una "valle" (<strong>minimo locale</strong>) è sensibilmente <strong>ridotto</strong>.</li>
+<li>Essendo un <strong>processo probabilistico</strong>, c’è una bassa probabilità di adattarsi troppo ai dati (overfitting), e questo rende la soluzione più <strong>robusta</strong>.</li>
+<li>Dato che non si usa più la discesa del gradiente... beh, non c’è più nemmeno il gradiente. <strong>Addio</strong> problemi di vanishing o exploding gradient.</li>
+</ul>
+<p>Ma, come ogni bella storia, anche questa ha i suoi problemi. So che <em>le dimensioni non contano</em>, ma per questi algoritmi contano eccome. Se la rete è troppo grande questa soluzione
+diventa semplicemente <strong>impraticabile</strong> e in generale tende a essere meno efficiente della backpropagation. Inoltre potrebbe metterci più tempo per 
+arrivare a convergenza, cioè ad un set di pesi tale per cui la rete può essere considerata buona. Quindi <strong>quando scegliere una e quando l'altra?</strong><br/>
+Come tutto nella vita, <strong>dipende</strong>. In generale, un approccio metaeuristico può tornare utile in presenza di <strong>dati molto rumorosi</strong> o quando il rischio di <strong>overfitting</strong> è particolarmente elevato.
+In questi casi può valere la pena testare le performance della rete con un metodo alternativo, come Crystal. Detto questo, la backpropagation resta quasi sempre la <strong>prima scelta</strong>.
+È molto più <strong>efficiente</strong> dal punto di vista computazionale, e buona parte delle sue limitazioni può essere attenuata con le tecniche giuste e, cosa ahimè spesso sottovalutata, con una buona <strong>pulizia dei dati</strong>.</p>
+<h3 id="ma-come">Ma Come!?<a class="headerlink" href="#ma-come" title="Permanent link"> </a></h3>
+<h4 id="i-dati">I Dati<a class="headerlink" href="#i-dati" title="Permanent link"> </a></h4>
+<p>In questo paragrafo vediamo <strong>come</strong>, a livello di codice si è proceduto con l'esperimento. <strong>Regola</strong> numero uno del deep learning, non parlare mai...ah no scusate! <strong>I dati</strong>. 
+Come dataset ho utilizzato il famosissimo <strong><a href="https://www.kaggle.com/datasets/uciml/iris">iris</a></strong>, composto da <strong>150 campioni</strong> su <strong>4 features</strong> che permettono
+di classificare <strong>3 tipi</strong> di iris:</p>
+<ul>
+<li>Iris Setosa</li>
+<li>Iris Virginica</li>
+<li>Iris Versicolor</li>
+</ul>
+<p>Se i fiori vi fanno schifo, skippate pure. Altrimenti, sappiate che le features sono:</p>
+<ul>
+<li>Sepal length (cm): <strong>Lunghezza</strong> del <a href="https://www.treccani.it/vocabolario/sepalo/">sepalo</a></li>
+<li>Sepal width (cm): <strong>Larghezza</strong> del sepalo</li>
+<li>Petal length (cm): Lunghezza del petalo</li>
+<li>Petal width (cm): Larghezza del petalo</li>
+</ul>
+<p><img alt="Features" class="image-with-caption" src="https://www.lucadivita.it/images/metaeuristica/not_only_back/iris.png"/>
+<em class="image-with-caption">Figura 1. Iris Features</em></p>
+<p>A volte può capitare di trovare una quinta colonna: <em>id</em>. Spoiler: <strong>non serve a nulla</strong>. È solo un <strong>identificativo</strong> univoco, quindi viene sempre scartato perché non contiene informazione utile.
+L’obiettivo della rete neurale è semplice sulla carta: <strong>indovinare</strong> che tipo di Iris abbiamo di fronte, dati i <strong>valori numerici</strong> delle 4 features.<br/>
+Questo è un problema <em>entry level</em> nel mondo del deep learning, ma non fatevi fregare: se vi mettessero in mano solo i numeri non ci capireste una fava (per rimanere a tema vegetali).</p>
+<p><img alt="Features" class="image-with-caption" src="https://www.lucadivita.it/images/metaeuristica/not_only_back/iris_data.png"/>
+<em class="image-with-caption">Figura 2. Classificazione Iris</em></p>
+<h4 id="la-rete">La Rete<a class="headerlink" href="#la-rete" title="Permanent link"> </a></h4>
+<p>Volendo <strong>comparare</strong> le performance di addestramento tra backpropagation e Crystal, 
+ho iniziato molto semplicemente creando due reti neurali <strong>identiche</strong>, utilizzando il framework <em>PyTorch</em>.<br/>
+Iniziamo dalla <strong>definizione</strong> della rete neurale:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">SimpleNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>L’architettura</strong> è molto semplice. E fidatevi, se questa vi sembra complicata... è solo perché <strong>non avete ancora visto nulla</strong>.<br/>
+In questa rete abbiamo:</p>
+<ul>
+<li>4 neuroni di ingresso</li>
+<li>16 neuroni nel singolo strato nascosto</li>
+<li>3 neuroni di uscita</li>
+</ul>
+<p>Graficamente, potremmo rappresentarla così:</p>
+<p><img alt="Rete" class="image-with-caption" src="https://www.lucadivita.it/images/metaeuristica/not_only_back/rete.png"/>
+<em class="image-with-caption">Figura 3. Architettura della Rete Neurale</em></p>
+<p>Questi numeri non sono buttati lì a caso. Certo a parte il 16, che potete tranquillamente cambiare in base al vostro umore, 
+all’allineamento dei pianeti o a quanto caffè avete bevuto.</p>
+<ul>
+<li>In ingresso ci <strong>devono</strong> essere 4 neuroni, perchè <strong>4 sono le features</strong> del dataset.</li>
+<li>In uscita ci <strong>devono</strong> essere 3 neuroni perchè <strong>3 sono i tipi di iris</strong> da classificare.</li>
+</ul>
+<p>Facendo due calcoli rapidi, abbiamo che <strong>i parametri</strong> della rete sono:</p>
+<ul>
+<li>Numero di pesi del layer nascosto:</li>
+</ul>
+<p><span class="math center-math">\(4 \cdot 16 = 64\)</span></p>
+<ul>
+<li>Numero di bias del layer nascosto:</li>
+</ul>
+<p><span class="math center-math">\(16\)</span></p>
+<ul>
+<li>Numero di pesi del layer di uscita:</li>
+</ul>
+<p><span class="math center-math">\(3 \cdot 16 = 48\)</span></p>
+<ul>
+<li>Numero di bias del layer di uscita:</li>
+</ul>
+<p><span class="math center-math">\(3\)</span></p>
+<p>Quindi il numero di totale dei parametri è:</p>
+<p><span class="math center-math">\(64 + 48 + 16 + 3 = 131\)</span></p>
+<p>E questo numero è tutt'altro che banale: sarà proprio quello a determinare la <strong>dimensione dei cristalli</strong> nell’algoritmo Crystal.<br/>
+Bene ora che abbiamo definito la rete, non dimentichiamoci che <strong>ne vogliamo due copie identiche</strong>, e per identiche intendo proprio
+ <strong>stessa architettura</strong> e <strong>stessi pesi iniziali</strong>, altrimenti che comparazione sarebbe!?<br/>
+Ora, quando create una rete con PyTorch, i pesi vengono sì inizializzati in modo <strong>coerente</strong>, ma comunque in maniera <strong>casuale</strong>. 
+Quindi ho fatto così: ho creato una terza <strong>rete fantasma</strong>, il cui unico scopo nella vita è fornire i pesi iniziali. 
+Questi vengono poi copiati in entrambe le reti <em>vere</em> che andrò ad allenare. Volendo, potete anche salvare i vostri pesi personalizzati e ricaricarli a piacimento...
+ma crearli tocca a voi, quindi poi non lamentatevi.<br/>
+Ecco il codice:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">create_networks</span><span class="p">(</span><span class="n">weights</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"weights.pth"</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading weights from </span><span class="si">{</span><span class="n">weights</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">initial_weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Creating and Saving new weights..."</span><span class="p">)</span>
+        <span class="n">initial_weights</span> <span class="o">=</span> <span class="n">SimpleNet</span><span class="p">()</span><span class="o">.</span><span class="n">state_dict</span><span class="p">()</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">initial_weights</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+
+    <span class="n">nn_model_backp</span> <span class="o">=</span> <span class="n">SimpleNet</span><span class="p">()</span>
+    <span class="n">nn_model_crystal</span> <span class="o">=</span> <span class="n">SimpleNet</span><span class="p">()</span>
+    <span class="n">nn_model_backp</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">initial_weights</span><span class="p">))</span>
+    <span class="n">nn_model_crystal</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">initial_weights</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">nn_model_backp</span><span class="p">,</span> <span class="n">nn_model_crystal</span>
+</code></pre></div>
+<p>Se vi state chiedendo perchè ho utilizzato <em>deepcopy</em> vi consiglio caldamento un recappino di <strong><a href="https://it.wikipedia.org/wiki/Programmazione_orientata_agli_oggetti">OOP</a></strong> e in 
+particolare sul concetto di <strong><a href="https://it.wikipedia.org/wiki/Incapsulamento_(informatica)">incapsulamento</a></strong>.<br/>
+Spoiler: si vuole evitare che modificare una rete cambi anche l'altra, che qua ti distrai un secondo ed è subito <strong>anarchia</strong>.</p>
+<h4 id="tutto-il-resto">Tutto Il Resto<a class="headerlink" href="#tutto-il-resto" title="Permanent link"> </a></h4>
+<p>Ora che sappiamo che è definita la nostra rete andiamo a vedere il restante codice. Dato che non ci piace farci mancare nulla, gli ottimizzatori sono
+stati sviluppati con uno <a href="https://refactoring.guru/design-patterns/strategy">strategy pattern</a>.<br/>
+La classe astratta e quella contesto sono:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AOptimizer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nn_model</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">loss_function</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">nn_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loss_function</span> <span class="o">=</span> <span class="n">loss_function</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span>
+
+    <span class="nd">@model</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nn_model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">nn_model</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">loss_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">loss</span><span class="o">.</span><span class="n">_WeightedLoss</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss_function</span>
+
+    <span class="nd">@loss_function</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">loss_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loss_function</span><span class="p">:</span> <span class="n">loss</span><span class="o">.</span><span class="n">_WeightedLoss</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_loss_function</span> <span class="o">=</span> <span class="n">loss_function</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">X_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">y_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="p">(</span><span class="n">preds</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">acc</span>
+
+<span class="k">class</span> <span class="nc">Optimizer</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="n">AOptimizer</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_strategy</span> <span class="o">=</span> <span class="n">strategy</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AOptimizer</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strategy</span>
+
+    <span class="nd">@strategy</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strategy</span><span class="p">:</span> <span class="n">AOptimizer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_strategy</span> <span class="o">=</span> <span class="n">strategy</span>
+
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_strategy</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_test</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strategy</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+</code></pre></div>
+<p>Mentre le strategie concrete sono due.<br/>
+Quella che implementa la <strong>backpropagation</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">BackpropOptimizer</span><span class="p">(</span><span class="n">AOptimizer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nn_model</span><span class="p">,</span> <span class="n">loss_function</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nn_model</span><span class="o">=</span><span class="n">nn_model</span><span class="p">,</span> <span class="n">loss_function</span><span class="o">=</span><span class="n">loss_function</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">"Backprop"</span>
+
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Start optimization for </span><span class="si">{</span><span class="n">BackpropOptimizer</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> Strategy"</span><span class="p">)</span>
+
+        <span class="n">X_train_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">y_train_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+        <span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">TensorDataset</span><span class="p">(</span><span class="n">X_train_t</span><span class="p">,</span> <span class="n">y_train_t</span><span class="p">),</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">21</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">xb</span><span class="p">,</span> <span class="n">yb</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+                <span class="n">opt</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss_function</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">yb</span><span class="p">)</span>
+                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                <span class="n">opt</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+        <span class="n">acc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy on Train Set: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<p>e quella che implementa il <strong>Crystal</strong>:  </p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">CrystalOptimizer</span><span class="p">(</span><span class="n">AOptimizer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nn_model</span><span class="p">,</span> <span class="n">loss_function</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nn_model</span><span class="o">=</span><span class="n">nn_model</span><span class="p">,</span> <span class="n">loss_function</span><span class="o">=</span><span class="n">loss_function</span><span class="p">)</span>
+
+    <span class="o">...</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"Crystal"</span>
+
+    <span class="k">def</span> <span class="nf">_is_new_fitness_better</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old_crystal_fitness</span><span class="p">,</span> <span class="n">new_crystal_fitness</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">new_crystal_fitness</span> <span class="o">&lt;</span> <span class="n">old_crystal_fitness</span>
+
+    <span class="k">def</span> <span class="nf">_flat_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">weights</span>
+
+    <span class="k">def</span> <span class="nf">_create_crystals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lb</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ub</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">base_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flat_weights</span><span class="p">()</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">base_weights</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">random_crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">lb</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">ub</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nb_crystal</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+        <span class="n">crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">base_weights</span><span class="p">,</span> <span class="n">random_crystals</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Created </span><span class="si">{</span><span class="n">crystals</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> Crystals With </span><span class="si">{</span><span class="n">crystals</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> Elements"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">crystals</span>
+
+    <span class="k">def</span> <span class="nf">_assign_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">crystal</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cum_p</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">total_params</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span>
+            <span class="n">tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">crystal</span><span class="p">[</span><span class="n">cum_p</span><span class="p">:</span><span class="n">cum_p</span> <span class="o">+</span> <span class="n">total_params</span><span class="p">])</span>
+            <span class="n">reshaped_tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy_</span><span class="p">(</span><span class="n">reshaped_tensor</span><span class="p">)</span>
+            <span class="n">cum_p</span> <span class="o">+=</span> <span class="n">total_params</span>
+
+    <span class="k">def</span> <span class="nf">_evaluate_crystals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">crystals</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">crystal</span> <span class="ow">in</span> <span class="n">crystals</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_assign_weights</span><span class="p">(</span><span class="n">crystal</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss_function</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+            <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+        <span class="n">fitnesses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">best_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">fitnesses</span><span class="p">)</span>
+        <span class="n">best_value</span> <span class="o">=</span> <span class="n">fitnesses</span><span class="p">[</span><span class="n">best_index</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">fitnesses</span><span class="p">,</span> <span class="n">best_value</span><span class="p">,</span> <span class="n">best_index</span>
+
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Start optimization for </span><span class="si">{</span><span class="n">CrystalOptimizer</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> Strategy"</span><span class="p">)</span>
+
+        <span class="n">X_train_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">y_train_t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+
+        <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+        <span class="n">nb_crystal</span> <span class="o">=</span> <span class="mi">15</span>
+        <span class="n">nb_iterations</span> <span class="o">=</span> <span class="mi">60</span>
+        <span class="n">crystals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_crystals</span><span class="p">(</span><span class="n">lb</span><span class="o">=</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="o">=</span><span class="n">nb_crystal</span><span class="p">)</span>
+        <span class="n">fitnesses</span><span class="p">,</span> <span class="n">best_fitness</span><span class="p">,</span> <span class="n">best_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_crystals</span><span class="p">(</span><span class="n">crystals</span><span class="o">=</span><span class="n">crystals</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="n">X_train_t</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="n">y_train_t</span><span class="p">)</span>
+        <span class="n">Cr_b</span> <span class="o">=</span> <span class="n">crystals</span><span class="p">[</span><span class="n">best_index</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_iterations</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">crystal_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="p">):</span>
+                <span class="n">new_crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
+                <span class="n">Cr_main</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_take_random_crystals</span><span class="p">(</span><span class="n">crystals</span><span class="o">=</span><span class="n">crystals</span><span class="p">,</span> <span class="n">nb_random_crystals_to_take</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="o">=</span><span class="n">nb_crystal</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+                <span class="n">Cr_old</span> <span class="o">=</span> <span class="n">crystals</span><span class="p">[</span><span class="n">crystal_idx</span><span class="p">]</span>
+                <span class="n">Fc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_take_random_crystals</span><span class="p">(</span><span class="n">crystals</span><span class="o">=</span><span class="n">crystals</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="o">=</span><span class="n">nb_crystal</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">r</span><span class="p">,</span> <span class="n">r_1</span><span class="p">,</span> <span class="n">r_2</span><span class="p">,</span> <span class="n">r_3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__compute_r_values</span><span class="p">()</span>
+                <span class="n">Cr_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_simple_cubicle</span><span class="p">(</span><span class="n">Cr_old</span><span class="o">=</span><span class="n">Cr_old</span><span class="p">,</span> <span class="n">Cr_main</span><span class="o">=</span><span class="n">Cr_main</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
+                <span class="n">new_crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">new_crystals</span><span class="p">,</span> <span class="n">Cr_new</span><span class="p">))</span>
+                <span class="n">Cr_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_cubicle_with_best_crystals</span><span class="p">(</span><span class="n">Cr_old</span><span class="o">=</span><span class="n">Cr_old</span><span class="p">,</span> <span class="n">Cr_main</span><span class="o">=</span><span class="n">Cr_main</span><span class="p">,</span> <span class="n">Cr_b</span><span class="o">=</span><span class="n">Cr_b</span><span class="p">,</span> <span class="n">r_1</span><span class="o">=</span><span class="n">r_1</span><span class="p">,</span> <span class="n">r_2</span><span class="o">=</span><span class="n">r_2</span><span class="p">)</span>
+                <span class="n">new_crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">new_crystals</span><span class="p">,</span> <span class="n">Cr_new</span><span class="p">))</span>
+                <span class="n">Cr_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_cubicle_with_mean_crystals</span><span class="p">(</span><span class="n">Cr_old</span><span class="o">=</span><span class="n">Cr_old</span><span class="p">,</span> <span class="n">Cr_main</span><span class="o">=</span><span class="n">Cr_main</span><span class="p">,</span> <span class="n">Fc</span><span class="o">=</span><span class="n">Fc</span><span class="p">,</span> <span class="n">r_1</span><span class="o">=</span><span class="n">r_1</span><span class="p">,</span> <span class="n">r_2</span><span class="o">=</span><span class="n">r_2</span><span class="p">)</span>
+                <span class="n">new_crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">new_crystals</span><span class="p">,</span> <span class="n">Cr_new</span><span class="p">))</span>
+                <span class="n">Cr_new</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_cubicle_with_best_and_mean_crystals</span><span class="p">(</span><span class="n">Cr_old</span><span class="o">=</span><span class="n">Cr_old</span><span class="p">,</span> <span class="n">Cr_main</span><span class="o">=</span><span class="n">Cr_main</span><span class="p">,</span> <span class="n">Cr_b</span><span class="o">=</span><span class="n">Cr_b</span><span class="p">,</span> <span class="n">Fc</span><span class="o">=</span><span class="n">Fc</span><span class="p">,</span> <span class="n">r_1</span><span class="o">=</span><span class="n">r_1</span><span class="p">,</span> <span class="n">r_2</span><span class="o">=</span><span class="n">r_2</span><span class="p">,</span> <span class="n">r_3</span><span class="o">=</span><span class="n">r_3</span><span class="p">)</span>
+                <span class="n">new_crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">new_crystals</span><span class="p">,</span> <span class="n">Cr_new</span><span class="p">))</span>
+                <span class="n">new_crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">new_crystals</span><span class="p">,</span> <span class="n">a_min</span><span class="o">=</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">a_max</span><span class="o">=</span><span class="n">upper_bound</span><span class="p">)</span>
+                <span class="n">new_crystal_fitnesses</span><span class="p">,</span> <span class="n">new_crystal_best_fitness</span><span class="p">,</span> <span class="n">new_crystal_best_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_crystals</span><span class="p">(</span><span class="n">crystals</span><span class="o">=</span><span class="n">new_crystals</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="n">X_train_t</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="n">y_train_t</span><span class="p">)</span>
+                <span class="n">current_crystal_fitness</span> <span class="o">=</span> <span class="n">fitnesses</span><span class="p">[</span><span class="n">crystal_idx</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_new_fitness_better</span><span class="p">(</span><span class="n">old_crystal_fitness</span><span class="o">=</span><span class="n">current_crystal_fitness</span><span class="p">,</span> <span class="n">new_crystal_fitness</span><span class="o">=</span><span class="n">new_crystal_best_fitness</span><span class="p">):</span>
+                    <span class="n">crystals</span><span class="p">[</span><span class="n">crystal_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_crystals</span><span class="p">[</span><span class="n">new_crystal_best_index</span><span class="p">]</span>
+
+            <span class="n">fitnesses</span><span class="p">,</span> <span class="n">best_fitness</span><span class="p">,</span> <span class="n">best_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_crystals</span><span class="p">(</span><span class="n">crystals</span><span class="o">=</span><span class="n">crystals</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="n">X_train_t</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="n">y_train_t</span><span class="p">)</span>
+            <span class="n">Cr_b</span> <span class="o">=</span> <span class="n">crystals</span><span class="p">[</span><span class="n">best_index</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Iter </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. Current Best Crystal Fitness Is </span><span class="si">{</span><span class="n">best_fitness</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_assign_weights</span><span class="p">(</span><span class="n">crystal</span><span class="o">=</span><span class="n">Cr_b</span><span class="p">)</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy on Train Set: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<p>Non mi soffermerò sulla classe relativa alla backpropagation. Vi basti sapere che è stato utilizzato PyTorch che permette di avere un <strong>alto livello di astrazione</strong> e ci risparmia il manicomio.<br/>
+<em>Ma Luca, io voglio sapere come funziona!</em><br/>
+Se ti sei fatto questa domanda, vuol dire che non hai letto la serie di articoli sul neurone quindi <strong>RECUPERALI</strong>.
+Concentriamoci invece sulla classe relativa al Crystal. Anche qui mi limiterò a spiegare solo alcuni pezzi di codice e sai perchè? Perchè l'ho già spiegato in un articolo 
+dedicato quindi sì, anche sta volta è colpa tua. Vai e recupera anche quello.<br/>
+Ma bando ai rimproveri e iniziamo vedendo come viene creata la <strong>popolazione</strong> iniziale di <em>cristalli grezzi</em>.
+Se stampassimo la struttura della rete con questo snippet:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">SimpleNet</span> <span class="kn">import</span> <span class="n">SimpleNet</span>
+
+<span class="n">net</span> <span class="o">=</span> <span class="n">SimpleNet</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">net</span><span class="o">.</span><span class="n">named_parameters</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="s2">"|"</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</code></pre></div>
+<p>otterremmo il seguente <strong>output</strong>:</p>
+<div class="highlight"><pre><span></span><code>net.0.weight | torch.Size([16, 4])
+net.0.bias | torch.Size([16])
+net.2.weight | torch.Size([3, 16])
+net.2.bias | torch.Size([3])
+</code></pre></div>
+<p>Cosa stiamo guardando esattamente? Una <strong>sequenza di matrici e vettori</strong>.</p>
+<ul>
+<li>Il primo elemento (<code>net.0.weight</code>) è una <strong>matrice di pesi</strong> con 16 righe (una per neurone) e 4 colonne (una per feature). Come so che sono pesi? È scritto proprio lì, sulla sinistra. </li>
+<li>Subito dopo c’è un <strong>vettore di bias</strong> (<code>net.0.bias</code>) con 16 elementi, uno per neurone. Come so che sono bias?! Perchè è sempre lì, sulla sinistra.</li>
+</ul>
+<p>Stesso discorso vale per le altre due righe.<br/>
+C'è un piccolo problema: i cristalli sono semplici liste di <code>float</code> mentre la rete neurale lavora con matrici e vettori. Quindi dobbiamo <strong>adattare</strong> la nostra sequenza di parametri.<br/>
+Vediamo questo snippet:</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">_flat_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">weights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">weights</span>
+
+    <span class="k">def</span> <span class="nf">_create_crystals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lb</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ub</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">:</span>
+        <span class="n">base_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_flat_weights</span><span class="p">()</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">base_weights</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">random_crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">lb</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">ub</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">nb_crystal</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+        <span class="n">crystals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">base_weights</span><span class="p">,</span> <span class="n">random_crystals</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Created </span><span class="si">{</span><span class="n">crystals</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> Crystals With </span><span class="si">{</span><span class="n">crystals</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> Elements"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">crystals</span>
+
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="o">...</span>
+        <span class="n">nb_crystal</span> <span class="o">=</span> <span class="mi">15</span>
+        <span class="n">lower_bound</span><span class="p">,</span> <span class="n">upper_bound</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span>
+        <span class="n">crystals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_crystals</span><span class="p">(</span><span class="n">lb</span><span class="o">=</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="o">=</span><span class="n">nb_crystal</span><span class="p">)</span>
+</code></pre></div>
+<p>Cosa stiamo facendo qui?</p>
+<ul>
+<li>Con <code>_flat_weights</code> iteriamo su tutti i parametri della rete, cioè le matrici e i vettori dei pesi e dei bias. Ognuna di queste strutture viene <em>flattenata</em>, cioè
+<strong>trasformata</strong> in una lista. Perdiamo la struttura, ma non il <strong>contenuto</strong>. Tutti questi vettori vengono concatenati insieme 
+in un’unica grande lista di 131 elementi (nel nostro caso specifico), che rappresenta <strong>tutti i pesi e bias</strong> della rete.</li>
+<li>Questa lista rappresenta il <strong>primo</strong> cristallo della rete, e fornisce informazioni alla funzione <code>_create_crystals</code> per creare tutti gli altri in maniera casuale ma della <strong>stessa dimensione</strong>.
+Abbiamo in uscita una matrice dove ogni riga, ossia ogni cristallo, è l'intero set di parametri della rete neurale.</li>
+<li>
+<p>I parametri <code>lower_bound, upper_bound = -2, 2</code> e <code>nb_crystal = 15</code>, specificano rispettivamente:</p>
+<ul>
+<li>i valori <strong>massimi e minimi</strong> che possono assumere i pesi.</li>
+<li>il numero di <strong>cristalli</strong> desiderati.</li>
+</ul>
+</li>
+</ul>
+<p>Abbiamo quindi una popolazione di 15 cristalli, ognuno con 131 elementi che spaziano da -2 a 2. Questi valori sono <strong>iperparametri</strong>. Come sono stati scelti? A <strong>sentimento</strong>. In generale: 
+meno elementi nella popolazione = algoritmo più veloce. Inoltre non vogliamo una rete con pesi troppo grandi per non renderla troppo <strong>sensibile</strong> agli input.<br/>
+Continuiamo vedendo un altro snippet <strong>essenziale</strong>:</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">_assign_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">crystal</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">cum_p</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+            <span class="n">total_params</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span>
+            <span class="n">tensor</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">crystal</span><span class="p">[</span><span class="n">cum_p</span><span class="p">:</span><span class="n">cum_p</span> <span class="o">+</span> <span class="n">total_params</span><span class="p">])</span>
+            <span class="n">reshaped_tensor</span> <span class="o">=</span> <span class="n">tensor</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">copy_</span><span class="p">(</span><span class="n">reshaped_tensor</span><span class="p">)</span>
+            <span class="n">cum_p</span> <span class="o">+=</span> <span class="n">total_params</span>
+
+    <span class="k">def</span> <span class="nf">_evaluate_crystals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">crystals</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">losses</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">crystal</span> <span class="ow">in</span> <span class="n">crystals</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_assign_weights</span><span class="p">(</span><span class="n">crystal</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+                <span class="n">outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+                <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loss_function</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+            <span class="n">losses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+        <span class="n">fitnesses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">losses</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">best_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">fitnesses</span><span class="p">)</span>
+        <span class="n">best_value</span> <span class="o">=</span> <span class="n">fitnesses</span><span class="p">[</span><span class="n">best_index</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">fitnesses</span><span class="p">,</span> <span class="n">best_value</span><span class="p">,</span> <span class="n">best_index</span>
+
+    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">y_train</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="o">...</span>
+        <span class="n">crystals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_crystals</span><span class="p">(</span><span class="n">lb</span><span class="o">=</span><span class="n">lower_bound</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="n">upper_bound</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="o">=</span><span class="n">nb_crystal</span><span class="p">)</span>
+        <span class="n">fitnesses</span><span class="p">,</span> <span class="n">best_fitness</span><span class="p">,</span> <span class="n">best_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_crystals</span><span class="p">(</span><span class="n">crystals</span><span class="o">=</span><span class="n">crystals</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="n">X_train_t</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="n">y_train_t</span><span class="p">)</span>
+        <span class="n">Cr_b</span> <span class="o">=</span> <span class="n">crystals</span><span class="p">[</span><span class="n">best_index</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_iterations</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">crystal_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nb_crystal</span><span class="p">):</span>
+                <span class="o">...</span>
+                <span class="n">new_crystal_fitnesses</span><span class="p">,</span> <span class="n">new_crystal_best_fitness</span><span class="p">,</span> <span class="n">new_crystal_best_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_crystals</span><span class="p">(</span><span class="n">crystals</span><span class="o">=</span><span class="n">new_crystals</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="n">X_train_t</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="n">y_train_t</span><span class="p">)</span>
+                <span class="n">current_crystal_fitness</span> <span class="o">=</span> <span class="n">fitnesses</span><span class="p">[</span><span class="n">crystal_idx</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_new_fitness_better</span><span class="p">(</span><span class="n">old_crystal_fitness</span><span class="o">=</span><span class="n">current_crystal_fitness</span><span class="p">,</span> <span class="n">new_crystal_fitness</span><span class="o">=</span><span class="n">new_crystal_best_fitness</span><span class="p">):</span>
+                    <span class="n">crystals</span><span class="p">[</span><span class="n">crystal_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_crystals</span><span class="p">[</span><span class="n">new_crystal_best_index</span><span class="p">]</span>
+            <span class="n">fitnesses</span><span class="p">,</span> <span class="n">best_fitness</span><span class="p">,</span> <span class="n">best_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluate_crystals</span><span class="p">(</span><span class="n">crystals</span><span class="o">=</span><span class="n">crystals</span><span class="p">,</span> <span class="n">X_train</span><span class="o">=</span><span class="n">X_train_t</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="n">y_train_t</span><span class="p">)</span>
+            <span class="n">Cr_b</span> <span class="o">=</span> <span class="n">crystals</span><span class="p">[</span><span class="n">best_index</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_assign_weights</span><span class="p">(</span><span class="n">crystal</span><span class="o">=</span><span class="n">Cr_b</span><span class="p">)</span>
+</code></pre></div>
+<p>Entriamo nel cuore pulsante dell’algoritmo, dove i cristalli vengono finalmente <strong>messi alla prova</strong>. Quello che vedete è l’inizio dell’iterazione evolutiva che consente ai cristalli di <strong>evolversi</strong>, mutare e, si spera, migliorare.
+Ma visto che l’evoluzione l’abbiamo già spiegata in un altro articolo, qui ci concentriamo su <strong>come usiamo</strong> questi benedetti cristalli.</p>
+<ul>
+<li>
+<p>Per ogni cristallo, la funzione <code>_evaluate_crystals</code> fa tre cose fondamentali:</p>
+<ul>
+<li>Trasforma il cristallo in parametri di rete <strong>compatibili</strong>.</li>
+<li><strong>Assegna</strong> quei parametri alla rete neurale.</li>
+<li>Valuta quanto il cristallo è <strong>bravo a classificare</strong> i fiori usando una loss function (che vediamo a brevissimo).</li>
+</ul>
+</li>
+<li>
+<p>La funzione <code>_assign_weights</code> è responsabile della <strong>magia nera</strong>. Prende una semplice lista piatta di numeri (il cristallo), e la <strong>trasforma</strong> di nuovo in matrici e vettori 
+compatibili con la rete neurale. Come ci riesce? Vediamolo passo per passo:</p>
+<ul>
+<li>Si <strong>cicla</strong> sulla rete neurale accedendo ai suoi parametri (pesi e bias) con <code>self._model.parameters()</code>. </li>
+<li>Per ogni parametro:<ul>
+<li>Con <code>p.numel()</code> scopriamo <strong>quanti</strong> elementi servono.</li>
+<li><strong>Prendiamo</strong> esattamente quel numero di elementi dalla lista del cristallo: <code>crystal[cum_p:cum_p + total_params]</code>.</li>
+<li>Li <strong>trasformiamo</strong> nella forma corretta (matrice o vettore) con: <code>tensor.view(p.shape)</code>.</li>
+<li>Li <strong>assegniamo</strong> al layer: <code>p.data.copy_(reshaped_tensor)</code></li>
+<li>E <strong>aggiorniamo</strong> il contatore <code>cum_p</code>, così la prossima volta prenderemo i valori giusti dalla posizione giusta.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>In pratica, visto che abbiamo <strong>costruito</strong> i cristalli seguendo esattamente l’ordine dei parametri della rete, adesso possiamo <strong>ricostruire</strong> la rete neurale a partire dal cristallo, pezzo dopo pezzo. Elegante, no?  </p>
+<p>Eccoci arrivati al momento della verità: mettere a <strong>confronto</strong> backpropagation e Crystal su un terreno comune.</p>
+<div class="highlight"><pre><span></span><code><span class="n">nn_model_backp</span><span class="p">,</span> <span class="n">nn_model_crystal</span> <span class="o">=</span> <span class="n">create_networks</span><span class="p">()</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">()</span>
+<span class="n">loss</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+
+<span class="n">backprop_opt</span> <span class="o">=</span> <span class="n">BackpropOptimizer</span><span class="p">(</span><span class="n">nn_model</span><span class="o">=</span><span class="n">nn_model_backp</span><span class="p">,</span> <span class="n">loss_function</span><span class="o">=</span><span class="n">loss</span><span class="p">)</span>
+<span class="n">crystal_opt</span> <span class="o">=</span> <span class="n">CrystalOptimizer</span><span class="p">(</span><span class="n">nn_model</span><span class="o">=</span><span class="n">nn_model_crystal</span><span class="p">,</span> <span class="n">loss_function</span><span class="o">=</span><span class="n">loss</span><span class="p">)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">Optimizer</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">concrete_strategy</span> <span class="ow">in</span> <span class="p">[</span><span class="n">backprop_opt</span><span class="p">,</span> <span class="n">crystal_opt</span><span class="p">]:</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+    <span class="n">opt</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">concrete_strategy</span>
+
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span><span class="n">y_test</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy Before Train On Test Set with </span><span class="si">{</span><span class="n">concrete_strategy</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="n">opt</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">X_train</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="o">=</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span><span class="n">y_test</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Accuracy After Train On Test Set with </span><span class="si">{</span><span class="n">concrete_strategy</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">acc</span><span class="si">:</span><span class="s2">.2%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">elapsed</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Elapsed: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
+</code></pre></div>
+<p>Come si può leggere dal codice, dopo aver istanziato le due reti neurali identiche, e aver istanziato <code>train set</code> e <code>test set</code>, definiamo la funzione di loss, 
+in questo caso la buona vecchia <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross Entropy</a>, perfetta per problemi di classificazione.
+La funzione di loss è richiesta, insieme alle reti neurali, come parametro dai costruttori delle classi concrete degli ottimizzatori.
+Per ogni ottimizzatore istanziato quello che si fa è:</p>
+<ul>
+<li>Si stampa l'accuratezza sul <code>test set</code> <strong>prima</strong> del train. Ovviamente l'accuratezza pre train, sarà identica per le due strategie perchè hanno entrambe lo stesso 
+set di pesi e condividono lo stesso <code>test set</code>.</li>
+<li>Si avvia il processo di ottimizzazione richiamando il <strong>metodo</strong> <code>optimize(X_train=X_train, y_train=y_train)</code> che prende in ingresso il <code>train set</code>.</li>
+<li>Si stampa l'accuratezza sul <code>test set</code> <strong>dopo</strong> il processo di ottimizzazione, ossia dopo il train.</li>
+<li>Si stampa il <strong>tempo</strong> di elaborazione.</li>
+</ul>
+<p>L'output dovrebbe essere simile al seguente:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">Accuracy</span><span class="w"> </span><span class="nv">Before</span><span class="w"> </span><span class="nv">Train</span><span class="w"> </span><span class="nv">On</span><span class="w"> </span><span class="nv">Test</span><span class="w"> </span><span class="nv">Set</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">Backprop</span>:<span class="w"> </span><span class="mi">36</span>.<span class="mi">67</span><span class="o">%</span>
+<span class="nv">Start</span><span class="w"> </span><span class="nv">optimization</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">Backprop</span><span class="w"> </span><span class="nv">Strategy</span>
+<span class="nv">Epoch</span><span class="w"> </span><span class="mi">0</span>,<span class="w"> </span><span class="nv">Loss</span>:<span class="w"> </span><span class="mi">0</span>.<span class="mi">3089</span>
+<span class="nv">Epoch</span><span class="w"> </span><span class="mi">10</span>,<span class="w"> </span><span class="nv">Loss</span>:<span class="w"> </span><span class="mi">0</span>.<span class="mi">0071</span>
+<span class="nv">Epoch</span><span class="w"> </span><span class="mi">20</span>,<span class="w"> </span><span class="nv">Loss</span>:<span class="w"> </span><span class="mi">0</span>.<span class="mi">0010</span>
+<span class="nv">Accuracy</span><span class="w"> </span><span class="nv">on</span><span class="w"> </span><span class="nv">Train</span><span class="w"> </span><span class="nv">Set</span>:<span class="w"> </span><span class="mi">97</span>.<span class="mi">50</span><span class="o">%</span>
+<span class="nv">Accuracy</span><span class="w"> </span><span class="nv">After</span><span class="w"> </span><span class="nv">Train</span><span class="w"> </span><span class="nv">On</span><span class="w"> </span><span class="nv">Test</span><span class="w"> </span><span class="nv">Set</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">Backprop</span>:<span class="w"> </span><span class="mi">96</span>.<span class="mi">67</span><span class="o">%</span>
+<span class="nv">Elapsed</span>:<span class="w"> </span><span class="mi">4</span>.<span class="mi">4316</span><span class="nv">s</span>
+<span class="nv">Accuracy</span><span class="w"> </span><span class="nv">Before</span><span class="w"> </span><span class="nv">Train</span><span class="w"> </span><span class="nv">On</span><span class="w"> </span><span class="nv">Test</span><span class="w"> </span><span class="nv">Set</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">Crystal</span>:<span class="w"> </span><span class="mi">36</span>.<span class="mi">67</span><span class="o">%</span>
+<span class="nv">Start</span><span class="w"> </span><span class="nv">optimization</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">Crystal</span><span class="w"> </span><span class="nv">Strategy</span>
+<span class="nv">Created</span><span class="w"> </span><span class="mi">15</span><span class="w"> </span><span class="nv">Crystals</span><span class="w"> </span><span class="nv">With</span><span class="w"> </span><span class="mi">131</span><span class="w"> </span><span class="nv">Elements</span>
+<span class="nv">Iter</span><span class="w"> </span><span class="mi">0</span>.<span class="w"> </span><span class="nv">Current</span><span class="w"> </span><span class="nv">Best</span><span class="w"> </span><span class="nv">Crystal</span><span class="w"> </span><span class="nv">Fitness</span><span class="w"> </span><span class="nv">Is</span><span class="w"> </span><span class="mi">1</span>.<span class="mi">5699747800827026</span>
+<span class="nv">Iter</span><span class="w"> </span><span class="mi">10</span>.<span class="w"> </span><span class="nv">Current</span><span class="w"> </span><span class="nv">Best</span><span class="w"> </span><span class="nv">Crystal</span><span class="w"> </span><span class="nv">Fitness</span><span class="w"> </span><span class="nv">Is</span><span class="w"> </span><span class="mi">0</span>.<span class="mi">38595184683799744</span>
+<span class="nv">Iter</span><span class="w"> </span><span class="mi">20</span>.<span class="w"> </span><span class="nv">Current</span><span class="w"> </span><span class="nv">Best</span><span class="w"> </span><span class="nv">Crystal</span><span class="w"> </span><span class="nv">Fitness</span><span class="w"> </span><span class="nv">Is</span><span class="w"> </span><span class="mi">0</span>.<span class="mi">16885297000408173</span>
+<span class="nv">Iter</span><span class="w"> </span><span class="mi">30</span>.<span class="w"> </span><span class="nv">Current</span><span class="w"> </span><span class="nv">Best</span><span class="w"> </span><span class="nv">Crystal</span><span class="w"> </span><span class="nv">Fitness</span><span class="w"> </span><span class="nv">Is</span><span class="w"> </span><span class="mi">0</span>.<span class="mi">14107681810855865</span>
+<span class="nv">Iter</span><span class="w"> </span><span class="mi">40</span>.<span class="w"> </span><span class="nv">Current</span><span class="w"> </span><span class="nv">Best</span><span class="w"> </span><span class="nv">Crystal</span><span class="w"> </span><span class="nv">Fitness</span><span class="w"> </span><span class="nv">Is</span><span class="w"> </span><span class="mi">0</span>.<span class="mi">09387028217315674</span>
+<span class="nv">Iter</span><span class="w"> </span><span class="mi">50</span>.<span class="w"> </span><span class="nv">Current</span><span class="w"> </span><span class="nv">Best</span><span class="w"> </span><span class="nv">Crystal</span><span class="w"> </span><span class="nv">Fitness</span><span class="w"> </span><span class="nv">Is</span><span class="w"> </span><span class="mi">0</span>.<span class="mi">09387028217315674</span>
+<span class="nv">Accuracy</span><span class="w"> </span><span class="nv">on</span><span class="w"> </span><span class="nv">Train</span><span class="w"> </span><span class="nv">Set</span>:<span class="w"> </span><span class="mi">96</span>.<span class="mi">67</span><span class="o">%</span>
+<span class="nv">Accuracy</span><span class="w"> </span><span class="nv">After</span><span class="w"> </span><span class="nv">Train</span><span class="w"> </span><span class="nv">On</span><span class="w"> </span><span class="nv">Test</span><span class="w"> </span><span class="nv">Set</span><span class="w"> </span><span class="nv">with</span><span class="w"> </span><span class="nv">Crystal</span>:<span class="w"> </span><span class="mi">93</span>.<span class="mi">33</span><span class="o">%</span>
+<span class="nv">Elapsed</span>:<span class="w"> </span><span class="mi">1</span>.<span class="mi">1045</span><span class="nv">s</span>
+</code></pre></div>
+<p>I risultati non saranno <strong>esattamente</strong> identici ogni volta dato che i processi sono probabilistici, ma in media le performance si avvicinano sorprendentemente.
+E ora, rullo di <strong>tamburi</strong>: il Crystal è risultato più <strong>veloce</strong>. E no, non ho sbagliato tutto quello che ho detto all’inizio. Semplicemente, in questo caso specifico:</p>
+<ul>
+<li>La rete è <strong>piccola</strong></li>
+<li>I parametri sono <strong>pochi</strong></li>
+<li>15 cristalli per 50 iterazioni fanno <em>solo</em> 750 <strong>valutazioni</strong></li>
+<li>Niente <strong>derivate</strong> da calcolare</li>
+</ul>
+<p>Quindi sì, è plausibile che batta la backpropagation in velocità.
+Ma <strong>attenzione</strong>: al crescere della complessità del problema e delle dimensioni della rete, i cristalli diventano sempre più grandi, e le iterazioni necessarie aumentano. 
+E in quel caso la backpropagation se la gode <strong>comandandosela</strong>.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Siamo finalmente giunti alla <strong>conclusione</strong> di questo articolo. Magari vi sarà utile nella vita o magari no, ma posso dire che 
+è stato un ottimo <strong>esercizio concettuale</strong> che mi ha permesso di affrontare diversi argomenti interessanti. 
+Come sempre, se siete curiosi di leggere l'intero codice sorgente, potete scaricarlo da <a href="https://github.com/lucadivit/NotOnlyBackProp"><strong>qui</strong></a>.</p>
+<p>Alla Prossima.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h2>Consigliati</h2>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/metaeuristica/crystal-structure-algorithm/" title="Crystal Structure Algorithm">Crystal Structure Algorithm</a></li>
+<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1">Neurons for Dummies - 1</a></li>
+<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
+<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3">Neurons for Dummies - 3</a></li>
+</ul>
+<hr />
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Pubblicato</h4>
+            <time itemprop="dateCreated" datetime="2025-05-27T00:00:00+02:00">27 maggio 2025</time>
+            <h4>Argomento</h4>
+            <a class="category-link" href="https://www.lucadivita.it/categories.html#metaeuristica-ref">Metaeuristica</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/tags.html#crystal_structure_algorithm-ref">crystal_structure_algorithm
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#metaeuristica-ref">metaeuristica
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#reti_neurali-ref">reti_neurali
+                    <span class="superscript">4</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#retropropagazione-ref">retropropagazione
+                    <span class="superscript">4</span>
+</a></li>
+            </ul>
+<h4>Contatti</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>

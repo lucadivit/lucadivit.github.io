@@ -13,7 +13,7 @@
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
         <meta name="author" content="Luca Di Vita" />
 
-        <meta name="description" content="For my first article, I’d like to talk about a topic that’s very close to my heart: Metaheuristics. Despite the name, it’s not some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems — that is, problems involving finding a maximum …
+        <meta name="description" content="For my first article, I’d like to talk about a topic that’s very close to my heart: Metaheuristics. Despite the name, it’s not some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems, that is, problems involving finding a maximum …
 " />
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
@@ -22,12 +22,12 @@
 
 <meta property="og:title" content="Crystal Structure Algorithm "/>
 <meta property="og:url" content="https://www.lucadivita.it/en/metaeuristica/crystal-structure-algorithm/" />
-<meta property="og:description" content="For my first article, I’d like to talk about a topic that’s very close to my heart: Metaheuristics. Despite the name, it’s not some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems — that is, problems involving finding a maximum …" />
+<meta property="og:description" content="For my first article, I’d like to talk about a topic that’s very close to my heart: Metaheuristics. Despite the name, it’s not some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems, that is, problems involving finding a maximum …" />
 <meta property="og:site_name" content="Bit Di Vita" />
 <meta property="og:article:author" content="Luca Di Vita" />
 <meta property="og:article:published_time" content="2025-04-07T00:00:00+02:00" />
 <meta name="twitter:title" content="Crystal Structure Algorithm ">
-<meta name="twitter:description" content="For my first article, I’d like to talk about a topic that’s very close to my heart: Metaheuristics. Despite the name, it’s not some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems — that is, problems involving finding a maximum …">
+<meta name="twitter:description" content="For my first article, I’d like to talk about a topic that’s very close to my heart: Metaheuristics. Despite the name, it’s not some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems, that is, problems involving finding a maximum …">
 
         <title>Crystal Structure Algorithm  · Bit Di Vita
 </title>
@@ -132,15 +132,15 @@
             
             
 <p>For my first article, I’d like to talk about a topic that’s very close to my heart: <strong>Metaheuristics</strong>. Despite the name, it’s not 
-some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems — that is, 
+some ancient Assyrian demon, but rather a family of algorithms designed to solve computational and optimization problems, that is, 
 problems involving finding a maximum or minimum.</p>
-<p>When we face very large or complex problems — such as <strong><a href="https://en.wikipedia.org/wiki/NP-completeness">NP-Complete</a></strong> problems — finding the perfect 
+<p>When we face very large or complex problems, such as <strong><a href="https://en.wikipedia.org/wiki/NP-completeness">NP-Complete</a></strong> problems, finding the perfect 
 solution would take an impractically long time.<br/>
 And that’s where metaheuristics come into play. These algorithms don’t promise the absolute optimum, but they do their best to find <strong>very good 
 solutions</strong> within a reasonable time, often using approaches inspired by nature and its processes. Just think of <strong><a href="https://en.wikipedia.org/wiki/Ant_colony_optimization_algorithms">ACO</a></strong>,
 which is based on the behavior of ants, or <strong><a href="https://en.wikipedia.org/wiki/Particle_swarm_optimization">PSO</a></strong>, inspired by the movement of swarms.</p>
-<p>Among the many metaheuristic algorithms, one in particular caught my attention — both for its elegance and for the originality of its inspiration: <strong>the Crystal Structure Algorithm</strong>, or <strong>CryStAl</strong>.</p>
-<p>This algorithm is inspired by the formation processes of <strong>crystal structures</strong>, where elements — atoms, molecules, or ions — arrange themselves 
+<p>Among the many metaheuristic algorithms, one in particular caught my attention, both for its elegance and for the originality of its inspiration: <strong>the Crystal Structure Algorithm</strong>, or <strong>CryStAl</strong>.</p>
+<p>This algorithm is inspired by the formation processes of <strong>crystal structures</strong>, where elements: atoms, molecules, or ions, arrange themselves 
 in an orderly and symmetrical way, as seen in quartz crystals, for example.</p>
 <p>CryStAl stands out for a particularly interesting feature: it is a <strong>parameter-free algorithm</strong>. 
 Unlike many other approaches, it doesn't require manually setting values to control the optimization behavior. 
@@ -150,7 +150,7 @@ At the core of the algorithm are <strong>four distinct phases</strong> of soluti
 combine <strong>local search</strong> (improving solutions near those already found) and <strong>global search</strong> (exploring new areas in the solution space).</p>
 <h3 id="where-the-idea-comes-from">Where the Idea Comes From<a class="headerlink" href="#where-the-idea-comes-from" title="Permanent link"> </a></h3>
 <p>Solid minerals whose components are arranged in a regular and repeated pattern along all three spatial dimensions are called <strong>crystals</strong>.
-At the heart of this orderly structure lies the <strong>lattice</strong> — a kind of <strong>three-dimensional grid</strong> made up of points, which repeats through space.<br/>
+At the heart of this orderly structure lies the <strong>lattice</strong>, a kind of <strong>three-dimensional grid</strong> made up of points, which repeats through space.<br/>
 By itself, though, the lattice doesn’t tell us exactly where the atoms are. That’s where another piece of the puzzle comes in: the <strong>basis</strong>,
 meaning the set of atoms that repeats at each point of the lattice. In other words: the lattice tells us <strong>where</strong> to place something, 
 the basis tells us <strong>what</strong> goes there and <strong>how</strong> it’s oriented in space. Here’s an example using <strong>blue dots and gummy bears</strong>.</p>
@@ -158,12 +158,12 @@ the basis tells us <strong>what</strong> goes there and <strong>how</strong> it�
 <em class="image-with-caption">Figure 1. Basis + Lattice</em></p>
 <p>Thanks to the concepts of <strong>lattice</strong> and <strong>basis</strong>, it’s possible to generate an infinite number of <strong>crystal structures</strong>.
 The lattice, with its regular arrangement of points, defines the overall shape of the crystal, while
-the basis — that is, the repeating set of atoms — determines its <strong>internal configuration</strong>.
+the basis, that is, the repeating set of atoms determines its <strong>internal configuration</strong>.
 By combining these two elements in different ways, we can obtain crystals with a wide range of geometries, some regular and well-known, others more complex.
 Below are a few examples of how these structures can vary:</p>
 <p><img alt="Examples Of Crystals" class="image-with-caption" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/esempi_cristalli.png"/>
 <em class="image-with-caption">Figure 2. Examples of Cubicle Crystals</em></p>
-<p>The lattice, together with its basis, is the <strong>ordered</strong> and <strong>ideal</strong> structure that our <em>artificial crystals</em> — as we’ll soon see — will 
+<p>The lattice, together with its basis, is the <strong>ordered</strong> and <strong>ideal</strong> structure that our <em>artificial crystals</em>, as we’ll soon see, will 
 have to try to <strong>replicate</strong> during optimization.</p>
 <h3 id="the-mathematical-model">The Mathematical Model<a class="headerlink" href="#the-mathematical-model" title="Permanent link"> </a></h3>
 <p>The <strong>mathematical model</strong> used by the authors of this algorithm is the <strong><a href="https://en.wikipedia.org/wiki/Bravais_lattice">Bravais lattice model</a></strong>,
@@ -175,15 +175,15 @@ A <strong>position vector</strong> is then defined using the following formula:<
 Where:</p>
 <ul>
 <li><span class="math">\(d\)</span> is the number of dimensions of the crystal, which is usually 3 (unless you live in a world with
-4 spatial dimensions — in that case, <strong>please invite me over</strong>).</li>
+4 spatial dimensions, in that case <strong>please invite me over</strong>).</li>
 <li><span class="math">\(n_i\)</span> is an integer indicating how many steps we take along the direction <span class="math">\(a_i\)</span>.</li>
 <li><span class="math">\(a_i\)</span> represents the "movement direction".</li>
 </ul>
-<p>Now that we’ve defined <span class="math">\(\overrightarrow{r}\)</span>, let’s set it aside for now — but don’t worry, it’ll be back soon.
+<p>Now that we’ve defined <span class="math">\(\overrightarrow{r}\)</span>, let’s set it aside for now, but don’t worry, it’ll be back soon.
 <strong>May Thor strike me down</strong> if I ever make you give up your beloved <span class="math">\(\overrightarrow{r}\)</span>.</p>
 <p>Let’s get back to it and take a look at the <strong>candidate solutions</strong>.
 That’s right: in metaheuristic algorithms, there isn’t just one solution, but a whole set of candidate solutions,
-from which we’ll select the <strong>best one</strong>... Ahem, I mean — each candidate solution (or "crystal") is represented as a <strong>numerical vector</strong> in
+from which we’ll select the <strong>best one</strong>... Ahem, I mean, each candidate solution (or "crystal") is represented as a <strong>numerical vector</strong> in
 <span class="math">\(d\)</span> dimensions, that is, a list of values:</p>
 <p><span class="math center-math">\(C_i = \left[x_{i}^{1}, x_{i}^{2}, \dots, x_{i}^{d}  \right]\)</span></p>
 <p>Where:</p>
@@ -201,8 +201,8 @@ C_r = \left[C_{r_1}, C_{r_2}, \dots, C_{r_n}  \right]^{T} =
  x_{n}^{1} &amp; x_{n}^{2} &amp; \dots &amp; x_{n}^{d} \\
 \end{bmatrix}
 $$</div>
-<p>In other words, we have a population of <span class="math">\(n\)</span> crystals, each with <span class="math">\(d\)</span> variables. This matrix — where each row is a crystal
-and each column is a variable — represents the entire search space from which the algorithm will try to extract the best candidate.</p>
+<p>In other words, we have a population of <span class="math">\(n\)</span> crystals, each with <span class="math">\(d\)</span> variables. This matrix, where each row is a crystal
+and each column is a variable, represents the entire search space from which the algorithm will try to extract the best candidate.</p>
 <p>Alright, all clear so far (I hope)! But now the question is... <strong>How the heck do we create these crystals?</strong><br/>
 Simple as that.<br/>
 Given a <strong>fitness function</strong> <span class="math">\(f\)</span> that represents the problem to solve, the individual crystals are created using 
@@ -221,10 +221,10 @@ set according to the domain of the problem.
 Each of these crystals is a candidate solution to the problem <span class="math">\(f\)</span>.<br/>
 Being a candidate solution means that, by <strong>replacing the elements of the crystal with the variables of the function</strong> <span class="math">\(f\)</span>,
 we get a numerical result. And what we want is to find the <strong>maximum</strong> or the <strong>minimum</strong> of <span class="math">\(f\)</span>, depending on the problem.</p>
-<p>In crystallography, the bases located at the corners of the lattice — for example, like those at the vertices of the cube in Figure 1 — play a fundamental role:
+<p>In crystallography, the bases located at the corners of the lattice, for example, like those at the vertices of the cube in Figure 1, play a fundamental role:
 they are the <strong>origin of the crystal structure</strong>. By analogy, the initial crystals created (the random ones) are called <strong>main crystals</strong> and
 are denoted as <span class="math">\(C_{r_{main}}\)</span>.
-These main crystals are the <strong>starting point</strong> of the algorithm, which — as mentioned earlier — is structured into
+These main crystals are the <strong>starting point</strong> of the algorithm, which, as mentioned earlier,  is structured into
 <strong>four update phases</strong> for the solutions.
 Each phase corresponds to a variant of the cubic structure:</p>
 <ul>
@@ -257,7 +257,7 @@ We’ll see that in a moment. First, let me explain the sorcery behind those mys
 That’s what the authors of the paper decided… and who am I to argue?</li>
 </ul>
 <p>The newly created crystals are used, as will be seen in the pseudocode, to replace the "old and imperfect" ones with something newer and more refined.
-By applying these formulas <span class="math">\(n\)</span> times to the <span class="math">\(m\)</span> crystals, the algorithm tries — in a probabilistic way — to find the crystal that best optimizes the problem.<br/>
+By applying these formulas <span class="math">\(n\)</span> times to the <span class="math">\(m\)</span> crystals, the algorithm tries, in a probabilistic way, to find the crystal that best optimizes the problem.<br/>
 We’ve now reached the end of the mathematical model.  </p>
 <h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"> </a></h3>
 <p>At this point, let’s try to put everything together in pseudocode:</p>
@@ -317,7 +317,7 @@ We’ve now reached the end of the mathematical model.  </p>
     <span class="n">crystal_fitnesses</span> <span class="o">=</span> <span class="n">compute_fitnesses</span><span class="p">(</span><span class="n">crystals</span><span class="p">,</span> <span class="n">problem_to_solve</span><span class="p">)</span>
     <span class="n">Cr_b</span> <span class="o">=</span> <span class="n">get_best_crystal</span><span class="p">(</span><span class="n">crystals</span><span class="p">,</span> <span class="n">crystal_fitnesses</span><span class="p">)</span>
 </code></pre></div>
-<p>We have now defined all the <strong>steps of the algorithm</strong>, which allow — metaphorically speaking — the crystals to 
+<p>We have now defined all the <strong>steps of the algorithm</strong>, which allow, metaphorically speaking, the crystals to 
 <strong>modify their internal structure</strong> (i.e., their numerical values) in order to achieve the optimal arrangement of the basis within the lattice.</p>
 <p>I’d like to wrap up with an application example of CryStAl on a function called the <strong><a href="https://www.indusmic.com/post/bird-function">Bird Function</a></strong>,
 which has the following form:</p>
@@ -348,9 +348,9 @@ $$</div>
 <p>The output will be something like:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Best</span> <span class="n">Crystal</span> <span class="n">Is</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.58090168</span> <span class="o">-</span><span class="mf">3.14616277</span><span class="p">]</span> <span class="k">with</span> <span class="n">fitness</span> <span class="o">-</span><span class="mf">106.73618458034184</span>
 </code></pre></div>
-<p>Not bad, right? The result is <strong>very close</strong> to the theoretical minimum, and we get it using a parameter-free algorithm, inspired by crystallography, and — let’s be honest — also pretty <strong>stylish</strong>.</p>
+<p>Not bad, right? The result is <strong>very close</strong> to the theoretical minimum, and we get it using a parameter-free algorithm, inspired by crystallography, and let’s be honest, also pretty <strong>stylish</strong>.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
-<p>I hope this first article piqued your curiosity — and maybe even helped you discover something new!
+<p>I hope this first article piqued your curiosity, and maybe even helped you discover something new!
 If you want to tinker with the algorithm, you can find the <strong>full source code</strong> at <a href="https://github.com/lucadivit/CrystalStructureAlgorithm">this link</a>.
 And if you’ve fallen in love with CryStAl like I did, I also recommend checking out the <strong><a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method">paper</a></strong>
 where it all started.</p>
@@ -432,6 +432,13 @@ where it all started.</p>
 
 
             <hr/>
+<section>
+    <h2>Related Posts</h2>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/en/metaeuristica/not-only-backprop/" title="Not Only BackProp">Not Only BackProp</a></li>
+</ul>
+<hr />
+</section>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
@@ -441,13 +448,13 @@ where it all started.</p>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/en/tags.html#crystal_structure_algorithm-ref">crystal_structure_algorithm
-                    <span class="superscript">1</span>
+                    <span class="superscript">2</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#evolutionary_algorithms-ref">evolutionary_algorithms
                     <span class="superscript">1</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#metaheuristic-ref">metaheuristic
-                    <span class="superscript">1</span>
+                    <span class="superscript">2</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#optimization-ref">optimization
                     <span class="superscript">1</span>

@@ -54,6 +54,10 @@ pre code {
     white-space: pre !important;
 }
 
+code {
+    white-space: pre-wrap !important;
+}
+
 /* Gli elementi con entrambe le classi */
 .math.center-math{
     /*font-size: x-large !important;*/
