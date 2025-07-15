@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="Once upon a time, there was a neural network that didn’t want to work layer by layer like all her friends. No, she wanted to be continuous, fluid, dynamic. She wanted to be a differential equation. This is not the usual nightmare for mathematicians. There&#39;s no Freddy Krueger waking …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="deep_learning, math, neural_ode, neural_network, differential_equation, ode, theory, Teoria & Matematica, " />
+
+<meta property="og:title" content="I ODE, You ODE and the Neural ODE - 1 "/>
+<meta property="og:url" content="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" />
+<meta property="og:description" content="Once upon a time, there was a neural network that didn’t want to work layer by layer like all her friends. No, she wanted to be continuous, fluid, dynamic. She wanted to be a differential equation. This is not the usual nightmare for mathematicians. There&#39;s no Freddy Krueger waking …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-07-15T00:00:00+02:00" />
+<meta name="twitter:title" content="I ODE, You ODE and the Neural ODE - 1 ">
+<meta name="twitter:description" content="Once upon a time, there was a neural network that didn’t want to work layer by layer like all her friends. No, she wanted to be continuous, fluid, dynamic. She wanted to be a differential equation. This is not the usual nightmare for mathematicians. There&#39;s no Freddy Krueger waking …">
+
+        <title>I ODE, You ODE and the Neural ODE - 1  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/en/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/index.html">About Me</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/latest.html">
+                                        Latest
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/categories.html">
+                                            Categories
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/archives.html">
+                                            Archives
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/en/pages/contatti/">Contacts</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li>
+                                            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li class="active">
+                                            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">
+                I ODE, You ODE and the Neural ODE - 1
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <div class="toc">
+<ul>
+<li><a href="#in-the-beginning-was-the-derivative">In the Beginning Was the Derivative</a><ul>
+<li><a href="#from-definition-to-action">From Definition to Action</a></li>
+<li><a href="#the-dark-side-of-change-integration">The Dark Side of Change: Integration</a><ul>
+<li><a href="#indefinite-integral">Indefinite Integral</a></li>
+<li><a href="#definite-integral">Definite Integral</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#when-change-becomes-law">When Change Becomes Law</a><ul>
+<li><a href="#not-great-not-terrible-just-cauchy">Not Great, Not Terrible. Just... Cauchy.</a></li>
+<li><a href="#from-law-to-system">From Law to System</a></li>
+<li><a href="#ode-hall-of-fame">ODE Hall of Fame</a></li>
+</ul>
+</li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Once upon a time, there was a neural network that didn’t want to work layer by layer like all her friends. 
+No, she wanted to be continuous, fluid, dynamic. She wanted to be a <strong>differential equation</strong>. 
+This is not the usual <strong>nightmare</strong> for mathematicians. There's no Freddy Krueger waking them up 
+in the middle of the night whispering <em>solve the Demidovich</em>, nor derivatives appearing on the walls in blood. 
+On the contrary, it's an elegant and conceptually fascinating way to rethink the architecture of 
+neural networks: I'm talking about <strong>Neural ODEs</strong>.</p>
+<p>In this article, or rather series of articles, we’ll explore what happens when the world of Deep Learning meets that of 
+ordinary differential equations. Spoiler: no one gets hurt (maybe), but someone might end up a bit more confused than usual. 
+And if you’re asking yourself:<br/>
+<em>But what's the point?</em><br/>
+Don’t worry: as always, the answer lies somewhere between because I can 
+and because it’s conceptually awesome. But not only that. Neural ODEs offer an elegant alternative 
+for modeling <strong>complex temporal dynamics</strong>. They are particularly useful when you need 
+<strong>continuity</strong> over time, limited <strong>memory</strong>, and <strong>flexible</strong> structures.</p>
+<p>Obviously not everything is gold, but we’ll get to that.<br/>
+Let’s begin, starting from a galaxy far, far away...</p>
+<h3 id="in-the-beginning-was-the-derivative">In the Beginning Was the Derivative<a class="headerlink" href="#in-the-beginning-was-the-derivative" title="Permanent link"> </a></h3>
+<p>I refuse to believe that you, dear readers of this humble article, truly remember what <strong>ODEs</strong> are. 
+Let’s be honest: since we graduated, who’s actually solved one? And if you have... my condolences. 
+In any case, to fully understand Neural ODEs, we need to go <em>waaay</em> back: to the concept of the <strong>derivative</strong>.</p>
+<p>When we talk about derivatives, we talk about <strong>change</strong>. In particular, we’re answering the question:</p>
+<blockquote>
+<p>How does the value of <span class="math">\(f(x)\)</span> change when I slightly change the value of <span class="math">\(x\)</span>?</p>
+</blockquote>
+<p>Let’s translate this sentence into the language of mathematics. We’re changing the value of <span class="math">\(x\)</span> by 
+adding a very small amount: <span class="math">\(h\)</span>. But what we want to measure is the <strong>change</strong>, so we write:</p>
+<div class="math">$$
+\Delta f = f(x+h) - f(x)
+$$</div>
+<p>We now have our change, but change relative to what!? The formula as it is, doesn’t answer that. 
+It’s like saying: <em>I got a raise of €1000</em>.<br/>
+Good for you, but €1000 over what time period? If it’s €1000 per year, that’s not so impressive; 
+if it’s €1000 per hour, I’m coming to work with you.<br/>
+A single additional word changed everything. That’s because that word gave us the <strong>rate of change</strong>.<br/>
+So, let’s add a term to our formula to reflect the <strong>rate</strong>:</p>
+<div class="math">$$
+\Delta f = \frac{f(x+h) - f(x)}{h}
+$$</div>
+<p>Great, we’re almost there. We said the change in <span class="math">\(x\)</span> must be minimal, right? And what’s the tool we use to represent 
+something <em>infinitely small</em>? Exactly, the <strong>limit</strong>. Our <span class="math">\(h\)</span> has to be so small it’s almost <span class="math">\(0\)</span>. So we write:</p>
+<div class="math">$$
+f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+$$</div>
+<p>This function is called the <strong>difference quotient</strong> and it’s the mathematical definition of the derivative. 
+Its <strong>sign</strong> tells us the <strong>direction</strong> in which the function changes:</p>
+<ul>
+<li>if <span class="math">\(f'(x) &gt; 0\)</span>: it increases and the function <strong>rises</strong> (positive rate).</li>
+<li>if <span class="math">\(f'(x) &lt; 0\)</span>: it decreases and the function <strong>falls</strong> (negative rate).</li>
+<li>if <span class="math">\(f'(x) = 0\)</span>: it remains constant and the function <strong>doesn’t change</strong>.</li>
+</ul>
+<p>Let’s see <strong>geometrically</strong> what happens:</p>
+<p><img alt="Plot Derivata" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/plot_geo.png"/>
+<em class="image-with-caption">Figure 1. Geometric Interpretation</em></p>
+<p>The thin curve is our <span class="math">\(f(x)\)</span>. As you can see, given a value <span class="math">\(x_0\)</span> we find the point <span class="math">\(P=(x_0, f(x_0))\)</span>. 
+If we consider an infinitesimal increase of <span class="math">\(h\)</span>, we get a second point: <span class="math">\(Q=(x_0 + h, f(x_0 + h))\)</span>. 
+Now I’m fairly certain (I checked this morning) that it’s still true that</p>
+<blockquote>
+<p>Through two points there passes exactly one line (at least in Euclidean geometry).</p>
+</blockquote>
+<p>This line is called the <strong>secant</strong> and it’s the black line. Let’s go deeper and look at the explicit equation 
+of the line:</p>
+<div class="math">$$
+y = mx + q
+$$</div>
+<p>where <span class="math">\(m\)</span> is the <strong>slope</strong> of the line. Assuming we know two points on the line, we can write 
+(if you want the proof, take a look <a href="https://en.wikipedia.org/wiki/Slope">here</a>):</p>
+<div class="math">$$
+m = \frac{y_2-y_1}{x_2-x_1}
+$$</div>
+<p>But wait, we do have those points:</p>
+<div class="math">$$
+P=(x_1, y_1)=(x_0, f(x_0))
+$$</div>
+<p>and </p>
+<div class="math">$$
+Q=(x_2, y_2)=(x_0+h, f(x_0+h))
+$$</div>
+<p>So we write:</p>
+<div class="math">$$
+m = \frac{f(x_0+h) - f(x_0)}{x_0+h-x_0} = \frac{f(x_0+h) - f(x_0)}{h}
+$$</div>
+<p>Sound familiar?!<br/>
+So what we’re saying is that the difference quotient is nothing but the slope of the secant line. 
+As <span class="math">\(h\)</span> becomes infinitesimally small, the distance between <span class="math">\(f(x_0+h)\)</span> and <span class="math">\(f(x_0)\)</span> shrinks. 
+This means that <span class="math">\(Q\)</span> moves closer and closer to <span class="math">\(P\)</span> until they become the same point. 
+Therefore, as <span class="math">\(h\)</span> tends to <span class="math">\(0\)</span>, just like in the definition of <strong>derivative</strong>, the secant becomes the <strong>tangent</strong>, the red line in the plot. 
+All of this leads us to say that the <strong>limit</strong> of the difference quotient, or 
+the derivative among friends, represents the <strong>slope</strong> of the <strong>tangent line</strong> to the graph of the function. </p>
+<ul>
+<li>If the line slopes upward from left to right, then <span class="math">\(f'(x) &gt; 0\)</span> and the function is increasing.</li>
+<li>If it slopes downward from left to right, then <span class="math">\(f'(x) &lt; 0\)</span> and the function is decreasing.</li>
+<li>If it’s horizontal, then <span class="math">\(f'(x) = 0\)</span> and the function is steady.</li>
+</ul>
+<p>The slope of the line also tells us the rate of change. The steeper the line, the faster the function changes. 
+For example, consider the function:</p>
+<div class="math">$$
+f(x)=x^2
+$$</div>
+<p>Its derivative is:</p>
+<div class="math">$$
+f'(x) = 2x
+$$</div>
+<p>Given <span class="math">\(x=1\)</span>, we have:</p>
+<div class="math">$$
+f(x) = x^2 = 1^2 = 1
+$$</div>
+<p>and </p>
+<div class="math">$$
+f'(x)=2 \cdot 1 = 2
+$$</div>
+<p>Which means that at the point:</p>
+<div class="math">$$
+P=(x, f(x)) = (1, 1)
+$$</div>
+<p>the function <em>increases</em> with a rate of <span class="math">\(2\)</span>, i.e., for every unit increase in <span class="math">\(x\)</span>, the value of <span class="math">\(f(x)\)</span> increases by 2.</p>
+<p>Here’s a graphical representation of what we’ve discussed:</p>
+<p><img alt="Plot Derivata" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/plot.png"/>
+<em class="image-with-caption">Figure 2. Graphical Behavior of the Derivative</em></p>
+<p>From left to right, you can see the three cases: <strong>increasing</strong> function, <strong>constant</strong> function, and <strong>decreasing</strong> function.</p>
+<p>Although there’s much more to say about derivatives, like their <a href="https://en.wikipedia.org/wiki/Differentiation_rules">rules</a>, 
+I’ll just add that from this point on, I won’t use only the <span class="math">\(f'(x)\)</span> notation for derivatives, but also the <span class="math">\(\frac{d f}{d x}\)</span> notation, 
+called the <strong>Leibniz</strong> notation. Why?! Because I’m a supporter of Leibniz’s claim to the invention of calculus... 
+but that’s another story. Just know they’re two ways to represent the <strong>same</strong> thing.</p>
+<p>So, we’ve covered the mathematical and geometric interpretation of the derivative. 
+We’re missing the physical interpretation, but honestly, I’m not in the mood. 
+So here’s the example below, figure it out from there.</p>
+<h4 id="from-definition-to-action">From Definition to Action<a class="headerlink" href="#from-definition-to-action" title="Permanent link"> </a></h4>
+<p>Let’s consider a very simple example to better explain the concept of the derivative and its physical meaning. 
+Suppose we’re driving a car, and our position over time is given by this function:</p>
+<div class="math">$$
+s(t) = -t^2 + 10t
+$$</div>
+<p>Then we have:</p>
+<div class="math">$$
+s(t+h) = -(t+h)^2 + 10 \cdot (t+h)
+$$</div>
+<div class="math">$$
+s(t+h) = -t^2 -h^2 -2ht + 10h + 10t
+$$</div>
+<p>So:</p>
+<div class="math">$$
+s(t+h) - s(t) = -t^2 -h^2 -2ht + 10h + 10t - (-t^2 + 10t)
+$$</div>
+<div class="math">$$
+s(t+h) - s(t) = -2ht -h^2 + 10h = h \cdot (-2t -h + 10)
+$$</div>
+<p>Thus:</p>
+<div class="math">$$
+\frac{s(t+h) - s(t)}{h} = \frac{h \cdot (-2t -h + 10)}{h} = -2t -h + 10
+$$</div>
+<p>Finally, we consider the limit as <span class="math">\(h \rightarrow 0\)</span>:</p>
+<div class="math">$$
+\frac{d s}{d t} = \lim_{h \to 0} -2t -h + 10 = -2t + 10
+$$</div>
+<p>We’ve now computed the derivative of the position function. But what does it represent?<br/>
+Remember, the derivative measures the <strong>rate of change</strong> of the function. 
+In our case, it represents the <em>rate at which position changes with respect to time</em>. 
+We’ve thus obtained the <strong>velocity function</strong>. 
+Let’s analyze it in detail by looking at its value at different time instants:</p>
+<ol>
+<li>Suppose <span class="math">\(t=0\)</span>:<br/>
+<span class="math center-math">\(\frac{d s}{d t} = 10\)</span></li>
+<li>Suppose <span class="math">\(t=5\)</span>:<br/>
+<span class="math center-math">\(\frac{d s}{d t} = -10 + 10 = 0\)</span></li>
+<li>Suppose <span class="math">\(t=7\)</span>:<br/>
+<span class="math center-math">\(\frac{d s}{d t} = -14 + 10 = -4\)</span></li>
+</ol>
+<p>At the initial moment (case 1), the velocity is <span class="math">\(10 \frac{m}{s}\)</span>, 
+but after <span class="math">\(5\)</span> seconds (case 2), we are instantaneously at rest. 
+This means velocity is decreasing: we are decelerating. 
+After <span class="math">\(5\)</span> seconds (case 3), velocity becomes negative: 
+we are moving backward, literally. So the car’s behavior is this: it was moving forward but <strong>slowing down</strong>, 
+we came to a <strong>stop</strong>, and then began to <strong>reverse</strong>.</p>
+<p>Who would have thought a simple formula could tell such a story? 
+And guess what? We’ve only just <strong>scratched the surface</strong>.</p>
+<h4 id="the-dark-side-of-change-integration">The Dark Side of Change: Integration<a class="headerlink" href="#the-dark-side-of-change-integration" title="Permanent link"> </a></h4>
+<p>The derivative is the infinitesimal change. We've said it again and again, and I hope the message has sunk in. 
+Now let’s pause for a moment to reflect: if the derivative measures the <strong>infinitesimal change</strong> of a function, 
+then by summing an infinite number of these tiny changes, we can <strong>reconstruct</strong> the original function.<br/>
+Makes sense, right?<br/>
+Excellent, what we’ve just introduced is the concept of the <strong>integral</strong>. 
+But beware, because here’s where things get <strong>tricky</strong>. 
+In fact, while with derivatives we have a <strong>nice formula</strong> to help us, here we don’t. 
+Integrals are more of a <strong>pattern matching</strong> game, the solution isn’t direct but stems from the question:</p>
+<blockquote>
+<p>What is the function whose derivative gives the one I’m looking at?</p>
+</blockquote>
+<p>That is, to solve an integral, we have to recognize it as the <em>derivative of something</em>. 
+But let’s start from the beginning.<br/>
+In derivatives, <span class="math">\(h\)</span> represented an <strong>infinitesimal increment</strong>. Now we change notation and use <span class="math">\(dx\)</span> instead of <span class="math">\(h\)</span>. 
+We have the infinitesimal change, so we can estimate the <strong>variation</strong>:</p>
+<div class="math">$$
+\Delta{f}=f(x+dx) - f(x)
+$$</div>
+<p>From the derivative formula, we have:</p>
+<div class="math">$$
+f'(x) = \frac{f(x+dx) - f(x)}{dx}
+$$</div>
+<p>and thus:</p>
+<div class="math">$$
+\Delta{f} \approx f'(x) \cdot dx
+$$</div>
+<p>Graphically, what we’re calculating is the <strong>area</strong> of an infinitesimal rectangle under the function <span class="math">\(f'(x)\)</span>, 
+where the <strong>height</strong> is given by the value of <span class="math">\(f'(x)\)</span> at a given point, and the <strong>base</strong> is the <strong>infinitesimal increment</strong> <span class="math">\(dx\)</span>. 
+You might be wondering why I used the approximation symbol instead of equality. Take a look at the image below.</p>
+<p><img alt="Plot Integrale" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/integrale.png"/>
+<em class="image-with-caption">Figure 3. Infinitesimal Area</em></p>
+<p>As you can see, a rectangle can never perfectly fit a curve, 
+but the “narrower” the rectangle, that is, the smaller the <span class="math">\(dx\)</span>, the better the approximation. 
+And for <span class="math">\(dx \rightarrow 0\)</span>, the approximation becomes equality.</p>
+<p>As mentioned earlier, to recover the original function, we must <strong>sum</strong> all these areas. And how many are there? 
+Since the increment is infinitesimal, it makes sense to think we have <strong>infinitely many increments</strong>. 
+So we can write:</p>
+<div class="math">$$
+f(x) \approx \sum_{i=0}^{+\infty} f'(x) \cdot dx
+$$</div>
+<p>This sum is an approximation, and when taken to infinity, it becomes the <strong>integral</strong>. 
+Mathematically, it’s written as:</p>
+<div class="math">$$
+F(x) + C = \int f'(x) \cdot dx
+$$</div>
+<p>This formula is the <strong>fundamental theorem of calculus</strong> and tells us, in simple terms, 
+that the integral is the <strong>inverse operation</strong> of the derivative. 
+The generic <span class="math">\(F(x)\)</span> is called the <strong>antiderivative</strong>, and it's the function whose derivative gives back the <strong>argument</strong> (what we’re integrating) of the integral.</p>
+<p>Now you might be asking: <em>what the heck is this C?</em><br/>
+If you apply the difference quotient to a constant function, you get <span class="math">\(0\)</span>. 
+This means that in differentiation, we <strong>lose all information about constants</strong>. 
+That’s why when we integrate, we always add the constant <span class="math">\(C\)</span>, to compensate for this loss of information.</p>
+<p>What we just defined is called the <strong>indefinite integral</strong>. 
+And yes, if there’s an indefinite one, there’s also a <strong>definite</strong> one. 
+The definite integral doesn’t compute a function, but a number, and it’s written like this:</p>
+<div class="math">$$
+\int_{a}^{b} f'(x) \cdot dx = (F(b) + C) - (F(a) + C) = F(b) - F(a)
+$$</div>
+<p>That is, the difference between the antiderivative evaluated at <span class="math">\(b\)</span> and at <span class="math">\(a\)</span>.<br/>
+What you just had the "pleasure" of reading is <strong>Riemann integration</strong>. 
+There are many others, like <strong>Lebesgue</strong> integration,  but don’t worry, we won’t go into that. I’m tired, and I bet you are too. 
+Now we have everything we need for two examples.</p>
+<h5 id="indefinite-integral">Indefinite Integral<a class="headerlink" href="#indefinite-integral" title="Permanent link"> </a></h5>
+<p>Suppose we have:</p>
+<div class="math">$$
+\frac{d f(x)}{d x} = x
+$$</div>
+<p>and we want to recover <span class="math">\(f(x)\)</span>, we get:</p>
+<div class="math">$$
+f(x) = \int x \cdot dx = \frac{x^2}{2} + C
+$$</div>
+<p>How do we get there?<br/>
+The mental process should be: <em>what is the function whose derivative is <span class="math">\(x\)</span>?</em><br/>
+Let’s apply the difference quotient to the resulting <span class="math">\(f(x)\)</span> and see if it works!</p>
+<div class="math">$$
+\frac{d}{dx} = \lim_{h \to 0} \frac{ \left( \frac{(x+h)^2}{2} + C \right) - \left( \frac{x^2}{2} + C \right)}{h} =
+\lim_{h \to 0} \frac{ \frac{2xh + h^2}{2} }{h} = \lim_{h \to 0} \frac{2x + h}{2} = x
+$$</div>
+<p>To wrap up this example, the original <span class="math">\(f(x)\)</span> could simply have been <span class="math">\(\frac{(x+h)^2}{2}\)</span>, or 
+<span class="math">\(\frac{(x+h)^2}{2} + 1\)</span>, or even <span class="math">\(\frac{(x+h)^2}{2} + 100000\)</span>. <strong>Constant values are always lost</strong> in derivative calculations. 
+So, when using an integral to move from a derivative to the <strong>antiderivative</strong>, we must account for those constants 
+with a generic <span class="math">\(C\)</span>. Otherwise, you’ll lose a point on a five-point exam. Trust me...</p>
+<h5 id="definite-integral">Definite Integral<a class="headerlink" href="#definite-integral" title="Permanent link"> </a></h5>
+<p>For this second example, besides applying the integral formula, I also want to show you why the idea of <strong>infinite summation</strong> of 
+rectangle areas works.</p>
+<p>Let’s suppose we want to compute the <strong>area</strong> under the function <span class="math">\(f(x) = 2x\)</span> in <span class="math">\([0, 2]\)</span>. 
+Note that there’s <strong>no</strong> derivative symbol here. That’s because derivatives are the classic <strong>shadow consultant</strong>: 
+they’re there, doing all the work, but you don’t see or hear them (don’t worry, they don’t want to see or hear you either).<br/>
+Back to the topic. Using the integral in its strict form, and aided by the table of <a href="https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions">indefinite integrals</a>, we write:</p>
+<div class="math">$$
+\int_{0}^{2} 2x dx = 2 \int_{0}^{2} x dx = \left. 2 \cdot \frac{x^2}{2} \right|_{0}^{2} = \left. x^2 \right|_{0}^{2} = 2^2 - 0^2 = 4
+$$</div>
+<p>So, the area under <span class="math">\(f(x) = 2x\)</span> from <span class="math">\([0, 2]\)</span> is <span class="math">\(4\)</span>, and the problem would be solved. 
+But since I’m <strong>cruel</strong>, let’s apply the theory strictly and do that cursed infinite summation. 
+We’re in the interval <span class="math">\([0, 2]\)</span>, and we want to divide it into infinitesimally small pieces <span class="math">\(dx\)</span>. We use:</p>
+<div class="math">$$
+dx = \frac{2-0}{n}
+$$</div>
+<p>where <span class="math">\(n \rightarrow \infty\)</span>, meaning we have <strong>infinitely many small pieces</strong> (or rectangles) of the interval. 
+The area of one piece is:</p>
+<div class="math">$$
+\Delta f = f(x_i) \cdot dx
+$$</div>
+<p>and summing all these areas gives:</p>
+<div class="math">$$
+\text{Total Area} = \sum_{i=0}^{n} f(x_i) \cdot dx = \sum_{i=0}^{n} 2x_i \cdot \frac{2}{n}
+$$</div>
+<p>Now pay attention here. We must evaluate each point on the graph of <span class="math">\(2x_i\)</span>. But this graph is 
+split into many <span class="math">\(dx\)</span> as described. The first rectangle spans <span class="math">\([0, dx]\)</span>, the second <span class="math">\([dx, 2dx]\)</span>, and so on. 
+We said <span class="math">\(dx = \frac{2}{n}\)</span>, right? So the first rectangle is <span class="math">\([0, \frac{2}{n}]\)</span>, the second <span class="math">\([\frac{2}{n}, 2 \cdot \frac{2}{n}]\)</span>, and so on. 
+Noticing the <strong>pattern</strong>? Please say yes... 
+To summarize, the <strong>base points of the rectangles follow the rule</strong>:</p>
+<div class="math">$$
+i \cdot dx = i \cdot \frac{2}{n}
+$$</div>
+<p>To better visualize this, refer to the image below:</p>
+<p><img alt="Plot Integrale" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/integrale_definito.png"/>
+<em class="image-with-caption">Figure 4. Domain Partitioning</em></p>
+<p>Now we can compute <span class="math">\(f(x_i)\)</span> at each point:</p>
+<ul>
+<li>At <span class="math">\(i=0\)</span><br/>
+<span class="math">\(2x_i = 2 \cdot 0 \cdot \frac{2}{n} = 0\)</span> </li>
+<li>At <span class="math">\(i=1\)</span><br/>
+<span class="math">\(2x_i = 2 \cdot 1 \cdot \frac{2}{n} = \frac{4}{n}\)</span> </li>
+<li>At <span class="math">\(i=2\)</span><br/>
+<span class="math">\(2x_i = 2 \cdot 2 \cdot \frac{2}{n} = \frac{8}{n}\)</span> </li>
+<li>...</li>
+</ul>
+<p>So in our summation, we can <strong>substitute</strong> </p>
+<div class="math">$$f(x_i) = 2x_i$$</div>
+<p>with its value:</p>
+<div class="math">$$2 \cdot i \cdot \frac{2}{n}$$</div>
+<p>yielding:</p>
+<div class="math">$$
+\text{Total Area} = \sum_{i=0}^{n} 2 \cdot i \cdot \frac{2}{n} \cdot \frac{2}{n} = \sum_{i=0}^{+\infty} \frac{8i}{n^2}
+$$</div>
+<p>Only <span class="math">\(i\)</span> is tied to the summation. To solve, we sum infinite <span class="math">\(i\)</span> values:</p>
+<div class="math">$$
+\sum_{i=0}^{n} i = 0 + 1 + 2 + ...
+$$</div>
+<p>How much is this sum? If you studied calculus and don’t know, you should be <strong>ashamed</strong>. 
+For everyone else: it has a <strong>well-proven</strong> solution by good ol’ <a href="https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF">Gauss</a>:</p>
+<div class="math">$$
+\sum_{i=0}^{n} i = \frac{n (n+1)}{2}
+$$</div>
+<p>So we have:</p>
+<div class="math">$$
+\sum_{i=0}^{n} \frac{8i}{n} = 8 \cdot \frac{\frac{n (n+1)}{2}}{n^2} = 8 \cdot \frac{(n+1)}{2n}
+$$</div>
+<p>and since <span class="math">\(n \rightarrow \infty\)</span>, we write:</p>
+<div class="math">$$
+\text{Total Area} = \lim_{n \to \infty} 8 \cdot \frac{(n+1)}{2n} = \frac{8}{2} = 4
+$$</div>
+<p>We got <strong>exactly</strong> the same result.<br/>
+Didn’t I tell you that an integral is the sum of infinite rectangle areas!?<br/>
+What’s that? You still want a (completely uncalled-for) <strong>physical interpretation</strong>? Fine, remember when we said that <strong>velocity is 
+the derivative of position with respect to time</strong>? Well, since <strong>integration is the inverse of derivation</strong>, integrating <strong>velocity</strong> (yes, we have <strong>velocity function</strong>) over time 
+gives us <strong>position</strong>. So, if we traveled at a <strong>speed</strong> of <span class="math">\(2t\)</span> for <span class="math">\(2\)</span> seconds, how much distance would we cover? Exactly 
+<span class="math">\(4\)</span> meters.</p>
+<h3 id="when-change-becomes-law">When Change Becomes Law<a class="headerlink" href="#when-change-becomes-law" title="Permanent link"> </a></h3>
+<p>Alright, now things are getting serious, but let’s stay calm. </p>
+<p>In the previous section, we looked at the derivative as the main tool to measure <strong>how a function changes</strong> over time. 
+We also saw that, knowing a derivative, we can (at least theoretically) <strong>recover the original function</strong> using the integral. </p>
+<p>But what happens if, instead of a “nice” derivative ready to integrate, we’re given a <strong>rule</strong> that tells us <strong>how that derivative behaves</strong>, 
+perhaps depending on the same variable? In other words: what if we <strong>only</strong> know an equation that links the <strong>rate of change</strong> 
+to the function itself, without knowing either explicitly? Welcome to the world of <strong>ordinary differential equations</strong>, or as friends call them: <strong>ODEs</strong>. 
+ODEs don’t tell us <em>what the function looks like</em>, but <strong>how it evolves over time</strong>. 
+They’re not the ID photo of a phenomenon, but its <strong>dynamic behavior</strong>.<br/>
+And be warned: don’t be fooled by the word “equation.” In an algebraic equation we look for a number,  in an ODE, 
+the solution is an <strong>entire function</strong>. It’s worth noting that when we speak of <strong>differential equations</strong>, we’re talking about a vast world in which ODEs are just a small part. 
+There are <strong>PDEs</strong> (partial differential equations), <strong>SDEs</strong> (stochastic differential equations), and so on. 
+And each one, in its own way, will hurt you. <strong>Hurt you deeply</strong>. But since I’m still too young to die from this, 
+let’s focus on ODEs for now,  we’ll see what comes next. But what does an ODE look like? An ODE is like COVID... you can’t see it or hear it, but it’s out there threatening you, and someone will deny its existence. 
+Basically, it’s an equation that <strong>involves at least one derivative</strong> and tells us <strong>how something should change</strong>. 
+Everything revolves around <strong>a single independent variable</strong>, usually <strong>time</strong> <span class="math">\(t\)</span> (but it could also be space, temperature, or how much will to live you’ve got left). 
+Instead of knowing the function <span class="math">\(y(t)\)</span> directly, we know its derivative, in other words, how <span class="math">\(y(t)\)</span> <strong>changes over time</strong>.<br/>
+Let’s start with the simplest ODE example:</p>
+<div class="math">$$
+\frac{dy}{dt} = f(y(t), t)
+$$</div>
+<p>Where:</p>
+<ul>
+<li><span class="math">\(t\)</span> is the independent variable (often time),</li>
+<li><span class="math">\(y\)</span> is the unknown function we want to find,</li>
+<li><span class="math">\(f(y(t), t)\)</span> is the function describing how <span class="math">\(y(t)\)</span> changes over time.</li>
+</ul>
+<p>For example:</p>
+<div class="math">$$
+\frac{dy}{dt} = 3y(t)
+$$</div>
+<p>As you can see, we don’t know the function <span class="math">\(y(t)\)</span>, but we know that <span class="math">\(y\)</span> grows proportionally 
+to its <strong>own value</strong> with a factor of <span class="math">\(3\)</span>. The goal, then, is to find the function <span class="math">\(y(t)\)</span> that satisfies this growth law. 
+In this case, the solution is:</p>
+<div class="math">$$
+y(t) = Ce^{3t}
+$$</div>
+<p>How did I find that? We’ll figure it out soon...<br/>
+For now, let’s highlight a few more facts about ODEs. 
+The one we just saw is an <strong>ordinary differential equation of first order, linear, explicit, and with constant coefficients</strong>.</p>
+<ul>
+<li><strong>First order</strong> means it contains only the first derivative <span class="math">\(\frac{dy}{dt}\)</span>, not higher ones like <span class="math">\(\frac{d^2y}{dt^2}\)</span>.</li>
+<li><strong>Linear</strong> means that <span class="math">\(y\)</span> and its derivatives appear to the first power, there are no powers, products, or non-linear functions of <span class="math">\(y\)</span>.</li>
+<li><strong>Explicit</strong> means the derivative is isolated on one side of the equation, like: <span class="math">\(\frac{dy}{dt} = f(t, y)\)</span>.</li>
+<li><strong>Constant coefficients</strong> means the terms multiplying <span class="math">\(y\)</span> or its derivatives are fixed numbers and not functions of <span class="math">\(t\)</span>.</li>
+</ul>
+<p>Now that you’ve seen what a <strong>nice and cuddly</strong> ODE looks like, let’s balance things out with one that’ll make you curse:</p>
+<div class="math">$$
+t \cdot \frac{d^2y}{dt^2} = -y^2
+$$</div>
+<p>Here we have the complete opposite:</p>
+<ul>
+<li>It’s <strong>second order</strong>, meaning <span class="math">\(y(t)\)</span> has been differentiated twice, as seen in the term <span class="math">\(\frac{d^2y}{dt^2}\)</span>.</li>
+<li>It’s <strong>non-linear</strong> since <span class="math">\(y\)</span> is squared.</li>
+<li>It’s <strong>implicit</strong> because the derivative is multiplied by a factor of <span class="math">\(t\)</span>.</li>
+<li>It has <strong>variable coefficients</strong> because <span class="math">\(y\)</span> or its derivatives are multiplied by a value that changes (in this case, <span class="math">\(t\)</span>).</li>
+</ul>
+<h4 id="not-great-not-terrible-just-cauchy">Not Great, Not Terrible. Just... Cauchy.<a class="headerlink" href="#not-great-not-terrible-just-cauchy" title="Permanent link"> </a></h4>
+<p>Earlier I said that the <strong>solution</strong> to an ODE is a <strong>function</strong>, and that’s true. 
+But I never said it’s not possible to know the value of <span class="math">\(y(t)\)</span> at a specific time <span class="math">\(t\)</span>. 
+All we need is a <strong>starting point</strong>, that is, we need to know the value of <span class="math">\(y(t)\)</span> at least at one moment in time. 
+Once we have that, we can know its value everywhere. This starting point is called an <strong>initial condition</strong>, 
+and if we have it, we’re dealing with a <strong>Cauchy problem</strong> or <strong>IVP (Initial Value Problem)</strong>. An IVP is structured like this:</p>
+<div class="math">$$
+\begin{cases}
+\frac{dy}{dt} = f(y(t), t) \\
+y(k) = z
+\end{cases}
+k \in \mathbb{R}, z \in \mathbb{R}
+$$</div>
+<p>That is, after solving the ODE, we know that at time <span class="math">\(t = k\)</span>, <span class="math">\(y(t)\)</span> is <span class="math">\(z\)</span>.</p>
+<h4 id="from-law-to-system">From Law to System<a class="headerlink" href="#from-law-to-system" title="Permanent link"> </a></h4>
+<p>Unfortunately (or fortunately), the world doesn’t work with just one <strong>variable</strong>. 
+When we want to describe multiple <strong>interacting phenomena</strong>, 
+we need to move from a single equation to a <strong>system of ODEs</strong>. 
+A system of ODEs is a set of equations that describes <strong>multiple evolving quantities</strong>, all interconnected. For example:</p>
+<div class="math">$$
+\begin{cases}
+\frac{dx}{dt} = f_1(x(t), y(t), t) \\
+\frac{dy}{dt} = f_2(x(t), y(t), t)
+\end{cases}
+$$</div>
+<p>Here, the functions <span class="math">\(x(t)\)</span> and <span class="math">\(y(t)\)</span> <strong>influence</strong> one another. 
+You can’t just solve one and then the other: they’re coupled and must be solved <strong>together</strong>. 
+And if we also have initial conditions for both ODEs, then we’re dealing with an <strong>IVP</strong>:</p>
+<div class="math">$$
+\begin{cases}
+\frac{dx}{dt} = f_1(x(t), y(t), t) \\
+\frac{dy}{dt} = f_2(x(t), y(t), t) \\
+y(k_1) = z_1 \\
+x(k_2) = z_2
+\end{cases}
+$$</div>
+<h4 id="ode-hall-of-fame">ODE Hall of Fame<a class="headerlink" href="#ode-hall-of-fame" title="Permanent link"> </a></h4>
+<p>Yes, I know, up to this point it’s all been <strong>complicated</strong> and <strong>abstract</strong>, 
+but even if it doesn’t seem like it, we’re surrounded by ODEs. <strong>ODEs everywhere</strong>. 
+An example? Newton’s famous formula, the <strong>second law of motion</strong> (yeah yeah, we’ll give Leibniz a break):</p>
+<div class="math">$$
+F=ma
+$$</div>
+<p>Even though it doesn’t look like it, <strong>acceleration</strong> is the derivative of velocity, 
+which in turn is the derivative of position over time. 
+So acceleration is the second derivative of position over time, and we can write:</p>
+<div class="math">$$
+F = m\frac{d^2 s}{dt^2}
+$$</div>
+<p>Another famous example is the <strong>Lotka-Volterra system</strong>, or the <strong>predator-prey</strong> model. 
+This system of ODEs represents the <strong>equilibrium</strong> created in an environment with <strong>prey</strong> and <strong>predators</strong> (e.g., rabbits and foxes). 
+The system looks like this:</p>
+<div class="math">$$
+\begin{cases}
+\frac{dx}{dt} = \alpha x - \beta x y \\
+\frac{dy}{dt} = \delta x y - \gamma y
+\end{cases}
+$$</div>
+<p>The graphical behavior of this system is shown in the diagram below, called a <strong>direction and phase diagram</strong>:</p>
+<p><img alt="Plot LV" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/lotka_volterra.png"/>
+<em class="image-with-caption">Figure 5. Lotka-Volterra Direction and Phase</em></p>
+<p>Note: the two graphs can be shown <strong>separately</strong>, but for brevity, you get them together here. 
+The <strong>direction field</strong> is used for first-order ODEs and visually represents 
+<strong>how solutions behave</strong> at every point in the plane, assigning an arrow tangent to the curve at that point. 
+So now you know it shows not just the <strong>direction</strong> but also the <strong>rate</strong> of change of the ODE. 
+If that’s still unclear, <strong>don’t tell me</strong>, otherwise all of this was <strong>pointless</strong>.</p>
+<p>The <strong>phase diagram</strong>, on the other hand, is used for <strong>ODE systems</strong> and shows the evolution of <strong>relationships between variables</strong>. 
+Back to the graph: <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are foxes and rabbits. 
+As you can see, their interaction forms a <strong>closed system</strong>. 
+When foxes increase, there are too many predators, and rabbits decrease. 
+Once rabbits become too few, there’s not enough food for the predators, so they decrease too, 
+giving rabbits a chance to repopulate. The different colored lines represent the same <strong>system</strong> 
+(i.e., the same <strong>behavior</strong>), but under <strong>different initial conditions</strong>.</p>
+<p>Let’s move on to the last <strong>famous</strong> ODE of the day. 
+Ever heard of the <strong>butterfly effect</strong>? 
+That idea that <strong>small actions</strong> can lead to <strong>large and unpredictable</strong> long-term consequences? 
+Well, that effect originates from the following ODE system called the <strong>Lorenz system</strong>:</p>
+<div class="math">$$
+\begin{cases}
+\frac{dx}{dt} = \sigma (y - x) \\
+\frac{dy}{dt} = x (\rho - z) - y \\
+\frac{dz}{dt} = xy - \beta z
+\end{cases}
+$$</div>
+<p>Here’s what its graph looks like:</p>
+<p><img alt="Plot Lorenz" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/lorenz.png"/>
+<em class="image-with-caption">Figure 6. Lorenz Attractor Phase</em></p>
+<p>From the shape, you can guess why it’s called the butterfly effect. 
+But what’s fascinating about this ODE system is this: 
+the graph <strong>never passes through the same trajectory twice</strong>. 
+Also, since the variables influence each other through <strong>multiplicative factors</strong>, 
+a tiny variation <strong>grows</strong> significantly over time <span class="math">\(t\)</span>, which is why it’s associated with <strong>chaos</strong>. 
+A final point worth noting is the presence of <strong>attractors</strong>, points that pull solutions of the ODE toward them. 
+Even though, like lightning, the Lorenz system never strikes the same point twice, 
+the system is <strong>attracted</strong> to those points, <strong>orbiting</strong> around them. 
+A system with the opposite behavior is called a <strong>repulsor</strong>, and you can see one below:</p>
+<p><img alt="Repulsore" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/repulsion_ode.png"/>
+<em class="image-with-caption">Figure 7. Repulsor</em></p>
+<p>But now I’ll end this paragraph, there’s a storm coming.</p>
+<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<p>I know this article was mathematically a bit <strong>heavy</strong>, 
+and that there was nothing about computer science, neural networks, or metaheuristics. 
+But hey, if I put it under the <strong>Theory and Mathematics</strong> section, there must be a reason, right? 
+Like it or not, this is the math that’s hiding behind it all, <strong>this is it</strong>. 
+And if you’re the type that says:</p>
+<blockquote>
+<p>ooooh I love working with AI, it’s sooo cool, love it...</p>
+</blockquote>
+<p>but you hate math and your deepest understanding is <code>import sklearn</code>, 
+you’ve definitely chosen the <strong>wrong career</strong>. 
+Jokes aside, don’t rest on your laurels thinking:</p>
+<p><em>I made it to the end</em></p>
+<p>because it’s not over yet. 
+There’s much more to discuss, like for instance:</p>
+<p><em>How the heck do you solve ODEs?</em></p>
+<p>But since this is just <strong>one</strong> in a <strong>series</strong> of articles, 
+we’ll save that answer for later, let’s just swallow this <strong>bitter pill</strong> for now. In the meantime, 
+you can head over to <a href="https://github.com/lucadivit/NeuralODEBlog">this repo</a> to see some of the topics covered in action.</p>
+<p>Until next time.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2025-07-15T00:00:00+02:00">July 15, 2025</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://www.lucadivita.it/en/categories.html#teoria-matematica-ref">Teoria & Matematica</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
+                    <span class="superscript">4</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#differential_equation-ref">differential_equation
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#math-ref">math
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#neural_network-ref">neural_network
+                    <span class="superscript">4</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#neural_ode-ref">neural_ode
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#ode-ref">ode
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#theory-ref">theory
+                    <span class="superscript">1</span>
+</a></li>
+            </ul>
+<h4>Contacts</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>
