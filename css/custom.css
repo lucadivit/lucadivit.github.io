@@ -87,6 +87,27 @@ code {
     white-space: nowrap;
 }
 
+.latex-formula {
+  text-align: center;
+  margin: 1em 0;
+}
+
+.latex-formula .caption {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/*
+Esempio di utilizzo
+<a href="#formula1"></a>
+<div class="latex-formula">
+  $$\frac{dy}{dt} \cdot e^{-t^2} - 2yt \cdot e^{-t^2} = t \cdot e^{-t^2}$$
+  <div class="caption">Formula 1: Sviluppo Fattore Integrante</div>
+</div>
+ */
+
 
 @media (max-width: 767px) {
     #bio-pic {
