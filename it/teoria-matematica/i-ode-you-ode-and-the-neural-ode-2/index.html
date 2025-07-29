@@ -251,8 +251,8 @@ $$</div>
 Ora ci rimane solo l'amaro in bocca del <em>"si ma quanto vale sto' K?"</em> Il problema non ci fornisce abbastanza informazioni, quindi per come è posto 
 non possiamo saperlo. Per quantificare <span class="math">\(K\)</span> ci serve un <strong>problema di Cauchy</strong>. Cosa rimane...? Ah sì, da mostrare <strong>l'andamento grafico</strong>.
 Eccolo qui</p>
-<p><img alt="Plot Sostituzione" class="image-with-caption" src="https://www.lucadivita.it/it/images/teoria_matematica/neural_ode_2/substitution_plot.png"/>
-<em class="image-with-caption">Figura 1. Plot di <span class="math">\(y=K \cdot e^{3t}\)</span></em></p>
+<p class="image-caption"><img alt="Plot Sostituzione" class="image" src="https://www.lucadivita.it/it/images/teoria_matematica/neural_ode_2/substitution_plot.png"/>
+Figura 1. Plot di <span class="math">\(y=K \cdot e^{3t}\)</span></p>
 <p><strong>Commentiamo</strong> questo grafico. Come sapete, o almeno dovreste dalla prima parte, è un grafico di <strong>Direzione di Campo</strong>. 
 Anche se conosciamo la <strong>forma generale</strong> della soluzione, senza sapere quanto vale <span class="math">\(K\)</span> <strong>non possiamo tracciarne l’andamento preciso</strong>.
 Il campo di direzione però ci <strong>aiuta</strong>: ci mostra come si <strong>comportano</strong> le soluzioni per valori diversi di <span class="math">\(K\)</span>, anche senza conoscerli <strong>esplicitamente</strong>.
@@ -271,27 +271,27 @@ $$</div>
 <p>Piccola nota, la <span class="math">\(y\)</span> è <strong>sempre</strong> in funzione del tempo, quindi capiterà che leggiate <span class="math">\(y\)</span> e non <span class="math">\(y(t)\)</span>, ma sono del tutto <strong>equivalenti</strong>.</p>
 <p>Bene, con il metodo del <strong>fattore integrante</strong> possiamo arrivare dove la separazione delle variabili non è arrivata. Questo metodo richiede che la ODE sia <strong>lineare di primo grado</strong> (leggi <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge">qui</a>), 
 e che possa essere scritta nella forma:</p>
-<p><a id="formula-fattore-integrante-base"></a></p>
-<div class="latex-formula">
-  $$y' + p(t) \cdot y = q(t)$$
-  <div class="caption">Formula 1: Forma Base Fattore Integrante</div>
-</div>
+<p><a id="formula-fattore-integrante-base"></a>
+</p>
+<div class="math">$$y' + p(t) \cdot y = q(t)$$</div>
+<p class="formula-caption">
+Formula 1. Forma Base Fattore Integrante</p>
 <p>a questo punto il metodo richiede la creazione di <strong>fattore integrante</strong> definito come:</p>
 <div class="math">$$
 \mu (t) = e^{\int p(t) dt} 
 $$</div>
 <p>e <strong>moltiplichiamo</strong> tutti i termini della nostra ODE per <span class="math">\(\mu (t)\)</span>:</p>
-<p><a id="formula-fattore-integrante"></a></p>
-<div class="latex-formula">
-  $$y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt} = e^{\int p(t) dt} \cdot q(t)$$
-  <div class="caption">Formula 2: Fattore Integrante</div>
-</div>
+<p><a id="formula-fattore-integrante"></a>
+</p>
+<div class="math">$$y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt} = e^{\int p(t) dt} \cdot q(t)$$</div>
+<p class="formula-caption">
+Formula 2. Fattore Integrante</p>
 <p>A questo punto ricorriamo ad un <strong>trucchetto matematico</strong>. Prendiamo <a href="https://it.wikipedia.org/wiki/Regola_del_prodotto">la regola di derivazione del prodotto tra funzioni</a>:</p>
-<p><a id="derivata-prodotto"></a></p>
-<div class="latex-formula">
-  $$\frac{d}{dt} \left( f(t) \cdot g(t) \right) = f'(t) \cdot g(t) + f(t) \cdot g'(t)$$
-  <div class="caption">Formula 3: Derivata Del Prodotto</div>
-</div>
+<p><a id="derivata-prodotto"></a>
+</p>
+<div class="math">$$\frac{d}{dt} \left( f(t) \cdot g(t) \right) = f'(t) \cdot g(t) + f(t) \cdot g'(t)$$</div>
+<p class="formula-caption">
+Formula 3. Derivata Del Prodotto</p>
 <p>Dato che siamo in presenza di una <strong>ODE del primo grado</strong>, abbiamo che</p>
 <div class="math">$$
 f'(t) = y'
@@ -339,11 +339,11 @@ $$</div>
 y \cdot e^{\int p(t) dt} = \int q(t) \cdot e^{\int p(t) dt} dt + C
 $$</div>
 <p>Infine signore e signori, dividendo per <span class="math">\(\mu(t)\)</span> arriviamo alla formulazione finale della <span class="math">\(y\)</span></p>
-<p><a id="fattore-integrante-soluzione"></a></p>
-<div class="latex-formula">
-  $$y = e^{-\int p(t) dt} \cdot \int q(t) \cdot e^{\int p(t) dt} dt + e^{-\int p(t) dt} \cdot C$$
-  <div class="caption">Formula 4: Soluzione Del Fattore Integrante</div>
-</div>
+<p><a id="fattore-integrante-soluzione"></a>
+</p>
+<div class="math">$$y = e^{-\int p(t) dt} \cdot \int q(t) \cdot e^{\int p(t) dt} dt + e^{-\int p(t) dt} \cdot C$$</div>
+<p class="formula-caption">
+Formula 4. Soluzione Del Fattore Integrante</p>
 <p>Come abbiamo visto, con non poche difficoltà <strong>ammettiamolo</strong>, quando possiamo applicare il fattore integrante abbiamo una <em>"formuletta"</em> confezionata
 pronta per <strong>esplicitare</strong> la tanto agognata <span class="math">\(y\)</span>. Direi senza indugio, di vedere un esempio.</p>
 <h4 id="esempio_1">Esempio<a class="headerlink" href="#esempio_1" title="Permanent link"> </a></h4>
@@ -431,13 +431,15 @@ $$</div>
 <p>Esattamente come ci avevo anticipato, avere una condizione iniziale permette di ottenere
 il <strong>valore della ODE</strong> in qualsiasi istante temporale <span class="math">\(t\)</span>. Ovviamente la condizione iniziale può cambiare l'andamento della ODE.
 Diamo una occhiata al diagramma di <strong>direzione di campo</strong> e <strong>di fase</strong></p>
-<p><img alt="Plot Fattore Integrante" class="image-with-caption" src="https://www.lucadivita.it/it/images/teoria_matematica/neural_ode_2/integrating_factor_plot.png"/>
-<em class="image-with-caption">Figura 2. Plot di <span class="math">\(y=-\frac{1}{2} + K \cdot e^{t^2}\)</span></em></p>
+<p class="image-caption"><img alt="Plot Fattore Integrante" class="image" src="https://www.lucadivita.it/it/images/teoria_matematica/neural_ode_2/integrating_factor_plot.png"/>
+Figura 2. Plot di <span class="math">\(y=-\frac{1}{2} + K \cdot e^{t^2}\)</span></p>
 <p>Vi ricordate quando nella prima parte ho scritto che i diagrammi di fase si usano per i <strong>sistemi</strong> di ODE? Beh questo non è vero in forma <strong>assoluta</strong>,
 perché anche una singola ODE, se <strong>accompagnata</strong> da una condizione iniziale, produce una <strong>curva ben definita</strong> nel piano <span class="math">\((y,t)\)</span>. Ed è proprio quello che sto facendo qui. Ma perché in questo caso riusciamo? 
 Semplicemente perché ora abbiamo un <strong>problema di Cauchy</strong> e non una ODE semplice. Avendo quindi una <strong>condizione iniziale</strong>, posso ricavarmi in valore di <span class="math">\(K\)</span> e vedere 
 l'andamento della <span class="math">\(y\)</span> nel tempo con <span class="math">\(K\)</span> noto. 
-Quindi il campo di direzione ci mostra <strong>tutte le soluzioni possibili</strong>: il valore iniziale fissa quale tra queste la nostra <strong>y(t)</strong> seguirà.
+Quindi il campo di direzione ci mostra <strong>tutte le soluzioni possibili</strong>: il valore iniziale fissa quale tra queste la nostra </p>
+<div class="math">$$y(t)$$</div>
+<p> seguirà.
 Nel nostro caso la condizione iniziale è <span class="math">\(y(0) = 0\)</span> che implica <span class="math">\(K=\frac{1}{2}\)</span>. Nel grafico, questo caso in particolare è rappresentato dalla <strong>linea verde</strong> (e no, non mettete su RAI 1). 
 Anche qui, come nel caso precedente, abbiamo <strong>tre famiglie</strong> differenti:</p>
 <ul>
@@ -532,6 +534,7 @@ Come al solito, eccovi il <a href="https://github.com/lucadivit/NeuralODEBlog">l
     <h2>Consigliati</h2>
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 </ul>
 <hr />
 </section>
@@ -544,28 +547,28 @@ Come al solito, eccovi il <a href="https://github.com/lucadivit/NeuralODEBlog">l
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/it/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">5</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/it/tags.html#equazioni_differenziali-ref">equazioni_differenziali
-                    <span class="superscript">2</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/it/tags.html#matematica-ref">matematica
-                    <span class="superscript">5</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/it/tags.html#metodi_numerici-ref">metodi_numerici
-                    <span class="superscript">1</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/it/tags.html#neural_ode-ref">neural_ode
-                    <span class="superscript">2</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/it/tags.html#ode-ref">ode
-                    <span class="superscript">2</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/it/tags.html#reti_neurali-ref">reti_neurali
                     <span class="superscript">6</span>
 </a></li>
-                <li><a href="https://www.lucadivita.it/it/tags.html#teoria-ref">teoria
+                <li><a href="https://www.lucadivita.it/it/tags.html#equazioni_differenziali-ref">equazioni_differenziali
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#matematica-ref">matematica
+                    <span class="superscript">6</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#metodi_numerici-ref">metodi_numerici
                     <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#neural_ode-ref">neural_ode
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#ode-ref">ode
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#reti_neurali-ref">reti_neurali
+                    <span class="superscript">7</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#teoria-ref">teoria
+                    <span class="superscript">3</span>
 </a></li>
             </ul>
 <h4>Contatti</h4>

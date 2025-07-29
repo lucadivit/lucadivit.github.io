@@ -247,8 +247,8 @@ $$</div>
 Now we’re left with the bitter taste of <em>“okay, but what’s the value of K?”</em> The problem doesn’t provide enough information, so as posed 
 we can’t know it. To determine <span class="math">\(K\)</span> we’d need a <strong>Cauchy problem</strong>. What’s left...? Ah yes, to show the <strong>graphical behavior</strong>.
 Here it is</p>
-<p><img alt="Plot Sostituzione" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_2/substitution_plot.png"/>
-<em class="image-with-caption">Figure 1. Plot of <span class="math">\(y=K \cdot e^{3t}\)</span></em></p>
+<p class="image-caption"><img alt="Plot Sostituzione" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_2/substitution_plot.png"/>
+Figure 1. Plot of <span class="math">\(y=K \cdot e^{3t}\)</span></p>
 <p><strong>Let’s comment</strong> on this graph. As you know, or at least should from part one, it’s a <strong>direction field</strong> graph. 
 Even though we know the <strong>general form</strong> of the solution, without knowing the value of <span class="math">\(K\)</span> we <strong>can’t trace the exact curve</strong>.
 However, the direction field <strong>helps us</strong>: it shows how solutions <strong>behave</strong> for different values of <span class="math">\(K\)</span>, even without knowing them <strong>explicitly</strong>.
@@ -267,27 +267,27 @@ $$</div>
 <p>Quick note: <span class="math">\(y\)</span> is <strong>always</strong> a function of time, so you might read <span class="math">\(y\)</span> instead of <span class="math">\(y(t)\)</span>, but they’re entirely <strong>equivalent</strong>.</p>
 <p>Well, with the <strong>integrating factor</strong> method we can go where separation of variables couldn’t. This method requires the ODE to be <strong>first-order linear</strong> (read more <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law">here</a>), 
 and it must be written in the form:</p>
-<p><a id="formula-fattore-integrante-base"></a></p>
-<div class="latex-formula">
-  $$y' + p(t) \cdot y = q(t)$$
-  <div class="caption">Formula 1: Base Form for Integrating Factor</div>
-</div>
+<p><a id="formula-fattore-integrante-base"></a>
+</p>
+<div class="math">$$y' + p(t) \cdot y = q(t)$$</div>
+<p class="formula-caption">
+Formula 1. Base Form for Integrating Factor</p>
 <p>At this point, the method requires us to define the <strong>integrating factor</strong> as:</p>
 <div class="math">$$
 \mu (t) = e^{\int p(t) dt} 
 $$</div>
 <p>and we <strong>multiply</strong> every term of the ODE by <span class="math">\(\mu (t)\)</span>:</p>
-<p><a id="formula-fattore-integrante"></a></p>
-<div class="latex-formula">
-  $$y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt} = e^{\int p(t) dt} \cdot q(t)$$
-  <div class="caption">Formula 2: Integrating Factor</div>
-</div>
+<p><a id="formula-fattore-integrante"></a>
+</p>
+<div class="math">$$y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt} = e^{\int p(t) dt} \cdot q(t)$$</div>
+<p class="formula-caption">
+Formula 2. Integrating Factor</p>
 <p>Now we use a <strong>math trick</strong>. Let’s take <a href="https://en.wikipedia.org/wiki/Product_rule">the product rule for derivatives</a>:</p>
-<p><a id="derivata-prodotto"></a></p>
-<div class="latex-formula">
-  $$\frac{d}{dt} \left( f(t) \cdot g(t) \right) = f'(t) \cdot g(t) + f(t) \cdot g'(t)$$
-  <div class="caption">Formula 3: Product Rule</div>
-</div>
+<p><a id="derivata-prodotto"></a>
+</p>
+<div class="math">$$\frac{d}{dt} \left( f(t) \cdot g(t) \right) = f'(t) \cdot g(t) + f(t) \cdot g'(t)$$</div>
+<p class="formula-caption">
+Formula 3: Product Rule</p>
 <p>Since we’re dealing with a <strong>first-order ODE</strong>, we have:</p>
 <div class="math">$$
 f'(t) = y'
@@ -335,11 +335,11 @@ $$</div>
 y \cdot e^{\int p(t) dt} = \int q(t) \cdot e^{\int p(t) dt} dt + C
 $$</div>
 <p>Finally, ladies and gentlemen, dividing by <span class="math">\(\mu(t)\)</span> we get the final formulation of <span class="math">\(y\)</span>:</p>
-<p><a id="fattore-integrante-soluzione"></a></p>
-<div class="latex-formula">
-  $$y = e^{-\int p(t) dt} \cdot \int q(t) \cdot e^{\int p(t) dt} dt + e^{-\int p(t) dt} \cdot C$$
-  <div class="caption">Formula 4: Integrating Factor Solution</div>
-</div>
+<p><a id="fattore-integrante-soluzione"></a>
+</p>
+<div class="math">$$y = e^{-\int p(t) dt} \cdot \int q(t) \cdot e^{\int p(t) dt} dt + e^{-\int p(t) dt} \cdot C$$</div>
+<p class="formula-caption">
+Formula 4. Integrating Factor Solution</p>
 <p>As we’ve seen, with not a few hurdles <strong>let’s be honest</strong>, when we can apply the integrating factor, we have a nice little “<strong>formula</strong>” ready to <strong>explicitly solve</strong> the elusive <span class="math">\(y\)</span>. I’d say it’s time to look at an example.</p>
 <h4 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link"> </a></h4>
 <p>The ODE we wanted to solve was this:</p>
@@ -425,13 +425,15 @@ y = \frac{e - 1}{2} \approx 0.859
 $$</div>
 <p>Exactly as I hinted, having an initial condition allows us to determine the <strong>value of the ODE</strong> at any moment in time <span class="math">\(t\)</span>. Of course, the initial condition can alter the ODE’s behavior.
 Let’s take a look at the <strong>direction field</strong> and <strong>phase diagram</strong>.</p>
-<p><img alt="Plot Fattore Integrante" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_2/integrating_factor_plot.png"/>
-<em class="image-with-caption">Figure 2. Plot of <span class="math">\(y=-\frac{1}{2} + K \cdot e^{t^2}\)</span></em></p>
+<p class="image-caption"><img alt="Plot Fattore Integrante" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_2/integrating_factor_plot.png"/>
+Figure 2. Plot of <span class="math">\(y=-\frac{1}{2} + K \cdot e^{t^2}\)</span></p>
 <p>Remember when I said in part one that phase diagrams are used for <strong>systems</strong> of ODEs? Well, that’s not <strong>entirely</strong> true,
 because even a single ODE, if it comes with an initial condition, produces a <strong>well-defined curve</strong> in the <span class="math">\((y,t)\)</span> plane. That’s exactly what I’m doing here. But why is it possible in this case?
 Simply because now we have a <strong>Cauchy problem</strong>, not just a plain ODE. So with an <strong>initial condition</strong>, I can compute <span class="math">\(K\)</span> and see 
 the behavior of <span class="math">\(y\)</span> over time with <span class="math">\(K\)</span> known. 
-Thus, the direction field shows us <strong>all possible solutions</strong>: the initial value determines which of these our <strong>y(t)</strong> will follow.
+Thus, the direction field shows us <strong>all possible solutions</strong>: the initial value determines which of these, our </p>
+<div class="math">$$y(t)$$</div>
+<p> will follow.
 In our case, the initial condition is <span class="math">\(y(0) = 0\)</span> which implies <span class="math">\(K=\frac{1}{2}\)</span>. In the plot, this specific case is shown by the <strong>green line</strong> (and no, don’t switch to RAI 1). 
 Here too, just like before, we have <strong>three distinct families</strong>:</p>
 <ul>
@@ -527,6 +529,7 @@ Oh, and in case it wasn’t obvious, the next article in our beloved series will
     <h2>Related Posts</h2>
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1">I ODE, You ODE and the Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 </ul>
 <hr />
 </section>
@@ -539,28 +542,28 @@ Oh, and in case it wasn’t obvious, the next article in our beloved series will
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#differential_equation-ref">differential_equation
-                    <span class="superscript">2</span>
+                    <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#math-ref">math
-                    <span class="superscript">2</span>
+                    <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neural_network-ref">neural_network
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neural_ode-ref">neural_ode
-                    <span class="superscript">2</span>
+                    <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#numeric_methods-ref">numeric_methods
-                    <span class="superscript">1</span>
+                    <span class="superscript">2</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#ode-ref">ode
-                    <span class="superscript">2</span>
+                    <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#theory-ref">theory
-                    <span class="superscript">2</span>
+                    <span class="superscript">3</span>
 </a></li>
             </ul>
 <h4>Contacts</h4>

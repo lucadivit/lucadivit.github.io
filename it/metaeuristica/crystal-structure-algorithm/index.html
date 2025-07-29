@@ -154,15 +154,15 @@ Alla base di questa struttura ordinata c’è il <strong>reticolo</strong> o <st
 Di per sé, però, il reticolo non ci dice dove si trovano esattamente gli atomi. Per quello serve un altro pezzo del puzzle: la <strong>base</strong>, 
 cioè l’insieme di atomi che si ripete su ogni punto del reticolo. In altre parole: il lattice dice <strong>dove</strong> mettere qualcosa, 
 la base dice <strong>cosa</strong> ci va e <strong>come</strong> è orientato nello spazio. Eccone un esempio usando <strong>puntini blu e orsetti gommosi</strong>.</p>
-<p><img alt="Base e Lattice" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/base_lattice.png"/>
-<em class="image-with-caption">Figura 1. Base + Lattice</em></p>
+<p class="image-caption"><img alt="Base e Lattice" class="image" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/base_lattice.png"/>
+Figura 1. Base + Lattice</p>
 <p>Grazie ai concetti di reticolo e base, è possibile generare un’infinità di <strong>strutture cristalline</strong> diverse.
 Il reticolo, con la sua disposizione regolare di punti, definisce la forma generale del cristallo, mentre 
 la base, cioè l’insieme di atomi che si ripete, ne determina la <strong>configurazione interna</strong>. Combinando questi due elementi in modi differenti,
 possiamo ottenere cristalli con geometrie molto varie, alcune regolari e ben note, altre più complesse.
 Qui sotto trovi alcuni esempi di come queste strutture possono variare:</p>
-<p><img alt="Esempi Cristalli" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/esempi_cristalli.png"/>
-<em class="image-with-caption">Figura 2. Esempi di Cristalli Cubici</em></p>
+<p class="image-caption"><img alt="Esempi Cristalli" class="image" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/esempi_cristalli.png"/>
+Figura 2. Esempi di Cristalli Cubici</p>
 <p>Il lattice, con la sua base, è la <strong>struttura ordinata</strong> ed <strong>ideale</strong> che i nostri <em>cristalli artificiali</em>, come vedremo a breve, dovranno 
 cercare di <strong>replicare</strong> durante l’ottimizzazione.</p>
 <h3 id="il-modello-matematico">Il Modello Matematico<a class="headerlink" href="#il-modello-matematico" title="Permanent link"> </a></h3>
@@ -171,8 +171,8 @@ permette di descrivere tutti i possibili reticoli che possono esistere nello spa
 Ogni punto del reticolo si può raggiungere partendo dall’origine e facendo un certo numero intero di passi lungo ciascuna delle tre direzioni:
 destra|sinistra, avanti|indietro, sopra|sotto.<br/>
 Si definisce quindi un <strong>vettore posizione</strong> tramite la seguente formula:</p>
-<p><span class="math center-math">\(\overrightarrow{r} = \sum_{i=1}^{d}n_i \overrightarrow{a_i}\)</span>
-Dove:</p>
+<div class="math">$$\overrightarrow{r} = \sum_{i=1}^{d}n_i \overrightarrow{a_i}$$</div>
+<p>Dove:</p>
 <ul>
 <li><span class="math">\(d\)</span> è il numero di dimensioni del cristallo, che è solitamente 3 (a meno che non vivi in un mondo di
 4 dimensioni spaziali, in quel caso <strong>invitami a casa tua per favore</strong>).</li>
@@ -185,7 +185,9 @@ Dove:</p>
 Ebbene sì: negli algoritmi metaeuristici non c’è una sola soluzione, ma un insieme di soluzioni candidate, 
 da cui andremo a prendere la <strong>migliore</strong>.... Ehm dicevo, ogni soluzione candidata (o "cristallo") viene rappresentata come un <strong>vettore numerico</strong> a 
 <span class="math">\(d\)</span> dimensioni, cioè una lista di valori:</p>
-<p><span class="math center-math">\(C_i = \left[x_{i}^{1}, x_{i}^{2}, \dots, x_{i}^{d}  \right]\)</span></p>
+<div class="math">$$
+C_i = \left[x_{i}^{1}, x_{i}^{2}, \dots, x_{i}^{d}  \right]
+$$</div>
 <p>Dove: </p>
 <ul>
 <li><span class="math">\(C_i\)</span> è l'<span class="math">\(i\)</span>-esimo cristallo.</li>
@@ -229,19 +231,19 @@ Ognuna corrisponde a una variante della struttura cubica:</p>
 <ul>
 <li><strong>Cubico semplice</strong>:</li>
 </ul>
-<p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r C_{r_{main}}\)</span></p>
+<div class="math">$$C_{r_{new}} = C_{r_{old}} + r C_{r_{main}}$$</div>
 <ul>
 <li><strong>Cubico con il cristallo migliore</strong>:</li>
 </ul>
-<p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}}\)</span></p>
+<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}}$$</div>
 <ul>
 <li><strong>Cubico con il cristallo medio</strong>:</li>
 </ul>
-<p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} F_{c}\)</span></p>
+<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} F_{c}$$</div>
 <ul>
 <li><strong>Cubico con il cristallo medio e quello migliore</strong>:</li>
 </ul>
-<p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}} + r_{3} F_{c}\)</span></p>
+<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}} + r_{3} F_{c}$$</div>
 <p>Come detto all’inizio, questo algoritmo <strong>non usa parametri esterni</strong> per bilanciare l’esplorazione (trovare nuove soluzioni) e lo sfruttamento (raffinare quelle buone).
 Il bilanciamento avviene in modo naturale, proprio grazie alle equazioni di aggiornamento che abbiamo appena visto.<br/>
 Ma torniamo a noi... abbiamo creato <strong>quattro nuovi cristalli</strong> partendo dai precedenti. E cosa farne? Lo vedremo tra poco. Prima, lasciate che vi spieghi le stregonerie dietro quei nomi misteriosi:</p>
@@ -322,10 +324,10 @@ che ha questa forma:</p>
 f(x, y) = sin(x) \cdot e^{(1-cos(y))^2} + cos(x) \cdot e^{(1-sin(x))^2} + (x-y)^2
 $$</div>
 <p>dove:</p>
-<p><span class="math center-math">\(x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]\)</span></p>
+<div class="math">$$x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]$$</div>
 <p>Il grafico della funzione è piuttosto complesso (vedi Figura 3), e trovare il minimo <strong>non è affatto banale</strong> dal punto di vista analitico.</p>
-<p><img alt="Bird Function" class="image-with-caption" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/bird.png"/>
-<em class="image-with-caption">Figura 3. Bird Function</em></p>
+<p class="image-caption"><img alt="Bird Function" class="image" src="https://www.lucadivita.it/it/images/metaeuristica/crystal/bird.png"/>
+Figura 3. Bird Function</p>
 <p>Il suo <strong>minimo globale</strong> è circa <span class="math">\(f(x, y) = −106.764\)</span> nei punti</p>
 <ul>
 <li><span class="math">\(p_1 = (4.701, 3.152)\)</span> </li>

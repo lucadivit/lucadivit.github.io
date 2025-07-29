@@ -291,8 +291,8 @@ Il segno <strong>meno</strong> indica che vogliamo andare nella direzione che fa
 Rappresenta la <em>capacità dello scalatore di intuire dove si scende e dove si sale</em>.</li>
 </ul>
 <p>Graficamente possiamo rappresentarlo così, una <em>entità</em> che cerca sempre di puntare alle zone più basse del grafico.</p>
-<p><img alt="GD" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_2/gd.png"/>
-<em class="image-with-caption">Figura 1. Discesa Del Gradiente</em></p>
+<p class="image-caption"><img alt="GD" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_2/gd.png"/>
+Figura 1. Discesa Del Gradiente</p>
 <p>Se volete una infarinatura molto a grandi linee di <strong>come</strong> si arriva alla formula della discesa del gradiente, fate un salto su
  <a href="/it/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente">questo paragrafo</a>, altrimenti passate al successivo e vediamo (finalmente, aggiungerei) un <strong>esempio con i numeri</strong>.</p>
 <h3 id="ritorno-al-fut-ehm-al-problema-and">Ritorno Al Fut... Ehm Al Problema AND<a class="headerlink" href="#ritorno-al-fut-ehm-al-problema-and" title="Permanent link"> </a></h3>
@@ -302,11 +302,10 @@ Vi avevo o no anticipato di non affezionarvi al gradino di Heaviside? E' arrivat
 e noi prendiamo la funzione <strong><a href="https://it.wikipedia.org/wiki/Funzione_sigmoidea">Sigmoide</a></strong>. Siete curiosi di sapere il perchè Heaviside <strong>non è adatto</strong>? Fate un salto <a href="/it/machine-learning/neurons-for-dummies-3/#sulle-funzioni-di-attivazione">qui</a>.</p>
 <p>La funzione Sigmoidea ha questa formulazione:</p>
 <div class="math">$$\sigma(x)=\frac{1}{1+e^{-x}}$$</div>
-<p>
-Ed ha questo andamento grafico:</p>
-<p><img alt="SIGMOID" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_2/sigmoid.png"/>
-<em class="image-with-caption">Figura 2. Funzione Sigmoide</em>
-Come potete vedere, l'output è sempre compreso nel range <span class="math">\((0, 1)\)</span>.<br/>
+<p>Ed ha questo andamento grafico:</p>
+<p class="image-caption"><img alt="SIGMOID" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_2/sigmoid.png"/>
+Figura 2. Funzione Sigmoide</p>
+<p>Come potete vedere, l'output è sempre compreso nel range <span class="math">\((0, 1)\)</span>.<br/>
 Voi date <span class="math">\(x=\infty\)</span>? La sigmoide se ne frega e vi da <span class="math">\(1.\)</span><br/>
 Voi date <span class="math">\(x=-\infty\)</span>? La sigmoide se ne frega e vi da <span class="math">\(0\)</span>.<br/>
 La sigmoide è troppo forte. Non sfidate la sigmoide perchè tanto perdete.</p>
@@ -318,8 +317,8 @@ non è altro che un <strong>numero decimale</strong> compreso tra <span class="m
 <li><span class="math">\(0.5\)</span> indica <em>boh</em></li>
 </ul>
 <p>Ora che siamo ormai esperti di <strong>sigmoidi</strong>, riprendiamo in mano il nostro caro <strong>percettrone</strong>:</p>
-<p><img alt="Artificial Neuron" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_2/artificial_neuron.png"/>
-<em class="image-with-caption">Figura 3. Neurone Artificiale</em></p>
+<p class="image-caption"><img alt="Artificial Neuron" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_2/artificial_neuron.png"/>
+Figura 3. Neurone Artificiale*</p>
 <p>e, riprendiamo i nostri pesi e bias:</p>
 <ul>
 <li><span class="math">\(w_1 = 0.5\)</span></li>
@@ -688,16 +687,16 @@ di complessità. Sappiate in ogni caso che non è finita qui, c'è la <strong>pa
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#matematica-ref">matematica
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#neuroni-ref">neuroni
                     <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#reti_neurali-ref">reti_neurali
-                    <span class="superscript">6</span>
+                    <span class="superscript">7</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#retropropagazione-ref">retropropagazione
                     <span class="superscript">4</span>

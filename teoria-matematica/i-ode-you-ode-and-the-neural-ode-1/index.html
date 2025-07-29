@@ -195,8 +195,8 @@ Il suo <strong>segno</strong>, ci dice in che <strong>direzione</strong> cambia 
 <li>se <span class="math">\(f'(x) = 0\)</span>: rimane costante e la funzione <strong>non cambia</strong>.</li>
 </ul>
 <p>Vediamo <strong>geometricamente</strong> cosa accade:</p>
-<p><img alt="Plot Derivata" class="image-with-caption" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/plot_geo.png"/>
-<em class="image-with-caption">Figura 1. Interpretazione Geometrica</em></p>
+<p class="image-caption"><img alt="Plot Derivata" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/plot_geo.png"/>
+Figura 1. Interpretazione Geometrica</p>
 <p>La linea curva sottile è la nostra <span class="math">\(f(x)\)</span>. Come si può vedere, dato un valore <span class="math">\(x_0\)</span> troviamo il punto <span class="math">\(P=(x_0, f(x_0))\)</span>. 
 Se consideriamo l'aumento infinitesimo di <span class="math">\(h\)</span>, troviamo un secondo punto: <span class="math">\(Q=(x_0 + h, f(x_0 + h))\)</span>. Ora sono abbastanza sicuro (ho controllato
 questa mattina) che è ancora vero l'assioma che</p>
@@ -259,8 +259,8 @@ P=(x, f(x)) = (1, 1)
 $$</div>
 <p>la funzione <em>cresce</em> con rapidità <span class="math">\(2\)</span>, cioè per ogni unità di incremento in <span class="math">\(x\)</span>, il valore di <span class="math">\(f(x)\)</span> cresce di 2.</p>
 <p>Ecco a voi una rappresentazione grafica di quanto detto:</p>
-<p><img alt="Plot Derivata" class="image-with-caption" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/plot.png"/>
-<em class="image-with-caption">Figura 2. Andamento Grafico Della Derivata</em></p>
+<p class="image-caption"><img alt="Plot Derivata" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/plot.png"/>
+Figura 2. Andamento Grafico Della Derivata</p>
 <p>Da sinistra a destra potete vedere i tre casi: funzione <strong>crescente</strong>, funzione <strong>costante</strong> e funzione <strong>decrescente</strong>.</p>
 <p>Sebbene ci sarebbe molto altro da dire sulle derivate, come le sue <a href="https://it.wikipedia.org/wiki/Regole_di_derivazione">proprietà</a>, 
 mi limito ad aggiungere che da questo punto in poi non userò più la sola notazione <span class="math">\(f'(x)\)</span> per indicare la derivata, ma anche la notazione
@@ -342,8 +342,8 @@ $$</div>
 <p>Graficamente quello che stiamo calcolando è <strong>l'area</strong> di un rettangolo infinitesimo sotto la funzione <span class="math">\(f'(x)\)</span>, dove <strong>l'altezza</strong> è data dal
 dal valore di <span class="math">\(f'(x)\)</span> in un dato punto, e la <strong>base</strong> è l' <strong>incremento infinitesimo</strong> <span class="math">\(dx\)</span>. Vi starete chiedendo perché ho usato il simbolo 
 di approssimazione piuttosto che di uguaglianza. Guardate l'immagine che segue.</p>
-<p><img alt="Plot Integrale" class="image-with-caption" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/integrale.png"/>
-<em class="image-with-caption">Figura 3. Area Infinitesima</em></p>
+<p class="image-caption"><img alt="Plot Integrale" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/integrale.png"/>
+Figura 3. Area Infinitesima</p>
 <p>Come potete vedere il rettangolo non potrà mai calzare perfettamente una curva, ma più "stretto" è il rettangolo, ossia più piccolo è 
 il <span class="math">\(dx\)</span>, migliore sarà l'approssimazione. E per <span class="math">\(dx \rightarrow 0\)</span>, l'approssimazione diventerà uguaglianza.</p>
 <p>Come detto inizialmente, per risalire alla funzione originale, dobbiamo <strong>sommare</strong> tutte queste aree. E quante sono? Dato che 
@@ -427,8 +427,8 @@ non saprei come altro dirlo... Per farla breve quindi, abbiamo <strong>che i pun
 i \cdot dx = i \cdot \frac{2}{n}
 $$</div>
 <p>Per meglio rendere l'idea vedete l'immagine che segue:</p>
-<p><img alt="Plot Integrale" class="image-with-caption" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/integrale_definito.png"/>
-<em class="image-with-caption">Figura 4. Partizionamento Dominio</em></p>
+<p class="image-caption"><img alt="Plot Integrale" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/integrale_definito.png"/>
+Figura 4. Partizionamento Dominio</p>
 <p>Quindi facendo delle <strong>sostituzioni</strong> possiamo vedere quanto vale <span class="math">\(f(x_i)\)</span> in ogni punto:</p>
 <ul>
 <li>In <span class="math">\(i=0\)</span>
@@ -524,7 +524,7 @@ $$</div>
 <li>E' di <strong>secondo grado</strong>, vuol dire che la <span class="math">\(y(t)\)</span> <strong>è stata derivata due volte</strong> come si vede dal termine <span class="math">\(\frac{d^2y}{dt^2}\)</span>.</li>
 <li>E' <strong>non lineare</strong> dato che la <span class="math">\(y\)</span> è al quadrato.</li>
 <li>E' <strong>implicita</strong> perché la derivata ha un fattore moltiplicativo <span class="math">\(t\)</span>.</li>
-<li>E' a <strong>coefficienti variabili</strong> perché la <span class="math">\(y\)</span> e/o le sue derivata sono moltiplicate per un valore variabile e non costante.</li>
+<li>E' a <strong>coefficienti variabili</strong> perché la <span class="math">\(y\)</span> e/o le sue derivate sono moltiplicate per un valore variabile e non costante.</li>
 </ul>
 <h4 id="come-ti-senti-mah-cauchy-cauchy">Come ti Senti: Mah, Cauchy Cauchy...<a class="headerlink" href="#come-ti-senti-mah-cauchy-cauchy" title="Permanent link"> </a></h4>
 <p>Prima ho scritto che la <strong>soluzione</strong> di una ODE è una <strong>funzione</strong>, e questo è vero. Ma non ho mai detto che non è possibile sapere quanto vale 
@@ -580,8 +580,8 @@ Il sistema è il seguente:</p>
 \end{cases}
 $$</div>
 <p>L'andamento grafico di questo sistema è riportato nel diagramma che segue chiamato di <strong>direzione e fase</strong></p>
-<p><img alt="Plot LV" class="image-with-caption" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/lotka_volterra.png"/>
-<em class="image-with-caption">Figura 5. Lotka-Volterra Direzione e Fase</em></p>
+<p class="image-caption"><img alt="Plot LV" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/lotka_volterra.png"/>
+Figura 5. Lotka-Volterra Direzione e Fase</p>
 <p>C'è da precisare che i due grafici sono rappresentabili <strong>separatamente</strong> ma per velocità di esposizione ve li beccate insieme.
 Il <strong>grafico di direzione</strong>, si usa per le sole ODE di primo grado e rappresenta visivamente <strong>come si comportano le soluzioni</strong> in ogni punto del piano, associandoci
  una freccia tangente alla curva che attraversa quel punto. Ora sapete che mostra, quindi, non solo la <strong>direzione</strong> ma anche la <strong>velocità</strong> di cambiamento della ODE. Se non vi 
@@ -600,16 +600,16 @@ Bene, quell'effetto nasce proprio dal sistema di ODE che segue, chiamato <strong
 \end{cases}
 $$</div>
 <p>E il suo grafico è il seguente:</p>
-<p><img alt="Plot Lorenz" class="image-with-caption" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/lorenz.png"/>
-<em class="image-with-caption">Figura 6. Attrattore Lorenz Fase </em></p>
+<p class="image-caption"><img alt="Plot Lorenz" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/lorenz.png"/>
+Figura 6. Attrattore Lorenz Fase</p>
 <p>Dal suo andamento potete intuire perché si chiama effetto farfalla, ma le cose interessanti di questo sistema di ODE sono altre.
 Come ad esempio il fatto che il grafico <strong>non passa mai due volte sulla stessa traiettoria</strong>. Inoltre, essendo che le variabili si 
 influenzano a vicenda con <strong>fattore moltiplicativo</strong>, una piccolissima variazione <strong>cresce</strong> di molto con il passare del tempo <span class="math">\(t\)</span>,
 ed è per questo che è associato al <strong>caos</strong>. Ultimo punto degno di nota è la presenza di <strong>attrattori</strong>, cioè dei punti che richiamano a loro
 le soluzioni delle ODE. Anche se, come i fulmini, il sistema di Lorenz non passa mai due volte sullo stesso punto, il sistema stesso è <strong>attratto</strong> 
 da quei punti <strong>orbitandoci</strong> intorno. Un sistema con comportamento inverso si chiama <strong>repulsore</strong> e può essere visto nel grafico sottostante.</p>
-<p><img alt="Repulsore" class="image-with-caption" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/repulsion_ode.png"/>
-<em class="image-with-caption">Figura 7. Repulsore</em></p>
+<p class="image-caption"><img alt="Repulsore" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode/repulsion_ode.png"/>
+Figura 7. Repulsore</p>
 <p>Ora però concludo il paragrafo che sta arrivando un temporale.</p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>So che questo articolo è stato matematicamente un po' <strong>pesante</strong>, e che di informatica, reti neurali e metaeuristica non c'è nulla. Ma hey,
@@ -703,6 +703,14 @@ però, potete andare su <a href="https://github.com/lucadivit/NeuralODEBlog">que
 
 
             <hr/>
+<section>
+    <h2>Consigliati</h2>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
+</ul>
+<hr />
+</section>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Pubblicato</h4>
@@ -712,25 +720,25 @@ però, potete andare su <a href="https://github.com/lucadivit/NeuralODEBlog">que
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">5</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/tags.html#equazioni_differenziali-ref">equazioni_differenziali
-                    <span class="superscript">2</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/tags.html#matematica-ref">matematica
-                    <span class="superscript">5</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/tags.html#neural_ode-ref">neural_ode
-                    <span class="superscript">2</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/tags.html#ode-ref">ode
-                    <span class="superscript">2</span>
-</a></li>
-                <li><a href="https://www.lucadivita.it/tags.html#reti_neurali-ref">reti_neurali
                     <span class="superscript">6</span>
 </a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#equazioni_differenziali-ref">equazioni_differenziali
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#matematica-ref">matematica
+                    <span class="superscript">6</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#neural_ode-ref">neural_ode
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#ode-ref">ode
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#reti_neurali-ref">reti_neurali
+                    <span class="superscript">7</span>
+</a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#teoria-ref">teoria
-                    <span class="superscript">2</span>
+                    <span class="superscript">3</span>
 </a></li>
             </ul>
 <h4>Contatti</h4>

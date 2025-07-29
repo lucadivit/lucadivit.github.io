@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="There comes a time in the life of every mathematician, engineer, and mythological figure alike when You like analytics, huh!? Then take this ODE. And it smacks you with a nonlinear, coupled, implicit one, with coefficients changing like the Hogwarts staircases. The only thing you can do is not solve …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="deep_learning, math, neural_ode, neural_network, differential_equation, ode, theory, numeric_methods, Teoria & Matematica, " />
+
+<meta property="og:title" content="Io ODO, Tu ODI e la Neural ODE - 3 "/>
+<meta property="og:url" content="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" />
+<meta property="og:description" content="There comes a time in the life of every mathematician, engineer, and mythological figure alike when You like analytics, huh!? Then take this ODE. And it smacks you with a nonlinear, coupled, implicit one, with coefficients changing like the Hogwarts staircases. The only thing you can do is not solve …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-07-30T00:00:00+02:00" />
+<meta name="twitter:title" content="Io ODO, Tu ODI e la Neural ODE - 3 ">
+<meta name="twitter:description" content="There comes a time in the life of every mathematician, engineer, and mythological figure alike when You like analytics, huh!? Then take this ODE. And it smacks you with a nonlinear, coupled, implicit one, with coefficients changing like the Hogwarts staircases. The only thing you can do is not solve …">
+
+        <title>Io ODO, Tu ODI e la Neural ODE - 3  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/en/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/index.html">About Me</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/latest.html">
+                                        Latest
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/categories.html">
+                                            Categories
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/archives.html">
+                                            Archives
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/en/pages/contatti/">Contacts</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li>
+                                            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li class="active">
+                                            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+                Io ODO, Tu ODI e la Neural ODE - 3
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contents</h4>
+        <div class="toc">
+<ul>
+<li><a href="#ode-in-small-steps">ODE in Small Steps</a></li>
+<li><a href="#eulers-method">Euler's Method</a><ul>
+<li><a href="#euler-example">Euler Example</a></li>
+</ul>
+</li>
+<li><a href="#the-mans-rk-family">The Mans... RK Family</a><ul>
+<li><a href="#rk-example">RK Example</a></li>
+</ul>
+</li>
+<li><a href="#conclusions">Conclusions</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>There comes a time in the life of every mathematician, engineer, and mythological figure alike when</p>
+<blockquote>
+<p>You like analytics, huh!? Then take this ODE.</p>
+</blockquote>
+<p>And it smacks you with a <strong>nonlinear</strong>, <strong>coupled</strong>, <strong>implicit</strong> one, with coefficients changing 
+like the <strong>Hogwarts</strong> staircases. The only thing you can do is <strong>not solve it</strong>. Not even by <strong>praying</strong> 
+to the good souls of Gauss, Leibniz, and whatever other mathematicians you worship. Or at least, that was 
+true until the advent of <strong>numerical methods</strong>. Not very elegant, often messy, but incredibly <strong>effective</strong>. 
+They won’t give you any <strong>closed-form formulas</strong> to brag about, but if you <strong>settle</strong> for an <strong>approximate result</strong>, 
+you really can’t complain. After all, although it might not seem like it, we are surrounded by <strong>approximations</strong>: 
+when you use <strong>Google Maps</strong> (<em>that tells you’ll arrive in 10 minutes and you get there in 17</em>), when you 
+add a <strong>pinch</strong> of salt (<em>where “pinch” means a tablespoon</em>), when you read my <strong>blog</strong> (<em>which is supposed to 
+be educational but helps me more to remember than you to learn</em>)...</p>
+<p>But enough chit-chat, since you’re probably on the edge of your seat, let’s finally look at these famous numerical methods. But first, if you haven’t already, go check out <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Part 1</a> and <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">Part 2</a>.</p>
+<h3 id="ode-in-small-steps">ODE in Small Steps<a class="headerlink" href="#ode-in-small-steps" title="Permanent link"> </a></h3>
+<p>Let's revisit the much-praised <strong>Lotka-Volterra system</strong> introduced <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame">here</a>.</p>
+<div class="math">$$
+\begin{cases}
+\frac{dx}{dt} = \alpha x - \beta x y \\
+\frac{dy}{dt} = \delta x y - \gamma y
+\end{cases}
+$$</div>
+<p>where:</p>
+<ul>
+<li><span class="math">\(x(t)\)</span> is the <strong>number of prey</strong> (e.g., rabbits).</li>
+<li><span class="math">\(y(t)\)</span> is the <strong>number of predators</strong> (e.g., foxes).</li>
+<li><span class="math">\(\alpha\)</span> is the <strong>prey growth rate</strong>. It describes how quickly prey reproduce in the absence of predators (which, in the case of rabbits, is apparently quite high according to legend).</li>
+<li><span class="math">\(\beta\)</span> is the <strong>predation rate</strong>. It indicates how often prey are killed by predators.</li>
+<li><span class="math">\(\delta\)</span> is the <strong>conversion rate</strong>. It tells how many new predators are born per prey eaten and digested.</li>
+<li><span class="math">\(\gamma\)</span> is the <strong>predator mortality rate</strong>. It represents the natural death rate of predators in the absence of prey. If they don’t eat, they starve.</li>
+</ul>
+<p>There is <strong>no known analytical method</strong> to symbolically solve this system, so we turn to numerical methods.
+These are strategies to obtain an <strong>approximate solution</strong>, using <strong>small</strong>, <strong>discrete</strong>, and hopeful steps. All thanks to the 
+<strong>great Euler</strong>, who, in addition to giving us the iconic tattoo</p>
+<div class="math">$$
+e^{i \pi} + 1 = 0
+$$</div>
+<p>(<em>no seriously folks, stop getting it tattooed if you don’t even know what pi is</em>), also gave us the <strong>progenitor</strong> of all numerical methods: the <strong>Euler method</strong>.
+The convergence of this method was proven by the venerable Cauchy and later generalized 
+by the eminent Runge and Kutta with the family of <strong>RK methods</strong>. Basically, everyone here is great, and the world of numerical methods is 
+more <strong>crowded</strong> than TikTok’s algorithm. There are many more we could cover, but we’ll stick to a select few.</p>
+<h3 id="eulers-method">Euler's Method<a class="headerlink" href="#eulers-method" title="Permanent link"> </a></h3>
+<p>Let’s go back to the <strong>Taylor series expansion</strong>. Remember? I already talked about it <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent">here</a>.
+The Taylor series is like a wildcard, it shows up everywhere.</p>
+<p>Let’s consider in particular a <strong>first-order expansion</strong>, i.e.,</p>
+<div class="math">$$
+f(x) = f(a) + f'(a) \cdot (\bar x) + O(\bar x^2)
+$$</div>
+<p>where</p>
+<div class="math">$$
+\bar x = (x - a)
+$$</div>
+<p>In other words, we are <strong>evaluating</strong> the function at <span class="math">\(x\)</span>, using derivatives calculated at a point <span class="math">\(a\)</span> that is <strong>offset</strong> from <span class="math">\(x\)</span>.
+Now let’s consider a generic Cauchy problem:</p>
+<div class="math">$$
+\begin{cases}
+y'(t) = f(y(t), t) \\
+y(t_0) = y_0
+\end{cases}
+$$</div>
+<p>and recall the <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative">definition of derivative</a>. For <span class="math">\(h \rightarrow 0\)</span> we can write:</p>
+<div class="math">$$
+y'(t) \approx \frac{y(t+h) - y(t)}{h}
+$$</div>
+<div class="math">$$
+\Rightarrow h \cdot y'(t) \approx y(t+h) - y(t)
+$$</div>
+<div class="math">$$
+\Rightarrow y(t+h) \approx y(t) + h \cdot y'(t)
+$$</div>
+<p>Does it look familiar? Exactly, a first-order Taylor expansion, where:</p>
+<ul>
+<li><span class="math">\(x = t + h\)</span></li>
+<li><span class="math">\(a = t\)</span></li>
+</ul>
+<p>So we calculate the <strong>derivative</strong> at time <span class="math">\(t\)</span> and use it to estimate the function at <span class="math">\(t+h\)</span>. Now let’s go further and assume 
+we start at time <span class="math">\(t_0\)</span>, which we know because we’re solving a Cauchy problem. We take a <strong>tiny step</strong> <span class="math">\(h\)</span> forward 
+and land at <span class="math">\(t_1\)</span>. Thus:</p>
+<div class="math">$$
+y(t_1) = y(t_0 + h) \approx y(t_0) + h \cdot y'(t_0)
+$$</div>
+<p>where</p>
+<div class="math">$$
+t_1 = t_0 + h
+$$</div>
+<p>Once we have <span class="math">\(t_1\)</span>, we can move to <span class="math">\(t_2\)</span> in the same way:</p>
+<div class="math">$$
+y(t_2) = y(t_1 + h) \approx y(t_1) + h \cdot y'(t_1)
+$$</div>
+<p>where</p>
+<div class="math">$$
+t_2 = t_1 + h = t_0 + 2h
+$$</div>
+<p>Get the idea? We can <strong>generalize</strong> it like this:</p>
+<p><a id="sviluppo-ode-1"></a>
+</p>
+<div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n)$$</div>
+<p class="formula-caption">
+Formula 1. First-Order ODE Expansion</p>
+<p>Thus:</p>
+<p><a id="tempo-discretizzato"></a>
+</p>
+<div class="math">$$t_{n+1} = t_n + h = t_0 + n \cdot h$$</div>
+<p class="formula-caption">
+Formula 2. Time Discretization</p>
+<p>Where:</p>
+<ul>
+<li><span class="math">\(t_0\)</span> is the <strong>initial time</strong></li>
+<li><span class="math">\(t_{n+1}\)</span> is the <strong>final time</strong></li>
+<li><span class="math">\(h\)</span> is the <strong>integration step size</strong>, freely chosen</li>
+<li><span class="math">\(n\)</span> is the <strong>number of iterations</strong></li>
+</ul>
+<p>In short, we’re discretizing time. The smaller <span class="math">\(h\)</span> is, the more <strong>accurate</strong> the method, but also more <strong>computationally expensive</strong>.</p>
+<p>Going back to the Cauchy problem:</p>
+<div class="math">$$
+y'(t) = f(y(t), t)
+$$</div>
+<p>we can plug this into Euler’s method and get the <strong>final formulation</strong>:</p>
+<p><a id="metodo-eulero-esplicito"></a>
+</p>
+<div class="math">$$y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n)$$</div>
+<p class="formula-caption">
+Formula 3. Explicit Euler Method</p>
+<p>That’s the formula for the <strong>Explicit Euler Method</strong>. Why “explicit”? Because we use only known values. Suppose we want to compute <span class="math">\(y(t_1)\)</span>:</p>
+<ul>
+<li><span class="math">\(y(t_0)\)</span> is <strong>given</strong> by the Cauchy problem</li>
+<li><span class="math">\(f(y(t_0), t_0)\)</span> can be calculated by <strong>simple substitution</strong></li>
+</ul>
+<p>And of course, if there’s an explicit method, there’s also an <strong>implicit</strong> one, whose formula (without proof) is:</p>
+<p><a id="metodo-eulero-implicito"></a>
+</p>
+<div class="math">$$y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_{n+1}), t_{n+1})$$</div>
+<p class="formula-caption">
+Formula 4. Implicit Euler Method</p>
+<p>It’s called implicit because, as you can see, the value we want to compute, <span class="math">\(y(t_{n+1})\)</span>, appears on <strong>both sides</strong> of the equation.
+It’s not always easy to solve. In some cases, iterative methods like the <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method"><strong>successive substitution method</strong></a> are needed.
+But that’s beyond the scope of this article, and since we’ve already made life complicated enough, I’ll leave it to your curiosity to <strong>dig deeper</strong>.</p>
+<h4 id="euler-example">Euler Example<a class="headerlink" href="#euler-example" title="Permanent link"> </a></h4>
+<p>All of this has been a bit too theoretical so far, I know, so let’s look at something practical with an exercise. Let’s consider the following Cauchy problem representing <strong>exponential decay</strong>. It may seem pointless, but many natural phenomena follow this law, such as radioactive decay, capacitor discharge in RC circuits, etc.</p>
+<div class="math">$$
+\begin{cases}
+y' = -ky \\
+y(t_0) = 1 \\
+k = 1
+\end{cases}
+$$</div>
+<p>where <span class="math">\(k\)</span> is the <strong>decay rate</strong>, and in this case, we choose it ourselves. The solution to this ODE is:</p>
+<div class="math">$$
+y(t) = e^{-1 \cdot t}
+$$</div>
+<p>If you want the steps, <strong>do them yourself</strong>. You already know the <strong>tools</strong> to solve it. I chose this ODE (which can be solved analytically, as you've seen) to show the <strong>difference between an exact and a numerical solution</strong>. Let’s see the values at <span class="math">\(t=1\)</span> and <span class="math">\(t=2\)</span>.</p>
+<div class="math">$$
+\begin{array}{|c|c|c|}
+\hline
+t &amp; y(t) &amp; \text{Result} \\
+\hline
+0 &amp; e^0 &amp; 1 \\
+\hline
+1 &amp; e^{-1 \cdot 1} &amp; 0.367 \\
+\hline
+2 &amp; e^{-1 \cdot 2} &amp; 0.135 \\
+\hline
+\end{array}
+$$</div>
+<p>Now let’s solve it using Euler’s method. From the <a href="#tempo-discretizzato">time discretization formula</a>, we already know how many steps we need using <span class="math">\(h=0.1\)</span>, initial time <span class="math">\(t_0=0\)</span>, and final time <span class="math">\(t_n=2\)</span>:</p>
+<div class="math">$$
+t_{n} - t_0 = n \cdot h \Rightarrow 2 - 0 = n \cdot h \Rightarrow n = 20
+$$</div>
+<p>For clarity, let’s go <strong>step by step</strong>. The value at <span class="math">\(t_0\)</span> is given in the Cauchy problem, so:</p>
+<ul>
+<li>Step <span class="math">\(n=1\)</span>
+<div class="math">$$
+t_1 = t_0 + 1 \cdot 0.1 = 0.1
+$$</div>
+</li>
+</ul>
+<div class="math">$$
+y(t_1) \approx y(t_0) + h \cdot f(y(t_0), t_0)
+$$</div>
+<div class="math">$$
+y(0.1) \approx y(0) + 0.1 \cdot f(y(0), 0)
+$$</div>
+<div class="math">$$
+y(0.1) \approx 1 + 0.1 \cdot (-1 \cdot 1) = 0.9
+$$</div>
+<ul>
+<li>Step <span class="math">\(n=2\)</span></li>
+</ul>
+<div class="math">$$
+t_2 = t_0 + 2 \cdot 0.1 = 0.2
+$$</div>
+<div class="math">$$
+y(t_2) \approx y(t_1) + h \cdot f(y(t_1), t_1)
+$$</div>
+<div class="math">$$
+y(0.2) \approx y(0.1) + 0.1 \cdot f(y(0.1), 0.1)
+$$</div>
+<div class="math">$$
+y(0.2) \approx 0.9 + 0.1 \cdot (-1 \cdot 0.9) = 0.81
+$$</div>
+<p>And so on. Trust me when I say the <strong>results</strong> are those shown in this table:</p>
+<div class="math">$$
+\begin{array}{|c|c|c|}
+\hline
+n &amp; t_n &amp; \text{Result} \\
+\hline
+0 &amp; 0 &amp; 1 \\
+\hline
+1 &amp; 0.1 &amp; 0.9 \\
+\hline
+2 &amp; 0.2 &amp; 0.810 \\
+\hline
+\dots &amp; \dots &amp; \dots \\
+\hline
+10 &amp; 1 &amp; 0.349 \\
+\hline
+\dots &amp; \dots &amp; \dots \\
+\hline
+20 &amp; 2 &amp; 0.122 \\
+\hline
+\end{array}
+$$</div>
+<p>Now let’s see what happens with <span class="math">\(h=0.5\)</span>. I won’t go step by step because you know how it’s done now, so just <strong>take</strong> this table:</p>
+<div class="math">$$
+\begin{array}{|c|c|c|}
+\hline
+n &amp; t_n &amp; \text{Result} \\
+\hline
+0 &amp; 0 &amp; 1 \\
+\hline
+1 &amp; 0.5 &amp; 0.5 \\
+\hline
+2 &amp; 1 &amp; 0.250 \\
+\hline
+3 &amp; 1.5 &amp; 0.125 \\
+\hline
+4 &amp; 2 &amp; 0.062 \\
+\hline
+\end{array}
+$$</div>
+<p>Here’s a <strong>summary comparison</strong> between the <strong>analytical solution</strong> and the two <strong>numerical approximations</strong>:</p>
+<ul>
+<li><span class="math">\(y(t)\)</span> is the analytical solution</li>
+<li><span class="math">\(E(h=0.1)\)</span> is Euler with <span class="math">\(h=0.1\)</span></li>
+<li><span class="math">\(E(h=0.5)\)</span> is Euler with <span class="math">\(h=0.5\)</span></li>
+</ul>
+<div class="math">$$
+\begin{array}{|c|c|c|c|}
+\hline
+t &amp; y(t) &amp; E(h=0.1) &amp; E(h=0.5) \\
+\hline
+0 &amp; 1 &amp; 1 &amp; 1 \\
+\hline
+1 &amp; 0.367 &amp; 0.349 &amp; 0.25 \\
+\hline
+2 &amp; 0.135 &amp; 0.122 &amp; 0.062 \\
+\hline
+\end{array}
+$$</div>
+<p>As you can see, apart from <span class="math">\(n=0\)</span>, the <strong>known solution</strong>, <span class="math">\(h=0.1\)</span> gives a much <strong>better approximation</strong> than <span class="math">\(h=0.5\)</span>, but it also <strong>requires</strong> 20 steps compared to just 4 in the latter case.</p>
+<p>All of this can be <strong>summarized</strong> by the following image:</p>
+<p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_3/comparison_euler.png"/>
+Figure 1. Results Comparison</p>
+<p>The <strong>exact solution</strong> is the red one, and as <span class="math">\(h\)</span> <strong>decreases</strong>, the <strong>approximation</strong> gets better and better.
+Alright, time to move on to the next round where the <strong>Runge-Kutta</strong> methods will knock you out.</p>
+<h3 id="the-mans-rk-family">The Mans... RK Family<a class="headerlink" href="#the-mans-rk-family" title="Permanent link"> </a></h3>
+<p>Let’s give credit where credit is due: Euler’s method is the <strong>patriarch</strong> of all numerical methods. But is it really that good? 
+Well, as always... it depends. For instance, on the type of problem you’re dealing with. For problems that are too complex, it can <strong>fail miserably</strong>. So yes, it’s good and dear, but let’s be honest, it’s getting old. We need fresh blood, brave and strong youngsters. That brings us to the <strong>Runge-Kutta methods</strong>, or simply <strong>RK</strong>.</p>
+<p>RK methods are like a sprawling dynasty, and each has its own quirks. The only certainty, besides death, is that they keep Euler’s core idea: <strong>proceed in small steps</strong>.</p>
+<p>Let’s go back to the Taylor expansion. As you’ll remember, the higher the order of expansion, the <strong>better the approximation</strong>. RK methods are built exactly on higher-order Taylor expansions. So Euler can be viewed as a method of <strong>order 1</strong>, i.e., <strong>RK1</strong>, or <strong>first-order Runge-Kutta</strong>. Now let’s see what happens when we go beyond first order and move to the second, starting from the <a href="#sviluppo-ode-1">First-Order Formula</a>:</p>
+<div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n) + \frac{h^2}{2} \cdot y''(t_n)$$</div>
+<p>Given that</p>
+<div class="math">$$
+y'(t_n) = f(y(t_n), t_n)
+$$</div>
+<div class="math">$$
+\Rightarrow y''(t_n) = f'(y(t_n), t_n)
+$$</div>
+<p><a id="sviluppo-ode-2"></a>
+</p>
+<div class="math">$$\Rightarrow y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n) + \frac{h^2}{2} \cdot f'(y(t_n), t_n)$$</div>
+<p class="formula-caption">
+Formula 5. Second-Order ODE Expansion</p>
+<p>We can then use the definition of the first derivative and expand <span class="math">\(f'\)</span> using a finite difference:</p>
+<div class="math">$$
+f'(y(t_n), t_n) \approx \frac{f(y(t_n + h), t_n+h) - f(y(t_n), t_n)}{h} = \frac{f(y(t_{n+1}), t_{n+1}) - f(y(t_n), t_n)}{h}
+$$</div>
+<p>But from Euler’s method we know that</p>
+<div class="math">$$
+y(t_{n+1}) = y_{n+1} = y_n + h \cdot f(y_n, t_n)
+$$</div>
+<p>Substituting in:</p>
+<div class="math">$$
+f'(y_n, t_n) \approx \frac{f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n)}{h}
+$$</div>
+<p>Substituting again into the <a href="#sviluppo-ode-2"><strong>Second-Order Expansion</strong></a>, we get:</p>
+<div class="math">$$
+y_{n+1} \approx y_n + h \cdot f(y_n, t_n) + \frac{h}{2} \cdot \left [ f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n) \right]
+$$</div>
+<div class="math">$$
+\Rightarrow y_{n+1} \approx y_n + \frac{h}{2} \cdot \left [ f(y_n + h \cdot f(y_n, t_n), t_{n+1}) + f(y_n, t_n) \right]
+$$</div>
+<p>So let’s define:
+</p>
+<div class="math">$$
+k_1 = f(y_n, t_n)
+\\
+k_2 = f(y_n + h \cdot f(y_n, t_n), t_{n+1}) = f(y_n + h \cdot k_1, t_{n+1})
+$$</div>
+<p>and we obtain the so-called <strong>RK2 Method</strong>, or <strong>Heun’s Method</strong>:</p>
+<p><a id="metodo-heun"></a>
+</p>
+<div class="math">$$
+    \begin{cases}
+    k_1 = f(y_n, t_n)  \\
+    k_2 = f(y_n + h k_1, t_n + h) \\
+    y_{n+1} \approx y_n + \frac{h}{2} (k_1 + k_2)
+    \end{cases}
+$$</div>
+<p class="formula-caption">
+Formula 6. Heun’s Method</p>
+<p>Following the same logic, you can derive <strong>higher-order methods</strong> by expanding Taylor’s series further:</p>
+<ul>
+<li><strong>RK3</strong> or <strong>Shu-Osher</strong></li>
+<li><strong>RK4</strong></li>
+<li><strong>RK5</strong> or <strong>Dormand-Prince</strong></li>
+<li>... and many more.</li>
+</ul>
+<p>Given its importance, we must include the RK4 formulation, it’s an <strong>excellent balance between precision and computational complexity</strong>:</p>
+<p><a id="metodo-rk4"></a>
+</p>
+<div class="math">$$
+    \begin{cases}
+    k_1 = f(y_n, t_n)  \\
+    k_2 = f(y_n + \frac{h}{2} k_1, t_n + \frac{h}{2}) \\
+    k_3 = f(y_n + \frac{h}{2} k_2, t_n + \frac{h}{2}) \\
+    k_4 = f(y_n + h k_3, t_n + h) \\
+    y_{n+1} \approx y_n + \frac{h}{6} (k_1 + 2k_2 + 2k_3 + k_4)
+    \end{cases}
+$$</div>
+<p class="formula-caption">
+Formula 7. RK4 Method</p>
+<p>Note that, just because I care, we’ve only considered <strong>explicit methods</strong> here. But sticking our heads in the sand doesn’t mean that <strong>implicit</strong> RK methods (yes, they exist) can’t hurt you.</p>
+<h4 id="rk-example">RK Example<a class="headerlink" href="#rk-example" title="Permanent link"> </a></h4>
+<p>If you’ve made it this far, you’ve probably heard about <strong>Lotka-Volterra</strong> a bazillion times. And now that we can, why not solve it?! So let’s take the following setup:</p>
+<div class="math">$$
+\begin{cases}
+\frac{dx}{dt} = \alpha x - \beta x y \\
+\frac{dy}{dt} = \delta x y - \gamma y \\
+\alpha = 1.1 \\
+\beta = 0.4 \\
+\delta = 0.1 \\
+\gamma = 0.4 \\
+x_0 = 10 \\
+y_0 = 5
+\end{cases}
+$$</div>
+<p>Obviously, after all the rambling above, we’ll use numerical methods with:</p>
+<div class="math">$$
+h = 0.1 \\
+t \in [0, 2]
+$$</div>
+<p>Specifically, we’ll apply both Heun and RK4. Don’t worry, this is just to show you how they work, so we’ll only carry out one step.</p>
+<ul>
+<li>Heun, <span class="math">\(n=1\)</span></li>
+</ul>
+<p>Remember, Lotka-Volterra is a system of two ODEs, so it gets a little more involved, but nothing crazy. <strong>Don’t panic</strong>. Let's start by calculating <span class="math">\(k_1\)</span> and <span class="math">\(k_2\)</span>. Since we have <strong>two ODEs</strong>, we’ll compute:</p>
+<ul>
+<li><span class="math">\(k_1^x, k_2^x\)</span> for the first ODE</li>
+<li><span class="math">\(k_1^y, k_2^y\)</span> for the second ODE</li>
+</ul>
+<div class="math">$$
+k_1^x = \alpha x_0 - \beta x_0 y_0 \\
+k_1^y = \delta x_0 y_0 - \gamma y_0 
+$$</div>
+<div class="math">$$
+k_2^x = \alpha (x_0 + h k_1^x) - \beta (x_0 + h k_1^x) \cdot (y_0 + h k_1^y) \\
+k_2^y = \delta (x_0 + h k_1^x) \cdot (y_0 + h k_1^y) - \gamma (y_0 + h k_1^y)
+$$</div>
+<div class="math">$$
+x_1 = x_0 + \frac{h}{2} (k_1^x + k_2^x) \\
+y_1 = y_0 + \frac{h}{2} (k_1^y + k_2^y)
+$$</div>
+<p>Substituting:</p>
+<div class="math">$$
+k_1^x = 1.1 \cdot 10 - 0.4 \cdot 10 \cdot 5 = 11 - 20 = -9 \\
+k_1^y = 0.1 \cdot 10 \cdot 5 - 0.4 \cdot 5 = 5 - 2 = 3
+$$</div>
+<div class="math">$$
+k_2^x = 1.1 \cdot (10 - 0.1 \cdot 9) - 0.4 \cdot (10 - 0.1 \cdot 9) \cdot (5 + 0.1 \cdot 3) \approx 10.01 - 19.292 = -9.282 \\
+k_2^y = 0.1 \cdot (10 - 0.1 \cdot 9) \cdot (5 + 0.1 \cdot 3) - 0.4 \cdot (5 + 0.1 \cdot 3) \approx 4.823 - 2.12 = 2.703
+$$</div>
+<div class="math">$$
+x_1 = 10 + 0.05 \cdot (-9 - 9.282) = 9.086 \\
+y_1 = 5 + 0.05 \cdot (3 + 2.703) = 5.285
+$$</div>
+<p>The sharpest among you may wonder why <span class="math">\(t+h\)</span>, required for computing <span class="math">\(k_2\)</span>, <strong>doesn’t appear anywhere</strong>.
+Simple: all the ODEs in the system <strong>don’t explicitly depend</strong> on time <span class="math">\(t\)</span>,
+so it’s <strong>irrelevant</strong> for the computation. But if it did matter, the <strong>current time</strong> would be calculated using the <a href="#tempo-discretizzato">Time Discretization Formula</a> shown in the <a href="#esempio-eulero">previous section</a>.</p>
+<ul>
+<li>RK4, <span class="math">\(n=1\)</span></li>
+</ul>
+<p>Using the same idea, we calculate:</p>
+<ul>
+<li><span class="math">\(k_1^x, k_2^x, k_3^x, k_4^x\)</span> for the first ODE</li>
+<li><span class="math">\(k_1^y, k_2^y, k_3^y, k_4^y\)</span> for the second ODE</li>
+</ul>
+<div class="math">$$
+k_1^x = \alpha x_0 - \beta x_0 y_0 \\
+k_1^y = \delta x_0 y_0 - \gamma y_0
+$$</div>
+<div class="math">$$
+k_2^x = \alpha \cdot (x_0 + \frac{h}{2} \cdot k_1^x) - \beta \cdot (x_0 + \frac{h}{2} \cdot k_1^x) \cdot (y_0 + \frac{h}{2} \cdot k_1^y) \\
+k_2^y = \delta \cdot (x_0 + \frac{h}{2} \cdot k_1^x) \cdot (y_0 + \frac{h}{2} \cdot k_1^y) - \gamma \cdot (y_0 + \frac{h}{2} \cdot k_1^y)
+$$</div>
+<div class="math">$$
+k_3^x = \alpha \cdot (x_0 + \frac{h}{2} \cdot k_2^x) - \beta \cdot (x_0 + \frac{h}{2} \cdot k_2^x) \cdot (y_0 + \frac{h}{2} \cdot k_2^y) \\
+k_3^y = \delta \cdot (x_0 + \frac{h}{2} \cdot k_2^x) \cdot (y_0 + \frac{h}{2} \cdot k_2^y) - \gamma \cdot (y_0 + \frac{h}{2} \cdot k_2^y)
+$$</div>
+<div class="math">$$
+k_4^x = \alpha \cdot (x_0 + h \cdot k_3^x) - \beta \cdot (x_0 + h \cdot k_3^x) \cdot (y_0 + h \cdot k_3^y) \\
+k_4^y = \delta \cdot (x_0 + h \cdot k_3^x) \cdot (y_0 + h \cdot k_3^y) - \gamma \cdot (y_0 + h \cdot k_3^y)
+$$</div>
+<div class="math">$$
+x_1 = x_0 + \frac{h}{6} (k_1^x + 2k_2^x + 2k_3^x + k_4^x) \\
+y_1 = y_0 + \frac{h}{6} (k_1^y + 2k_2^y + 2k_3^y + k_4^y)
+$$</div>
+<p>Substituting:</p>
+<div class="math">$$
+k_1^x = 1.1 \cdot 10 - 0.4 \cdot 10 \cdot 5 = 11 - 20 = -9 \\
+k_1^y = 0.1 \cdot 10 \cdot 5 - 0.4 \cdot 5 = 5 - 2 = 3
+$$</div>
+<div class="math">$$
+k_2^x = 1.1 \cdot (10 - 0.05 \cdot 9) - 0.4 \cdot (10 - 0.05 \cdot 9) \cdot (5 + 0.05 \cdot 3) = 10.5 - 19.64 = -9.14 \\
+k_2^y = 0.1 \cdot (10 - 0.05 \cdot 9) \cdot (5 + 0.05 \cdot 3) - 0.4 \cdot (5 + 0.05 \cdot 3) = 4.91 - 2.06 = 2.85
+$$</div>
+<div class="math">$$
+k_3^x = 1.1 \cdot (10 - 0.05 \cdot 9.14) - 0.4 \cdot (10 - 0.05 \cdot 9.14) \cdot (5 + 0.05 \cdot 2.85) = -9.13 \\
+k_3^y = 0.1 \cdot (10 - 0.05 \cdot 9.14) \cdot (5 + 0.05 \cdot 2.85) - 0.4 \cdot (5 + 0.05 \cdot 2.85) = 2.84
+$$</div>
+<div class="math">$$
+k_4^x = 1.1 \cdot (10 - 0.1 \cdot 9.13) - 0.4 \cdot (10 - 0.1 \cdot 9.13) \cdot (5 + 0.1 \cdot 2.84) = -9.21 \\
+k_4^y = 0.1 \cdot (10 - 0.1 \cdot 9.13) \cdot (5 + 0.1 \cdot 2.84) - 0.4 \cdot (5 + 0.1 \cdot 2.84) = 2.68
+$$</div>
+<div class="math">$$
+x_1 = 10 + \frac{0.1}{6} \cdot (-9 + 2 \cdot (-9.14) + 2 \cdot (-9.13) + (-9.21)) = 9.085 \\
+y_1 = 5 + \frac{0.1}{6} \cdot (3 + 2 \cdot (2.85) + 2 \cdot (2.84) + 2.68) = 5.285
+$$</div>
+<p>Yeah, I know, <strong>it's a lot</strong> and seems overly complicated, but once you have the method’s formula, it’s just about making the <strong>right substitutions</strong> carefully.</p>
+<p>Just like with Euler’s method, let’s provide a <strong>comparison table</strong> here. This time, we’ll group by method rather than <span class="math">\(h\)</span>, and compare the results of RK4, Heun, and Euler. As we cannot compute the analytical solution here, all we have are <strong>approximations</strong>.</p>
+<div class="math">$$
+\begin{array}{|c|c|c|c|c|}
+\hline
+n &amp; t_n &amp; \text{Euler} &amp; \text{Heun} &amp; \text{RK4} \\
+\hline
+0 &amp; 0 &amp; x=10, y=5 &amp; x=10, y=5 &amp; x=10, y=5 \\
+\hline
+1 &amp; 0.1 &amp; x=9.1, y=5.3 &amp; x=9.08, y=5.28 &amp; x=9.08, y=5.28 \\
+\hline
+2 &amp; 0.2 &amp; x=8.17, y=5.57 &amp; x=8.16, y=5.53 &amp; x=8.16, y=5.53 \\
+\hline
+\dots &amp; \dots &amp; \dots &amp; \dots &amp; \dots \\
+\hline
+10 &amp; 1 &amp; x=2.61, y=6.19 &amp; x=2.88, y=6.06 &amp; x=2.88, y=6.06 \\
+\hline
+\dots &amp; \dots &amp; \dots &amp; \dots &amp; \dots \\
+\hline
+20 &amp; 2 &amp; x=0.83, y=4.97 &amp; x=0.96, y=4.8 &amp; x=0.95, y=4.81 \\
+\hline
+\end{array}
+$$</div>
+<p>As seen from the table, Heun and RK4 give <strong>very similar results</strong>, with differences appearing only after <span class="math">\(t=2\)</span> seconds. In contrast, Euler starts to <strong>deviate poorly</strong> as early as <span class="math">\(t=0.1\)</span>. The following image shows the <strong>phase behavior</strong>:</p>
+<p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_3/phase_comparison_1.png"/>
+Figure 2. Results Comparison at <span class="math">\(t=2\)</span></p>
+<p>Finally, let’s see what happens when we extend the time from <span class="math">\(t=2\)</span> to <span class="math">\(t=15\)</span>.</p>
+<p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_3/phase_comparison_2.png"/>
+Figure 3. Results Comparison at <span class="math">\(t=15\)</span></p>
+<p>As you can see, Heun and RK4 have very similar, <strong>theoretically consistent</strong> behavior, forming a <strong>closed orbit</strong> (read previous posts if you don’t remember what that means). Meanwhile, <strong>Euler accumulates error</strong> so heavily that its solution <strong>goes completely off track</strong>.</p>
+<p>To be thorough, here’s the time series of prey and predator populations, i.e., <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, over time <span class="math">\(t\)</span>:</p>
+<p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_3/time_series_comparison.png"/>
+Figure 4. Behavior of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> over time <span class="math">\(t=15\)</span></p>
+<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<p>Here we are at the end of this third article. By now, you <strong>should know</strong> (or at least remember, if you already had the knowledge) what derivatives, 
+integrals, differential equations, and numerical methods are. There’s so much more to say, but I tried to keep it <strong>concise</strong>. No need to <strong>thank me</strong>. 
+In any case, we now have all the ingredients to talk about <strong>Neural ODEs</strong>. And in case you were wondering, yes, 
+there will be plenty of math there too. As always, I’ll end with the <a href="https://github.com/lucadivit/NeuralODEBlog">link to the repo</a> where 
+you can see the code behind everything we’ve discussed.</p>
+<p>Until next time.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h2>Related Posts</h2>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1">I ODE, You ODE and the Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="I ODE, You ODE and the Neural ODE - 2">I ODE, You ODE and the Neural ODE - 2</a></li>
+</ul>
+<hr />
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2025-07-30T00:00:00+02:00">July 30, 2025</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://www.lucadivita.it/en/categories.html#teoria-matematica-ref">Teoria & Matematica</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
+                    <span class="superscript">6</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#differential_equation-ref">differential_equation
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#math-ref">math
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#neural_network-ref">neural_network
+                    <span class="superscript">6</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#neural_ode-ref">neural_ode
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#numeric_methods-ref">numeric_methods
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#ode-ref">ode
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#theory-ref">theory
+                    <span class="superscript">3</span>
+</a></li>
+            </ul>
+<h4>Contacts</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>
