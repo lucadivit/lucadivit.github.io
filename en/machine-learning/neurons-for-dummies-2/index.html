@@ -140,33 +140,81 @@ That said, in the first part I left you with more questions than answers. Today 
 Because they’re the only thing we can modify. We certainly can’t change the input, that comes from the problem itself and 
 we have to take it as is. So, if we want to change the value of the <strong>transfer function</strong>, and therefore the <strong>output</strong>, we must act on them. 
 Keeping this premise in mind and bearing in mind the predictions we made in part one, our goal is to move from these results:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
-\hline 
-0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
-\hline  
-\end{array}
-$$</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2)\)</span></th>
+<th style="text-align: center;"><span class="math">\(\sigma(H)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
 <p>to these:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
-\hline 
-0 &amp; 0 &amp; 0 &amp; \color{green}{\mathbf{0}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \color{green}{\mathbf{0}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \color{green}{\mathbf{0}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
-\hline  
-\end{array}
-$$</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2)\)</span></th>
+<th style="text-align: center;"><span class="math">\(\sigma(H)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
 <p>In other words, we want every prediction to be correct or, to put it more technically, we want <strong>the prediction error to be as small 
 as possible</strong>. So the first thing to do is obvious: <strong>measure the error</strong>.<br/>
 To do that we need to define a <strong><a href="https://en.wikipedia.org/wiki/Loss_function">Loss Function</a></strong> (also called an <strong>Error Function</strong>), that is something that tells us how far we are from the 
@@ -186,19 +234,43 @@ where:</p>
 <li><span class="math">\(p_i\)</span> the probability predicted by the perceptron for that same input</li>
 </ul>
 <p>Applying this formula to the following truth table:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
-\hline 
-0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
-\hline  
-\end{array}
-$$</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2)\)</span></th>
+<th style="text-align: center;"><span class="math">\(\sigma(H)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
 <p>For the first row we have:</p>
 <p><span class="math center-math">\(y_0 = 0, p_0 = 1 \ \Rightarrow\ BCE_0 = -[0 \cdot \ln(1) + (1 - 0) \cdot \ln(1 - 1)] = -\infty\)</span></p>
 <p>As you can see, <strong>the error is maximal</strong> and indeed, the prediction is the <strong>exact opposite</strong> of the real result.</p>
@@ -292,8 +364,8 @@ The <strong>minus</strong> sign means we want to move in the direction that <str
 and where it goes up</em>.</li>
 </ul>
 <p>Graphically we can picture it as an <em>entity</em> that always aims for the lowest areas of the plot.</p>
-<p><img alt="GD" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_2/gd.png"/>
-<em class="image-with-caption">Figure 1. Gradient Descent</em></p>
+<p class="image-caption"><img alt="GD" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_2/gd.png"/>
+Figure 1. Gradient Descent</p>
 <p>If you want a very broad overview of <strong>how</strong> we arrive at the gradient‑descent formula, check out <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent">this section</a>, 
 otherwise skip ahead and we'll (finally!) look at a <strong>numerical example</strong>.</p>
 <h3 id="back-to-the-futuhm-to-the-and-problem">Back to the Fut...Uhm to the AND Problem<a class="headerlink" href="#back-to-the-futuhm-to-the-and-problem" title="Permanent link"> </a></h3>
@@ -305,8 +377,8 @@ and we’re taking the <strong><a href="https://en.wikipedia.org/wiki/Sigmoid_fu
 <div class="math">$$\sigma(x)=\frac{1}{1+e^{-x}}$$</div>
 <p>
 and it looks like this:</p>
-<p><img alt="SIGMOID" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_2/sigmoid.png"/>
-<em class="image-with-caption">Figure 2. Sigmoid Function</em></p>
+<p class="image-caption"><img alt="SIGMOID" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_2/sigmoid.png"/>
+Figure 2. Sigmoid Function</p>
 <p>As you can see, its output is always in the range <span class="math">\((0, 1)\)</span>.<br/>
 Feed it <span class="math">\(x = \infty\)</span>? The sigmoid doesn’t care, it gives you <span class="math">\(1\)</span>.<br/>
 Feed it <span class="math">\(x = -\infty\)</span>? The sigmoid doesn’t care, it gives you <span class="math">\(0\)</span>.<br/>
@@ -319,8 +391,8 @@ The sigmoid is too strong. Don’t challenge the sigmoid because you’ll lose a
 <li><span class="math">\(0.5\)</span> means <em>meh</em></li>
 </ul>
 <p>Now that we’re experts on <strong>sigmoids</strong>, let’s pick up our trusty <strong>perceptron</strong>:</p>
-<p><img alt="Artificial Neuron" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_2/artificial_neuron.png"/>
-<em class="image-with-caption">Figure 3. Artificial Neuron</em></p>
+<p class="image-caption"><img alt="Artificial Neuron" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_2/artificial_neuron.png"/>
+Figure 3. Artificial Neuron</p>
 <p>and recall our weights and bias:</p>
 <ul>
 <li><span class="math">\(w_1 = 0.5\)</span></li>
@@ -429,56 +501,254 @@ $$</div>
 </ul>
 <p>The results obtained over <strong>3 epochs</strong> are as follows:</p>
 <p><strong>Epoch 1</strong></p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|r|r|r|r|r|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
-\hline 
-0 &amp; 1 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.5 &amp; 0.5 &amp; 1.0 &amp; 0.81 &amp; 0.66 &amp; \color{red}{\mathbf{1}} &amp; \color{red}{\mathbf{1}} &amp; 0 \\ 
-\hline 
-1 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.74 &amp; 0.58 &amp; \color{red}{\mathbf{1}} &amp; \color{red}{\mathbf{1}} &amp; 0 \\ 
-\hline 
-0 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.55 &amp; 0.48 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 1 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.53 &amp; 0.70 &amp; \color{green}{\mathbf{1}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
-\hline  
-\end{array}
-$$</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(b\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_1^{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_2^{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(b_{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(p_{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(p\)</span></th>
+<th style="text-align: center;"><span class="math">\(\overline{p_{\text{old}}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(\overline{p}\)</span></th>
+<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.5\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.09\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.59\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.5\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.5\)</span></td>
+<td style="text-align: center;"><span class="math">\(1.0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.81\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.66\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.12\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.09\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.21\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.5\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.09\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.59\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.74\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.58\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.12\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.09\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.06\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.12\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.09\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.21\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.55\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.48\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.35\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.32\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.17\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.12\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.09\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.06\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.53\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.70\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
 <p><strong>Epoch 2</strong></p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|r|r|r|r|r|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
-\hline 
-0 &amp; 1 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.62 &amp; 0.46 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.55 &amp; 0.41 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-0 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.39 &amp; 0.35 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 1 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.37 &amp; 0.60 &amp; \color{red}{\mathbf{0}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
-\hline  
-\end{array}
-$$</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(b\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_1^{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_2^{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(b_{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(p_{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(p\)</span></th>
+<th style="text-align: center;"><span class="math">\(\overline{p_{\text{old}}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(\overline{p}\)</span></th>
+<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.35\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.01\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.13\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.35\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.32\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.17\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.62\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.46\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.01\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.41\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.35\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.01\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.13\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.55\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.41\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.01\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.61\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.01\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.41\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.39\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.35\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.39\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.32\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.30\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.01\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.61\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.37\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.60\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
 <p><strong>Epoch 3</strong></p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|r|r|r|r|r|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
-\hline 
-0 &amp; 1 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.50 &amp; 0.38 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.45 &amp; 0.34 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-0 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.31 &amp; 0.28 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 1 &amp; 0.49 &amp; 0.40 &amp; -0.60 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.33 &amp; 0.57 &amp; \color{red}{\mathbf{0}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
-\hline  
-\end{array}
-$$</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(b\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_1^{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(w_2^{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(b_{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(p_{\text{old}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(p\)</span></th>
+<th style="text-align: center;"><span class="math">\(\overline{p_{\text{old}}}\)</span></th>
+<th style="text-align: center;"><span class="math">\(\overline{p}\)</span></th>
+<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.39\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.55\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.39\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.32\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.30\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.50\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.38\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.16\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.78\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.39\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.55\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.45\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.34\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.16\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.94\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.16\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.78\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.31\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.28\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.49\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.40\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.60\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.16\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.07\)</span></td>
+<td style="text-align: center;"><span class="math">\(-0.94\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.33\)</span></td>
+<td style="text-align: center;"><span class="math">\(0.57\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">Perceptron</span> <span class="kn">import</span> <span class="n">Perceptron</span>
 
 <span class="k">class</span> <span class="nc">WeightedSum</span><span class="p">(</span><span class="n">TransferFunction</span><span class="p">):</span>
@@ -590,7 +860,7 @@ $$</div>
 </code></pre></div>
 <p>Curious to see the <strong>complete code</strong>? You can find it <strong><a href="https://github.com/lucadivit/neurons_for_dummies">here</a></strong>.<br/>
 One last note before we close: this code is meant purely for <strong>educational</strong> purposes. 
-In practice you’d use libraries like PyTorch or Keras to <strong>abstract</strong> away this level of complexity. 
+In practice, you’d use libraries like PyTorch or Keras to <strong>abstract</strong> away this level of complexity. 
 Suffice it to say, we’re not done yet, <strong>part three</strong> is waiting for you...</p>
 <p>Until next time.</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
@@ -690,13 +960,13 @@ Suffice it to say, we’re not done yet, <strong>part three</strong> is waiting 
                     <span class="superscript">4</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#mathematics-ref">mathematics
                     <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neural_network-ref">neural_network
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neurons-ref">neurons
                     <span class="superscript">3</span>

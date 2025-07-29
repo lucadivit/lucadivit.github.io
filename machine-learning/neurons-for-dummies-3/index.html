@@ -226,8 +226,8 @@ $$</div>
 <div class="math">$$
 g(x) = 1 + 2 \cdot (x - 1) + (x - 1)^2 \quad \text{e} \quad f(x) = x^2
 $$</div>
-<p><img alt="Taylor" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/taylor.png"/>
-<em class="image-with-caption">Figura 1. Approssimazione di Taylor</em></p>
+<p class="image-caption"><img alt="Taylor" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/taylor.png"/>
+Figura 1. Approssimazione di Taylor</p>
 <p>Come si può vedere, le due funzioni <strong>hanno lo stesso andamento</strong> nell’intorno di <span class="math">\(x_0=1\)</span>, quindi <span class="math">\(g(x)\)</span> 
 approssima correttamente <span class="math">\(f(x)\)</span> in quel punto.</p>
 <p>Nella serie di Taylor, più termini (cioè <strong>più derivate</strong>) consideriamo, <strong>migliore</strong> sarà l’approssimazione della funzione.
@@ -311,13 +311,13 @@ Il problema è che il <strong>gradino di Heaviside</strong> ha una <strong>disco
 ma lo è nella <strong>teoria delle distribuzioni</strong>. Difatti la sua derivata è la <strong><a href="https://it.wikipedia.org/wiki/Delta_di_Dirac">Delta di Dirac</a></strong>. Ma senza perderci in troppe astrazioni, diciamo che non è una derivata che 
 possiamo usare direttamente nel nostro algoritmo. Infatti anche la funzione di attivazione <strong><a href="https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)">ReLU</a></strong> non è derivabile in <span class="math">\(x=0\)</span>, ma nessuno la scarta per questo.
 Nell'immagine seguente potete vedere il suo <strong>andamento</strong>:</p>
-<p><img alt="ReLU" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/relu.png"/>
-<em class="image-with-caption">Figura 2. ReLU</em></p>
+<p><img alt="ReLU" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/relu.png"/>
+Figura 2. ReLU</p>
 <p><strong>Quindi, perché tutta questa avversione verso Heaviside?</strong></p>
 <p>Presto detto: sebbene ReLU non sia derivabile in <span class="math">\(x=0\)</span>, <strong>non è discontinua</strong> in quel punto. Possiamo quindi assegnare <strong>artificialmente</strong> un valore di derivata tra 0 e 1: la funzione è <strong><a href="https://it.wikipedia.org/wiki/Subdifferenziale">subderivabile</a></strong>.
 Con Heaviside, invece, questo <strong>non è possibile</strong>. E anche se (per assurdo) decidessimo di usare la Delta di Dirac come derivata... guardate qui:</p>
-<p><img alt="Dirac Delta" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
-<em class="image-with-caption">Figura 3. Delta di Dirac</em></p>
+<p class="image-caption"><img alt="Dirac Delta" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
+Figura 3. Delta di Dirac</p>
 <p>Come potete vedere, è nulla <strong>ovunque</strong>, tranne che in <span class="math">\(x=0\)</span>. Questo significa che il gradiente sarebbe <strong>sempre nullo</strong>, che i pesi <strong>non cambierebbero mai</strong> e <em>la rete neurale non imparerebbe nulla</em>.<br/>
 C'è infine un'ultima, seppur secondaria, criticità: la <strong>Binary Cross Entropy</strong> divergerebbe ad <strong>infinito</strong> se la predizione fosse esattamente <span class="math">\(0\)</span> o <span class="math">\(1\)</span>. Questo non succede con la <strong>sigmoide</strong> perchè 
 assume quei valori solo <strong>asintoticamente</strong>.</p>
@@ -333,36 +333,55 @@ $$</div>
 <p>
 Ad alcuni di voi questa formula non dirà nulla. Ad altri farà riaffiorare brutti ricordi legati all'<strong><a href="https://it.wikipedia.org/wiki/Retta_nel_piano_cartesiano">equazione della retta</a></strong>, in forma implicita. 
 Quindi di fatto quello che sta facendo la backpropagation è trovare i <strong>coefficienti della retta</strong> per permettere questo:</p>
-<p><img alt="RettaAND" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/retta_and.png"/>
-<em class="image-with-caption">Figura 4. Retta su Problema AND</em></p>
+<p class="image-caption"><img alt="RettaAND" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/retta_and.png"/>
+Figura 4. Retta su Problema AND</p>
 <p>Cioè <strong>separare i casi in cui la soluzione è <span class="math">\(0\)</span> da quelli in cui è <span class="math">\(1\)</span></strong>. Riuscire a fare questo significa che possiamo <strong>separare linearmente</strong> le soluzioni del problema e abbiamo visto 
 che un singolo percettrone è perfettamente in grado di farlo.<br/>
 Consideriamo un altro problema ora, chiamato <strong><a href="https://it.wikipedia.org/wiki/Disgiunzione_esclusiva">problema XOR</a></strong>. E' un'<strong>operazione logica</strong> come il problema AND, ma ha una tabella di verità diversa:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; XOR(x_1, x_2) \\ 
-\hline 
-0 &amp; 0 &amp; 0 \\ 
-\hline 0 &amp; 1 &amp; 1 \\ 
-\hline 1 &amp; 0 &amp; 1 \\ 
-\hline 1 &amp; 1 &amp; 0 \\ 
-\hline  
-\end{array}
-$$</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(\text{XOR}(x_1, x_2)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
 <p>Vediamo <strong>geometricamente</strong> cosa succede:</p>
-<p><img alt="RettaXOR" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/retta_xor.png"/>
-<em class="image-with-caption">Figura 5. Retta su Problema XOR</em></p>
+<p class="image-caption"><img alt="RettaXOR" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/retta_xor.png"/>
+Figura 5. Retta su Problema XOR</p>
 <p>Sbattete pure la testa, imprecate quanto volete, ma non <strong>riuscirete mai</strong> a trovare una retta che separi gli <span class="math">\(0\)</span> dagli <span class="math">\(1\)</span>. E' <strong>impossibile</strong>. 
 Ed è proprio per questo che il problema XOR si dice <strong>non linearmente separabile</strong>. Ahimè potessimo <strong>aggiungere un'altra retta</strong>, allora sì che potremmo fare questo:</p>
-<p><img alt="BoundaryXOR" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/boundary_xor.png"/>
-<em class="image-with-caption">Figura 6. Due rette su Problema XOR</em></p>
+<p class="image-caption"><img alt="BoundaryXOR" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/boundary_xor.png"/>
+Figura 6. Due rette su Problema XOR</p>
 <p>Ma un momento... chi ci dice che <strong>non possiamo</strong>!? Dopotutto, <strong>un neurone crea una retta</strong> quindi... <strong>due neuroni creano due rette</strong>, no?
 Ed ecco qui che abbiamo <strong>giustificato</strong> il perché abbiamo bisogno di più neuroni. Ma questo quanto cambio tutto quello visto finora!? 
 Prima di rispondere, guardiamo come diventa la nostra rete neurale:</p>
-<p><img alt="NNXOR" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/xor_nn.png"/>
-<em class="image-with-caption">Figura 7. Rete Neurale per Problema XOR</em></p>
+<p class="image-caption"><img alt="NNXOR" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/xor_nn.png"/>
+Figura 7. Rete Neurale per Problema XOR</p>
 <p>Se vi state chiedendo: <em>"ma come Luca, hai detto che bastava l'aggiunta di un solo neurone! <strong>Sono indignato</strong>!1!!</em> La risposta è si, confermo che è vero.
 Ma le reti feed-forward classiche <strong>pretendono</strong> che il numero di neuroni in ingresso sia <strong>pari al numero di features</strong> quindi ve lo tenete così. Magari in futuro vi racconterò 
 la bellissima storia della <strong>neuroevoluzione</strong> dove le cose cambiano parecchio. Ma torniamo a noi...<br/>
@@ -395,8 +414,8 @@ $$</div>
 $$</div>
 <p>E con <span class="math">\(n\)</span> neuroni? E' come avere <span class="math">\(n\)</span> rette (o <strong>spezzate</strong>) che, tutte insieme, formano una <strong>curva</strong> che è in grado di separare i dati <strong>non linearmente separabili</strong>.
 Insomma... è tranquillamente in grado di fare questa <strong>mostruosità</strong></p>
-<p><img alt="N_Bound" class="image-with-caption" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/n_layer.png"/>
-<em class="image-with-caption">Figura 8. Confine Decisionale della Rete con Tanti Neuroni</em></p>
+<p class="image-caption"><img alt="N_Bound" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/n_layer.png"/>
+Figura 8. Confine Decisionale della Rete con Tanti Neuroni</p>
 <p><strong>Ultima nota</strong> prima di passare alle conclusioni. Per semplicità, abbiamo considerato il caso <strong>bidimensionale</strong> e quindi abbiamo parlato di <strong>rette</strong>, ma il discorso resta valido anche per spazi a 
 più dimensioni. In quel caso non parliamo di rette ma di <strong><a href="https://it.wikipedia.org/wiki/Iperpiano">iperpiani</a></strong>.</p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
@@ -501,16 +520,16 @@ vita ci sono poche cose certe: <strong>morte, tasse e un altro mio articolo</str
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#matematica-ref">matematica
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#neuroni-ref">neuroni
                     <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#reti_neurali-ref">reti_neurali
-                    <span class="superscript">6</span>
+                    <span class="superscript">7</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/tags.html#retropropagazione-ref">retropropagazione
                     <span class="superscript">4</span>

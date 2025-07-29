@@ -225,8 +225,8 @@ $$</div>
 <div class="math">$$
 g(x) = 1 + 2 \cdot (x - 1) + (x - 1)^2 \quad \text{and} \quad f(x) = x^2
 $$</div>
-<p><img alt="Taylor" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/taylor.png"/>
-<em class="image-with-caption">Figure 1. Taylor Approximation</em></p>
+<p class="image-caption"><img alt="Taylor" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/taylor.png"/>
+Figure 1. Taylor Approximation</p>
 <p>As you can see, the two functions <strong>behave similarly</strong> near <span class="math">\(x_0 = 1\)</span>, so <span class="math">\(g(x)\)</span> correctly approximates <span class="math">\(f(x)\)</span> in that region.</p>
 <p>The more terms (thus <strong>more derivatives</strong>) we consider in the Taylor series, the <strong>better</strong> the approximation. 
 But for our purposes, we’re happy stopping at the <strong>first derivative</strong>:</p>
@@ -309,13 +309,13 @@ The trouble is that the <strong>Heaviside step</strong> has a <strong>discontinu
 (Strictly speaking it <em>is</em> differentiable in the <strong>theory of distributions</strong>: its derivative is the <strong><a href="https://en.wikipedia.org/wiki/Dirac_delta_function">Dirac Delta</a></strong>.) 
 But that derivative isn’t something we can drop directly into our algorithm. Notice that <strong><a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a></strong> is also non-differentiable at <span class="math">\(x = 0\)</span>, yet no one rejects it for that reason. 
 In the image below, you can see how it <strong>behaves</strong>:</p>
-<p><img alt="ReLU" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/relu.png"/>
-<em class="image-with-caption">Figure 2. ReLU</em></p>
+<p class="image-caption"><img alt="ReLU" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/relu.png"/>
+Figure 2. ReLU</p>
 <p><strong>So why all the hostility toward Heaviside?</strong> </p>
 <p>Although ReLU is non-differentiable at <span class="math">\(x = 0\)</span>, it is <strong>continuous</strong> there, so we can assign an <strong>artificial</strong> sub-gradient between 0 and 1: the function is <strong><a href="https://en.wikipedia.org/wiki/Subderivative">sub-differentiable</a></strong>. 
 With Heaviside that’s <strong>impossible</strong>. And even if (for argument’s sake) we chose to use the Dirac Delta as its derivative... look here:</p>
-<p><img alt="Dirac Delta" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
-<em class="image-with-caption">Figure 3. Dirac Delta</em></p>
+<p class="image-caption"><img alt="Dirac Delta" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
+Figure 3. Dirac Delta</p>
 <p>As you can see, it is zero <strong>everywhere</strong> except at <span class="math">\(x = 0\)</span>.<br/>
 That means the gradient would be <strong>always zero</strong>, the weights would <strong>never change</strong>, and <em>the neural network would learn nothing</em>.<br/>
 Finally, there’s a secondary snag: <strong>Binary Cross-Entropy</strong> blows up to <strong>infinity</strong> if the prediction is exactly 0 or 1. 
@@ -332,38 +332,55 @@ $$</div>
 <p>
 For some of you, this formula won’t mean much. For others, it may dredge up bad memories of the <strong><a href="https://en.wikipedia.org/wiki/Linear_equation">line equation</a></strong> in its implicit form. 
 Back-propagation is finding the <strong>line’s coefficients</strong> so that we can do this:</p>
-<p><img alt="Line AND" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/retta_and.png"/>
-<em class="image-with-caption">Figure 4. Line on the AND Problem</em></p>
+<p class="image-caption"><img alt="Line AND" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/retta_and.png"/>
+Figure 4. Line on the AND Problem</p>
 <p>That is, <strong>separate the 0-cases from the 1-cases</strong>. If you can do that, the data are <strong>linearly separable</strong>, and one perceptron suffices.<br/>
 Now look at the <strong><a href="https://en.wikipedia.org/wiki/Exclusive_or">XOR</a></strong> problem. It’s a <strong>logical operation</strong> like the AND problem, but it has a different truth table:</p>
-<div class="math">$$
-\begin{array}{|r|r|r|}
-\hline
-x_1 &amp; x_2 &amp; XOR(x_1,x_2)\\
-\hline
-0 &amp; 0 &amp; 0\\
-\hline
-0 &amp; 1 &amp; 1\\
-\hline
-1 &amp; 0 &amp; 1\\
-\hline
-1 &amp; 1 &amp; 0\\
-\hline
-\end{array}
-$$</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="math">\(\text{XOR}(x_1, x_2)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(1\)</span></td>
+<td style="text-align: center;"><span class="math">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p> </p>
 <p>Let’s see what happens <strong>geometrically</strong>:</p>
-<p><img alt="Line XOR" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/retta_xor.png"/>
-<em class="image-with-caption">Figure 5. Line on the XOR Problem</em></p>
+<p class="image-caption"><img alt="Line XOR" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/retta_xor.png"/>
+Figure 5. Line on the XOR Problem</p>
 <p>You can bang your head and swear all you like, but <strong>you’ll never</strong> find a single straight line that separates the 
 0s from the 1s. It’s <strong>impossible</strong>. That’s exactly why the XOR problem is said to be <strong>not linearly separable</strong>. 
 If only we could <strong>add another line</strong>, then we really could do this:</p>
-<p><img alt="Boundary XOR" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/boundary_xor.png"/>
-<em class="image-with-caption">Figure 6. Two Lines on the XOR Problem</em></p>
+<p class="image-caption"><img alt="Boundary XOR" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/boundary_xor.png"/>
+Figure 6. Two Lines on the XOR Problem</p>
 <p>But wait a second... who’s to say <strong>we can't</strong>? After all, <strong>one neuron gives you one line</strong>, so <strong>two neurons give you two lines</strong>, right? 
 And there we have it: a <strong>clear reason</strong> why we need more neurons. But how much does that change everything we’ve seen so far!? Before we answer, 
 let’s see what our neural network now looks like:</p>
-<p><img alt="NN XOR" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/xor_nn.png"/>
-<em class="image-with-caption">Figure 7. Neural Network for XOR Problem</em></p>
+<p class="image-caption"><img alt="NN XOR" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/xor_nn.png"/>
+Figure 7. Neural Network for XOR Problem</p>
 <p>If you’re thinking, <em>"Come on Luca, you said one extra neuron was enough! <strong>I’m outraged</strong>!1!!"</em> well, yes, that’s still true. 
 But classic feed-forward networks <strong>insist</strong> that the number of input neurons <strong>matches the number of features</strong>, so you’re stuck with this setup. 
 Maybe one day I’ll tell you the incredible story of <strong>neuroevolution</strong>, where things get very different. But back to us...<br/>
@@ -399,8 +416,8 @@ $$</div>
 $$</div>
 <p>With <span class="math">\(n\)</span> neurons you have <span class="math">\(n\)</span> lines (or <strong>segments</strong>) forming a <strong>piece-wise curve</strong> that separates data that are <strong>not linearly separable</strong>, In short...
 it can effortlessly pull off this <strong>monstrosity</strong>.</p>
-<p><img alt="n-segment Boundary" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/n_layer.png"/>
-<em class="image-with-caption">Figure 8. Network Decision Boundary with Many Neurons</em></p>
+<p class="image-caption"><img alt="n-segment Boundary" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/n_layer.png"/>
+Figure 8. Network Decision Boundary with Many Neurons</p>
 <p><strong>One last note</strong> before we get to the conclusions. For simplicity, we focused on the <strong>two-dimensional</strong> case and therefore talked about <strong>lines</strong>, but the same reasoning holds 
 in higher-dimensional spaces. There, we speak of <strong><a href="https://en.wikipedia.org/wiki/Hyperplane">hyperplanes</a></strong> instead of lines.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
@@ -509,7 +526,7 @@ I hope you enjoyed this series as much as I enjoyed writing it.</p>
                     <span class="superscript">4</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">5</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#mathematics-ref">mathematics
                     <span class="superscript">3</span>
