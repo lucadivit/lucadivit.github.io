@@ -194,8 +194,8 @@ Its <strong>sign</strong> tells us the <strong>direction</strong> in which the f
 <li>if <span class="math">\(f'(x) = 0\)</span>: it remains constant and the function <strong>doesn’t change</strong>.</li>
 </ul>
 <p>Let’s see <strong>geometrically</strong> what happens:</p>
-<p class="image-caption"><img alt="Plot Derivata" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/plot_geo.png"/>
-Figure 1. Geometric Interpretation</p>
+<p><img alt="Plot Derivata" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/plot_geo.png"/>
+<em class="image-with-caption">Figure 1. Geometric Interpretation</em></p>
 <p>The thin curve is our <span class="math">\(f(x)\)</span>. As you can see, given a value <span class="math">\(x_0\)</span> we find the point <span class="math">\(P=(x_0, f(x_0))\)</span>. 
 If we consider an infinitesimal increase of <span class="math">\(h\)</span>, we get a second point: <span class="math">\(Q=(x_0 + h, f(x_0 + h))\)</span>. 
 Now I’m fairly certain (I checked this morning) that it’s still true that</p>
@@ -259,8 +259,8 @@ P=(x, f(x)) = (1, 1)
 $$</div>
 <p>the function <em>increases</em> with a rate of <span class="math">\(2\)</span>, i.e., for every unit increase in <span class="math">\(x\)</span>, the value of <span class="math">\(f(x)\)</span> increases by 2.</p>
 <p>Here’s a graphical representation of what we’ve discussed:</p>
-<p class="image-caption"><img alt="Plot Derivata" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/plot.png"/>
-Figure 2. Graphical Behavior of the Derivative</p>
+<p><img alt="Plot Derivata" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/plot.png"/>
+<em class="image-with-caption">Figure 2. Graphical Behavior of the Derivative</em></p>
 <p>From left to right, you can see the three cases: <strong>increasing</strong> function, <strong>constant</strong> function, and <strong>decreasing</strong> function.</p>
 <p>Although there’s much more to say about derivatives, like their <a href="https://en.wikipedia.org/wiki/Differentiation_rules">rules</a>, 
 I’ll just add that from this point on, I won’t use only the <span class="math">\(f'(x)\)</span> notation for derivatives, but also the <span class="math">\(\frac{d f}{d x}\)</span> notation, 
@@ -348,8 +348,8 @@ $$</div>
 <p>Graphically, what we’re calculating is the <strong>area</strong> of an infinitesimal rectangle under the function <span class="math">\(f'(x)\)</span>, 
 where the <strong>height</strong> is given by the value of <span class="math">\(f'(x)\)</span> at a given point, and the <strong>base</strong> is the <strong>infinitesimal increment</strong> <span class="math">\(dx\)</span>. 
 You might be wondering why I used the approximation symbol instead of equality. Take a look at the image below.</p>
-<p><img alt="Plot Integrale" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/integrale.png"/>
-Figure 3. Infinitesimal Area</p>
+<p><img alt="Plot Integrale" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/integrale.png"/>
+<em class="image-with-caption">Figure 3. Infinitesimal Area</em></p>
 <p>As you can see, a rectangle can never perfectly fit a curve, 
 but the “narrower” the rectangle, that is, the smaller the <span class="math">\(dx\)</span>, the better the approximation. 
 And for <span class="math">\(dx \rightarrow 0\)</span>, the approximation becomes equality.</p>
@@ -435,8 +435,8 @@ To summarize, the <strong>base points of the rectangles follow the rule</strong>
 i \cdot dx = i \cdot \frac{2}{n}
 $$</div>
 <p>To better visualize this, refer to the image below:</p>
-<p class="image-caption"><img alt="Plot Integrale" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/integrale_definito.png"/>
-Figure 4. Domain Partitioning</p>
+<p><img alt="Plot Integrale" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/integrale_definito.png"/>
+<em class="image-with-caption">Figure 4. Domain Partitioning</em></p>
 <p>Now we can compute <span class="math">\(f(x_i)\)</span> at each point:</p>
 <ul>
 <li>At <span class="math">\(i=0\)</span><br/>
@@ -594,8 +594,8 @@ The system looks like this:</p>
 \end{cases}
 $$</div>
 <p>The graphical behavior of this system is shown in the diagram below, called a <strong>direction and phase diagram</strong>:</p>
-<p class="image-caption"><img alt="Plot LV" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/lotka_volterra.png"/>
-Figure 5. Lotka-Volterra Direction and Phase</p>
+<p><img alt="Plot LV" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/lotka_volterra.png"/>
+<em class="image-with-caption">Figure 5. Lotka-Volterra Direction and Phase</em></p>
 <p>Note: the two graphs can be shown <strong>separately</strong>, but for brevity, you get them together here. 
 The <strong>direction field</strong> is used for first-order ODEs and visually represents 
 <strong>how solutions behave</strong> at every point in the plane, assigning an arrow tangent to the curve at that point. 
@@ -620,8 +620,8 @@ Well, that effect originates from the following ODE system called the <strong>Lo
 \end{cases}
 $$</div>
 <p>Here’s what its graph looks like:</p>
-<p class="image-caption"><img alt="Plot Lorenz" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/lorenz.png"/>
-Figure 6. Lorenz Attractor Phase</p>
+<p><img alt="Plot Lorenz" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/lorenz.png"/>
+<em class="image-with-caption">Figure 6. Lorenz Attractor Phase</em></p>
 <p>From the shape, you can guess why it’s called the butterfly effect. 
 But what’s fascinating about this ODE system is this: 
 the graph <strong>never passes through the same trajectory twice</strong>. 
@@ -631,8 +631,8 @@ A final point worth noting is the presence of <strong>attractors</strong>, point
 Even though, like lightning, the Lorenz system never strikes the same point twice, 
 the system is <strong>attracted</strong> to those points, <strong>orbiting</strong> around them. 
 A system with the opposite behavior is called a <strong>repulsor</strong>, and you can see one below:</p>
-<p class="image-caption"><img alt="Repulsore" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/repulsion_ode.png"/>
-Figure 7. Repulsor</p>
+<p><img alt="Repulsore" class="image-with-caption" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/repulsion_ode.png"/>
+<em class="image-with-caption">Figure 7. Repulsor</em></p>
 <p>But now I’ll end this paragraph, there’s a storm coming.</p>
 <h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
 <p>I know this article was mathematically a bit <strong>heavy</strong>, 
@@ -731,14 +731,6 @@ you can head over to <a href="https://github.com/lucadivit/NeuralODEBlog">this r
 
 
             <hr/>
-<section>
-    <h2>Related Posts</h2>
-<ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="I ODE, You ODE and the Neural ODE - 2">I ODE, You ODE and the Neural ODE - 2</a></li>
-<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
-</ul>
-<hr />
-</section>
         </div>
         <section id="article-sidebar" class="span2">
             <h4>Published</h4>
@@ -748,25 +740,25 @@ you can head over to <a href="https://github.com/lucadivit/NeuralODEBlog">this r
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">6</span>
+                    <span class="superscript">5</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#differential_equation-ref">differential_equation
-                    <span class="superscript">3</span>
+                    <span class="superscript">2</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#math-ref">math
-                    <span class="superscript">3</span>
+                    <span class="superscript">2</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neural_network-ref">neural_network
-                    <span class="superscript">6</span>
+                    <span class="superscript">5</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neural_ode-ref">neural_ode
-                    <span class="superscript">3</span>
+                    <span class="superscript">2</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#ode-ref">ode
-                    <span class="superscript">3</span>
+                    <span class="superscript">2</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#theory-ref">theory
-                    <span class="superscript">3</span>
+                    <span class="superscript">2</span>
 </a></li>
             </ul>
 <h4>Contacts</h4>

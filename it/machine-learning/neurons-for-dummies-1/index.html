@@ -139,8 +139,8 @@ e lo faremo passo dopo passo, con un esempio pratico.</p>
 <p>Prima di capire <em>come</em> funziona una rete neurale, dobbiamo prima chiarire che <em>cosa è</em> una rete neurale.
 Iniziamo dicendo che ci sono diverse tipologie di reti neurali: <strong>convoluzionali</strong>, <strong>ricorrenti</strong> e molte altre. L'una o l'altra viene scelta in base al problema da risolvere.
 Quelle che prendiamo in considerazione in questo articolo sono le reti <strong>Multi Layer Perceptron</strong> (o <strong>MLP</strong>), che sono solitamente rappresentate così:</p>
-<p class="image-caption"><img alt="MLP" class="image" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies/mlp.png"/>
-Figura 1. Multi Layer Perceptron</p>
+<p><img alt="MLP" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies/mlp.png"/>
+<em class="image-with-caption">Figura 1. Multi Layer Perceptron</em></p>
 <p>L'immagine può sembrare semplice, ma dietro quella semplicità si nasconde un numero di concetti tale da far venir voglia di fare harakiri.<br/>
 E di questa pletora di concetti... ne scalfiremo solo la superficie.
 Iniziamo parlando di quello che abbiamo sotto gli occhi:</p>
@@ -169,16 +169,16 @@ Calma cowboy ci arriveremo.</p>
 <p>Abbiamo parlato di reti, di layer, di frecce e pallini.<br/>
 Ma per capire davvero come una rete neurale prende decisioni (e come impara dai suoi errori), dobbiamo scendere di livello. Al livello del pallino.<br/>
 Iniziamo partendo da quella che è la stilizzazione di un neurone biologico.</p>
-<p class="image-caption"><img alt="Biological Neuron" class="image" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies/natural_neuron.png"/>
-Figura 2. Neurone Biologico</p>
+<p><img alt="Biological Neuron" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies/natural_neuron.png"/>
+<em class="image-with-caption">Figura 2. Neurone Biologico</em></p>
 <p>Nella vita ho poche convinzioni ma una di queste è che non sono un neurologo, per cui gli addetti ai lavori mi perdoneranno per la semplificazione che segue.
 I dendriti vengono <strong>stimolati</strong> dai segnali elettrici in ingresso. Il nucleo, insieme al soma <strong>elabora</strong> l'informazione, e l'assone la <strong>propaga</strong>
 verso le connessioni sinaptiche, collegandosi ai neuroni successivi.</p>
 <p><strong>Vi ricorda qualcosa?</strong></p>
 <p>Ora che sappiamo come "funziona" (il virgolettato è voluto) un neurone biologico, facciamo un grande salto di fantasia e vediamo insieme come è rappresentato un <strong>neurone
 artificiale</strong>, cioè l'ormai famoso pallino:</p>
-<p class="image-caption"><img alt="Artificial Neuron" class="image" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies/artificial_neuron.png"/>
-Figura 3. Neurone Artificiale</p>
+<p><img alt="Artificial Neuron" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies/artificial_neuron.png"/>
+<em class="image-with-caption">Figura 3. Neurone Artificiale</em></p>
 <p>Da questa immagine possiamo introdurre molti concetti dei concetti necessari al nostro scopo:</p>
 <ul>
 <li><strong>Input</strong>: sono gli ingressi del neurone, cioè ciò che va a stimolare i dendriti.</li>
@@ -208,101 +208,38 @@ Che, per gli amici, vuol dire semplicemente: senza di loro, la rete non saprebbe
 <p>Iniziamo questo nuovo paragrafo introducendo quello che è il problema da risolvere, il <strong>problema AND</strong>. L'AND tra due <strong>variabili binarie</strong> è una semplice operazione logica: 
 il risultato è <span class="math">\(1\)</span> solo se entrambe le variabili valgono <span class="math">\(1\)</span> in tutti gli altri casi è <span class="math">\(0\)</span>.
 Per essere più formali, consideriamo due variabili <span class="math">\(A \in \{0, 1\}\)</span> e <span class="math">\(B \in \{0, 1\}\)</span> il risultato di <span class="math">\(AND(A, B)\)</span> è riassunto nella seguente tabella, chiamata <strong>tabella di verità</strong>:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"><span class="math">\(A\)</span></th>
-<th style="text-align: center;"><span class="math">\(B\)</span></th>
-<th style="text-align: center;"><span class="math">\(\text{AND}(A, B)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
+<div class="math">$$
+\begin{array} 
+{|r|r|}
+\hline 
+A &amp; B &amp; AND(A, B) \\ 
+\hline 
+0 &amp; 0 &amp; 0 \\ 
+\hline 0 &amp; 1 &amp; 0 \\ 
+\hline 1 &amp; 0 &amp; 0 \\ 
+\hline 1 &amp; 1 &amp; 1 \\ 
+\hline  
+\end{array}
+$$</div>
 <p>Qui abbiamo presentato il caso più semplice del problema AND, ma non esiste alcun vincolo sul numero di variabili.<br/>
 Ad esempio, con tre variabili otterremmo la seguente tabella di verità:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
-<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
-<th style="text-align: center;"><span class="math">\(x_3\)</span></th>
-<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2, x_3)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
+<div class="math">$$
+\begin{array} 
+{|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; x_3 &amp; AND(x_1, x_2, x_3) \\ 
+\hline 
+0 &amp; 0 &amp; 0 &amp; 0\\ 
+\hline 0 &amp; 0 &amp; 1 &amp; 0\\ 
+\hline 0 &amp; 1 &amp; 0 &amp; 0\\ 
+\hline 0 &amp; 1 &amp; 1 &amp; 0\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; 0\\ 
+\hline 1 &amp; 0 &amp; 1 &amp; 0 \\ 
+\hline 1 &amp; 1 &amp; 0 &amp; 0 \\ 
+\hline 1 &amp; 1 &amp; 1 &amp; 1 \\ 
+\hline  
+\end{array}
+$$</div>
 <p>Consideriamo ora una rete neurale, la più <strong>semplice possibile</strong>: composta da un solo percettrone. L'obiettivo è risolvere il problema AND a due variabili, cioè: dati gli input 
 <span class="math">\(x_1\)</span> e <span class="math">\(x_2\)</span>, prevedere quale sarà l'output di <span class="math">\(AND(x_1, x_2)\)</span> che potrà essere <span class="math">\(0\)</span> o <span class="math">\(1\)</span>. Poiché l'output può assumere solo due valori distinti, <strong>o sale o pepe</strong>, 
 il problema che stiamo affrontando è un tipico <strong>problema di classificazione</strong>.</p>
@@ -326,8 +263,8 @@ Ora ci restano da stabilire tre cose:</p>
 <li>Scegliamo come funzione di attivazione il <a href="https://it.wikipedia.org/wiki/Funzione_gradino_di_Heaviside">gradino di Heaviside</a>.</li>
 </ol>
 <p>Il <strong>gradino di Heaviside</strong> è una semplice funzione il cui grafico è il seguente:</p>
-<p class="image-caption"><img alt="Step Function" class="image" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies/step.png"/>
-Figura 4. Gradino di Heaviside</p>
+<p><img alt="Step Function" class="image-with-caption" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies/step.png"/>
+<em class="image-with-caption">Figura 4. Gradino di Heaviside</em></p>
 <p>In breve, dato un qualsiasi valore <span class="math">\(x\)</span> in ingresso, il gradino di Heaviside restituisce:</p>
 <ul>
 <li><span class="math">\(0\)</span> se <span class="math">\(x &lt; 0\)</span>, </li>
@@ -363,43 +300,19 @@ $$</div>
 <span class="math center-math">\(H= 1 \cdot 0.5 + 1 \cdot 0.5 + 1 = 2 \Rightarrow p = \sigma(H) = \sigma(2) = 1\)</span></li>
 </ul>
 <p>Ripetiamo quindi la tabella di verità dove riportiamo anche le <strong>predizioni</strong> del percettrone creato, dove in rosso indichiamo quelle errate e in verde quelle corrette:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
-<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
-<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2)\)</span></th>
-<th style="text-align: center;"><span class="math">\(p\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; p \\ 
+\hline 
+0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+\hline  
+\end{array}
+$$</div>
 <p>Come possiamo vedere, il nostro percettrone ha fatto <strong>una sola predizione corretta su quattro</strong>. Possiamo dirlo senza mezzi termini: <strong>fa abbastanza schifo</strong>, vero?!<br/>
 Ma allora perché tutto questo panegirico per arrivare a un risultato così pessimo? Semplice, perchè questa è solo la base.<br/>
 Ora "rimane" da capire <strong>come migliorare</strong> i risultati, ovvero come addestriamo la rete neurale affinché smetta di fare schifo e inizi a dare predizioni sensate...<br/>
@@ -534,9 +447,9 @@ vero?! Non si può vivere senza sapere <strong>come impara</strong>.  Si lo so, 
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
 <li><a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3">Neurons for Dummies - 3</a></li>
+<li><a href="https://www.lucadivita.it/it/metaeuristica/not-only-backprop/" title="BackProp? Anche No">BackProp? Anche No</a></li>
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
-<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 </ul>
 <hr />
 </section>
@@ -549,16 +462,16 @@ vero?! Non si può vivere senza sapere <strong>come impara</strong>.  Si lo so, 
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/it/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">6</span>
+                    <span class="superscript">5</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/it/tags.html#matematica-ref">matematica
-                    <span class="superscript">6</span>
+                    <span class="superscript">5</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/it/tags.html#neuroni-ref">neuroni
                     <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/it/tags.html#reti_neurali-ref">reti_neurali
-                    <span class="superscript">7</span>
+                    <span class="superscript">6</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/it/tags.html#retropropagazione-ref">retropropagazione
                     <span class="superscript">4</span>

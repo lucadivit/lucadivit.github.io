@@ -154,15 +154,15 @@ At the heart of this orderly structure lies the <strong>lattice</strong>, a kind
 By itself, though, the lattice doesn’t tell us exactly where the atoms are. That’s where another piece of the puzzle comes in: the <strong>basis</strong>,
 meaning the set of atoms that repeats at each point of the lattice. In other words: the lattice tells us <strong>where</strong> to place something, 
 the basis tells us <strong>what</strong> goes there and <strong>how</strong> it’s oriented in space. Here’s an example using <strong>blue dots and gummy bears</strong>.</p>
-<p class="image-caption"><img alt="Basis and Lattice" class="image" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/base_lattice.png"/>
-Figure 1. Basis + Lattice</p>
+<p><img alt="Basis and Lattice" class="image-with-caption" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/base_lattice.png"/>
+<em class="image-with-caption">Figure 1. Basis + Lattice</em></p>
 <p>Thanks to the concepts of <strong>lattice</strong> and <strong>basis</strong>, it’s possible to generate an infinite number of <strong>crystal structures</strong>.
 The lattice, with its regular arrangement of points, defines the overall shape of the crystal, while
 the basis, that is, the repeating set of atoms determines its <strong>internal configuration</strong>.
 By combining these two elements in different ways, we can obtain crystals with a wide range of geometries, some regular and well-known, others more complex.
 Below are a few examples of how these structures can vary:</p>
-<p class="image-caption"><img alt="Examples Of Crystals" class="image" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/esempi_cristalli.png"/>
-Figure 2. Examples of Cubicle Crystals</p>
+<p><img alt="Examples Of Crystals" class="image-with-caption" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/esempi_cristalli.png"/>
+<em class="image-with-caption">Figure 2. Examples of Cubicle Crystals</em></p>
 <p>The lattice, together with its basis, is the <strong>ordered</strong> and <strong>ideal</strong> structure that our <em>artificial crystals</em>, as we’ll soon see, will 
 have to try to <strong>replicate</strong> during optimization.</p>
 <h3 id="the-mathematical-model">The Mathematical Model<a class="headerlink" href="#the-mathematical-model" title="Permanent link"> </a></h3>
@@ -171,8 +171,8 @@ which allows the description of all possible lattices that can exist in three-di
 Each point in the lattice can be reached starting from the origin and taking an integer number of steps along each of the three directions:
 right|left, forward|backward, up|down.
 A <strong>position vector</strong> is then defined using the following formula:</p>
-<div class="math">$$\overrightarrow{r} = \sum_{i=1}^{d}n_i \overrightarrow{a_i}$$</div>
-<p>Where:</p>
+<p><span class="math center-math">\(\overrightarrow{r} = \sum_{i=1}^{d}n_i \overrightarrow{a_i}\)</span>
+Where:</p>
 <ul>
 <li><span class="math">\(d\)</span> is the number of dimensions of the crystal, which is usually 3 (unless you live in a world with
 4 spatial dimensions, in that case <strong>please invite me over</strong>).</li>
@@ -185,7 +185,7 @@ A <strong>position vector</strong> is then defined using the following formula:<
 That’s right: in metaheuristic algorithms, there isn’t just one solution, but a whole set of candidate solutions,
 from which we’ll select the <strong>best one</strong>... Ahem, I mean, each candidate solution (or "crystal") is represented as a <strong>numerical vector</strong> in
 <span class="math">\(d\)</span> dimensions, that is, a list of values:</p>
-<div class="math">$$C_i = \left[x_{i}^{1}, x_{i}^{2}, \dots, x_{i}^{d}  \right]$$</div>
+<p><span class="math center-math">\(C_i = \left[x_{i}^{1}, x_{i}^{2}, \dots, x_{i}^{d}  \right]\)</span></p>
 <p>Where:</p>
 <ul>
 <li><span class="math">\(C_i\)</span> is the <span class="math">\(i\)</span>-th crystal.</li>
@@ -229,24 +229,20 @@ These main crystals are the <strong>starting point</strong> of the algorithm, wh
 Each phase corresponds to a variant of the cubic structure:</p>
 <ul>
 <li><strong>Simple Cubicle</strong>:</li>
-<li>
-<p>
-<div class="math">$$C_{r_{new}} = C_{r_{old}} + r C_{r_{main}}$$</div>
-</p>
-</li>
-<li>
-<p><strong>Cubicle with the Best Crystals</strong>:</p>
-</li>
 </ul>
-<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}}$$</div>
+<p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r C_{r_{main}}\)</span></p>
+<ul>
+<li><strong>Cubicle with the Best Crystals</strong>:</li>
+</ul>
+<p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}}\)</span></p>
 <ul>
 <li><strong>Cubicle with the Mean Crystals</strong>:</li>
 </ul>
-<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} F_{c}$$</div>
+<p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} F_{c}\)</span></p>
 <ul>
 <li><strong>Cubicle with the Best and Mean Crystals</strong>:</li>
 </ul>
-<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}} + r_{3} F_{c}$$</div>
+<p><span class="math center-math">\(C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}} + r_{3} F_{c}\)</span></p>
 <p>As mentioned at the beginning, this algorithm <strong>does not use external parameters</strong> to balance exploration (finding new solutions) and exploitation (refining the good ones).
 The balance happens naturally, thanks to the update equations we’ve just seen.<br/>
 But let’s get back on track... we’ve created <strong>four new crystals</strong> starting from the previous ones. And what do we do with them?
@@ -329,10 +325,10 @@ which has the following form:</p>
 f(x, y) = sin(x) \cdot e^{(1-cos(y))^2} + cos(x) \cdot e^{(1-sin(x))^2} + (x-y)^2
 $$</div>
 <p>where:</p>
-<div class="math">$$x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]$$</div>
+<p><span class="math center-math">\(x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]\)</span></p>
 <p>The plot of the function is quite complex (see Figure 3), and finding the minimum is <strong>anything but trivial</strong> from an analytical point of view.</p>
-<p class="image-caption"><img alt="Bird Function" class="image" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/bird.png"/>
-Figura 3. Bird Function</p>
+<p><img alt="Bird Function" class="image-with-caption" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/bird.png"/>
+<em class="image-with-caption">Figura 3. Bird Function</em></p>
 <p>Its <strong>global minimum</strong> is approximately <span class="math">\(f(x, y) = -106.764\)</span> at the points:</p>
 <ul>
 <li><span class="math">\(p_1 = (4.701, 3.152)\)</span></li>

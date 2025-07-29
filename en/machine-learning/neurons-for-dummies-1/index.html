@@ -140,8 +140,8 @@ and we will do it step by step, with a practical example.</p>
 Let's start by saying that there are different types of neural networks: <strong>convolutional</strong>, <strong>recurrent</strong>, and many others.
 One or the other is chosen depending on the problem to be solved.
 In this article, we will focus on <strong>Multi Layer Perceptron</strong> networks (or <strong>MLP</strong>), which are usually represented like this:</p>
-<p class="image-caption"><img alt="MLP" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/mlp.png"/>
-Figure 1. Multi Layer Perceptron</p>
+<p><img alt="MLP" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/mlp.png"/>
+<em class="image-with-caption">Figure 1. Multi Layer Perceptron</em></p>
 <p>The image may look simple, but behind that simplicity hides a number of concepts enough to make you want to commit harakiri.<br/>
 And from this plethora of concepts... we will only scratch the surface.
 Let's start by talking about what we have in front of our eyes:</p>
@@ -170,16 +170,16 @@ Hold your horses, cowboy — we’ll get there.</p>
 <p>We have talked about networks, layers, arrows, and dots.<br/>
 But to truly understand how a neural network makes decisions (and how it learns from its mistakes), we need to go down a level. Down to the level of the dot.<br/>
 Let's start by looking at the stylization of a biological neuron.</p>
-<p class="image-caption"><img alt="Biological Neuron" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/natural_neuron.png"/>
-Figura 2. Biological Neuron</p>
+<p><img alt="Biological Neuron" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/natural_neuron.png"/>
+<em class="image-with-caption">Figura 2. Biological Neuron</em></p>
 <p>In life, I have few certainties, but one of them is that I am not a neurologist, so I hope the experts will forgive the simplification that follows.
 The dendrites are <strong>stimulated</strong> by incoming electrical signals. The nucleus, together with the soma, <strong>processes</strong> the information, and the axon <strong>propagates</strong> it
 toward the synaptic connections, linking to the next neurons.</p>
 <p><strong>Does it ring a bell?</strong></p>
 <p>Now that we know how a biological neuron "works" (yes, the quotation marks are intentional), let's take a big leap of imagination and see how an <strong>artificial neuron</strong> is represented, 
 the now famous little dot:</p>
-<p class="image-caption"><img alt="Artificial Neuron" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/artificial_neuron.png"/>
-Figura 3. Artificial Neuron</p>
+<p><img alt="Artificial Neuron" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/artificial_neuron.png"/>
+<em class="image-with-caption">Figura 3. Artificial Neuron</em></p>
 <p>From this image, we can introduce many of the concepts necessary for our purpose:</p>
 <ul>
 <li><strong>Input</strong>: these are the neuron's inputs, meaning what stimulates the dendrites.</li>
@@ -209,101 +209,38 @@ Which, for friends, simply means: without them, the network wouldn't even be abl
 <p>Let's start this new paragraph by introducing the problem to solve, the <strong>AND problem</strong>. The AND between two binary variables is a simple logical operation: 
 the result is <span class="math">\(1\)</span> only if both variables are <span class="math">\(1\)</span> in all other cases, it is <span class="math">\(0\)</span>.
 To be more formal, let's consider two variables <span class="math">\(A \in \{0, 1\}\)</span> and <span class="math">\(B \in \{0, 1\}\)</span> the result of <span class="math">\(AND(x_1, x_2)\)</span> is summarized in the following table, called <strong>the truth table</strong>:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"><span class="math">\(A\)</span></th>
-<th style="text-align: center;"><span class="math">\(B\)</span></th>
-<th style="text-align: center;"><span class="math">\(\text{AND}(A, B)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
+<div class="math">$$
+\begin{array} 
+{|r|r|}
+\hline 
+A &amp; B &amp; AND(A, B) \\ 
+\hline 
+0 &amp; 0 &amp; 0 \\ 
+\hline 0 &amp; 1 &amp; 0 \\ 
+\hline 1 &amp; 0 &amp; 0 \\ 
+\hline 1 &amp; 1 &amp; 1 \\ 
+\hline  
+\end{array}
+$$</div>
 <p>Here we presented the simplest case of the AND problem, but there’s no restriction on the number of variables.<br/>
 For example, with three variables, we would get the following truth table:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"><span class="math">\(A\)</span></th>
-<th style="text-align: center;"><span class="math">\(B\)</span></th>
-<th style="text-align: center;"><span class="math">\(C\)</span></th>
-<th style="text-align: center;"><span class="math">\(\text{AND}(A, B, C)\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
+<div class="math">$$
+\begin{array} 
+{|r|r|}
+\hline 
+A &amp; B &amp; C &amp; AND(A, B, C) \\ 
+\hline 
+0 &amp; 0 &amp; 0 &amp; 0\\ 
+\hline 0 &amp; 0 &amp; 1 &amp; 0\\ 
+\hline 0 &amp; 1 &amp; 0 &amp; 0\\ 
+\hline 0 &amp; 1 &amp; 1 &amp; 0\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; 0\\ 
+\hline 1 &amp; 0 &amp; 1 &amp; 0 \\ 
+\hline 1 &amp; 1 &amp; 0 &amp; 0 \\ 
+\hline 1 &amp; 1 &amp; 1 &amp; 1 \\ 
+\hline  
+\end{array}
+$$</div>
 <p>Let's now consider a neural network, the <strong>simplest possible</strong>: composed of a single perceptron. The goal is to solve the two-variable AND problem, that is: given the inputs
 <span class="math">\(x_1\)</span> and <span class="math">\(x_2\)</span>, predict what the output of <span class="math">\(AND(x_1, x_2)\)</span> which can be <span class="math">\(0\)</span> or <span class="math">\(1\)</span>. Since the output can take only two distinct values, <strong>either salt or pepper</strong>,
 the problem we are dealing with is a typical <strong>classification problem</strong>.</p>
@@ -327,8 +264,8 @@ the neuron will have two inputs <span class="math">\(x_1\)</span> e <span class=
 <li>We choose the <a href="https://en.wikipedia.org/wiki/Heaviside_step_function">Heaviside step function</a> as the activation function</li>
 </ol>
 <p>The <strong>Heaviside step</strong> is a simple function whose graph is as follows:</p>
-<p class="image-caption"><img alt="Step Function" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/step.png"/>
-Figura 4. Heaviside Step</p>
+<p><img alt="Step Function" class="image-with-caption" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/step.png"/>
+<em class="image-with-caption">Figura 4. Heaviside Step</em></p>
 <p>In short, given any value <span class="math">\(x\)</span> as input, the Heaviside step function returns:</p>
 <ul>
 <li><span class="math">\(0\)</span> if <span class="math">\(x &lt; 0\)</span>, </li>
@@ -366,43 +303,19 @@ $$</div>
 </ul>
 <p>Let's now repeat the truth table, also showing the predictions made by the created perceptron, 
 with incorrect ones highlighted in red and correct ones in green:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"><span class="math">\(x_1\)</span></th>
-<th style="text-align: center;"><span class="math">\(x_2\)</span></th>
-<th style="text-align: center;"><span class="math">\(\text{AND}(x_1, x_2)\)</span></th>
-<th style="text-align: center;"><span class="math">\(p\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(0\)</span></td>
-<td style="text-align: center;"><span class="math">\(\color{red}{\mathbf{1}}\)</span></td>
-</tr>
-<tr>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(1\)</span></td>
-<td style="text-align: center;"><span class="math">\(\color{green}{\mathbf{1}}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p> </p>
+<div class="math">$$
+\begin{array} 
+{|r|r|r|}
+\hline 
+x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; p \\ 
+\hline 
+0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+\hline  
+\end{array}
+$$</div>
 <p>As we can see, our perceptron made <strong>only one correct prediction out of four</strong>. We can say it without mincing words: <strong>it sucks quite a bit</strong>, right?! 
 So why all this fuss to reach such a poor result? Simple: because this is just the foundation.<br/>
 Now, we still need to understand <strong>how to improve</strong> the results — that is, how to train the neural network so that it stops sucking and starts making sensible predictions...<br/>
@@ -540,9 +453,9 @@ While waiting for the second part, I bid you farewell.</p>
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
 <li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3">Neurons for Dummies - 3</a></li>
+<li><a href="https://www.lucadivita.it/en/metaeuristica/not-only-backprop/" title="Not Only BackProp">Not Only BackProp</a></li>
 <li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1">I ODE, You ODE and the Neural ODE - 1</a></li>
 <li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="I ODE, You ODE and the Neural ODE - 2">I ODE, You ODE and the Neural ODE - 2</a></li>
-<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 </ul>
 <hr />
 </section>
@@ -558,13 +471,13 @@ While waiting for the second part, I bid you farewell.</p>
                     <span class="superscript">4</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
-                    <span class="superscript">6</span>
+                    <span class="superscript">5</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#mathematics-ref">mathematics
                     <span class="superscript">3</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neural_network-ref">neural_network
-                    <span class="superscript">6</span>
+                    <span class="superscript">5</span>
 </a></li>
                 <li><a href="https://www.lucadivita.it/en/tags.html#neurons-ref">neurons
                     <span class="superscript">3</span>
