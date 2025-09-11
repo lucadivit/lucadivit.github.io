@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="Si lo so, post vacanze è dura per tutti. Ma qualcuno deve pur farlo il lavoro sporco no? Quindi riprendiamo, dopo qualche settimana di pausa, il nostro bel discorsetto sulle Neural ODE o NODE. Discorsetto che potete recuperare leggendo le prime tre parti linkate a fine articolo. Per farla breve …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="deep_learning, matematica, neural_ode, reti_neurali, equazioni_differenziali, ode, teoria, metodi_numerici, Teoria & Matematica, " />
+
+<meta property="og:title" content="Io ODO, Tu ODI e la Neural ODE - 4 "/>
+<meta property="og:url" content="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" />
+<meta property="og:description" content="Si lo so, post vacanze è dura per tutti. Ma qualcuno deve pur farlo il lavoro sporco no? Quindi riprendiamo, dopo qualche settimana di pausa, il nostro bel discorsetto sulle Neural ODE o NODE. Discorsetto che potete recuperare leggendo le prime tre parti linkate a fine articolo. Per farla breve …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-09-12T00:00:00+02:00" />
+<meta name="twitter:title" content="Io ODO, Tu ODI e la Neural ODE - 4 ">
+<meta name="twitter:description" content="Si lo so, post vacanze è dura per tutti. Ma qualcuno deve pur farlo il lavoro sporco no? Quindi riprendiamo, dopo qualche settimana di pausa, il nostro bel discorsetto sulle Neural ODE o NODE. Discorsetto che potete recuperare leggendo le prime tre parti linkate a fine articolo. Per farla breve …">
+
+        <title>Io ODO, Tu ODI e la Neural ODE - 4  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/index.html">Bio</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/latest.html">
+                                        Recenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/categories.html">
+                                            Argomenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/archives.html">
+                                            Archivio
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/pages/contatti/">Contatti</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li class="active">
+                                            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li>
+                                            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">
+                Io ODO, Tu ODI e la Neural ODE - 4
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2 table-of-content">
+        <nav>
+        <h4>Contenuti</h4>
+        <div class="toc">
+<ul>
+<li><a href="#dal-discreto-al-continuo">Dal Discreto Al Continuo</a></li>
+<li><a href="#integra-che-ti-passa">Integra Che Ti Passa</a></li>
+<li><a href="#houston-abbiamo-un-problema-di-addestramento">Houston, Abbiamo Un Problema... Di Addestramento</a></li>
+<li><a href="#adjoint-un-posto-a-tavola">Adjoint Un Posto A Tavola</a></li>
+<li><a href="#un-adjoint-per-domarlo">Un Adjoint Per Domarlo</a></li>
+<li><a href="#dio-benedica-i-recap">Dio Benedica I Recap</a><ul>
+<li><a href="#forward">Forward</a></li>
+<li><a href="#backward">Backward</a></li>
+</ul>
+</li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+</ul>
+</div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Si lo so, post vacanze è dura per tutti. Ma qualcuno deve pur farlo il lavoro sporco no? Quindi riprendiamo, dopo qualche settimana di pausa,
+il nostro bel discorsetto sulle <strong>Neural ODE</strong> o <strong>NODE</strong>. Discorsetto che potete recuperare leggendo le prime tre parti linkate a fine articolo. Per farla breve abbiamo 
+parlato di <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">calcolo differenziale e calcolo integrale</a>, e metodi <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">analitici</a> 
+e <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">numerici</a> per risolvere equazioni differenziali. 
+Non ci resta, finalmente aggiungerei, che vedere come mettere tutto insieme per arrivare alla formulazione di queste benedette NODE. Quindi iniziamo...</p>
+<h3 id="dal-discreto-al-continuo">Dal Discreto Al Continuo<a class="headerlink" href="#dal-discreto-al-continuo" title="Permanent link"> </a></h3>
+<p>Esistono tante architetture di reti neurali. Troppe. Tra le varie architetture ne esiste una in particolare, nota come <a href="https://arxiv.org/pdf/1512.03385"><strong>ResNet</strong></a> o 
+<strong>Rete Residuale</strong>. Le ResNet sono state un punto di svolta nel mondo del Deep Learning in quanto hanno permesso di superare delle problematiche di addestramento. 
+Quali, vi starete chiedendo. Vedetela così, per essere più performante una rete neurale deve essere più profonda, ma più è profonda più le performance peggiorano 
+per via di <strong>Gradient Vanishing/Explosion</strong> che non staremo qui a trattare ma fidatevi, sono brutte bestie. La particolarità di queste reti è l'utilizzo 
+di <strong>blocchi residuali</strong>. Per farla semplice, una ResNet è una serie di questi blocchetti, ognuno dei quali è strutturato così:</p>
+<p class="image-caption"><img alt="ResBlock" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/res_block.svg"/>
+Figura 1. Blocco Residuale</p>
+<p>Da qui dovrebbe essere chiaro il perchè è <strong>residuale</strong>. L'uscita infatti è </p>
+<div class="math">$$
+y = F(x) + x
+$$</div>
+<p>da cui </p>
+<div class="math">$$
+F(x) = y-x
+$$</div>
+<p>Dove:</p>
+<ul>
+<li><span class="math">\(x\)</span> è l'input</li>
+<li><span class="math">\(y\)</span> è l'output</li>
+<li><span class="math">\(F(x)\)</span> è la <strong>trasformazione</strong> fatta dai layer (o residuo).</li>
+</ul>
+<p>Per cui quello che imparano i singoli layers non è una mappatura assoluta della <span class="math">\(y\)</span>, bensì sono <strong>residui</strong>. </p>
+<p>Ma cosa c'entra questo con le NODE? Calma calma. Ora ci arriviamo. Iniziamo supponendo di avere una ResNet ad <strong>un livello</strong>:</p>
+<p class="image-caption"><img alt="ResNet1" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/resnet_1.svg"/>
+Figura 2. ResNet Un Livello</p>
+<p>L'uscita è la seguente:</p>
+<div class="math">$$
+x_1 = f_1(x_0, \theta_1) + x_0
+$$</div>
+<p>Dove:</p>
+<ul>
+<li><span class="math">\(x_0\)</span> è l'ingresso della ResNet</li>
+<li><span class="math">\(f_1\)</span> è il layer di trasformazione</li>
+<li><span class="math">\(\theta_1\)</span> sono i pesi del relativo layer</li>
+<li><span class="math">\(x_1\)</span> è l'output</li>
+</ul>
+<p>Prendiamone ora, una a <strong>due livelli</strong>:</p>
+<p class="image-caption"><img alt="ResNet2" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/resnet_2.svg"/>
+Figura 3. ResNet Due Livelli</p>
+<p>Ora l'uscita è:</p>
+<div class="math">$$
+x_2 = f_2(x_1, \theta_2) + x_1
+$$</div>
+<p>Ancora. Prendiamone una a <strong>tre livelli</strong>:</p>
+<p class="image-caption"><img alt="ResNet3" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/resnet_3.svg"/>
+Figura 4. ResNet Tre Livelli</p>
+<p>l'uscita è</p>
+<div class="math">$$
+x_3 = f_3(x_2, \theta_3) + x_2
+$$</div>
+<p>Avete capito l'antifona...? Quindi perché non pensare alla profondità della rete come una <strong>sequenza temporale</strong>, dove ogni layer <span class="math">\(f_i\)</span> rappresenta un <strong>passo discreto nel tempo</strong>?
+E perché non supponiamo di avere <strong>infiniti layers</strong> e quindi infinite <span class="math">\(f_i\)</span>, una per ogni step temporale...? Ma si, facciamolo! E andiamo a <strong>generalizzare</strong>:</p>
+<div class="math">$$
+x_{t} = f_{t}(x_{t-1}, \theta_t) + x_{t-1}
+$$</div>
+<p>Ma arrivati a questo punto, perché non immaginare di avere <strong>un’unica funzione</strong> <span class="math">\(f\)</span> che varia in <strong>funzione del tempo</strong>, invece che infinite <span class="math">\(f_i\)</span>? 
+E allora scriviamolo così:</p>
+<div class="math">$$
+x_{t} = f(x_{t-1}, t, \theta_{t}) + x_{t-1}
+$$</div>
+<p>Questa formulazione vi ricorda qualcosa? No!? Forse potrebbe se aggiungessi un fattore moltiplicativo <span class="math">\(h=1\)</span>:</p>
+<div class="math">$$
+x_{t} = x_{t-1} + h \cdot f(x_{t-1}, t, \theta_{t})
+$$</div>
+<p>Così spero che vada meglio. Dovreste avere familiarità ormai con la <strong>formula di Eulero</strong>. Se non l'avete, recuperatela <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">qui</a>.</p>
+<p>Da questa formulazione possiamo scrivere:</p>
+<div class="math">$$
+\frac{x_{t} - x_{t-1} }{h} = f(x_{t-1}, t, \theta_{t})
+$$</div>
+<p>Anche questa formulazione dovreste riconoscere, è quella del <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">rapporto incrementale</a>.
+Quindi, supponendo di poter agire sul valore <span class="math">\(h\)</span>, possiamo tranquillamente scrivere:</p>
+<p><a id="nn-differenziale"></a>
+</p>
+<div class="math">$$
+\frac{dx}{dt} = f(x(t), t, \theta)
+$$</div>
+<p class="formula-caption">
+Formula 1. Formulazione Differenziale della Neural ODE</p>
+<p>Se quindi riuscissimo a trovare un modo per considerare piccole variazioni della nostra <span class="math">\(f\)</span> introducendo un <span class="math">\(h\)</span> <strong>piccolo a piacere</strong>, 
+il nostro problema passerebbe dall'essere una <strong>sequenza di passi grossi</strong>, ossia layer discreti con <span class="math">\(h=1\)</span>, a <strong>infiniti passetti piccolini</strong>.</p>
+<p>Ed ecco che, almeno concettualmente, siamo passati da un <strong>problema discreto</strong> con tante funzioni <span class="math">\(f_t(x, \theta_t)\)</span>, ad uno <strong>continuo</strong> che <em>evolve con fluidità nel tempo</em>,
+guidato da un’unica <span class="math">\(f(x(t), t, \theta)\)</span>. Schematicamente abbiamo questo comportamento:</p>
+<p class="image-caption"><img alt="RawNode" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/raw_node.svg"/>
+Figura 5. Dal Discreto al Continuo</p>
+<p>A questo punto il passo successivo è naturale. Se abbiamo una derivata che descrive come cambia il nostro stato, possiamo chiederci</p>
+<blockquote>
+<p>quanto cambia nel tempo?</p>
+</blockquote>
+<p>La risposta è, come sempre: <strong>integriamo</strong>.</p>
+<h3 id="integra-che-ti-passa">Integra Che Ti Passa<a class="headerlink" href="#integra-che-ti-passa" title="Permanent link"> </a></h3>
+<p>Abbiamo appena ottenuto una bella <a href="#nn-differenziale">equazione differenziale</a> che ci dice <strong>come cambia lo stato nel tempo</strong>.
+Bene, ma a noi interessa sapere <strong>quanto cambia</strong>, cioè:</p>
+<blockquote>
+<p>Se parto da <span class="math">\(x_0\)</span> nel tempo <span class="math">\(t_0\)</span>, dove sarò nel tempo <span class="math">\(t_N\)</span>?</p>
+</blockquote>
+<p>La risposta, se avete letto anche solo una riga degli articoli precedenti, la conoscete già: <strong>integriamo</strong>.</p>
+<p><a id="formulazione-integrale-node"></a>
+</p>
+<div class="math">$$
+x(t_N) = x(t_0) + \int_{t_0}^{t_N} f(x(t), t, \theta) \, dt
+$$</div>
+<p class="formula-caption">
+Formula 2. Formulazione Integrale della Neural ODE</p>
+<p>Questa, signore e signori, è il <strong>cuore</strong> di una NODE. 
+Non c'è più una lista di layer, ma una <em>dinamica continua che evolve nel tempo</em>, guidata da una 
+funzione <span class="math">\(f\)</span> che impara <strong>come far cambiare lo stato</strong>. E questa <span class="math">\(f\)</span>, sorpresa sorpresa, altro non è che una rete neurale.</p>
+<p>Ora viene il bello. Come <strong>integro analiticamente</strong> una <span class="math">\(f\)</span> che, ricordiamolo, è una rete neurale bella piena di ReLU, layer non lineari e pesi sparsi?</p>
+<p>La risposta veloce? <strong>Non puoi</strong>.</p>
+<p>E' per questo che vi ho scritto un intero articolo sui <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/"><strong>metodi numerici</strong></a>. Non sono mica uno sprovveduto.<br/>
+E ricordate nei solver, quale era il parametro che controllava il <strong>passo di integrazione</strong>? Esatto... era proprio <span class="math">\(h\)</span>.<br/>
+Quindi quell’idea introdotta nel paragrafo precedente, cioè introdurre un <span class="math">\(h\)</span> <strong>piccolo a piacere</strong>, non solo è sensata, ma è esattamente 
+quello che si va a fare.</p>
+<h3 id="houston-abbiamo-un-problema-di-addestramento">Houston, Abbiamo Un Problema... Di Addestramento<a class="headerlink" href="#houston-abbiamo-un-problema-di-addestramento" title="Permanent link"> </a></h3>
+<p>Sappiamo che non possiamo risolvere il nostro integrale analiticamente, ma numericamente chi ci ferma? Quindi per il momento, limitiamoci a scrivere questo:</p>
+<p><a id="formulazione-numerica-node"></a>
+</p>
+<div class="math">$$
+x(t_N) = ODESolve(f(x(t), t, \theta), x_0, t_0, t_N)
+$$</div>
+<p class="formula-caption">
+Formula 3. Formulazione Numerica della Neural ODE</p>
+<p>dove:</p>
+<ul>
+<li><span class="math">\(f\)</span> <em>non è il classico problema</em>. Non è un Lotka Volterra o simili, ma è una rete neurale con i suoi strati, non linearità e attivazioni.</li>
+<li><span class="math">\(\theta\)</span> sono i pesi della rete neurale e quindi i <strong>parametri da ottimizzare</strong>.</li>
+<li><span class="math">\(x_0\)</span> è lo <strong>stato iniziale</strong> (l'input della rete neurale), ed è noto.</li>
+<li><span class="math">\(t_0\)</span> è il <strong>tempo di partenza</strong>.</li>
+<li><span class="math">\(t_N\)</span> è il <strong>tempo di arrivo</strong>, cioè il momento in cui osserviamo <strong>l’output</strong>.</li>
+</ul>
+<p>Se avete letto gli articoli sul neurone, sapete che addestrare una rete neurale significa <strong>ottimizzare</strong> i pesi.
+Questo lo si fa calcolando la <strong>Loss</strong> che è l’errore tra l'output previsto e quello desiderato, e propagandola all’indietro tramite backpropagation
+modificando i <strong>pesi</strong> in base a quanto hanno inciso sull'errore stesso. Tutto facile nel discreto, vero? Layer per layer, peso per peso. E ora?<br/>
+Ora è ogni <strong>istante del tempo di integrazione</strong> a contribuire, un po’ per volta, alla perdita finale.</p>
+<blockquote>
+<p>Come calcoliamo l’errore di qualcosa che evolve in modo continuo nel tempo?</p>
+</blockquote>
+<p>La rete non è più fatta di layer distinti. È <strong>nascosta</strong> dentro un <strong>integratore</strong>.
+Non c’è più una sequenza di layer ben definita, come la seguente</p>
+<div class="math">$$
+Input \, x_0 \longmapsto Layer\, 1 \longmapsto Layer\, 2 \longmapsto \cdots \longmapsto Output
+$$</div>
+<p>dove per arrivare all'output <span class="math">\(y\)</span>, <em>ci basta</em> un <strong>forward</strong> della rete, bensì abbiamo</p>
+<div class="math">$$
+Input \, x_0 \longmapsto ODESolve(f(x(t), t, \theta), t_0, t_N) \longmapsto Output
+$$</div>
+<p>Non possiamo più <strong>vedere</strong> né <strong>controllare</strong> l'effetto diretto di ogni peso sull’errore, perché l'output
+non è prodotto direttamente da una rete neurale, ma da un ODESolver che <em>integra il sistema dinamico definito dalla rete stessa</em>. 
+Come abbiamo visto, un solver chiama <strong>ripetutamente</strong>, in base al valore <span class="math">\(h\)</span>, la dinamica <span class="math">\(f\)</span>. Quindi ora, ogni chiamata a <span class="math">\(f\)</span> è un <strong>forward</strong> della rete. 
+Il risultato viene utilizzato per <em>calcolare il valore allo step successivo</em>, fino ad arrivare all'output <span class="math">\(y\)</span> al tempo <span class="math">\(t_N\)</span>, ossia dopo <span class="math">\(n\)</span> forward. 
+Le differenze tra il forward di una NODE e quello di una rete neurale classica, sono riportate nelle immagini che seguono:</p>
+<p class="image-caption"><img alt="ForwardNN" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/nn_forward.svg"/>
+Figura 5. Forward Rete Neurale</p>
+<p class="image-caption"><img alt="ForwardNode" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/node_forward.svg"/>
+Figura 6. Forward Neural ODE</p>
+<p>La Loss quindi, non è più il <strong>semplice errore</strong> calcolato in funzione di <em>output vero</em> e <em>output predetto</em> ma qualcosa di molto più complesso che è funzione di tutti
+gli istanti temporali, come nell'immagine che segue.</p>
+<p class="image-caption"><img alt="LossNode" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/loss_node.svg"/>
+Figura 7. Loss Della Neural ODE</p>
+<p>Potete vedere ogni pallino nero come un <em>forward che genera un output per lo step successivo</em> <strong>contribuendo</strong> alla Loss, a partire dall'istante iniziale <span class="math">\(t_0\)</span>
+fino ad arrivare a quello finale <span class="math">\(t_N\)</span> che produce la predizione <span class="math">\(y=x(t_N)\)</span>.</p>
+<p>Facendo un recap, gli input iniziali sono dati da <span class="math">\(x_0\)</span> e l'obiettivo è minimizzare il valore di</p>
+<div class="math">$$
+L(x(t_N), y)
+$$</div>
+<p>dove:</p>
+<ul>
+<li><span class="math">\(L\)</span> è la funzione di Loss</li>
+<li><span class="math">\(y\)</span> è l'output vero</li>
+<li><span class="math">\(x(t_N)\)</span> è <strong>l'output dell'ODESolver</strong>, ottenuto dopo <em>decine o centinaia</em> di forward della stessa rete neurale <span class="math">\(f\)</span>.</li>
+</ul>
+<p>A questo punto però il quesito resta. Come addestriamo la rete per <strong>ottimizzare</strong> <span class="math">\(\theta\)</span>? Cioè come facciamo <strong>backpropagation</strong> dell'errore sapendo che la Loss calcolata
+<em>non è il risultato di un forward della rete neurale</em>, ma il risultato di un ODESolver cioè di <span class="math">\(n\)</span> forward della rete neurale?</p>
+<h3 id="adjoint-un-posto-a-tavola">Adjoint Un Posto A Tavola<a class="headerlink" href="#adjoint-un-posto-a-tavola" title="Permanent link"> </a></h3>
+<p>Se arrivati a questo punto ci avete capito qualcosa, ottimo! Potete spiegarlo anche a me! Ma bando agli scherzi, riprendiamo. Dalla serie di articoli sul neurone
+abbiamo imparato che minimizzare la Loss vuol dire <strong>derivare l'errore rispetto i pesi</strong>, cioè eseguire</p>
+<div class="math">$$
+\frac{dL}{d \theta}
+$$</div>
+<p>Nel paragrafo precedente però, abbiamo visto che in una NODE, l'errore è il risultato di <strong>tanti contributi infinitesimi</strong> generati dagli stati <span class="math">\(x(t_i)\)</span>, 
+ognuno dei quali utilizza lo stesso identico insieme di pesi <span class="math">\(\theta\)</span>. Quindi per la regola della catena possiamo scrivere:</p>
+<p><a id="loss"></a>
+</p>
+<div class="math">$$
+\frac{dL}{d \theta} = \frac{\partial L}{\partial x(t_i)} \cdot \frac{\partial x(t_i)}{\partial \theta}
+$$</div>
+<p class="formula-caption">
+Formula 4. Gradiente della Loss</p>
+<p>dove:</p>
+<ul>
+<li><span class="math">\(\frac{\partial L}{\partial x(t_i)}\)</span> è il contributo all'errore dello <strong>stato</strong> <span class="math">\(i-esimo\)</span></li>
+<li><span class="math">\(\frac{dx}{d\theta}\)</span> è il contributo che i <strong>pesi</strong> danno allo stato <span class="math">\(x(t_i)\)</span></li>
+</ul>
+<p>Poniamo attenzione alla grandezza</p>
+<div class="math">$$
+a(t) = \frac{dL}{dx(t_i)}
+$$</div>
+<p>Questo valore è anche chiamato <strong>sensibilità</strong> della Loss rispetto lo stato al tempo <span class="math">\(t\)</span>, e rappresenta il <em>gradiente istantaneo</em>
+che <strong>evolve</strong> nel tempo, cioè come ogni singolo stato impatta sull'errore. Risponde alla domanda:</p>
+<blockquote>
+<p>Se cambiassi il valore dello stato, quanto cambierebbe il valore della Loss?</p>
+</blockquote>
+<p>E come quantifichiamo quanto, istantaneamente, una grandezza incide su un'altra? Esatto, attraverso la <strong>derivata</strong>.
+Quindi possiamo scrivere</p>
+<div class="math">$$
+\frac{da(t)}{dt} = \frac{d}{dt} \left( \frac{dL}{dx(t_i)} \right)
+$$</div>
+<p>Per il <a href="https://it.wikipedia.org/wiki/Teorema_di_Schwarz">teorema di Schwarz</a> possiamo modificarla come segue</p>
+<div class="math">$$
+\frac{da(t)}{dt} = \frac{d}{dx(t_i)} \left( \frac{dL}{dt} \right)
+$$</div>
+<p>Ora abbiamo la Loss in funzione del tempo, ma come ben sappiamo la <em>Loss è in funzione degli stati</em> e sono gli <em>stati ad essere in funzione del tempo</em>
+per cui possiamo applicare la <a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">regola della catena</a> e scrivere</p>
+<div class="math">$$
+\frac{dL}{dt} = \frac{dL}{dx(t_i)}\frac{dx(t_i)}{dt}
+$$</div>
+<p>per cui facendo una semplice sostituzione abbiamo:</p>
+<div class="math">$$
+\frac{da(t)}{dt} = \frac{d}{dx(t_i)} \left( \frac{dL}{dx(t_i)}\frac{dx(t_i)}{dt} \right)
+$$</div>
+<p>In mezzo a questa ginepraio di derivate, probabilmente non avete notato che una parte di questa formula l'abbiamo già definita <a href="#nn-differenziale">qui</a>. Per cui, sostituendo la notazione relativa
+ad un <span class="math">\(i-esimo\)</span> stato in favore di una generica, possiamo scrivere</p>
+<div class="math">$$
+\frac{da(t)}{dt} = \frac{dL}{dx(t)} \frac{f(x(t), t, \theta)}{dx}
+$$</div>
+<p>Se ben ricordate però abbiamo anche scritto che</p>
+<div class="math">$$
+\frac{dL}{dx(t)} = a(t)
+$$</div>
+<p>quindi facciamo un'altra sostituzione e scriviamo:</p>
+<div class="math">$$
+\frac{da(t)}{dt} = a(t) \cdot \frac{f(x(t), t, \theta)}{dx}
+$$</div>
+<p>Arrivati a questo punto manca un ultimo pezzettino. Abbiamo visto che per arrivare allo stato finale, abbiamo utilizzato un ODESolver che evolve in <strong>avanti nel tempo</strong>:
+partiamo dallo stato iniziale <span class="math">\(x_0\)</span> (l'input) e arriviamo allo stato finale <span class="math">\(x_{t_N}\)</span> (l'output). E' Proprio sullo stato finale che possiamo <strong>calcolare</strong> la Loss, ma vi 
+ricordo che non abbiamo informazione sugli <strong>stati intermedi</strong>, quindi niente backpropagation. Per cui, per come ogni singolo stato ha impattato sull'errore, dobbiamo tornare 
+<strong>indietro nel tempo</strong> a partire dallo stato <span class="math">\(x(t_N)\)</span> per arrivare allo stato <span class="math">\(x_0\)</span>. Ma questo ha delle <strong>implicazioni</strong>. Lasciate che ve le spieghi con un esempio: supponete di
+stare camminando in salita e di fare un <em>passo in avanti</em>. Vi siete spostati di mezzo metro in avanti e vi trovate <strong>più in alto</strong>, diciamo del <span class="math">\(5\%\)</span>. Ora fate lo stesso identico passo, 
+ma <em>all'indietro</em>. Vi spostate sempre di mezzo metro, sempre con un dislivello del <span class="math">\(5\%\)</span> ma questa volta <strong>verso il basso</strong>, siete cioè scesi del <span class="math">\(5\%\)</span>, il che vuol dire che siete a <span class="math">\(-5\%\)</span> 
+rispetto a prima. Matematicamente quello che si sta facendo è far sì che la derivata (ossia la pendenza) rimanga <strong>coerente</strong>, cioè che indichi correttamente non solo
+quanto lo spostamento in pendenza, ma anche se si sta salendo o scendendo. Quindi, per poter tornare indietro nel tempo a partire dallo stato finale, ma mantenendo la coerenza del 
+gradiente, ci serve un bel <strong>segno meno</strong>. Aggiungiamolo:</p>
+<p><a id="adjoint-differenziale"></a>
+</p>
+<div class="math">$$
+\frac{da(t)}{dt} = - a(t) \cdot \frac{f(x(t), t, \theta)}{dx}
+$$</div>
+<p class="formula-caption">
+Formula 5. Formulazione Differenziale della Sensibilità</p>
+<p>Si lo so, io ve l'ho raccontata e quasi un po' <strong>imposta</strong>, ma in realtà dovreste ringraziarmi per avervi evitato lo sbattimento di altre formule.
+Se in ogni caso siete curiosi potete vedere la dimostrazione del perché ci va il segno meno, <a href="https://arxiv.org/pdf/2402.15141">qui</a>. Tornando a noi,
+dal teorema fondamentale del calcolo integrale possiamo scrivere:</p>
+<p><a id="adjoint-integrale"></a>
+</p>
+<div class="math">$$
+a(t_0) = a(t_N) + \int_{t_N}^{t_0} \frac{da(t)}{dt} dt = a(t_N) - \int_{t_N}^{t_0} a(t) \cdot \frac {f(x(t), t, \theta)}{dz} dt
+$$</div>
+<p class="formula-caption">
+Formula 6. Formulazione Integrale della Sensibilità</p>
+<p>Quello che abbiamo appena introdotto si chiama <strong>Metodo Adjoint</strong> e il perché non solo è utile, ma è <strong>indispensabile</strong>, lo vedremo tra pochissimo.
+Graficamente quello che il metodo adjoint fa è riportato nella figura che segue</p>
+<p class="image-caption"><img alt="AdjointNode" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/adjoint.svg"/>
+Figura 7. Metodo Adjoint</p>
+<p>Partiamo dall'istante finale, del quale abbiamo tutte le informazioni necessarie in quanto è l'output, e torniamo indietro nel tempo calcolando per ogni istante temporale
+la <em>sensibilità dell'errore rispetto allo stato corrente</em>. Se c'è una cosa che abbiamo imparato è che ci fanno schifo gli integrali analitici. Quindi come risolviamo il nostro
+<strong>equazione della sensibilità</strong>...? E perché proprio con un ODESolver?</p>
+<p><a id="adjoint-numerico"></a>
+</p>
+<div class="math">$$
+a(t_0) = ODESolve \left( -a(t) \cdot \frac{df(x(t), t, \theta)}{dx}, \frac{dL}{dx(t_N)}, t_N, t_0 \right)
+$$</div>
+<p class="formula-caption">
+Formula 7. Formulazione Numerica della Sensibilità</p>
+<p>dove:</p>
+<ul>
+<li><span class="math">\(-a(t) \cdot \frac{df(x(t), t, \theta)}{dx}\)</span> è la <strong>dinamica</strong>.</li>
+<li><span class="math">\(\frac{dL}{dx(t_N)} = a(t_N)\)</span> è la sensibilità allo stato finale ed è <strong>calcolabile</strong>, quindi nota.</li>
+<li><span class="math">\(t_N\)</span> è <strong>l'istante finale</strong>, dal quale iniziamo l'integrazione.</li>
+<li><span class="math">\(t_0\)</span> è <strong>l'istante iniziale</strong>, nel quale finiamo l'integrazione.</li>
+</ul>
+<h3 id="un-adjoint-per-domarlo">Un Adjoint Per Domarlo<a class="headerlink" href="#un-adjoint-per-domarlo" title="Permanent link"> </a></h3>
+<p>Se siete arrivati a questo punto complimenti, ma immagino sarete più confusi di prima. Perché di fatto il metodo adjoint ora come ora non serve a nulla. Quindi, per evitare 
+<strong>linciaggi</strong>, diamo un senso a tutto questo. Ripartiamo proprio dalla <a href="#formulazione-integrale-node">formulazione integrale della neural ODE</a> e deriviamola rispetto ai pesi.
+Quello che otteniamo è:</p>
+<div class="math">$$
+\frac{dx(t_N)}{d\theta} = \frac{d}{d\theta} \left( x(t_0) + \int_{t_0}^{t_N} f(x(t), t, \theta) dt \right)
+$$</div>
+<p>Dato che <span class="math">\(x(t_0)\)</span> è il solito e noto <strong>istante iniziale</strong> che non cambia mai nel tempo, abbiamo che il suo valore è <strong>costante</strong> per cui (come dovreste sapere dai precedenti articoli),
+la sua derivata è <strong>nulla</strong>. Quindi abbiamo:</p>
+<div class="math">$$
+\frac{dx(t_0)}{d\theta} = 0 \Rightarrow \frac{dx(t_N)}{d\theta} = \int_{t_0}^{t_N} \frac{f(x(t), t, \theta)}{d\theta} dt
+$$</div>
+<p>Riprendiamo anche la <a href="#loss">formulazione del gradiente dell'errore</a>. Dalla formula precedente abbiamo <span class="math">\(\frac{dx(t_N)}{d\theta}\)</span>, e dal paragrafo precedente sappiamo che 
+<span class="math">\(\frac{dL}{dx(t)} = a(t)\)</span> per cui possiamo scrivere:</p>
+<p><a id="loss-integrale"></a>
+</p>
+<div class="math">$$
+\frac{dL}{d\theta} = \frac{dL}{dx} \cdot \frac{dx}{d\theta} = - \int_{t_N}^{t_0} a(t) \cdot \frac{f(x(t), t, \theta)}{d\theta} dt
+$$</div>
+<p class="formula-caption">
+Formula 8. Formulazione Integrale del Gradiente</p>
+<p>Siamo quindi arrivati ad una <strong>nuova formulazione del gradiente di errore</strong> che permette la backpropagation. E sapete cosa ha di speciale questa formulazione? Che <strong>non dipende dagli
+stati interni</strong>. E se ricordate il nostro problema era proprio quello. Il fatto che essendo la rete neurale nascosta in un solver, non abbiamo accesso agli stati interni. E seppure
+potremmo trovare un modo per salvarli, non converrebbe dal punto di vista della occupazione di memoria perché vi ricordo che abbiamo centinaia di forward, e quindi centinaia stati interni. Solita storia,
+abbiamo un integrale. Quindi scomodiamo, per la terza volta, i solver e scriviamo:</p>
+<p><a id="loss-numerica"></a>
+</p>
+<div class="math">$$
+\frac{dL}{d\theta} = ODESolve \left( -a(t) \cdot \frac{df(x(t), t, \theta)}{d\theta}, 0, t_N, t_0 \right)
+$$</div>
+<p class="formula-caption">
+Formula 9. Formulazione Numerica del Gradiente</p>
+<p>Per questo ODESolver la condizione iniziale, che è al tempo <span class="math">\(t_N\)</span> dato che andiamo indietro nel tempo, è <span class="math">\(0\)</span>. Questo perché <span class="math">\(\frac{dL}{d\theta}\)</span> è un gradiente che <strong>accumula</strong>
+il contributo dei pesi alla Loss. In fase iniziale questo <em>contenitore di contributi</em> è vuoto, e man mano che si torna indietro nel tempo possiamo quantificarli e <strong>aggiungerli</strong>.</p>
+<p>Quindi, la <a href="#adjoint-numerico">ODESolver</a> sulla funzione sensibilità, ci permette di calcolare la <strong>sensibilità istantanea</strong> che viene utilizzata dalla <a href="#loss-numerica">ODESolver</a> per il calcolo
+della <strong>funzione gradiente</strong>. Manca un ultimo pezzo. Quali sono gli <strong>input</strong> della nostra <span class="math">\(f(x(t), t, \theta)\)</span>? Sappiamo che sono gli stati <span class="math">\(x(t)\)</span> ma chi ci fornisce questi stati?
+Li avevamo in fase di <strong>forward</strong> perché sono proprio quelli che calcoliamo con <a href="#formulazione-numerica-node">questa ODESolver</a> ma come già detto e ridetto, ce ne sono a migliaia
+e quindi l'occupazione spaziale sarebbe eccessiva se li volessimo memorizzare. Quindi come si procede? Beh tanto per cambiare... usiamo un'altra ODE che risolve il nostro problema all'indietro.
+Quindi se con <a href="#formulazione-numerica-node">questo ODESolver</a> abbiamo fatto il forward, con il seguente:</p>
+<p><a id="stato-numerico"></a>
+</p>
+<div class="math">$$
+x(t_0) = ODESolve \left( f(x(t), t, \theta), x(t_N), t_N, t_0 \right)
+$$</div>
+<p class="formula-caption">
+Formula 10. Formulazione Numerica dello Stato in Backward</p>
+<p><em>ripercorriamo i nostri stati all'indietro</em>. Quindi usiamo nuovamente la rete neurale per predire lo stato ma piuttosto che procedere con</p>
+<div class="math">$$
+x_0 \longmapsto x_1 \longmapsto x_2 \cdots \longmapsto \longmapsto x_N
+$$</div>
+<p>procediamo al contrario</p>
+<div class="math">$$
+x_N \longmapsto x_{N-1} \longmapsto x_{N-2} \longmapsto \cdots \longmapsto x_0
+$$</div>
+<p>dove <span class="math">\(x_N\)</span> lo abbiamo perché è l'output dell'ODESolver della fase di forward. Quindi è vero che computazionalmente dobbiamo risolvere un'altra ODE facendo <span class="math">\(n\)</span> forward
+della rete neurale, ma in questo modo <strong>istantaneamente</strong> abbiamo lo stato <span class="math">\(x_i\)</span> da utilizzare per risolvere la ODE della <strong>sensibilità</strong> e, di conseguenza, quella del <strong>gradiente</strong>. 
+Ed essendo che questo risultato ci serve solo per un <strong>istante temporale</strong>, una volta utilizzato per fare uno step, possiamo buttarlo facendo si che l'uso di memoria 
+rimanga limitato.</p>
+<h3 id="dio-benedica-i-recap">Dio Benedica I Recap<a class="headerlink" href="#dio-benedica-i-recap" title="Permanent link"> </a></h3>
+<p>Ci tengo ancora a farvi i miei complimenti se state leggendo queste righe, non perché siete il <strong>milionesimo</strong> visitatore (anzi probabilmente siete il secondo, il primo sono io), ma perché
+vi ho buttato in mezzo le Menadi e ne siete usciti Orfeo. Non che questo sia di buon auspicio. In ogni caso, ora che abbiamo tutti gli strumenti, possiamo fare un <strong>recap</strong>. </p>
+<p>Iniziamo guardando il seguente disegno che ho così alacremente disegnato per voi</p>
+<p class="image-caption"><img alt="Insieme" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_4/all.svg"/>
+Figura 8. Quadro di Insieme</p>
+<p>Così come per le reti neurali classiche, l'addestramento di una NODE si divide in due fasi: <strong>forward</strong> e <strong>backward</strong>.</p>
+<h4 id="forward">Forward<a class="headerlink" href="#forward" title="Permanent link"> </a></h4>
+<p>Si utilizza un <strong>ODESolver</strong> (Eulero, RK4, DOPRI5, ecc), dal tempo <span class="math">\(t_0\)</span> al tempo <span class="math">\(t_N\)</span> scelto, su una <strong>dinamica</strong> definita da una rete neurale <span class="math">\(f\)</span> utilizzando, come input, <span class="math">\(x_0\)</span></p>
+<div class="math">$$
+x(t_N) = ODESolve(f(x(t), t, \theta), x_0, t_0, t_N)
+$$</div>
+<p>Arrivati all'istante <span class="math">\(t_N\)</span>, abbiamo il nostro <strong>output</strong> (o predizione), dato dallo stato <span class="math">\(x(t_N)\)</span>. Usiamo lo stato <span class="math">\(x(t_N)\)</span> e l'output vero <span class="math">\(y\)</span>, per calcolare la Loss <span class="math">\(L\)</span> e la sua derivata
+rispetto allo stato, ossia la sensibilità all'istante <span class="math">\(t_N\)</span>:</p>
+<div class="math">$$
+a(t_N) = \frac{dL}{dx(t_N)}
+$$</div>
+<p>Sia <span class="math">\(x(t_N)\)</span> che <span class="math">\(a(t_N)\)</span>, che hanno dimensionalità pari alla dimensione dell'output della rete neurale, vengono usati per gli step della backward.</p>
+<h4 id="backward">Backward<a class="headerlink" href="#backward" title="Permanent link"> </a></h4>
+<p>Si utilizza un sistema di ben <strong>tre ODESolver</strong>, dello stesso tipo di quello usato per il forward. Tutte e tre risolvono la dinamica a partire all'indietro, cioè si parte
+da <span class="math">\(t_N\)</span> per arrivare a <span class="math">\(t_0\)</span>.</p>
+<div class="math">$$
+\begin{cases}
+x(t_0) = ODESolve \left( f(x(t), t, \theta), x(t_N), t_N, t_0 \right) \\
+a(t_0) = ODESolve \left( -a(t) \cdot \frac{df(x(t), t, \theta)}{dx}, a(t_N), t_N, t_0 \right) \\
+\frac{dL}{d\theta} = ODESolve \left( -a(t) \cdot \frac{df(x(t), t, \theta)}{d\theta}, 0, t_N, t_0 \right)
+\end{cases}
+$$</div>
+<p>dove:</p>
+<ul>
+<li>La prima prende in ingresso lo <strong>stato</strong> <span class="math">\(x(t_N)\)</span> predetto nella fase di forward e produce uno stato all'istante <span class="math">\(x(t_{N-1})\)</span>.</li>
+<li>La seconda prende in ingresso la <strong>sensibilità</strong> <span class="math">\(a(t_N)\)</span> calcolato in fase di forward, e lo <strong>stato corrente</strong> <span class="math">\(x(t_{N-1})\)</span> calcolato dal primo ODESolver del sistema e produce in output la 
+sensibilità <span class="math">\(a(t_{N-1})\)</span> all'istante <span class="math">\(t_{N-1}\)</span>.</li>
+<li>La terza prende in ingresso la <strong>sensibilità corrente</strong> <span class="math">\(a(t_{N-1})\)</span> prodotta dal secondo ODESolver del sistema, e lo <strong>stato corrente</strong> <span class="math">\(x(t_{N-1})\)</span> calcolato dal primo ODESolver del sistema. L'output
+di questa ODESolver è una <strong>matrice gradiente</strong> delle dimensioni della rete neurale (o meglio dei suoi parametri).</li>
+</ul>
+<p>Una volta arrivati all'istante <span class="math">\(t_0\)</span>, possiamo usare la matrice gradiente prodotta dal terzo ODESolver, che conterrà quindi le derivate parziali della Loss rispetto i pesi, per
+aggiornare i pesi della rete stessa.</p>
+<p>Ultimissima nota prima di passare alle conclusioni. Se avete dei <strong>dubbi</strong> su come si calcolano le derivate</p>
+<div class="math">$$
+\frac{df}{dx}, \, \frac{df}{d\theta}, \, \frac{dL}{dx}
+$$</div>
+<p>Non è nulla più nulla meno di quello che vi ho già mostrato sulla serie di articoli relativi al neurone. Un buon motivo quindi per recuperarla.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Siamo arrivati alla fine di questo (ultimo, per ora) capitolo teorico sulle NODE. È stato un viaggio lungo, iniziato dalle derivate e dagli integrali, che ci ha portati a 
+formulare un <strong>modello dinamico continuo</strong> capace di apprendere trasformazioni complesse nel tempo.</p>
+<p>Come abbiamo visto, le NODE sono <strong>computazionalmente più costose</strong> rispetto alle reti classiche, ma presentano <strong>vantaggi unici</strong>:</p>
+<ul>
+<li>Non hanno bisogno di salvare tutte le attivazioni intermedie, <strong>risparmiando</strong> memoria.</li>
+<li>Possono operare con <strong>reti più piccole</strong>. Grazie alla natura continua dell’integrazione riescono a generalizzare meglio e con reti meno complesse.</li>
+</ul>
+<p>Quindi, <strong>quando ha senso usare una NODE?</strong><br/>
+Come spesso accade nel machine learning, la risposta è: <strong>dipende</strong>.<br/>
+Se il tuo problema coinvolge <strong>dinamiche temporali</strong> continue, <strong>dati irregolari</strong> o <strong>sistemi fisici</strong> modellabili tramite ODE, allora una NODE può fare la differenza.<br/>
+In tutti gli altri casi potrebbe solo complicarti la vita.</p>
+<p>Nel prossimo (e ultimo) articolo della serie, passeremo finalmente alla pratica: vedremo un'applicazione <strong>concreta</strong> delle NODE e discuteremo di alcuni casi d’uso reali.</p>
+<p>Alla Prossima.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h2>Consigliati</h2>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
+</ul>
+<hr />
+</section>
+<section>
+    <h2>Riferimenti</h2>
+<ul class="references-list">
+    <!-- https://www.lucadivita.it//it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/ -->
+<li><a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a></li>
+    <!-- https://www.lucadivita.it//it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/ -->
+<li><a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a></li>
+    <!-- https://www.lucadivita.it//it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/ -->
+<li><a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a></li>
+    <!-- https://www.lucadivita.it/https://arxiv.org/pdf/1512.03385 -->
+<li><a href="https://arxiv.org/pdf/1512.03385">https://arxiv.org/pdf/1512.03385</a></li>
+    <!-- https://www.lucadivita.it//it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato -->
+<li><a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato</a></li>
+    <!-- https://www.lucadivita.it/https://it.wikipedia.org/wiki/Teorema_di_Schwarz -->
+<li><a href="https://it.wikipedia.org/wiki/Teorema_di_Schwarz">https://it.wikipedia.org/wiki/Teorema_di_Schwarz</a></li>
+    <!-- https://www.lucadivita.it//it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena -->
+<li><a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena</a></li>
+    <!-- https://www.lucadivita.it/https://arxiv.org/pdf/2402.15141 -->
+<li><a href="https://arxiv.org/pdf/2402.15141">https://arxiv.org/pdf/2402.15141</a></li>
+</ul>
+<hr />
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Pubblicato</h4>
+            <time itemprop="dateCreated" datetime="2025-09-12T00:00:00+02:00">12 settembre 2025</time>
+            <h4>Argomento</h4>
+            <a class="category-link" href="https://www.lucadivita.it/categories.html#teoria-matematica-ref">Teoria & Matematica</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/tags.html#deep_learning-ref">deep_learning
+                    <span class="superscript">7</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#equazioni_differenziali-ref">equazioni_differenziali
+                    <span class="superscript">4</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#matematica-ref">matematica
+                    <span class="superscript">7</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#metodi_numerici-ref">metodi_numerici
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#neural_ode-ref">neural_ode
+                    <span class="superscript">4</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#ode-ref">ode
+                    <span class="superscript">4</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#reti_neurali-ref">reti_neurali
+                    <span class="superscript">8</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/tags.html#teoria-ref">teoria
+                    <span class="superscript">4</span>
+</a></li>
+            </ul>
+<h4>Contatti</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>

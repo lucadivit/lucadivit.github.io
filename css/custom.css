@@ -126,6 +126,11 @@ code {
     white-space: nowrap;
 }
 
+.references-list li a {
+  color: #3875d7 !important;
+  font-size: inherit;
+}
+
 @media (max-width: 767px) {
     #bio-pic {
         display: block;
