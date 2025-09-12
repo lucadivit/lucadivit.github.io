@@ -10,6 +10,23 @@
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
         <meta name="author" content="Luca Di Vita" />
 
@@ -115,24 +132,10 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span2 table-of-content">
-        <nav>
-        <h4>Contents</h4>
-        <div class="toc">
-<ul>
-<li><a href="#ode-to-the-method">ODE To The Method</a></li>
-<li><a href="#analytical-methods">Analytical Methods</a><ul>
-<li><a href="#separation-of-variables">Separation of Variables</a><ul>
-<li><a href="#example">Example</a></li>
-</ul>
-</li>
-<li><a href="#integrating-factor">Integrating Factor</a></li>
-<li><a href="#example_1">Example</a></li>
-</ul>
-</li>
-<li><a href="#conclusions">Conclusions</a></li>
-</ul>
-</div>
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contents</h4>
+            <div id="toc-list"></div>
         </nav>
     </div>
     <div class="span8 article-content">
@@ -442,7 +445,7 @@ Here too, just like before, we have <strong>three distinct families</strong>:</p
 <li><span class="math">\(y = -\frac{1}{2}\)</span>: The function remains <strong>constant and zero-valued</strong></li>
 </ul>
 <p>If you want to <strong>verify</strong> for yourself, try setting the initial condition <span class="math">\(y(0) = -\frac{1}{2}\)</span> and go through the math. You’ll find that it implies <span class="math">\(K=0\)</span>.</p>
-<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>I swear I started with the <strong>best intentions</strong>, but I got a bit carried away. So here we are, at the end of a second part that was <strong>mathematically</strong> pretty intense. 
 As for the third part, well I can’t promise it’ll be any easier, but you’ve started dancing, so now <strong>KEEP DANCING!</strong>
 As always, here’s the <a href="https://github.com/lucadivit/NeuralODEBlog">link to the repo</a>.<br/>
@@ -526,36 +529,49 @@ Oh, and in case it wasn’t obvious, the next article in our beloved series will
 
             <hr/>
 <section>
-    <h2>Related Posts</h2>
+    <h3 id="Related Posts">
+        Related Posts
+        <a class="headerlink" href="#Related Posts" title="Permanent link"> </a>
+    </h3>
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1">I ODE, You ODE and the Neural ODE - 1</a></li>
 <li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="I ODE, You ODE and the Neural ODE - 3">I ODE, You ODE and the Neural ODE - 3</a></li>
 </ul>
-<hr />
 </section>
 <section class="references">
-    <h2>References</h2>
-<ul class="related-posts-list">
-    <!-- https://www.lucadivita.it/en//en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/ -->
-<li><a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a></li>
-    <!-- https://www.lucadivita.it/en/https://users.math.msu.edu/users/gnagy/teaching/ode.pdf -->
-<li><a href="https://users.math.msu.edu/users/gnagy/teaching/ode.pdf">https://users.math.msu.edu/users/gnagy/teaching/ode.pdf</a></li>
-    <!-- https://www.lucadivita.it/en//en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law -->
-<li><a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law</a></li>
-    <!-- https://www.lucadivita.it/en/https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions -->
-<li><a href="https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions">https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions</a></li>
-    <!-- https://www.lucadivita.it/en//en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#indefinite-integral -->
-<li><a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#indefinite-integral">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#indefinite-integral</a></li>
-    <!-- https://www.lucadivita.it/en/https://en.wikipedia.org/wiki/Natural_logarithm -->
-<li><a href="https://en.wikipedia.org/wiki/Natural_logarithm">https://en.wikipedia.org/wiki/Natural_logarithm</a></li>
-    <!-- https://www.lucadivita.it/en/https://en.wikipedia.org/wiki/Product_rule -->
-<li><a href="https://en.wikipedia.org/wiki/Product_rule">https://en.wikipedia.org/wiki/Product_rule</a></li>
-    <!-- https://www.lucadivita.it/en/https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf -->
-<li><a href="https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf">https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf</a></li>
-    <!-- https://www.lucadivita.it/en/https://github.com/lucadivit/NeuralODEBlog -->
-<li><a href="https://github.com/lucadivit/NeuralODEBlog">https://github.com/lucadivit/NeuralODEBlog</a></li>
-</ul>
-<hr />
+    <h3 id="References">
+        References
+        <a class="headerlink" href="#References" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+        </li>
+        <li>
+            <a href="https://users.math.msu.edu/users/gnagy/teaching/ode.pdf">https://users.math.msu.edu/users/gnagy/teaching/ode.pdf</a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions">https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions</a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#indefinite-integral">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#indefinite-integral</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Natural_logarithm">https://en.wikipedia.org/wiki/Natural_logarithm</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Product_rule">https://en.wikipedia.org/wiki/Product_rule</a>
+        </li>
+        <li>
+            <a href="https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf">https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf</a>
+        </li>
+        <li>
+            <a href="https://github.com/lucadivit/NeuralODEBlog">https://github.com/lucadivit/NeuralODEBlog</a>
+        </li>
+    </ul>
 </section>
         </div>
         <section id="article-sidebar" class="span2">

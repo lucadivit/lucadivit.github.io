@@ -10,6 +10,23 @@
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
         <meta name="author" content="Luca Di Vita" />
 
@@ -115,24 +132,10 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span2 table-of-content">
-        <nav>
-        <h4>Contenuti</h4>
-        <div class="toc">
-<ul>
-<li><a href="#dal-discreto-al-continuo">Dal Discreto Al Continuo</a></li>
-<li><a href="#integra-che-ti-passa">Integra Che Ti Passa</a></li>
-<li><a href="#houston-abbiamo-un-problema-di-addestramento">Houston, Abbiamo Un Problema... Di Addestramento</a></li>
-<li><a href="#adjoint-un-posto-a-tavola">Adjoint Un Posto A Tavola</a></li>
-<li><a href="#un-adjoint-per-domarlo">Un Adjoint Per Domarlo</a></li>
-<li><a href="#dio-benedica-i-recap">Dio Benedica I Recap</a><ul>
-<li><a href="#forward">Forward</a></li>
-<li><a href="#backward">Backward</a></li>
-</ul>
-</li>
-<li><a href="#conclusioni">Conclusioni</a></li>
-</ul>
-</div>
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contenuti</h4>
+            <div id="toc-list"></div>
         </nav>
     </div>
     <div class="span8 article-content">
@@ -616,35 +619,47 @@ In tutti gli altri casi potrebbe solo complicarti la vita.</p>
 
             <hr/>
 <section>
-    <h2>Consigliati</h2>
+    <h3 id="Consigliati">
+        Consigliati
+        <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
+    </h3>
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 </ul>
-<hr />
 </section>
 <section class="references">
-    <h2>Riferimenti</h2>
-<ul class="related-posts-list">
-    <!-- https://www.lucadivita.it/it//it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/ -->
-<li><a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a></li>
-    <!-- https://www.lucadivita.it/it//it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/ -->
-<li><a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a></li>
-    <!-- https://www.lucadivita.it/it//it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/ -->
-<li><a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a></li>
-    <!-- https://www.lucadivita.it/it/https://arxiv.org/pdf/1512.03385 -->
-<li><a href="https://arxiv.org/pdf/1512.03385">https://arxiv.org/pdf/1512.03385</a></li>
-    <!-- https://www.lucadivita.it/it//it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato -->
-<li><a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato</a></li>
-    <!-- https://www.lucadivita.it/it/https://it.wikipedia.org/wiki/Teorema_di_Schwarz -->
-<li><a href="https://it.wikipedia.org/wiki/Teorema_di_Schwarz">https://it.wikipedia.org/wiki/Teorema_di_Schwarz</a></li>
-    <!-- https://www.lucadivita.it/it//it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena -->
-<li><a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena</a></li>
-    <!-- https://www.lucadivita.it/it/https://arxiv.org/pdf/2402.15141 -->
-<li><a href="https://arxiv.org/pdf/2402.15141">https://arxiv.org/pdf/2402.15141</a></li>
-</ul>
-<hr />
+    <h3 id="Riferimenti">
+        Riferimenti
+        <a class="headerlink" href="#Riferimenti" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+        </li>
+        <li>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
+        </li>
+        <li>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a>
+        </li>
+        <li>
+            <a href="https://arxiv.org/pdf/1512.03385">https://arxiv.org/pdf/1512.03385</a>
+        </li>
+        <li>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Teorema_di_Schwarz">https://it.wikipedia.org/wiki/Teorema_di_Schwarz</a>
+        </li>
+        <li>
+            <a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena</a>
+        </li>
+        <li>
+            <a href="https://arxiv.org/pdf/2402.15141">https://arxiv.org/pdf/2402.15141</a>
+        </li>
+    </ul>
 </section>
         </div>
         <section id="article-sidebar" class="span2">

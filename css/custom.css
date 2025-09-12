@@ -133,6 +133,31 @@ code {
   max-width: 100%;
 }
 
+#toc-list{
+    font-size: .8rem;
+}
+
+#toc-list .toc-list-item a {
+    display: block;
+    position: relative;
+    padding-left: 0.5em;
+    text-indent: 0;
+    color: #08c;
+    text-decoration: none
+}
+
+
+#toc-list .toc-link::after {
+    content: none !important;
+    opacity: 0;
+}
+
+#toc-list .toc-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;    /* regola l’altezza della linea */
+  text-decoration-thickness: 1px;   /* spessore */
+}
+
 @media (max-width: 767px) {
     #bio-pic {
         display: block;

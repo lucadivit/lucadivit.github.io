@@ -10,6 +10,23 @@
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
         <meta name="author" content="Luca Di Vita" />
 
@@ -115,17 +132,10 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span2 table-of-content">
-        <nav>
-        <h4>Contenuti</h4>
-        <div class="toc">
-<ul>
-<li><a href="#anatomia-di-una-rete-neurale">Anatomia Di Una Rete Neurale</a></li>
-<li><a href="#dalla-rete-al-neurone">Dalla Rete Al Neurone</a></li>
-<li><a href="#un-esempio-numerico-il-problema-and">Un Esempio Numerico. Il Problema AND.</a></li>
-<li><a href="#conclusioni">Conclusioni</a></li>
-</ul>
-</div>
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contenuti</h4>
+            <div id="toc-list"></div>
         </nav>
     </div>
     <div class="span8 article-content">
@@ -443,7 +453,10 @@ vero?! Non si può vivere senza sapere <strong>come impara</strong>.  Si lo so, 
 
             <hr/>
 <section>
-    <h2>Consigliati</h2>
+    <h3 id="Consigliati">
+        Consigliati
+        <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
+    </h3>
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
 <li><a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3">Neurons for Dummies - 3</a></li>
@@ -451,21 +464,26 @@ vero?! Non si può vivere senza sapere <strong>come impara</strong>.  Si lo so, 
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" title="Io ODO, Tu ODI e la Neural ODE - 4">Io ODO, Tu ODI e la Neural ODE - 4</a></li>
 </ul>
-<hr />
 </section>
 <section class="references">
-    <h2>Riferimenti</h2>
-<ul class="related-posts-list">
-    <!-- https://www.lucadivita.it/it/https://en.wikipedia.org/wiki/Activation_function -->
-<li><a href="https://en.wikipedia.org/wiki/Activation_function">https://en.wikipedia.org/wiki/Activation_function</a></li>
-    <!-- https://www.lucadivita.it/it/https://it.wikipedia.org/wiki/Sistema_non_lineare -->
-<li><a href="https://it.wikipedia.org/wiki/Sistema_non_lineare">https://it.wikipedia.org/wiki/Sistema_non_lineare</a></li>
-    <!-- https://www.lucadivita.it/it/https://it.wikipedia.org/wiki/Funzione_gradino_di_Heaviside -->
-<li><a href="https://it.wikipedia.org/wiki/Funzione_gradino_di_Heaviside">https://it.wikipedia.org/wiki/Funzione_gradino_di_Heaviside</a></li>
-    <!-- https://www.lucadivita.it/it/https://github.com/lucadivit/neurons_for_dummies -->
-<li><a href="https://github.com/lucadivit/neurons_for_dummies">https://github.com/lucadivit/neurons_for_dummies</a></li>
-</ul>
-<hr />
+    <h3 id="Riferimenti">
+        Riferimenti
+        <a class="headerlink" href="#Riferimenti" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Activation_function">https://en.wikipedia.org/wiki/Activation_function</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Sistema_non_lineare">https://it.wikipedia.org/wiki/Sistema_non_lineare</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Funzione_gradino_di_Heaviside">https://it.wikipedia.org/wiki/Funzione_gradino_di_Heaviside</a>
+        </li>
+        <li>
+            <a href="https://github.com/lucadivit/neurons_for_dummies">https://github.com/lucadivit/neurons_for_dummies</a>
+        </li>
+    </ul>
 </section>
         </div>
         <section id="article-sidebar" class="span2">

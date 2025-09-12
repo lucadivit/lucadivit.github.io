@@ -10,6 +10,23 @@
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
         <meta name="author" content="Luca Di Vita" />
 
@@ -115,17 +132,10 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span2 table-of-content">
-        <nav>
-        <h4>Contenuti</h4>
-        <div class="toc">
-<ul>
-<li><a href="#da-dove-nasce-lidea">Da Dove Nasce L’idea</a></li>
-<li><a href="#il-modello-matematico">Il Modello Matematico</a></li>
-<li><a href="#visione-di-insieme">Visione Di Insieme</a></li>
-<li><a href="#conclusioni">Conclusioni</a></li>
-</ul>
-</div>
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contenuti</h4>
+            <div id="toc-list"></div>
         </nav>
     </div>
     <div class="span8 article-content">
@@ -432,31 +442,42 @@ da cui tutto è partito.</p>
 
             <hr/>
 <section>
-    <h2>Consigliati</h2>
+    <h3 id="Consigliati">
+        Consigliati
+        <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
+    </h3>
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/metaeuristica/not-only-backprop/" title="BackProp? Anche No">BackProp? Anche No</a></li>
 </ul>
-<hr />
 </section>
 <section class="references">
-    <h2>Riferimenti</h2>
-<ul class="related-posts-list">
-    <!-- https://www.lucadivita.it/https://it.wikipedia.org/wiki/NP-completo -->
-<li><a href="https://it.wikipedia.org/wiki/NP-completo">https://it.wikipedia.org/wiki/NP-completo</a></li>
-    <!-- https://www.lucadivita.it/https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche -->
-<li><a href="https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche">https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche</a></li>
-    <!-- https://www.lucadivita.it/https://it.wikipedia.org/wiki/Particle_Swarm_Optimization -->
-<li><a href="https://it.wikipedia.org/wiki/Particle_Swarm_Optimization">https://it.wikipedia.org/wiki/Particle_Swarm_Optimization</a></li>
-    <!-- https://www.lucadivita.it/https://it.wikipedia.org/wiki/Reticolo_di_Bravais -->
-<li><a href="https://it.wikipedia.org/wiki/Reticolo_di_Bravais">https://it.wikipedia.org/wiki/Reticolo_di_Bravais</a></li>
-    <!-- https://www.lucadivita.it/https://www.indusmic.com/post/bird-function -->
-<li><a href="https://www.indusmic.com/post/bird-function">https://www.indusmic.com/post/bird-function</a></li>
-    <!-- https://www.lucadivita.it/https://github.com/lucadivit/CrystalStructureAlgorithm -->
-<li><a href="https://github.com/lucadivit/CrystalStructureAlgorithm">https://github.com/lucadivit/CrystalStructureAlgorithm</a></li>
-    <!-- https://www.lucadivita.it/https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method -->
-<li><a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method">https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method</a></li>
-</ul>
-<hr />
+    <h3 id="Riferimenti">
+        Riferimenti
+        <a class="headerlink" href="#Riferimenti" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="https://it.wikipedia.org/wiki/NP-completo">https://it.wikipedia.org/wiki/NP-completo</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche">https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Particle_Swarm_Optimization">https://it.wikipedia.org/wiki/Particle_Swarm_Optimization</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Reticolo_di_Bravais">https://it.wikipedia.org/wiki/Reticolo_di_Bravais</a>
+        </li>
+        <li>
+            <a href="https://www.indusmic.com/post/bird-function">https://www.indusmic.com/post/bird-function</a>
+        </li>
+        <li>
+            <a href="https://github.com/lucadivit/CrystalStructureAlgorithm">https://github.com/lucadivit/CrystalStructureAlgorithm</a>
+        </li>
+        <li>
+            <a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method">https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method</a>
+        </li>
+    </ul>
 </section>
         </div>
         <section id="article-sidebar" class="span2">

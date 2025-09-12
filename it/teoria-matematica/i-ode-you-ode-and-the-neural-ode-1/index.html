@@ -10,6 +10,23 @@
         <link rel="dns-prefetch" href="//fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
         <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
         <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
         <meta name="author" content="Luca Di Vita" />
 
@@ -115,29 +132,10 @@
 </div>
 
 <div class="row-fluid">
-    <div class="span2 table-of-content">
-        <nav>
-        <h4>Contenuti</h4>
-        <div class="toc">
-<ul>
-<li><a href="#in-principio-era-derivato">In Principio Era Derivato</a><ul>
-<li><a href="#dalla-definizione-allazione">Dalla Definizione all’Azione</a></li>
-<li><a href="#il-lato-oscuro-della-variazione-lintegrazione">Il Lato Oscuro della Variazione: L'Integrazione</a><ul>
-<li><a href="#integrale-indefinito">Integrale Indefinito</a></li>
-<li><a href="#integrale-definito">Integrale Definito</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#quando-il-cambiamento-diventa-legge">Quando il Cambiamento Diventa Legge</a><ul>
-<li><a href="#come-ti-senti-mah-cauchy-cauchy">Come ti Senti: Mah, Cauchy Cauchy...</a></li>
-<li><a href="#da-legge-a-sistema">Da Legge a Sistema</a></li>
-<li><a href="#ode-hall-of-fame">ODE Hall of Fame</a></li>
-</ul>
-</li>
-<li><a href="#conclusioni">Conclusioni</a></li>
-</ul>
-</div>
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contenuti</h4>
+            <div id="toc-list"></div>
         </nav>
     </div>
     <div class="span8 article-content">
@@ -704,28 +702,37 @@ però, potete andare su <a href="https://github.com/lucadivit/NeuralODEBlog">que
 
             <hr/>
 <section>
-    <h2>Consigliati</h2>
+    <h3 id="Consigliati">
+        Consigliati
+        <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
+    </h3>
 <ul class="related-posts-list">
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
 <li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 </ul>
-<hr />
 </section>
 <section class="references">
-    <h2>Riferimenti</h2>
-<ul class="related-posts-list">
-    <!-- https://www.lucadivita.it/it/https://it.wikipedia.org/wiki/Coefficiente_angolare -->
-<li><a href="https://it.wikipedia.org/wiki/Coefficiente_angolare">https://it.wikipedia.org/wiki/Coefficiente_angolare</a></li>
-    <!-- https://www.lucadivita.it/it/https://it.wikipedia.org/wiki/Regole_di_derivazione -->
-<li><a href="https://it.wikipedia.org/wiki/Regole_di_derivazione">https://it.wikipedia.org/wiki/Regole_di_derivazione</a></li>
-    <!-- https://www.lucadivita.it/it/https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali -->
-<li><a href="https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali">https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali</a></li>
-    <!-- https://www.lucadivita.it/it/https://it.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%C2%B7_%C2%B7_%C2%B7 -->
-<li><a href="https://it.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%C2%B7_%C2%B7_%C2%B7">https://it.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%C2%B7_%C2%B7_%C2%B7</a></li>
-    <!-- https://www.lucadivita.it/it/https://github.com/lucadivit/NeuralODEBlog -->
-<li><a href="https://github.com/lucadivit/NeuralODEBlog">https://github.com/lucadivit/NeuralODEBlog</a></li>
-</ul>
-<hr />
+    <h3 id="Riferimenti">
+        Riferimenti
+        <a class="headerlink" href="#Riferimenti" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Coefficiente_angolare">https://it.wikipedia.org/wiki/Coefficiente_angolare</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Regole_di_derivazione">https://it.wikipedia.org/wiki/Regole_di_derivazione</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali">https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%C2%B7_%C2%B7_%C2%B7">https://it.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%C2%B7_%C2%B7_%C2%B7</a>
+        </li>
+        <li>
+            <a href="https://github.com/lucadivit/NeuralODEBlog">https://github.com/lucadivit/NeuralODEBlog</a>
+        </li>
+    </ul>
 </section>
         </div>
         <section id="article-sidebar" class="span2">
