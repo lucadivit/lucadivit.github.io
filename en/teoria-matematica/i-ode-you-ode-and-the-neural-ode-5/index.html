@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4, h5',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="Here we are. We&#39;ve reached the fifth and final part of the NODE series. Though take that statement with a grain of salt, if I run out of space, you might get a sixth one too. In any case, in this (hopefully) final part, we&#39;ll look at some code and …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="deep_learning, math, neural_ode, neural_network, differential_equation, ode, theory, numeric_methods, Teoria & Matematica, " />
+
+<meta property="og:title" content="Io ODO, Tu ODI e la Neural ODE - 5 "/>
+<meta property="og:url" content="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/" />
+<meta property="og:description" content="Here we are. We&#39;ve reached the fifth and final part of the NODE series. Though take that statement with a grain of salt, if I run out of space, you might get a sixth one too. In any case, in this (hopefully) final part, we&#39;ll look at some code and …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-10-01T00:00:00+02:00" />
+<meta name="twitter:title" content="Io ODO, Tu ODI e la Neural ODE - 5 ">
+<meta name="twitter:description" content="Here we are. We&#39;ve reached the fifth and final part of the NODE series. Though take that statement with a grain of salt, if I run out of space, you might get a sixth one too. In any case, in this (hopefully) final part, we&#39;ll look at some code and …">
+
+        <title>Io ODO, Tu ODI e la Neural ODE - 5  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/en/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/index.html">About Me</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/latest.html">
+                                        Latest
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/categories.html">
+                                            Categories
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/archives.html">
+                                            Archives
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/en/pages/contatti/">Contacts</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li>
+                                            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li class="active">
+                                            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">
+                Io ODO, Tu ODI e la Neural ODE - 5
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contents</h4>
+            <div id="toc-list"></div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Here we are. We've reached the <strong>fifth</strong> and final part of the NODE series. Though take that statement with a 
+grain of salt, if I run out of space, you might get a sixth one too. In any case, in this (hopefully) final part, 
+we'll look at some code and an actual application of a NODE. Before we begin, if you've landed on this 
+page without reading the <strong>previous</strong> ones, I strongly recommend going back and checking them out. 
+You can find the links to the earlier articles <a href="#Related%20Posts"><strong>here</strong></a>. With that said, let's dive in.</p>
+<h3 id="from-node-to-code">From NODE to Code<a class="headerlink" href="#from-node-to-code" title="Permanent link"> </a></h3>
+<p>If there's one thing we've learned (or at least should have), it's that NODEs differ from standard neural 
+networks not so much in terms of <strong>architecture</strong>, but in the way these architectures are <strong>used</strong>. With 
+that in mind, let's not be discriminatory. Don't treat NODEs any differently, they can do everything a 
+classical neural network can do. They can be used for classification problems, regression, and even generation. 
+That said, due to their <strong>continuous nature</strong>, they are naturally better suited for certain use cases, 
+though there's nothing stopping you from using them whenever, however, and for whatever you want. 
+I’m certainly not going to stop you. In the examples I’ll show, I’ll use them in their natural 
+habitat: <strong>forecasting</strong>, and I’ll compare the results with those produced by a classical neural network.</p>
+<h4 id="again-lotka-volterra">(Again) Lotka-Volterra<a class="headerlink" href="#again-lotka-volterra" title="Permanent link"> </a></h4>
+<p>Let’s start with this first use case. Suppose we have a <strong>Time Series</strong>, whose nature is unknown to us. 
+All we know is that we have a list of numbers thrown together. We know what those numbers represent, 
+but shhh, the NODE has no idea what they <strong>mean</strong>. This list of numbers is our starting point,
+the data we’re going to use to train our NODE. And since, unfortunately, this data doesn't 
+<strong>generate</strong> itself, we’ll have to create it manually. Wondering how? Nothing could be easier. 
+We’ll take our good old <strong>Lotka-Volterra</strong> dynamic model and feed it to an <strong>ODESolver</strong>. 
+If you don’t know how this model is defined, go check out <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">part 3</a>.</p>
+<p>But enough talk, let’s look at some code and create a <strong>class</strong> <code>LotkaVolterra</code> that extends a generic 
+<code>DatasetProvider</code>, where we define the system’s <strong>dynamics</strong> and how to <strong>generate</strong> the data.</p>
+<h5 id="dataset-creation">Dataset Creation<a class="headerlink" href="#dataset-creation" title="Permanent link"> </a></h5>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="n">LotkaVolterra</span><span class="p">(</span><span class="n">DatasetProvider</span><span class="p">)</span><span class="err">:</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="nl">n_train</span><span class="p">:</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"> </span><span class="nl">noise_std</span><span class="p">:</span><span class="w"> </span><span class="nc">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span>
+<span class="w">                 </span><span class="nl">t_train_range</span><span class="p">:</span><span class="w"> </span><span class="n">tuple</span><span class="o">[</span><span class="n">float, float</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">6.0</span><span class="p">),</span>
+<span class="w">                 </span><span class="nl">t_extra_range</span><span class="p">:</span><span class="w"> </span><span class="n">tuple</span><span class="o">[</span><span class="n">float, float</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span><span class="w"> </span><span class="mf">10.0</span><span class="p">),</span>
+<span class="w">                 </span><span class="nl">n_extra</span><span class="p">:</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="nl">n_resamp</span><span class="p">:</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span>
+<span class="w">                 </span><span class="nl">alpha</span><span class="p">:</span><span class="w"> </span><span class="nc">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5</span><span class="p">,</span><span class="w"> </span><span class="nl">beta</span><span class="p">:</span><span class="w"> </span><span class="nc">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">                 </span><span class="nl">delta</span><span class="p">:</span><span class="w"> </span><span class="nc">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.75</span><span class="p">,</span><span class="w"> </span><span class="nl">gamma</span><span class="p">:</span><span class="w"> </span><span class="nc">float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">                 </span><span class="nl">initial_values</span><span class="p">:</span><span class="w"> </span><span class="n">tuple</span><span class="o">[</span><span class="n">float, float</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">))</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">        </span><span class="n">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="n">initial_values</span><span class="o">=</span><span class="n">initial_values</span><span class="p">,</span><span class="w"> </span><span class="n">n_train</span><span class="o">=</span><span class="n">n_train</span><span class="p">,</span><span class="w"> </span><span class="n">noise_std</span><span class="o">=</span><span class="n">noise_std</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">t_train_range</span><span class="o">=</span><span class="n">t_train_range</span><span class="p">,</span><span class="w"> </span><span class="n">t_extra_range</span><span class="o">=</span><span class="n">t_extra_range</span><span class="p">,</span><span class="w"> </span><span class="n">n_extra</span><span class="o">=</span><span class="n">n_extra</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">n_resamp</span><span class="o">=</span><span class="n">n_resamp</span><span class="p">)</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">float</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">beta</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nc">float</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">delta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">float</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
+<span class="w">        </span><span class="n">self</span><span class="p">.</span><span class="n">gamma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">float</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+
+<span class="w">    </span><span class="p">...</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">dynamics</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="nl">t</span><span class="p">:</span><span class="w"> </span><span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="err">:</span><span class="w"> </span><span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">torch</span><span class="p">.</span><span class="nl">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="n">x1</span><span class="p">,</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">state</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="o">[</span><span class="n">1</span><span class="o">]</span>
+<span class="w">        </span><span class="n">x1dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">alpha</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">beta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x2</span>
+<span class="w">        </span><span class="n">x2dt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">delta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">gamma</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x2</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">torch</span><span class="p">.</span><span class="n">stack</span><span class="p">(</span><span class="o">[</span><span class="n">x1dt, x2dt</span><span class="o">]</span><span class="p">).</span><span class="k">to</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">_solve_at</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="nl">t_grid_np</span><span class="p">:</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="n">ndarray</span><span class="p">,</span><span class="w"> </span><span class="k">method</span><span class="err">:</span><span class="w"> </span><span class="nf">str</span><span class="p">,</span><span class="w"> </span><span class="nl">dynamics</span><span class="p">:</span><span class="w"> </span><span class="n">Callable</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="nl">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">        </span><span class="n">sol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">odeint</span><span class="p">(</span><span class="n">dynamics</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">x0_t</span><span class="p">,</span><span class="w"> </span><span class="n">t_tensor</span><span class="p">,</span><span class="w"> </span><span class="k">method</span><span class="o">=</span><span class="k">method</span><span class="p">,</span><span class="w"> </span><span class="n">rtol</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">r_tol</span><span class="p">,</span><span class="w"> </span><span class="n">atol</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">a_tol</span><span class="p">)</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">sol</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">__call__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">method</span><span class="err">:</span><span class="w"> </span><span class="nf">str</span><span class="p">,</span><span class="w"> </span><span class="nl">dynamics</span><span class="p">:</span><span class="w"> </span><span class="n">Callable</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nl">DataObject</span><span class="p">:</span>
+<span class="w">        </span><span class="n">t_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">self</span><span class="p">.</span><span class="n">t_train_range</span><span class="p">,</span><span class="w"> </span><span class="k">size</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">n_train</span><span class="p">))</span>
+<span class="w">        </span><span class="n">x_train_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_solve_at</span><span class="p">(</span><span class="n">t_grid_np</span><span class="o">=</span><span class="n">t_train</span><span class="p">,</span><span class="w"> </span><span class="k">method</span><span class="o">=</span><span class="k">method</span><span class="p">,</span><span class="w"> </span><span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">)</span>
+<span class="w">        </span><span class="n">x_train_noised</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_train_true</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">noise_std</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rng</span><span class="p">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">x_train_true</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">t_test_extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">self</span><span class="p">.</span><span class="n">t_extra_range</span><span class="p">,</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">n_extra</span><span class="p">)</span>
+<span class="w">        </span><span class="n">x_test_extra_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_solve_at</span><span class="p">(</span><span class="n">t_grid_np</span><span class="o">=</span><span class="n">t_test_extra</span><span class="p">,</span><span class="w"> </span><span class="k">method</span><span class="o">=</span><span class="k">method</span><span class="p">,</span><span class="w"> </span><span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">t_test_resamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">np</span><span class="p">.</span><span class="n">sort</span><span class="p">(</span><span class="n">rng</span><span class="p">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">*</span><span class="n">self</span><span class="p">.</span><span class="n">t_train_range</span><span class="p">,</span><span class="w"> </span><span class="k">size</span><span class="o">=</span><span class="n">self</span><span class="p">.</span><span class="n">n_resamp</span><span class="p">))</span>
+<span class="w">        </span><span class="n">x_test_resamp_true</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_solve_at</span><span class="p">(</span><span class="n">t_grid_np</span><span class="o">=</span><span class="n">t_test_resamp</span><span class="p">,</span><span class="w"> </span><span class="k">method</span><span class="o">=</span><span class="k">method</span><span class="p">,</span><span class="w"> </span><span class="n">dynamics</span><span class="o">=</span><span class="n">dynamics</span><span class="p">)</span>
+<span class="w">        </span><span class="n">x_test_resamp_noised</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x_test_resamp_true</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">noise_std</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rng</span><span class="p">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">x_test_resamp_true</span><span class="p">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_create_dict</span><span class="p">(</span><span class="n">t_train</span><span class="p">,</span><span class="w"> </span><span class="n">x_train_noised</span><span class="p">,</span><span class="w"> </span><span class="n">x_train_true</span><span class="p">,</span><span class="w"> </span><span class="n">t_test_extra</span><span class="p">,</span><span class="w"> </span><span class="n">x_test_extra_true</span><span class="p">,</span><span class="w"> </span><span class="n">t_test_resamp</span><span class="p">,</span><span class="w"> </span><span class="n">x_test_resamp_true</span><span class="p">,</span><span class="w"> </span><span class="n">x_test_resamp_noised</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">prepare_data</span><span class="p">(</span><span class="n">self</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="err">:</span><span class="w"> </span><span class="n">DataObject</span><span class="p">,</span><span class="w"> </span><span class="nl">shuffle</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span><span class="p">,</span><span class="w"> </span><span class="nl">use_noise</span><span class="p">:</span><span class="w"> </span><span class="n">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">True</span><span class="p">,</span><span class="w"> </span><span class="nl">train_K_max</span><span class="p">:</span><span class="w"> </span><span class="n">Optional</span><span class="o">[</span><span class="n">int</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">None</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nl">Loaders</span><span class="p">:</span>
+<span class="w">        </span><span class="k">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">train_K_max</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">None</span><span class="err">:</span>
+<span class="w">            </span><span class="n">ds_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_build_pairwise_transitions</span><span class="p">(</span><span class="k">data</span><span class="o">[</span><span class="n">"t_train"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="o">[</span><span class="n">"x_train_noised" if use_noise else "x_train_true"</span><span class="o">]</span><span class="p">,</span>
+<span class="w">                                                        </span><span class="k">data</span><span class="o">[</span><span class="n">"x_train_true"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="w">        </span><span class="k">else</span><span class="err">:</span>
+<span class="w">            </span><span class="n">ds_train</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_build_multi_horizon_transitions</span><span class="p">(</span><span class="k">data</span><span class="o">[</span><span class="n">"t_train"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="o">[</span><span class="n">"x_train_noised" if use_noise else "x_train_true"</span><span class="o">]</span><span class="p">,</span>
+<span class="w">                                                             </span><span class="k">data</span><span class="o">[</span><span class="n">"x_train_true"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">K_max</span><span class="o">=</span><span class="n">train_K_max</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="w">        </span><span class="k">out</span><span class="o">[</span><span class="n">"train"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">"dataset"</span><span class="err">:</span><span class="w"> </span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds_train</span><span class="p">,</span><span class="w"> </span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="w"> </span><span class="n">shuffle</span><span class="o">=</span><span class="n">shuffle</span><span class="p">)</span><span class="err">}</span>
+
+<span class="w">        </span><span class="n">ds_resamp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_build_pairwise_transitions</span><span class="p">(</span><span class="k">data</span><span class="o">[</span><span class="n">"t_test_resamp"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="o">[</span><span class="n">"x_test_resamp_noised" if use_noise else "x_test_resamp_true"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="o">[</span><span class="n">"x_test_resamp_true"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="w">        </span><span class="k">out</span><span class="o">[</span><span class="n">"resamp"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">"dataset"</span><span class="err">:</span><span class="w"> </span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds_resamp</span><span class="p">,</span><span class="w"> </span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="w"> </span><span class="n">shuffle</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="err">}</span>
+
+<span class="w">        </span><span class="n">ds_extra</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_build_pairwise_transitions</span><span class="p">(</span><span class="k">data</span><span class="o">[</span><span class="n">"t_test_extra"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="o">[</span><span class="n">"x_test_extra_true"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="k">data</span><span class="o">[</span><span class="n">"x_test_extra_true"</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+<span class="w">        </span><span class="k">out</span><span class="o">[</span><span class="n">"extra"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="ss">"dataset"</span><span class="err">:</span><span class="w"> </span><span class="n">DataLoader</span><span class="p">(</span><span class="n">ds_extra</span><span class="p">,</span><span class="w"> </span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="w"> </span><span class="n">shuffle</span><span class="o">=</span><span class="k">False</span><span class="p">)</span><span class="err">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">out</span>
+</code></pre></div>
+<p>Yes, I know, it's a lot of <strong>code</strong>. But let me explain. In the constructor, in addition to passing 
+the <strong>parameters</strong> needed to define the <strong>system</strong>, we also provide information about how we want our <strong>dataset</strong> to be built:</p>
+<ul>
+<li><code>t_train_range</code>: Represents the <strong>time range</strong> from which we want to draw the training and testing samples.</li>
+<li><code>n_train</code>: Indicates the <strong>number of training samples</strong> we want to generate.</li>
+<li><code>n_resamp</code>: Indicates the <strong>number of test samples</strong> we want to generate.</li>
+<li><code>noise_std</code>: Used to <strong>dirty up</strong> the train and test data. Because what’s life without a bit of challenge?</li>
+<li><code>t_extra_range</code>: Represents the time range for which we want to perform <strong>forecasting</strong>.</li>
+<li><code>n_extra</code>: Indicates the number of samples we want to predict in the forecast range.</li>
+</ul>
+<p>So if we consider the following lines:</p>
+<div class="highlight"><pre><span></span><code>DataCreator = LotkaVolterra
+params = {
+    "n_train": 350,
+    "noise_std": 0.01,
+    "t_train_range": (0.0, 12.0),
+    "t_extra_range": (12.0, 18.0),
+    "n_extra": 300,
+    "n_resamp": 200,
+}
+data_creator = DataCreator(**params)
+data = data_creator.prepare_data(data)
+</code></pre></div>
+<p>What we're asking for is a dataset composed of:</p>
+<ul>
+<li><span class="math">\(350\)</span> training samples <strong>randomly</strong> drawn from the time range <span class="math">\((0, 12)\)</span> seconds, along with their corresponding <strong>timestamps</strong>.</li>
+<li><span class="math">\(200\)</span> test samples <strong>randomly</strong> drawn from the time range <span class="math">\((0, 12)\)</span> seconds, along with their corresponding <strong>timestamps</strong>.</li>
+<li><span class="math">\(300\)</span> <strong>forecast</strong> samples in the range <span class="math">\((12, 18)\)</span> seconds (used only to check if predictions are correct), along with their corresponding <strong>timestamps</strong>.</li>
+</ul>
+<p>These datasets are structured like this:</p>
+<div class="highlight"><pre><span></span><code>idx   t_i      x_i                  t_next   x_next               dt      
+--------------------------------------------------------------------------------
+0     0.023    [ 1.986 -0.044]      0.118    [ 1.986 -0.235]      0.095   
+1     0.118    [ 1.968 -0.245]      0.159    [ 1.975 -0.314]      0.041   
+2     0.159    [ 1.986 -0.314]      0.160    [ 1.975 -0.317]      0.001   
+3     0.160    [ 1.971 -0.318]      0.200    [ 1.96  -0.394]      0.040   
+4     0.200    [ 1.988 -0.383]      0.211    [ 1.956 -0.415]      0.011   
+5     0.211    [ 1.948 -0.398]      0.306    [ 1.908 -0.593]      0.094 
+<span class="k">...</span>   ...      ...                  ...      ...                  ...
+</code></pre></div>
+<p>where:</p>
+<ul>
+<li><span class="math">\(t_i\)</span>: The <strong>current</strong> timestamp.</li>
+<li><span class="math">\(x_i\)</span>: The system <strong>state</strong> at the current timestamp, computed both with and without <strong>noise</strong> (for <code>train</code> and <code>test</code>).</li>
+<li><span class="math">\(t_{next}\)</span>: The <strong>next</strong> timestamp.</li>
+<li><span class="math">\(x_{next}\)</span>: The <strong>state</strong> at the next timestamp. In the case of <code>train</code>, this is the state <span class="math">\(K\)</span> <strong>steps ahead</strong>, where <span class="math">\(K\)</span> is a random integer.</li>
+<li><span class="math">\(dt\)</span>: The <strong>delta</strong> between the two timestamps.</li>
+</ul>
+<p>By plotting this data, we get the following image:</p>
+<p class="image-caption"><img alt="TrueData" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_5/dataset_LotkaVolterra_train.svg"/>
+Figure 1. True and Noisy Training Dataset</p>
+<p>If you're wondering how we actually solve the dynamics, we use the <code>odeint</code> method from the <a href="https://github.com/rtqichen/torchdiffeq"><strong>torchdiffeq</strong></a> library,
+which provides <strong>high-level</strong> methods for working with NODEs. This method implements various ODE solvers,
+and in our case we used <a href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method"><strong>dopri5</strong></a>.</p>
+<h5 id="network-definition">Network Definition<a class="headerlink" href="#network-definition" title="Permanent link"> </a></h5>
+<p>Since the main goal is to compare results under <strong>equal conditions</strong>, we used two almost identical networks. Let’s see why they are <em>almost identical</em> 
+and not <em>completely identical</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="nx">def</span><span class="w"> </span><span class="nx">lotka_volterra_nets</span><span class="p">():</span>
+
+<span class="w">    </span><span class="nx">def</span><span class="w"> </span><span class="nx">create_net</span><span class="p">(</span><span class="nx">is_node</span><span class="p">:</span><span class="w"> </span><span class="kt">bool</span><span class="p">):</span>
+<span class="w">        </span><span class="nx">input_dim</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">LotkaVolterra</span><span class="p">.</span><span class="nx">get_dim</span><span class="p">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">is_node</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nx">LotkaVolterra</span><span class="p">.</span><span class="nx">get_dim</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">nn</span><span class="p">.</span><span class="nx">Sequential</span><span class="p">(</span>
+<span class="w">                </span><span class="nx">torch</span><span class="p">.</span><span class="nx">nn</span><span class="p">.</span><span class="nx">Linear</span><span class="p">(</span><span class="nx">input_dim</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">),</span>
+<span class="w">                </span><span class="nx">torch</span><span class="p">.</span><span class="nx">nn</span><span class="p">.</span><span class="nx">Tanh</span><span class="p">(),</span>
+<span class="w">                </span><span class="nx">torch</span><span class="p">.</span><span class="nx">nn</span><span class="p">.</span><span class="nx">Linear</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">),</span>
+<span class="w">                </span><span class="nx">torch</span><span class="p">.</span><span class="nx">nn</span><span class="p">.</span><span class="nx">Tanh</span><span class="p">(),</span>
+<span class="w">                </span><span class="nx">torch</span><span class="p">.</span><span class="nx">nn</span><span class="p">.</span><span class="nx">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="nx">LotkaVolterra</span><span class="p">.</span><span class="nx">get_dim</span><span class="p">()),</span>
+<span class="w">            </span><span class="p">)</span>
+
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="nx">SimpleNet</span><span class="p">(</span><span class="nx">nn</span><span class="p">.</span><span class="nx">Module</span><span class="p">):</span>
+
+<span class="w">        </span><span class="nx">def</span><span class="w"> </span><span class="nx">__init__</span><span class="p">(</span><span class="kp">self</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="nx">kwargs</span><span class="p">):</span>
+<span class="w">            </span><span class="nx">super</span><span class="p">().</span><span class="nx">__init__</span><span class="p">(</span><span class="o">*</span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="nx">kwargs</span><span class="p">)</span>
+<span class="w">            </span><span class="kp">self</span><span class="p">.</span><span class="nx">ann</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">create_net</span><span class="p">(</span><span class="nx">is_node</span><span class="p">=</span><span class="nx">False</span><span class="p">)</span>
+<span class="w">            </span><span class="kp">self</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">LotkaVolterra</span><span class="p">.</span><span class="nx">get_name</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"_MLP"</span>
+
+<span class="w">        </span><span class="nx">def</span><span class="w"> </span><span class="nx">forward</span><span class="p">(</span><span class="kp">self</span><span class="p">,</span><span class="w"> </span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">dt</span><span class="p">):</span>
+<span class="w">            </span><span class="nx">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">torch</span><span class="p">.</span><span class="nx">cat</span><span class="p">([</span><span class="nx">x</span><span class="p">,</span><span class="w"> </span><span class="nx">dt</span><span class="p">],</span><span class="w"> </span><span class="nx">dim</span><span class="p">=</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kp">self</span><span class="p">.</span><span class="nx">ann</span><span class="p">(</span><span class="nx">z</span><span class="p">)</span>
+
+<span class="w">    </span><span class="kd">class</span><span class="w"> </span><span class="nx">NODE</span><span class="p">(</span><span class="nx">nn</span><span class="p">.</span><span class="nx">Module</span><span class="p">):</span>
+
+<span class="w">        </span><span class="nx">def</span><span class="w"> </span><span class="nx">__init__</span><span class="p">(</span><span class="kp">self</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="nx">kwargs</span><span class="p">):</span>
+<span class="w">            </span><span class="nx">super</span><span class="p">().</span><span class="nx">__init__</span><span class="p">(</span><span class="o">*</span><span class="nx">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="nx">kwargs</span><span class="p">)</span>
+<span class="w">            </span><span class="kp">self</span><span class="p">.</span><span class="nx">ann</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">create_net</span><span class="p">(</span><span class="nx">is_node</span><span class="p">=</span><span class="nx">True</span><span class="p">)</span>
+<span class="w">            </span><span class="kp">self</span><span class="p">.</span><span class="nx">method</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">LotkaVolterra</span><span class="p">.</span><span class="nx">get_method</span><span class="p">()</span>
+<span class="w">            </span><span class="kp">self</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">LotkaVolterra</span><span class="p">.</span><span class="nx">get_name</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"_NODE"</span>
+<span class="w">            </span><span class="kp">self</span><span class="p">.</span><span class="nx">h</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="m m-Double">0.01</span>
+
+<span class="w">        </span><span class="nx">def</span><span class="w"> </span><span class="nx">forward</span><span class="p">(</span><span class="kp">self</span><span class="p">,</span><span class="w"> </span><span class="nx">t</span><span class="p">,</span><span class="w"> </span><span class="nx">state</span><span class="p">):</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kp">self</span><span class="p">.</span><span class="nx">ann</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">SimpleNet</span><span class="p">(),</span><span class="w"> </span><span class="nx">NODE</span><span class="p">()</span>
+</code></pre></div>
+<p>While for NODEs the use of time <span class="math">\(t\)</span> is <strong>implicit</strong> in their nature, this is not the case for standard neural networks. 
+For the latter, we need to explicitly include the time factor, and we do so by treating it as an <strong>additional feature</strong>. 
+As a result, the classical neural network, called <code>SimpleNet</code>, has one extra input dimension. </p>
+<p>The <code>NODE</code>, on the other hand, accepts the parameter <span class="math">\(t\)</span> in its forward method, 
+but this is only used in computing the <strong>dynamics</strong>, not directly as a feature. So it’s <strong>necessary</strong> to pass it, but it 
+doesn’t affect the number of <strong>neurons</strong>, which remains equal to the number of <strong>variables</strong> in the problem. 
+Since we now have two architectures that are nearly, but not entirely identical, I had to settle for 
+two different <strong>weight initializations</strong>. You can’t have it all in life, sadly. But hey, at least 
+I still have my health (for now). One last note. No, I’m not crazy, if I used <code>Tanh</code> as the <strong>activation</strong> 
+functions, it’s because <code>torchdiffeq</code> <a href="https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md"><strong>explicitly advises</strong> against</a><br/>
+using non-smooth activations.</p>
+<p>Now that we have two ready-to-go models and a dataset to challenge them with, let’s finally move on to <strong>training</strong>.</p>
+<h5 id="training">Training<a class="headerlink" href="#training" title="Permanent link"> </a></h5>
+<p>Since the networks have a different <strong>nature</strong>, their training process will also differ. 
+At a high level, not by much actually, but at a low level, well... go read <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">Part Four</a> 
+and the series on <a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/">neurons</a> to really understand
+just how fundamentally different they are. Luckily for us, someone already did the dirty work behind the scenes, 
+so this <strong>high-level</strong> difference is hardly noticeable. Let’s take a look:</p>
+<div class="highlight"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">train_mlp</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">train_loader</span><span class="p">,</span><span class="w"> </span><span class="n">resamp_loader</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="n">start_epoch</span><span class="p">,</span><span class="w"> </span><span class="n">start_epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">epochs</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="n">train</span><span class="p">()</span>
+<span class="w">        </span><span class="n">epoch_loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">x_next</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_next</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">train_loader</span><span class="p">:</span>
+<span class="w">            </span><span class="n">opt</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+<span class="w">            </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">(</span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">dt</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x_next</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="w">            </span><span class="n">opt</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+<span class="w">            </span><span class="n">epoch_loss</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">loss</span><span class="p">.</span><span class="n">item</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">x_i</span><span class="p">.</span><span class="n">shape</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">x_i</span><span class="p">.</span><span class="n">ndim</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">train_avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">epoch_loss</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">.</span><span class="n">dataset</span><span class="p">)</span>
+<span class="w">        </span><span class="n">val_avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eval_mlp</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">resamp_loader</span><span class="p">,</span><span class="w"> </span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="w">        </span><span class="p">...</span>
+
+<span class="n">def</span><span class="w"> </span><span class="n">train_node</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">train_loader</span><span class="p">,</span><span class="w"> </span><span class="n">resamp_loader</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">epoch</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="n">start_epoch</span><span class="p">,</span><span class="w"> </span><span class="n">start_epoch</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">epochs</span><span class="p">)</span><span class="err">:</span>
+<span class="w">        </span><span class="n">model</span><span class="p">.</span><span class="n">train</span><span class="p">()</span>
+<span class="w">        </span><span class="n">epoch_loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">x_i</span><span class="p">,</span><span class="w"> </span><span class="n">x_next</span><span class="p">,</span><span class="w"> </span><span class="n">_dt</span><span class="p">,</span><span class="w"> </span><span class="n">t_i</span><span class="p">,</span><span class="w"> </span><span class="n">t_next</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nl">train_loader</span><span class="p">:</span>
+<span class="w">            </span><span class="n">opt</span><span class="p">.</span><span class="n">zero_grad</span><span class="p">()</span>
+<span class="w">            </span><span class="n">preds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">[]</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="k">range</span><span class="p">(</span><span class="n">x_i</span><span class="p">.</span><span class="k">size</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="err">:</span>
+<span class="w">                </span><span class="n">tspan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">torch</span><span class="p">.</span><span class="n">stack</span><span class="p">((</span><span class="n">t_i</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">t_next</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">)).</span><span class="k">to</span><span class="p">(</span><span class="n">device</span><span class="o">=</span><span class="n">x_i</span><span class="p">.</span><span class="n">device</span><span class="p">,</span><span class="w"> </span><span class="n">dtype</span><span class="o">=</span><span class="n">x_i</span><span class="p">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="w">                </span><span class="n">x_T</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">odeint</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">x_i</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">tspan</span><span class="p">)</span><span class="o">[</span><span class="n">-1</span><span class="o">]</span>
+<span class="w">                </span><span class="n">preds</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_T</span><span class="p">)</span>
+<span class="w">            </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">torch</span><span class="p">.</span><span class="n">stack</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">crit</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x_next</span><span class="p">)</span>
+<span class="w">            </span><span class="n">loss</span><span class="p">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="w">            </span><span class="n">opt</span><span class="p">.</span><span class="n">step</span><span class="p">()</span>
+<span class="w">            </span><span class="n">epoch_loss</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">loss</span><span class="p">.</span><span class="n">item</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">x_i</span><span class="p">.</span><span class="n">shape</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">x_i</span><span class="p">.</span><span class="n">ndim</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="w">        </span><span class="n">train_avg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">epoch_loss</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nf">len</span><span class="p">(</span><span class="n">train_loader</span><span class="p">.</span><span class="n">dataset</span><span class="p">)</span>
+<span class="w">        </span><span class="n">val_avg</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">eval_node</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">loader</span><span class="o">=</span><span class="n">resamp_loader</span><span class="p">)</span>
+<span class="w">        </span><span class="p">...</span>
+</code></pre></div>
+<p>As you can see, when we train <code>SimpleNet</code> using the <code>train_mlp</code> function, we provide the data in <strong>batches</strong>. 
+This is because, in its typical use, a neural network can handle batch processing. So what we do is feed the network 
+batches of pairs <span class="math">\((x_i, dt)\)</span>. The model’s prediction <span class="math">\(y\)</span>, computed for each pair, represents the <strong>future state</strong> 
+of input <span class="math">\(x_i\)</span> after <span class="math">\(dt\)</span> seconds. The loss function, which is a 
+<a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html"><strong>Mean Squared Error (MSE)</strong></a>, 
+is calculated using the <strong>predicted state</strong> <span class="math">\(y\)</span> and the <strong>true next state</strong> <span class="math">\(x_{next}\)</span>.</p>
+<p>As for <code>NODE</code>, as shown, it uses the <strong><code>odeint</code> method</strong> internally, but instead of passing an ODE that describes 
+the dynamics, we pass in the <strong>neural network itself</strong>. The goal is for the network to <strong>learn</strong> the system’s 
+dynamics from the data, and thus be able to <strong>accurately predict how the system will evolve</strong>. While in <code>SimpleNet</code>, 
+the time difference is explicitly provide, enabling batch processing, this concept <strong>doesn't apply</strong> to NODEs. That's 
+because time is <strong>implicitly</strong> handled by NODEs, but <code>odeint</code> works with <strong>only one time span</strong> at a time, 
+whereas each <span class="math">\(x_i\)</span> in the dataset corresponds to a different <span class="math">\(dt\)</span>. </p>
+<p>So, what happens <strong>repeatedly</strong> during training is the following:</p>
+<ol>
+<li>We take the state <span class="math">\(x_i\)</span> as the <strong>initial state</strong>.  </li>
+<li>We take the <strong>time instant</strong> <span class="math">\(t_i\)</span> associated with state <span class="math">\(x_i\)</span>.  </li>
+<li>We take the <strong>final time instant</strong> <span class="math">\(t_{next}\)</span> associated with the target state <span class="math">\(x_{next}\)</span>.  </li>
+<li>We <strong>integrate</strong> the dynamics <span class="math">\(f\)</span>, represented by the <code>NODE</code> network, from the initial time <span class="math">\(t_i\)</span> to the final time <span class="math">\(t_{next}\)</span>, using <span class="math">\(x_i\)</span> as the initial condition.  </li>
+<li>We take the <strong>final state</strong> <span class="math">\(x_T\)</span>, which represents the predicted value.</li>
+</ol>
+<p>These steps are repeated for all samples in the dataset, and once the cycle is completed, we compute the MSE loss using the <strong>predicted states</strong> <span class="math">\(x_T\)</span> and the <strong>true states</strong> <span class="math">\(x_{next}\)</span>.<br/>
+Training the networks for <span class="math">\(100\)</span> epochs, the output of this phase looks something like:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Loading</span><span class="w"> </span><span class="n">Dataset</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">LotkaVolterra</span>
+<span class="o">[</span><span class="n">ckpt</span><span class="o">]</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">epoch</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span><span class="w"> </span><span class="n">train</span><span class="o">=</span><span class="mf">3.042975</span><span class="p">,</span><span class="w"> </span><span class="n">resamp</span><span class="o">=</span><span class="mf">2.176756</span>
+<span class="n">Epoch</span><span class="w"> </span><span class="mi">000</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">3.042975</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">2.176756</span>
+<span class="o">[</span><span class="n">ckpt</span><span class="o">]</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">epoch</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="n">train</span><span class="o">=</span><span class="mf">1.603393</span><span class="p">,</span><span class="w"> </span><span class="n">resamp</span><span class="o">=</span><span class="mf">1.257801</span>
+<span class="n">Epoch</span><span class="w"> </span><span class="mi">001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">1.603393</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">1.257801</span>
+<span class="o">[</span><span class="n">ckpt</span><span class="o">]</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">epoch</span><span class="w"> </span><span class="mi">2</span><span class="err">:</span><span class="w"> </span><span class="n">train</span><span class="o">=</span><span class="mf">0.689440</span><span class="p">,</span><span class="w"> </span><span class="n">resamp</span><span class="o">=</span><span class="mf">0.469525</span>
+<span class="n">Epoch</span><span class="w"> </span><span class="mi">002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">0.689440</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">0.469525</span>
+<span class="p">...</span>
+<span class="n">Epoch</span><span class="w"> </span><span class="mi">099</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">0.003902</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">8.248611</span>
+<span class="n">MLP</span><span class="w"> </span><span class="n">Train</span><span class="w"> </span><span class="n">Done</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mf">31.057</span><span class="n">s</span>
+<span class="p">...</span>
+<span class="o">[</span><span class="n">ckpt</span><span class="o">]</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">epoch</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span><span class="w"> </span><span class="n">train</span><span class="o">=</span><span class="mf">0.007876</span><span class="p">,</span><span class="w"> </span><span class="n">resamp</span><span class="o">=</span><span class="mf">0.563527</span>
+<span class="n">Epoch</span><span class="w"> </span><span class="mi">000</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">0.007876</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">0.563527</span>
+<span class="o">[</span><span class="n">ckpt</span><span class="o">]</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">epoch</span><span class="w"> </span><span class="mi">1</span><span class="err">:</span><span class="w"> </span><span class="n">train</span><span class="o">=</span><span class="mf">0.007059</span><span class="p">,</span><span class="w"> </span><span class="n">resamp</span><span class="o">=</span><span class="mf">0.510813</span>
+<span class="n">Epoch</span><span class="w"> </span><span class="mi">001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">0.007059</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">0.510813</span>
+<span class="n">Epoch</span><span class="w"> </span><span class="mi">002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">0.006362</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">0.537184</span>
+<span class="p">...</span>
+<span class="n">Epoch</span><span class="w"> </span><span class="mi">099</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">0.000170</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">0.038154</span>
+<span class="n">NODE</span><span class="w"> </span><span class="n">Train</span><span class="w"> </span><span class="n">Done</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mf">512.356</span><span class="n">s</span>
+</code></pre></div>
+<p>We immediately notice that the NODE took not just longer, but <strong>much</strong> longer than the traditional network. 
+If you're wondering why, well, you probably haven't read the <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">fourth part</a>. 
+But let’s not just stick to numbers, let’s see with our <strong>own eyes</strong> how the training went. 
+Below is a real-time visual result of the <strong>training process</strong> for both models:</p>
+<p class="image-caption"><img alt="LVMLP" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_5/lv_mlp.gif"/><br/>
+Figure 2. Training on Lotka-Volterra with <code>SimpleNet</code></p>
+<p class="image-caption"><img alt="LVNODE" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_5/lv_node.gif"/><br/>
+Figure 3. Training on Lotka-Volterra with <code>NODE</code></p>
+<p>Even from these gifs, it’s clear that with just <span class="math">\(100\)</span> epochs, the <code>NODE</code> appears to have 
+<strong>grasped the dynamics</strong> much better than <code>SimpleNet</code>. But training alone isn't enough. 
+Let's now see how these models perform when we test them <strong>outside</strong> the training range.</p>
+<h5 id="forecast">Forecast<a class="headerlink" href="#forecast" title="Permanent link"> </a></h5>
+<p>During training, we taught or at least tried to teach, the <code>NODE</code> and <code>SimpleNet</code> models to follow the behavior of a 
+dynamic system. Yes, it was the Lotka-Volterra system, but the networks don’t know that. All they saw was a 
+list of <strong>randomly sampled</strong> values over time. But how can we verify whether they actually <strong>understood</strong> 
+anything? For all we know, they might have just memorized the <code>train</code> and <code>test</code> sets without being able 
+to <strong>generalize</strong>. What we want to verify is:</p>
+<blockquote>
+<p>Given samples from <span class="math">\((0, \, 12)\)</span> seconds, can I predict the behavior beyond <span class="math">\(12\)</span> seconds?</p>
+</blockquote>
+<p>To do this, we need to proceed in two <strong>different</strong> ways for <code>SimpleNet</code> and <code>NODE</code>. That’s because while 
+forward prediction is implicit for NODEs, it’s not for traditional networks. For <code>SimpleNet</code>, then, 
+we use an <strong>autoregressive</strong> approach, feeding the predicted state back in as input to <strong>estimate</strong> the next state. 
+Let’s take a look at what that means in code:</p>
+<div class="highlight"><pre><span></span><code><span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">predict_mlp</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="o">...</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x_i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t_grid</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">t_grid</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t_grid</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+        <span class="n">traj</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">traj</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">pred</span><span class="p">,</span> <span class="n">tgt</span>
+
+<span class="nd">@torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">predict_node</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">loader</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="o">...</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x_i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">traj</span> <span class="o">=</span> <span class="n">odeint</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">t_grid</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">method</span><span class="p">)</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="n">traj</span><span class="p">,</span> <span class="n">tgt</span>
+</code></pre></div>
+<p>In the <code>predict_mlp</code> function, used for making <strong>predictions</strong> with <code>SimpleNet</code>, we start with an initial value say, 
+the state <span class="math">\(x\)</span> at <span class="math">\(t = 12\)</span> seconds. We make a prediction using <span class="math">\(x\)</span> as <strong>input</strong> and moving <strong>forward</strong> by a 
+time <span class="math">\(dt\)</span>. The output, i.e. the state at time <span class="math">\(dt\)</span>, is then used as the <strong>input</strong> to predict the state at 
+the <strong>next</strong> <span class="math">\(dt\)</span>. Since we want predictions over the range <span class="math">\((12, 18)\)</span> seconds, this loop 
+continues until we reach <span class="math">\(t = 18\)</span>. This kind of iterative prediction is <strong>fragile</strong>: each error 
+<strong>propagates over time</strong>, making <strong>generalization</strong> harder.</p>
+<p>As for the <code>NODE</code>, it makes things much simpler. Because of its very nature, when we <strong>integrate</strong> from <span class="math">\(12\)</span> to <span class="math">\(18\)</span> 
+seconds, we’re computing the <strong>dynamics</strong>, and thus <strong>all the states</strong> within that time window. 
+In practice, it’s enough to call <code>odeint</code> once with all the time steps in the desired range, and the
+model returns the <strong>entire predicted trajectory</strong>. But enough talk, let’s see how our networks actually performed 
+in <strong>predicting the future</strong>.</p>
+<p class="image-caption"><img alt="LVMLPPred" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_5/LotkaVolterra_predictions_mlp.svg"/><br/>
+Figure 4. Lotka-Volterra Forecast with <code>SimpleNet</code> </p>
+<p class="image-caption"><img alt="LVNODEPred" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_5/LotkaVolterra_predictions_node.svg"/><br/>
+Figure 5. Lotka-Volterra Forecast with <code>NODE</code> </p>
+<p>From the training videos, it was already clear that <code>SimpleNet</code> didn’t perform <strong>particularly well</strong>. 
+And looking at the forecast, we can safely say it <strong>didn’t get a thing</strong> its forecast is, frankly, <strong>atrocious</strong> by the 
+second step. On the other hand, <code>NODE</code> seems to have <strong>grasped the dynamics</strong> quite well, as it manages to make 
+<strong>accurate predictions</strong> for all states over a <strong>very wide</strong> time window.</p>
+<p>In conclusion, the NODE not only showed it could <strong>fit</strong> the data well,<br/>
+but also <strong>generalized</strong> effectively to a time window it had never seen before.<br/>
+Sure, NODEs take longer, but as someone once said: <strong>quality</strong> comes at a price.</p>
+<h4 id="the-harmonic-oscillator">The Harmonic Oscillator<a class="headerlink" href="#the-harmonic-oscillator" title="Permanent link"> </a></h4>
+<p>The second problem tackled is the <strong>harmonic oscillator</strong>. I won’t go over all the steps again since they are 
+essentially the <strong>same</strong> as those above, just with different data. In this paragraph, I’ll simply explain how 
+I transitioned from a <strong>physical problem</strong> to a <strong>mathematical model</strong>, and we’ll look only at the 
+<strong>forecasting results</strong>. </p>
+<p>Let’s start with the classic physics exercise involving a <strong>mass attached to a spring</strong>, as shown in the image below.</p>
+<p class="image-caption"><img alt="Oscillatore" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_5/oscillatore.png"/><br/>
+Figure 6. Mass Attached to a Spring </p>
+<p>If you try to <strong>pull and release</strong> the mass, it will <strong>oscillate</strong> around its equilibrium point until it 
+returns to the <strong>stable state</strong> where it's at rest. This motion is called a harmonic oscillator. 
+Let’s look at the <strong>physical laws</strong> behind it. From Newton’s law, we know that force equals mass times acceleration. 
+But what is acceleration? From <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Part 1</a>, we know that velocity 
+is the first derivative of position with respect to time. Since acceleration is the first derivative of velocity 
+with respect to time, we then have that acceleration is the <strong>second derivative</strong> of position with respect to time.</p>
+<p>In the image above, we do have a notion of position. It’s the <strong>distance</strong> between the <strong>mass</strong> <span class="math">\(m\)</span> 
+and its <strong>equilibrium point</strong>, denoted by <span class="math">\(x\)</span>. So we write:</p>
+<div class="math">$$
+F_{tot} = m \cdot a = m \frac{d^{2}x(t)}{dt^{2}}
+$$</div>
+<p>But from <strong>Hooke’s Law</strong> we know that the <strong>elastic force</strong> is a force opposite to the displacement, 
+dependent on the spring’s <strong>elastic constant</strong> <span class="math">\(k\)</span> and the displacement itself. So we can write:</p>
+<div class="math">$$
+F_{el} = -k \cdot x(t)
+$$</div>
+<p>Thus, if there are no other forces at play, the <strong>total force</strong> is just the elastic component. Hence:</p>
+<div class="math">$$
+F_{tot} = F_{el} \Rightarrow m \frac{d^{2}x(t)}{dt^{2}} = -k \cdot x(t)
+$$</div>
+<p>Now suppose the mass is sitting on a <strong>plastic floor</strong> that introduces significant <strong>friction</strong>. 
+By definition, a frictional force is equal to <strong>velocity</strong> times a <strong>friction coefficient</strong>. Velocity, as we’ve 
+said, is the first derivative of position with respect to time. Moreover, since it’s a <strong>dissipative</strong> force, 
+it subtracts energy from the system. Therefore, we write:</p>
+<div class="math">$$
+F_{att} = - \beta \cdot \frac{dx(t)}{dt}
+$$</div>
+<p>Including this force in the system, we now have:</p>
+<div class="math">$$
+F_{tot} = F_{el} + F_{att} \Rightarrow m \frac{d^{2}x(t)}{dt^{2}} = -k \cdot x(t) - \beta \cdot \frac{dx(t)}{dt}
+$$</div>
+<p>Which simplifies to:</p>
+<div class="math">$$
+\frac{d^{2}x(t)}{dt^{2}} = -\frac{k}{m} \cdot x(t) - \frac{\beta}{m} \cdot \frac{dx(t)}{dt}
+$$</div>
+<p>Let’s define:</p>
+<div class="math">$$
+-\frac{k}{m} = \omega^2, \, \frac{\beta}{m} = \gamma
+$$</div>
+<p>Where <span class="math">\(\omega^2\)</span> is called the <strong>natural frequency of the oscillator</strong>, and <span class="math">\(\gamma\)</span> the <strong>damping coefficient</strong>. So:</p>
+<div class="math">$$
+\frac{d^{2}x(t)}{dt^{2}} + \gamma \frac{dx(t)}{dt}  + \omega^2 \cdot x(t) = 0
+$$</div>
+<p>We've reached the <strong>differential form</strong> of the harmonic oscillator. But we’re not done yet, because ODESolvers can 
+only handle <strong>first-order differential equations</strong>, so as it is, this equation isn’t usable. Let’s leverage a 
+<strong>property</strong> of differential equations, specifically the one that says:</p>
+<blockquote>
+<p>Any ordinary differential equation of order <span class="math">\(n\)</span> can be rewritten as an equivalent system of <span class="math">\(n\)</span> first-order equations.</p>
+</blockquote>
+<p>We’ll make a simple <strong>change of variables</strong>:</p>
+<div class="math">$$
+x_1(t) = x(t), \, x_2(t) = \frac{dx(t)}{dt} = \frac{dx_1(t)}{dt} \Rightarrow \frac{dx_2(t)}{dt} = \frac{dx^2(t)}{dt^2} = \frac{dx_1^2(t)}{dt^2}
+$$</div>
+<p>After this change of variables, we can write the second-order differential equation as two <strong>first-order 
+differential equations</strong>:</p>
+<div class="math">$$
+\begin{cases}
+\frac{dx_1(t)}{dt} = x_2(t) \\
+\frac{dx_2(t)}{dt} = - \omega^2 \cdot x_1(t) - \gamma \cdot x_2(t)
+\end{cases}
+$$</div>
+<p>This is a form that an ODESolver can handle, and it represents the <strong>dynamics we need to solve</strong>. In code, 
+this dynamic system becomes:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HarmonicOscillator</span><span class="p">(</span><span class="n">DatasetProvider</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_train</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="n">noise_std</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">t_train_range</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">),</span>
+                 <span class="n">t_extra_range</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">),</span> <span class="n">n_extra</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">n_resamp</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">omega</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">initial_values</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">initial_values</span><span class="o">=</span><span class="n">initial_values</span><span class="p">,</span> <span class="n">n_train</span><span class="o">=</span><span class="n">n_train</span><span class="p">,</span> <span class="n">noise_std</span><span class="o">=</span><span class="n">noise_std</span><span class="p">,</span>
+                         <span class="n">t_train_range</span><span class="o">=</span><span class="n">t_train_range</span><span class="p">,</span> <span class="n">t_extra_range</span><span class="o">=</span><span class="n">t_extra_range</span><span class="p">,</span> <span class="n">n_extra</span><span class="o">=</span><span class="n">n_extra</span><span class="p">,</span>
+                         <span class="n">n_resamp</span><span class="o">=</span><span class="n">n_resamp</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">dynamics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">x1dt</span> <span class="o">=</span> <span class="n">x2</span>
+        <span class="n">x2dt</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">omega</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">x2</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x1dt</span><span class="p">,</span> <span class="n">x2dt</span><span class="p">])</span>
+
+    <span class="o">...</span>
+</code></pre></div>
+<p>The rest, as they say, is history. So I'll just show the <strong>forecast</strong> plots:</p>
+<p class="image-caption"><img alt="HOMLPPred" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_5/HarmonicOscillator_predictions_mlp.svg"/>
+Figure 7. Harmonic Oscillator Forecast with <code>SimpleNet</code></p>
+<p class="image-caption"><img alt="HONODEPred" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_5/HarmonicOscillator_predictions_node.svg"/>
+Figure 8. Harmonic Oscillator Forecast with <code>NODE</code></p>
+<p>From these plots we can see that, once again, the NODE seems to have truly <strong>captured</strong> the dynamics, while the classic 
+network looks a <em>bit</em> confused.</p>
+<p>So to sum it all up, NODEs have proven their potential—especially in contexts involving <strong>continuous dynamics</strong>.</p>
+<p>Are they <strong>slow</strong>? Yes.  </p>
+<p>Are they <strong>heavy</strong> to integrate? Definitely.  </p>
+<p>Are they <strong>hard to tune</strong>? Also true.  </p>
+<p>But they <strong>do</strong> learn how a system evolves, and they do it well. With <strong>constant memory usage</strong>, <strong>simpler architectures</strong>, 
+and a remarkable ability to <strong>generalize</strong>.</p>
+<h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
+<p>We finally wrap up this series of articles on NODEs. It's been a long and, let's be honest, <strong>exhausting</strong> journey, 
+for both you and me. But hey, we walk away with a nice bundle of knowledge, right? Before closing, I’d like to 
+dot a few i’s on a couple of points. Starting with classic neural networks, which might have seemed a bit 
+<strong>neglected</strong> here. That’s not really the case. To keep the comparison fair, I used 
+<strong>just one training approach</strong>, but with the proper tuning, a classic network can perform <strong>really well</strong>.
+Now, about NODEs. Yes, this article series is over, but NODEs are just the foundation. 
+The ones that started it all. In this series, I used them for forecasting, but just like classic networks, 
+they can be used for classification, regression, generation... And beyond that: NODEs have inspired many other 
+fascinating architectures. From <strong>CNFs</strong> for image generation, 
+to <a href="https://arxiv.org/pdf/2006.04439"><strong>Liquid Neural Networks</strong></a> used in robotics and control, 
+and even to <a href="https://arxiv.org/pdf/2503.18181"><strong>Physics-Informed Neural Networks</strong></a> (Lagrangian Nets, 
+Hamiltonian Nets, etc.), which integrate physics to model complex systems. In short, there’s a lot more out there. 
+And each of these deserves its <strong>own deep dive</strong>. Who knows, maybe one day I’ll hit you with that too.</p>
+<p>That said, as always, I invite you to check out the full code <a href="https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5"><strong>here</strong></a> and give it a spin yourself.</p>
+<p>Until next time.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h3 id="Related Posts">
+        Related Posts
+        <a class="headerlink" href="#Related Posts" title="Permanent link"> </a>
+    </h3>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1">I ODE, You ODE and the Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="I ODE, You ODE and the Neural ODE - 2">I ODE, You ODE and the Neural ODE - 2</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="I ODE, You ODE and the Neural ODE - 3">I ODE, You ODE and the Neural ODE - 3</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" title="I ODE, You ODE and the Neural ODE - 4">I ODE, You ODE and the Neural ODE - 4</a></li>
+</ul>
+</section>
+<section class="references">
+    <h3 id="References">
+        References
+        <a class="headerlink" href="#References" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a>
+        </li>
+        <li>
+            <a href="https://github.com/rtqichen/torchdiffeq">https://github.com/rtqichen/torchdiffeq</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method">https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method</a>
+        </li>
+        <li>
+            <a href="https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md">https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md</a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/</a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/">https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/</a>
+        </li>
+        <li>
+            <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html">https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html</a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+        </li>
+        <li>
+            <a href="https://arxiv.org/pdf/2006.04439">https://arxiv.org/pdf/2006.04439</a>
+        </li>
+        <li>
+            <a href="https://arxiv.org/pdf/2503.18181">https://arxiv.org/pdf/2503.18181</a>
+        </li>
+        <li>
+            <a href="https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5">https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5</a>
+        </li>
+        <li>
+            <a href="http://eotvos.dm.unipi.it/corsi/Fisica1_1415/OscillatoreArmonico1e2.pdf">http://eotvos.dm.unipi.it/corsi/Fisica1_1415/OscillatoreArmonico1e2.pdf</a>
+        </li>
+        <li>
+            <a href="https://math.mit.edu/~stevenj/18.336/adjoint.pdf">https://math.mit.edu/~stevenj/18.336/adjoint.pdf</a>
+        </li>
+    </ul>
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2025-10-01T00:00:00+02:00">October 01, 2025</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://www.lucadivita.it/en/categories.html#teoria-matematica-ref">Teoria & Matematica</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/en/tags.html#deep_learning-ref">deep_learning
+                    <span class="superscript">8</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#differential_equation-ref">differential_equation
+                    <span class="superscript">5</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#math-ref">math
+                    <span class="superscript">5</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#neural_network-ref">neural_network
+                    <span class="superscript">8</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#neural_ode-ref">neural_ode
+                    <span class="superscript">5</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#numeric_methods-ref">numeric_methods
+                    <span class="superscript">4</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#ode-ref">ode
+                    <span class="superscript">5</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#theory-ref">theory
+                    <span class="superscript">5</span>
+</a></li>
+            </ul>
+<h4>Contacts</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>
