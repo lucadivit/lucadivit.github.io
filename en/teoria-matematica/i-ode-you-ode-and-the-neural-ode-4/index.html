@@ -344,9 +344,13 @@ Formula 4. Gradient of the Loss</p>
 <li><span class="math">\(\frac{dx}{d\theta}\)</span> is the contribution of the <strong>weights</strong> to the state <span class="math">\(x(t_i)\)</span></li>
 </ul>
 <p>Let’s focus on the quantity:</p>
+<p><a id="sensibilita"></a>
+</p>
 <div class="math">$$
 a(t) = \frac{dL}{dx(t_i)}
 $$</div>
+<p class="formula-caption">
+Formula 5. Sensitivity</p>
 <p>This value is also called the <strong>sensitivity</strong> of the Loss with respect to the state at time <span class="math">\(t\)</span>, and it represents the <em>instantaneous gradient</em>
 that <strong>evolves</strong> over time, that is, how each state impacts the error. It answers the question:</p>
 <blockquote>
@@ -398,7 +402,7 @@ Let’s add it:</p>
 \frac{da(t)}{dt} = - a(t) \cdot \frac{f(x(t), t, \theta)}{dx}
 $$</div>
 <p class="formula-caption">
-Formula 5. Differential Formulation of the Sensitivity</p>
+Formula 6. Differential Formulation of the Sensitivity</p>
 <p>Yes, I know, I made it sound like this just <em>happens</em>, maybe even a bit <strong>forced</strong>, but really, you should be thanking me for sparing you the hassle of more formulas.
 Still curious? You can find the proof for why we need the minus sign <a href="https://arxiv.org/pdf/2402.15141">here</a>. But back to us.
 From the fundamental theorem of calculus, we can write:</p>
@@ -408,7 +412,7 @@ From the fundamental theorem of calculus, we can write:</p>
 a(t_0) = a(t_N) + \int_{t_N}^{t_0} \frac{da(t)}{dt} dt = a(t_N) - \int_{t_N}^{t_0} a(t) \cdot \frac {f(x(t), t, \theta)}{dz} dt
 $$</div>
 <p class="formula-caption">
-Formula 6. Integral Formulation of Sensitivity</p>
+Formula 7. Integral Formulation of Sensitivity</p>
 <p>What we just introduced is called the <strong>Adjoint Method</strong>, and why it’s not only useful but <strong>indispensable</strong>, we’ll see very soon.
 Visually, what the adjoint method does is shown in the figure below:</p>
 <p class="image-caption"><img alt="AdjointNode" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_4/adjoint.svg"/>
@@ -423,7 +427,7 @@ If there's one thing we've learned, it's that we hate analytical integrals. So h
 a(t_0) = ODESolve \left( -a(t) \cdot \frac{df(x(t), t, \theta)}{dx}, \frac{dL}{dx(t_N)}, t_N, t_0 \right)
 $$</div>
 <p class="formula-caption">
-Formula 7. Numerical Formulation of Sensitivity</p>
+Formula 8. Numerical Formulation of Sensitivity</p>
 <p>where:</p>
 <ul>
 <li><span class="math">\(-a(t) \cdot \frac{df(x(t), t, \theta)}{dx}\)</span> is the <strong>dynamic</strong>.</li>
@@ -432,72 +436,93 @@ Formula 7. Numerical Formulation of Sensitivity</p>
 <li><span class="math">\(t_0\)</span> is the <strong>initial time</strong>, where we end the integration.</li>
 </ul>
 <h3 id="an-adjoint-to-rule-them-all">An Adjoint to Rule Them All<a class="headerlink" href="#an-adjoint-to-rule-them-all" title="Permanent link"> </a></h3>
-<p>If you’ve made it this far congratulations, but you’re probably more confused than before. Because, honestly, the adjoint method, as it stands now, seems pointless.
-So, to avoid any <strong>pitchforks</strong>, let’s make it meaningful.
-Let’s start again from the <a href="#formulazione-integrale-node">integral formulation of the neural ODE</a> and differentiate it with respect to the weights.
-We get:</p>
+<p>If you've made it this far, congratulations, but I imagine you're more confused than before. Because, in fact, the adjoint method as it stands 
+seems quite useless. So, to avoid <strong>lynching</strong>, let’s give all this some meaning. Let's start again from the <a href="#loss">formulation of the loss</a>. 
+The basics of mathematics tell us that whatever we do on the right, we must also do on the left, and everything will continue to hold. 
+So, we differentiate both sides with respect to time:</p>
 <div class="math">$$
-\frac{dx(t_N)}{d\theta} = \frac{d}{d\theta} \left( x(t_0) + \int_{t_0}^{t_N} f(x(t), t, \theta) dt \right)
+\frac{d}{dt} \left( \frac{dL}{d \theta} \right) = \frac{d}{dt} \left( \frac{\partial L}{\partial x(t)} \cdot \frac{\partial x(t)}{\partial \theta} \right)
 $$</div>
-<p>Since <span class="math">\(x(t_0)\)</span> is the usual known <strong>initial state</strong>, which doesn’t change over time, its value is <strong>constant</strong>, so (as you should know from earlier articles),
-its derivative is <strong>zero</strong>. Therefore:</p>
+<p>By Schwarz’s theorem we can write:</p>
 <div class="math">$$
-\frac{dx(t_0)}{d\theta} = 0 \Rightarrow \frac{dx(t_N)}{d\theta} = \int_{t_0}^{t_N} \frac{f(x(t), t, \theta)}{d\theta} dt
+\frac{d}{dt} \left( \frac{dL}{d \theta} \right) = \frac{d}{d\theta} \left( \frac{\partial L}{\partial x(t)} \cdot \frac{\partial x(t)}{\partial t} \right)
 $$</div>
-<p>Now let’s bring back the <a href="#loss">formulation of the error gradient</a>. From the previous formula, we have <span class="math">\(\frac{dx(t_N)}{d\theta}\)</span>,
-and from the earlier section we know <span class="math">\(\frac{dL}{dx(t)} = a(t)\)</span>, so we can write:</p>
+<p>From which, recalling <a href="#nn-differenziale">this equality</a> and <a href="#sensibilita">this other one</a>:</p>
+<div class="math">$$
+\frac{d}{dt} \left( \frac{dL}{d \theta} \right) = \frac{d}{d\theta} \left( a(t) \cdot f(x(t), t, \theta) \right)
+$$</div>
+<p>Integrating both sides over time gives:</p>
+<div class="math">$$
+\int_{t_0}^{t_N} \frac{dL}{d \theta} = \int_{t_0}^{t_N} a(t) \cdot \frac{\partial f(x(t), t, \theta)}{\partial \theta} dt
+$$</div>
+<p>But remember, we’re doing <strong>backpropagation</strong>. That means we’re starting from the <strong>final instant</strong>. 
+So, for the same reason as before, we must treat <strong>sensitivity</strong> as a negative quantity and <strong>invert</strong> the sign of the integral, 
+applying its <a href="https://www.cuemath.com/calculus/properties-of-integrals/">properties</a>:</p>
+<div class="math">$$
+-\int_{t_N}^{t_0} \frac{dL}{d \theta} = \int_{t_N}^{t_0} a(t) \cdot \frac{\partial f(x(t), t, \theta)}{\partial \theta} dt
+$$</div>
+<p>And thus, solving:</p>
+<div class="math">$$
+\frac{dL(t_N)}{d \theta} - \frac{dL(t_0)}{d \theta} = \int_{t_N}^{t_0} a(t) \cdot \frac{\partial f(x(t), t, \theta)}{\partial \theta} dt
+$$</div>
+<p>We know this gradient <strong>accumulates the contribution of the weights with respect to the loss</strong>. 
+Initially, this <em>container of contributions</em> is empty, and as we move backward through time, we can quantify and <strong>add</strong> them. 
+This means that:</p>
+<div class="math">$$
+\frac{dL(t_N)}{d \theta} = 0 
+$$</div>
+<p>so rewriting the equation above, we have:</p>
 <p><a id="loss-integrale"></a>
 </p>
 <div class="math">$$
-\frac{dL}{d\theta} = \frac{dL}{dx} \cdot \frac{dx}{d\theta} = - \int_{t_N}^{t_0} a(t) \cdot \frac{f(x(t), t, \theta)}{d\theta} dt
+\frac{dL(t_0)}{d \theta} = -\int_{t_N}^{t_0} a(t) \cdot \frac{\partial f(x(t), t, \theta)}{\partial \theta} dt
 $$</div>
 <p class="formula-caption">
-Formula 8. Integral Formulation of the Gradient</p>
-<p>We’ve now reached a <strong>new formulation of the error gradient</strong> that enables backpropagation.
-And what’s special about this formulation? It <strong>doesn’t depend on the internal states</strong>.
-And if you remember, that was exactly our problem.
-Since the neural network is hidden inside a solver, we don’t have access to the internal states.
-And even if we did find a way to store them, it wouldn’t be worth it from a memory perspective, remember, we’re doing hundreds of forward passes, which means hundreds of internal states.
-Same story again: we have an integral. So let’s once again bring in the solvers and write:</p>
+Formula 9. Integral Formulation of the Gradient</p>
+<p>We have thus reached a <strong>new formulation of the error gradient</strong> that enables backpropagation.<br/>
+And do you know what’s special about this formulation?<br/>
+That it <strong>does not depend on the internal states</strong>.<br/>
+And if you remember, that was exactly our problem. Since the neural network is hidden within a solver, we don’t have access to its internal states.<br/>
+Even if we could find a way to save them, it wouldn’t be memory-efficient, because remember, we have hundreds of forward passes, and therefore hundreds of internal states.<br/>
+Same story: we have an integral. So, once again, we call upon the solvers and write:</p>
 <p><a id="loss-numerica"></a>
 </p>
 <div class="math">$$
-\frac{dL}{d\theta} = ODESolve \left( -a(t) \cdot \frac{df(x(t), t, \theta)}{d\theta}, 0, t_N, t_0 \right)
+\frac{dL(t_0)}{d\theta} = ODESolve \left( -a(t) \cdot \frac{df(x(t), t, \theta)}{d\theta}, 0, t_N, t_0 \right)
 $$</div>
 <p class="formula-caption">
-Formula 9. Numerical Formulation of the Gradient</p>
-<p>For this ODESolver, the initial condition, at time <span class="math">\(t_N\)</span>, since we’re going backward in time is <span class="math">\(0\)</span>.
-That’s because <span class="math">\(\frac{dL}{d\theta}\)</span> is a gradient that <strong>accumulates</strong> the contribution of the weights to the Loss.
-At the start, this <em>container of contributions</em> is empty, and as we move backward in time we can quantify and <strong>add</strong> them.</p>
-<p>So, the <a href="#adjoint-numerico">ODESolver</a> for the sensitivity function allows us to compute the <strong>instantaneous sensitivity</strong>,
-which is used by the <a href="#loss-numerica">ODESolver</a> to compute the <strong>gradient function</strong>.
-One piece is still missing. What are the <strong>inputs</strong> to our <span class="math">\(f(x(t), t, \theta)\)</span>?
-We know they are the states <span class="math">\(x(t)\)</span>, but who gives us these states?
-We had them during the <strong>forward pass</strong>, since they’re computed by <a href="#formulazione-numerica-node">this ODESolver</a>,
-but as already said, we’re dealing with thousands of them, and storing them would require way too much memory.
-So how do we proceed?
-Well, surprise surprise... we use another ODE that solves the state backward.
-So if <a href="#formulazione-numerica-node">this ODESolver</a> did the forward pass, then the following one:</p>
+Formula 10. Numerical Formulation of the Gradient</p>
+<p>Since we started from <span class="math">\(t_N\)</span>, the value in <span class="math">\(\frac{dL(t_0)}{d\theta}\)</span> is the <strong>cumulative</strong> result of all the contributions gathered across time; 
+it is therefore the <strong>complete gradient</strong> of the loss with respect to the weights <span class="math">\(\theta\)</span>. This is precisely the value used to <strong>update the parameters</strong> 
+during the optimization process.</p>
+<p>Thus, the <a href="#adjoint-numerico">ODESolver</a> on the sensitivity function allows us to compute the <strong>instantaneous sensitivity</strong>, 
+which is then used by the <a href="#loss-numerica">ODESolver</a> to compute the <strong>gradient function</strong>. 
+One final piece remains: what are the <strong>inputs</strong> of our <span class="math">\(f(x(t), t, \theta)\)</span>? 
+We know they are the states <span class="math">\(x(t)\)</span>, but where do these states come from? 
+We had them during the <strong>forward</strong> phase, because they’re exactly what we computed with <a href="#formulazione-numerica-node">this ODESolver</a>. 
+But, as we’ve said over and over, there are thousands of them, and storing them all would take too much memory. 
+So how do we proceed? Well, once again… we use another ODE that solves our problem backward. 
+So if <a href="#formulazione-numerica-node">this ODESolver</a> performs the forward pass, then the following:</p>
 <p><a id="stato-numerico"></a>
 </p>
 <div class="math">$$
 x(t_0) = ODESolve \left( f(x(t), t, \theta), x(t_N), t_N, t_0 \right)
 $$</div>
 <p class="formula-caption">
-Formula 10. Numerical Formulation of the State in Backward</p>
-<p><em>allows us to retrace our states in reverse</em>. So once again we use the neural network to predict the state,
-but instead of going:</p>
+Formula 11. Numerical Formulation of the State in Backward</p>
+<p><em>retraces our states backward</em>.
+So we use the neural network again to predict the state, but instead of proceeding as</p>
 <div class="math">$$
-x_0 \longmapsto x_1 \longmapsto x_2 \cdots \longmapsto x_N
+x_0 \longmapsto x_1 \longmapsto x_2 \cdots \longmapsto \longmapsto x_N
 $$</div>
 <p>we go in reverse:</p>
 <div class="math">$$
 x_N \longmapsto x_{N-1} \longmapsto x_{N-2} \longmapsto \cdots \longmapsto x_0
 $$</div>
-<p>where <span class="math">\(x_N\)</span> is known because it’s the output from the ODESolver during the forward phase.
-So yes, computationally we have to solve another ODE, doing <span class="math">\(n\)</span> forward passes of the neural network,
-but in this way we <strong>instantaneously</strong> get the state <span class="math">\(x_i\)</span> to use for solving the <strong>sensitivity ODE</strong> and, consequently, the <strong>gradient ODE</strong>.
-And since this result is needed only for a <strong>single time instant</strong>, once it’s used for one step, we can discard it, keeping memory usage low.</p>
+<p>where <span class="math">\(x_N\)</span> is known, since it’s the output of the ODESolver from the forward phase.
+So yes, computationally we must solve another ODE by performing <span class="math">\(n\)</span> forward passes of the neural network, but this way we <strong>instantaneously</strong> 
+have the state <span class="math">\(x_i\)</span> needed to solve the ODE for <strong>sensitivity</strong>, and consequently, the one for the <strong>gradient</strong>.
+And since this result is only needed for a <strong>single instant in time</strong>, once it’s used for one step we can discard it, keeping memory usage minimal.</p>
 <h3 id="god-bless-recaps">God Bless Recaps<a class="headerlink" href="#god-bless-recaps" title="Permanent link"> </a></h3>
 <p>If you’ve made it this far congratulations, not because you’re the <strong>millionth</strong> visitor (in fact, you’re probably the second; I’m the first), but because
 I threw you into the Maenads and you came out as Orpheus. Not that that’s a good omen. Anyway, now that we have all the tools, let’s do a <strong>recap</strong>.</p>
@@ -672,6 +697,9 @@ In all other cases, they might just make your life more complicated.</p>
         </li>
         <li>
             <a href="https://arxiv.org/pdf/2402.15141">https://arxiv.org/pdf/2402.15141</a>
+        </li>
+        <li>
+            <a href="https://www.cuemath.com/calculus/properties-of-integrals/">https://www.cuemath.com/calculus/properties-of-integrals/</a>
         </li>
     </ul>
 </section>

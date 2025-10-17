@@ -298,7 +298,11 @@ Se <span class="math">\(\eta = 0\)</span> lo scalatore rimane immobile ed il nuo
  che matematicamente vuol dire <em>superare la zona dove l'errore era basso</em>.</li>
 <li><span class="math">\(-\frac{\partial L }{\partial w_i}\)</span>: E' la derivata dell'errore rispetto al peso, cioè la direzione in cui l’errore cresce o diminuisce.
 Il segno <strong>meno</strong> indica che vogliamo andare nella direzione che fa <strong>diminuire l’errore</strong>.
-Rappresenta la <em>capacità dello scalatore di intuire dove si scende e dove si sale</em>.</li>
+Rappresenta la <em>capacità dello scalatore di intuire dove si scende e dove si sale</em>. Infatti se:<ul>
+<li><span class="math">\(\frac{\partial L }{\partial w_i} &gt; 0\)</span>: all'aumentare di <span class="math">\(w_i\)</span>, l'errore <strong>aumenta</strong> e quindi vogliamo che <span class="math">\(w_i^{new}\)</span> diminuisca.</li>
+<li><span class="math">\(\frac{\partial L }{\partial w_i} &lt; 0\)</span>: all'aumentare di <span class="math">\(w_i\)</span>, l'errore <strong>diminuisce</strong> e quindi vogliamo che <span class="math">\(w_i^{new}\)</span> aumenti.</li>
+</ul>
+</li>
 </ul>
 <p>Graficamente possiamo rappresentarlo così, una <em>entità</em> che cerca sempre di puntare alle zone più basse del grafico.</p>
 <p class="image-caption"><img alt="GD" class="image" src="https://www.lucadivita.it/it/images/machine_learning/neurons_for_dummies_2/gd.png"/>

@@ -299,7 +299,11 @@ If <span class="math">\(\eta = 0\)</span> the climber stands still and the new w
 you’re stepping, mathematically it means <em>overshooting the region where the error was low</em>.</li>
 <li><span class="math">\(-\frac{\partial L }{\partial w_i}\)</span>: the derivative of the loss with respect to the weight that is, the direction in which the error increases or decreases. 
 The <strong>minus</strong> sign means we want to move in the direction that <strong>reduces the error</strong>. It represents the <em>climber’s ability to guess where the slope goes down 
-and where it goes up</em>.</li>
+and where it goes up</em>. Indeed:<ul>
+<li>If <span class="math">\(\frac{\partial L }{\partial w_i} &gt; 0\)</span>: as <span class="math">\(w_i\)</span> increases, the error <strong>increases</strong>, so we want <span class="math">\(w_i^{new}\)</span> to decrease.</li>
+<li>If <span class="math">\(\frac{\partial L }{\partial w_i} &lt; 0\)</span>: as <span class="math">\(w_i\)</span> increases, the error <strong>decreases</strong>, so we want <span class="math">\(w_i^{new}\)</span> to increase.</li>
+</ul>
+</li>
 </ul>
 <p>Graphically we can picture it as an <em>entity</em> that always aims for the lowest areas of the plot.</p>
 <p class="image-caption"><img alt="GD" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_2/gd.png"/>
