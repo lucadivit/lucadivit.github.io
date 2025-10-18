@@ -394,7 +394,9 @@ we have no information about the <strong>intermediate states</strong>, so backpr
 suppose you’re walking uphill and take a <em>step forward</em>. You’ve moved half a meter forward and find yourself <strong>higher up</strong>, say by <span class="math">\(5\%\)</span>. Now take that same exact step,
 but <em>backward</em>. You still move half a meter, still on a <span class="math">\(5\%\)</span> slope, but this time you’re going <strong>downhill</strong>, you’ve descended by <span class="math">\(5\%\)</span>, which means you’re at <span class="math">\(-5\%\)</span>
 relative to where you started. Mathematically, what we’re doing is ensuring that the derivative (i.e., the slope) remains <strong>consistent</strong>, it should correctly indicate not only
-how steep the change is, but also whether we’re going up or down. So, to go back in time from the final state while keeping the gradient coherent, we need a nice big <strong>minus sign</strong>.
+how steep the change is, but also whether we’re going up or down. In short, the error at time <span class="math">\(t_0\)</span> is <strong>zero</strong>, and as the dynamics evolve, it <strong>accumulates</strong> gradually 
+until reaching the final error at time <span class="math">\(t_N\)</span>. Starting from the final error and retracing our steps backward, we must <strong>subtract</strong> the individual <strong>components</strong> until we reach time <span class="math">\(t_0\)</span>, where it becomes zero again.
+So, to go back in time from the final state while keeping the gradient coherent, we need a nice big <strong>minus sign</strong>.
 Let’s add it:</p>
 <p><a id="adjoint-differenziale"></a>
 </p>

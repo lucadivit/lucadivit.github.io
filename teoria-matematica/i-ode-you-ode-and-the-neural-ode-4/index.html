@@ -390,7 +390,9 @@ ricordo che non abbiamo informazione sugli <strong>stati intermedi</strong>, qui
 stare camminando in salita e di fare un <em>passo in avanti</em>. Vi siete spostati di mezzo metro in avanti e vi trovate <strong>più in alto</strong>, diciamo del <span class="math">\(5\%\)</span>. Ora fate lo stesso identico passo, 
 ma <em>all'indietro</em>. Vi spostate sempre di mezzo metro, sempre con un dislivello del <span class="math">\(5\%\)</span> ma questa volta <strong>verso il basso</strong>, siete cioè scesi del <span class="math">\(5\%\)</span>, il che vuol dire che siete a <span class="math">\(-5\%\)</span> 
 rispetto a prima. Matematicamente quello che si sta facendo è far sì che la derivata (ossia la pendenza) rimanga <strong>coerente</strong>, cioè che indichi correttamente non solo
-quanto ci siamo spostati in pendenza, ma anche se si sta salendo o scendendo. Quindi, per poter tornare indietro nel tempo a partire dallo stato finale, ma mantenendo la coerenza del 
+quanto ci siamo spostati in pendenza, ma anche se si sta salendo o scendendo. Per farla breve, l'errore al tempo <span class="math">\(t_0\)</span> è <strong>nullo</strong>, e man mano che si procede con la dinamica se ne
+<strong>accumula</strong> un pochino fino ad arrivare all'errore finale al tempo <span class="math">\(t_N\)</span>. Partendo dall'errore finale, e tornando indietro sui nostri passi, dobbiamo <strong>sottrarre</strong> le singole <strong>componenti</strong>
+fino ad arrivare al tempo <span class="math">\(t_0\)</span> in cui torna ad essere nullo. Quindi, per poter tornare indietro nel tempo a partire dallo stato finale, ma mantenendo la coerenza del 
 gradiente, ci serve un bel <strong>segno meno</strong>. Aggiungiamolo:</p>
 <p><a id="adjoint-differenziale"></a>
 </p>
