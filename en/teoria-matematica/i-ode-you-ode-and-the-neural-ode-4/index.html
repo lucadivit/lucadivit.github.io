@@ -494,8 +494,8 @@ Same story: we have an integral. So, once again, we call upon the solvers and wr
 $$</div>
 <p class="formula-caption">
 Formula 10. Numerical Formulation of the Gradient</p>
-<p>Since we started from <span class="math">\(t_N\)</span>, the value in <span class="math">\(\frac{dL(t_0)}{d\theta}\)</span> is the <strong>cumulative</strong> result of all the contributions gathered across time; 
-it is therefore the <strong>complete gradient</strong> of the loss with respect to the weights <span class="math">\(\theta\)</span>. This is precisely the value used to <strong>update the parameters</strong> 
+<p>Since we started from <span class="math">\(t_N\)</span>, the value in <span class="math">\(\frac{dL(t_0)}{d\theta}\)</span> is the <strong>cumulative</strong> result of all the contributions gathered across time. 
+It is therefore the <strong>complete gradient</strong> of the loss with respect to the weights <span class="math">\(\theta\)</span>. This is precisely the value used to <strong>update the parameters</strong> 
 during the optimization process.</p>
 <p>Thus, the <a href="#adjoint-numerico">ODESolver</a> on the sensitivity function allows us to compute the <strong>instantaneous sensitivity</strong>, 
 which is then used by the <a href="#loss-numerica">ODESolver</a> to compute the <strong>gradient function</strong>. 
@@ -526,7 +526,7 @@ So yes, computationally we must solve another ODE by performing <span class="mat
 have the state <span class="math">\(x_i\)</span> needed to solve the ODE for <strong>sensitivity</strong>, and consequently, the one for the <strong>gradient</strong>.
 And since this result is only needed for a <strong>single instant in time</strong>, once it’s used for one step we can discard it, keeping memory usage minimal.</p>
 <h3 id="god-bless-recaps">God Bless Recaps<a class="headerlink" href="#god-bless-recaps" title="Permanent link"> </a></h3>
-<p>If you’ve made it this far congratulations, not because you’re the <strong>millionth</strong> visitor (in fact, you’re probably the second; I’m the first), but because
+<p>If you’ve made it this far congratulations, not because you’re the <strong>millionth</strong> visitor (in fact, you’re probably the second, I’m the first), but because
 I threw you into the Maenads and you came out as Orpheus. Not that that’s a good omen. Anyway, now that we have all the tools, let’s do a <strong>recap</strong>.</p>
 <p>Let’s start by looking at the following diagram that I so diligently sketched out for you:</p>
 <p class="image-caption"><img alt="Insieme" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_4/all.svg"/>

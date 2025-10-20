@@ -484,7 +484,7 @@ perché vi ricordo che abbiamo centinaia di forward, e quindi centinaia stati in
 $$</div>
 <p class="formula-caption">
 Formula 10. Formulazione Numerica del Gradiente</p>
-<p>Essendo partiti da <span class="math">\(t_N\)</span>, il valore in <span class="math">\(\frac{dL(t_0)}{d\theta}\)</span> è <strong>cumulativo</strong> dei contributi raccolti in tutti gli istanti temporali: è quindi il <strong>gradiente completo</strong> della loss rispetto i pesi <span class="math">\(\theta\)</span>;
+<p>Essendo partiti da <span class="math">\(t_N\)</span>, il valore in <span class="math">\(\frac{dL(t_0)}{d\theta}\)</span> è <strong>cumulativo</strong> dei contributi raccolti in tutti gli istanti temporali: è quindi il <strong>gradiente completo</strong> della loss rispetto i pesi <span class="math">\(\theta\)</span>.
 È proprio questo valore che viene utilizzato per <strong>aggiornare i parametri</strong> nel processo di ottimizzazione.</p>
 <p>Quindi, la <a href="#adjoint-numerico">ODESolver</a> sulla funzione sensibilità, ci permette di calcolare la <strong>sensibilità istantanea</strong> che viene utilizzata dalla <a href="#loss-numerica">ODESolver</a> per il calcolo
 della <strong>funzione gradiente</strong>. Manca un ultimo pezzo. Quali sono gli <strong>input</strong> della nostra <span class="math">\(f(x(t), t, \theta)\)</span>? Sappiamo che sono gli stati <span class="math">\(x(t)\)</span> ma chi ci fornisce questi stati?
