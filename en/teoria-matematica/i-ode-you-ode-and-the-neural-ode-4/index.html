@@ -144,14 +144,14 @@
 <p>Yes, I know, post-holiday slumps hit everyone hard. But hey, someone has to do the dirty work, right? So let's pick up, 
 after a few weeks' break, our delightful little chat about <strong>Neural ODEs</strong>, or <strong>NODEs</strong>. If you missed the earlier parts, 
 don't worry, they're linked at the end of the article. To recap quickly, we’ve already talked 
-about <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">differential and integral calculus</a>, 
-and <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">analytical</a> and 
-<a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">numerical</a> methods for 
+about <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">differential and integral calculus</a>, 
+and <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">analytical</a> and 
+<a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank">numerical</a> methods for 
 solving differential equations. Now, finally, it’s time to put it all together and 
 see how we arrive at the formulation of these blessed NODEs. So let’s begin...</p>
 <h3 id="from-discrete-to-continuous">From Discrete to Continuous<a class="headerlink" href="#from-discrete-to-continuous" title="Permanent link"> </a></h3>
 <p>There are many neural network architectures. Too many, in fact. Among them, there's one in particular known as
-<a href="https://arxiv.org/pdf/1512.03385"><strong>ResNet</strong></a>, or <strong>Residual Network</strong>. ResNets were a major 
+<a href="https://arxiv.org/pdf/1512.03385" target="_blank"><strong>ResNet</strong></a>, or <strong>Residual Network</strong>. ResNets were a major 
 breakthrough in the world of Deep Learning because they helped overcome certain training issues. What 
 kind of issues, you might ask? Well, here's the idea: to improve performance, a neural network typically 
 needs to be deeper. But the deeper it gets, the worse the performance becomes due to 
@@ -219,12 +219,12 @@ $$</div>
 x_{t} = x_{t-1} + h \cdot f(x_{t-1}, t, \theta_{t})
 $$</div>
 <p>Hopefully that’s clearer now. By now you should be familiar with the <strong>Euler formula</strong>. 
-If not, catch up <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">here</a>.</p>
+If not, catch up <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank">here</a>.</p>
 <p>From this formulation, we can write:</p>
 <div class="math">$$
 \frac{x_{t} - x_{t-1} }{h} = f(x_{t-1}, t, \theta_{t})
 $$</div>
-<p>This should also look familiar, it's the <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative">finite difference quotient</a>.
+<p>This should also look familiar, it's the <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative" target="_blank">finite difference quotient</a>.
 So, assuming we can control the value of <span class="math">\(h\)</span>, we can easily write:</p>
 <p><a id="nn-differenziale"></a>
 </p>
@@ -243,7 +243,7 @@ Figure 5. From Discrete to Continuous</p>
 </blockquote>
 <p>The answer, as always: <strong>we integrate</strong>.</p>
 <h3 id="integrate-it-away">Integrate It Away<a class="headerlink" href="#integrate-it-away" title="Permanent link"> </a></h3>
-<p>We've just obtained a neat <a href="#nn-differenziale">differential equation</a> that tells us <strong>how the state changes over time</strong>.
+<p>We've just obtained a neat <a href="#nn-differenziale" target="_blank">differential equation</a> that tells us <strong>how the state changes over time</strong>.
 Great, but what we really want to know is <strong>how much it changes</strong>, that is:</p>
 <blockquote>
 <p>If I start from <span class="math">\(x_0\)</span> at time <span class="math">\(t_0\)</span>, where will I be at time <span class="math">\(t_N\)</span>?</p>
@@ -261,7 +261,7 @@ No more list of layers, but a <em>continuous dynamic evolving over time</em>, dr
 And this <span class="math">\(f\)</span>, surprise surprise, is nothing but a neural network.</p>
 <p>The fun part begins. How do you <strong>analytically integrate</strong> a function <span class="math">\(f\)</span> that, let’s not forget, is a neural network packed with ReLUs, nonlinear layers, and scattered weights?</p>
 <p>Quick answer? <strong>You can’t</strong>.</p>
-<p>That’s why I wrote an entire article on <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/"><strong>numerical methods</strong></a>. I’m no amateur.
+<p>That’s why I wrote an entire article on <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank"><strong>numerical methods</strong></a>. I’m no amateur.
 And remember in those solvers, what was the parameter that controlled the <strong>integration step</strong>? Exactly... it was <span class="math">\(h\)</span>.
 So that idea we introduced in the previous paragraph, introducing an <span class="math">\(h\)</span> <strong>as small as we like</strong>, not only makes sense, it’s exactly what we do.</p>
 <h3 id="houston-we-have-a-problem-with-training">Houston, We Have a Problem... With Training<a class="headerlink" href="#houston-we-have-a-problem-with-training" title="Permanent link"> </a></h3>
@@ -361,12 +361,12 @@ So we can write:</p>
 <div class="math">$$
 \frac{da(t)}{dt} = \frac{d}{dt} \left( \frac{dL}{dx(t_i)} \right)
 $$</div>
-<p>By <a href="https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives">Schwarz’s theorem</a>, we can rewrite it as:</p>
+<p>By <a href="https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives" target="_blank">Schwarz’s theorem</a>, we can rewrite it as:</p>
 <div class="math">$$
 \frac{da(t)}{dt} = \frac{d}{dx(t_i)} \left( \frac{dL}{dt} \right)
 $$</div>
 <p>Now we’ve got the Loss as a function of time, but as we know, the <em>Loss is a function of the states</em>, and the <em>states are a function of time</em>,
-so we can apply the <a href="/en/machine-learning/neurons-for-dummies-3/#the-chain-rule">chain rule</a> and write:</p>
+so we can apply the <a href="/en/machine-learning/neurons-for-dummies-3/#the-chain-rule" target="_blank">chain rule</a> and write:</p>
 <div class="math">$$
 \frac{dL}{dt} = \frac{dL}{dx(t_i)}\frac{dx(t_i)}{dt}
 $$</div>
@@ -375,7 +375,7 @@ $$</div>
 \frac{da(t)}{dt} = \frac{d}{dx(t_i)} \left( \frac{dL}{dx(t_i)}\frac{dx(t_i)}{dt} \right)
 $$</div>
 <p>Amid this jungle of derivatives, you probably didn’t notice that part of this formula was already defined 
-<a href="#nn-differenziale">here</a>. So, replacing the notation for the <span class="math">\(i\)</span>-th state with a more general one, we can write:</p>
+<a href="#nn-differenziale" target="_blank">here</a>. So, replacing the notation for the <span class="math">\(i\)</span>-th state with a more general one, we can write:</p>
 <div class="math">$$
 \frac{da(t)}{dt} = \frac{dL}{dx(t)} \frac{f(x(t), t, \theta)}{dx}
 $$</div>
@@ -406,7 +406,7 @@ $$</div>
 <p class="formula-caption">
 Formula 6. Differential Formulation of the Sensitivity</p>
 <p>Yes, I know, I made it sound like this just <em>happens</em>, maybe even a bit <strong>forced</strong>, but really, you should be thanking me for sparing you the hassle of more formulas.
-Still curious? You can find the proof for why we need the minus sign <a href="https://arxiv.org/pdf/2402.15141">here</a>. But back to us.
+Still curious? You can find the proof for why we need the minus sign <a href="https://arxiv.org/pdf/2402.15141" target="_blank">here</a>. But back to us.
 From the fundamental theorem of calculus, we can write:</p>
 <p><a id="adjoint-integrale"></a>
 </p>
@@ -439,7 +439,7 @@ Formula 8. Numerical Formulation of Sensitivity</p>
 </ul>
 <h3 id="an-adjoint-to-rule-them-all">An Adjoint to Rule Them All<a class="headerlink" href="#an-adjoint-to-rule-them-all" title="Permanent link"> </a></h3>
 <p>If you've made it this far, congratulations, but I imagine you're more confused than before. Because, in fact, the adjoint method as it stands 
-seems quite useless. So, to avoid <strong>lynching</strong>, let’s give all this some meaning. Let's start again from the <a href="#loss">formulation of the loss</a>. 
+seems quite useless. So, to avoid <strong>lynching</strong>, let’s give all this some meaning. Let's start again from the <a href="#loss" target="_blank">formulation of the loss</a>. 
 The basics of mathematics tell us that whatever we do on the right, we must also do on the left, and everything will continue to hold. 
 So, we differentiate both sides with respect to time:</p>
 <div class="math">$$
@@ -449,7 +449,7 @@ $$</div>
 <div class="math">$$
 \frac{d}{dt} \left( \frac{dL}{d \theta} \right) = \frac{d}{d\theta} \left( \frac{\partial L}{\partial x(t)} \cdot \frac{\partial x(t)}{\partial t} \right)
 $$</div>
-<p>From which, recalling <a href="#nn-differenziale">this equality</a> and <a href="#sensibilita">this other one</a>:</p>
+<p>From which, recalling <a href="#nn-differenziale" target="_blank">this equality</a> and <a href="#sensibilita" target="_blank">this other one</a>:</p>
 <div class="math">$$
 \frac{d}{dt} \left( \frac{dL}{d \theta} \right) = \frac{d}{d\theta} \left( a(t) \cdot f(x(t), t, \theta) \right)
 $$</div>
@@ -671,9 +671,9 @@ In all other cases, they might just make your life more complicated.</p>
         <a class="headerlink" href="#Related Posts" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1">I ODE, You ODE and the Neural ODE - 1</a></li>
-<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="I ODE, You ODE and the Neural ODE - 2">I ODE, You ODE and the Neural ODE - 2</a></li>
-<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="I ODE, You ODE and the Neural ODE - 3">I ODE, You ODE and the Neural ODE - 3</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1" target="_blank">I ODE, You ODE and the Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="I ODE, You ODE and the Neural ODE - 2" target="_blank">I ODE, You ODE and the Neural ODE - 2</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="I ODE, You ODE and the Neural ODE - 3" target="_blank">I ODE, You ODE and the Neural ODE - 3</a></li>
 </ul>
 </section>
 <section class="references">
@@ -683,31 +683,31 @@ In all other cases, they might just make your life more complicated.</p>
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
         </li>
         <li>
-            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
         </li>
         <li>
-            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a>
         </li>
         <li>
-            <a href="https://arxiv.org/pdf/1512.03385">https://arxiv.org/pdf/1512.03385</a>
+            <a href="https://arxiv.org/pdf/1512.03385" target="_blank">https://arxiv.org/pdf/1512.03385</a>
         </li>
         <li>
-            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative</a>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative" target="_blank">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives">https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives</a>
+            <a href="https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives" target="_blank">https://en.wikipedia.org/wiki/Symmetry_of_second_derivatives</a>
         </li>
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-3/#the-chain-rule">/en/machine-learning/neurons-for-dummies-3/#the-chain-rule</a>
+            <a href="/en/machine-learning/neurons-for-dummies-3/#the-chain-rule" target="_blank">/en/machine-learning/neurons-for-dummies-3/#the-chain-rule</a>
         </li>
         <li>
-            <a href="https://arxiv.org/pdf/2402.15141">https://arxiv.org/pdf/2402.15141</a>
+            <a href="https://arxiv.org/pdf/2402.15141" target="_blank">https://arxiv.org/pdf/2402.15141</a>
         </li>
         <li>
-            <a href="https://www.cuemath.com/calculus/properties-of-integrals/">https://www.cuemath.com/calculus/properties-of-integrals/</a>
+            <a href="https://www.cuemath.com/calculus/properties-of-integrals/" target="_blank">https://www.cuemath.com/calculus/properties-of-integrals/</a>
         </li>
     </ul>
 </section>

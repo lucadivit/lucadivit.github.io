@@ -143,7 +143,7 @@
             
 <p>Dai che ci siamo. Siamo arrivati alla <strong>quinta</strong> e ultima parte della serie sulle NODE. Prendete questa affermazione con le pinze però, che se non mi basta
 questo spazio vi beccate anche la sesta. In ogni caso in questa (spero) ultima parte, vedremo un po' di codice e di applicazione di una NODE.
-Prima di iniziare, se siete giunti a questa pagina senza aver letto le <strong>precedenti</strong>, vi consiglio vivamente di recuperarle. <a href="#Consigliati"><strong>Qui</strong></a> trovate i link
+Prima di iniziare, se siete giunti a questa pagina senza aver letto le <strong>precedenti</strong>, vi consiglio vivamente di recuperarle. <a href="#Consigliati" target="_blank"><strong>Qui</strong></a> trovate i link
 agli articoli precedenti. Detto questo senza perdere altro tempo, iniziamo.</p>
 <h3 id="dal-node-al-code">Dal NODE al Code<a class="headerlink" href="#dal-node-al-code" title="Permanent link"> </a></h3>
 <p>Se c'è una cosa che abbiamo imparato (o almeno avremmo dovuto), è che di fatto le NODE si differenziano dalle reti normali non tanto a livello 
@@ -157,7 +157,7 @@ utilizzare quando, come e perché volete. Non sarò di certo io a impedirvelo. N
 in una lista. Noi sappiamo che numeri sono ma acqua in bocca, la NODE non ne ha idea di cosa <strong>rappresentano</strong>. Ecco questa lista di numeri rappresenta la nostra
 base di partenza. I dati sui quali andremo ad addestrare la nostra NODE. Dato che, malauguratamente, questi dati non si <strong>generano</strong> da soli, dobbiamo 
 crearli noi. Se vi state chiedendo come, niente di più semplice. Prendiamo il nostro bel modellino dinamico di <strong>Lotka-Volterra</strong> e diamolo in pasto ad un <strong>ODESolver</strong>. Se non 
-sapete come è definito, recuperate la <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">parte 3</a>.</p>
+sapete come è definito, recuperate la <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank">parte 3</a>.</p>
 <p>Ma basta parlare, mostriamo un po' di codice e creiamo una <strong>classe</strong> <code>LotkaVolterra</code> che estende un generico <code>DatasetProvider</code>, 
 dove definiamo la <strong>dinamica</strong> del sistema e come <strong>generare</strong> i dati.</p>
 <h5 id="creazione-del-dataset">Creazione Del Dataset<a class="headerlink" href="#creazione-del-dataset" title="Permanent link"> </a></h5>
@@ -276,9 +276,9 @@ data = data_creator.prepare_data(data)
 <p>Facendo il plot di questi dati otteniamo l'immagine che segue:</p>
 <p class="image-caption"><img alt="TrueData" class="image" src="https://www.lucadivita.it/it/images/teoria_matematica/neural_ode_5/dataset_LotkaVolterra_train.svg"/>
 Figura 1. Dataset di Train Vero e Rumoroso</p>
-<p>Se vi steste chiedendo come, di fatto, risolviamo la dinamica, lo facciamo tramite il metodo <code>odeint</code> definito dalla libreria <a href="https://github.com/rtqichen/torchdiffeq"><strong>torchdiffeq</strong></a>,
+<p>Se vi steste chiedendo come, di fatto, risolviamo la dinamica, lo facciamo tramite il metodo <code>odeint</code> definito dalla libreria <a href="https://github.com/rtqichen/torchdiffeq" target="_blank"><strong>torchdiffeq</strong></a>,
 che fornisce metodi di <strong>alto livello</strong> per la gestione delle NODE. Questo metodo implementa vari ODESolver, 
-e nel nostro caso è stato utilizzato <a href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method"><strong>dopri5</strong></a></p>
+e nel nostro caso è stato utilizzato <a href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method" target="_blank"><strong>dopri5</strong></a></p>
 <h5 id="definizione-delle-reti">Definizione Delle Reti<a class="headerlink" href="#definizione-delle-reti" title="Permanent link"> </a></h5>
 <p>Dato che l'obiettivo principale è comparare i risultati a <strong>parità di condizioni</strong>, si sono utilizzate due reti quasi identiche. Andiamo a vedere perché sono <em>quasi identiche</em>
 e non <em>identiche</em>.</p>
@@ -325,12 +325,12 @@ Quindi per queste ultime, dobbiamo considerare esplicitamente il fattore tempo e
 <p>La <code>NODE</code> invece, accetta il parametro <span class="math">\(t\)</span> in fase di forward ma viene utilizzato per il calcolo della <strong>dinamica</strong> e non
 come feature in maniera diretta. Quindi è <strong>necessario</strong> passarlo, ma non incide sul numero di <strong>neuroni</strong>, che rimangono pari al numero di <strong>variabili</strong> del problema. Avendo quindi
 due architetture quasi uguali ma non identiche, mi sono dovuto accontentare di avere due <strong>inizializzazioni</strong> diverse dei pesi, ahimè non si può avere tutto nella vita. Ma almeno la 
-salute c'è (per ora). Ultima nota. No non sono impazzito, se ho utilizzato le <code>Tanh</code> come funzioni di <strong>attivazione</strong> è perché <code>torchdiffeq</code> <a href="https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md"><strong>specifica</strong> di evitare</a> 
+salute c'è (per ora). Ultima nota. No non sono impazzito, se ho utilizzato le <code>Tanh</code> come funzioni di <strong>attivazione</strong> è perché <code>torchdiffeq</code> <a href="https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md" target="_blank"><strong>specifica</strong> di evitare</a> 
 l'utilizzo di attivazioni non smooth. </p>
 <p>Ora che abbiamo due modelli pronti e un dataset su cui metterli alla prova, passiamo finalmente all’<strong>addestramento</strong>.</p>
 <h5 id="addestramento">Addestramento<a class="headerlink" href="#addestramento" title="Permanent link"> </a></h5>
-<p>Essendo le reti di <strong>natura</strong> diversa, lo sarà anche il train. Ad alto livello neanche troppo a dire la verità ma a basso livello beh...leggetevi la <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">quarta parte</a> 
-e la serie di articoli sui <a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-1/">neuroni</a> per capire quanto in realtà siano profondamente diversi. Dato che, fortunatamente,
+<p>Essendo le reti di <strong>natura</strong> diversa, lo sarà anche il train. Ad alto livello neanche troppo a dire la verità ma a basso livello beh...leggetevi la <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" target="_blank">quarta parte</a> 
+e la serie di articoli sui <a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-1/" target="_blank">neuroni</a> per capire quanto in realtà siano profondamente diversi. Dato che, fortunatamente,
 qualcuno ha già smazzato il lavoro sporco per noi, questa differenza ad <strong>alto livello</strong> si nota ben poco. Andiamola a vedere:</p>
 <div class="highlight"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">train_mlp</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">train_loader</span><span class="p">,</span><span class="w"> </span><span class="n">resamp_loader</span><span class="p">)</span><span class="err">:</span>
 <span class="w">    </span><span class="p">...</span>
@@ -373,7 +373,7 @@ qualcuno ha già smazzato il lavoro sporco per noi, questa differenza ad <strong
 </code></pre></div>
 <p>Come si può vedere, quando andiamo ad addestrare <code>SimpleNet</code> attraverso la funzione <code>train_mlp</code>, forniamo i dati in <strong>batch</strong>. Questo perché nel suo utilizzo classico, la rete neurale può gestirlo. Per cui quello che facciamo 
 è fornire in batch, alla rete, delle coppie <span class="math">\((x_i, dt)\)</span>. La generica predizione <span class="math">\(y\)</span> della rete, ottenuta per ogni coppia, rappresenta quanto <strong>varrà</strong> lo stato di input <span class="math">\(x_i\)</span>, 
-trascorsi <span class="math">\(dt\)</span> secondi. La loss, che è una <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html"><strong>MSE</strong></a>, viene calcolata usando lo <strong>stato predetto</strong> <span class="math">\(y\)</span> e lo <strong>stato di arrivo</strong> vero <span class="math">\(x_{next}\)</span>.</p>
+trascorsi <span class="math">\(dt\)</span> secondi. La loss, che è una <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html" target="_blank"><strong>MSE</strong></a>, viene calcolata usando lo <strong>stato predetto</strong> <span class="math">\(y\)</span> e lo <strong>stato di arrivo</strong> vero <span class="math">\(x_{next}\)</span>.</p>
 <p>Per quanto riguarda <code>NODE</code> invece, come si può vedere, usa al suo interno il <strong>metodo</strong> <code>odeint</code> ma questa volta non forniamo una ODE rappresentante la dinamica, bensì la <strong>rete neurale</strong>
 stessa, e lo scopo è far si che <strong>impari</strong> la dinamica a partire dai dati, e quindi fare la <strong>corretta previsione di come evolverà il sistema</strong>. Mentre nelle <code>SimpleNet</code> la differenza temporale era fornita 
 e quindi si possono gestire i batch, qui questo concetto <strong>viene meno</strong>. Questo perché il tempo è <strong>implicito</strong> nelle NODE come detto, ma <code>odeint</code> lavora con <strong>un solo range temporale</strong> la volta, mentre
@@ -408,7 +408,7 @@ Addestrando le reti con <span class="math">\(100\)</span> epoche, l'output di qu
 <span class="n">NODE</span><span class="w"> </span><span class="n">Train</span><span class="w"> </span><span class="n">Done</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mf">512.356</span><span class="n">s</span>
 </code></pre></div>
 <p>Notiamo subito che la NODE ci ha messo non tanto, ma <strong>tantissimo</strong> di più rispetto la rete tradizionale. Se vi steste chiedendo il perché beh, non avete letto la 
-<a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">quarta parte</a>. Ma non fermiamoci solo ai numeri e vediamo con i <strong>nostri
+<a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" target="_blank">quarta parte</a>. Ma non fermiamoci solo ai numeri e vediamo con i <strong>nostri
 occhi</strong> come è andato il train. Ecco il risultato visivo del <strong>processo di addestramento</strong> per entrambi i modelli, riprodotto in tempo reale:</p>
 <p class="image-caption"><img alt="LVMLP" class="image" src="https://www.lucadivita.it/it/images/teoria_matematica/neural_ode_5/lv_mlp.gif"/>
 Figura 2. Addestramento su Lotka-Volterra di <code>SimpleNet</code></p>
@@ -471,7 +471,7 @@ In questo paragrafo mi limiterò a dire come sono passato da un <strong>problema
 Figura 6. Massa Attaccata ad una Molla</p>
 <p>Se provaste a <strong>tirare e rilasciare</strong> la massa, quest'ultima <strong>oscillerebbe</strong> intorno al suo punto di equilibro fino a tornare alla <strong>situazione stabile</strong> in cui è fermo. 
 Questo moto si chiama oscillatore armonico. Vediamone le <strong>leggi fisiche</strong>. Dalla legge di Newton sappiamo che una forza è pari alla massa per una accelerazione. 
-Ma cosa è una accelerazione? Dalla <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">parte 1</a> sappiamo che la velocità è 
+Ma cosa è una accelerazione? Dalla <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">parte 1</a> sappiamo che la velocità è 
 la derivata prima dello spazio rispetto al tempo. Dato che l'accelerazione è la derivata prima della velocità rispetto al tempo, abbiamo di conseguenza, 
 che l'accelerazione è la <strong>derivata seconda</strong> dello spazio rispetto al tempo. Nell'immagine in alto noi uno spazio lo abbiamo. E' la <strong>distanza</strong> tra la <strong>massa</strong> <span class="math">\(m\)</span> e il suo 
 <strong>punto di equilibrio</strong>, e nell'immagine è <span class="math">\(x\)</span>. Per cui scriviamo:</p>
@@ -652,10 +652,10 @@ di queste architetture merita una <strong>dissertazione</strong> a parte. Chiss�
         <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
-<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
-<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
-<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" title="Io ODO, Tu ODI e la Neural ODE - 4">Io ODO, Tu ODI e la Neural ODE - 4</a></li>
+<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1" target="_blank">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2" target="_blank">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
+<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3" target="_blank">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
+<li><a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" title="Io ODO, Tu ODI e la Neural ODE - 4" target="_blank">Io ODO, Tu ODI e la Neural ODE - 4</a></li>
 </ul>
 </section>
 <section class="references">
@@ -665,43 +665,43 @@ di queste architetture merita una <strong>dissertazione</strong> a parte. Chiss�
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a>
+            <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank">https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a>
         </li>
         <li>
-            <a href="https://github.com/rtqichen/torchdiffeq">https://github.com/rtqichen/torchdiffeq</a>
+            <a href="https://github.com/rtqichen/torchdiffeq" target="_blank">https://github.com/rtqichen/torchdiffeq</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method">https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method</a>
+            <a href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method" target="_blank">https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method</a>
         </li>
         <li>
-            <a href="https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md">https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md</a>
+            <a href="https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md" target="_blank">https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md</a>
         </li>
         <li>
-            <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/</a>
+            <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" target="_blank">https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/</a>
         </li>
         <li>
-            <a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-1/">https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-1/</a>
+            <a href="https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-1/" target="_blank">https://www.lucadivita.it/it/machine-learning/neurons-for-dummies-1/</a>
         </li>
         <li>
-            <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html">https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html</a>
+            <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html" target="_blank">https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html</a>
         </li>
         <li>
-            <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+            <a href="https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">https://www.lucadivita.it/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
         </li>
         <li>
-            <a href="https://arxiv.org/pdf/2006.04439">https://arxiv.org/pdf/2006.04439</a>
+            <a href="https://arxiv.org/pdf/2006.04439" target="_blank">https://arxiv.org/pdf/2006.04439</a>
         </li>
         <li>
-            <a href="https://arxiv.org/pdf/2503.18181">https://arxiv.org/pdf/2503.18181</a>
+            <a href="https://arxiv.org/pdf/2503.18181" target="_blank">https://arxiv.org/pdf/2503.18181</a>
         </li>
         <li>
-            <a href="https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5">https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5</a>
+            <a href="https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5" target="_blank">https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5</a>
         </li>
         <li>
-            <a href="http://eotvos.dm.unipi.it/corsi/Fisica1_1415/OscillatoreArmonico1e2.pdf">http://eotvos.dm.unipi.it/corsi/Fisica1_1415/OscillatoreArmonico1e2.pdf</a>
+            <a href="http://eotvos.dm.unipi.it/corsi/Fisica1_1415/OscillatoreArmonico1e2.pdf" target="_blank">http://eotvos.dm.unipi.it/corsi/Fisica1_1415/OscillatoreArmonico1e2.pdf</a>
         </li>
         <li>
-            <a href="https://math.mit.edu/~stevenj/18.336/adjoint.pdf">https://math.mit.edu/~stevenj/18.336/adjoint.pdf</a>
+            <a href="https://math.mit.edu/~stevenj/18.336/adjoint.pdf" target="_blank">https://math.mit.edu/~stevenj/18.336/adjoint.pdf</a>
         </li>
     </ul>
 </section>

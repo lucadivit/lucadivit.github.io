@@ -143,7 +143,7 @@
             
 <p>Here we are again for the second part of the article devoted to the neuron.<br/>
 If you landed here by mistake... <strong>RUN AWAY!</strong><br/>
-Just kidding, of course you’re invited to read the <strong>first part</strong> <a href="/en/machine-learning/neurons-for-dummies-1/">here</a>. <br/>
+Just kidding, of course you’re invited to read the <strong>first part</strong> <a href="/en/machine-learning/neurons-for-dummies-1/" target="_blank">here</a>. <br/>
 That said, in the first part I left you with more questions than answers. Today we’ll finally try to clear things up a bit.</p>
 <h3 id="understanding-where-things-go-wrong">Understanding Where Things Go Wrong<a class="headerlink" href="#understanding-where-things-go-wrong" title="Permanent link"> </a></h3>
 <p>Let's begin this section by recalling one fundamental point: <strong>the weights are at the center of everything</strong>. Why!?<br/>
@@ -179,7 +179,7 @@ x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\
 $$</div>
 <p>In other words, we want every prediction to be correct or, to put it more technically, we want <strong>the prediction error to be as small 
 as possible</strong>. So the first thing to do is obvious: <strong>measure the error</strong>.<br/>
-To do that we need to define a <strong><a href="https://en.wikipedia.org/wiki/Loss_function">Loss Function</a></strong> (also called an <strong>Error Function</strong>), that is something that tells us how far we are from the 
+To do that we need to define a <a href="https://en.wikipedia.org/wiki/Loss_function" target="_blank"><strong>Loss Function</strong></a> (also called an <strong>Error Function</strong>), that is something that tells us how far we are from the 
 ideal situation, which, for simplicity, we’ll consider to be the one where the error equals zero.</p>
 <p>There are plenty of loss functions, each designed for a specific type of problem.
 In our case—remember, we’re dealing with the <strong>AND problem</strong>, we’re facing a <strong>binary classification</strong> task, so the most 
@@ -255,7 +255,7 @@ From the previous paragraph you also know that:</p>
 <p>Mathematically, that means writing:</p>
 <div class="math">$$\frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i}$$</div>
 <p>To differentiate this monster we need the <strong>chain rule</strong>. Far be it from me to write a treatise on analysis, if you want a <strong>quick explanation</strong> you can find one 
- <a href="/en/machine-learning/neurons-for-dummies-3/#the-chain-rule">here</a>. Applying the rule to our <strong>composite loss function</strong> we get:
+ <a href="/en/machine-learning/neurons-for-dummies-3/#the-chain-rule" target="_blank">here</a>. Applying the rule to our <strong>composite loss function</strong> we get:
 </p>
 <div class="math">$$
 \frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i}=\frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_i}
@@ -280,7 +280,7 @@ example with <strong>just one</strong> perceptron... but in reality there are <s
 So I ask you: <strong>is it worth it?</strong><br/>
 And this is where <strong>numerical methods</strong> come into play.<br/>
 They may not be as <strong>elegant</strong> as analytical methods but, darn it, <strong>they work</strong>.<br/>
-We thus arrive at the final ingredient of this lavish dish: <strong><a href="https://en.wikipedia.org/wiki/Gradient_descent">Gradient Descent</a></strong>.  Within machine learning it's one of many <strong><a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Extensions_and_variants">Optimizers</a></strong>. 
+We thus arrive at the final ingredient of this lavish dish: <a href="https://en.wikipedia.org/wiki/Gradient_descent" target="_blank"><strong>Gradient Descent</strong></a>.  Within machine learning it's one of many <strong><a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Extensions_and_variants">Optimizers</a></strong>. 
 The underlying idea is simple, and let me explain it with the most overused metaphor: the <strong>blindfolded climber</strong>. 
 Imagine you’re on a mountain, blindfolded, and your goal is to descend to the valley.<br/>
 How do you proceed?<br/>
@@ -308,13 +308,13 @@ and where it goes up</em>. Indeed:<ul>
 <p>Graphically we can picture it as an <em>entity</em> that always aims for the lowest areas of the plot.</p>
 <p class="image-caption"><img alt="GD" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_2/gd.png"/>
 Figure 1. Gradient Descent</p>
-<p>If you want a very broad overview of <strong>how</strong> we arrive at the gradient‑descent formula, check out <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent">this section</a>, 
+<p>If you want a very broad overview of <strong>how</strong> we arrive at the gradient‑descent formula, check out <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent" target="_blank">this section</a>, 
 otherwise skip ahead and we'll (finally!) look at a <strong>numerical example</strong>.</p>
 <h3 id="back-to-the-futuhm-to-the-and-problem">Back to the Fut...Uhm to the AND Problem<a class="headerlink" href="#back-to-the-futuhm-to-the-and-problem" title="Permanent link"> </a></h3>
 <p>And here we are, folks, finally ready to see <strong>how a neural network learns</strong>. Remember the AND problem? 
-If so go right ahead, if not, refresh your memory <a href="/en/machine-learning/neurons-for-dummies-1/#a-numerical-example-the-and-problem">here</a>. 
+If so go right ahead, if not, refresh your memory <a href="/en/machine-learning/neurons-for-dummies-1/#a-numerical-example-the-and-problem" target="_blank">here</a>. 
 Didn’t I warn you not to get attached to the Heaviside step? It’s time to <strong>ditch it</strong>. You know what they say: an activation dies, another one rises, 
-and we’re taking the <strong><a href="https://en.wikipedia.org/wiki/Sigmoid_function">Sigmoid</a></strong> function. Curious why Heaviside <strong>isn’t suitable</strong>? Take a look <a href="/en/machine-learning/neurons-for-dummies-3/#about-activation-functions">here</a>.</p>
+and we’re taking the <a href="https://en.wikipedia.org/wiki/Sigmoid_function" target="_blank"><strong>Sigmoid</strong></a> function. Curious why Heaviside <strong>isn’t suitable</strong>? Take a look <a href="/en/machine-learning/neurons-for-dummies-3/#about-activation-functions" target="_blank">here</a>.</p>
 <p>The sigmoid is defined as:</p>
 <div class="math">$$\sigma(x)=\frac{1}{1+e^{-x}}$$</div>
 <p>
@@ -404,7 +404,7 @@ We went from <span class="math">\(p = 0.81\)</span> to <span class="math">\(p = 
 This means the perceptron realised that <span class="math">\(p = 0.81\)</span> wasn’t right and started to <strong>lower the probability</strong> that the output is <span class="math">\(1\)</span>.
 As training continues, that value <strong>keeps going down</strong> until it falls below the threshold <span class="math">\(p &lt; 0.5\)</span>, that is, <strong>it’s more likely that</strong> the answer is 0, which happens to be the correct prediction for that case in the AND problem.
 What you’ve just seen is called <strong>Error Propagation</strong>, a.k.a. <strong>Backpropagation</strong>. Now that you’ve made it this far, imagine these steps—simple or complex
-you decide, not on a single perceptron but on <a href="/en/machine-learning/neurons-for-dummies-3/#from-one-to-many">hundreds</a> arranged over multiple layers.
+you decide, not on a single perceptron but on <a href="/en/machine-learning/neurons-for-dummies-3/#from-one-to-many" target="_blank">hundreds</a> arranged over multiple layers.
 Enough to <strong>make your head explode</strong>, right!?<br/>
 But at least we’re popping our heads knowing how an algorithm that automatically updates the weights works, 
 adapts to the problem, and learns from its own mistakes.</p>
@@ -602,7 +602,7 @@ $$</div>
 <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
     <span class="n">error</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">(</span><span class="n">perceptron</span><span class="o">=</span><span class="n">perceptron</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">cases</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">true</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-<p>Curious to see the <strong>complete code</strong>? You can find it <strong><a href="https://github.com/lucadivit/neurons_for_dummies">here</a></strong>.<br/>
+<p>Curious to see the <strong>complete code</strong>? You can find it <a href="https://github.com/lucadivit/neurons_for_dummies" target="_blank"><strong>here</strong></a>.<br/>
 One last note before we close: this code is meant purely for <strong>educational</strong> purposes. 
 In practice, you’d use libraries like PyTorch or Keras to <strong>abstract</strong> away this level of complexity. 
 Suffice it to say, we’re not done yet, <strong>part three</strong> is waiting for you...</p>
@@ -690,8 +690,8 @@ Suffice it to say, we’re not done yet, <strong>part three</strong> is waiting 
         <a class="headerlink" href="#Related Posts" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1">Neurons for Dummies - 1</a></li>
-<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3">Neurons for Dummies - 3</a></li>
+<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1" target="_blank">Neurons for Dummies - 1</a></li>
+<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3" target="_blank">Neurons for Dummies - 3</a></li>
 </ul>
 </section>
 <section class="references">
@@ -701,37 +701,37 @@ Suffice it to say, we’re not done yet, <strong>part three</strong> is waiting 
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-1/">/en/machine-learning/neurons-for-dummies-1/</a>
+            <a href="/en/machine-learning/neurons-for-dummies-1/" target="_blank">/en/machine-learning/neurons-for-dummies-1/</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Loss_function">https://en.wikipedia.org/wiki/Loss_function</a>
+            <a href="https://en.wikipedia.org/wiki/Loss_function" target="_blank">https://en.wikipedia.org/wiki/Loss_function</a>
         </li>
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-3/#the-chain-rule">/en/machine-learning/neurons-for-dummies-3/#the-chain-rule</a>
+            <a href="/en/machine-learning/neurons-for-dummies-3/#the-chain-rule" target="_blank">/en/machine-learning/neurons-for-dummies-3/#the-chain-rule</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Gradient_descent">https://en.wikipedia.org/wiki/Gradient_descent</a>
+            <a href="https://en.wikipedia.org/wiki/Gradient_descent" target="_blank">https://en.wikipedia.org/wiki/Gradient_descent</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Extensions_and_variants">https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Extensions_and_variants</a>
+            <a href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Extensions_and_variants" target="_blank">https://en.wikipedia.org/wiki/Stochastic_gradient_descent#Extensions_and_variants</a>
         </li>
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent">/en/machine-learning/neurons-for-dummies-3/#gradient-descent</a>
+            <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent" target="_blank">/en/machine-learning/neurons-for-dummies-3/#gradient-descent</a>
         </li>
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-1/#a-numerical-example-the-and-problem">/en/machine-learning/neurons-for-dummies-1/#a-numerical-example-the-and-problem</a>
+            <a href="/en/machine-learning/neurons-for-dummies-1/#a-numerical-example-the-and-problem" target="_blank">/en/machine-learning/neurons-for-dummies-1/#a-numerical-example-the-and-problem</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Sigmoid_function">https://en.wikipedia.org/wiki/Sigmoid_function</a>
+            <a href="https://en.wikipedia.org/wiki/Sigmoid_function" target="_blank">https://en.wikipedia.org/wiki/Sigmoid_function</a>
         </li>
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-3/#about-activation-functions">/en/machine-learning/neurons-for-dummies-3/#about-activation-functions</a>
+            <a href="/en/machine-learning/neurons-for-dummies-3/#about-activation-functions" target="_blank">/en/machine-learning/neurons-for-dummies-3/#about-activation-functions</a>
         </li>
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-3/#from-one-to-many">/en/machine-learning/neurons-for-dummies-3/#from-one-to-many</a>
+            <a href="/en/machine-learning/neurons-for-dummies-3/#from-one-to-many" target="_blank">/en/machine-learning/neurons-for-dummies-3/#from-one-to-many</a>
         </li>
         <li>
-            <a href="https://github.com/lucadivit/neurons_for_dummies">https://github.com/lucadivit/neurons_for_dummies</a>
+            <a href="https://github.com/lucadivit/neurons_for_dummies" target="_blank">https://github.com/lucadivit/neurons_for_dummies</a>
         </li>
     </ul>
 </section>

@@ -153,9 +153,9 @@ eleganti, spesso sporchi, ma tremendamente <strong>efficaci</strong>. Non ti dan
 <strong>Google Maps</strong> (<em>che vi dice che arriverete tra 10 minuti e ce ne mettete 17</em>), quando mettete un <strong>pizzico</strong> di sale (<em>dove il "pizzico" è un cucchiaio da cucina</em>), 
 quando leggete il mio <strong>blog</strong> (<em>che dovrebbe essere divulgativo invece aiuta più me a ricordare che voi a imparare</em>)... </p>
 <p>Ma bando agli indugi, dato che non state più nella pelle vediamo questi famosi metodi numerici. Ma prima, se non l'hai fatto,
-recupera la <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Parte 1</a> e la <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">Parte 2</a>.</p>
+recupera la <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">Parte 1</a> e la <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">Parte 2</a>.</p>
 <h3 id="ode-a-piccoli-passi">ODE a Piccoli Passi<a class="headerlink" href="#ode-a-piccoli-passi" title="Permanent link"> </a></h3>
-<p>Riprendiamo il tanto decantato <strong>sistema di Lotka-Volterra</strong> introdotto <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame">qui</a>.</p>
+<p>Riprendiamo il tanto decantato <strong>sistema di Lotka-Volterra</strong> introdotto <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame" target="_blank">qui</a>.</p>
 <div class="math">$$
 \begin{cases}
 \frac{dx}{dt} = \alpha x - \beta x y \\
@@ -184,7 +184,7 @@ La convergenza di questo metodo è stata dimostrata dal sommo Cauchy ed è stato
 dai sommi Runge e Kutta con la famiglia dei <strong>metodi RK</strong>. Insomma qui tutti sono sommi e il mondo dei metodi numerici è 
 più <strong>affollato</strong> dell'algoritmo di TikTok. Ce ne sarebbero tanti altri da affrontare ma ci limiteremo solo ad alcuni.</p>
 <h3 id="metodo-di-eulero">Metodo Di Eulero<a class="headerlink" href="#metodo-di-eulero" title="Permanent link"> </a></h3>
-<p>Riprendiamo la formula dell'<strong>espansione di Taylor</strong>. Ricordi? Ne ho già parlato <a href="/it/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente">qui</a>.
+<p>Riprendiamo la formula dell'<strong>espansione di Taylor</strong>. Ricordi? Ne ho già parlato <a href="/it/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente" target="_blank">qui</a>.
 La serie di Taylor è un po' un jolly, si usa ovunque.</p>
 <p>Consideriamo in particolare una <strong>espansione al primo ordine</strong> cioè del tipo</p>
 <div class="math">$$
@@ -202,7 +202,7 @@ y'(t) = f(y(t), t) \\
 y(t_0) = y_0
 \end{cases}
 $$</div>
-<p>e consideriamo la <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">definizione di derivata</a>. Possiamo
+<p>e consideriamo la <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato" target="_blank">definizione di derivata</a>. Possiamo
 scrivere, per <span class="math">\(h \rightarrow 0\)</span>:</p>
 <div class="math">$$
 y'(t) \approx \frac{y(t+h) - y(t)}{h}
@@ -279,7 +279,7 @@ supponiamo di voler calcolare <span class="math">\(y(t_1)\)</span>, dovremmo cal
 <p class="formula-caption">
 Formula 4. Metodo di Eulero Implicito</p>
 <p>E' implicito perché, come potete vedere, il valore da calcolare <span class="math">\(t_{n+1}\)</span> compare in <strong>entrambi</strong> i lati dell'equazione.
-Non sempre si risolve con facilità. In determinati casi, sono necessari metodi iterativi come il <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method"><strong>metodo delle sostituzioni successive</strong></a>.
+Non sempre si risolve con facilità. In determinati casi, sono necessari metodi iterativi come il <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method" target="_blank"><strong>metodo delle sostituzioni successive</strong></a>.
 Ma questo esula questo articolo quindi, dato che la vita ce la siamo già complicati abbastanza, vi lascio alla vostra volontà di <strong>approfondire</strong>.</p>
 <h4 id="esempio-eulero">Esempio Eulero<a class="headerlink" href="#esempio-eulero" title="Permanent link"> </a></h4>
 <p>Tutto troppo teorico fino ad ora lo so, quindi vediamo qualcosa di pratico con un esercizio. Consideriamo il seguente problema di Cauchy
@@ -311,7 +311,7 @@ t &amp; y(t) &amp; \text{Result} \\
 \hline
 \end{array}
 $$</div>
-<p>Ora risolviamo con il metodo di Eulero. Dalla formula di <a href="#tempo-discretizzato">discretizzazione del tempo</a> sappiamo già quanti sono 
+<p>Ora risolviamo con il metodo di Eulero. Dalla formula di <a href="#tempo-discretizzato" target="_blank">discretizzazione del tempo</a> sappiamo già quanti sono 
 gli step da fare posto <span class="math">\(h=0.1\)</span>, istante iniziale <span class="math">\(t_0=0\)</span> e istante finale <span class="math">\(t_{n}=2\)</span>:</p>
 <div class="math">$$
 t_{n} - t_0 = n \cdot h \Rightarrow 2-0 = n \cdot h \Rightarrow n = 20
@@ -423,7 +423,7 @@ che mantengono la stessa idea di base di Eulero. <strong>Procedere per piccoli p
 <p>Ripartiamo dalla formula di Taylor. Come ben ricorderete maggiore è lo sviluppo, <strong>migliore è l'approssimazione</strong>. I metodi RK si basano
 proprio sullo sviluppo di ordini superiori della serie di Taylor. Eulero quindi può essere visto come un metodo <strong>RK1</strong>
 cioè <strong>Runge Kutta del primo ordine</strong>. Vediamo cosa succede se non ci accontentiamo del primo ordine ed arriviamo al secondo, partendo dalla
-<a href="#sviluppo-ode-1">Formula del Primo Ordine</a>:</p>
+<a href="#sviluppo-ode-1" target="_blank">Formula del Primo Ordine</a>:</p>
 <div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n) + \frac{h^2}{2} \cdot y''(t_n)$$</div>
 <p>Dato che</p>
 <div class="math">$$
@@ -735,8 +735,8 @@ sarà molta matematica. Concludo come sempre con il <a href="https://github.com/
         <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
-<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1" target="_blank">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2" target="_blank">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
 </ul>
 </section>
 <section class="references">
@@ -746,25 +746,25 @@ sarà molta matematica. Concludo come sempre con il <a href="https://github.com/
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
         </li>
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
         </li>
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame</a>
         </li>
         <li>
-            <a href="/it/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente">/it/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente</a>
+            <a href="/it/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente" target="_blank">/it/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente</a>
         </li>
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato</a>
         </li>
         <li>
-            <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method">https://www.researchgate.net/publication/379666225_Successive_Substitution_Method</a>
+            <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method" target="_blank">https://www.researchgate.net/publication/379666225_Successive_Substitution_Method</a>
         </li>
         <li>
-            <a href="https://github.com/lucadivit/NeuralODEBlog">https://github.com/lucadivit/NeuralODEBlog</a>
+            <a href="https://github.com/lucadivit/NeuralODEBlog" target="_blank">https://github.com/lucadivit/NeuralODEBlog</a>
         </li>
     </ul>
 </section>

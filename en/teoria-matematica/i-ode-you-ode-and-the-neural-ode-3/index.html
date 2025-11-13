@@ -154,9 +154,9 @@ you really can’t complain. After all, although it might not seem like it, we a
 when you use <strong>Google Maps</strong> (<em>that tells you’ll arrive in 10 minutes and you get there in 17</em>), when you 
 add a <strong>pinch</strong> of salt (<em>where “pinch” means a tablespoon</em>), when you read my <strong>blog</strong> (<em>which is supposed to 
 be educational but helps me more to remember than you to learn</em>)...</p>
-<p>But enough chit-chat, since you’re probably on the edge of your seat, let’s finally look at these famous numerical methods. But first, if you haven’t already, go check out <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Part 1</a> and <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">Part 2</a>.</p>
+<p>But enough chit-chat, since you’re probably on the edge of your seat, let’s finally look at these famous numerical methods. But first, if you haven’t already, go check out <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">Part 1</a> and <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">Part 2</a>.</p>
 <h3 id="ode-in-small-steps">ODE in Small Steps<a class="headerlink" href="#ode-in-small-steps" title="Permanent link"> </a></h3>
-<p>Let's revisit the much-praised <strong>Lotka-Volterra system</strong> introduced <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame">here</a>.</p>
+<p>Let's revisit the much-praised <strong>Lotka-Volterra system</strong> introduced <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame" target="_blank">here</a>.</p>
 <div class="math">$$
 \begin{cases}
 \frac{dx}{dt} = \alpha x - \beta x y \\
@@ -183,7 +183,7 @@ The convergence of this method was proven by the venerable Cauchy and later gene
 by the eminent Runge and Kutta with the family of <strong>RK methods</strong>. Basically, everyone here is great, and the world of numerical methods is 
 more <strong>crowded</strong> than TikTok’s algorithm. There are many more we could cover, but we’ll stick to a select few.</p>
 <h3 id="eulers-method">Euler's Method<a class="headerlink" href="#eulers-method" title="Permanent link"> </a></h3>
-<p>Let’s go back to the <strong>Taylor series expansion</strong>. Remember? I already talked about it <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent">here</a>.
+<p>Let’s go back to the <strong>Taylor series expansion</strong>. Remember? I already talked about it <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent" target="_blank">here</a>.
 The Taylor series is like a wildcard, it shows up everywhere.</p>
 <p>Let’s consider in particular a <strong>first-order expansion</strong>, i.e.,</p>
 <div class="math">$$
@@ -201,7 +201,7 @@ y'(t) = f(y(t), t) \\
 y(t_0) = y_0
 \end{cases}
 $$</div>
-<p>and recall the <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative">definition of derivative</a>. For <span class="math">\(h \rightarrow 0\)</span> we can write:</p>
+<p>and recall the <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative" target="_blank">definition of derivative</a>. For <span class="math">\(h \rightarrow 0\)</span> we can write:</p>
 <div class="math">$$
 y'(t) \approx \frac{y(t+h) - y(t)}{h}
 $$</div>
@@ -276,7 +276,7 @@ Formula 3. Explicit Euler Method</p>
 <p class="formula-caption">
 Formula 4. Implicit Euler Method</p>
 <p>It’s called implicit because, as you can see, the value we want to compute, <span class="math">\(y(t_{n+1})\)</span>, appears on <strong>both sides</strong> of the equation.
-It’s not always easy to solve. In some cases, iterative methods like the <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method"><strong>successive substitution method</strong></a> are needed.
+It’s not always easy to solve. In some cases, iterative methods like the <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method" target="_blank"><strong>successive substitution method</strong></a> are needed.
 But that’s beyond the scope of this article, and since we’ve already made life complicated enough, I’ll leave it to your curiosity to <strong>dig deeper</strong>.</p>
 <h4 id="euler-example">Euler Example<a class="headerlink" href="#euler-example" title="Permanent link"> </a></h4>
 <p>All of this has been a bit too theoretical so far, I know, so let’s look at something practical with an exercise. Let’s consider the following Cauchy problem representing <strong>exponential decay</strong>. It may seem pointless, but many natural phenomena follow this law, such as radioactive decay, capacitor discharge in RC circuits, etc.</p>
@@ -305,7 +305,7 @@ t &amp; y(t) &amp; \text{Result} \\
 \hline
 \end{array}
 $$</div>
-<p>Now let’s solve it using Euler’s method. From the <a href="#tempo-discretizzato">time discretization formula</a>, we already know how many steps we need using <span class="math">\(h=0.1\)</span>, initial time <span class="math">\(t_0=0\)</span>, and final time <span class="math">\(t_n=2\)</span>:</p>
+<p>Now let’s solve it using Euler’s method. From the <a href="#tempo-discretizzato" target="_blank">time discretization formula</a>, we already know how many steps we need using <span class="math">\(h=0.1\)</span>, initial time <span class="math">\(t_0=0\)</span>, and final time <span class="math">\(t_n=2\)</span>:</p>
 <div class="math">$$
 t_{n} - t_0 = n \cdot h \Rightarrow 2 - 0 = n \cdot h \Rightarrow n = 20
 $$</div>
@@ -410,7 +410,7 @@ Alright, time to move on to the next round where the <strong>Runge-Kutta</strong
 <p>Let’s give credit where credit is due: Euler’s method is the <strong>patriarch</strong> of all numerical methods. But is it really that good? 
 Well, as always... it depends. For instance, on the type of problem you’re dealing with. For problems that are too complex, it can <strong>fail miserably</strong>. So yes, it’s good and dear, but let’s be honest, it’s getting old. We need fresh blood, brave and strong youngsters. That brings us to the <strong>Runge-Kutta methods</strong>, or simply <strong>RK</strong>.</p>
 <p>RK methods are like a sprawling dynasty, and each has its own quirks. The only certainty, besides death, is that they keep Euler’s core idea: <strong>proceed in small steps</strong>.</p>
-<p>Let’s go back to the Taylor expansion. As you’ll remember, the higher the order of expansion, the <strong>better the approximation</strong>. RK methods are built exactly on higher-order Taylor expansions. So Euler can be viewed as a method of <strong>order 1</strong>, i.e., <strong>RK1</strong>, or <strong>first-order Runge-Kutta</strong>. Now let’s see what happens when we go beyond first order and move to the second, starting from the <a href="#sviluppo-ode-1">First-Order Formula</a>:</p>
+<p>Let’s go back to the Taylor expansion. As you’ll remember, the higher the order of expansion, the <strong>better the approximation</strong>. RK methods are built exactly on higher-order Taylor expansions. So Euler can be viewed as a method of <strong>order 1</strong>, i.e., <strong>RK1</strong>, or <strong>first-order Runge-Kutta</strong>. Now let’s see what happens when we go beyond first order and move to the second, starting from the <a href="#sviluppo-ode-1" target="_blank">First-Order Formula</a>:</p>
 <div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n) + \frac{h^2}{2} \cdot y''(t_n)$$</div>
 <p>Given that</p>
 <div class="math">$$
@@ -436,7 +436,7 @@ $$</div>
 <div class="math">$$
 f'(y_n, t_n) \approx \frac{f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n)}{h}
 $$</div>
-<p>Substituting again into the <a href="#sviluppo-ode-2"><strong>Second-Order Expansion</strong></a>, we get:</p>
+<p>Substituting again into the <a href="#sviluppo-ode-2" target="_blank"><strong>Second-Order Expansion</strong></a>, we get:</p>
 <div class="math">$$
 y_{n+1} \approx y_n + h \cdot f(y_n, t_n) + \frac{h}{2} \cdot \left [ f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n) \right]
 $$</div>
@@ -539,7 +539,7 @@ y_1 = 5 + 0.05 \cdot (3 + 2.703) = 5.285
 $$</div>
 <p>The sharpest among you may wonder why <span class="math">\(t+h\)</span>, required for computing <span class="math">\(k_2\)</span>, <strong>doesn’t appear anywhere</strong>.
 Simple: all the ODEs in the system <strong>don’t explicitly depend</strong> on time <span class="math">\(t\)</span>,
-so it’s <strong>irrelevant</strong> for the computation. But if it did matter, the <strong>current time</strong> would be calculated using the <a href="#tempo-discretizzato">Time Discretization Formula</a> shown in the <a href="#esempio-eulero">previous section</a>.</p>
+so it’s <strong>irrelevant</strong> for the computation. But if it did matter, the <strong>current time</strong> would be calculated using the <a href="#tempo-discretizzato" target="_blank">Time Discretization Formula</a> shown in the <a href="#esempio-eulero" target="_blank">previous section</a>.</p>
 <ul>
 <li>RK4, <span class="math">\(n=1\)</span></li>
 </ul>
@@ -626,7 +626,7 @@ Figure 4. Behavior of <span class="math">\(x\)</span> and <span class="math">\(y
 <p>Here we are at the end of this third article. By now, you <strong>should know</strong> (or at least remember, if you already had the knowledge) what derivatives, 
 integrals, differential equations, and numerical methods are. There’s so much more to say, but I tried to keep it <strong>concise</strong>. No need to <strong>thank me</strong>. 
 In any case, we now have all the ingredients to talk about <strong>Neural ODEs</strong>. And in case you were wondering, yes, 
-there will be plenty of math there too. As always, I’ll end with the <a href="https://github.com/lucadivit/NeuralODEBlog">link to the repo</a> where 
+there will be plenty of math there too. As always, I’ll end with the <a href="https://github.com/lucadivit/NeuralODEBlog" target="_blank">link to the repo</a> where 
 you can see the code behind everything we’ve discussed.</p>
 <p>Until next time.</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
@@ -712,8 +712,8 @@ you can see the code behind everything we’ve discussed.</p>
         <a class="headerlink" href="#Related Posts" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1">I ODE, You ODE and the Neural ODE - 1</a></li>
-<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="I ODE, You ODE and the Neural ODE - 2">I ODE, You ODE and the Neural ODE - 2</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="I ODE, You ODE and the Neural ODE - 1" target="_blank">I ODE, You ODE and the Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="I ODE, You ODE and the Neural ODE - 2" target="_blank">I ODE, You ODE and the Neural ODE - 2</a></li>
 </ul>
 </section>
 <section class="references">
@@ -723,25 +723,25 @@ you can see the code behind everything we’ve discussed.</p>
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
         </li>
         <li>
-            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
         </li>
         <li>
-            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame</a>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame" target="_blank">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame</a>
         </li>
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent">/en/machine-learning/neurons-for-dummies-3/#gradient-descent</a>
+            <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent" target="_blank">/en/machine-learning/neurons-for-dummies-3/#gradient-descent</a>
         </li>
         <li>
-            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative</a>
+            <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative" target="_blank">/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative</a>
         </li>
         <li>
-            <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method">https://www.researchgate.net/publication/379666225_Successive_Substitution_Method</a>
+            <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method" target="_blank">https://www.researchgate.net/publication/379666225_Successive_Substitution_Method</a>
         </li>
         <li>
-            <a href="https://github.com/lucadivit/NeuralODEBlog">https://github.com/lucadivit/NeuralODEBlog</a>
+            <a href="https://github.com/lucadivit/NeuralODEBlog" target="_blank">https://github.com/lucadivit/NeuralODEBlog</a>
         </li>
     </ul>
 </section>

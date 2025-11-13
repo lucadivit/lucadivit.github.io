@@ -143,11 +143,11 @@
             
 <p>Per questo mio primo articolo vorrei parlare di un argomento che mi sta molto a cuore: la <strong>Metaeuristica</strong>, che non è il nome di un demone assiro
 ma una famiglia di algoritmi per la risoluzione di problemi computazionali e di ottimizzazione ossia di massimo o di minimo.</p>
-<p>Quando ci troviamo davanti a un problema molto grande o complesso, come i problemi <strong><a href="https://it.wikipedia.org/wiki/NP-completo">NP-Completi</a></strong>, trovare la soluzione 
+<p>Quando ci troviamo davanti a un problema molto grande o complesso, come i problemi <a href="https://it.wikipedia.org/wiki/NP-completo" target="_blank"><strong>NP-Completi</strong></a>, trovare la soluzione 
 perfetta richiederebbe tempi biblici.<br/>
 Ed è qui che entrano in gioco loro: le metaeuristiche. Questi algoritmi non promettono l’ottimo assoluto, ma fanno del loro meglio per trovare 
 <strong>soluzioni molto buone</strong>, in tempi ragionevoli e con approcci spesso ispirati alla natura ed ai suoi processi.<br/>
-Basti pensare ad <strong><a href="https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche">ACO</a></strong> che si basa sul comportamento delle formiche, o <strong><a href="https://it.wikipedia.org/wiki/Particle_Swarm_Optimization">PSO</a></strong> ispirato al movimento degli sciami.</p>
+Basti pensare ad <a href="https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche" target="_blank"><strong>ACO</strong></a> che si basa sul comportamento delle formiche, o <a href="https://it.wikipedia.org/wiki/Particle_Swarm_Optimization" target="_blank"><strong>PSO</strong></a> ispirato al movimento degli sciami.</p>
 <p>Tra i tanti algoritmi metaeuristici, ce n'è uno che mi ha colpito particolarmente, sia per la sua eleganza che per l’originalità dell’ispirazione: il <strong>Crystal Structure Algorithm</strong> o <strong>CryStAl</strong>.</p>
 <p>Questo algoritmo è ispirato ai processi di formazione di <strong>strutture cristalline</strong> dove gli elementi: atomi, molecole o ioni, si dispongono in modo ordinato e simmetrico, come avviene
 ad esempio nei cristalli di quarzo.<br/>
@@ -176,7 +176,7 @@ Figura 2. Esempi di Cristalli Cubici</p>
 <p>Il lattice, con la sua base, è la <strong>struttura ordinata</strong> ed <strong>ideale</strong> che i nostri <em>cristalli artificiali</em>, come vedremo a breve, dovranno 
 cercare di <strong>replicare</strong> durante l’ottimizzazione.</p>
 <h3 id="il-modello-matematico">Il Modello Matematico<a class="headerlink" href="#il-modello-matematico" title="Permanent link"> </a></h3>
-<p>Il <strong>modello matematico</strong> utilizzato dagli autori di questo algoritmo è il <strong><a href="https://it.wikipedia.org/wiki/Reticolo_di_Bravais">modello di Bravais</a></strong> che 
+<p>Il <strong>modello matematico</strong> utilizzato dagli autori di questo algoritmo è il <a href="https://it.wikipedia.org/wiki/Reticolo_di_Bravais" target="_blank"><strong>modello di Bravais</strong></a> che 
 permette di descrivere tutti i possibili reticoli che possono esistere nello spazio tridimensionale.<br/>
 Ogni punto del reticolo si può raggiungere partendo dall’origine e facendo un certo numero intero di passi lungo ciascuna delle tre direzioni:
 destra|sinistra, avanti|indietro, sopra|sotto.<br/>
@@ -328,7 +328,7 @@ Siamo cosi arrivati alla conclusione del modello matematico.</p>
 </code></pre></div>
 <p>Abbiamo quindi definito tutti gli <strong>step dell’algoritmo</strong>, che permettono, metaforicamente parlando, ai cristalli di 
 <strong>modificare la loro struttura interna</strong> (cioè i valori numerici) per ottenere la disposizione ottimale della base nel reticolo.</p>
-<p>Voglio chiudere con un esempio applicativo di CryStAl su una funzione chiamata <strong><a href="https://www.indusmic.com/post/bird-function">Bird Function</a></strong>.
+<p>Voglio chiudere con un esempio applicativo di CryStAl su una funzione chiamata <a href="https://www.indusmic.com/post/bird-function" target="_blank"><strong>Bird Function</strong></a>.
 che ha questa forma:</p>
 <div class="math">$$
 f(x, y) = sin(x) \cdot e^{(1-cos(y))^2} + cos(x) \cdot e^{(1-sin(x))^2} + (x-y)^2
@@ -360,8 +360,8 @@ Figura 3. Bird Function</p>
 <p>Non male, vero? Il risultato è <strong>molto vicino</strong> al minimo teorico, e lo otteniamo con un algoritmo senza parametri, ispirato alla cristallografia, e, ammettiamolo, pure <strong>stiloso</strong>.</p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Spero che questo primo articolo ti abbia incuriosito e magari anche fatto scoprire qualcosa di nuovo!
-Se vuoi smanettare con l’algoritmo, trovi il <strong>codice sorgente completo</strong> a <a href="https://github.com/lucadivit/CrystalStructureAlgorithm">questo link</a>.
-E se ti sei innamorato o innamorata di CryStAl come è successo a me, ti consiglio di dare un’occhiata anche al <strong><a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method">paper</a></strong>
+Se vuoi smanettare con l’algoritmo, trovi il <strong>codice sorgente completo</strong> a <a href="https://github.com/lucadivit/CrystalStructureAlgorithm" target="_blank">questo link</a>.
+E se ti sei innamorato o innamorata di CryStAl come è successo a me, ti consiglio di dare un’occhiata anche al <a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method" target="_blank"><strong>paper</strong></a>
 da cui tutto è partito.</p>
 <p>Alla prossima.</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
@@ -447,8 +447,8 @@ da cui tutto è partito.</p>
         <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/it/metaeuristica/not-only-backprop/" title="BackProp? Anche No">BackProp? Anche No</a></li>
-<li><a href="https://www.lucadivita.it/it/tra-codice-e-vita/elogio-al-quasi-ottimo/" title="Elogio Al (quasi) Ottimo">Elogio Al (quasi) Ottimo</a></li>
+<li><a href="https://www.lucadivita.it/it/metaeuristica/not-only-backprop/" title="BackProp? Anche No" target="_blank">BackProp? Anche No</a></li>
+<li><a href="https://www.lucadivita.it/it/tra-codice-e-vita/elogio-al-quasi-ottimo/" title="Elogio Al (quasi) Ottimo" target="_blank">Elogio Al (quasi) Ottimo</a></li>
 </ul>
 </section>
 <section class="references">
@@ -458,25 +458,25 @@ da cui tutto è partito.</p>
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="https://it.wikipedia.org/wiki/NP-completo">https://it.wikipedia.org/wiki/NP-completo</a>
+            <a href="https://it.wikipedia.org/wiki/NP-completo" target="_blank">https://it.wikipedia.org/wiki/NP-completo</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche">https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche</a>
+            <a href="https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche" target="_blank">https://it.wikipedia.org/wiki/Algoritmo_delle_colonie_di_formiche</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Particle_Swarm_Optimization">https://it.wikipedia.org/wiki/Particle_Swarm_Optimization</a>
+            <a href="https://it.wikipedia.org/wiki/Particle_Swarm_Optimization" target="_blank">https://it.wikipedia.org/wiki/Particle_Swarm_Optimization</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Reticolo_di_Bravais">https://it.wikipedia.org/wiki/Reticolo_di_Bravais</a>
+            <a href="https://it.wikipedia.org/wiki/Reticolo_di_Bravais" target="_blank">https://it.wikipedia.org/wiki/Reticolo_di_Bravais</a>
         </li>
         <li>
-            <a href="https://www.indusmic.com/post/bird-function">https://www.indusmic.com/post/bird-function</a>
+            <a href="https://www.indusmic.com/post/bird-function" target="_blank">https://www.indusmic.com/post/bird-function</a>
         </li>
         <li>
-            <a href="https://github.com/lucadivit/CrystalStructureAlgorithm">https://github.com/lucadivit/CrystalStructureAlgorithm</a>
+            <a href="https://github.com/lucadivit/CrystalStructureAlgorithm" target="_blank">https://github.com/lucadivit/CrystalStructureAlgorithm</a>
         </li>
         <li>
-            <a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method">https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method</a>
+            <a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method" target="_blank">https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method</a>
         </li>
     </ul>
 </section>

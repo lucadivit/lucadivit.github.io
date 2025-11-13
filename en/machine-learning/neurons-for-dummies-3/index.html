@@ -144,11 +144,11 @@
 <p>And here we are, with the <strong>third part</strong> of the article series dedicated to neurons. At first, I had only planned two, but what can I say? 
 I got carried away. I couldn’t just leave you hanging without explaining why neural networks are made up of <strong>so many neurons</strong> or how we arrive at the 
 <strong>weight update formulation</strong>. <strong>I would never forgive myself</strong>. 
-Anyway, in the <a href="/en/machine-learning/neurons-for-dummies-1/">first part</a> I explained <strong>how a neuron makes predictions</strong>, 
-and in the <a href="/en/machine-learning/neurons-for-dummies-2/">second part</a> I explained <strong>how learning works</strong>. 
+Anyway, in the <a href="/en/machine-learning/neurons-for-dummies-1/" target="_blank">first part</a> I explained <strong>how a neuron makes predictions</strong>, 
+and in the <a href="/en/machine-learning/neurons-for-dummies-2/" target="_blank">second part</a> I explained <strong>how learning works</strong>. 
 This third part focuses on a few aspects I had left out, but that can be <strong>very useful</strong>. As the saying goes, everything adds flavor to the stew, right!?</p>
 <h3 id="the-chain-rule">The Chain Rule<a class="headerlink" href="#the-chain-rule" title="Permanent link"> </a></h3>
-<p>The <a href="https://en.wikipedia.org/wiki/Chain_rule">chain rule</a> is a differentiation rule for <strong>composite</strong> functions, meaning functions<br/>
+<p>The <a href="https://en.wikipedia.org/wiki/Chain_rule" target="_blank">chain rule</a> is a differentiation rule for <strong>composite</strong> functions, meaning functions<br/>
 that <strong>wrap</strong> other functions inside them. Simply put:  </p>
 <blockquote>
 <p>The derivative of a composite function is obtained by differentiating the outer function and multiplying by the derivative of the inner function.</p>
@@ -200,7 +200,7 @@ $$</div>
 <p>In this section we look at <strong>how we arrive</strong> at the formulation for gradient descent. This is not a math textbook, just a way to offer 
 a <strong>general intuition</strong> of why it works, so I’ll omit many technical details to keep it simple.<br/>
 <strong>Math purists among you, forgive me.</strong><br/>
-First, let’s introduce the <strong><a href="https://en.wikipedia.org/wiki/Taylor_series">Taylor Series</a></strong>. This allows us to <strong>approximate a function</strong> <span class="math">\(f(x)\)</span> 
+First, let’s introduce the <a href="https://en.wikipedia.org/wiki/Taylor_series" target="_blank"><strong>Taylor Series</strong></a>. This allows us to <strong>approximate a function</strong> <span class="math">\(f(x)\)</span> 
 near a known point <span class="math">\(x_0\)</span>, using the derivatives of <span class="math">\(f\)</span> at that point. Isn't that exactly what we do with the loss function?! 
 We <strong>evaluate</strong> the function near our current point, to <strong>decide</strong> where to go next.<br/>
 Mathematically, it’s written like this:
@@ -281,7 +281,7 @@ $$</div>
 <div class="math">$$
 f(x_{t+1}) \approx f(x_t) - \eta \cdot f'(x_t)^2
 $$</div>
-<p>Now suppose <span class="math">\(f\)</span> is a <strong><a href="https://en.wikipedia.org/wiki/Convex_function">Convex Function</a></strong> and <strong><a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">Lipschitz Continuous</a></strong>, 
+<p>Now suppose <span class="math">\(f\)</span> is a <a href="https://en.wikipedia.org/wiki/Convex_function" target="_blank"><strong>Convex Function</strong></a> and <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity"><strong>Lipschitz Continuous</strong></a>, 
 we can then assert this <strong>inequality</strong>:</p>
 <div class="math">$$
 f(x_{t+1}) \leq f(x_t) - \frac{\eta}{2} \cdot f'(x_t)^2
@@ -301,7 +301,7 @@ $$</div>
 <p>So, if <span class="math">\(f\)</span> is the <strong>loss function</strong> and <span class="math">\(x\)</span> is some <strong>generic weight</strong>,<br/>
 we’ve just <strong>derived</strong> the formula for gradient descent.</p>
 <p>This was meant to give a "simple" <strong>intuition</strong>. 
-If you're looking for a formal, rigorous proof, I recommend <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf">this source</a>.</p>
+If you're looking for a formal, rigorous proof, I recommend <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf" target="_blank">this source</a>.</p>
 <h3 id="about-activation-functions">About Activation Functions<a class="headerlink" href="#about-activation-functions" title="Permanent link"> </a></h3>
 <p>In this section we finally answer why the <strong>Heaviside Step</strong> was ruthlessly <strong>discarded</strong> as an activation function. 
 If you’ve read the whole article, you’ve seen that <strong>backpropagation</strong> requires this computation:</p>
@@ -315,13 +315,13 @@ $$</div>
 </ul>
 <p>To compute these derivatives, both the loss <span class="math">\(L\)</span> and the activation <span class="math">\(\sigma\)</span> <strong>must be differentiable</strong>. 
 The trouble is that the <strong>Heaviside step</strong> has a <strong>discontinuity</strong> at <span class="math">\(x = 0\)</span>, so it’s not classically differentiable. 
-(Strictly speaking it <em>is</em> differentiable in the <strong>theory of distributions</strong>: its derivative is the <strong><a href="https://en.wikipedia.org/wiki/Dirac_delta_function">Dirac Delta</a></strong>.) 
-But that derivative isn’t something we can drop directly into our algorithm. Notice that <strong><a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">ReLU</a></strong> is also non-differentiable at <span class="math">\(x = 0\)</span>, yet no one rejects it for that reason. 
+(Strictly speaking it <em>is</em> differentiable in the <strong>theory of distributions</strong>: its derivative is the <a href="https://en.wikipedia.org/wiki/Dirac_delta_function" target="_blank"><strong>Dirac Delta</strong></a>.) 
+But that derivative isn’t something we can drop directly into our algorithm. Notice that <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)" target="_blank"><strong>ReLU</strong></a> is also non-differentiable at <span class="math">\(x = 0\)</span>, yet no one rejects it for that reason. 
 In the image below, you can see how it <strong>behaves</strong>:</p>
 <p class="image-caption"><img alt="ReLU" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/relu.png"/>
 Figure 2. ReLU</p>
 <p><strong>So why all the hostility toward Heaviside?</strong> </p>
-<p>Although ReLU is non-differentiable at <span class="math">\(x = 0\)</span>, it is <strong>continuous</strong> there, so we can assign an <strong>artificial</strong> sub-gradient between 0 and 1: the function is <strong><a href="https://en.wikipedia.org/wiki/Subderivative">sub-differentiable</a></strong>. 
+<p>Although ReLU is non-differentiable at <span class="math">\(x = 0\)</span>, it is <strong>continuous</strong> there, so we can assign an <strong>artificial</strong> sub-gradient between 0 and 1: the function is <a href="https://en.wikipedia.org/wiki/Subderivative" target="_blank"><strong>sub-differentiable</strong></a>. 
 With Heaviside that’s <strong>impossible</strong>. And even if (for argument’s sake) we chose to use the Dirac Delta as its derivative... look here:</p>
 <p class="image-caption"><img alt="Dirac Delta" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
 Figure 3. Dirac Delta</p>
@@ -339,12 +339,12 @@ First examine the <strong>transfer function</strong>. For the two-dimensional AN
 net = w_1 \cdot x_1 + w_2 \cdot x_2 + b
 $$</div>
 <p>
-For some of you, this formula won’t mean much. For others, it may dredge up bad memories of the <strong><a href="https://en.wikipedia.org/wiki/Linear_equation">line equation</a></strong> in its implicit form. 
+For some of you, this formula won’t mean much. For others, it may dredge up bad memories of the <a href="https://en.wikipedia.org/wiki/Linear_equation" target="_blank"><strong>line equation</strong></a> in its implicit form. 
 Back-propagation is finding the <strong>line’s coefficients</strong> so that we can do this:</p>
 <p class="image-caption"><img alt="Line AND" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/retta_and.png"/>
 Figure 4. Line on the AND Problem</p>
 <p>That is, <strong>separate the 0-cases from the 1-cases</strong>. If you can do that, the data are <strong>linearly separable</strong>, and one perceptron suffices.<br/>
-Now look at the <strong><a href="https://en.wikipedia.org/wiki/Exclusive_or">XOR</a></strong> problem. It’s a <strong>logical operation</strong> like the AND problem, but it has a different truth table:</p>
+Now look at the <a href="https://en.wikipedia.org/wiki/Exclusive_or" target="_blank"><strong>XOR</strong></a> problem. It’s a <strong>logical operation</strong> like the AND problem, but it has a different truth table:</p>
 <div class="math">$$
 \begin{array}{|r|r|r|}
 \hline
@@ -411,7 +411,7 @@ it can effortlessly pull off this <strong>monstrosity</strong>.</p>
 <p class="image-caption"><img alt="n-segment Boundary" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/n_layer.png"/>
 Figure 8. Network Decision Boundary with Many Neurons</p>
 <p><strong>One last note</strong> before we get to the conclusions. For simplicity, we focused on the <strong>two-dimensional</strong> case and therefore talked about <strong>lines</strong>, but the same reasoning holds 
-in higher-dimensional spaces. There, we speak of <strong><a href="https://en.wikipedia.org/wiki/Hyperplane">hyperplanes</a></strong> instead of lines.</p>
+in higher-dimensional spaces. There, we speak of <a href="https://en.wikipedia.org/wiki/Hyperplane" target="_blank"><strong>hyperplanes</strong></a> instead of lines.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>Alright folks, we’ve reached the <strong>end</strong> of our series of articles on the neuron. And to borrow a famous quote:</p>
 <blockquote>
@@ -504,8 +504,8 @@ I hope you enjoyed this series as much as I enjoyed writing it.</p>
         <a class="headerlink" href="#Related Posts" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1">Neurons for Dummies - 1</a></li>
-<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
+<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1" target="_blank">Neurons for Dummies - 1</a></li>
+<li><a href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2" target="_blank">Neurons for Dummies - 2</a></li>
 </ul>
 </section>
 <section class="references">
@@ -515,43 +515,43 @@ I hope you enjoyed this series as much as I enjoyed writing it.</p>
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-1/">/en/machine-learning/neurons-for-dummies-1/</a>
+            <a href="/en/machine-learning/neurons-for-dummies-1/" target="_blank">/en/machine-learning/neurons-for-dummies-1/</a>
         </li>
         <li>
-            <a href="/en/machine-learning/neurons-for-dummies-2/">/en/machine-learning/neurons-for-dummies-2/</a>
+            <a href="/en/machine-learning/neurons-for-dummies-2/" target="_blank">/en/machine-learning/neurons-for-dummies-2/</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Chain_rule">https://en.wikipedia.org/wiki/Chain_rule</a>
+            <a href="https://en.wikipedia.org/wiki/Chain_rule" target="_blank">https://en.wikipedia.org/wiki/Chain_rule</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Taylor_series">https://en.wikipedia.org/wiki/Taylor_series</a>
+            <a href="https://en.wikipedia.org/wiki/Taylor_series" target="_blank">https://en.wikipedia.org/wiki/Taylor_series</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Convex_function">https://en.wikipedia.org/wiki/Convex_function</a>
+            <a href="https://en.wikipedia.org/wiki/Convex_function" target="_blank">https://en.wikipedia.org/wiki/Convex_function</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity">https://en.wikipedia.org/wiki/Lipschitz_continuity</a>
+            <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity" target="_blank">https://en.wikipedia.org/wiki/Lipschitz_continuity</a>
         </li>
         <li>
-            <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf">https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf</a>
+            <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf" target="_blank">https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Dirac_delta_function">https://en.wikipedia.org/wiki/Dirac_delta_function</a>
+            <a href="https://en.wikipedia.org/wiki/Dirac_delta_function" target="_blank">https://en.wikipedia.org/wiki/Dirac_delta_function</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)">https://en.wikipedia.org/wiki/Rectifier_(neural_networks)</a>
+            <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)" target="_blank">https://en.wikipedia.org/wiki/Rectifier_(neural_networks)</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Subderivative">https://en.wikipedia.org/wiki/Subderivative</a>
+            <a href="https://en.wikipedia.org/wiki/Subderivative" target="_blank">https://en.wikipedia.org/wiki/Subderivative</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Linear_equation">https://en.wikipedia.org/wiki/Linear_equation</a>
+            <a href="https://en.wikipedia.org/wiki/Linear_equation" target="_blank">https://en.wikipedia.org/wiki/Linear_equation</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Exclusive_or">https://en.wikipedia.org/wiki/Exclusive_or</a>
+            <a href="https://en.wikipedia.org/wiki/Exclusive_or" target="_blank">https://en.wikipedia.org/wiki/Exclusive_or</a>
         </li>
         <li>
-            <a href="https://en.wikipedia.org/wiki/Hyperplane">https://en.wikipedia.org/wiki/Hyperplane</a>
+            <a href="https://en.wikipedia.org/wiki/Hyperplane" target="_blank">https://en.wikipedia.org/wiki/Hyperplane</a>
         </li>
     </ul>
 </section>

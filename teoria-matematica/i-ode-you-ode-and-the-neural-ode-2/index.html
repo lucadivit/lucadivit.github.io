@@ -144,7 +144,7 @@
 <p>Rieccoci con la <strong>seconda parte</strong> della serie dedicata alle <strong>Neural ODE</strong>. Se il primo articolo è stata una violenza mentale 
 questo lo sarà un po' meno. Ma non illudetevi: non è ancora una passeggiata di salute. Abbiamo già affondato le mani nella melma di <strong>derivata</strong>, 
 <strong>integrale</strong> ed <strong>equazione differenziale</strong>. E ora, visto che ci siamo già rovinati la manicure, tanto vale farla finita e 
-rispondiamo a una delle domande lasciate in sospeso nel <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">primo articolo</a>. 
+rispondiamo a una delle domande lasciate in sospeso nel <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">primo articolo</a>. 
 Quindi senza indugio (con segugio) iniziamo, e vediamo <strong>come</strong> si risolve una ODE.</p>
 <h3 id="ode-al-metodo">ODE Al Metodo<a class="headerlink" href="#ode-al-metodo" title="Permanent link"> </a></h3>
 <p>Lo so, lo sento che non vedevate l'ora di sapere come si risolve una ODE e finalmente eccoci qua.
@@ -175,7 +175,7 @@ Non c'è un unico metodo a disposizione, ma in base alla struttura della ODE ne 
 <li>...e altri ancora, ma fidatevi, la lista è <strong>lunga</strong></li>
 </ul>
 <p>Li vedremo tutti? <strong>Assolutamente no</strong>. Vedremo i primi due giusto per mostrare che non sto inventando roba, ma se volete una panoramica completa
-e dettagliata, vi consiglio di dare una letta <a href="https://users.math.msu.edu/users/gnagy/teaching/ode.pdf">qui</a>.</p>
+e dettagliata, vi consiglio di dare una letta <a href="https://users.math.msu.edu/users/gnagy/teaching/ode.pdf" target="_blank">qui</a>.</p>
 <h4 id="separazione-delle-variabili">Separazione delle Variabili<a class="headerlink" href="#separazione-delle-variabili" title="Permanent link"> </a></h4>
 <p>Il metodo di <strong>separazione delle variabili</strong> è uno di quei metodi che <em>vabbè dai è fichissimo, ma quando mai potrò usarlo?</em>. Infatti è utilizzabile
 <strong>solo</strong> quando una ODE può essere scritta in questo modo:</p>
@@ -198,7 +198,7 @@ sempre un <strong>intruso</strong>, sia esso relativo a <span class="math">\(y\)
 \int \frac{dy}{f(y)} = \int g(t) \cdot dt
 $$</div>
 <h5 id="esempio">Esempio<a class="headerlink" href="#esempio" title="Permanent link"> </a></h5>
-<p>Bene finalmente possiamo vedere un <strong>esempio</strong>. In <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge">questo paragrafo</a> 
+<p>Bene finalmente possiamo vedere un <strong>esempio</strong>. In <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge" target="_blank">questo paragrafo</a>
 vi avevo buttato lì una ODE insieme alla sua soluzione, senza dirvi da <strong>dove è scappata fuori</strong>. Riprendiamola:</p>
 <div class="math">$$
 \frac{dy}{dt} = 3y(t)
@@ -221,7 +221,7 @@ per risalire alla <strong>primitiva</strong>. Integriamo quindi, in maniera <str
 <div class="math">$$
 \int \frac{1}{y(t)} \cdot dy = \int 3 \cdot dt
 $$</div>
-<p>Dalla tabella degli <a href="https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali">integrali notevoli</a> risolviamo molto <strong>agevolmente</strong> questi integrali:</p>
+<p>Dalla tabella degli <a href="https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali" target="_blank">integrali notevoli</a> risolviamo molto <strong>agevolmente</strong> questi integrali:</p>
 <div class="math">$$
 \ln \left | y(t) \right | + C_1 = 3t + C_2 
 $$</div>
@@ -229,7 +229,7 @@ $$</div>
 <div class="math">$$
 \ln \left | y(t) \right | = 3t + (C_2 - C_1)
 $$</div>
-<p>Dato che <span class="math">\(C_2\)</span> e <span class="math">\(C_1\)</span> sono due <strong>costanti arbitrarie</strong>, che possono assumere qualsiasi valore (riflettete su questo punto, <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#integrale-indefinito">qui</a>)
+<p>Dato che <span class="math">\(C_2\)</span> e <span class="math">\(C_1\)</span> sono due <strong>costanti arbitrarie</strong>, che possono assumere qualsiasi valore (riflettete su questo punto, <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#integrale-indefinito" target="_blank">qui</a>)
 possiamo, a cuor leggero, porre:</p>
 <div class="math">$$
 (C_2 - C_1) = C
@@ -238,7 +238,7 @@ $$</div>
 <div class="math">$$
 \ln \left | y(t) \right | = 3t + C
 $$</div>
-<p>Per <strong>isolare</strong> la <span class="math">\(y\)</span> dobbiamo invertire il <strong>logaritmo naturale</strong>, quindi usiamo entrambi i termini come esponenti di <a href="https://it.wikipedia.org/wiki/Logaritmo_naturale"><span class="math">\(e\)</span></a> e otteniamo:</p>
+<p>Per <strong>isolare</strong> la <span class="math">\(y\)</span> dobbiamo invertire il <strong>logaritmo naturale</strong>, quindi usiamo entrambi i termini come esponenti di <a href="https://it.wikipedia.org/wiki/Logaritmo_naturale" target="_blank"><span class="math">\(e\)</span></a> e otteniamo:</p>
 <div class="math">$$
 y(t) = e^{3t + C} = e^{3t} \cdot e^C
 $$</div>
@@ -272,7 +272,7 @@ Intendo questa:</p>
 y' = 2yt + t
 $$</div>
 <p>Piccola nota, la <span class="math">\(y\)</span> è <strong>sempre</strong> in funzione del tempo, quindi capiterà che leggiate <span class="math">\(y\)</span> e non <span class="math">\(y(t)\)</span>, ma sono del tutto <strong>equivalenti</strong>.</p>
-<p>Bene, con il metodo del <strong>fattore integrante</strong> possiamo arrivare dove la separazione delle variabili non è arrivata. Questo metodo richiede che la ODE sia <strong>lineare di primo grado</strong> (leggi <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge">qui</a>), 
+<p>Bene, con il metodo del <strong>fattore integrante</strong> possiamo arrivare dove la separazione delle variabili non è arrivata. Questo metodo richiede che la ODE sia <strong>lineare di primo grado</strong> (leggi <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge" target="_blank">qui</a>), 
 e che possa essere scritta nella forma:</p>
 <p><a id="formula-fattore-integrante-base"></a>
 </p>
@@ -289,7 +289,7 @@ $$</div>
 <div class="math">$$y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt} = e^{\int p(t) dt} \cdot q(t)$$</div>
 <p class="formula-caption">
 Formula 2. Fattore Integrante</p>
-<p>A questo punto ricorriamo ad un <strong>trucchetto matematico</strong>. Prendiamo <a href="https://it.wikipedia.org/wiki/Regola_del_prodotto">la regola di derivazione del prodotto tra funzioni</a>:</p>
+<p>A questo punto ricorriamo ad un <strong>trucchetto matematico</strong>. Prendiamo <a href="https://it.wikipedia.org/wiki/Regola_del_prodotto" target="_blank">la regola di derivazione del prodotto tra funzioni</a>:</p>
 <p><a id="derivata-prodotto"></a>
 </p>
 <div class="math">$$\frac{d}{dt} \left( f(t) \cdot g(t) \right) = f'(t) \cdot g(t) + f(t) \cdot g'(t)$$</div>
@@ -320,7 +320,7 @@ $$</div>
 <div class="math">$$
 \mu'(t) = p(t) \cdot e^{\int p(t) dt}
 $$</div>
-<p>Facendo le dovute <strong>sostituzioni</strong> nella <a href="#derivata-prodotto">Formula 3</a> abbiamo:</p>
+<p>Facendo le dovute <strong>sostituzioni</strong> nella <a href="#derivata-prodotto" target="_blank">Formula 3</a> abbiamo:</p>
 <div class="math">$$
 \frac{d}{dt} \left( f(t) \cdot g(t) \right) = \frac{d}{dt} \left( y \cdot \mu(t) \right)
 $$</div>
@@ -333,7 +333,7 @@ $$</div>
 <div class="math">$$
 \Rightarrow \frac{d}{dt} \left( y \cdot \mu(t) \right) = y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt}
 $$</div>
-<p>Dato che l'ultima volta che ho controllato, valeva ancora la <a href="#formula-fattore-integrante">Formula 2</a>, possiamo scrivere:</p>
+<p>Dato che l'ultima volta che ho controllato, valeva ancora la <a href="#formula-fattore-integrante" target="_blank">Formula 2</a>, possiamo scrivere:</p>
 <div class="math">$$
 \frac{d}{dt} \left( y \cdot e^{\int p(t) dt} \right) = e^{\int p(t) dt} \cdot q(t)
 $$</div>
@@ -372,7 +372,7 @@ $$</div>
 <li><span class="math">\(p(t) = -2t\)</span></li>
 <li><span class="math">\(q(t) = t\)</span></li>
 </ul>
-<p>Dalla <a href="#fattore-integrante-soluzione">formula della soluzione</a> del fattore integrante, dobbiamo calcolare:</p>
+<p>Dalla <a href="#fattore-integrante-soluzione" target="_blank">formula della soluzione</a> del fattore integrante, dobbiamo calcolare:</p>
 <div class="math">$$
 \int p(t) = \int -2t = -t^2 + C_1
 $$</div>
@@ -388,7 +388,7 @@ $$</div>
 \int t \cdot e^{-t^2}
 $$</div>
 <p>Lo sento, sento il <em>terrore che attanaglia i cuori</em> di chi ha fatto Analisi 1, perché 
-la risoluzione di questo integrale richiede il <a href="https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf"><strong>metodo della sostituzione</strong></a>, 
+la risoluzione di questo integrale richiede il <a href="https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf" target="_blank"><strong>metodo della sostituzione</strong></a>, 
 che non sto qui a spiegare ma vi lascio una fonte per <strong>approfondire</strong>. Posto quindi</p>
 <div class="math">$$
 u = -t^2 \Rightarrow du = -2t dt \Rightarrow tdt = -\frac{du}{2}
@@ -454,7 +454,7 @@ Anche qui, come nel caso precedente, abbiamo <strong>tre famiglie</strong> diffe
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Giuro che ero partito con le <strong>migliori intenzioni</strong>, ma mi sono lasciato prendere la mano. Per cui eccoci qui, giunti alla fine di una seconda
 parte <strong>matematicamente</strong> abbastanza impegnativa. La terza parte, a questo punto, non vi prometto che lo sarà meno ma siete in ballo quindi ora <strong>BALLATE!</strong>
-Come al solito, eccovi il <a href="https://github.com/lucadivit/NeuralODEBlog">link al repo</a>. Ah e se non si fosse capito, nel prossimo articolo della nostra amata serie, parlerò dei <strong>metodi numerici</strong>.</p>
+Come al solito, eccovi il <a href="https://github.com/lucadivit/NeuralODEBlog" target="_blank">link al repo</a>. Ah e se non si fosse capito, nel prossimo articolo della nostra amata serie, parlerò dei <strong>metodi numerici</strong>.</p>
 <p>Alla Prossima.</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
@@ -539,8 +539,8 @@ Come al solito, eccovi il <a href="https://github.com/lucadivit/NeuralODEBlog">l
         <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
-<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1" target="_blank">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3" target="_blank">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 </ul>
 </section>
 <section class="references">
@@ -550,31 +550,31 @@ Come al solito, eccovi il <a href="https://github.com/lucadivit/NeuralODEBlog">l
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
         </li>
         <li>
-            <a href="https://users.math.msu.edu/users/gnagy/teaching/ode.pdf">https://users.math.msu.edu/users/gnagy/teaching/ode.pdf</a>
+            <a href="https://users.math.msu.edu/users/gnagy/teaching/ode.pdf" target="_blank">https://users.math.msu.edu/users/gnagy/teaching/ode.pdf</a>
         </li>
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#quando-il-cambiamento-diventa-legge</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali">https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali</a>
+            <a href="https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali" target="_blank">https://it.wikipedia.org/wiki/Tavola_degli_integrali_indefiniti_di_funzioni_razionali</a>
         </li>
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#integrale-indefinito">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#integrale-indefinito</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#integrale-indefinito" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#integrale-indefinito</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Logaritmo_naturale">https://it.wikipedia.org/wiki/Logaritmo_naturale</a>
+            <a href="https://it.wikipedia.org/wiki/Logaritmo_naturale" target="_blank">https://it.wikipedia.org/wiki/Logaritmo_naturale</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Regola_del_prodotto">https://it.wikipedia.org/wiki/Regola_del_prodotto</a>
+            <a href="https://it.wikipedia.org/wiki/Regola_del_prodotto" target="_blank">https://it.wikipedia.org/wiki/Regola_del_prodotto</a>
         </li>
         <li>
-            <a href="https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf">https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf</a>
+            <a href="https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf" target="_blank">https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf</a>
         </li>
         <li>
-            <a href="https://github.com/lucadivit/NeuralODEBlog">https://github.com/lucadivit/NeuralODEBlog</a>
+            <a href="https://github.com/lucadivit/NeuralODEBlog" target="_blank">https://github.com/lucadivit/NeuralODEBlog</a>
         </li>
     </ul>
 </section>

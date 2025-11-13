@@ -143,11 +143,11 @@
             
 <p>Ed eccoci qui, con la <strong>terza parte</strong> dell'articolo dedicato al neurone. Inizialmente ne avevo preventivate due ma che volete che vi dica, 
 mi sono lasciato prendere la mano. Non potevo mica lasciarvi senza spiegare perché le reti sono composte da <strong>tanti neuroni</strong> o come si arriva alla 
-<strong>formulazione dell'aggiornamento dei pesi</strong>. <strong>Non me lo sarei mai perdonato</strong>. In ogni caso, nella <a href="/it/machine-learning/neurons-for-dummies-1/">prima parte</a> 
-ho spiegato <strong>come un neurone predice</strong>, nella <a href="/it/machine-learning/neurons-for-dummies-2/">seconda parte</a> ho spiegato <strong>come avviene l'apprendimento</strong>. 
+<strong>formulazione dell'aggiornamento dei pesi</strong>. <strong>Non me lo sarei mai perdonato</strong>. In ogni caso, nella <a href="/it/machine-learning/neurons-for-dummies-1/" target="_blank">prima parte</a> 
+ho spiegato <strong>come un neurone predice</strong>, nella <a href="/it/machine-learning/neurons-for-dummies-2/" target="_blank">seconda parte</a> ho spiegato <strong>come avviene l'apprendimento</strong>. 
 Questa terza parte invece è dedicata ad alcuni aspetti che avevo lasciato fuori, ma che possono tornare <strong>utili</strong>. Come si suol dire tutto fa brodo no!?</p>
 <h3 id="la-regola-della-catena">La Regola Della Catena<a class="headerlink" href="#la-regola-della-catena" title="Permanent link"> </a></h3>
-<p>La <a href="https://it.wikipedia.org/wiki/Regola_della_catena">regola della catena</a> è una regola di derivazione per funzioni <strong>composte</strong>, cioè funzioni
+<p>La <a href="https://it.wikipedia.org/wiki/Regola_della_catena" target="_blank">regola della catena</a> è una regola di derivazione per funzioni <strong>composte</strong>, cioè funzioni
 che <strong>incapsulano</strong> altre funzioni al loro interno.
 In parole povere:</p>
 <blockquote>
@@ -201,7 +201,7 @@ $$</div>
 <p>In questa sezione vediamo <strong>come si arriva</strong> alla formulazione della discesa del gradiente. Non vuole essere un trattato di matematica, ma solo fornire <strong>un’idea generale</strong> del perché funziona, quindi ometterò molti dettagli tecnici per non 
 appesantire la trattazione.<br/>
 <strong>I puristi della matematica tra voi mi perdoneranno</strong>.<br/>
-Prima di tutto introduciamo la <strong><a href="https://it.wikipedia.org/wiki/Serie_di_Taylor">Serie di Taylor</a></strong>. Questa permette di <strong>approssimare una funzione</strong> <span class="math">\(f(x)\)</span> 
+Prima di tutto introduciamo la <a href="https://it.wikipedia.org/wiki/Serie_di_Taylor" target="_blank"><strong>Serie di Taylor</strong></a>. Questa permette di <strong>approssimare una funzione</strong> <span class="math">\(f(x)\)</span> 
 in un punto vicino uno noto <span class="math">\(x_0\)</span>, utilizzando le derivate di <span class="math">\(f\)</span> calcolate in quel punto. E non è proprio quello che facciamo con la funzione di errore?! 
 <strong>Valutiamo</strong> la funzione nei dintorni di dove ci troviamo, per <strong>scegliere</strong> dove andare.<br/>
 Ma torniamo a noi. Matematicamente si scrive così:
@@ -283,7 +283,7 @@ $$</div>
 <div class="math">$$
 f(x_{t+1}) \approx f(x_t) -\eta \cdot f'(x_t)^2
 $$</div>
-<p>A questo punto supponiamo che <span class="math">\(f\)</span> sia una <strong><a href="https://it.wikipedia.org/wiki/Funzione_convessa">Funzione Convessa</a></strong> e <strong><a href="https://it.wikipedia.org/wiki/Funzione_lipschitziana">Lipschitziana</a></strong>, 
+<p>A questo punto supponiamo che <span class="math">\(f\)</span> sia una <a href="https://it.wikipedia.org/wiki/Funzione_convessa" target="_blank"><strong>Funzione Convessa</strong></a> e <a href="https://it.wikipedia.org/wiki/Funzione_lipschitziana" target="_blank"><strong>Lipschitziana</strong></a>, 
 possiamo affermare la seguente <strong>disuguaglianza</strong>:</p>
 <div class="math">$$
 f(x_{t+1}) \leq f(x_t) - \frac{\eta}{2} \cdot f'(x_t)^2
@@ -303,7 +303,7 @@ $$</div>
 <p>Quindi, se poniamo <span class="math">\(f\)</span> come la <strong>funzione di errore</strong> e <span class="math">\(x\)</span> come un <strong>generico peso</strong>,
 abbiamo appena <strong>dimostrato</strong> la formula della discesa del gradiente.</p>
 <p>Questa dissertazione è solo per fornire una "semplice" <strong>intuizione</strong>.
-Se cercate una dimostrazione formale e rigorosa, vi consiglio di dare un’occhiata <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf">qui</a>.</p>
+Se cercate una dimostrazione formale e rigorosa, vi consiglio di dare un’occhiata <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf" target="_blank">qui</a>.</p>
 <h3 id="sulle-funzioni-di-attivazione">Sulle Funzioni Di Attivazione<a class="headerlink" href="#sulle-funzioni-di-attivazione" title="Permanent link"> </a></h3>
 <p>In questa sezione rispondiamo finalmente al perché il <strong>Gradino di Heaviside</strong> è stato spietatamente <strong>scartato</strong> come funzione di attivazione.
 Se avete letto tutto l'articolo avete anche visto che la <strong>backpropagation</strong> richiede questo calcolo:</p>
@@ -317,13 +317,13 @@ $$</div>
 </ul>
 <p>Per poter calcolare queste derivate, sia la funzione di errore <span class="math">\(L\)</span>, sia la funzione di attivazione <span class="math">\(\sigma\)</span> <strong>devono essere derivabili</strong>.
 Il problema è che il <strong>gradino di Heaviside</strong> ha una <strong>discontinuità</strong> in <span class="math">\(x=0\)</span>, per cui non è derivabile e questo è un problema. O meglio, per essere onesti, non è derivabile nel senso classico
-ma lo è nella <strong>teoria delle distribuzioni</strong>. Difatti la sua derivata è la <strong><a href="https://it.wikipedia.org/wiki/Delta_di_Dirac">Delta di Dirac</a></strong>. Ma senza perderci in troppe astrazioni, diciamo che non è una derivata che 
-possiamo usare direttamente nel nostro algoritmo. Infatti anche la funzione di attivazione <strong><a href="https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)">ReLU</a></strong> non è derivabile in <span class="math">\(x=0\)</span>, ma nessuno la scarta per questo.
+ma lo è nella <strong>teoria delle distribuzioni</strong>. Difatti la sua derivata è la <a href="https://it.wikipedia.org/wiki/Delta_di_Dirac" target="_blank"><strong>Delta di Dirac</strong></a>. Ma senza perderci in troppe astrazioni, diciamo che non è una derivata che 
+possiamo usare direttamente nel nostro algoritmo. Infatti anche la funzione di attivazione <a href="https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)" target="_blank"><strong>ReLU</strong></a> non è derivabile in <span class="math">\(x=0\)</span>, ma nessuno la scarta per questo.
 Nell'immagine seguente potete vedere il suo <strong>andamento</strong>:</p>
 <p><img alt="ReLU" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/relu.png"/>
 Figura 2. ReLU</p>
 <p><strong>Quindi, perché tutta questa avversione verso Heaviside?</strong></p>
-<p>Presto detto: sebbene ReLU non sia derivabile in <span class="math">\(x=0\)</span>, <strong>non è discontinua</strong> in quel punto. Possiamo quindi assegnare <strong>artificialmente</strong> un valore di derivata tra 0 e 1: la funzione è <strong><a href="https://it.wikipedia.org/wiki/Subdifferenziale">subderivabile</a></strong>.
+<p>Presto detto: sebbene ReLU non sia derivabile in <span class="math">\(x=0\)</span>, <strong>non è discontinua</strong> in quel punto. Possiamo quindi assegnare <strong>artificialmente</strong> un valore di derivata tra 0 e 1: la funzione è <a href="https://it.wikipedia.org/wiki/Subdifferenziale" target="_blank"><strong>subderivabile</strong></a>.
 Con Heaviside, invece, questo <strong>non è possibile</strong>. E anche se (per assurdo) decidessimo di usare la Delta di Dirac come derivata... guardate qui:</p>
 <p class="image-caption"><img alt="Dirac Delta" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
 Figura 3. Delta di Dirac</p>
@@ -340,13 +340,13 @@ Iniziamo il ragionamento guardando alla <strong>funzione di trasferimento</stron
 net = w_1 \cdot x_1 + w_2 \cdot x_2 + b
 $$</div>
 <p>
-Ad alcuni di voi questa formula non dirà nulla. Ad altri farà riaffiorare brutti ricordi legati all'<strong><a href="https://it.wikipedia.org/wiki/Retta_nel_piano_cartesiano">equazione della retta</a></strong>, in forma implicita. 
+Ad alcuni di voi questa formula non dirà nulla. Ad altri farà riaffiorare brutti ricordi legati all'<a href="https://it.wikipedia.org/wiki/Retta_nel_piano_cartesiano" target="_blank"><strong>equazione della retta</strong></a>, in forma implicita. 
 Quindi di fatto quello che sta facendo la backpropagation è trovare i <strong>coefficienti della retta</strong> per permettere questo:</p>
 <p class="image-caption"><img alt="RettaAND" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/retta_and.png"/>
 Figura 4. Retta su Problema AND</p>
 <p>Cioè <strong>separare i casi in cui la soluzione è <span class="math">\(0\)</span> da quelli in cui è <span class="math">\(1\)</span></strong>. Riuscire a fare questo significa che possiamo <strong>separare linearmente</strong> le soluzioni del problema e abbiamo visto 
 che un singolo percettrone è perfettamente in grado di farlo.<br/>
-Consideriamo un altro problema ora, chiamato <strong><a href="https://it.wikipedia.org/wiki/Disgiunzione_esclusiva">problema XOR</a></strong>. E' un'<strong>operazione logica</strong> come il problema AND, ma ha una tabella di verità diversa:</p>
+Consideriamo un altro problema ora, chiamato <a href="https://it.wikipedia.org/wiki/Disgiunzione_esclusiva" target="_blank"><strong>problema XOR</strong></a>. E' un'<strong>operazione logica</strong> come il problema AND, ma ha una tabella di verità diversa:</p>
 <div class="math">$$
 \begin{array} 
 {|r|r|r|}
@@ -407,7 +407,7 @@ Insomma... è tranquillamente in grado di fare questa <strong>mostruosità</stro
 <p class="image-caption"><img alt="N_Bound" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_3/n_layer.png"/>
 Figura 8. Confine Decisionale della Rete con Tanti Neuroni</p>
 <p><strong>Ultima nota</strong> prima di passare alle conclusioni. Per semplicità, abbiamo considerato il caso <strong>bidimensionale</strong> e quindi abbiamo parlato di <strong>rette</strong>, ma il discorso resta valido anche per spazi a 
-più dimensioni. In quel caso non parliamo di rette ma di <strong><a href="https://it.wikipedia.org/wiki/Iperpiano">iperpiani</a></strong>.</p>
+più dimensioni. In quel caso non parliamo di rette ma di <a href="https://it.wikipedia.org/wiki/Iperpiano" target="_blank"><strong>iperpiani</strong></a>.</p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Bene ragazzi, eccoci arrivati alla <strong>fine</strong> della serie di articoli relativi al neurone. Per fare una grande citazione: </p>
 <blockquote>
@@ -499,8 +499,8 @@ vita ci sono poche cose certe: <strong>morte, tasse e un altro mio articolo</str
         <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1">Neurons for Dummies - 1</a></li>
-<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
+<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1" target="_blank">Neurons for Dummies - 1</a></li>
+<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2" target="_blank">Neurons for Dummies - 2</a></li>
 </ul>
 </section>
 <section class="references">
@@ -510,43 +510,43 @@ vita ci sono poche cose certe: <strong>morte, tasse e un altro mio articolo</str
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/it/machine-learning/neurons-for-dummies-1/">/it/machine-learning/neurons-for-dummies-1/</a>
+            <a href="/it/machine-learning/neurons-for-dummies-1/" target="_blank">/it/machine-learning/neurons-for-dummies-1/</a>
         </li>
         <li>
-            <a href="/it/machine-learning/neurons-for-dummies-2/">/it/machine-learning/neurons-for-dummies-2/</a>
+            <a href="/it/machine-learning/neurons-for-dummies-2/" target="_blank">/it/machine-learning/neurons-for-dummies-2/</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Regola_della_catena">https://it.wikipedia.org/wiki/Regola_della_catena</a>
+            <a href="https://it.wikipedia.org/wiki/Regola_della_catena" target="_blank">https://it.wikipedia.org/wiki/Regola_della_catena</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Serie_di_Taylor">https://it.wikipedia.org/wiki/Serie_di_Taylor</a>
+            <a href="https://it.wikipedia.org/wiki/Serie_di_Taylor" target="_blank">https://it.wikipedia.org/wiki/Serie_di_Taylor</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Funzione_convessa">https://it.wikipedia.org/wiki/Funzione_convessa</a>
+            <a href="https://it.wikipedia.org/wiki/Funzione_convessa" target="_blank">https://it.wikipedia.org/wiki/Funzione_convessa</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Funzione_lipschitziana">https://it.wikipedia.org/wiki/Funzione_lipschitziana</a>
+            <a href="https://it.wikipedia.org/wiki/Funzione_lipschitziana" target="_blank">https://it.wikipedia.org/wiki/Funzione_lipschitziana</a>
         </li>
         <li>
-            <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf">https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf</a>
+            <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf" target="_blank">https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Delta_di_Dirac">https://it.wikipedia.org/wiki/Delta_di_Dirac</a>
+            <a href="https://it.wikipedia.org/wiki/Delta_di_Dirac" target="_blank">https://it.wikipedia.org/wiki/Delta_di_Dirac</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)">https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)</a>
+            <a href="https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)" target="_blank">https://it.wikipedia.org/wiki/Rettificatore_(reti_neurali)</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Subdifferenziale">https://it.wikipedia.org/wiki/Subdifferenziale</a>
+            <a href="https://it.wikipedia.org/wiki/Subdifferenziale" target="_blank">https://it.wikipedia.org/wiki/Subdifferenziale</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Retta_nel_piano_cartesiano">https://it.wikipedia.org/wiki/Retta_nel_piano_cartesiano</a>
+            <a href="https://it.wikipedia.org/wiki/Retta_nel_piano_cartesiano" target="_blank">https://it.wikipedia.org/wiki/Retta_nel_piano_cartesiano</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Disgiunzione_esclusiva">https://it.wikipedia.org/wiki/Disgiunzione_esclusiva</a>
+            <a href="https://it.wikipedia.org/wiki/Disgiunzione_esclusiva" target="_blank">https://it.wikipedia.org/wiki/Disgiunzione_esclusiva</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Iperpiano">https://it.wikipedia.org/wiki/Iperpiano</a>
+            <a href="https://it.wikipedia.org/wiki/Iperpiano" target="_blank">https://it.wikipedia.org/wiki/Iperpiano</a>
         </li>
     </ul>
 </section>

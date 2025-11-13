@@ -143,11 +143,11 @@
             
 <p>Si lo so, post vacanze è dura per tutti. Ma qualcuno deve pur farlo il lavoro sporco no? Quindi riprendiamo, dopo qualche settimana di pausa,
 il nostro bel discorsetto sulle <strong>Neural ODE</strong> o <strong>NODE</strong>. Discorsetto che potete recuperare leggendo le prime tre parti linkate a fine articolo. Per farla breve abbiamo 
-parlato di <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">calcolo differenziale e calcolo integrale</a>, e metodi <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">analitici</a> 
+parlato di <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">calcolo differenziale e calcolo integrale</a>, e metodi <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">analitici</a> 
 e <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">numerici</a> per risolvere equazioni differenziali. 
 Non ci resta, finalmente aggiungerei, che vedere come mettere tutto insieme per arrivare alla formulazione di queste benedette NODE. Quindi iniziamo...</p>
 <h3 id="dal-discreto-al-continuo">Dal Discreto Al Continuo<a class="headerlink" href="#dal-discreto-al-continuo" title="Permanent link"> </a></h3>
-<p>Esistono tante architetture di reti neurali. Troppe. Tra le varie architetture ne esiste una in particolare, nota come <a href="https://arxiv.org/pdf/1512.03385"><strong>ResNet</strong></a> o 
+<p>Esistono tante architetture di reti neurali. Troppe. Tra le varie architetture ne esiste una in particolare, nota come <a href="https://arxiv.org/pdf/1512.03385" target="_blank"><strong>ResNet</strong></a> o 
 <strong>Rete Residuale</strong>. Le ResNet sono state un punto di svolta nel mondo del Deep Learning in quanto hanno permesso di superare delle problematiche di addestramento. 
 Quali, vi starete chiedendo. Vedetela così, per essere più performante una rete neurale deve essere più profonda, ma più è profonda più le performance peggiorano 
 per via di <strong>Gradient Vanishing/Explosion</strong> che non staremo qui a trattare ma fidatevi, sono brutte bestie. La particolarità di queste reti è l'utilizzo 
@@ -211,12 +211,12 @@ $$</div>
 <div class="math">$$
 x_{t} = x_{t-1} + h \cdot f(x_{t-1}, t, \theta_{t})
 $$</div>
-<p>Così spero che vada meglio. Dovreste avere familiarità ormai con la <strong>formula di Eulero</strong>. Se non l'avete, recuperatela <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">qui</a>.</p>
+<p>Così spero che vada meglio. Dovreste avere familiarità ormai con la <strong>formula di Eulero</strong>. Se non l'avete, recuperatela <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank">qui</a>.</p>
 <p>Da questa formulazione possiamo scrivere:</p>
 <div class="math">$$
 \frac{x_{t} - x_{t-1} }{h} = f(x_{t-1}, t, \theta_{t})
 $$</div>
-<p>Anche questa formulazione dovreste riconoscere, è quella del <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">rapporto incrementale</a>.
+<p>Anche questa formulazione dovreste riconoscere, è quella del <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato" target="_blank">rapporto incrementale</a>.
 Quindi, supponendo di poter agire sul valore <span class="math">\(h\)</span>, possiamo tranquillamente scrivere:</p>
 <p><a id="nn-differenziale"></a>
 </p>
@@ -237,7 +237,7 @@ Figura 5. Dal Discreto al Continuo</p>
 </blockquote>
 <p>La risposta è, come sempre: <strong>integriamo</strong>.</p>
 <h3 id="integra-che-ti-passa">Integra Che Ti Passa<a class="headerlink" href="#integra-che-ti-passa" title="Permanent link"> </a></h3>
-<p>Abbiamo appena ottenuto una bella <a href="#nn-differenziale">equazione differenziale</a> che ci dice <strong>come cambia lo stato nel tempo</strong>.
+<p>Abbiamo appena ottenuto una bella <a href="#nn-differenziale" target="_blank">equazione differenziale</a> che ci dice <strong>come cambia lo stato nel tempo</strong>.
 Bene, ma a noi interessa sapere <strong>quanto cambia</strong>, cioè:</p>
 <blockquote>
 <p>Se parto da <span class="math">\(x_0\)</span> nel tempo <span class="math">\(t_0\)</span>, dove sarò nel tempo <span class="math">\(t_N\)</span>?</p>
@@ -255,7 +255,7 @@ Non c'è più una lista di layer, ma una <em>dinamica continua che evolve nel te
 funzione <span class="math">\(f\)</span> che impara <strong>come far cambiare lo stato</strong>. E questa <span class="math">\(f\)</span>, sorpresa sorpresa, altro non è che una rete neurale.</p>
 <p>Ora viene il bello. Come <strong>integro analiticamente</strong> una <span class="math">\(f\)</span> che, ricordiamolo, è una rete neurale bella piena di ReLU, layer non lineari e pesi sparsi?</p>
 <p>La risposta veloce? <strong>Non puoi</strong>.</p>
-<p>E' per questo che vi ho scritto un intero articolo sui <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/"><strong>metodi numerici</strong></a>. Non sono mica uno sprovveduto.<br/>
+<p>E' per questo che vi ho scritto un intero articolo sui <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank"><strong>metodi numerici</strong></a>. Non sono mica uno sprovveduto.<br/>
 E ricordate nei solver, quale era il parametro che controllava il <strong>passo di integrazione</strong>? Esatto... era proprio <span class="math">\(h\)</span>.<br/>
 Quindi quell’idea introdotta nel paragrafo precedente, cioè introdurre un <span class="math">\(h\)</span> <strong>piccolo a piacere</strong>, non solo è sensata, ma è esattamente 
 quello che si va a fare.</p>
@@ -357,12 +357,12 @@ Quindi possiamo scrivere</p>
 <div class="math">$$
 \frac{da(t)}{dt} = \frac{d}{dt} \left( \frac{dL}{dx(t_i)} \right)
 $$</div>
-<p>Per il <a href="https://it.wikipedia.org/wiki/Teorema_di_Schwarz">teorema di Schwarz</a> possiamo modificarla come segue</p>
+<p>Per il <a href="https://it.wikipedia.org/wiki/Teorema_di_Schwarz" target="_blank">teorema di Schwarz</a> possiamo modificarla come segue</p>
 <div class="math">$$
 \frac{da(t)}{dt} = \frac{d}{dx(t_i)} \left( \frac{dL}{dt} \right)
 $$</div>
 <p>Ora abbiamo la Loss in funzione del tempo, ma come ben sappiamo la <em>Loss è in funzione degli stati</em> e sono gli <em>stati ad essere in funzione del tempo</em>
-per cui possiamo applicare la <a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">regola della catena</a> e scrivere</p>
+per cui possiamo applicare la <a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena" target="_blank">regola della catena</a> e scrivere</p>
 <div class="math">$$
 \frac{dL}{dt} = \frac{dL}{dx(t_i)}\frac{dx(t_i)}{dt}
 $$</div>
@@ -370,7 +370,7 @@ $$</div>
 <div class="math">$$
 \frac{da(t)}{dt} = \frac{d}{dx(t_i)} \left( \frac{dL}{dx(t_i)}\frac{dx(t_i)}{dt} \right)
 $$</div>
-<p>In mezzo a questa ginepraio di derivate, probabilmente non avete notato che una parte di questa formula l'abbiamo già definita <a href="#nn-differenziale">qui</a>. Per cui, sostituendo la notazione relativa
+<p>In mezzo a questa ginepraio di derivate, probabilmente non avete notato che una parte di questa formula l'abbiamo già definita <a href="#nn-differenziale" target="_blank">qui</a>. Per cui, sostituendo la notazione relativa
 ad un <span class="math">\(i-esimo\)</span> stato in favore di una generica, possiamo scrivere</p>
 <div class="math">$$
 \frac{da(t)}{dt} = \frac{dL}{dx(t)} \frac{f(x(t), t, \theta)}{dx}
@@ -654,9 +654,9 @@ In tutti gli altri casi potrebbe solo complicarti la vita.</p>
         <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
-<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
-<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" title="Io ODO, Tu ODI e la Neural ODE - 1" target="_blank">Io ODO, Tu ODI e la Neural ODE - 1</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" title="Io ODO, Tu ODI e la Neural ODE - 2" target="_blank">Io ODO, Tu ODI e la Neural ODE - 2</a></li>
+<li><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" title="Io ODO, Tu ODI e la Neural ODE - 3" target="_blank">Io ODO, Tu ODI e la Neural ODE - 3</a></li>
 </ul>
 </section>
 <section class="references">
@@ -666,31 +666,31 @@ In tutti gli altri casi potrebbe solo complicarti la vita.</p>
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</a>
         </li>
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/</a>
         </li>
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/</a>
         </li>
         <li>
-            <a href="https://arxiv.org/pdf/1512.03385">https://arxiv.org/pdf/1512.03385</a>
+            <a href="https://arxiv.org/pdf/1512.03385" target="_blank">https://arxiv.org/pdf/1512.03385</a>
         </li>
         <li>
-            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato</a>
+            <a href="/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato" target="_blank">/it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Teorema_di_Schwarz">https://it.wikipedia.org/wiki/Teorema_di_Schwarz</a>
+            <a href="https://it.wikipedia.org/wiki/Teorema_di_Schwarz" target="_blank">https://it.wikipedia.org/wiki/Teorema_di_Schwarz</a>
         </li>
         <li>
-            <a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena</a>
+            <a href="/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena" target="_blank">/it/machine-learning/neurons-for-dummies-3/#la-regola-della-catena</a>
         </li>
         <li>
-            <a href="https://arxiv.org/pdf/2402.15141">https://arxiv.org/pdf/2402.15141</a>
+            <a href="https://arxiv.org/pdf/2402.15141" target="_blank">https://arxiv.org/pdf/2402.15141</a>
         </li>
         <li>
-            <a href="https://www.youmath.it/lezioni/analisi-matematica/integrali/627-proprieta-degli-integrali-definiti.html">https://www.youmath.it/lezioni/analisi-matematica/integrali/627-proprieta-degli-integrali-definiti.html</a>
+            <a href="https://www.youmath.it/lezioni/analisi-matematica/integrali/627-proprieta-degli-integrali-definiti.html" target="_blank">https://www.youmath.it/lezioni/analisi-matematica/integrali/627-proprieta-degli-integrali-definiti.html</a>
         </li>
     </ul>
 </section>

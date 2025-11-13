@@ -147,8 +147,8 @@ No!? <strong>Strano</strong>, ma contenti voi. In ogni caso, anche se nessuno l'
 Scherzi a parte, questo articolo è più un <strong>esercizio concettuale</strong>. Dedicato a chi, come me, pensa che le case siano fatte per starci dentro
 e azzera la batteria sociale dopo le 20:00. Quest'oggi parlerò di come ho utilizzato l'algoritmo <strong>Crystal</strong> al posto della backpropagation
 per modificare, e quindi <strong>addestrare</strong>, una rete neurale. Non sapete cos'è il Crystal? <strong>Male</strong>, molto male. Vuol dire che non avete letto il mio articolo a riguardo. 
-Ma tranquilli, potete recuperarlo <a href="/it/metaeuristica/crystal-structure-algorithm/">qui</a>. E se invece vi manca questa fantomatica <strong>backpropagation</strong>, niente paura:
-trovate tutta la saga del neurone <a href="/it/machine-learning/neurons-for-dummies-1/">qui</a>.</p>
+Ma tranquilli, potete recuperarlo <a href="/it/metaeuristica/crystal-structure-algorithm/" target="_blank">qui</a>. E se invece vi manca questa fantomatica <strong>backpropagation</strong>, niente paura:
+trovate tutta la saga del neurone <a href="/it/machine-learning/neurons-for-dummies-1/" target="_blank">qui</a>.</p>
 <h3 id="ma-perche">Ma Perche!?<a class="headerlink" href="#ma-perche" title="Permanent link"> </a></h3>
 <p>Se è questa la vostra domanda, vi ho già detto che l'accoppiata <strong>asocialità-20:00</strong> porta a cose strane. <strong>Perchè</strong> mai dovremmo voler addestrare una rete neurale 
 <strong>senza</strong> backpropagation che funziona già così bene...?<br/>
@@ -188,7 +188,7 @@ In questi casi può valere la pena testare le performance della rete con un meto
 <h3 id="ma-come">Ma Come!?<a class="headerlink" href="#ma-come" title="Permanent link"> </a></h3>
 <h4 id="i-dati">I Dati<a class="headerlink" href="#i-dati" title="Permanent link"> </a></h4>
 <p>In questo paragrafo vediamo <strong>come</strong>, a livello di codice si è proceduto con l'esperimento. <strong>Regola</strong> numero uno del deep learning, non parlare mai...ah no scusate! <strong>I dati</strong>. 
-Come dataset ho utilizzato il famosissimo <a href="https://www.kaggle.com/datasets/uciml/iris"><strong>iris</strong></a>, composto da <strong>150 campioni</strong> su <strong>4 features</strong> che permettono
+Come dataset ho utilizzato il famosissimo <a href="https://www.kaggle.com/datasets/uciml/iris" target="_blank"><strong>iris</strong></a>, composto da <strong>150 campioni</strong> su <strong>4 features</strong> che permettono
 di classificare <strong>3 tipi</strong> di iris:</p>
 <ul>
 <li>Iris Setosa</li>
@@ -197,7 +197,7 @@ di classificare <strong>3 tipi</strong> di iris:</p>
 </ul>
 <p>Se i fiori vi fanno schifo, skippate pure. Altrimenti, sappiate che le features sono:</p>
 <ul>
-<li>Sepal length (cm): <strong>Lunghezza</strong> del <a href="https://www.treccani.it/vocabolario/sepalo/">sepalo</a></li>
+<li>Sepal length (cm): <strong>Lunghezza</strong> del <a href="https://www.treccani.it/vocabolario/sepalo/" target="_blank">sepalo</a></li>
 <li>Sepal width (cm): <strong>Larghezza</strong> del sepalo</li>
 <li>Petal length (cm): Lunghezza del petalo</li>
 <li>Petal width (cm): Larghezza del petalo</li>
@@ -284,12 +284,12 @@ Ecco il codice:</p>
     <span class="n">nn_model_crystal</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">initial_weights</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">nn_model_backp</span><span class="p">,</span> <span class="n">nn_model_crystal</span>
 </code></pre></div>
-<p>Se vi state chiedendo perchè ho utilizzato <em>deepcopy</em> vi consiglio caldamento un recappino di <strong><a href="https://it.wikipedia.org/wiki/Programmazione_orientata_agli_oggetti">OOP</a></strong> e in 
-particolare sul concetto di <strong><a href="https://it.wikipedia.org/wiki/Incapsulamento_(informatica)">incapsulamento</a></strong>.<br/>
+<p>Se vi state chiedendo perchè ho utilizzato <em>deepcopy</em> vi consiglio caldamento un recappino di <a href="https://it.wikipedia.org/wiki/Programmazione_orientata_agli_oggetti" target="_blank"><strong>OOP</strong></a> e in 
+particolare sul concetto di <a href="https://it.wikipedia.org/wiki/Incapsulamento_(informatica)" target="_blank"><strong>incapsulamento</strong></a>.<br/>
 Spoiler: si vuole evitare che modificare una rete cambi anche l'altra, che qua ti distrai un secondo ed è subito <strong>anarchia</strong>.</p>
 <h4 id="tutto-il-resto">Tutto Il Resto<a class="headerlink" href="#tutto-il-resto" title="Permanent link"> </a></h4>
 <p>Ora che sappiamo che è definita la nostra rete andiamo a vedere il restante codice. Dato che non ci piace farci mancare nulla, gli ottimizzatori sono
-stati sviluppati con uno <a href="https://refactoring.guru/design-patterns/strategy">strategy pattern</a>.<br/>
+stati sviluppati con uno <a href="https://refactoring.guru/design-patterns/strategy" target="_blank">strategy pattern</a>.<br/>
 La classe astratta e quella contesto sono:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">AOptimizer</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
 
@@ -637,7 +637,7 @@ compatibili con la rete neurale. Come ci riesce? Vediamolo passo per passo:</p>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Elapsed: </span><span class="si">{</span><span class="n">elapsed</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s"</span><span class="p">)</span>
 </code></pre></div>
 <p>Come si può leggere dal codice, dopo aver istanziato le due reti neurali identiche, e aver istanziato <code>train set</code> e <code>test set</code>, definiamo la funzione di loss, 
-in questo caso la buona vecchia <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">Cross Entropy</a>, perfetta per problemi di classificazione.
+in questo caso la buona vecchia <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html" target="_blank">Cross Entropy</a>, perfetta per problemi di classificazione.
 La funzione di loss è richiesta, insieme alle reti neurali, come parametro dai costruttori delle classi concrete degli ottimizzatori.
 Per ogni ottimizzatore istanziato quello che si fa è:</p>
 <ul>
@@ -683,7 +683,7 @@ E in quel caso la backpropagation se la gode <strong>comandandosela</strong>.</p
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Siamo finalmente giunti alla <strong>conclusione</strong> di questo articolo. Magari vi sarà utile nella vita o magari no, ma posso dire che 
 è stato un ottimo <strong>esercizio concettuale</strong> che mi ha permesso di affrontare diversi argomenti interessanti. 
-Come sempre, se siete curiosi di leggere l'intero codice sorgente, potete scaricarlo da <a href="https://github.com/lucadivit/NotOnlyBackProp"><strong>qui</strong></a>.</p>
+Come sempre, se siete curiosi di leggere l'intero codice sorgente, potete scaricarlo da <a href="https://github.com/lucadivit/NotOnlyBackProp" target="_blank"><strong>qui</strong></a>.</p>
 <p>Alla Prossima.</p>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var align = "center",
@@ -768,10 +768,10 @@ Come sempre, se siete curiosi di leggere l'intero codice sorgente, potete scaric
         <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
     </h3>
 <ul class="related-posts-list">
-<li><a href="https://www.lucadivita.it/metaeuristica/crystal-structure-algorithm/" title="Crystal Structure Algorithm">Crystal Structure Algorithm</a></li>
-<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1">Neurons for Dummies - 1</a></li>
-<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2">Neurons for Dummies - 2</a></li>
-<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3">Neurons for Dummies - 3</a></li>
+<li><a href="https://www.lucadivita.it/metaeuristica/crystal-structure-algorithm/" title="Crystal Structure Algorithm" target="_blank">Crystal Structure Algorithm</a></li>
+<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/" title="Neurons for Dummies - 1" target="_blank">Neurons for Dummies - 1</a></li>
+<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/" title="Neurons for Dummies - 2" target="_blank">Neurons for Dummies - 2</a></li>
+<li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-3/" title="Neurons for Dummies - 3" target="_blank">Neurons for Dummies - 3</a></li>
 </ul>
 </section>
 <section class="references">
@@ -781,31 +781,31 @@ Come sempre, se siete curiosi di leggere l'intero codice sorgente, potete scaric
     </h3>
     <ul class="related-posts-list">
         <li>
-            <a href="/it/metaeuristica/crystal-structure-algorithm/">/it/metaeuristica/crystal-structure-algorithm/</a>
+            <a href="/it/metaeuristica/crystal-structure-algorithm/" target="_blank">/it/metaeuristica/crystal-structure-algorithm/</a>
         </li>
         <li>
-            <a href="/it/machine-learning/neurons-for-dummies-1/">/it/machine-learning/neurons-for-dummies-1/</a>
+            <a href="/it/machine-learning/neurons-for-dummies-1/" target="_blank">/it/machine-learning/neurons-for-dummies-1/</a>
         </li>
         <li>
-            <a href="https://www.kaggle.com/datasets/uciml/iris">https://www.kaggle.com/datasets/uciml/iris</a>
+            <a href="https://www.kaggle.com/datasets/uciml/iris" target="_blank">https://www.kaggle.com/datasets/uciml/iris</a>
         </li>
         <li>
-            <a href="https://www.treccani.it/vocabolario/sepalo/">https://www.treccani.it/vocabolario/sepalo/</a>
+            <a href="https://www.treccani.it/vocabolario/sepalo/" target="_blank">https://www.treccani.it/vocabolario/sepalo/</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Programmazione_orientata_agli_oggetti">https://it.wikipedia.org/wiki/Programmazione_orientata_agli_oggetti</a>
+            <a href="https://it.wikipedia.org/wiki/Programmazione_orientata_agli_oggetti" target="_blank">https://it.wikipedia.org/wiki/Programmazione_orientata_agli_oggetti</a>
         </li>
         <li>
-            <a href="https://it.wikipedia.org/wiki/Incapsulamento_(informatica)">https://it.wikipedia.org/wiki/Incapsulamento_(informatica)</a>
+            <a href="https://it.wikipedia.org/wiki/Incapsulamento_(informatica)" target="_blank">https://it.wikipedia.org/wiki/Incapsulamento_(informatica)</a>
         </li>
         <li>
-            <a href="https://refactoring.guru/design-patterns/strategy">https://refactoring.guru/design-patterns/strategy</a>
+            <a href="https://refactoring.guru/design-patterns/strategy" target="_blank">https://refactoring.guru/design-patterns/strategy</a>
         </li>
         <li>
-            <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html">https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</a>
+            <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html" target="_blank">https://docs.pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html</a>
         </li>
         <li>
-            <a href="https://github.com/lucadivit/NotOnlyBackProp">https://github.com/lucadivit/NotOnlyBackProp</a>
+            <a href="https://github.com/lucadivit/NotOnlyBackProp" target="_blank">https://github.com/lucadivit/NotOnlyBackProp</a>
         </li>
     </ul>
 </section>
