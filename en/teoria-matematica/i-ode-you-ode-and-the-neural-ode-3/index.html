@@ -305,7 +305,7 @@ t &amp; y(t) &amp; \text{Result} \\
 \hline
 \end{array}
 $$</div>
-<p>Now let’s solve it using Euler’s method. From the <a href="#tempo-discretizzato" target="_blank">time discretization formula</a>, we already know how many steps we need using <span class="math">\(h=0.1\)</span>, initial time <span class="math">\(t_0=0\)</span>, and final time <span class="math">\(t_n=2\)</span>:</p>
+<p>Now let’s solve it using Euler’s method. From the <a href="#tempo-discretizzato">time discretization formula</a>, we already know how many steps we need using <span class="math">\(h=0.1\)</span>, initial time <span class="math">\(t_0=0\)</span>, and final time <span class="math">\(t_n=2\)</span>:</p>
 <div class="math">$$
 t_{n} - t_0 = n \cdot h \Rightarrow 2 - 0 = n \cdot h \Rightarrow n = 20
 $$</div>
@@ -410,7 +410,7 @@ Alright, time to move on to the next round where the <strong>Runge-Kutta</strong
 <p>Let’s give credit where credit is due: Euler’s method is the <strong>patriarch</strong> of all numerical methods. But is it really that good? 
 Well, as always... it depends. For instance, on the type of problem you’re dealing with. For problems that are too complex, it can <strong>fail miserably</strong>. So yes, it’s good and dear, but let’s be honest, it’s getting old. We need fresh blood, brave and strong youngsters. That brings us to the <strong>Runge-Kutta methods</strong>, or simply <strong>RK</strong>.</p>
 <p>RK methods are like a sprawling dynasty, and each has its own quirks. The only certainty, besides death, is that they keep Euler’s core idea: <strong>proceed in small steps</strong>.</p>
-<p>Let’s go back to the Taylor expansion. As you’ll remember, the higher the order of expansion, the <strong>better the approximation</strong>. RK methods are built exactly on higher-order Taylor expansions. So Euler can be viewed as a method of <strong>order 1</strong>, i.e., <strong>RK1</strong>, or <strong>first-order Runge-Kutta</strong>. Now let’s see what happens when we go beyond first order and move to the second, starting from the <a href="#sviluppo-ode-1" target="_blank">First-Order Formula</a>:</p>
+<p>Let’s go back to the Taylor expansion. As you’ll remember, the higher the order of expansion, the <strong>better the approximation</strong>. RK methods are built exactly on higher-order Taylor expansions. So Euler can be viewed as a method of <strong>order 1</strong>, i.e., <strong>RK1</strong>, or <strong>first-order Runge-Kutta</strong>. Now let’s see what happens when we go beyond first order and move to the second, starting from the <a href="#sviluppo-ode-1">First-Order Formula</a>:</p>
 <div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n) + \frac{h^2}{2} \cdot y''(t_n)$$</div>
 <p>Given that</p>
 <div class="math">$$
@@ -436,7 +436,7 @@ $$</div>
 <div class="math">$$
 f'(y_n, t_n) \approx \frac{f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n)}{h}
 $$</div>
-<p>Substituting again into the <a href="#sviluppo-ode-2" target="_blank"><strong>Second-Order Expansion</strong></a>, we get:</p>
+<p>Substituting again into the <a href="#sviluppo-ode-2"><strong>Second-Order Expansion</strong></a>, we get:</p>
 <div class="math">$$
 y_{n+1} \approx y_n + h \cdot f(y_n, t_n) + \frac{h}{2} \cdot \left [ f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n) \right]
 $$</div>
@@ -539,7 +539,7 @@ y_1 = 5 + 0.05 \cdot (3 + 2.703) = 5.285
 $$</div>
 <p>The sharpest among you may wonder why <span class="math">\(t+h\)</span>, required for computing <span class="math">\(k_2\)</span>, <strong>doesn’t appear anywhere</strong>.
 Simple: all the ODEs in the system <strong>don’t explicitly depend</strong> on time <span class="math">\(t\)</span>,
-so it’s <strong>irrelevant</strong> for the computation. But if it did matter, the <strong>current time</strong> would be calculated using the <a href="#tempo-discretizzato" target="_blank">Time Discretization Formula</a> shown in the <a href="#esempio-eulero" target="_blank">previous section</a>.</p>
+so it’s <strong>irrelevant</strong> for the computation. But if it did matter, the <strong>current time</strong> would be calculated using the <a href="#tempo-discretizzato">Time Discretization Formula</a> shown in the <a href="#esempio-eulero">previous section</a>.</p>
 <ul>
 <li>RK4, <span class="math">\(n=1\)</span></li>
 </ul>

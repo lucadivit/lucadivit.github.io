@@ -243,7 +243,7 @@ Figure 5. From Discrete to Continuous</p>
 </blockquote>
 <p>The answer, as always: <strong>we integrate</strong>.</p>
 <h3 id="integrate-it-away">Integrate It Away<a class="headerlink" href="#integrate-it-away" title="Permanent link"> </a></h3>
-<p>We've just obtained a neat <a href="#nn-differenziale" target="_blank">differential equation</a> that tells us <strong>how the state changes over time</strong>.
+<p>We've just obtained a neat <a href="#nn-differenziale">differential equation</a> that tells us <strong>how the state changes over time</strong>.
 Great, but what we really want to know is <strong>how much it changes</strong>, that is:</p>
 <blockquote>
 <p>If I start from <span class="math">\(x_0\)</span> at time <span class="math">\(t_0\)</span>, where will I be at time <span class="math">\(t_N\)</span>?</p>
@@ -375,7 +375,7 @@ $$</div>
 \frac{da(t)}{dt} = \frac{d}{dx(t_i)} \left( \frac{dL}{dx(t_i)}\frac{dx(t_i)}{dt} \right)
 $$</div>
 <p>Amid this jungle of derivatives, you probably didn’t notice that part of this formula was already defined 
-<a href="#nn-differenziale" target="_blank">here</a>. So, replacing the notation for the <span class="math">\(i\)</span>-th state with a more general one, we can write:</p>
+<a href="#nn-differenziale">here</a>. So, replacing the notation for the <span class="math">\(i\)</span>-th state with a more general one, we can write:</p>
 <div class="math">$$
 \frac{da(t)}{dt} = \frac{dL}{dx(t)} \frac{f(x(t), t, \theta)}{dx}
 $$</div>
@@ -439,7 +439,7 @@ Formula 8. Numerical Formulation of Sensitivity</p>
 </ul>
 <h3 id="an-adjoint-to-rule-them-all">An Adjoint to Rule Them All<a class="headerlink" href="#an-adjoint-to-rule-them-all" title="Permanent link"> </a></h3>
 <p>If you've made it this far, congratulations, but I imagine you're more confused than before. Because, in fact, the adjoint method as it stands 
-seems quite useless. So, to avoid <strong>lynching</strong>, let’s give all this some meaning. Let's start again from the <a href="#loss" target="_blank">formulation of the loss</a>. 
+seems quite useless. So, to avoid <strong>lynching</strong>, let’s give all this some meaning. Let's start again from the <a href="#loss">formulation of the loss</a>. 
 The basics of mathematics tell us that whatever we do on the right, we must also do on the left, and everything will continue to hold. 
 So, we differentiate both sides with respect to time:</p>
 <div class="math">$$
@@ -449,7 +449,7 @@ $$</div>
 <div class="math">$$
 \frac{d}{dt} \left( \frac{dL}{d \theta} \right) = \frac{d}{d\theta} \left( \frac{\partial L}{\partial x(t)} \cdot \frac{\partial x(t)}{\partial t} \right)
 $$</div>
-<p>From which, recalling <a href="#nn-differenziale" target="_blank">this equality</a> and <a href="#sensibilita" target="_blank">this other one</a>:</p>
+<p>From which, recalling <a href="#nn-differenziale">this equality</a> and <a href="#sensibilita">this other one</a>:</p>
 <div class="math">$$
 \frac{d}{dt} \left( \frac{dL}{d \theta} \right) = \frac{d}{d\theta} \left( a(t) \cdot f(x(t), t, \theta) \right)
 $$</div>
