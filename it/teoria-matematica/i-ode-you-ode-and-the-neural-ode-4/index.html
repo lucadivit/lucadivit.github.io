@@ -509,7 +509,11 @@ $$</div>
 <p>dove <span class="math">\(x_N\)</span> lo abbiamo perché è l'output dell'ODESolver della fase di forward. Quindi è vero che computazionalmente dobbiamo risolvere un'altra ODE facendo <span class="math">\(n\)</span> forward
 della rete neurale, ma in questo modo <strong>istantaneamente</strong> abbiamo lo stato <span class="math">\(x_i\)</span> da utilizzare per risolvere la ODE della <strong>sensibilità</strong> e, di conseguenza, quella del <strong>gradiente</strong>. 
 Ed essendo che questo risultato ci serve solo per un <strong>istante temporale</strong>, una volta utilizzato per fare uno step, possiamo buttarlo facendo si che l'uso di memoria 
-rimanga limitato.</p>
+rimanga limitato. Per concludere, è importante chiarire un punto. Abbiamo introdotto tutto questo meccanismo per <strong>non dipendere dagli stati</strong>, e 
+ora vi sto dicendo che dobbiamo comunque calcolarli. Sembra un controsenso no?! Ebbene non lo è. Prima eravamo dipendenti dall'<strong>intero stato</strong>, cioè da una matrice 
+che descrive come ogni parametro influenza ogni componente del sistema. Ora invece dipendiamo solo dal <strong>valore dello stato nel tempo</strong>, un vettore che ci dice dove 
+ci troviamo in quel preciso istante. In altre parole, non dobbiamo più tenere traccia di tutte le direzioni possibili dell’evoluzione: 
+ci basta conoscere la posizione corrente per calcolare come l’errore si propaga.</p>
 <h3 id="dio-benedica-i-recap">Dio Benedica I Recap<a class="headerlink" href="#dio-benedica-i-recap" title="Permanent link"> </a></h3>
 <p>Ci tengo ancora a farvi i miei complimenti se state leggendo queste righe, non perché siete il <strong>milionesimo</strong> visitatore (anzi probabilmente siete il secondo, il primo sono io), ma perché
 vi ho buttato in mezzo le Menadi e ne siete usciti Orfeo. Non che questo sia di buon auspicio. In ogni caso, ora che abbiamo tutti gli strumenti, possiamo fare un <strong>recap</strong>. </p>

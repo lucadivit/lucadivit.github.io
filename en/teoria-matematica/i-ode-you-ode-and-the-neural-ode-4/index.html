@@ -524,7 +524,13 @@ $$</div>
 <p>where <span class="math">\(x_N\)</span> is known, since it’s the output of the ODESolver from the forward phase.
 So yes, computationally we must solve another ODE by performing <span class="math">\(n\)</span> forward passes of the neural network, but this way we <strong>instantaneously</strong> 
 have the state <span class="math">\(x_i\)</span> needed to solve the ODE for <strong>sensitivity</strong>, and consequently, the one for the <strong>gradient</strong>.
-And since this result is only needed for a <strong>single instant in time</strong>, once it’s used for one step we can discard it, keeping memory usage minimal.</p>
+And since this result is only needed for a <strong>single instant in time</strong>, once it’s used for one step we can discard it, keeping memory usage minimal. 
+To conclude, it’s important to clarify one thing. We introduced this whole mechanism to <strong>avoid depending on the states</strong>, 
+and now I’m telling you that we still need to <strong>compute them</strong>. Sounds like a contradiction, doesn’t it? Well, it isn't.<br/>
+Before, we were dependent on the <strong>entire state</strong>, a <strong>matrix</strong> describing how every parameter influences every component of the system. 
+Now, instead, we only depend on the <strong>value of the state over time</strong>, a <strong>vector</strong> that tells us where we are at that specific instant.
+In other words, we no longer need to keep track of <em>all possible directions</em> of the evolution: it’s enough to know the <strong>current position</strong> 
+to compute how the error propagates.</p>
 <h3 id="god-bless-recaps">God Bless Recaps<a class="headerlink" href="#god-bless-recaps" title="Permanent link"> </a></h3>
 <p>If you’ve made it this far congratulations, not because you’re the <strong>millionth</strong> visitor (in fact, you’re probably the second, I’m the first), but because
 I threw you into the Maenads and you came out as Orpheus. Not that that’s a good omen. Anyway, now that we have all the tools, let’s do a <strong>recap</strong>.</p>

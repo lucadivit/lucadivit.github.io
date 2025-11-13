@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4, h5',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="Questo mio articolo è diverso da tutti quelli che ho scritto finora. Non troverete formule, algoritmi o altre stregonerie mind-blowing. Voglio invece parlare di un tema a cui tengo: le metaeuristiche. Quell’arte di cercare in maniera non intuitiva soluzioni abbastanza buone, quando l&#39;ottimo è un miraggio. E voglio farlo …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="metaeuristica, subottimo, critica, considerazioni_personali, Tra Codice E Vita, " />
+
+<meta property="og:title" content="Elogio Al (quasi) Ottimo "/>
+<meta property="og:url" content="https://www.lucadivita.it/it/tra-codice-e-vita/elogio-al-quasi-ottimo/" />
+<meta property="og:description" content="Questo mio articolo è diverso da tutti quelli che ho scritto finora. Non troverete formule, algoritmi o altre stregonerie mind-blowing. Voglio invece parlare di un tema a cui tengo: le metaeuristiche. Quell’arte di cercare in maniera non intuitiva soluzioni abbastanza buone, quando l&#39;ottimo è un miraggio. E voglio farlo …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-11-13T00:00:00+01:00" />
+<meta name="twitter:title" content="Elogio Al (quasi) Ottimo ">
+<meta name="twitter:description" content="Questo mio articolo è diverso da tutti quelli che ho scritto finora. Non troverete formule, algoritmi o altre stregonerie mind-blowing. Voglio invece parlare di un tema a cui tengo: le metaeuristiche. Quell’arte di cercare in maniera non intuitiva soluzioni abbastanza buone, quando l&#39;ottimo è un miraggio. E voglio farlo …">
+
+        <title>Elogio Al (quasi) Ottimo  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/it/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/index.html">Bio</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/latest.html">
+                                        Recenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/categories.html">
+                                            Argomenti
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/it/archives.html">
+                                            Archivio
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/it/pages/contatti/">Contatti</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li class="active">
+                                            <a href="/it/tra-codice-e-vita/elogio-al-quasi-ottimo/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li>
+                                            <a href="/en/tra-codice-e-vita/elogio-al-quasi-ottimo/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/it/tra-codice-e-vita/elogio-al-quasi-ottimo/">
+                Elogio Al (quasi) Ottimo
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contenuti</h4>
+            <div id="toc-list"></div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Questo mio articolo è diverso da tutti quelli che ho scritto finora. Non troverete formule, algoritmi o altre stregonerie mind-blowing.
+Voglio invece parlare di un tema a cui tengo: le <strong>metaeuristiche</strong>. Quell’arte di cercare in maniera non intuitiva soluzioni <em>abbastanza buone</em>,
+quando l'ottimo è un <strong>miraggio</strong>. E voglio farlo con un approccio non tecnico, ma <strong>umano</strong> e <strong>riflessivo</strong>. È un elogio del <strong>(quasi) ottimo</strong>: dell'esplorare 
+senza la pretesa di dominare, del migliorare passo dopo passo, accettando un po' di <strong>incertezza</strong> lungo la strada. </p>
+<p>Perché, diciamocelo: senza incertezze e senza mistero... che vita sarebbe?
+Varrebbe davvero la pena vivere un'esistenza in cui sappiamo per filo e per segno cosa accadrà, senza mai doverci mettere alla prova per raggiungere i nostri 
+<strong>obiettivi</strong>?
+Questo in fondo ci porta a un'altra domanda: <strong>vale davvero la pena vivere solo per raggiungere i nostri obiettivi?</strong>
+Forse la vita vale quando c'è il <strong>mistero</strong>. Quando l'incertezza è tale da costringerci a guardarci intorno, a divergere, a cambiare rotta per poi ritrovarci 
+quasi per caso esattamente nel punto in cui volevamo essere, senza che ce lo aspettassimo del tutto.</p>
+<h3 id="la-scienza-del-compromesso">La Scienza Del Compromesso<a class="headerlink" href="#la-scienza-del-compromesso" title="Permanent link"> </a></h3>
+<p>Viviamo in un mondo che ci <strong>spinge</strong> costantemente verso l'ottimo.
+A scuola, al lavoro, nei progetti e perfino nelle relazioni: tutto sembra misurato in base a quanto ci avviciniamo a un <strong>ideale di perfezione</strong>.
+Eppure, se ci pensiamo bene la maggior parte delle scelte che facciamo ogni giorno sono <strong>compromessi</strong>.
+Non ottimali, non perfette, ma funzionano e ci permettono di <strong>andare avanti</strong>.</p>
+<p>Ora so cosa starete pensando: <em>“sarai tu ad accontentarti!”</em>, ma pensaci.
+Quando apri il tuo bel Google Maps e scegli il percorso più veloce invece di quello panoramico.
+Quando mangi qualcosa al volo perché devi tornare a lavorare, anche se ti saresti scofanato volentieri un manicaretto ma hey, chi ha tempo di prepararlo?</p>
+<p>Chiamateli come vi pare ma io li definisco <strong>compromessi</strong> ergo accontentarsi.
+Che, badate bene, <strong>non è sbagliato</strong>.
+Non demonizziamo il termine accontentarsi perché è proprio il compromesso a renderci <strong>umanamente ricchi</strong>.</p>
+<p>Hai scelto Maps perché vuoi passare dieci minuti in più con il tuo ragazzo o la tua ragazza.
+Cosa c’è di brutto in questo?
+Hai mangiato qualcosa al volo perché non hai tempo di preparare il pranzo che avresti voluto, ma diamine... finita la giornata hai un nido caldo e 
+accogliente proprio grazie a quel piccolo sacrificio.</p>
+<p>Allora, dove sta il limite in tutto questo? Quando abbiamo iniziato a <strong>odiare</strong> il termine accontentarsi?
+Beh, forse quando il compromesso supera di gran lunga la nostra volontà e la <strong>libertà di essere</strong>. Quando il compromesso arriva a snaturarci.
+Ma udite udite: questo non è compromesso. Questo è <strong>prostrarsi</strong>.
+E mi auguro che non dobbiate mai farlo anche se, ahimè, mi tocca aprire la finestra a novembre per far uscire un augurio vano.</p>
+<h3 id="dal-compromesso-umano-a-quello-computazionale">Dal Compromesso Umano A Quello Computazionale<a class="headerlink" href="#dal-compromesso-umano-a-quello-computazionale" title="Permanent link"> </a></h3>
+<p>Le metaeuristiche nascono proprio da questo: dal riconoscere che la perfezione nei sistemi complessi, è spesso un'<strong>illusione</strong>.
+Che fai quando ricerchi l'ottimo di qualcosa e non sai da dove cominciare? Esplori, provi, sbagli e migliori.
+È così che funziona una metaeuristica: accetta l'incertezza ma <strong>sceglie comunque di muoversi</strong>.
+Si concede il lusso dell'<strong>errore</strong> perché sa che ogni tentativo, anche fallito, può rivelare un'<strong>informazione utile</strong>.
+Il segreto del suo successo? L'<strong>esplorazione</strong>. È questo che le rende così umane. O meglio così <strong>naturali</strong>.
+Sì, perché la maggior parte degli algoritmi metaeuristici prende ispirazione proprio dalla natura: 
+da come gli animali cercano il <strong>cibo</strong>, da come comunicano tra loro o persino da come <strong>corteggiano</strong> individui della loro 
+stessa specie. </p>
+<p>Perché dai, diciamocelo: diamo il meglio di noi quando si tratta di mangiare e quando si tratta di corteggiare.
+Per il resto, torniamo a essere i soliti <strong>bifolchi</strong>.</p>
+<p>Volete esempi? Bene.</p>
+<p><strong>L’Ant Colony Optimization</strong> nasce proprio osservando le formiche: ognuna lascia una traccia chimica lungo il cammino, e 
+più un percorso viene seguito più diventa “attraente” per le altre. Alla fine tra le centinaia di strade percorse senza mappe né supervisione, la colonia trova 
+quella migliore per raggiungere il cibo.</p>
+<p>Il <strong>Firefly Algorithm</strong> invece si ispira alle lucciole. Quelle più luminose attirano le altre e l'intero meccanismo è, 
+in fondo, un gigantesco rito di corteggiamento. Anche qui, niente perfezione, solo desiderio.
+Un'attrazione che muove che guida che fa avvicinare e cambiare percorso.</p>
+<p>Ma non è finita qua. Ci sono algoritmi metaeuristici ispirati a qualsiasi cosa: gli <strong>algoritmi genetici</strong> si rifanno alla teoria evolutiva di Darwin, 
+l’<strong>Artificial Immune System</strong> al funzionamento del sistema immunitario. Addirittura ne esiste uno ispirato alla
+<strong>fisica dei buchi neri</strong>. Insomma ce n'è per tutti i gusti. Sono tantissimi e (quasi) tutti loro come giá detto, hanno una cosa in comune: <strong>sono ispirati alla natura</strong>.</p>
+<blockquote>
+<p>Perché la natura che ci circonda in maniera del tutto spontanea tende ad avvicinarsi asintoticamente al meglio possibile.</p>
+</blockquote>
+<p>Se siete curiosi di sapere quante sono (e non sono neanche sicuro che siano riportate tutte), date una occhiata <a href="https://www.mi.sanu.ac.rs/~luka/resources/phd/AppendixA.pdf">qui</a>.</p>
+<p>Ma torniamo a noi. Perché parliamo di “quasi ottimo”?</p>
+<p>Perché nessuno di questi metodi è sviluppato per raggiungere in maniera certa la soluzione ottima a un problema. <strong>Spesso ci riesce</strong>. A volte no.
+Noi siamo protetti dal nostro sistema immunitario: funziona e funziona bene. Ma questo vuol dire che non ci ammaliamo mai? Va da sé che non è così.
+Eppure ci <strong>accontentiamo</strong>, proprio come facciamo quando usiamo gli algoritmi metaeuristici. Se troviamo la soluzione ottima siamo tutti felici.
+Ma davvero ci serve? Magari per risolvere un problema non è necessario avere l’ottimo: basta qualcosa che ci si <strong>avvicini</strong>.
+E non pensate che questa sia un'idea aliena, vi basta leggere il paragrafo successivo per capire il perché.</p>
+<h3 id="il-perche-del-quasi-ottimo">Il Perché Del Quasi Ottimo<a class="headerlink" href="#il-perche-del-quasi-ottimo" title="Permanent link"> </a></h3>
+<p>Se state leggendo questo articolo state usando un PC o uno smartphone.
+Nel vostro dispositivo c'è un processore che <strong>schedula</strong> i processi, cioè decide quale eseguire prima. Potreste eseguire un algoritmo “ottimo“ come 
+lo <a href="https://it.wikipedia.org/wiki/Shortest_job_first">Shortest Job First</a> (SJF) ma no, il vostro processore se ne frega e usa (ad esempio) un <a href="https://it.wikipedia.org/wiki/Schedulazione_round_robin">Round Robin</a> (RR).
+Ma c'è un motivo. Il SJF richiede in anticipo di conoscere quanto durerà un processo. Cosa che ovviamente non può sapere. Ed eccovi dimostrato come l’ottimo 
+non solo <strong>non è sempre necessario</strong>, ma a volte non è nemmeno perseguibile. Eppure se state ancora leggendo, anche un algoritmo non ottimo come il RR sta funzionando egregiamente.</p>
+<p>Altro esempio. Torniamo a Google Maps. Tutti sappiamo che serve per andare da un punto A a un punto B. Ma quanti sanno davvero <strong>come</strong> ci si arriva? </p>
+<p>Date due città e una rete enorme di strade, i percorsi possibili sono migliaia a volte <strong>milioni</strong>. Supponiamo di dover andare da Milano a Torino.
+I più sensati tra voi sceglieranno l’autostrada: veloce, diretta, lineare. E anche Maps vi suggerirà la stessa cosa. Ma... chi vi impedisce di passare per Roma?
+Tecnicamente quella strada esiste e potreste farlo. Ma ovviamente <strong>non ha alcun senso</strong>. Noi lo capiamo grazie al <strong>pensiero critico</strong>. 
+Un calcolatore invece no: il suo pensiero critico è pari a quello di un <strong>tostapane</strong> che è molto bravo a eseguire i calcoli. Quindi come fa a dirvi che la strada migliore 
+è l’autostrada diretta? Usa delle euristiche: regole pratiche che gli permettono di dire:</p>
+<blockquote>
+<p>Scarto tutti i percorsi che non hanno senso e concentro la ricerca su quelli più promettenti.</p>
+</blockquote>
+<p>Perché lo fa?</p>
+<p>Perché i percorsi da Milano a Torino sono <strong>potenzialmente infiniti</strong> se consideriamo tutte le combinazioni possibili di strade, deviazioni, incroci e ritorni indietro.
+Se dovesse analizzarli tutti, Maps impiegherebbe <strong>ore</strong> a rispondervi. E quanti di voi vorrebbero aspettare ore per sapere quale percorso prendere? Nell'esempio precedente 
+potevamo fare a meno dell'ottimo <strong>ma ora no</strong>. Vogliamo andare da Milano a Torino nel piú breve tempo possibile. Ecco dunque uno degli usi fondamentali delle euristiche:
+<strong>esplorare quanto basta per eliminare ciò che non ha senso</strong>, e rendere possibile il calcolo dell’ottimo.</p>
+<p>Si lo so, ho parlato di metaeuristiche (o meglio dell'idea che c'è dietro), mentre poco fa vi ho nominato le <strong>euristiche</strong>. C'è <strong>differenza</strong>? Assolutamente si.
+L’euristica è il singolo <strong>metodo pratico</strong> per trovare una buona soluzione mentre la metaeuristica è l’approccio che guida l'euristica per <strong>esplorare</strong> meglio le possibilità.
+In pratica la metaeuristica usa le euristiche per <strong>orientarsi</strong> nel labirinto delle soluzioni.</p>
+<p>Dati questi esempi, quando è necessario usare delle metaeuristiche?</p>
+<p>Quando il problema è talmente complesso da rendere <strong>impraticabile</strong> una ricerca esaustiva o un algoritmo deterministico.
+Quando dobbiamo esplorare spazi di <strong>soluzione enormi</strong> evitando di restare intrappolati in <strong>ottimi locali</strong> (cioè in soluzioni che sembrano ottime, ma <strong>non lo sono davvero</strong>)
+e vogliamo trovare soluzioni quasi ottimali in <strong>tempi ragionevoli</strong> pur non conoscendo in anticipo la struttura del problema.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Alla fine, le metaeuristiche non sono solo algoritmi. <strong>Sono un modo di guardare al mondo</strong>. Un promemoria che ci ricorda che la ricerca dell’ottimo non sempre coincide 
+con la ricerca del senso. Nel codice come nella vita a volte <strong>non serve</strong> arrivare perfettamente al traguardo. <strong>Serve muoversi, esplorare, imparare dai tentativi e, quando capita, 
+sapersi accontentare con intelligenza</strong>. Le metaeuristiche ci insegnano che <strong>la perfezione è una direzione, non una destinazione</strong>.
+<strong>Che non c’è fallimento nello sbagliare</strong> ma solo informazione in più per scegliere meglio la prossima volta. Che bisogna fare quel passetto nel buio che ci porta al <strong>(quasi) ottimo</strong>.
+Ribadisco che questo <strong>non è e non vuole essere un articolo tecnico</strong>. Se avete letto fino qui e non avete capito cosa è una metaeuristica, è perché di fatto non l'ho detto.
+Ma ci sará tempo e modo per essere tecnici, per il momento mi basta che abbiate colto la <strong>filosofia</strong> e il <strong>dualismo</strong> che c'è dietro.
+Detto questo concludo dicendo che spero di avervi ispirato <strong>curiositá</strong> sulle metaeuristiche e portato a riflettere sul valore di ogni <strong>passo incerto</strong> e di ogni compromesso che ogni giorno della vostra vita fate.</p>
+<p>Alla Prossima.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h3 id="Consigliati">
+        Consigliati
+        <a class="headerlink" href="#Consigliati" title="Permanent link"> </a>
+    </h3>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/it/metaeuristica/crystal-structure-algorithm/" title="Crystal Structure Algorithm">Crystal Structure Algorithm</a></li>
+</ul>
+</section>
+<section class="references">
+    <h3 id="Riferimenti">
+        Riferimenti
+        <a class="headerlink" href="#Riferimenti" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="https://www.mi.sanu.ac.rs/~luka/resources/phd/AppendixA.pdf">https://www.mi.sanu.ac.rs/~luka/resources/phd/AppendixA.pdf</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Shortest_job_first">https://it.wikipedia.org/wiki/Shortest_job_first</a>
+        </li>
+        <li>
+            <a href="https://it.wikipedia.org/wiki/Schedulazione_round_robin">https://it.wikipedia.org/wiki/Schedulazione_round_robin</a>
+        </li>
+    </ul>
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Pubblicato</h4>
+            <time itemprop="dateCreated" datetime="2025-11-13T00:00:00+01:00">13 novembre 2025</time>
+            <h4>Argomento</h4>
+            <a class="category-link" href="https://www.lucadivita.it/it/categories.html#tra-codice-e-vita-ref">Tra Codice E Vita</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/it/tags.html#considerazioni_personali-ref">considerazioni_personali
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#critica-ref">critica
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#metaeuristica-ref">metaeuristica
+                    <span class="superscript">3</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/it/tags.html#subottimo-ref">subottimo
+                    <span class="superscript">1</span>
+</a></li>
+            </ul>
+<h4>Contatti</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>
