@@ -207,20 +207,28 @@ Nel vostro dispositivo c'è un processore che <strong>schedula</strong> i proces
 lo <a href="https://it.wikipedia.org/wiki/Shortest_job_first" target="_blank">Shortest Job First</a> (SJF) ma no, il vostro processore se ne frega e usa (ad esempio) un <a href="https://it.wikipedia.org/wiki/Schedulazione_round_robin" target="_blank">Round Robin</a> (RR).
 Ma c'è un motivo. Il SJF richiede in anticipo di conoscere quanto durerà un processo. Cosa che ovviamente non può sapere. Ed eccovi dimostrato come l’ottimo 
 non solo <strong>non è sempre necessario</strong>, ma a volte non è nemmeno perseguibile. Eppure se state ancora leggendo, anche un algoritmo non ottimo come il RR sta funzionando egregiamente.</p>
-<p>Altro esempio. Torniamo a Google Maps. Tutti sappiamo che serve per andare da un punto A a un punto B. Ma quanti sanno davvero <strong>come</strong> ci si arriva? </p>
-<p>Date due città e una rete enorme di strade, i percorsi possibili sono migliaia a volte <strong>milioni</strong>. Supponiamo di dover andare da Milano a Torino.
-I più sensati tra voi sceglieranno l’autostrada: veloce, diretta, lineare. E anche Maps vi suggerirà la stessa cosa. Ma... chi vi impedisce di passare per Roma?
-Tecnicamente quella strada esiste e potreste farlo. Ma ovviamente <strong>non ha alcun senso</strong>. Noi lo capiamo grazie al <strong>pensiero critico</strong>. 
-Un calcolatore invece no: il suo pensiero critico è pari a quello di un <strong>tostapane</strong> che è molto bravo a eseguire i calcoli. Quindi come fa a dirvi che la strada migliore 
-è l’autostrada diretta? Usa delle euristiche: regole pratiche che gli permettono di dire:</p>
+<p>Altro esempio. Torniamo a Google Maps. Qui parliamo di <strong>ricerca di un percorso</strong>, ma con una differenza fondamentale rispetto alle metaeuristiche:
+Maps <em>non vuole</em> un "quasi ottimo". Maps vuole il <strong>miglior percorso</strong> possibile. Il problema è che i percorsi 
+possibili sono <strong>enormi</strong>: milioni di combinazioni, molte senza alcun senso.</p>
+<p>E allora cosa fa?
+Prima ancora di cercare l'ottimo, fa qualcosa di profondamente umano: <strong>semplifica il mondo</strong>.
+Scarta tutto ciò che è assurdo (tipo andare da Milano a Torino passando per Roma) e restringe la ricerca solo ai percorsi "plausibili".
+Sono le famose <strong>euristiche</strong>: piccole scorciatoie che permettono al computer di dire:</p>
 <blockquote>
-<p>Scarto tutti i percorsi che non hanno senso e concentro la ricerca su quelli più promettenti.</p>
+<p>Questa strada non ha senso, non la considero nemmeno. Questa invece ha una logica, continuo a cercare.</p>
 </blockquote>
-<p>Perché lo fa?</p>
-<p>Perché i percorsi da Milano a Torino sono <strong>potenzialmente infiniti</strong> se consideriamo tutte le combinazioni possibili di strade, deviazioni, incroci e ritorni indietro.
-Se dovesse analizzarli tutti, Maps impiegherebbe <strong>ore</strong> a rispondervi. E quanti di voi vorrebbero aspettare ore per sapere quale percorso prendere? Nell'esempio precedente 
-potevamo fare a meno dell'ottimo <strong>ma ora no</strong>. Vogliamo andare da Milano a Torino nel piú breve tempo possibile. Ecco dunque uno degli usi fondamentali delle euristiche:
-<strong>esplorare quanto basta per eliminare ciò che non ha senso</strong>, e rendere possibile il calcolo dell’ottimo.</p>
+<p>Solo dopo aver ridotto l'universo delle possibilità, può finalmente tentare di calcolare il <strong>vero ottimo</strong>.
+Ed è proprio in questo contrasto che le metaeuristiche brillano. Maps si affida alle euristiche per 
+rendere l'ottimo <strong>calcolabile</strong>. Le metaeuristiche, invece, nascono quando l'ottimo <strong>non è un obiettivo realistico</strong>: 
+quando il problema è talmente complesso, incerto o vasto che l'unica cosa sensata da fare è <strong>muoversi</strong>, 
+farsi guidare dall'esplorazione, e accettare un risultato "abbastanza buono". E qui c'è una lezione sottilissima, ma enorme:
+<strong>non sempre ha senso guardare a tutto ciò che è possibile fare</strong>. Se ci preoccupiamo di ogni strada, di ogni esito, 
+di ogni deviazione teorica, rischiamo di non partire mai. A volte il modo migliore per avvicinarsi all'ottimo, 
+in un algoritmo come nella vita, è proprio <strong>smettere di voler prevedere ogni possibilità</strong> e fare quell'unico passo che ci 
+mette in cammino.</p>
+<p>Maps semplifica per arrivare all'ottimo.
+Le metaeuristiche accettano l'incertezza per avvicinarsi al "quasi ottimo". Sono due facce della stessa medaglia:
+<strong>come affrontiamo l'infinito quando non possiamo vederlo tutto.</strong></p>
 <p>Si lo so, ho parlato di metaeuristiche (o meglio dell'idea che c'è dietro), mentre poco fa vi ho nominato le <strong>euristiche</strong>. C'è <strong>differenza</strong>? Assolutamente si.
 L’euristica è il singolo <strong>metodo pratico</strong> per trovare una buona soluzione mentre la metaeuristica è l’approccio che guida l'euristica per <strong>esplorare</strong> meglio le possibilità.
 In pratica la metaeuristica usa le euristiche per <strong>orientarsi</strong> nel labirinto delle soluzioni.</p>
@@ -275,6 +283,9 @@ Detto questo concludo dicendo che spero di avervi ispirato <strong>curiositá</s
         </li>
         <li>
             <a href="https://it.wikipedia.org/wiki/Schedulazione_round_robin" target="_blank">https://it.wikipedia.org/wiki/Schedulazione_round_robin</a>
+        </li>
+        <li>
+            <a href="https://www.goodreads.com/book/show/25670869-why-greatness-cannot-be-planned" target="_blank">https://www.goodreads.com/book/show/25670869-why-greatness-cannot-be-planned</a>
         </li>
     </ul>
 </section>

@@ -209,20 +209,26 @@ Inside your device there’s a processor that <strong>schedules</strong> process
 But there’s a reason behind that. SJF requires knowing in advance how long a process will last. Something it obviously cannot know. And there you have it: proof that the optimal 
 solution <strong>is not only not always necessary</strong>, but sometimes not even achievable.
 And yet if you’re still reading, even a non-optimal algorithm like RR is working perfectly fine.</p>
-<p>Another example. Let’s go back to Google Maps. We all know it’s used to go from point A to point B. But how many really know <strong>how</strong> it gets us there?</p>
-<p>Given two cities and a huge network of roads, the possible routes are thousands sometimes <strong>millions</strong>. Let’s say we need to go from Milan to Turin.
-The most sensible among you will choose the highway: fast, direct, straightforward. And Maps will suggest the same thing. But... what’s stopping you from going through Rome?
-Technically that road exists and you could take it. But obviously <strong>doesn’t make any sense</strong>. We understand that thanks to <strong>critical thinking</strong>.
-A computer, on the other hand, doesn’t: its critical thinking is about the same as a <strong>toaster’s</strong> that is very good at doing calculations. 
-So how does it tell you that the best route is the direct highway? It uses heuristics: practical rules that allow it to say:</p>
+<p>Another example. Let's go back to Google Maps. Here we are talking about <strong>finding a path</strong>, but with a fundamental difference compared to metaheuristics:
+Maps does <em>not</em> want a "near-optimal" solution. Maps wants the <strong>best possible route</strong>. The problem is that the possible paths are <strong>huge</strong>: millions of combinations, many of which make no sense.</p>
+<p>So what does it do?
+Before even searching for the optimum, it does something profoundly human: <strong>it simplifies the world</strong>.
+It discards everything that is absurd (like going from Milan to Turin by passing through Rome) and narrows the search to only the “plausible” routes.
+These are the well-known <strong>heuristics</strong>: small shortcuts that allow the computer to say:</p>
 <blockquote>
-<p>I discard all the routes that don’t make sense and focus the search on the most promising ones.</p>
+<p>This route makes no sense, I won't even consider it. This one instead seems reasonable, I keep exploring.</p>
 </blockquote>
-<p>Why does it do that?</p>
-<p>Because the routes from Milan to Turin are <strong>potentially infinite</strong> if we consider all possible combinations of roads, detours, intersections, and backtracks.
-If Maps had to analyze them all, it would take <strong>hours</strong> to give you an answer. And how many of you would want to wait hours just to know which route to take? In the previous example,
-we could do without the optimal solution, <strong>but not here</strong>. We want to go from Milan to Turin in the shortest possible time.
-Here then lies one of the fundamental uses of heuristics: <strong>exploring just enough to eliminate what doesn’t make sense</strong>, and making it possible to compute the optimum.</p>
+<p>Only after reducing the universe of possibilities can it finally attempt to compute the <strong>true optimum</strong>.
+And it is precisely in this contrast that metaheuristics shine. Maps relies on heuristics to make the optimum <strong>computable</strong>. 
+Metaheuristics, instead, arise when the optimum <strong>is not a realistic goal</strong>: when the problem is so complex, uncertain, 
+or vast that the only sensible thing to do is to <strong>move</strong>, be guided by exploration, and accept a solution that is "good enough".
+And here lies a subtle but enormous lesson: <strong>it does not always make sense to look at everything that is possible to do</strong>. 
+If we worry about every path, every outcome, every theoretical deviation, we risk never starting at all.
+Sometimes the best way to get closer to the optimum, in an algorithm as in life, is precisely to 
+<strong>stop trying to foresee every possibility</strong> and take that single step that sets us in motion.</p>
+<p>Maps simplifies the world in order to reach the optimum.
+Metaheuristics embrace uncertainty to move closer to the "near-optimal". They are two sides of the same coin:
+<strong>how we face the infinite when we cannot see it all.</strong></p>
 <p>Yes, I know I talked about metaheuristics (or rather the idea behind them), while earlier I mentioned <strong>heuristics</strong>. Is there a <strong>difference</strong>? Absolutely yes.
 A heuristic is a single <strong>practical method</strong> to find a good solution while a metaheuristic is the broader approach that guides or combines heuristics to <strong>explore</strong> possibilities more effectively.
 In short the metaheuristic uses heuristics to <strong>navigate</strong> through the labyrinth of possible solutions.</p>
@@ -281,6 +287,9 @@ With that said, I’ll conclude by saying that I hope I’ve sparked your <stron
         <li>
             <a href="https://en.wikipedia.org/wiki/Round-robin_scheduling" target="_blank">https://en.wikipedia.org/wiki/Round-robin_scheduling</a>
         </li>
+        <li>
+            <a href="https://www.goodreads.com/book/show/25670869-why-greatness-cannot-be-planned" target="_blank">https://www.goodreads.com/book/show/25670869-why-greatness-cannot-be-planned</a>
+        </li>
     </ul>
 </section>
         </div>
@@ -288,7 +297,7 @@ With that said, I’ll conclude by saying that I hope I’ve sparked your <stron
             <h4>Published</h4>
             <time itemprop="dateCreated" datetime="2025-11-13T00:00:00+01:00">November 13, 2025</time>
             <h4>Category</h4>
-            <a class="category-link" href="https://www.lucadivita.it/en/categories.html#tra-codice-e-vita-ref">Tra Codice E Vita</a>
+            <a class="category-link" href="https://www.lucadivita.it/en/categories.html#tra-codice-e-vita-ref">Between Code And Life</a>
             <h4>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="https://www.lucadivita.it/en/tags.html#critique-ref">critique
