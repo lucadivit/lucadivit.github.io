@@ -152,6 +152,14 @@ code {
     opacity: 0;
 }
 
+.pdf-frame {
+    width: 100%;
+    height: min(85vh, 120vw);
+    display: block;
+    margin: 0 auto;
+    border: none;
+}
+
 #toc-list .toc-link:hover {
   text-decoration: underline;
   text-underline-offset: 0.15em;    /* regola l’altezza della linea */
