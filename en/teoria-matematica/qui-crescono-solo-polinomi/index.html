@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4, h5',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="Who knows me knows that one of the topics I am most passionate about is cryptography. For this reason it was not a matter of if but of when, I would have written an article about it. Since forever however you cannot start abruptly, and this article serves exactly this …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="math, cryptography, security, finite_fields, modular_arithmetic, number_theory, galois_fields, Teoria & Matematica, " />
+
+<meta property="og:title" content="Where Only Polynomials Grow "/>
+<meta property="og:url" content="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/" />
+<meta property="og:description" content="Who knows me knows that one of the topics I am most passionate about is cryptography. For this reason it was not a matter of if but of when, I would have written an article about it. Since forever however you cannot start abruptly, and this article serves exactly this …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2025-12-01T00:00:00+01:00" />
+<meta name="twitter:title" content="Where Only Polynomials Grow ">
+<meta name="twitter:description" content="Who knows me knows that one of the topics I am most passionate about is cryptography. For this reason it was not a matter of if but of when, I would have written an article about it. Since forever however you cannot start abruptly, and this article serves exactly this …">
+
+        <title>Where Only Polynomials Grow  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/en/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/index.html">About Me</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/latest.html">
+                                        Latest
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/categories.html">
+                                            Categories
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/archives.html">
+                                            Archives
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/en/pages/cv/">CV</a>
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/en/pages/contatti/">Contacts</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li>
+                                            <a href="/it/teoria-matematica/qui-crescono-solo-polinomi/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li class="active">
+                                            <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/">
+                Where Only Polynomials Grow
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contents</h4>
+            <div id="toc-list"></div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>Who knows me knows that one of the topics I am most passionate about is <strong>cryptography</strong>. For this reason it was not a matter of <em>if</em> but of <em>when</em>, 
+I would have written an article about it. Since forever however you cannot start abruptly, and this article serves exactly this, to prepare 
+the <strong>field</strong>. No, not the Galois one, that will come later. So in this post we will lay the foundations of <strong>modular arithmetic</strong> and <strong>Galois fields</strong>,
+which are the supporting pillars of all modern cryptography. Small spoiler: there will be a few numbers. Nothing unmanageable, but if you do not like mathematics, deal with it.</p>
+<h3 id="my-numbers-spin">My Numbers Spin<a class="headerlink" href="#my-numbers-spin" title="Permanent link"> </a></h3>
+<p>As anticipated in this first paragraph we introduce a fundamental little block: <strong>modular arithmetic</strong>. 
+I know that when you see numbers it is you who spins, but the title as we will see fits the topic.
+Modular arithmetic is that branch of mathematics that studies the properties and the relations between integers, through the concepts
+of <strong>congruence</strong> and <strong>modulus</strong>. What?! You ask when two numbers <span class="math">\(a\)</span> and <span class="math">\(b\)</span> are congruent modulo <span class="math">\(n\)</span> ? Well when <span class="math">\(b\)</span> is the <strong>remainder of the division</strong>
+between <span class="math">\(a\)</span> and <span class="math">\(n\)</span>. This relation is written as follows:</p>
+<p><a id="forma-base-congruenza"></a>
+</p>
+<div class="math">$$
+a \equiv b \pmod{n}
+$$</div>
+<p class="formula-caption">
+Formula 1. Base Form of Congruence</p>
+<p>Yes, written like this it looks like some abstract thing but in reality it is very simple and with a few examples it becomes clear immediately.
+Suppose we have <span class="math">\(a=5\)</span> and <span class="math">\(n=3\)</span>. The division <span class="math">\(\frac{5}{3}\)</span> has result <span class="math">\(1\)</span> with remainder <span class="math">\(2\)</span>, therefore the congruence is true</p>
+<div class="math">$$
+5 \equiv 2 \pmod{3}
+$$</div>
+<p>So, in modular arithmetic, writing</p>
+<div class="math">$$
+5 \pmod{3}
+$$</div>
+<p>or writing</p>
+<div class="math">$$
+2 \pmod{3}
+$$</div>
+<p>is completely <strong>equivalent</strong>. With this logic this congruence is also true:</p>
+<div class="math">$$
+6 \equiv 0 \pmod{3}
+$$</div>
+<p>since <span class="math">\(\frac{6}{3}\)</span> has result <span class="math">\(2\)</span> with remainder <span class="math">\(0\)</span>.</p>
+<p>Now, I know it is not the most fun but you can indulge yourselves by writing all the congruences you want. In fact they are just relations between
+numbers. And do not make the mistake of thinking they are useless, in reality you use them more often than you might imagine.</p>
+<p>A simple example is reading the time. Every time you look at a clock, you are unknowingly working <span class="math">\(\pmod{24}\)</span>. 
+When the day ends, you do not keep counting the hours beyond 24, you start again. 
+So 25 becomes 1, 27 becomes 3, and so on until the end of your days. 
+Each "round" of the clock is a <strong>modular operation</strong>.</p>
+<p>Since <span class="math">\(b\)</span> is a remainder, it goes without saying that it <strong>can never be negative</strong>, but will always be <strong>between</strong> <span class="math">\(0\)</span> and <span class="math">\(n-1\)</span>.
+If you get a remainder below zero you have made a mistake: too good to go shopping, have a “negative remainder” and see
+the cashier giving you money. Unfortunately it does not work like this, neither in supermarkets, nor in modular arithmetic.
+This characteristic leads to a fundamental property: modular arithmetic is <strong>cyclic</strong>. Once the modulus is exceeded,
+numbers wrap around themselves starting the count again from 0. And even if it seems like a property with no real purpose,
+all modern <strong>cryptography</strong> is based exactly on this.</p>
+<h4 id="one-rule-to-rule-them">One Rule To Rule Them<a class="headerlink" href="#one-rule-to-rule-them" title="Permanent link"> </a></h4>
+<p>Solving a congruence is very simple. Suppose you have the following relation:</p>
+<div class="math">$$
+x \equiv a \pmod{n}
+$$</div>
+<p>What the equation is asking you is to find the <strong>remainder</strong> of the division of <span class="math">\(a\)</span> by <span class="math">\(n\)</span>.
+To solve it you follow three very simple steps:</p>
+<ol>
+<li>
+<p>You compute:</p>
+<p>
+<div class="math">$$
+z = \left\lfloor \frac{a}{n} \right\rfloor
+$$</div>
+</p>
+</li>
+<li>
+<p>You compute:</p>
+<p>
+<div class="math">$$
+y = n \cdot z
+$$</div>
+</p>
+</li>
+<li>
+<p>You compute:</p>
+<p>
+<div class="math">$$
+x = a - y
+$$</div>
+</p>
+</li>
+</ol>
+<p>These three simple steps handle both congruences with <strong>positive</strong> values and those with <strong>negative</strong> values:</p>
+<ol>
+<li>
+<p>Case 1:</p>
+<p>
+<div class="math">$$
+x \equiv 13 \pmod{5} \\
+z = \left\lfloor \frac{13}{5} \right\rfloor = \left\lfloor 2.6 \right\rfloor = 2 \\
+y = 5 \cdot 2 = 10 \\
+x = 13 - 10 = 3
+$$</div>
+</p>
+<p>and indeed</p>
+<p>
+<div class="math">$$
+13 \equiv 3 \pmod{5}
+$$</div>
+</p>
+</li>
+<li>
+<p>Case 2:</p>
+<p>
+<div class="math">$$
+x \equiv -3 \pmod{5} \\
+z = \left\lfloor \frac{-3}{5} \right\rfloor = \left\lfloor -0.6 \right\rfloor = -1 \\
+y = 5 \cdot -1 = -5 \\
+x = -3 - (-5) = 2
+$$</div>
+</p>
+<p>from which</p>
+<p>
+<div class="math">$$
+-3 \equiv 2 \pmod{5}
+$$</div>
+</p>
+</li>
+</ol>
+<p>The positive case is very intuitive, unlike the negative one which seems made up out of nowhere, right? No! That one also makes sense.
+If you are looking at the clock and it is exactly midnight, <strong>modularly</strong> speaking it is:</p>
+<div class="math">$$
+0 \pmod{24}
+$$</div>
+<p>And if I asked you: <em>"what time was it one hour ago?"</em> mathematically it would be:</p>
+<div class="math">$$
+-1 \pmod{24}
+$$</div>
+<p>But you, with your extraordinary ability to conceive time, would answer:</p>
+<div class="math">$$
+23 \pmod{24}
+$$</div>
+<p>(of the previous day).</p>
+<h4 id="yes-even-fractions">Yes, Even Fractions<a class="headerlink" href="#yes-even-fractions" title="Permanent link"> </a></h4>
+<p>We have seen positive numbers and negative numbers, but it does not end here. Just because remainders are always integers, it does not mean that modular
+arithmetic is not able to handle <strong>divisions</strong>. If negative numbers seemed strange to you, <strong>modular fractions</strong> are no less.
+The matter here becomes a little more elaborate in fact, given the equation</p>
+<div class="math">$$
+ax \equiv 1 \pmod{n}
+$$</div>
+<p>so that the result exists the condition must hold:</p>
+<div class="math">$$
+GCD(a, \, n) = 1
+$$</div>
+<p>where the <span class="math">\(GCD\)</span> is nothing more than the greatest common divisor. When it holds the numbers are said to be <strong>coprime</strong> with each other and we can solve
+divisions. The matter certainly does not end here, because in order to solve it is necessary to apply the algorithm of <a href="https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm"><strong>extended Euclid</strong></a> and find the
+coefficients of <a href="https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity"><strong>Bézout identity</strong></a>. Without going too much into detail let us see an
+example, just to show you that I am not talking nonsense. Suppose we have to solve:</p>
+<div class="math">$$
+3x \equiv 1 \pmod{7}
+$$</div>
+<p>That they are coprime does not need to be proven so we start immediately by applying the extended Euclidean algorithm which allows us to write:</p>
+<div class="math">$$
+ax + ny = GCD(a, \, n)
+$$</div>
+<p>and in this equality, the <span class="math">\(x\)</span> is exactly the solution we are looking for.</p>
+<p>Making the proper substitutions we have:</p>
+<div class="math">$$
+3x + 7y = 1
+$$</div>
+<p>This one we can also solve mentally, in fact by setting <span class="math">\(x=-2\)</span> and <span class="math">\(y=1\)</span>, we make the equality true. So the solution is <span class="math">\(x=-2\)</span>,
+but by now we know that in modular arithmetic negative numbers <strong>disgust us</strong>, so bringing it back to positive values we have:</p>
+<div class="math">$$
+x = -2 \equiv 5 \pmod{7}
+$$</div>
+<p>So in our initial equation we have:</p>
+<div class="math">$$
+3 \cdot 5 = 15 \equiv 1 \pmod{7}
+$$</div>
+<p>What we have done in practice is find a <strong>multiplicative inverse</strong>, that is, we have found a number (the <span class="math">\(5\)</span>) such that, multiplied by a
+second one (the <span class="math">\(3\)</span>), and reduced modulo (of <span class="math">\(7\)</span>) gives remainder <span class="math">\(1\)</span>. This is easy in everyday mathematics, for example the multiplicative
+inverse of <span class="math">\(3\)</span> is <span class="math">\(\frac{1}{3}\)</span>. But modular arithmetic lives in a world of its own and the inverse of <span class="math">\(3\pmod{7}\)</span> is <span class="math">\(5\)</span>.</p>
+<p>Knowing the multiplicative inverse, you can also solve <strong>equations</strong>. Suppose we have:</p>
+<div class="math">$$
+2x + 7 \equiv 3 \pmod{17} \Rightarrow 2x \equiv -4 \pmod{17}
+$$</div>
+<p>If you were to calculate the multiplicative inverse of <span class="math">\(2\pmod{17}\)</span> you would see that it is <span class="math">\(9\)</span>, so we can write:</p>
+<div class="math">$$
+2x \cdot 9 \equiv -4 \cdot 9 \pmod{17} \Rightarrow x \equiv -36 \pmod{17} \Rightarrow x \equiv 15 \pmod{17}
+$$</div>
+<p>
+These are simple examples, but very explanatory of how the calculation of the inverse works in modular arithmetic. 
+You can obviously make more complex examples but they fall outside my purpose of giving an overview of these concepts.</p>
+<p>Now that we have become familiar let us take a step back. Earlier I wrote that it is necessary that the numbers be coprime.
+Well I lied, at least partly. Even if a bit tricky, there are ways to solve cases in which for a congruence it results</p>
+<div class="math">$$
+GCD(a, \, n) = d &gt; 1
+$$</div>
+<p>Without going too much into the subject it is enough for you to know this:</p>
+<ul>
+<li>If <span class="math">\(GCD(a, n) = d &gt; 1\)</span> the congruence is <strong>solvable</strong> if and only if <span class="math">\(d \mid b\)</span> (that is, <span class="math">\(d\)</span> divides <span class="math">\(b\)</span> giving an integer result).</li>
+<li>If <span class="math">\(d \mid b\)</span> we have <strong>more than one solution</strong> for the congruence (exactly <span class="math">\(d\)</span>).</li>
+</ul>
+<p>To give you some examples:</p>
+<ul>
+<li>
+<p>Possible case example</p>
+<p>
+<div class="math">$$
+  4x \equiv 8 \pmod{12}
+$$</div>
+</p>
+<p>We have that <span class="math">\(GCD(4, 12) = 4\)</span> and since <span class="math">\(4\)</span> divides <span class="math">\(8\)</span> we have 4 solutions which are </p>
+<p>
+<div class="math">$$
+  x=2, 5, 8, 11
+$$</div>
+</p>
+<p>Even if I have omitted the procedure because out of scope, try it to believe it.</p>
+</li>
+<li>
+<p>Impossible case example:</p>
+<p>
+<div class="math">$$
+  4x \equiv 1 \pmod{12}
+$$</div>
+</p>
+<p>We have that <span class="math">\(GCD(4, 12) = 4\)</span> and since <span class="math">\(4\)</span> does not divide <span class="math">\(1\)</span> we have no solutions.</p>
+</li>
+</ul>
+<p>Obviously this is not all, you can also solve <strong>quadratic equations</strong>, <strong>systems of equations</strong>, etc. But these are all topics that fall outside
+the purpose of a general overview, if you want to explore further I recommend taking a look at the book listed in the <a href="#References">references</a>.</p>
+<h3 id="not-all-fields-come-to-harm">Not All Fields Come To Harm<a class="headerlink" href="#not-all-fields-come-to-harm" title="Permanent link"> </a></h3>
+<p>Modular arithmetic is a very <strong>powerful</strong> tool. By combining it with the use of <strong>prime numbers</strong>, you get the basis
+for many cryptographic algorithms: <strong>RSA</strong>, <strong>Diffie-Hellman</strong>, <strong>El Gamal</strong> and so on. It allowed us to play with numbers, remainders, cyclicity and we had fun, but when the
+going gets tough the tough get going and some cryptographic algorithms, without naming names (<strong>elliptic curves</strong>), break our balls. They say: <em>"All these remainders are no longer enough for us!"</em>.
+Elliptic curves are <strong>greedy</strong>, they want more elements. And this is where the infamous <strong>fields</strong> come into play. Not just any fields, but <strong>finite fields</strong>, but let us proceed step by step.</p>
+<p>What is a field... A field is nothing more than a <strong>set of elements</strong> which allow the operations of <strong>addition</strong> and <strong>multiplication</strong> that satisfy some requirements:</p>
+<ol>
+<li><strong>Closure</strong>: by adding and/or multiplying the elements of the field, we obtain an element in the field. Suppose we have a field <span class="math">\(\mathbb{A}\)</span> and two elements <span class="math">\(a, \, b \neq 0 \, \in \mathbb{A}\)</span>, 
+    then having a <strong>closed field</strong> means that <span class="math">\(a + b \in \mathbb{A}\)</span> and <span class="math">\(a \cdot b \in \mathbb{A}\)</span>.</li>
+<li><strong>Abelian Group</strong>: the operations of addition and multiplication must have <strong>the neutral element</strong>, their <strong>inverse</strong> and must satisfy the <strong>associative</strong>, <strong>commutative</strong> and <strong>distributive</strong> properties. 
+   This in plain words means that, given the field <span class="math">\(\mathbb{A}\)</span>, <span class="math">\(a, \, b, \, c \in \mathbb{A}\)</span> and <span class="math">\(a, \, b, \, c \neq 0\)</span>:<ul>
+<li>The term <span class="math">\(0\)</span> exists which allows us to write <span class="math">\(a + 0 = a\)</span> (<strong>neutral element of addition</strong>).</li>
+<li>The term <span class="math">\(1\)</span> exists which allows us to write <span class="math">\(a \cdot 1 = a\)</span> (<strong>neutral element of multiplication</strong>).</li>
+<li>The term <span class="math">\(-a\)</span> exists which allows us to write <span class="math">\(a - a = 0\)</span> (<strong>inverse of addition</strong>).</li>
+<li>The term <span class="math">\(a^{-1}\)</span> exists which allows us to write <span class="math">\(a \cdot a^{-1} = 1\)</span> with the exception of <span class="math">\(0\)</span> (<strong>inverse of multiplication</strong>).</li>
+<li><span class="math">\(a + b = b + a\)</span> and <span class="math">\((a + b) + c = a + (b + c)\)</span> (<strong>commutative and associative properties of addition</strong>).</li>
+<li><span class="math">\(a \cdot b = b \cdot a\)</span> and <span class="math">\((a \cdot b) \cdot c = a \cdot (b \cdot c)\)</span> (<strong>commutative and associative properties of multiplication</strong>).</li>
+<li><span class="math">\(a \cdot (b + c) = a \cdot b + a \cdot c\)</span> (<strong>distributive property</strong>)</li>
+</ul>
+</li>
+</ol>
+<p>It seems like a big list of stuff but if you read carefully everything is quite <strong>simple</strong>. There are no strange properties, in fact they are all things learned in elementary school.
+An example of a field is something you actually use every day, the set of <strong>real</strong> numbers <span class="math">\(\mathbb{R}\)</span>. Take any two real numbers and consider the listed points one by one.
+You will see that all of them are satisfied. The same cannot be said, for example, for the set of <strong>natural</strong> numbers <span class="math">\(\mathbb{N}\)</span>. Natural numbers (depending on the convention, with or without zero)
+are all positive integers <span class="math">\({0, \, 1, \, 2, \, \dots}\)</span>, therefore they cannot include a negative number and consequently the additive inverse element is missing
+(just to give an example, since other properties are not satisfied as well).</p>
+<h4 id="prairies-and-little-gardens">Prairies And Little Gardens<a class="headerlink" href="#prairies-and-little-gardens" title="Permanent link"> </a></h4>
+<p>If you have made it this far, congratulations, now you know what a field is. That said, when is a field defined as <strong>finite</strong>? Nothing more intuitive. When it has a <strong>finite set of elements</strong>.
+When you can <strong>count</strong> the elements of the field knowing that sooner or later the count ends. So not only must it satisfy the previously defined points, but it must also have a finite
+number of elements. So <span class="math">\(\mathbb{R}\)</span> is indeed a field, but it is not a finite field because it contains an infinite number of elements. If it is <strong>conceptually simple</strong> to know what a finite field is,
+building one is not so <strong>immediate</strong>. Or at least it is not if you want to make elliptic curves happy (yes I am aware that I have mentioned them twice but have not said what they are, it is enough for you
+to know that they are algebraic curves used in cryptography, maybe one day I will talk about them). So let us proceed step by step. We know what a finite field is, well finite field is a different name to
+indicate a <strong>Galois field</strong>. They are exactly the same thing and  </p>
+<p>Before proceeding with the rest however, I want to make a small tribute to the great <strong>Évariste Galois</strong>, from whose name Galois fields are derived. He was a great mathematician who died at the
+tender age of 20. At that age I used to <strong>get drunk</strong> at university parties, he invented a branch of <strong>abstract algebra</strong>. But at least I made it past 20 (only because duels to the death no longer exist). 
+But let us get back to us...</p>
+<p>In reality, in the previous paragraph we started to see finite fields, but it is not enough, we need to add something. Let us go back to good old modular arithmetic considering
+the <a href="#forma-base-congruenza">base form</a>, and let us suppose we take a <strong>prime number</strong> as the value of <span class="math">\(n\)</span> (that prime numbers are those numbers divisible only by 1 and by themselves does
+not need to be said, right?!). Considering <span class="math">\(n=5\)</span> we have:</p>
+<div class="math">$$
+a \equiv b \pmod{5}
+$$</div>
+<p>From the previous paragraph you should know that all the <strong>possible remainders</strong> are in the set</p>
+<div class="math">$$
+b \in \mathbb I = \{ 0, \, 1, \, 2, \, 3, \, 4 \}
+$$</div>
+<p>Let us go and check the conditions one by one:</p>
+<ol>
+<li>
+<p><strong>Closure</strong>:</p>
+<p>Let us consider the addition operation and take, for example, the values <span class="math">\(4\)</span> and <span class="math">\(3\)</span> (but it is valid for all, trust me)</p>
+<p>
+<div class="math">$$
+4 + 3 = 7 \equiv 2 \pmod{5}
+$$</div>
+</p>
+<p>that is, writing <span class="math">\(7 \pmod{5}\)</span> is equivalent to writing <span class="math">\(2 \pmod{5}\)</span>, so we are back in the set <span class="math">\(\mathbb I\)</span>. 
+With multiplication we obtain the same thing:</p>
+<p>
+<div class="math">$$
+4 \cdot 3 = 12 \equiv 2 \pmod{5}
+$$</div>
+we are still inside <span class="math">\(\mathbb{I}\)</span>.</p>
+</li>
+<li>
+<p><strong>Neutral element of addition</strong>:</p>
+<p>Let us consider the addition operation and take, for example, the value <span class="math">\(4\)</span> (but here too it is valid for all, trust me)</p>
+<p>
+<div class="math">$$
+4 + 0 = 4 \equiv 4 \pmod{5}
+$$</div>
+</p>
+<p>This also checks out, great.</p>
+</li>
+<li>
+<p><strong>Neutral element of multiplication</strong>:</p>
+<p>Let us consider the multiplication operation and take, for example, the value <span class="math">\(4\)</span> (but here too it is valid for all, trust me)</p>
+<p>
+<div class="math">$$
+4 \cdot 1 = 4 \equiv 4 \pmod{5}
+$$</div>
+</p>
+<p>This also checks out, yu-hu.</p>
+</li>
+<li>
+<p><strong>Additive inverse</strong>:</p>
+<p>Let us consider the addition operation and take, for example, the value <span class="math">\(4\)</span> (same story). The additive inverse is <span class="math">\(-4\)</span>, but by now you know
+how to handle negative values right?! So skipping the steps we write:</p>
+<p>
+<div class="math">$$
+-4 \equiv 1 \pmod{5}
+$$</div>
+</p>
+<p>therefore the additive inverse of <span class="math">\(4\)</span> is <span class="math">\(1\)</span>. In fact:</p>
+<p>
+<div class="math">$$
+1 + 4 = 5 \equiv 0 \pmod{5}
+$$</div>
+</p>
+<p>This also checks out, yay.</p>
+</li>
+<li>
+<p><strong>Multiplicative inverse</strong>: here I will not go through the steps but let us reflect on the set <span class="math">\(\mathbb I - \{ 0 \}\)</span>. Once we remove <span class="math">\(0\)</span> which <strong>by definition has no inverse</strong>, every element of <span class="math">\(\mathbb I\)</span> is coprime with 
+    <span class="math">\(5\)</span> since the latter is a prime number. And earlier I clearly wrote that if the numbers are coprime, the inverse exists. So we are certain that for every element of <span class="math">\(\mathbb I - \{ 0 \}\)</span> we have an inverse
+    and consequently we can also check off this point.</p>
+</li>
+<li>
+<p>Well guys, I would be a bit fed up. The last three are variants of additions and multiplications, if you feel like it take paper and pen and do them, otherwise trust me that those also check out.</p>
+</li>
+</ol>
+<p>We have therefore shown that if <span class="math">\(n\)</span> is a prime number, the set of remainders forms a Galois field and its <strong>formal notation</strong> is <span class="math">\(GF(p)\)</span> or <span class="math">\(\mathbb{F}_p\)</span> where <span class="math">\(p\)</span> is the chosen prime number.</p>
+<p>Let us see why, if <span class="math">\(p\)</span> were not prime, we could not have a Galois field. Let us consider the case <span class="math">\(p=8\)</span>, we have that the set of remainders is:</p>
+<div class="math">$$
+\mathbb{I} = \{ 0, \, 1, \, 2, \, 3, \, 4, \, 5, \, 6, \, 7 \}
+$$</div>
+<p>Let us take one of the remainders, <span class="math">\(b=2\)</span>, and look for its multiplicative inverse. To do this we must write the congruence:</p>
+<div class="math">$$
+2x \equiv 1 \pmod{8}
+$$</div>
+<p>From which:</p>
+<div class="math">$$
+GCD(2, \, 8) = 2
+$$</div>
+<p>Checking the divisibility we have that <span class="math">\(2 \nmid 1\)</span>, and we can conclude that <span class="math">\(2 \pmod{8}\)</span> has no multiplicative inverse, and this violates
+one of the required properties of fields.</p>
+<h4 id="from-the-little-garden-to-the-plantation">From The Little Garden To The Plantation<a class="headerlink" href="#from-the-little-garden-to-the-plantation" title="Permanent link"> </a></h4>
+<p>We have seen that <span class="math">\(p\)</span> must be prime in order to define a Galois field. But what if I told you that instead you can define fields of the type
+<span class="math">\(\mathbb{F}_8\)</span>? No, I am not crazy. It can be done, but in a slightly different way than before. First of all let us start by saying that the argument
+of the field <strong>cannot be just any number</strong>, but must be a <strong>power of a prime number</strong>. So why can <span class="math">\(\mathbb{F}_8\)</span> exist? Because we can
+write <span class="math">\(8=2^3\)</span>, that is, <span class="math">\(8\)</span> as a power of the prime number <span class="math">\(2\)</span>.</p>
+<p>Even if it is not so, let us suppose you are asking yourself why it is useful to do this. In the previous paragraph we saw that to obtain a Galois field
+it is necessary to have a prime number <span class="math">\(p\)</span>, and the field <span class="math">\(\mathbb{F}_p\)</span> will have exactly <span class="math">\(p\)</span> elements:</p>
+<div class="math">$$
+\{0, \, \dots, \, p-1 \}
+$$</div>
+<p>This is a bit <strong>limiting</strong>, don't you think? If we wanted a very <strong>large</strong> Galois field but with <strong>small</strong> primes? For example with <span class="math">\(2\)</span>? This would allow us to have
+all the numerical terms in <span class="math">\(\{0, \, 1\}\)</span> (therefore easily representable in computers) but with a number of elements greater than two. No it is
+not witchcraft. It can be done and it is very useful to do it, because it allows us to have <strong>numbers of low value</strong>, but in <strong>very large fields</strong> (which increases the security
+of the infamous elliptic curves). Ok, but how? If the numbers are those what do we use to increase the <strong>cardinality</strong> of the field? The answer is: <strong>polynomials</strong>.
+Therefore, given a prime number <span class="math">\(p\)</span> and given an exponent <span class="math">\(m\)</span>, we can define thanks to polynomials a field <span class="math">\(\mathbb{F}_{p^m}\)</span> of <span class="math">\(p^m\)</span> elements, whose numerical terms
+are in <span class="math">\(\{ 0, \, \dots, \, p - 1 \}\)</span>. </p>
+<p>Considering the case <span class="math">\(\mathbb{F}_{2^3}\)</span>, let us see step by step (or rather, by degrees), how to proceed:</p>
+<ul>
+<li>
+<p>Degree <span class="math">\(m=0\)</span>: This case is simple, we must take the <strong>polynomials of degree</strong> <span class="math">\(0\)</span> which are in fact just the <strong>coefficients</strong>. Since we are in <span class="math">\(p=2\)</span>, the coefficients are</p>
+<p>
+<div class="math">$$
+\{0, \, 1 \}
+$$</div>
+</p>
+</li>
+<li>
+<p>Degree <span class="math">\(m=1\)</span>: In this case we take all the <strong>polynomials of degree at most</strong> <span class="math">\(1\)</span>. The family of these is given by </p>
+<p>
+<div class="math">$$
+q(x) = ax + b
+$$</div>
+</p>
+<p>since the coefficients must be in <span class="math">\(\{0, \, 1 \}\)</span>, we have that these polynomials are:</p>
+<p>
+<div class="math">$$
+\{x, \, x + 1 \}
+$$</div>
+</p>
+<p>In fact if:</p>
+<ul>
+<li><span class="math">\(a=0, \, b=0\)</span> <span class="math">\(\Rightarrow q(x)=0\)</span>. Already considered previously.</li>
+<li><span class="math">\(a=0, \, b=1\)</span> <span class="math">\(\Rightarrow q(x)=1\)</span>. Already considered previously.</li>
+<li><span class="math">\(a=1, \, b=0\)</span> <span class="math">\(\Rightarrow q(x)=x\)</span>.</li>
+<li><span class="math">\(a=1, \, b=1\)</span> <span class="math">\(\Rightarrow q(x)=x + 1\)</span>.</li>
+</ul>
+<p>There cannot be polynomials of degree <span class="math">\(1\)</span> such as <span class="math">\(2x\)</span> because working, in this case, with <span class="math">\(\pmod{2}\)</span> we have that</p>
+<p>
+<div class="math">$$
+2 \equiv 0 \pmod{2} \Rightarrow 2x \equiv 0 \pmod{2}
+$$</div>
+</p>
+<p>which we already considered in the case <span class="math">\(m=0\)</span>.</p>
+</li>
+<li>
+<p>Degree <span class="math">\(m=2\)</span>: Similarly to before, we take all the <strong>polynomials of degree at most</strong> <span class="math">\(2\)</span> whose coefficients are in <span class="math">\(\{0, \, 1 \}\)</span>. The family of these is given by </p>
+<p>
+<div class="math">$$
+q(x) = ax^2 + bx + c
+$$</div>
+</p>
+<p>So, expanding, and ignoring all those already considered previously we have:</p>
+<p>
+<div class="math">$$
+\{x^2, \, x^2 + 1, \, x^2 + x, \, x^2 + x + 1 \}
+$$</div>
+</p>
+</li>
+<li>
+<p>Degree <span class="math">\(m=3\)</span>: Eh, here the situation changes. Let us start by saying that working in <span class="math">\(m=3\)</span> we <strong>must not go beyond</strong>. These polynomials <strong>will not be part of the field</strong>,
+    but will define the <strong>modulus of the field</strong>. When we look for the polynomials of maximum degree with respect to the field, we must make sure they are
+    <strong>irreducible</strong>, that is, that <em>they cannot be written as a product of polynomials</em> among those listed so far. The polynomials are of the family </p>
+<p>
+<div class="math">$$
+q(x) = ax^3 + bx^2 + cx + d
+$$</div>
+</p>
+<p>In total there are <span class="math">\(8\)</span> polynomials, but the irreducible ones are only two:</p>
+<p>
+<div class="math">$$
+\{x^3 + x + 1, \, x^3 + x^2 + 1 \}
+$$</div>
+</p>
+<p>Try as much as you like, you will never manage to write these two polynomials as the product of two polynomials of lower degree. Let us briefly see
+why we ignore the others. Suppose we have:</p>
+<p>
+<div class="math">$$
+q(x) = x^3 + x^2 + x
+$$</div>
+</p>
+<p>We can also write this as:</p>
+<p>
+<div class="math">$$
+q(x) = x^3 + x^2 + x = x \cdot (x^2 + x + 1)
+$$</div>
+</p>
+<p>Since it can be written as the product of two polynomials of lower degree, we discard it because it would mean introducing elements that do not have a multiplicative inverse.</p>
+</li>
+</ul>
+<p>We are almost at the end. Now that we have the irreducible polynomials we choose one <strong>at will</strong>, whichever you prefer (even if I would get myself checked if I preferred
+one polynomial over another). In this case the fields are said to be <strong>isomorphic</strong> (same <strong>cardinality</strong>, same <strong>field structure</strong> but <strong>different</strong> irreducible polynomial).
+Let us suppose we choose the polynomial:</p>
+<div class="math">$$
+q(x) = x^3 + x^2 + 1
+$$</div>
+<p>we have found our Galois field <span class="math">\(\mathbb{F}_{8}\)</span> which contains exactly <span class="math">\(8\)</span> elements reduced modulo the chosen polynomial, all coefficients computed <span class="math">\(\pmod{2}\)</span> and which satisfies the properties
+mentioned above (otherwise it would not be a Galois field):</p>
+<div class="math">$$
+\mathbb{F}_{8} = \{ 0, \, 1, \, x, \, x + 1, \, x^2, \, x^2 + 1, \, x^2 + x, \, x^2 + x + 1 \} \pmod{x^3 + x^2 + 1}
+$$</div>
+<p>Let us take two random values and see how, by performing addition and multiplication of the elements in the field, we never leave the field itself.
+Let us take <span class="math">\(f(x) = x^2 + 1\)</span> and <span class="math">\(g(x) = x + 1\)</span>.</p>
+<ul>
+<li>
+<p>Addition:</p>
+<p>
+<div class="math">$$
+f(x) + g(x) = x^2 + x + 2
+$$</div>
+</p>
+<p>Since we are in <span class="math">\(\pmod{2}\)</span> we have that</p>
+<p>
+<div class="math">$$
+2 \equiv 0 \pmod{2}
+$$</div>
+</p>
+<p>Therefore we can write</p>
+<p>
+<div class="math">$$
+x^2 + x + 2 \equiv x^2 + x \pmod{2}
+$$</div>
+</p>
+<p>that is, it has gone back to being a polynomial <strong>belonging to the field</strong> defined earlier.</p>
+</li>
+<li>
+<p>Product: </p>
+<p>
+<div class="math">$$
+f(x) \cdot g(x) = (x^2 + 1) \cdot (x + 1) = x^3 + x^2 + x + 1
+$$</div>
+</p>
+<p>Since our irreducible polynomial is <span class="math">\(x^3 + x^2 + 1\)</span> we can write this relation:</p>
+<p>
+<div class="math">$$
+x^3 + x^2 + 1 \equiv 0 \pmod{x^3 + x^2 + 1}
+$$</div>
+</p>
+<p>From which</p>
+<p>
+<div class="math">$$
+x^3 \equiv -x^2 - 1 \pmod{x^3 + x^2 + 1}
+$$</div>
+</p>
+<p>However I remind you, that in modular arithmetic, negative numbers are not liked but we already know how to bring ourselves back to positive remainders <span class="math">\(\pmod{2}\)</span>.
+Omitting the steps (which you should already know but which you can read <a href="#one-rule-to-rule-them">here</a>), we have that:</p>
+<p>
+<div class="math">$$
+-1 \equiv 1 \pmod{2}
+$$</div>
+</p>
+<p>So we can write this:</p>
+<p>
+<div class="math">$$
+-x^2 - 1 \equiv x^2 + 1 \pmod{2}
+$$</div>
+</p>
+<p>from which we can write:</p>
+<p>
+<div class="math">$$
+x^3 \equiv x^2 + 1 \pmod{x^3 + x^2 + 1}
+$$</div>
+</p>
+<p>Returning now to the initial polynomial we can write:</p>
+<p>
+<div class="math">$$
+x^3 + x^2 + x + 1 \equiv x^2 + 1 + x^2 + x + 1 \equiv 2x^2 + x + 2 \pmod{x^3 + x^2 + 1}
+$$</div>
+</p>
+<p>Since, as already said and repeated, shown and re-shown, we are in <span class="math">\(\pmod{2}\)</span> we have that:</p>
+<p>
+<div class="math">$$
+2x^2 \equiv 0 \pmod{2}, \, 2 \equiv 0 \pmod{2}
+$$</div>
+</p>
+<p>We have therefore reached the conclusion that:</p>
+<p>
+<div class="math">$$
+(x^2 + 1) \cdot (x + 1) \equiv x \pmod{x^3 + x^2 + 1}
+$$</div>
+</p>
+<p>and as luck would have it, <span class="math">\(x\)</span> is a polynomial of the Galois field.</p>
+</li>
+</ul>
+<p>For obvious reasons I have shown you only the closure property, but you are completely free to do all your experiments. I am right anyway.</p>
+<p>To conclude this paragraph, I invite you to use a reducible polynomial as the modulus of the field. With pen and paper in hand, you will see that <strong>there will be at least one element
+of the field that does not have a multiplicative inverse belonging to the field itself</strong>, violating one of the properties.</p>
+<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<p>When I started writing this article I imagined it shorter, much shorter. But this time I did not get carried away, the problem is that,
+with hindsight, there were many more things to say. You will forgive me if you have not seen more complicated cases of the extended Euclidean algorithm or if I have not shown you the
+<strong>Chinese remainder theorem</strong> to solve systems of congruences. Sure now if on a Saturday night you go out with your
+crush, you cannot say you know how to solve a quadratic congruence, but you can talk about Galois and finite fields. That’s something.
+In any case even if all these things seem pointless on their own, know that <strong>they are the basis of all the operations you perform every day and that you hope are secure</strong>.
+If you feel safe when performing online operations, if you feel protected under the umbrella of RSA, elliptic curves and so on, know that it is
+thanks to these <strong>basic elements</strong>, and one day I will talk to you about them. Until then however, do not come to me saying “my password got hacked”,
+because cryptography is secure, it is the passwords <em>1234</em> and <em>hot mom 3km</em> from you that are not. So it is your fault.</p>
+<p>Until next time.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section class="references">
+    <h3 id="References">
+        References
+        <a class="headerlink" href="#References" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm" target="_blank">https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity" target="_blank">https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity</a>
+        </li>
+        <li>
+            Introduction to Cryptography with Coding Theory
+        </li>
+    </ul>
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2025-12-01T00:00:00+01:00">December 01, 2025</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://www.lucadivita.it/en/categories.html#teoria-matematica-ref">Theory & Math</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/en/tags.html#cryptography-ref">cryptography
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#finite_fields-ref">finite_fields
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#galois_fields-ref">galois_fields
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#math-ref">math
+                    <span class="superscript">6</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#modular_arithmetic-ref">modular_arithmetic
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#number_theory-ref">number_theory
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#security-ref">security
+                    <span class="superscript">1</span>
+</a></li>
+            </ul>
+<h4>Contacts</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>
