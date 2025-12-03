@@ -501,9 +501,13 @@ di Galois è necessario avere un numero primo <span class="math">\(p\)</span>, e
 \{0, \, \dots, \, p-1 \}
 $$</div>
 <p>Questo è un pó <strong>limitante</strong> non vi pare? Se volessimo un campo di Galois molto <strong>grande</strong> ma con primi <strong>piccoli</strong>? Ad esempio con <span class="math">\(2\)</span>? Questo permetterebbe di avere 
-tutti i termini numerici in <span class="math">\(\{0, \, 1\}\)</span> (quindi facilmente rappresentabili nei calcolatori) ma con un numero di elementi più elevato di due. No non è
-stregoneria. Si può fare ed è molto utile farlo, perché permette di avere <strong>numeri di valore basso</strong>, ma in <strong>campi molto grandi</strong> (il che aumenta la sicurezza
-delle famigerate curve ellittiche). Ok, ma come? Se i numeri sono quelli a cosa ricorriamo per aumentare la <strong>cardinalità</strong> del campo? La risposta è: ai <strong>polinomi</strong>.
+tutti i termini numerici in <span class="math">\(\{0, \, 1\}\)</span> ma con un numero di elementi più elevato di due. Questo ci permetterebbe non solo di ottenere un campo con molti più elementi, 
+ma anche di lavorare con valori estremamente facili da gestire: rimanendo confinati a <span class="math">\(0\)</span> e <span class="math">\(1\)</span>, le operazioni diventano naturalmente <strong>efficienti</strong> da 
+rappresentare e da eseguire nei calcolatori, con notevoli vantaggi in termini di <strong>performance</strong>. No non è stregoneria. Si può fare ed è molto utile farlo, 
+perché permette di avere <strong>numeri di valore basso</strong>, ma in <strong>campi molto grandi</strong> (il che aumenta la sicurezza delle famigerate curve ellittiche). 
+Ok, ma come? Se i numeri sono quelli a cosa ricorriamo per aumentare la <strong>cardinalità</strong> del campo? La risposta è: ai <strong>polinomi</strong>.
+I polinomi agiscono come <strong>blocchi costruttivi</strong>: combinano i valori di <span class="math">\(\mathbb{F}_p\)</span> in forme complesse, permettendoci di creare molti più elementi 
+<strong>senza introdurre nuovi numeri</strong>, ma solo come nuove <strong>combinazioni</strong> degli stessi coefficienti.
 Per cui, dato un numero primo <span class="math">\(p\)</span> e dato un esponente <span class="math">\(m\)</span>, possiamo definire grazie ai polinomi un campo <span class="math">\(\mathbb{F}_{p^m}\)</span> di <span class="math">\(p^m\)</span> elementi, i cui termini 
 numerici sono in <span class="math">\(\{ 0, \, \dots, \, p - 1 \}\)</span>. </p>
 <p>Considerando il caso <span class="math">\(\mathbb{F}_{2^3}\)</span>, andiamo a vedere per step (anzi, per gradi), come procedere:</p>

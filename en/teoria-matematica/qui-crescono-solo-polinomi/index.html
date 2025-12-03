@@ -500,9 +500,13 @@ it is necessary to have a prime number <span class="math">\(p\)</span>, and the 
 \{0, \, \dots, \, p-1 \}
 $$</div>
 <p>This is a bit <strong>limiting</strong>, don't you think? If we wanted a very <strong>large</strong> Galois field but with <strong>small</strong> primes? For example with <span class="math">\(2\)</span>? This would allow us to have
-all the numerical terms in <span class="math">\(\{0, \, 1\}\)</span> (therefore easily representable in computers) but with a number of elements greater than two. No it is
-not witchcraft. It can be done and it is very useful to do it, because it allows us to have <strong>numbers of low value</strong>, but in <strong>very large fields</strong> (which increases the security
-of the infamous elliptic curves). Ok, but how? If the numbers are those what do we use to increase the <strong>cardinality</strong> of the field? The answer is: <strong>polynomials</strong>.
+all the numerical terms in <span class="math">\(\{0, \, 1\}\)</span> but with a number of elements greater than two. This would allow us not only to obtain a field with many more elements, 
+but also to work with values that are extremely easy to handle: by restricting ourselves to <span class="math">\(0\)</span> and <span class="math">\(1\)</span>, the operations become naturally <strong>efficient</strong> for 
+computers to represent and execute, resulting in significant <strong>performance</strong> benefits. No it is not witchcraft. It can be done and it is very useful to do it, 
+because it allows us to have <strong>numbers of low value</strong>, but in <strong>very large fields</strong> (which increases the security of the infamous elliptic curves). Ok, 
+but how? If the numbers are those what do we use to increase the <strong>cardinality</strong> of the field? The answer is: <strong>polynomials</strong>.
+Polynomials act as <strong>building blocks</strong>: they combine the values of <span class="math">\(\mathbb{F}_p\)</span> into more complex structures, allowing us to create many more 
+elements <strong>without introducing new numbers</strong>, but simply new <strong>combinations</strong> of the same coefficients.
 Therefore, given a prime number <span class="math">\(p\)</span> and given an exponent <span class="math">\(m\)</span>, we can define thanks to polynomials a field <span class="math">\(\mathbb{F}_{p^m}\)</span> of <span class="math">\(p^m\)</span> elements, whose numerical terms
 are in <span class="math">\(\{ 0, \, \dots, \, p - 1 \}\)</span>. </p>
 <p>Considering the case <span class="math">\(\mathbb{F}_{2^3}\)</span>, let us see step by step (or rather, by degrees), how to proceed:</p>
