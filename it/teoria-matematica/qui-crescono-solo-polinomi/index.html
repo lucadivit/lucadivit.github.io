@@ -690,6 +690,63 @@ $$</div>
 <p>Per ovvi motivi vi ho dimostrato solo la proprietà di chiusura, ma siete liberissimi di fare tutti i vostri esperimenti. Tanto ho ragione io.</p>
 <p>Per concludere questo paragrafo, vi invito ad usare un polinomio riducibile come modulo del campo. Carta e penna alla mano, vedrete che <strong>ci sarà almeno un elemento
 del campo che non ha un inverso moltiplicativo appartenente al campo stesso</strong>, violando una delle proprietà.</p>
+<h4 id="le-erbacce-crescono-ciclicamente">Le Erbacce Crescono Ciclicamente<a class="headerlink" href="#le-erbacce-crescono-ciclicamente" title="Permanent link"> </a></h4>
+<p>Molto utile e carina è la <strong>proprietà di ciclicità della potenza</strong>. Consideriamo tutte le potenze da <span class="math">\(0\)</span> a <span class="math">\(p^m - 1\)</span>. Fin quando l'elemento <span class="math">\(x^{a}\)</span> ha potenza <span class="math">\(a &lt; m\)</span>,
+l'elemento è nel campo, ma se <span class="math">\(x^a\)</span> ha una potenza <span class="math">\(a \geq m\)</span>, iniziano le riduzioni. Fin qui niente di nuovo no? Per cui possiamo, considerando l'ormai
+<strong>affezionato campo</strong>, la tabella:</p>
+<p><a id="tabella-campo"></a>
+</p>
+<div class="math">$$
+\begin{array} 
+{|r|l|l|l|}
+\hline 
+\textbf{Potenza} &amp; \textbf{Polinomio Ridotto} &amp; \textbf{Coefficienti} &amp; \textbf{Intero} \\ 
+\hline 
+0   &amp; 0              &amp; 0, 0, 0 &amp; 0 \\ 
+\hline 
+x^0 &amp; 1              &amp; 0, 0, 1 &amp; 1 \\ 
+\hline 
+x^1 &amp; x              &amp; 0, 1, 0 &amp; 2 \\ 
+\hline 
+x^2 &amp; x^2            &amp; 1, 0, 0 &amp; 4 \\ 
+\hline 
+x^3 &amp; x^2 + 1        &amp; 1, 0, 1 &amp; 5 \\ 
+\hline 
+x^4 &amp; x^2 + x + 1    &amp; 1, 1, 1 &amp; 7 \\ 
+\hline 
+x^5 &amp; x + 1          &amp; 0, 1, 1 &amp; 3 \\ 
+\hline 
+x^6 &amp; x^2 + x        &amp; 1, 1, 0 &amp; 6 \\ 
+\hline 
+\end{array}
+$$</div>
+<p class="formula-caption">
+Tabella 1. Elementi Del Campo <span class="math">\(\mathbb{F}_{8}\)</span> ridotto <span class="math">\(\pmod{x^3 + x^2 + 1}\)</span></p>
+<p>dove l'intero è costruito considerando i coefficienti dei polinomi come <strong>valori binari</strong> e questo permette una associazione tra interi e polinomi. Come potete vedere,
+fino al termine <span class="math">\(x^2\)</span>, la potenza è riportata cosí come è, da <span class="math">\(x^3\)</span> in poi iniziano le riduzioni, generando gli altri elementi del campo.
+Ma a questo punto, se io vi chiedesse la potenza di <span class="math">\(x^7\)</span>? Cosa succede con potenze maggiori di <span class="math">\(p^m - 1\)</span>? 
+Qui interviene la proprietà di ciclicità. Infatti vale la regoletta:</p>
+<div class="math">$$
+x^a = x^{a \bmod{n}}
+$$</div>
+<p>dove <span class="math">\(n = p^m - 1\)</span>. E quindi possiamo scrivere:</p>
+<div class="math">$$
+x^7 \equiv x^{7 \bmod 7} \equiv x^0 = 1
+$$</div>
+<p>Cioè siamo tornati al primo elemento della tabella (escludendo lo <span class="math">\(0\)</span>). La ciclicità rende semplice anche l'operazione di inversione dei polinomi. Infatti 
+dato che è vera la relazione:</p>
+<div class="math">$$
+x^k \cdot x^{n-k} = x^n = 1
+$$</div>
+<p>abbiamo che <span class="math">\(x^{n-k}\)</span> è <strong>sempre</strong> l'inverso moltiplicativo di <span class="math">\(x^{k}\)</span>. Per cui se cerchiamo l'inverso di <span class="math">\(x^2 + 1\)</span> possiamo guardare la nostra tabellina e scrivere:</p>
+<div class="math">$$
+(x^2 + 1)^{-1} = (x^3)^{-1}
+$$</div>
+<p>da cui</p>
+<div class="math">$$
+(x^3)^{-1} = x^{7-3} = x^{4} = x^2 + x + 1
+$$</div>
+<p>che è l'inverso cercato. <strong>Provare per credere</strong>.</p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Quando ho iniziato a scrivere questo articolo me lo ero figurato più corto, molto più corto. Ma questa volta non mi sono lasciato prendere la mano, il problema è che, 
 col senno di poi, le cose da dire erano molte di più. Mi perdonerete se non avete visto casi più complicati dell'algoritmo di Euclide esteso o se non vi ho mostrato il 

@@ -689,7 +689,63 @@ $$</div>
 <p>For obvious reasons I have shown you only the closure property, but you are completely free to do all your experiments. I am right anyway.</p>
 <p>To conclude this paragraph, I invite you to use a reducible polynomial as the modulus of the field. With pen and paper in hand, you will see that <strong>there will be at least one element
 of the field that does not have a multiplicative inverse belonging to the field itself</strong>, violating one of the properties.</p>
-<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<h4 id="weeds-grow-cyclically">Weeds Grow Cyclically<a class="headerlink" href="#weeds-grow-cyclically" title="Permanent link"> </a></h4>
+<p>A very useful and elegant concept is the <strong>cyclicity property of exponentiation</strong>. Let us consider all powers from <span class="math">\(0\)</span> to <span class="math">\(p^m - 1\)</span>. As long as the element <span class="math">\(x^{a}\)</span> 
+has an exponent <span class="math">\(a &lt; m\)</span>, the element belongs to the field; however, when <span class="math">\(x^a\)</span> has an exponent <span class="math">\(a \geq m\)</span>, reductions begin to occur. 
+Up to this point, nothing new, right? Therefore, by considering our now <strong>well-known field</strong>, we can construct the table:</p>
+<p><a id="tabella-campo"></a>
+</p>
+<div class="math">$$
+\begin{array}
+{|r|l|l|l|}
+\hline
+\textbf{Power} &amp; \textbf{Reduced Polynomial} &amp; \textbf{Coefficients} &amp; \textbf{Integer} \\
+\hline
+0 &amp; 0 &amp; 0, 0, 0 &amp; 0 \\
+\hline
+x^0 &amp; 1 &amp; 0, 0, 1 &amp; 1 \\
+\hline
+x^1 &amp; x &amp; 0, 1, 0 &amp; 2 \\
+\hline
+x^2 &amp; x^2 &amp; 1, 0, 0 &amp; 4 \\
+\hline
+x^3 &amp; x^2 + 1 &amp; 1, 0, 1 &amp; 5 \\
+\hline
+x^4 &amp; x^2 + x + 1 &amp; 1, 1, 1 &amp; 7 \\
+\hline
+x^5 &amp; x + 1 &amp; 0, 1, 1 &amp; 3 \\
+\hline
+x^6 &amp; x^2 + x &amp; 1, 1, 0 &amp; 6 \\
+\hline
+\end{array}
+$$</div>
+<p class="formula-caption">
+Table 1. Elements Of Field <span class="math">\(\mathbb{F}_{8}\)</span> reduced <span class="math">\(\pmod{x^3 + x^2 + 1}\)</span></p>
+<p>where the integer is constructed by treating the polynomial coefficients as <strong>binary values</strong>, which allows an association between integers and polynomials. 
+As you can see, up to the term <span class="math">\(x^2\)</span> the power is reported exactly as it is; starting from <span class="math">\(x^3\)</span> onward, reductions begin, generating the other elements of the field.
+At this point, however, if I were to ask you for the value of the power <span class="math">\(x^7\)</span>, what would happen? What happens with powers greater than <span class="math">\(p^m - 1\)</span>?
+This is where the cyclicity property comes into play. Indeed, the following simple rule applies:</p>
+<div class="math">$$
+x^a = x^{a \bmod{n}}
+$$</div>
+<p>where <span class="math">\(n = p^m - 1\)</span>. Therefore, we can write:</p>
+<div class="math">$$
+x^7 \equiv x^{7 \bmod 7} \equiv x^0 = 1
+$$</div>
+<p>That is, we have returned to the first element of the table (excluding <span class="math">\(0\)</span>). Cyclicity also makes the inversion of polynomials straightforward. In fact, since the relation</p>
+<div class="math">$$
+x^k \cdot x^{n-k} = x^n = 1
+$$</div>
+<p>holds, we have that <span class="math">\(x^{n-k}\)</span> is <strong>always</strong> the multiplicative inverse of <span class="math">\(x^{k}\)</span>. Therefore, if we are looking for the inverse of <span class="math">\(x^2 + 1\)</span>, we can look at our table and write:</p>
+<div class="math">$$
+(x^2 + 1)^{-1} = (x^3)^{-1}
+$$</div>
+<p>from which</p>
+<div class="math">$$
+(x^3)^{-1} = x^{7-3} = x^{4} = x^2 + x + 1
+$$</div>
+<p>which is the desired inverse. <strong>Seeing is believing</strong>.</p>
+<h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>When I started writing this article I imagined it shorter, much shorter. But this time I did not get carried away, the problem is that,
 with hindsight, there were many more things to say. You will forgive me if you have not seen more complicated cases of the extended Euclidean algorithm or if I have not shown you the
 <strong>Chinese remainder theorem</strong> to solve systems of congruences. Sure now if on a Saturday night you go out with your
