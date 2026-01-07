@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
+
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
+        <script>
+          document.addEventListener('DOMContentLoaded', function () {
+            tocbot.init({
+              tocSelector: '#toc-list',
+              contentSelector: '.article-content',
+              headingSelector: 'h3, h4, h5',
+              hasInnerContainers: true,
+              collapseDepth: 3,
+              scrollSmooth: true
+            });
+            window.addEventListener('load', function () {
+              try { tocbot.refresh(); } catch (e) {}
+            });
+          });
+        </script>
+
+        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+        <meta name="author" content="Luca Di Vita" />
+
+        <meta name="description" content="In the previous article, I talked about two nice things: modular arithmetic and Galois fields. I introduced them in anticipation of this day. Yes, because today I will talk about a cryptographic algorithm. An algorithm that is not only really cool, but also has an emotional value, since I first …
+" />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="math, cryptography, security, finite_fields, modular_arithmetic, number_theory, galois_fields, lagrange_interpolation, Crittografia & Sicurezza, " />
+
+<meta property="og:title" content="Share Your Secrets With Shamir "/>
+<meta property="og:url" content="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/" />
+<meta property="og:description" content="In the previous article, I talked about two nice things: modular arithmetic and Galois fields. I introduced them in anticipation of this day. Yes, because today I will talk about a cryptographic algorithm. An algorithm that is not only really cool, but also has an emotional value, since I first …" />
+<meta property="og:site_name" content="Bit Di Vita" />
+<meta property="og:article:author" content="Luca Di Vita" />
+<meta property="og:article:published_time" content="2026-01-07T00:00:00+01:00" />
+<meta name="twitter:title" content="Share Your Secrets With Shamir ">
+<meta name="twitter:description" content="In the previous article, I talked about two nice things: modular arithmetic and Galois fields. I introduced them in anticipation of this day. Yes, because today I will talk about a cryptographic algorithm. An algorithm that is not only really cool, but also has an emotional value, since I first …">
+
+        <title>Share Your Secrets With Shamir  · Bit Di Vita
+</title>
+
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://www.lucadivita.it/en/"><span class=site-name>Bit Di Vita</span></a>
+                        <div class="nav-collapse collapse">
+                                <ul class="nav pull-right top-menu">
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/index.html">About Me</a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/latest.html">
+                                        Latest
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/categories.html">
+                                            Categories
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/tags.html">
+                                            Tags
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a href="https://www.lucadivita.it/en/archives.html">
+                                            Archives
+                                        </a>
+                                    </li>
+                                            <li >
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/en/pages/cv/">CV</a>
+                                            </li>
+                                            <li >
+                                                    <a href="https://www.lucadivita.it/en/pages/contatti/">Contacts</a>
+                                            </li>
+                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
+
+
+
+
+                                        <li>
+                                            <a href="/it/crittografia-sicurezza/share-your-secrets-with-shamir/">
+                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+
+
+
+                                        <li class="active">
+                                            <a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/">
+                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
+                                            </a>
+                                        </li>
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/">
+                Share Your Secrets With Shamir
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+    <div class="span2">
+        <nav aria-label="Table of contents">
+            <h4>Contents</h4>
+            <div id="toc-list"></div>
+        </nav>
+    </div>
+    <div class="span8 article-content">
+            
+            
+<p>In the previous article, I talked about two nice things: <strong>modular arithmetic</strong> and <strong>Galois fields</strong>. I introduced them in anticipation of this day.
+Yes, because today I will talk about a <strong>cryptographic algorithm</strong>. An algorithm that is not only really cool, but also has an 
+emotional value, since I first encountered it some time ago while discussing it with a colleague whom 
+I greet here (hi Dylan) and who is no longer here.
+Don’t worry he’s not dead, he has “only”, to my great displeasure, changed company.
+The algorithm I will discuss is <strong>Shamir's Secret Sharing</strong> (abbreviated SSS, luckily there are three words 
+otherwise try explaining it to readers), devised by Adi Shamir, who is a cryptography guru (the "S" in the RSA algorithm comes from him).
+Before starting, I strongly recommend, if you haven’t done so already, 
+that you read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" target="_blank">here</a>, the article on <strong>finite fields</strong>.</p>
+<h3 id="in-addition">In Addition<a class="headerlink" href="#in-addition" title="Permanent link"> </a></h3>
+<p>I have already explained modular arithmetic and Galois fields, so my conscience is clear on that front. However, 
+there is still one last <strong>tool</strong> missing in order to explain the SSS algorithm, and since I am a perfectionist, 
+far be it from me to deprive you of everything you need. What we need now is <strong>Lagrange linear interpolation</strong>. Two notes on this:</p>
+<ol>
+<li>It bears his name, but he did not invent the method.</li>
+<li>He is a great ITALIAN mathematician and not French.</li>
+</ol>
+<p>Let us resume. I know this is probably not your first problem in the morning, 
+but what would you do if you wanted to <strong>determine a polynomial of degree</strong> <span class="math">\(n\)</span> that passes through <span class="math">\(n+1\)</span> given points:</p>
+<div class="math">$$
+(x_0, \, y_0), \, (x_1, \, y_1), \, \dots, \, (x_n, \, y_n)
+$$</div>
+<p>The problem may seem extremely complex, but in reality it is 
+nothing abstruse. Let us look at a first <strong>solution method</strong>.</p>
+<h4 id="the-naive-addition">The "Naive" Addition<a class="headerlink" href="#the-naive-addition" title="Permanent link"> </a></h4>
+<p>I do not want to start at full speed right away, so let us warm up first, otherwise we might get hurt, and look at a <em>simple</em> method.
+The goal of the problem is to find a polynomial of degree <span class="math">\(n\)</span>, right? So let us start by taking a <strong>generic</strong> one:</p>
+<p><a id="polinomio-generico"></a>
+</p>
+<div class="math">$$
+y = a_0 + a_1x + a_2x^2 + \dots + a_nx^n
+$$</div>
+<p class="formula-caption">
+Formula 1. Generic Polynomial</p>
+<p>Where <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are generic coordinates, and <span class="math">\(a_i\)</span> is a generic coefficient.
+What do we want from this polynomial? We want it to pass through <span class="math">\(n+1\)</span> points. Let us start from the first point:</p>
+<ul>
+<li>
+<p><span class="math">\((x_0, \, y_0)\)</span>: From this point we know the values of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, which are precisely <span class="math">\(x_0\)</span> and <span class="math">\(y_0\)</span>. Let us plug them into our formula.</p>
+<p>
+<div class="math">$$
+    y_0 = a_0 + a_1x_0 + a_2x_0^2 + \dots + a_nx_0^n
+$$</div>
+</p>
+<p>What we want to do is <strong>compute the coefficients</strong> <span class="math">\(a_i\)</span>, and is this single formula enough to solve the problem? No. Because the <span class="math">\(a_i\)</span> we are looking for are <span class="math">\(n+1\)</span>, and here we only have one equation. If there is one thing we learned in middle school by solving systems, it is that if we have <span class="math">\(m\)</span> <strong>unknowns</strong>, we <strong>need</strong> <span class="math">\(m\)</span> equations to determine them all. We have <span class="math">\(n+1\)</span> <span class="math">\(a\)</span>'s, but we also have <span class="math">\(n+1\)</span> points, right? So we can write a second <strong>equality</strong>...</p>
+</li>
+<li>
+<p><span class="math">\((x_1, \, y_1)\)</span>: From this point we know the values of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, which are precisely <span class="math">\(x_1\)</span> and <span class="math">\(y_1\)</span>. Let us plug them into our formula.</p>
+<p>
+<div class="math">$$
+    y_1 = a_0 + a_1x_1 + a_2x_1^2 + \dots + a_nx_1^n
+$$</div>
+</p>
+<p>I would say the pattern is quite clear. So let us <strong>skip</strong> straight to the last point.</p>
+</li>
+<li>
+<p><span class="math">\(...\)</span></p>
+</li>
+<li>
+<p><span class="math">\((x_n, \, y_n)\)</span>: From this point we know the values of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, which are precisely <span class="math">\(x_n\)</span> and <span class="math">\(y_n\)</span>. As usual, let us plug them into our formula.</p>
+<p>
+<div class="math">$$
+    y_n = a_0 + a_1x_n + a_2x_n^2 + \dots + a_nx_n^n
+$$</div>
+</p>
+<p>At this point it is clear that we <strong>have</strong> <span class="math">\(n+1\)</span> <strong>equations</strong>, and therefore we can be happy, since we can now <strong>compute</strong> the <span class="math">\(n+1\)</span> unknowns <span class="math">\(a\)</span>.</p>
+</li>
+</ul>
+<p>What we obtained is a <strong>system of equations</strong>, that is, that set of equations which, once the unknown values are substituted, <strong>satisfy all the given equality conditions</strong>. Let us write it in a more mathematical form:</p>
+<div class="math">$$
+\begin{cases}
+y_0 = a_0 + a_1 x_0 + a_2 x_0^2 + \dots + a_n x_0^n \\
+y_1 = a_0 + a_1 x_1 + a_2 x_1^2 + \dots + a_n x_1^n \\
+\vdots \\
+y_n = a_0 + a_1 x_n + a_2 x_n^2 + \dots + a_n x_n^n
+\end{cases}
+$$</div>
+<p>two paths are possible at this point: either we do it by hand, or we get clever and write the linear system in <strong>matrix form</strong>:</p>
+<div class="math">$$
+V \cdot \vec{a} = \vec{y}
+$$</div>
+<p>where:</p>
+<ul>
+<li>
+<p><span class="math">\(V\)</span> is a matrix called the <strong>Vandermonde matrix</strong>, and it is defined as follows:</p>
+<p>
+<div class="math">$$
+    V =
+    \begin{bmatrix}
+    1 &amp; x_0 &amp; x_0^2 &amp; \dots &amp; x_0^n \\
+    1 &amp; x_1 &amp; x_1^2 &amp; \dots &amp; x_1^n \\
+    \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    1 &amp; x_n &amp; x_n^2 &amp; \dots &amp; x_n^n
+    \end{bmatrix}
+$$</div>
+</p>
+<p>I remind you that we already have all the elements of this matrix: they are the <span class="math">\(x\)</span> <strong>coordinates</strong> (and their powers) <strong>through which we want the polynomial to pass</strong>.</p>
+</li>
+<li>
+<p><span class="math">\(\vec{a}\)</span> is the vector of unknowns, that is, the <strong>polynomial coefficients</strong> we are looking for.</p>
+<p>
+<div class="math">$$
+    \vec{a} =
+    \begin{bmatrix}
+    a_0 \\
+    a_1 \\
+    \vdots \\
+    a_n
+    \end{bmatrix}
+$$</div>
+</p>
+</li>
+<li>
+<p><span class="math">\(\vec{y}\)</span> is the vector of <strong>known terms</strong>, we know these as well since they come from the <span class="math">\(y\)</span> <strong>coordinates</strong> through which we want the polynomial to pass.</p>
+<p>
+<div class="math">$$
+    \vec{y} =
+    \begin{bmatrix}
+    y_0 \\
+    y_1 \\
+    \vdots \\
+    y_n
+    \end{bmatrix}
+$$</div>
+</p>
+</li>
+</ul>
+<p>By rewriting the system in full we have:</p>
+<p><a id="interpolazione-matriciale"></a>
+</p>
+<div class="math">$$
+\begin{bmatrix}
+1 &amp; x_0 &amp; x_0^2 &amp; \dots &amp; x_0^n \\
+1 &amp; x_1 &amp; x_1^2 &amp; \dots &amp; x_1^n \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_n &amp; x_n^2 &amp; \dots &amp; x_n^n
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+a_0 \\
+a_1 \\
+\vdots \\
+a_n
+\end{bmatrix}
+=
+\begin{bmatrix}
+y_0 \\
+y_1 \\
+\vdots \\
+y_n
+\end{bmatrix}
+$$</div>
+<p class="formula-caption">
+Formula 2. Matrix Form of Interpolation</p>
+<p>Good, at this point there are two ways to solve the problem.</p>
+<ol>
+<li>
+<p>The one that <strong>pisses off</strong> my professor of numerical calculus and complex analysis, which involves <strong>inverting</strong> <span class="math">\(V\)</span>:</p>
+<p>
+<div class="math">$$
+   \vec{a} = V^{-1} \cdot \vec{b}
+$$</div>
+</p>
+</li>
+<li>
+<p>A smarter method, such as the <a href="https://en.wikipedia.org/wiki/Gaussian_elimination" target="_blank">Gauss method</a>, <a href="https://en.wikipedia.org/wiki/LU_decomposition" target="_blank">LU factorization</a>, and so on.</p>
+</li>
+</ol>
+<p>Now we will not look at either of them, because that would mean explaining what a <strong>determinant</strong> is, what the <strong>inverse of a matrix</strong> is, and what happens when it is not invertible (to put it very briefly: either there are no solutions or there are infinitely many), why <strong>it is not advisable to invert a matrix</strong> and to do a decomposition instead. Then I would also have to explain the <strong>decompositions</strong>. Too much stuff.
+Let us consider a small example to solve by hand, just to help you understand what we obtain.</p>
+<h5 id="example">Example<a class="headerlink" href="#example" title="Permanent link"> </a></h5>
+<p>Let us assume we want to compute a polynomial of degree <span class="math">\(2\)</span> that passes through the points:</p>
+<div class="math">$$
+(x_0, \, y_0) = (0, \, 1) \\[6pt]
+(x_1, \, y_1) = (1, \, 2) \\[6pt]
+(x_2, \, y_2) = (2, \, 5)
+$$</div>
+<p>The polynomial will have the form:</p>
+<div class="math">$$
+y = a_0 + a_1 x + a_2 x^2
+$$</div>
+<p>Let us write our <strong>system of three equations</strong>, simply by substituting the points as shown previously:</p>
+<div class="math">$$
+\begin{cases}
+1 = a_0 + a_1 \cdot (0) + a_2 \cdot (0)^2 \\
+2 = a_0 + a_1 \cdot (1) + a_2 \cdot (1)^2 \\
+5 = a_0 + a_1 \cdot (2) + a_2 \cdot (2)^2
+\end{cases}
+$$</div>
+<p>from which:</p>
+<div class="math">$$
+\begin{aligned}
+\begin{cases}
+a_0 = 1 \\
+1 = a_1 + a_2 \\
+4 = 2a_1 + 4a_2
+\end{cases} \\[6pt]
+\Rightarrow a_1 = 0, \, a_2 = 1
+\end{aligned}
+$$</div>
+<p>We have found all the coefficients <span class="math">\(a_0, \, a_1, \, a_2\)</span>, so we can write our polynomial, which will be:</p>
+<div class="math">$$
+\begin{aligned}
+y &amp;= a_0 + a_1 x + a_2 x^2 \\[6pt]
+\Rightarrow y &amp;= 1 + x^2
+\end{aligned}
+$$</div>
+<p>Let us look at its graphical behavior:</p>
+<p class="image-caption"><img alt="plot" class="image" src="https://www.lucadivita.it/en/images/crittografia_sicurezza/share_your_secret_shamir/simple_ex.svg"/>
+Figure 1. Plot of the Polynomial <span class="math">\(y = 1 + x^2\)</span></p>
+<p>Look carefully at the graph to see where the red crosses are placed. <strong>It passes exactly through the required points</strong>.</p>
+<h4 id="the-lagrange-addition">The Lagrange Addition<a class="headerlink" href="#the-lagrange-addition" title="Permanent link"> </a></h4>
+<p>Now that you know what we are trying to do, <strong>throw away</strong> the entire previous method. It was certainly useful because it allowed us to understand, in a fairly intuitive way, what the point was. But since there is another way to do it, and since you are dying to learn it, who am I to deprive you of it?
+The time has come for Lagrange interpolation, so let us start by defining our polynomial <span class="math">\(y\)</span>.
+This time we define it through a <strong>summation</strong>, in the following way:</p>
+<p><a id="interpolazione-lagrange"></a>
+</p>
+<div class="math">$$
+y = \sum_{i=0}^{n} y_i \cdot L_i(x)
+$$</div>
+<p class="formula-caption">
+Formula 3. Lagrange Interpolation</p>
+<p>where the generic <span class="math">\(L_i(x)\)</span> is a <strong>product</strong> defined as follows:</p>
+<div class="math">$$
+L_i(x) = \prod_{j=0, \, j \neq i}^{n} \frac{x-x_j}{x_i-x_j}
+$$</div>
+<p>Expanding it explicitly, we have that a <strong>generic polynomial</strong> has the form:</p>
+<div class="math">$$
+\begin{aligned}
+y &amp;=
+y_0 \cdot
+\frac{(x - x_1)(x - x_2)\cdots(x - x_n)}
+{(x_0 - x_1)(x_0 - x_2)\cdots(x_0 - x_n)}
+\;+\;
+\\[6pt]
+&amp;\quad+\;
+y_1 \cdot
+\frac{(x - x_0)(x - x_2)\cdots(x - x_n)}
+{(x_1 - x_0)(x_1 - x_2)\cdots(x_1 - x_n)}
+\;+\;
+\\[6pt]
+&amp;\quad+\;
+\cdots
+\;+\;
+\\[6pt]
+&amp;\quad+\;
+y_n \cdot
+\frac{(x - x_0)(x - x_1)\cdots(x - x_{n-1})}
+{(x_n - x_0)(x_n - x_1)\cdots(x_n - x_{n-1})}
+\end{aligned}
+$$</div>
+<p>Here as well, it may look like something extremely complex, but in reality it is very simple. Let us see it with an example.</p>
+<h5 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link"> </a></h5>
+<p>Let us consider the same example as before and look for the polynomial that passes through the points:</p>
+<div class="math">$$
+(x_0, \, y_0) = (0, \, 1) \\[6pt]
+(x_1, \, y_1) = (1, \, 2) \\[6pt]
+(x_2, \, y_2) = (2, \, 5)
+$$</div>
+<p>Let us compute the required <span class="math">\(L_i\)</span>:</p>
+<ul>
+<li>
+<p><span class="math">\(L_0\)</span> uses the point <span class="math">\((x_0, \, y_0) = (0, \, 1)\)</span>:</p>
+<p>
+<div class="math">$$
+\begin{aligned}
+L_0(x)
+&amp;= \frac{x - x_1}{x_0 - x_1} \cdot \frac{x - x_2}{x_0 - x_2} \\
+&amp;= \frac{x - 1}{0 - 1} \cdot \frac{x - 2}{0 - 2} \\
+&amp;= \frac{x - 1}{-1} \cdot \frac{x - 2}{-2} \\[6pt]
+&amp;= \frac{(x - 1)(x - 2)}{2}
+\end{aligned}
+$$</div>
+</p>
+</li>
+<li>
+<p><span class="math">\(L_1\)</span> uses the point <span class="math">\((x_1, \, y_1) = (1, \, 2)\)</span>:</p>
+<p>
+<div class="math">$$
+\begin{aligned}
+L_1(x)
+&amp;= \frac{x - x_0}{x_1 - x_0} \cdot \frac{x - x_2}{x_1 - x_2} \\
+&amp;= \frac{x - 0}{1 - 0} \cdot \frac{x - 2}{1 - 2} \\
+&amp;= x \cdot \frac{x - 2}{-1} \\[6pt]
+&amp;= -x(x - 2)
+\end{aligned}
+$$</div>
+</p>
+</li>
+<li>
+<p><span class="math">\(L_2\)</span> uses the point <span class="math">\((x_2, \, y_2) = (2, \, 5)\)</span>:</p>
+<p>
+<div class="math">$$
+\begin{aligned}
+L_2(x)
+&amp;= \frac{x - x_0}{x_2 - x_0} \cdot \frac{x - x_1}{x_2 - x_1}\\
+&amp;= \frac{x - 0}{2 - 0} \cdot \frac{x - 1}{2 - 1}\\
+&amp;= \frac{x}{2}(x - 1)\\[6pt]
+&amp;= \frac{x(x - 1)}{2}
+\end{aligned}
+$$</div>
+</p>
+</li>
+</ul>
+<p>Note that we are not using the <span class="math">\(y\)</span> values yet. They come into play exactly here:</p>
+<div class="math">$$
+y = y_0 \cdot L_0(x) + y_1 \cdot L_1(x) + y_2 \cdot L_2(x) \\[10pt]
+\Rightarrow \; y = 1 \cdot \frac{(x - 1)(x - 2)}{2} \;+\; 2 \cdot (-x(x - 2)) \;+\; 5 \cdot \frac{x(x - 1)}{2}
+$$</div>
+<p>By expanding this expression we obtain:</p>
+<div class="math">$$
+\begin{aligned}
+y &amp;= \frac{(x - 1)(x - 2)}{2}
+     - 2x(x - 2)
+     + 5 \cdot \frac{x(x - 1)}{2} \\[6pt]
+  &amp;= \frac{x^2 - 3x + 2}{2}
+     - 2x^2 + 4x
+     + \frac{5x^2 - 5x}{2} \\[6pt]
+  &amp;= \left( \frac{x^2 - 3x + 2}{2}
+           + \frac{5x^2 - 5x}{2} \right)
+     - 2x^2 + 4x \\[6pt]
+  &amp;= \frac{x^2 - 3x + 2 + 5x^2 - 5x}{2}
+     - 2x^2 + 4x \\[6pt]
+  &amp;= \frac{6x^2 - 8x + 2}{2}
+     - 2x^2 + 4x \\[6pt]
+  &amp;= 3x^2 - 4x + 1 - 2x^2 + 4x \\[10pt]
+  &amp;= x^2 + 1.
+\end{aligned}
+$$</div>
+<p>And, as it turns out, this is the same result obtained previously. To conclude this paragraph, why should we prefer this method? Not so much for performance reasons, but because, for the use we will make of it, it is better suited to solving the problem.</p>
+<h3 id="it-is-time-to-share">It Is Time to Share<a class="headerlink" href="#it-is-time-to-share" title="Permanent link"> </a></h3>
+<p>Now that we have all the necessary tools, we can finally get to the heart of today’s algorithm.
+The idea behind SSS is as simple as it is elegant: <strong>take a secret</strong>, <strong>hide it in the constant term of a carefully chosen polynomial</strong>, and <strong>distribute to the participants</strong> points that lie on that polynomial. Taken individually, those points <strong>reveal nothing</strong>, but when enough of them are combined, they allow us to <strong>reconstruct exactly the original polynomial</strong> via Lagrange interpolation, and therefore recover the constant term, i.e., the secret. In other words, mathematics becomes the mechanism of distributed trust: each participant holds a fragment of the information and only if there is a <strong>large enough</strong> group, it becomes possible to reveal the secret.</p>
+<p>The steps are simple. We start by <strong>choosing</strong> two parameters:</p>
+<ol>
+<li>The <strong>number of participants</strong> <span class="math">\(s\)</span>, representing the <strong>number of points</strong> of the polynomial that we want to <strong>generate and distribute</strong>.</li>
+<li>The <strong>minimum threshold</strong> <span class="math">\(t\)</span>, representing the <strong>number of participants needed to reconstruct the secret</strong>. This value determines that we will use a polynomial of degree <span class="math">\(t-1\)</span>.</li>
+</ol>
+<p>The relationship between these two variables is that the following constraint must be satisfied:</p>
+<div class="math">$$
+t \leq s \leq Card(\mathbb{F}) - 1
+$$</div>
+<p>that is, the number of distributed points must be (obviously) greater than the number of participants needed to reconstruct the message, and it cannot be greater than the cardinality of the finite field from which the elements are taken (as I will show later), excluding the zero element. So, assuming we have <span class="math">\(s=3\)</span> and <span class="math">\(t=2\)</span>, we are saying that we create and distribute <span class="math">\(s=3\)</span> points, and to reconstruct the message it is necessary that at least <span class="math">\(t=2\)</span> participants agree. The opposite, even intuitively, makes no sense: how can we create and distribute <span class="math">\(s=2\)</span> but require the agreement of <span class="math">\(t=3\)</span> people? Or, how can we distribute more elements than are available in the field? Obviously you cannot, this is not Italian public debt. This is <strong>mathematics</strong>.</p>
+<p>Once the values of <span class="math">\(s\)</span> and <span class="math">\(t\)</span> have been established, we build our polynomial:</p>
+<p><a id="polinomio-shamir"></a>
+</p>
+<div class="math">$$
+f(x) = S + a_1x + a_2x^2 + \dots + a_{t-1}x^{t-1}
+$$</div>
+<p class="formula-caption">
+Formula 4. Sharing Polynomial</p>
+<p>This polynomial is very similar to the one defined <a href="#polinomio-generico">here</a>, but there are two small differences:</p>
+<ul>
+<li><span class="math">\(S\)</span> is the <strong>secret to hide in the polynomial</strong></li>
+<li>the <span class="math">\(a_i\)</span> are <strong>coefficients taken from the Galois field</strong></li>
+</ul>
+<p>The polynomial built this way <strong>must never be revealed in full</strong>, each participant receives only a pair <span class="math">\((x_i, \, f(x_i))\)</span>, that is, the <strong>evaluation of the polynomial at a point</strong>. Taken individually, this value contains no information about the secret, nor about the other coefficients of the polynomial. The secret is reconstructed only when at least <span class="math">\(t\)</span> participants <strong>put their points together</strong>. To reconstruct <span class="math">\(S\)</span>, it is enough to evaluate the polynomial <span class="math">\(f\)</span> at the point <span class="math">\(0\)</span>, by computing <span class="math">\(f(0)\)</span>. In fact, precisely because of how the polynomial <span class="math">\(f(x)\)</span> is constructed, by setting <span class="math">\(x=0\)</span> all terms (except <span class="math">\(S\)</span>) become zero. Therefore, what we know is:</p>
+<ul>
+<li>The secret is at point <span class="math">\(0\)</span> of the polynomial <span class="math">\(f(x)\)</span>.</li>
+<li>We do not have access to the polynomial <span class="math">\(f(x)\)</span>.</li>
+</ul>
+<p>In this context, Lagrange interpolation comes into play. It allows us to <strong>extract</strong> <span class="math">\(S\)</span> (that is, the polynomial evaluated at <span class="math">\(0\)</span>) <strong>without knowing</strong> the polynomial itself, but only the <strong>points</strong> that lie on it.
+In particular, what one does is compute:</p>
+<p><a id="decifatura"></a>
+</p>
+<div class="math">$$
+S = f(0) = \sum_{i \in I} y_i \cdot L_i(0) \\[10pt]
+L_i(0) = \prod_{j=0, \, j \neq i}^{n} \frac{0-x_j}{x_i-x_j}
+$$</div>
+<p class="formula-caption">
+Formula 5. Decryption Formulas</p>
+<p>With <span class="math">\(I\)</span> being the <strong>set of shares</strong> (and later we will see what those are). Up to this point, that is all, and if you think about it, it is not particularly complicated.
+But that is the beauty of cryptography: using simple tools that are terribly powerful.</p>
+<p>Enough chatter, let us look at an example.</p>
+<h4 id="encryption-example">Encryption Example<a class="headerlink" href="#encryption-example" title="Permanent link"> </a></h4>
+<p>I could use a simple Galois field such as <span class="math">\(\mathbb{F}_{11}\)</span>. Since it is composed only of numbers, given that <span class="math">\(p\)</span> is a prime and has power <span class="math">\(1\)</span>, performing addition and multiplication operations is simple. Too simple.
+So why not <strong>make life more complicated</strong>?
+Why not use a field <span class="math">\(\mathbb{F}_{2^3}\)</span> where the coefficients are <strong>polynomials</strong>? And above all, what would I be here for otherwise?
+Let us take a look.</p>
+<p>Let us assume we have a <strong>dealer</strong>, that is, a <strong>key distributor</strong>, who uses the field <span class="math">\(\mathbb{F}_{2^3}\)</span> with irreducible polynomial <span class="math">\(\alpha^3 + \alpha^2 + 1\)</span>.
+With this field we can <strong>hide</strong> at most 3 bits of information. If you have something larger to hide, either use <strong>larger</strong> fields or split the information into <strong>batches</strong>.
+I will only explain how to do it. In any case, as we know from <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#from-the-little-garden-to-the-plantation" target="_blank">here</a>, the elements of the field in question are:</p>
+<div class="math">$$
+\{ 0, \, 1, \, \alpha, \, \alpha + 1, \, \alpha^2, \, \alpha^2 + 1, \, \alpha^2 + \alpha, \, \alpha^2 + \alpha + 1 \}
+$$</div>
+<p>Let us further assume that, for some reason, the dealer wants to hide the number of blasphemies I produce in the span of 1 minute, namely 6.
+Knowing that <span class="math">\(S\)</span> and the <strong>coefficients</strong> <span class="math">\(a_i\)</span> <strong>must belong to the field</strong>, the first thing the dealer does is convert <span class="math">\(6\)</span> into a value of the field (note that I chose the number 6 because it is fully representable with 3 bits).
+Therefore we have:</p>
+<div class="math">$$
+6_{10} = (\alpha^2 + \alpha)_{\mathbb{F}_{2^3}}
+$$</div>
+<p>If you are curious to know how I did it, read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically" target="_blank">here</a>.
+Now the dealer has to choose <strong>how many keys</strong> (or shares, which we mentioned earlier) to create. Let us assume they want to generate <span class="math">\(s=4\)</span>, and that they choose a minimum threshold for reconstructing the information <span class="math">\(t=3\)</span> (note that the field <span class="math">\(\mathbb{F}_{2^3}\)</span> has <span class="math">\(8\)</span> elements and we distribute <span class="math">\(4\)</span> of them, so everything is legitimate).
+The <strong>sharing polynomial</strong> will have the form:</p>
+<div class="math">$$
+f(x) = S + a_1x + a_2x^2
+$$</div>
+<p>where <span class="math">\(S\)</span> is the information to hide, namely</p>
+<div class="math">$$
+S = \alpha^2 + \alpha
+$$</div>
+<p>and <span class="math">\(a_1\)</span> and <span class="math">\(a_2\)</span> are field coefficients <strong>chosen at random</strong>. Let us assume:</p>
+<div class="math">$$
+\begin{aligned}
+a_1 &amp;= \alpha + 1 \\[6pt]
+a_2 &amp;= \alpha^2 + 1
+\end{aligned}
+$$</div>
+<p>and therefore the polynomial is:</p>
+<div class="math">$$
+f(x) = \alpha^2 + \alpha + (\alpha + 1)x + (\alpha^2 + 1)x^2
+$$</div>
+<p>where:</p>
+<ul>
+<li><span class="math">\(\alpha\)</span> is the <strong>symbol used to represent the elements of the field</strong> <span class="math">\(\mathbb{F}_{2^3}\)</span>.</li>
+<li><span class="math">\(x\)</span> is the <strong>variable of the sharing polynomial</strong> on which the evaluation will be performed.</li>
+</ul>
+<p>Now that we have fixed the sharing polynomial, the dealer must generate the four shares.
+So what they do is choose <strong>four distinct</strong> <span class="math">\(x\)</span> values and <strong>evaluate the function</strong> <span class="math">\(f(x)\)</span> at the chosen points. 
+Do you remember that in <a href="#the-lagrange-addition">this section</a> we imposed points in the plane through which the polynomial had 
+to pass? Here it is exactly the same thing, but the <strong>domain is the Galois field</strong> excluding the point <span class="math">\(0\)</span> (because that is 
+the one that hides the information). Since I am as lazy as a sloth, and whoever knows me knows I am not exaggerating given 
+that I often do not even take care of my primary needs (but then I go to the gym, go figure...), let us choose points 
+that do not make the calculations (too) complicated:</p>
+<div class="math">$$
+x_i = 1, \; \alpha, \; \alpha^2, \; 1 + \alpha
+$$</div>
+<p>and let us start <strong>creating the shares to distribute</strong>:</p>
+<ul>
+<li>
+<p>Share 1:</p>
+<p>
+<div class="math">$$
+\begin{align}
+(x_1, \, f(x_1)) &amp;= (1, \, f(1)) \\[6pt]
+f(1) &amp;= \alpha^2 + \alpha + (\alpha + 1)\cdot 1 + (\alpha^2 + 1)\cdot 1^2 \\[6pt]
+&amp;= 2\alpha^2 + \alpha + 2 \\[10pt]
+\Rightarrow (1, \, f(1)) &amp;= (1, \, 0)
+\end{align}
+$$</div>
+</p>
+</li>
+<li>
+<p>Share 2:</p>
+<p>
+<div class="math">$$
+\begin{align}
+(x_2, \, f(x_2)) &amp;= (\alpha, \, f(\alpha)) \\[6pt]
+f(\alpha) &amp;= \alpha^2 + \alpha + (\alpha + 1) \cdot \alpha + (\alpha^2 + 1) \cdot \alpha^2 \\[6pt]
+&amp;= \alpha^4 + 3\alpha^2 + 2\alpha \\[10pt]
+\Rightarrow (\alpha, \, f(\alpha)) &amp;= (\alpha, \, \alpha + 1)
+\end{align}
+$$</div>
+</p>
+</li>
+<li>
+<p>Share 3:</p>
+<p>
+<div class="math">$$
+\begin{align}
+(x_3, \, f(x_3)) &amp;= (\alpha^2, \, f(\alpha^2)) \\[6pt]
+f(\alpha^2) &amp;= \alpha^2 + \alpha + (\alpha + 1) \cdot \alpha^2 + (\alpha^2 + 1) \cdot \alpha^4 \\[6pt]
+&amp;= \alpha^6 + \alpha^4 + \alpha^3 + 2\alpha^2 + \alpha \\[10pt]
+\Rightarrow (\alpha^2, \, f(\alpha^2)) &amp;= (\alpha^2, \, \alpha)
+\end{align}
+$$</div>
+</p>
+</li>
+<li>
+<p>Share 4:</p>
+<p>
+<div class="math">$$
+\begin{align}
+(x_4, \, f(x_4)) &amp;= (1 + \alpha, \, f(1 + \alpha)) \\[6pt]
+f(1 + \alpha) &amp;= \alpha^2 + \alpha + (\alpha + 1) \cdot (1 + \alpha) + (\alpha^2 + 1) \cdot (1 + \alpha)^2 \\[6pt]
+&amp;= \alpha^3 + \alpha \\[10pt]
+\Rightarrow (1 + \alpha, \, f(1 + \alpha)) &amp;= (1 + \alpha, \, \alpha^2 + 1)
+\end{align}
+$$</div>
+</p>
+</li>
+</ul>
+<p>In expanding the polynomials, the <strong>cyclic property of powers</strong> has been applied. If you want to know more, you just need to look <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically" target="_blank">here</a>.
+Let us get back to it. At this point the dealer is done. They have chosen what they needed to choose and generated what they needed to generate.
+They <strong>jealously</strong> keep the sharing polynomial, and <strong>distribute</strong> the <strong>shares</strong> (each person receives one and only one share) and the 
+field that was used. Let us assume the dealer distributes the shares to Ludwig, Pluto, Donald, and Mickey, claiming that 
+the top-secret information is the code to access Duckstein’s files (and who knows why the password is my number of blasphemies 
+per minute) and discover the truth about the relationships between Mr. T. (president of Duckburg) and Mr. B. (any reference 
+to facts and/or persons is purely coincidental). The dealer tells them that no one, alone, can access the files. It is necessary that at least <span class="math">\(3\)</span> people agree.</p>
+<h4 id="decryption-example">Decryption Example<a class="headerlink" href="#decryption-example" title="Permanent link"> </a></h4>
+<p>Since no one wants to undermine democracy the information is not used, after all, there is not much time left in the term. Then, however, 
+T. organizes an assault on Duckburg’s town hall to stay in power and, as they say, live by the sword, die by the sword. 
+The four start arguing among themselves and Pluto, who is a dog, is a fervent supporter of the 'Return Duckburg to Greatness' 
+movement and does not want to reveal anything. Fortunately, Ludwig, Donald, and Mickey, who do not live off other 
+people’s ignorance, agree to reveal the secrets that will open the eyes of Duckburg’s inhabitants and, hopefully, kick T. out.
+So they proceed as follows. Let us assume that three of them have the <strong>shares</strong> <span class="math">\((x_1, \, f(x_1))\)</span>, <span class="math">\((x_2, \, f(x_2))\)</span>, and <span class="math">\((x_4, \, f(x_4))\)</span>. They also know the <strong>finite field</strong> used:</p>
+<div class="math">$$
+\mathbb{F}_{2^3} \pmod{\alpha^3 + \alpha^2 + 1}
+$$</div>
+<p>From the <a href="#decifatura">decryption formulas</a>, we know that we must compute</p>
+<div class="math">$$
+L_1(0), \; L_2(0), \; L_4(0)
+$$</div>
+<p>and therefore, given the shares:</p>
+<ul>
+<li>
+<p><span class="math">\(L_1(0)\)</span>:</p>
+<p>
+<div class="math">$$
+\begin{aligned}
+L_1(0)
+&amp;= \frac{0 - x_2}{x_1 - x_2} \cdot \frac{0 - x_4}{x_1 - x_4}\\
+&amp;= \frac{0 - \alpha}{1 - \alpha} \cdot \frac{0 - (1 + \alpha)}{1 - (1 + \alpha)}\\[6pt]
+&amp;= 1
+\end{aligned}
+$$</div>
+</p>
+</li>
+<li>
+<p><span class="math">\(L_2(0)\)</span>:</p>
+<p>
+<div class="math">$$
+\begin{aligned}
+L_2(0)
+&amp;= \frac{0 - x_1}{x_2 - x_1} \cdot \frac{0 - x_4}{x_2 - x_4}\\
+&amp;= \frac{0 - 1}{\alpha - 1} \cdot \frac{0 - (1 + \alpha)}{\alpha - (1 + \alpha)}\\[6pt]
+&amp;= 1
+\end{aligned}
+$$</div>
+</p>
+</li>
+<li>
+<p><span class="math">\(L_4(0)\)</span>:</p>
+<p>
+<div class="math">$$
+\begin{aligned}
+L_4(0)
+&amp;= \frac{0 - x_1}{x_4 - x_1} \cdot \frac{0 - x_2}{x_4 - x_2}\\
+&amp;= \frac{0 - 1}{(1 + \alpha) - 1} \cdot \frac{0 - \alpha}{(1 + \alpha) - \alpha}\\[6pt]
+&amp;= 1
+\end{aligned}
+$$</div>
+</p>
+</li>
+</ul>
+<p>I would like to point out that the values of the <span class="math">\(L_i\)</span> are always <span class="math">\(1\)</span> because I chose an <strong>extremely small</strong> field. In any case, 
+we can now <strong>compute</strong> our <span class="math">\(S\)</span>. In fact, given the <span class="math">\(y_i\)</span> which are nothing but the <span class="math">\(f(x_i)\)</span> values of the shares, we apply again 
+the <a href="#decifratura">little decryption formula</a>:</p>
+<div class="math">$$
+\begin{aligned}
+S = f(0) &amp;= f(x_1) \cdot L_1(0) + f(x_2) \cdot L_2(0) + f(x_4) \cdot L_4(0) \\[6pt]
+&amp;= 0 \cdot 1 + (\alpha + 1) \cdot 1 + (\alpha^2 + 1) \cdot 1 \\[10pt]
+&amp;= \alpha^2 + \alpha
+\end{aligned}
+$$</div>
+<p>So the secret is <span class="math">\(S=\alpha^2 + \alpha\)</span> and, knowing that we are in the field <span class="math">\(\mathbb{F}_{2^3} \pmod{\alpha^3 + \alpha^2 + 1}\)</span>, 
+we take its <strong>integer value</strong> using the now <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically" target="_blank">overused little table</a>:</p>
+<div class="math">$$
+(\alpha^2 + \alpha)_{\mathbb{F}_{2^3}} = (110)_{2} = 6_{10}
+$$</div>
+<p>So now Ludwig, Donald, and Mickey together, and only together, not only know my blasphemy rate per minute but can access 
+Duckstein’s files and bring Duckburg back to reason. Try it and you will see: use <strong>any subset</strong> of 3 elements and you will see 
+that it works. Not one more (in the sense that one more is not necessary), not one less (in the sense that if you have just one less, 
+you cannot reconstruct the secret <strong>correctly</strong>). This is thanks to the interpolation property that says that, to uniquely 
+define a polynomial of degree <span class="math">\(k\)</span>, <strong><span class="math">\(k + 1\)</span> distinct</strong> points on the x-axis are <strong>necessary</strong>.</p>
+<h3 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link"> </a></h3>
+<p>The example I presented, mixing political satire, mathematics, and poetic license, is very simple. 
+To recover the secret, a very trivial brute-force attack would be enough, since each generic <span class="math">\(L_i\)</span> 
+lies within the field <span class="math">\(\mathbb{F}_{2^3}\)</span>, which contains 8 elements. Since by design three shares are 
+required, the number of attempts to be made is equal to all possible distinct triplets in a set of 8 
+elements. Using the formula of the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient" target="_blank">binomial coefficient</a>, 
+we have:</p>
+<div class="math">$$
+\binom{8}{3} = \frac{8!}{3!(8-3)!} = 56
+$$</div>
+<p>we have 56 <strong>possible</strong> triplets. <strong>Absolutely feasible</strong>. But let us look at the general case:</p>
+<div class="math">$$
+\binom{n}{k} = \frac{n!}{k!(n-k)!}
+$$</div>
+<p>From here we can proceed in two ways. Either we 
+use <a href="https://en.wikipedia.org/wiki/Stirling%27s_approximation" target="_blank">Stirling’s approximation</a> or 
+we go with brutal simplifications. Since we are all tired, let us proceed with the latter.</p>
+<p>By definition, the <strong>factorial</strong> is:</p>
+<div class="math">$$
+n! = n \cdot (n-1) \cdot (n-2) \cdots (n-k+1) \cdot (n-k) \cdot (n-k-1) \cdot (n-k-2) \cdots 1
+$$</div>
+<p>Applying the definition recursively, we can write that:</p>
+<div class="math">$$
+(n-k) \cdot (n-k-1) \cdot (n-k-2) \cdots 1 = (n-k)!
+$$</div>
+<p>from which</p>
+<div class="math">$$
+n! = n \cdot (n-1) \cdot (n-2) \cdots (n-k)!
+$$</div>
+<p>Using this in the initial formula we have:</p>
+<div class="math">$$
+\begin{aligned}
+\frac{n!}{k!(n-k)!} &amp;= \frac{n \cdot (n-1) \cdot (n-2) \cdots (n-k+1) \cdot (n-k)!}{k!(n-k)!} \\[6pt]
+&amp;= \frac{n \cdot (n-1) \cdot (n-2) \cdots (n-k+1)}{k!}
+\end{aligned}
+$$</div>
+<p>By grouping by <span class="math">\(n\)</span>, it is easy to obtain:</p>
+<div class="math">$$
+\frac{n \cdot (n-1) \cdot (n-2) \cdots (n-k+1)}{k!} = \frac{n^k}{k!} \cdot \left( 1 - \frac{1}{n} \right) \cdot \left( 1 - \frac{2}{n} \right) \cdots \left( 1 - \frac{k - 1}{n} \right)
+$$</div>
+<p>If we consider <span class="math">\(n \to \infty\)</span>, what remains is <span class="math">\(\frac{n^k}{k!}\)</span> and therefore, since <span class="math">\(k\)</span> is negligible if we consider it finite, we have that the computational complexity of testing all possible values is:</p>
+<div class="math">$$
+O(n^k)
+$$</div>
+<p>where <span class="math">\(n\)</span> is the cardinality of the finite field and <span class="math">\(k\)</span> is the minimum threshold to reconstruct the information, and 
+this is a <strong>monstrous complexity</strong>. Now consider that the fields used are of the type <span class="math">\(\mathbb{F}_{2^{256}}\)</span>, 
+which contain about <span class="math">\(\sim 10^{77}\)</span> elements. According to scientific estimates, the number of atoms in the universe 
+is on the order of <span class="math">\(\sim 10^{80}\)</span>.</p>
+<h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
+<p>Prefacing that I liked all the articles I have written (otherwise I simply would not have written them, obviously), among them all 
+this one was the most <strong>fun</strong> to write. Both because of the emotional value of its discovery, and because, come on, it is really 
+awesome. I liked it so much that I even wrote a <strong>repo</strong> about it. You can find it <a href="https://github.com/lucadivit/ShareYourSecret" target="_blank"><strong>here</strong></a>. 
+You will forgive me if I did not implement Galois fields raw; they are so beautiful and so dear to me, but implementing polynomial 
+reduction from scratch, no thanks at all. Luckily there is a library (<code>galois</code>, look at that creativity) that has implemented 
+much of the dirty work. In any case, I want to conclude the article by inviting you to 
+read <a href="https://apps.dtic.mil/sti/tr/pdf/ADA069397.pdf" target="_blank"><strong>Shamir’s original article</strong></a>, because it is very interesting.
+That said, I am going to <strong>share</strong> (in pieces, now that I can) my secrets with someone.</p>
+<p>Until next time.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+
+            <hr/>
+<section>
+    <h3 id="Related Posts">
+        Related Posts
+        <a class="headerlink" href="#Related Posts" title="Permanent link"> </a>
+    </h3>
+<ul class="related-posts-list">
+<li><a href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/" title="Where Only Polynomials Grow" target="_blank">Where Only Polynomials Grow</a></li>
+</ul>
+</section>
+<section class="references">
+    <h3 id="References">
+        References
+        <a class="headerlink" href="#References" title="Permanent link"> </a>
+    </h3>
+    <ul class="related-posts-list">
+        <li>
+            <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" target="_blank">/en/teoria-matematica/qui-crescono-solo-polinomi/</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Gaussian_elimination" target="_blank">https://en.wikipedia.org/wiki/Gaussian_elimination</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/LU_decomposition" target="_blank">https://en.wikipedia.org/wiki/LU_decomposition</a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#from-the-little-garden-to-the-plantation" target="_blank">/en/teoria-matematica/qui-crescono-solo-polinomi/#from-the-little-garden-to-the-plantation</a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically" target="_blank">/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Binomial_coefficient" target="_blank">https://en.wikipedia.org/wiki/Binomial_coefficient</a>
+        </li>
+        <li>
+            <a href="https://en.wikipedia.org/wiki/Stirling%27s_approximation" target="_blank">https://en.wikipedia.org/wiki/Stirling%27s_approximation</a>
+        </li>
+        <li>
+            <a href="https://github.com/lucadivit/ShareYourSecret" target="_blank">https://github.com/lucadivit/ShareYourSecret</a>
+        </li>
+        <li>
+            <a href="https://apps.dtic.mil/sti/tr/pdf/ADA069397.pdf" target="_blank">https://apps.dtic.mil/sti/tr/pdf/ADA069397.pdf</a>
+        </li>
+    </ul>
+</section>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2026-01-07T00:00:00+01:00">January 07, 2026</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://www.lucadivita.it/en/categories.html#crittografia-sicurezza-ref">Encryption & Security</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://www.lucadivita.it/en/tags.html#cryptography-ref">cryptography
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#finite_fields-ref">finite_fields
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#galois_fields-ref">galois_fields
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#lagrange_interpolation-ref">lagrange_interpolation
+                    <span class="superscript">1</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#math-ref">math
+                    <span class="superscript">7</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#modular_arithmetic-ref">modular_arithmetic
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#number_theory-ref">number_theory
+                    <span class="superscript">2</span>
+</a></li>
+                <li><a href="https://www.lucadivita.it/en/tags.html#security-ref">security
+                    <span class="superscript">2</span>
+</a></li>
+            </ul>
+<h4>Contacts</h4>
+<div id="sidebar-social-link">
+    <a href="mailto:lucadivita.ldv@gmail.com" title="Gmail" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Gmail" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#fff"/><rect width="362" height="272" x="75" y="120" fill="#f2f2f2" rx="8%"/><path fill="#d54c3f" d="M120 392H97c-12 0-22-10-22-23V143h45z"/><path fill="#b63524" d="M392 392h23c12 0 22-10 22-23V143h-45z"/><path fill-opacity=".05" d="M256 286L120 392V187z"/><path fill-opacity=".08" d="M82 159l235 233h75V159z"/><path stroke-linecap="round" fill="none" stroke="#de5145" stroke-width="45" d="M97 143l159 115 159-115"/><path fill="#f2f2f2" d="M415 120c-5 0-10 2-13 4L256 230 110 124c-3-2-8-4-13-4z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/luca_di_vita_/" title="Instagram" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Instagram" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#d43377"/><g fill="none" stroke="#fff" stroke-width="29"><rect height="296" rx="78" width="296" x="108" y="108"/><circle cx="256" cy="256" r="69"/></g><circle cx="343" cy="169" fill="#fff" r="19"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/lucadivit/" title="LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="LinkedIn" role="img" viewBox="0 0 512 512" fill="#fff"><rect width="512" height="512" rx="15%" fill="#0077b5"/><circle cx="142" cy="138" r="37"/><path stroke="#fff" stroke-width="66" d="M244 194v198M142 194v198"/><path d="M276 282c0-20 13-40 36-40 24 0 33 18 33 45v105h66V279c0-61-32-89-76-89-34 0-51 19-59 32"/></svg>
+    </a>
+    <a href="https://github.com/lucadivit" title="GitHub" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/>
+        </svg>
+    </a>
+    <a href="https://gitlab.com/lucadivit" title="GitLab" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitLab" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#30353e"/><path fill="#e24329" d="M84 215l43-133c2-7 12-7 14 0l115 353L371 82c2-7 12-7 14 0l43 133"/><path fill="#fc6d26" d="M256 435L84 215h100.4zm71.7-220H428L256 435l71.6-220z"/><path fill="#fca326" d="M84 215l-22 67c-2 6 0 13 6 16l188 137zm344 0l22 67c2 6 0 13-6 16L256 435z"/></svg>
+    </a>
+    <a href="https://sessionize.com/lucadivit/" title="Sessionize" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Sessionize" role="img" viewBox="0 0 225 225" preserveAspectRatio="xMidYMid meet" style="border-radius: 15%">
+            <rect width="512" height="512" rx="15%" fill="#1B1817"/>
+            <path d="M0 0 C74.25 0 148.5 0 225 0 C225 74.25 225 148.5 225 225 C150.75 225 76.5 225 0 225 C0 150.75 0 76.5 0 0 Z " fill="#19B293" transform="translate(0,0)"/>
+            <path d="M0 0 C1.31599686 -0.00953201 2.63199371 -0.01906403 3.98786926 -0.02888489 C5.43030829 -0.02862319 6.87274734 -0.02768483 8.31518555 -0.02612305 C9.80193704 -0.03001372 11.28868743 -0.03434916 12.7754364 -0.03910828 C15.9001321 -0.04657848 19.0247149 -0.04627702 22.14941406 -0.04101562 C26.11536182 -0.03527182 30.08083476 -0.05202298 34.04670429 -0.0753603 C37.12435015 -0.0902552 40.20188646 -0.09094734 43.279562 -0.08785057 C44.73890294 -0.08835765 46.19825104 -0.09347759 47.65755653 -0.10366249 C69.14532107 -0.23502938 87.02075403 5.26310965 102.8894043 19.9621582 C110.67057737 28.23789736 116.58232444 38.34520174 119.6394043 49.2746582 C119.97875 50.32194092 120.3180957 51.36922363 120.66772461 52.44824219 C122.33895379 59.21584233 121.94745978 66.26579559 121.94018555 73.19262695 C121.94407817 74.73863336 121.948414 76.28463871 121.95317078 77.8306427 C121.96060081 81.05737797 121.96036363 84.28400372 121.95507812 87.51074219 C121.94926476 91.63996754 121.96627466 95.76874707 121.9894228 99.89789867 C122.00416425 103.08497219 122.00503169 106.27193812 122.00191307 109.45903969 C122.00242532 110.98164063 122.00764501 112.50424775 122.01772499 114.02681541 C122.03009091 116.15423979 122.0232996 118.28079226 122.01171875 120.40820312 C122.01234818 121.61651291 122.0129776 122.82482269 122.0136261 124.06974792 C121.49507938 128.51068565 119.93321686 131.13005383 116.61132812 134.06884766 C112.12728909 135.88817476 107.88024462 135.64330395 103.08862305 135.56762695 C102.07467972 135.56338211 101.06073639 135.55913727 100.0160675 135.55476379 C96.7860733 135.53800679 93.55670908 135.50035942 90.3269043 135.4621582 C88.13355395 135.44710754 85.9401938 135.43341981 83.74682617 135.42114258 C78.37747157 135.38811307 73.00848295 135.33794314 67.6394043 135.2746582 C67.55831421 134.17275146 67.55831421 134.17275146 67.47558594 133.04858398 C67.39687256 132.0738916 67.31815918 131.09919922 67.23706055 130.0949707 C67.16237549 129.13349121 67.08769043 128.17201172 67.01074219 127.18139648 C65.85127395 118.10537487 61.31660105 111.35722519 54.6394043 105.2746582 C52.34547142 103.67192921 50.17315922 102.48874911 47.6394043 101.2746582 C50.63173573 98.85814791 53.59550826 97.25526048 57.1081543 95.70043945 C58.2202124 95.20519775 59.33227051 94.70995605 60.47802734 94.19970703 C61.07336273 93.93751373 61.66869812 93.67532043 62.28207397 93.40518188 C64.16867062 92.57426844 66.05237307 91.73707693 67.93554688 90.8984375 C74.6131471 87.92808819 81.3015826 84.98228965 87.98959351 82.03547668 C91.29295183 80.57903822 94.59488329 79.11938032 97.89672852 77.65951538 C100.30665369 76.59609413 102.7190391 75.53840104 105.1315918 74.48095703 C106.61737501 73.82519159 108.10305715 73.16919707 109.58862305 72.51293945 C110.27377487 72.21452148 110.9589267 71.91610352 111.6648407 71.60864258 C114.41185831 70.3896352 116.49455798 69.41950452 118.6394043 67.2746582 C117.61202148 66.85055664 116.58463867 66.42645508 115.52612305 65.98950195 C87.28595015 54.12733031 67.55569174 34.60394077 55.9519043 6.38012695 C54.9449732 3.45487798 54.9449732 3.45487798 53.6394043 2.2746582 C53.18839355 3.30719727 52.73738281 4.33973633 52.27270508 5.40356445 C42.53358817 27.68958682 32.69808257 49.92811976 22.67333984 72.08724976 C21.64957628 74.3550725 20.63173403 76.6254818 19.61450195 78.89624023 C18.29286769 81.84312633 16.94032637 84.7730835 15.56665039 87.69604492 C14.9175196 89.10626958 14.26858503 90.51658459 13.61987305 91.92700195 C13.31793533 92.55224258 13.01599762 93.17748322 12.70491028 93.82167053 C10.54136532 98.58578335 10.25387891 102.15001625 10.6394043 107.2746582 C11.95642312 109.88889673 11.95642312 109.88889673 14.6394043 111.2746582 C17.47883301 111.92556465 20.29914908 112.10079214 23.2019043 112.2746582 C31.96293627 113.04515811 40.76023837 113.82063152 47.2019043 120.4621582 C50.44815395 124.78425428 51.6394043 129.91246632 51.6394043 135.2746582 C44.18094298 135.39075406 36.72267798 135.47947465 29.26349449 135.53371906 C25.79944205 135.55976046 22.33600992 135.59505512 18.87231445 135.65185547 C14.88590036 135.71681507 10.89973324 135.74088407 6.9128418 135.76293945 C5.67513031 135.78874588 4.43741882 135.81455231 3.16220093 135.84114075 C-6.44183312 135.84426546 -6.44183312 135.84426546 -10.12768555 132.93164062 C-13.12362778 129.36671177 -13.4857942 126.89417722 -13.50776672 122.39187622 C-13.51492203 121.38527954 -13.52207733 120.37868286 -13.52944946 119.34158325 C-13.53213837 118.23813568 -13.53482727 117.13468811 -13.53759766 115.99780273 C-13.54745445 114.25355011 -13.54745445 114.25355011 -13.55751038 112.47406006 C-13.57725319 108.61852966 -13.5889068 104.76303818 -13.59887695 100.9074707 C-13.60295248 99.5925552 -13.60702801 98.27763969 -13.61122704 96.92287827 C-13.63027063 90.68384023 -13.64450465 84.44481399 -13.652839 78.20575249 C-13.66261549 71.00634951 -13.6889488 63.80725366 -13.7293399 56.60795891 C-13.75950045 51.04098472 -13.77430771 45.4740986 -13.77762002 39.90704429 C-13.77997019 36.58291276 -13.79089828 33.25918478 -13.81408119 29.93512344 C-13.83834245 26.22659878 -13.83753116 22.51888191 -13.83056641 18.81030273 C-13.84337646 17.71090363 -13.85618652 16.61150452 -13.86938477 15.47879028 C-13.81838403 8.04414793 -13.81838403 8.04414793 -11.51872253 4.17868042 C-7.48809963 0.62263568 -5.2978389 0.02105833 0 0 Z " fill="#FEFEFE" transform="translate(58.360595703125,44.725341796875)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C61.32078135 34.83244171 66.66940421 52.79904366 66.49609375 73.50390625 C66.49624921 75.04133675 66.49774591 76.57876764 66.50050354 78.11619568 C66.5018748 81.30721779 66.48953337 84.49778338 66.46655273 87.6887207 C66.43795261 91.7707473 66.4409809 95.85202988 66.45364285 99.9341135 C66.46060001 103.09547768 66.45281401 106.25667036 66.44038582 109.41801262 C66.43588692 110.92385132 66.4355208 112.42970849 66.43945122 113.93554878 C66.44236953 116.03367084 66.42583673 118.1307676 66.40405273 120.22875977 C66.39864975 121.41897232 66.39324677 122.60918488 66.38768005 123.83546448 C65.84762244 128.24382 64.27261053 130.87415255 60.97192383 133.79418945 C56.48788479 135.61351655 52.24084032 135.36864575 47.44921875 135.29296875 C46.43527542 135.28872391 45.42133209 135.28447906 44.37666321 135.28010559 C41.14666901 135.26334859 37.91730478 135.22570122 34.6875 135.1875 C32.49414965 135.17244934 30.3007895 135.1587616 28.10742188 135.14648438 C22.73806727 135.11345487 17.36907865 135.06328494 12 135 C11.94593994 134.26539551 11.89187988 133.53079102 11.83618164 132.77392578 C11.75746826 131.7992334 11.67875488 130.82454102 11.59765625 129.8203125 C11.52297119 128.85883301 11.44828613 127.89735352 11.37133789 126.90673828 C10.21186965 117.83071667 5.67719676 111.08256699 -1 105 C-3.29393287 103.39727101 -5.46624507 102.2140909 -8 101 C-5.00766857 98.58348971 -2.04389603 96.98060228 1.46875 95.42578125 C2.58080811 94.93053955 3.69286621 94.43529785 4.83862305 93.92504883 C5.43395844 93.66285553 6.02929382 93.40066223 6.64266968 93.13052368 C8.52926633 92.29961024 10.41296877 91.46241873 12.29614258 90.6237793 C18.9737428 87.65342998 25.6621783 84.70763145 32.35018921 81.76081848 C35.65354753 80.30438002 38.955479 78.84472212 42.25732422 77.38485718 C44.6672494 76.32143593 47.0796348 75.26374284 49.4921875 74.20629883 C50.97797072 73.55053338 52.46365286 72.89453886 53.94921875 72.23828125 C54.63437057 71.93986328 55.3195224 71.64144531 56.0254364 71.33398438 C58.77245401 70.114977 60.85515368 69.14484632 63 67 C61.97261719 66.57589844 60.94523437 66.15179688 59.88671875 65.71484375 C33.50645147 54.63391802 13.59780668 36.53480254 1.875 10.3125 C1.56731689 9.62905518 1.25963379 8.94561035 0.94262695 8.24145508 C-1.12599038 3.37797114 -1.12599038 3.37797114 0 0 Z " fill="#FDFEFE" transform="translate(114,45)"/>
+            <path d="M0 0 C18.47893545 0.34277958 33.23021483 7.00580799 46.6484375 19.55078125 C57.82695197 31.19351975 66.22886216 46.95089512 66.25 63.375 C66.18776003 64.91766223 66.11312576 66.46023277 66 68 C37.79431797 57.57100832 15.66661801 40.31717625 2.83447266 12.46142578 C2.51784668 11.75228027 2.2012207 11.04313477 1.875 10.3125 C1.56739746 9.62913574 1.25979492 8.94577148 0.94287109 8.24169922 C-1.1260832 3.3782496 -1.1260832 3.3782496 0 0 Z " fill="#FBFDFD" transform="translate(114,45)"/>
+            <path d="M0 0 C5.31132099 1.67208253 9.71465315 5.34510004 12.6328125 10.12109375 C13.62643421 12.72019895 13.10644906 14.4292834 12.375 17.0625 C10.25 17.8125 10.25 17.8125 7.375 18.0625 C2.55583514 15.5525183 -0.55382918 12.44988688 -3.625 8.0625 C-4.5625 4.8125 -4.5625 4.8125 -4.625 2.0625 C-2.625 0.0625 -2.625 0.0625 0 0 Z " fill="#1DB495" transform="translate(144.625,66.9375)"/>
+        </svg>
+    </a>
+    <a href="https://www.lucadivita.it/feeds/luca-di-vita.rss.xml" title="RSS" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="RSS" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#f80"/><circle cx="145" cy="367" r="35" fill="#fff"/><path fill="none" stroke="#fff" stroke-width="60" d="M109 241c89 0 162 73 162 162M109 127c152 0 276 124 276 276"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe.
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides.
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
+        <script src="/js/custom.js"></script>
+        <!--
+        <script src="/js/MathJax.js"></script>
+        <script src="/js/MathMenu.js"></script>
+        <script src="/js/MathZoom.js"></script>-->
+        <script type="text/javascript">
+          (() => {
+            document.querySelectorAll('a').forEach(a => {
+              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
+                a.setAttribute('data-umami-event-element', "anchor");
+                a.setAttribute('data-umami-event-event', "onclick");
+                a.setAttribute('data-umami-event-id', a.id);
+                a.setAttribute('data-umami-event-url', a.href);
+              }
+            });
+          })();
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+</html>
