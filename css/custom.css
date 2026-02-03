@@ -77,6 +77,14 @@ Table 1: Test table (andare a capo)
     font-style: italic;
 }
 
+.code-snippet{
+    text-align: center;
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.5em;
+    font-style: italic;
+}
+
 /* ________________ */
 
 /* Gli elementi pre che sono sotto un elemento con classe highlight */
