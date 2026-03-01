@@ -1,276 +1,167 @@
 <!DOCTYPE html>
 <html lang="it">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/css/elegant.prod.9e9d5ce754.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/css/custom.css" media="screen">
-        <link rel="dns-prefetch" href="//fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-        <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script src="https://unpkg.com/tocbot/dist/tocbot.min.js"></script>
-        <script>
-          document.addEventListener('DOMContentLoaded', function () {
-            tocbot.init({
-              tocSelector: '#toc-list',
-              contentSelector: '.article-content',
-              headingSelector: 'h3, h4, h5',
-              hasInnerContainers: true,
-              collapseDepth: 3,
-              scrollSmooth: true
-            });
-            window.addEventListener('load', function () {
-              try { tocbot.refresh(); } catch (e) {}
-            });
-          });
-        </script>
-
-        <script defer src="//cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
-        <meta name="author" content="Luca Di Vita" />
-
-        <meta name="description" content="A bilingual blog (Italian/English) by Luca Di Vita, focused on Machine Learning, metaheuristics, Data Science, and other IT-related topics—explained clearly and accessibly." />
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary">
-        <title>Bit Di Vita - reti_neurali tag</title>
-
-
-
-    </head>
-    <body>
-        <div id="content">
-            <div class="navbar navbar-static-top">
-                <div class="navbar-inner">
-                    <div class="container-fluid">
-                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>
-                        <a class="brand" href="https://www.lucadivita.it/"><span class=site-name>Bit Di Vita</span></a>
-                        <div class="nav-collapse collapse">
-                                <ul class="nav pull-right top-menu">
-                                    <li >
-                                        <a href="https://www.lucadivita.it/index.html">Bio</a>
-                                    </li>
-                                    <li >
-                                        <a href="https://www.lucadivita.it/latest.html">
-                                        Recenti
-                                        </a>
-                                    </li>
-                                    <li >
-                                        <a href="https://www.lucadivita.it/categories.html">
-                                            Argomenti
-                                        </a>
-                                    </li>
-                                    <li >
-                                        <a href="https://www.lucadivita.it/tags.html">
-                                            Tags
-                                        </a>
-                                    </li>
-                                    <li >
-                                        <a href="https://www.lucadivita.it/archives.html">
-                                            Archivio
-                                        </a>
-                                    </li>
-                                            <li >
-                                            </li>
-                                            <li >
-                                                    <a href="https://www.lucadivita.it/pages/cv/">CV</a>
-                                            </li>
-                                            <li >
-                                                    <a href="https://www.lucadivita.it/pages/contatti/">Contatti</a>
-                                            </li>
-                                            <li >
-                                                    <a href="https://www.lucadivita.it/pages/eventi/">Eventi & Sessioni</a>
-                                            </li>
-                                    <li class="nav-item-separator"><a>&nbsp;</a></li>
-
-
-
-
-                                        <li class="active">
-                                            <a href="/it/tag/reti_neurali.html">
-                                                <img src="/images/flags/it.png" alt="Italian" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
-                                            </a>
-                                        </li>
-
-
-
-                                        <li>
-                                            <a href="/en/tag/reti_neurali.html">
-                                                <img src="/images/flags/en.png" alt="English" style="horiz-align: center; vertical-align: middle; width: 2rem; ">
-                                            </a>
-                                        </li>
-                                </ul>
-                        </div>
-                    </div>
-                </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>#reti_neurali - Bit Di Vita</title>
+    <meta name="description" content="A bilingual blog (Italian/English) by Luca Di Vita, focused on Machine Learning, metaheuristics, Data Science, and other IT-related topics-explained clearly and accessibly.">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="#reti_neurali - Bit Di Vita">
+    <meta property="og:description" content="A bilingual blog (Italian/English) by Luca Di Vita, focused on Machine Learning, metaheuristics, Data Science, and other IT-related topics-explained clearly and accessibly.">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/theme/site.css">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body>
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/">
+                        <img class="site-logo" src="/images/logo/logo.png" alt="Bit Di Vita logo" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
             </div>
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span1"></div>
-                    <div class="span10">
-    <h2>Articles tagged with reti_neurali</h2>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
+        <li><a href="https://www.lucadivita.it/categories.html" >Argomenti</a></li>
+        <li><a href="https://www.lucadivita.it/tags.html" aria-current="page">Tags</a></li>
+        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="/images/flags/it.png" alt="Italian">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/" hreflang="en" title="English" >
+                <img class="lang-flag" src="/images/flags/en.png" alt="English">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
 
-
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/" rel="bookmark" title="Permalink to Io ODO, Tu ODI e la Neural ODE - 5">Io ODO, Tu ODI e la Neural ODE - 5</a></h2> </header>
-            <section>
-<p>Dai che ci siamo. Siamo arrivati alla <strong>quinta</strong> e ultima parte della serie sulle NODE. Prendete questa affermazione con le pinze però, che se non mi basta
-questo spazio vi beccate anche la sesta. In ogni caso in questa (spero) ultima parte, vedremo un po' di codice e di applicazione …</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-10-01T00:00:00+02:00"> 01 ottobre 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" rel="bookmark" title="Permalink to Io ODO, Tu ODI e la Neural ODE - 4">Io ODO, Tu ODI e la Neural ODE - 4</a></h2> </header>
-            <section>
-<p>Si lo so, post vacanze è dura per tutti. Ma qualcuno deve pur farlo il lavoro sporco no? Quindi riprendiamo, dopo qualche settimana di pausa,
-il nostro bel discorsetto sulle <strong>Neural ODE</strong> o <strong>NODE</strong>. Discorsetto che potete recuperare leggendo le prime tre parti linkate a fine articolo. Per farla breve …</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-09-12T00:00:00+02:00"> 12 settembre 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/" rel="bookmark" title="Permalink to Io ODO, Tu ODI e la Neural ODE - 3">Io ODO, Tu ODI e la Neural ODE - 3</a></h2> </header>
-            <section>
-<p>C'è un momento nella vita di ogni matematico, ingegnere e figure mitologiche simili, in cui</p>
-<blockquote>
-<p>Ti piace l'analitica eh!? Allora beccati sta ODE.</p>
-</blockquote>
-<p>E te ne sbatte in faccia una <strong>non lineare</strong>, <strong>accoppiata</strong>, <strong>implicita</strong>, con coefficienti che cambiano 
-neanche fossero le scale di <strong>Hogwarts</strong>. L'unica cosa che puoi farci è …</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-07-30T00:00:00+02:00"> 30 luglio 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" rel="bookmark" title="Permalink to Io ODO, Tu ODI e la Neural ODE - 2">Io ODO, Tu ODI e la Neural ODE - 2</a></h2> </header>
-            <section>
-<p>Rieccoci con la <strong>seconda parte</strong> della serie dedicata alle <strong>Neural ODE</strong>. Se il primo articolo è stata una violenza mentale 
-questo lo sarà un po' meno. Ma non illudetevi: non è ancora una passeggiata di salute. Abbiamo già affondato le mani nella melma di <strong>derivata</strong>, 
-<strong>integrale</strong> ed <strong>equazione differenziale</strong>. E …</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-07-21T00:00:00+02:00"> 21 luglio 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" rel="bookmark" title="Permalink to Io ODO, Tu ODI e la Neural ODE - 1">Io ODO, Tu ODI e la Neural ODE - 1</a></h2> </header>
-            <section>
-<p>C'era una volta una rete neurale che non voleva funzionare layer su layer come tutte le sue amiche.
-No, lei voleva essere continua, fluida, dinamica. Voleva essere una <strong>equazione differenziale</strong>.
-Questo non è il classico <strong>incubo</strong> dei matematici. Non c'è Freddy Krueger che 
-li sveglia nel cuore della notte sussurrando …</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-07-15T00:00:00+02:00"> 15 luglio 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/metaeuristica/not-only-backprop/" rel="bookmark" title="Permalink to BackProp? Anche No">BackProp? Anche No</a></h2> </header>
-            <section>
-<p>Vi capita mai di svegliarvi al mattino e pensare:<br/>
-<em>Cavolo, oggi ho proprio voglia di retropropagare l’errore... ma dovrei stare attento alla linea!</em> <br/>
-No!? <strong>Strano</strong>, ma contenti voi. In ogni caso, anche se nessuno l'ha chiesto, ho la <strong>soluzione</strong> che fa per voi: il <em>compromesso giusto tra godimento e …</em></p></section>
-            <footer>
-                <p>Published: <time datetime="2025-06-03T00:00:00+02:00"> 03 giugno 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-3/" rel="bookmark" title="Permalink to Neurons for Dummies - 3">Neurons for Dummies - 3</a></h2> </header>
-            <section>
-<p>Ed eccoci qui, con la <strong>terza parte</strong> dell'articolo dedicato al neurone. Inizialmente ne avevo preventivate due ma che volete che vi dica, 
-mi sono lasciato prendere la mano. Non potevo mica lasciarvi senza spiegare perché le reti sono composte da <strong>tanti neuroni</strong> o come si arriva alla 
-<strong>formulazione dell'aggiornamento dei …</strong></p></section>
-            <footer>
-                <p>Published: <time datetime="2025-05-16T00:00:00+02:00"> 16 maggio 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/" rel="bookmark" title="Permalink to Neurons for Dummies - 2">Neurons for Dummies - 2</a></h2> </header>
-            <section>
-<p>Rieccoci qui per la seconda parte dell'articolo dedicato al neurone.<br/>
-Se sei capitato qui per sbaglio... <strong>SCAPPA</strong>!<br/>
-No scherzo, ovviamente sei invitato a leggere la <strong>prima parte</strong> <a href="/it/machine-learning/neurons-for-dummies-1/" target="_blank">qui</a>.<br/>
-Detto questo, nella prima parte vi ho lasciato con più domande che risposte.
-Oggi, finalmente, proviamo a fare un po’ di chiarezza …</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-05-15T00:00:00+02:00"> 15 maggio 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-        <article>
-            <header> <h2><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/" rel="bookmark" title="Permalink to Neurons for Dummies - 1">Neurons for Dummies - 1</a></h2> </header>
-            <section>
-<p>Se avete mai sentito parlare di reti neurali e avete pensato: <em>"ma come diavolo fanno ad imparare?"</em> siete approdati nel posto giusto.<br/>
-Iniziamo subito con un spoiler fresco di giornata: non c'è nessuna <strong>magia</strong>, solo taaaaante <strong>moltiplicazioni</strong>, <strong>somme</strong> e <strong>derivate</strong>.<br/>
-In questo articolo voglio raccontarvi con calma e senza panico …</p></section>
-            <footer>
-                <p>Published: <time datetime="2025-04-30T00:00:00+02:00"> 30 aprile 2025 </time></p>
-                <address>By
-                        <a href="https://www.lucadivita.it/author/luca-di-vita.html">Luca Di Vita</a>
-                </address>
-            </footer>
-        </article>
-
-
-                    </div>
-                    <div class="span1"></div>
                 </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
             </div>
         </div>
-<footer>
+    </nav>
+</header>
 
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
+        <li><a href="https://www.lucadivita.it/categories.html" >Argomenti</a></li>
+        <li><a href="https://www.lucadivita.it/tags.html" aria-current="page">Tags</a></li>
+        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="/images/flags/it.png" alt="Italian">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/" hreflang="en" title="English" >
+                <img class="lang-flag" src="/images/flags/en.png" alt="English">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
 
+</div>
 
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>Tutti i Tags: reti_neurali</h1>
+    </header>
 
-    <div id="fpowered">
-        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
-        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
-    </div>
-</footer>        <script src="//code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script src="/js/elegant.prod.9e9d5ce754.js"></script>
-        <script src="/js/custom.js"></script>
-        <!--
-        <script src="/js/MathJax.js"></script>
-        <script src="/js/MathMenu.js"></script>
-        <script src="/js/MathZoom.js"></script>-->
-        <script type="text/javascript">
-          (() => {
-            document.querySelectorAll('a').forEach(a => {
-              if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
-                a.setAttribute('data-umami-event', "Click " + a.ariaLabel);
-                a.setAttribute('data-umami-event-element', "anchor");
-                a.setAttribute('data-umami-event-event', "onclick");
-                a.setAttribute('data-umami-event-id', a.id);
-                a.setAttribute('data-umami-event-url', a.href);
-              }
-            });
-          })();
-        </script>
-    </body>
+    <section>
+        <ul class="link-rows">
+            <li>
+                <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">Io ODO, Tu ODI e la Neural ODE - 5</a>
+                <small><time datetime="2025-10-01T00:00:00+02:00">01 ottobre 2025</time></small>
+            </li>
+            <li>
+                <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">Io ODO, Tu ODI e la Neural ODE - 4</a>
+                <small><time datetime="2025-09-12T00:00:00+02:00">12 settembre 2025</time></small>
+            </li>
+            <li>
+                <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">Io ODO, Tu ODI e la Neural ODE - 3</a>
+                <small><time datetime="2025-07-30T00:00:00+02:00">30 luglio 2025</time></small>
+            </li>
+            <li>
+                <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">Io ODO, Tu ODI e la Neural ODE - 2</a>
+                <small><time datetime="2025-07-21T00:00:00+02:00">21 luglio 2025</time></small>
+            </li>
+            <li>
+                <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Io ODO, Tu ODI e la Neural ODE - 1</a>
+                <small><time datetime="2025-07-15T00:00:00+02:00">15 luglio 2025</time></small>
+            </li>
+            <li>
+                <a href="https://www.lucadivita.it/metaeuristica/not-only-backprop/">BackProp? Anche No</a>
+                <small><time datetime="2025-06-03T00:00:00+02:00">03 giugno 2025</time></small>
+            </li>
+            <li>
+                <a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-3/">Neurons for Dummies - 3</a>
+                <small><time datetime="2025-05-16T00:00:00+02:00">16 maggio 2025</time></small>
+            </li>
+            <li>
+                <a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/">Neurons for Dummies - 2</a>
+                <small><time datetime="2025-05-15T00:00:00+02:00">15 maggio 2025</time></small>
+            </li>
+            <li>
+                <a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/">Neurons for Dummies - 1</a>
+                <small><time datetime="2025-04-30T00:00:00+02:00">30 aprile 2025</time></small>
+            </li>
+        </ul>
+    </section>
+</article>
+</main>
+
+<script defer src="/theme/site.js"></script>
+
+<script defer src="/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js"></script>
+
+</body>
 </html>

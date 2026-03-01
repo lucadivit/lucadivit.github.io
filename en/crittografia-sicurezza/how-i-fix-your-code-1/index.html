@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How I Fix Your Code - 1 - Bit Di Vita</title>
+    <meta name="description" content="You read the title and got pissed off, right? You told yourself: who the hell does this guy think he is, fixing my code? Not at all. Easy there. I do not care about your source code at all. Compile it, interpret it, push it, patch it: do whatever you …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="How I Fix Your Code - 1 - Bit Di Vita">
+    <meta property="og:description" content="You read the title and got pissed off, right? You told yourself: who the hell does this guy think he is, fixing my code? Not at all. Easy there. I do not care about your source code at all. Compile it, interpret it, push it, patch it: do whatever you …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+    <link rel="stylesheet" href="/theme/site.css">
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body>
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/en/">
+                        <img class="site-logo" src="/images/logo/logo.png" alt="Bit Di Vita logo" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
+        <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
+        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
+        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/en/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/" hreflang="it" title="Italian" >
+                <img class="lang-flag" src="/images/flags/it.png" alt="Italian">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-1/" hreflang="en" title="English" aria-current="page">
+                <img class="lang-flag" src="/images/flags/en.png" alt="English">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
+        <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
+        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
+        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/en/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/" hreflang="it" title="Italian" >
+                <img class="lang-flag" src="/images/flags/it.png" alt="Italian">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-1/" hreflang="en" title="English" aria-current="page">
+                <img class="lang-flag" src="/images/flags/en.png" alt="English">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>How I Fix Your Code - 1</h1>
+        <p>
+            <small>
+                <time datetime="2026-03-01T00:00:00+01:00">March 01, 2026</time>
+                - <a href="https://www.lucadivita.it/en/category/crittografia-sicurezza.html">Encryption & Security</a>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+                <div class="toc">
+<ul>
+<li><a href="#damn-open-space">Damn Open Space</a></li>
+<li><a href="#finally-a-partition">Finally, A Partition</a></li>
+<li><a href="#kind-of-an-expensive-partition">Kind Of An Expensive Partition</a></li>
+<li><a href="#a-better-partition">A Better Partition</a></li>
+<li><a href="#let-us-straighten-this-out">Let Us Straighten This Out</a><ul>
+<li><a href="#case-1">Case 1</a></li>
+<li><a href="#case-2">Case 2</a></li>
+</ul>
+</li>
+<li><a href="#conclusions">Conclusions</a></li>
+<li><a href="#related-posts">Related Posts</a></li><li><a href="#references">References</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>You read the title and got pissed off, right? You told yourself:</p>
+<blockquote>
+<p>who the hell does this guy think he is, fixing my code?</p>
+</blockquote>
+<p>Not at all. Easy there. I do not care about your source code at all.
+Compile it, interpret it, push it, patch it: do whatever you want. This article is not about your code,
+it is about <strong>codes</strong>. The ones that do not live in a repository. It is about <strong>transmissions</strong>,
+<strong>noisy</strong> channels, and bits that leave as kings and arrive as idiots.
+It is about the fact that, at some point, engineering gave up: reality is messy, it introduces
+<strong>errors</strong> everywhere, and the only sensible way to deal with that is not to avoid errors, but to <strong>correct</strong> them.
+This article is about <strong>error-correcting codes</strong>, the ones that let you search for <em>"biopark"</em> without getting... well, never mind.
+In short, these are the mechanisms behind all our digital conversations, which we use constantly without even noticing.
+The unsung heroes of information theory. The ones that make sure information arrives intact or, at worst, can be <strong>recovered</strong>.
+All right, the scope is clear. In this article we will do three things:</p>
+<ol>
+<li>see why <strong>redundancy</strong> is necessary</li>
+<li>analyze two classic techniques (<strong>repetition</strong> and <strong>parity check</strong>)</li>
+<li>formalize everything with the concept of <strong>minimum distance</strong></li>
+</ol>
+<p>Let us begin...</p>
+<h3 id="damn-open-space">Damn Open Space<a class="headerlink" href="#damn-open-space" title="Permanent link"> </a></h3>
+<p>You know those open-space offices? The whole <em>we are a modern company</em> thing,
+when really they just do not want to spend money on <strong>partitions</strong>. Cheap as hell.
+As if I cared about everyone else's calls. Anyway, back to it.</p>
+<p>You know the scene, right? There is one guy talking to another, the one who is permanently on a call,
+the one shouting on the phone, and then there is the guy firing plastic darts with a Nerf 2.0
+(that is me, and I am not joking, best purchase of 2025).
+In short, total chaos. Well: <strong>communication channels</strong> are the same.
+There are thousands of distractions: <strong>interference</strong> from other channels, equipment <strong>degradation</strong>,
+electrical <strong>impulses</strong>, and everything else you can imagine.
+And when a bit gets distracted, it starts as <span class="math">\(0\)</span> and arrives as <span class="math">\(1\)</span> (or vice versa).
+All this is called <strong>noise</strong>, and it is the Moriarty of communications: invisible criminal, always present.</p>
+<p>Just like holding a conversation in an open space gets harder as noise increases,
+data transmission gets harder as the communication channel gets noisier.
+To be understood, you either raise your voice (maybe with some swearing),
+or you are forced to <strong>repeat yourself</strong>.
+Since bits cannot swear (poor things), we only have the second option.
+And that option has a precise name: <strong>redundancy</strong>.
+We add information to the transmission so the receiver can <strong>reconstruct</strong> the message correctly,
+even when the channel does everything it can to ruin it.</p>
+<h3 id="finally-a-partition">Finally, A Partition<a class="headerlink" href="#finally-a-partition" title="Permanent link"> </a></h3>
+<p>Let us start this journey by showing why redundancy is necessary.
+Intuitively, it is easy to grasp. My grandma cannot hear well, so I arm myself with patience,
+repeat the same sentence three times, and the third one (maybe, otherwise I give up) works.
+But let us look at it in a less geriatric and more <strong>mathematical</strong> way, and consider this diagram:</p>
+<p class="image-caption"><img alt="Noise Channel" class="image" src="https://www.lucadivita.it/en/images/crittografia_sicurezza/how_i_fix_your_code_1/noise_channel.svg"/>
+Figure 1. Noisy Transmission</p>
+<p>Suppose we have a <strong>communication channel</strong>, maybe two cups connected by a string,
+where the <strong>message corruption probability</strong> is <span class="math">\(p=0.1\)</span>, that is <span class="math">\(10\%\)</span>
+(which sounds low but is huge: imagine one wrong letter every <span class="math">\(10\)</span> in a text).
+Suppose Alice wants to send Bob a message, and that message is a very expressive letter <span class="math">\(C\)</span>.
+There is a <span class="math">\(90\%\)</span> probability that Bob receives <span class="math">\(C\)</span> correctly, but <strong>we cannot be sure</strong>.
+So Alice has a great idea: she <strong>transmits the same message multiple times</strong>.
+She sends <span class="math">\(CCC\)</span>. Let us see what happens: the probability of receiving one message correctly is <span class="math">\(p=0.9\)</span>,
+so the probability of receiving all three <span class="math">\(C\)</span>s correctly, since events are <strong>independent</strong>, is:</p>
+<div class="math">$$
+p \left( \text{zero errors} \right) = 0.9 \cdot 0.9 \cdot 0.9 = 0.729
+$$</div>
+<p>Now suppose a <strong>transmission error</strong> happens.
+Bob knows he received the same message three times, so he uses <strong>majority voting</strong>, thinking:
+<em>if I receive two <span class="math">\(C\)</span>s and one <span class="math">\(B\)</span>, since correct transmission is more likely than wrong transmission,
+that <span class="math">\(B\)</span> was probably meant to be a <span class="math">\(C\)</span></em>.
+Smart move by Bob. So he is confident that the intended message is <span class="math">\(C\)</span>, and he is right.
+Let us see why. Assuming exactly one transmission error occurred and <span class="math">\(C\)</span> became <span class="math">\(B\)</span>,
+the received message <strong>must be one of</strong>: <span class="math">\(CCB\)</span>, <span class="math">\(CBC\)</span>, <span class="math">\(BCC\)</span>.
+Let us compute the probability of each message with exactly one error:</p>
+<div class="math">$$
+\begin{aligned}
+    p \left( CCB \right) &amp;= 0.9 \cdot 0.9 \cdot 0.1 = 0.081 \\
+    p \left( CBC \right) &amp;= 0.9 \cdot 0.1 \cdot 0.9 = 0.081 \\
+    p \left( BCC \right) &amp;= 0.1 \cdot 0.9 \cdot 0.9 = 0.081 \\
+\end{aligned}
+$$</div>
+<p>So the <strong>probability</strong> of receiving one of those erroneous messages is:</p>
+<div class="math">$$
+p \left( \text{one error} \right) = 3 \cdot 0.081 = 0.243
+$$</div>
+<p>At this point we know three things:</p>
+<ol>
+<li>The probability of receiving the <strong>error-free message</strong> is <span class="math">\(p=0.729\)</span>.</li>
+<li>The probability of receiving a message with <strong>exactly one error</strong> is <span class="math">\(p=0.243\)</span>.</li>
+<li>When exactly one error occurs, Bob can still <strong>reconstruct the message correctly</strong>.</li>
+</ol>
+<p>This means the message is received and decoded correctly in four different cases.
+So we can write the probability of <strong>correct decoding</strong> as:</p>
+<div class="math">$$
+p \left( \text{correct decoding} \right) = p \left( \text{one error} \right) + p \left( \text{zero errors} \right) = 0.243 + 0.729 = 0.972
+$$</div>
+<p>Consequently, the probability of <strong>incorrect decoding</strong> is:</p>
+<div class="math">$$
+p \left( \text{incorrect decoding} \right) = 1 - p \left( \text{correct decoding} \right) = 1 - 0.972 = 0.028
+$$</div>
+<p>Pretty good. We have seen how adding redundancy to transmissions <strong>reduces error</strong> probability
+from <span class="math">\(10\%\)</span> to <span class="math">\(2.8\%\)</span>.
+Nice result, right? In real transmissions, we send binary sequences, not letters.
+Suppose devices can send only <span class="math">\(4\)</span> symbols: <span class="math">\(A,\, B,\, C,\, D\)</span>, encoded as:</p>
+<ul>
+<li><span class="math">\(A=00\)</span></li>
+<li><span class="math">\(B=01\)</span></li>
+<li><span class="math">\(C=10\)</span></li>
+<li><span class="math">\(D=11\)</span></li>
+</ul>
+<p>Sending one of these symbols with the redundancy scheme above means transmitting:</p>
+<ul>
+<li><span class="math">\(000000\)</span> to send letter <span class="math">\(A\)</span></li>
+<li><span class="math">\(010101\)</span> to send letter <span class="math">\(B\)</span></li>
+<li><span class="math">\(101010\)</span> to send letter <span class="math">\(C\)</span></li>
+<li><span class="math">\(111111\)</span> to send letter <span class="math">\(D\)</span></li>
+</ul>
+<p>The decoder waits for the full <strong>codeword</strong> (in this case six bits) before decoding.
+To close this section: if you were wondering, the <strong>general formula</strong> for single-bit error probability is:</p>
+<p><a id="error-proba"></a>
+</p>
+<div class="math">$$
+p_e = \sum_{k=\lceil n/2\rceil}^{n} \binom{n}{k}\,p^k(1-p)^{\,n-k}
+$$</div>
+<p class="formula-caption">
+Formula 1. Error Probability</p>
+<p>where:</p>
+<ul>
+<li><span class="math">\(p_e\)</span> is the <strong>probability</strong> that decoding is wrong</li>
+<li><span class="math">\(n\)</span> is the number of <strong>repetitions</strong></li>
+<li><span class="math">\(p\)</span> is the probability that a bit is <strong>flipped</strong></li>
+<li><span class="math">\(k\)</span> is the number of <strong>wrong bits</strong></li>
+<li><span class="math">\(\binom{n}{k}\)</span> is the number of <strong>different ways</strong> to have <span class="math">\(k\)</span> errors</li>
+<li><span class="math">\(p^k\)</span> is the probability that those <span class="math">\(k\)</span> bits are <strong>wrong</strong></li>
+<li><span class="math">\((1-p)^{\,n-k}\)</span> is the probability that the remaining <span class="math">\(n-k\)</span> are <strong>correct</strong></li>
+<li><span class="math">\(\lceil n/2\rceil\)</span> is the <strong>majority threshold</strong> above which decoding fails</li>
+<li><span class="math">\(\sum\)</span> adds all events that lead to <strong>error</strong></li>
+</ul>
+<p>The formula gives the error probability of <strong>one information bit</strong> encoded by an <span class="math">\(n\)</span>-length <strong>repetition code</strong>.
+From this, the probability that a message is received correctly is:</p>
+<div class="math">$$
+p_c = 1-p_e
+$$</div>
+<p>If we want the probability that a message of <strong>arbitrary length</strong> is decoded correctly, we write:</p>
+<div class="math">$$
+p_c = (1-p_e)^L
+$$</div>
+<p>where <span class="math">\(L\)</span> is the <strong>number of bits</strong> in the message.
+For example, if the message is one of:</p>
+<div class="math">$$
+00, \, 01, \, 10, \, 11
+$$</div>
+<p>as seen above, then <span class="math">\(L=2\)</span>.</p>
+<h3 id="kind-of-an-expensive-partition">Kind Of An Expensive Partition<a class="headerlink" href="#kind-of-an-expensive-partition" title="Permanent link"> </a></h3>
+<p>In the previous section we saw a simple redundancy example that allows us not only to <strong>detect</strong> an error,
+but also to <strong>correct</strong> it.
+But at what cost? We had to send <span class="math">\(2\)</span> bits and we sent <span class="math">\(6\)</span>.
+That is pretty <strong>expensive</strong>: message length is tripled.
+So the question is: do we really need error correction?
+Maybe in some situations it is better to <strong>retransmit</strong> than to make the message heavier,
+so just detecting errors is enough.
+In these cases, we can still use our friend redundancy, but in a much more <strong>economical</strong> way.</p>
+<p>Enter the <strong>parity check</strong>.
+It is a very simple mechanism to determine whether a <strong>transmission error</strong> occurred,
+by adding only <strong>one</strong> extra bit.
+Let us see an example.
+Suppose we need to send a <span class="math">\(7\)</span>-bit message (just as an example, length can be arbitrary): <span class="math">\(0110010\)</span>.
+What we do is <strong>add</strong> one bit, called the <strong>parity bit</strong>, used to make the number of <span class="math">\(1\)</span>s in the message <strong>even</strong>.
+From this definition, we can write parity as:</p>
+<p><a id="parity"></a>
+</p>
+<div class="math">$$
+p = s \pmod 2
+$$</div>
+<p class="formula-caption">
+Formula 2. Parity Bit Definition</p>
+<p>where <span class="math">\(s\)</span> is the number of bits equal to <span class="math">\(1\)</span>. So:</p>
+<ul>
+<li>if <span class="math">\(s\)</span> is even, <span class="math">\(p=0\)</span></li>
+<li>if <span class="math">\(s\)</span> is odd, <span class="math">\(p=1\)</span></li>
+</ul>
+<p>If this is not obvious, it means you did not read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" target="_blank">this article</a>,
+where I also talk about modular arithmetic.
+In the previous message there are three bits equal to <span class="math">\(1\)</span>, which is odd,
+so <span class="math">\(p=1\)</span>.
+The transmitted message is therefore: <span class="math">\(0110010\color{green}{1}\)</span>.</p>
+<p>If one error happens, or more generally an <strong>odd number of errors</strong>, parity <strong>changes</strong>,
+so we can detect that a <strong>transmission error</strong> occurred.
+Consider this message: <span class="math">\(1110010\)</span>.
+Here <span class="math">\(s=4\)</span> so <span class="math">\(p=0\)</span>, and the transmitted message is: <span class="math">\(11100100\)</span>.
+Suppose one transmission error occurs and a bit changes from <span class="math">\(0\)</span> to <span class="math">\(1\)</span>:</p>
+<div class="math">$$
+11100100 \rightarrow 111\color{red}{1}0100
+$$</div>
+<p>We see the last bit is <span class="math">\(0\)</span>, so the number of <span class="math">\(1\)</span>s <strong>should be even</strong>,
+but now it is odd, because corruption changed it from four to five.
+So there is an <strong>error</strong>, and even if we <strong>do not know where</strong>, who cares, we ask for retransmission.
+Now let us see what happens with two errors:</p>
+<div class="math">$$
+11100100 \rightarrow 111\color{red}{11}100
+$$</div>
+<p>The last bit is still <span class="math">\(0\)</span>, but with two errors we now have six <span class="math">\(1\)</span>s.
+Parity did not change, so we <strong>do not detect</strong> the error.</p>
+<p>Parity check is therefore a code that uses redundancy to detect errors,
+but <strong>not</strong> to correct them.
+It is <strong>cheap</strong>, <strong>fast</strong>, and deeply limited.</p>
+<h3 id="a-better-partition">A Better Partition<a class="headerlink" href="#a-better-partition" title="Permanent link"> </a></h3>
+<p>We have seen that parity check is cheap, fast, and limited.
+It tells us something went wrong, but has no clue where.
+A bit unsatisfying, right?
+It looks like an <strong>impasse</strong>.
+If we repeat bits, cost increases; if we do not repeat bits, we do not know where to correct.
+Luckily, there is middle ground.
+That middle ground is not adding more information, but organizing it better.
+The idea is simple: instead of treating the message as a flat bit sequence,
+we arrange it as a <strong>matrix</strong>.
+Not because we have a table fetish, but because a matrix lets us check the message
+in <strong>two independent directions</strong>: rows and columns.
+Then we add <strong>parity bits</strong>, not just one, but one for every <strong>row</strong> and every <strong>column</strong>.
+Redundancy does not explode; it gets <strong>distributed</strong>.
+The result is that a single error breaks one specific row and one specific column,
+pinpointing the error <strong>coordinates</strong>.
+Enough words, let us do an example.
+Suppose we need to send this <span class="math">\(20\)</span>-bit message: <span class="math">\(10011011001100101011\)</span>.
+Using raw repetition would be brutal, so we place bits into a <span class="math">\(4 \times 5\)</span> matrix.</p>
+<div class="math">$$
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
+\end{pmatrix}
+$$</div>
+<p>Compute parity bits on rows and columns and we get:</p>
+<div class="math">$$
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; \color{green}{1} \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; \color{green}{0} \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; \color{green}{1} \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; \color{green}{1} \\
+\color{green}{0} &amp; \color{green}{1} &amp; \color{green}{1} &amp; \color{green}{0} &amp; \color{green}{1} &amp; \color{green}{1}
+\end{pmatrix}
+$$</div>
+<p>Now we have a <span class="math">\(5 \times 6\)</span> matrix.
+On top of <span class="math">\(20\)</span> bits, we added <span class="math">\(10\)</span> redundancy bits (not <span class="math">\(40\)</span>).
+Suppose the receiver gets this matrix:</p>
+<div class="math">$$
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; \color{red}{1} &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\
+\end{pmatrix}
+$$</div>
+<p>By checking parity bits on the <strong>last row</strong> and <strong>last column</strong>,
+we see the third row has an odd number of <span class="math">\(1\)</span>s,
+and the same happens in the fourth column.
+So the error occurred at coordinates <span class="math">\((3, \, 4)\)</span>.
+Not only did we <strong>detect</strong> the error, we can also correct it.
+Now suppose we receive this matrix:</p>
+<div class="math">$$
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; \color{red}{0} &amp; \color{red}{0} &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\
+\end{pmatrix}
+$$</div>
+<p>In this case, <strong>two errors</strong> occurred, specifically in columns two and three of row two.
+The row parity bit remains <strong>correct</strong>, while column two and three parity bits are <strong>wrong</strong>.
+So we know an error occurred, but we <strong>cannot</strong> identify one position.
+This method is smarter but has limits.
+It can detect that something went wrong even with multiple errors,
+but it can correct <strong>only one</strong>.</p>
+<h3 id="let-us-straighten-this-out">Let Us Straighten This Out<a class="headerlink" href="#let-us-straighten-this-out" title="Permanent link"> </a></h3>
+<p>Now an obvious question appears: is there a <strong>law</strong> connecting the <strong>number of added bits</strong>
+to our ability to <strong>correct</strong> errors?
+In other words, can we quantify how <strong>robust</strong> a code is against noise?
+Start with a deliberately <strong>trivial</strong> case.
+Suppose the only valid messages are</p>
+<div class="math">$$
+000000 \text{ and } 111111
+$$</div>
+<p>If the receiver gets</p>
+<div class="math">$$
+000\color{red}{1}00
+$$</div>
+<p>there is little doubt: this message is much closer to <span class="math">\(000000\)</span> than to <span class="math">\(111111\)</span>,
+so the original message is easy to infer.
+But what if the receiver gets</p>
+<div class="math">$$
+000\color{red}{111}
+$$</div>
+<p>then what?
+We can no longer tell which one was the <strong>original</strong>.
+The problem is not the error itself, it is the <strong>ambiguity</strong>:
+the received message is <strong>compatible</strong> with two different valid messages.
+What we are doing, even if we are not naming it yet,
+is <strong>counting</strong> how many bits differ between messages:
+we are measuring <strong>Hamming distance</strong>.
+In our example we have only two transmittable messages, and they differ in all six bits,
+so the code has <strong>minimum distance</strong> <span class="math">\(d_{min}=6\)</span>.
+Minimum distance is the <em>smallest number of bit changes needed to transform one valid message into another valid message</em>.
+When a message is received, we apply <strong>nearest-neighbor decoding</strong>,
+that is, we choose the <strong>closest valid message</strong> in terms of differing bits.
+As long as the received message is closer to exactly one <strong>codeword</strong>, decoding is possible.
+When it lands exactly in the middle, every decision becomes arbitrary.
+Let us make this explicit with numbers:</p>
+<div class="math">$$
+d(000000, 000\color{red}{1}00) = 1 \\
+d(111111, 000\color{red}{1}00) = 5
+$$</div>
+<p>With one error, the smaller Hamming distance between <span class="math">\(000100\)</span> and possible codewords is <span class="math">\(1\)</span>,
+so we know the correct codeword is <span class="math">\(000000\)</span>.</p>
+<div class="math">$$
+d(000000, 000\color{red}{11}0) = 2 \\
+d(111111, 000\color{red}{11}0) = 4
+$$</div>
+<p>With two errors, the minimum Hamming distance is <span class="math">\(2\)</span>, same conclusion as above.</p>
+<div class="math">$$
+d(000000, 000\color{red}{111}) = 3 \\
+d(111111, 000\color{red}{111}) = 3
+$$</div>
+<p>With three errors, there is no smaller distance, so we have <strong>ambiguity</strong>.
+From here comes a first important consequence.
+We say a code can <strong>detect</strong> (not correct) up to <span class="math">\(s\)</span> errors,
+if by changing at most <span class="math">\(s\)</span> bits it is <em>not possible to transform one valid codeword into another</em>.
+This happens when</p>
+<div class="math">$$
+d_{min} \geq s + 1
+$$</div>
+<p>Back to our example.
+The inequality says we can detect up to <span class="math">\(s=5\)</span> errors, because</p>
+<div class="math">$$
+6 \geq 5 + 1
+$$</div>
+<p>is true, and up to <span class="math">\(s=5\)</span> we still get a <strong>non-valid</strong> codeword compared to valid ones.
+If instead <span class="math">\(s=6\)</span>, we flip all bits, moving from valid codeword <span class="math">\(000000\)</span> to the other valid one <span class="math">\(111111\)</span>,
+and we can no longer tell whether an error happened.</p>
+<p>We found a <strong>condition</strong> that links error detection to minimum distance,
+but correction is a different story.
+It is not enough to know something went wrong, we must also know which way to go back.
+To avoid ambiguity, the received message must remain <strong>closer</strong> to exactly one valid codeword.
+That is possible only while <em>the number of errors is strictly less than half the minimum distance</em>.
+The <strong>maximum</strong> number of correctable errors is therefore</p>
+<div class="math">$$
+t = \left\lfloor \frac{d_{min} - 1}{2} \right\rfloor
+$$</div>
+<p>In our example, with <span class="math">\(d_{min} = 6\)</span>, we get:</p>
+<div class="math">$$
+t = \left\lfloor \frac{6 - 1}{2} \right\rfloor = 2
+$$</div>
+<p>Which means that up to two errors, the received message always stays closer to one codeword,
+matching what we saw before.</p>
+<p>To summarize this jungle of numbers and letters:
+the minimum distance of a code, <span class="math">\(d_{min}\)</span>, <strong>governs</strong> robustness against noise
+and gives us <strong>two conditions</strong>:</p>
+<p><a id="correction"></a>
+</p>
+<div class="math">$$
+d_{min} \geq 2t + 1
+$$</div>
+<p class="formula-caption">
+Formula 3. Correction Condition</p>
+<p>and</p>
+<p><a id="detection"></a>
+</p>
+<div class="math">$$
+d_{min} \geq s + 1
+$$</div>
+<p class="formula-caption">
+Formula 4. Detection Condition</p>
+<p>If true, the <a href="#correction">correction condition</a> tells us the code can <strong>correct</strong> up to <span class="math">\(t\)</span> errors,
+and if true, the <a href="#detection">detection condition</a> tells us the code can <strong>detect</strong> up to <span class="math">\(s\)</span> errors.</p>
+<p>Let us take one small step back and apply the laws we just found.</p>
+<h4 id="case-1">Case 1<a class="headerlink" href="#case-1" title="Permanent link"> </a></h4>
+<p>Take <a href="#finally-a-partition">this example</a>.
+The defined code was:</p>
+<ul>
+<li><span class="math">\(000000\)</span> to send letter <span class="math">\(A\)</span></li>
+<li><span class="math">\(010101\)</span> to send letter <span class="math">\(B\)</span></li>
+<li><span class="math">\(101010\)</span> to send letter <span class="math">\(C\)</span></li>
+<li><span class="math">\(111111\)</span> to send letter <span class="math">\(D\)</span></li>
+</ul>
+<p>so minimum distance (for example from <span class="math">\(A\)</span> to <span class="math">\(B\)</span>) is <span class="math">\(d_{min}=3\)</span>
+(and more generally, <span class="math">\(d_{min}\)</span> is <strong>equal to the number of repetitions</strong>).
+From the <a href="#detection">detection condition</a>, this means
+we can detect up to <span class="math">\(s=2\)</span> errors,
+and from the <a href="#correction">correction condition</a> we can correct <span class="math">\(t=1\)</span> error,
+which matches what we saw.</p>
+<h4 id="case-2">Case 2<a class="headerlink" href="#case-2" title="Permanent link"> </a></h4>
+<p>Take the examples seen <a href="#kind-of-an-expensive-partition">here</a>.
+In the one-dimensional case, we had messages of length <span class="math">\(8\)</span> with parity bit.
+Minimum distance is <span class="math">\(d_{min}=2\)</span>.
+If that was intuitive before, here is why.
+Consider message <span class="math">\(00000000\)</span>.
+If one bit gets <strong>corrupted</strong>, we get <span class="math">\(\color{red}{1}0000000\)</span>,
+which is not valid because <strong>parity does not match</strong>,
+so it is not in the set of codewords.
+With two errors, we could get <span class="math">\(\color{red}{1}000000\color{red}{1}\)</span>,
+which is a <strong>valid message</strong> at distance <span class="math">\(2\)</span>.
+Applying the same conditions gives <span class="math">\(s=1\)</span> and <span class="math">\(t=0\)</span>,
+so we detect one error but correct none.</p>
+<p>For the two-dimensional case,
+to move from one valid codeword to another,
+I must break at least two rows and two columns,
+so <span class="math">\(d_{min}=4\)</span>.
+From this we get detection up to <span class="math">\(s=3\)</span> errors,
+and correction up to <span class="math">\(t=1\)</span> error.</p>
+<p>There is a <strong>remark</strong> to make on these last two examples.
+If, in the shown example (and a similar argument applies in one dimension),
+one error occurred per column,
+we could detect all errors even beyond the computed value of <span class="math">\(s\)</span>.
+But this does not break the condition,
+because the <strong>condition gives a guarantee</strong>;
+detecting more than <span class="math">\(s\)</span> errors is not always guaranteed,
+it happens only in special cases (such as one error per column).</p>
+<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<p>We have reached the end of this first article.
+I will tell you: there is still a long road ahead, and here we only scratched the <strong>surface</strong>.
+With <strong>simple</strong> but <strong>concrete</strong> examples, we saw what <strong>error-correcting codes</strong> are.
+We understood why redundancy is <strong>necessary</strong>,
+and how better <strong>organization</strong> of information can let us not only detect errors,
+but also correct them, often with surprisingly limited overhead.
+In the next articles we will dive deeper with more <strong>structured</strong> and powerful examples:
+<strong>Hamming code</strong>, <strong>Reed-Solomon</strong>, and friends.
+There we will see how these keep the everyday digital world standing.
+If you want to tinker a bit, I wrote the examples shown in this <a href="https://github.com/lucadivit/HowIFixYouCode" target="_blank">repo</a>
+so you can get your hands dirty without reinventing the wheel.</p>
+<p>See you next time.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: false," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h2>Related Posts</h2>
+                <ol class="article-related-list">
+                    <li><a href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Where Only Polynomials Grow</a></li>
+                    <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Share Your Secrets With Shamir</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h2>References</h2>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">/en/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lucadivit/HowIFixYouCode" rel="noopener noreferrer" target="_blank">https://github.com/lucadivit/HowIFixYouCode</a>
+                    </li>
+                    <li>
+                        Introduction to Cryptography with Coding Theory - Trappe &amp; Washington
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="https://www.lucadivita.it/en/tag/math.html">math</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/information_theory.html">information_theory</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/codes.html">codes</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/error_correction_codes.html">error_correction_codes</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/repetition_codes.html">repetition_codes</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/parity_check.html">parity_check</a></li>
+            </ul>
+        </footer>
+    </div>
+
+</article>
+</main>
+
+<script defer src="/theme/site.js"></script>
+
+<script defer src="/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://cdn.jsdelivr.net/npm/instant.page@5.2.0/instantpage.min.js"></script>
+
+</body>
+</html>
