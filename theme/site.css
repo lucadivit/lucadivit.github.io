@@ -589,6 +589,13 @@
     text-decoration: underline;
 }
 
+@media (max-width: 45rem) {
+    .latest-rows li > small {
+        display: block;
+        margin-top: calc(var(--pico-spacing) * 0.2);
+    }
+}
+
 .page-body .link-rows.is-bulleted {
     list-style: disc;
     list-style-position: outside;
