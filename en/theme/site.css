@@ -6,10 +6,15 @@
     --site-inline-code-border-color: #d5dde8;
 }
 
+html {
+    scrollbar-gutter: stable;
+}
+
 .bio-pic {
     display: block;
     max-width: 14rem;
     width: 100%;
+    height: auto;
     border-radius: 50%;
     margin: 0 auto 1.5rem;
 }
@@ -722,7 +727,8 @@
 
 .site-logo {
     width: 1.8em;
-    height: 1.8em;
+    max-width: 100%;
+    height: auto;
     object-fit: contain;
 }
 
@@ -870,6 +876,7 @@
 .lang-flag {
     height: 1.5em;
     width: auto;
+    max-width: 100%;
     display: block;
     border-radius: var(--pico-border-radius);
 }
