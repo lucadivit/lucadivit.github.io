@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/metaeuristica/crystal-structure-algorithm/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/metaeuristica/crystal-structure-algorithm/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/metaeuristica/crystal-structure-algorithm/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/metaeuristica/crystal-structure-algorithm/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Crystal Structure Algorithm</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/metaeuristica.html">Metaheuristic</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-04-07T00:00:00+02:00">April 07, 2025</time>
-                - <a href="https://www.lucadivita.it/en/category/metaeuristica.html">Metaheuristic</a>
             </small>
         </p>
     </header>
@@ -178,28 +178,32 @@ which allows the description of all possible lattices that can exist in three-di
 Each point in the lattice can be reached starting from the origin and taking an integer number of steps along each of the three directions:
 right|left, forward|backward, up|down.
 A <strong>position vector</strong> is then defined using the following formula:</p>
-<div class="math">$$\overrightarrow{r} = \sum_{i=1}^{d}n_i \overrightarrow{a_i}$$</div>
+<div class="arithmatex">\[
+\overrightarrow{r} = \sum_{i=1}^{d}n_i \overrightarrow{a_i}
+\]</div>
 <p>Where:</p>
 <ul>
-<li><span class="math">\(d\)</span> is the number of dimensions of the crystal, which is usually 3 (unless you live in a world with
+<li><span class="arithmatex">\(d\)</span> is the number of dimensions of the crystal, which is usually 3 (unless you live in a world with
 4 spatial dimensions, in that case <strong>please invite me over</strong>).</li>
-<li><span class="math">\(n_i\)</span> is an integer indicating how many steps we take along the direction <span class="math">\(a_i\)</span>.</li>
-<li><span class="math">\(a_i\)</span> represents the "movement direction".</li>
+<li><span class="arithmatex">\(n_i\)</span> is an integer indicating how many steps we take along the direction <span class="arithmatex">\(a_i\)</span>.</li>
+<li><span class="arithmatex">\(a_i\)</span> represents the "movement direction".</li>
 </ul>
-<p>Now that we’ve defined <span class="math">\(\overrightarrow{r}\)</span>, let’s set it aside for now, but don’t worry, it’ll be back soon.
-<strong>May Thor strike me down</strong> if I ever make you give up your beloved <span class="math">\(\overrightarrow{r}\)</span>.</p>
+<p>Now that we’ve defined <span class="arithmatex">\(\overrightarrow{r}\)</span>, let’s set it aside for now, but don’t worry, it’ll be back soon.
+<strong>May Thor strike me down</strong> if I ever make you give up your beloved <span class="arithmatex">\(\overrightarrow{r}\)</span>.</p>
 <p>Let’s get back to it and take a look at the <strong>candidate solutions</strong>.
 That’s right: in metaheuristic algorithms, there isn’t just one solution, but a whole set of candidate solutions,
 from which we’ll select the <strong>best one</strong>... Ahem, I mean, each candidate solution (or "crystal") is represented as a <strong>numerical vector</strong> in
-<span class="math">\(d\)</span> dimensions, that is, a list of values:</p>
-<div class="math">$$C_i = \left[x_{i}^{1}, x_{i}^{2}, \dots, x_{i}^{d}  \right]$$</div>
+<span class="arithmatex">\(d\)</span> dimensions, that is, a list of values:</p>
+<div class="arithmatex">\[
+C_i = \left[x_{i}^{1}, x_{i}^{2}, \dots, x_{i}^{d}  \right]
+\]</div>
 <p>Where:</p>
 <ul>
-<li><span class="math">\(C_i\)</span> is the <span class="math">\(i\)</span>-th crystal.</li>
-<li>Each <span class="math">\(x_{i}^{j}\)</span> indicates the value of the <span class="math">\(j\)</span>-th variable in crystal <span class="math">\(i\)</span>.</li>
+<li><span class="arithmatex">\(C_i\)</span> is the <span class="arithmatex">\(i\)</span>-th crystal.</li>
+<li>Each <span class="arithmatex">\(x_{i}^{j}\)</span> indicates the value of the <span class="arithmatex">\(j\)</span>-th variable in crystal <span class="arithmatex">\(i\)</span>.</li>
 </ul>
 <p>So the <strong>crystal population</strong> is defined as:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 C_r = \left[C_{r_1}, C_{r_2}, \dots, C_{r_n}  \right]^{T} =
 \begin{bmatrix}
  x_{1}^{1} &amp; x_{1}^{2} &amp; \dots &amp; x_{1}^{d} \\
@@ -207,68 +211,74 @@ C_r = \left[C_{r_1}, C_{r_2}, \dots, C_{r_n}  \right]^{T} =
  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
  x_{n}^{1} &amp; x_{n}^{2} &amp; \dots &amp; x_{n}^{d} \\
 \end{bmatrix}
-$$</div>
-<p>In other words, we have a population of <span class="math">\(n\)</span> crystals, each with <span class="math">\(d\)</span> variables. This matrix, where each row is a crystal
+\]</div>
+<p>In other words, we have a population of <span class="arithmatex">\(n\)</span> crystals, each with <span class="arithmatex">\(d\)</span> variables. This matrix, where each row is a crystal
 and each column is a variable, represents the entire search space from which the algorithm will try to extract the best candidate.</p>
 <p>Alright, all clear so far (I hope)! But now the question is... <strong>How the heck do we create these crystals?</strong><br/>
 Simple as that.<br/>
-Given a <strong>fitness function</strong> <span class="math">\(f\)</span> that represents the problem to solve, the individual crystals are created using 
+Given a <strong>fitness function</strong> <span class="arithmatex">\(f\)</span> that represents the problem to solve, the individual crystals are created using 
 a straightforward formula: each value in the crystal is generated <strong>randomly</strong> within a given range.</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x_{i}^{j} = v_{min} + \xi \cdot \left(v_{max} - v_{min} \right)
-$$</div>
+\]</div>
 <p>With:</p>
 <ul>
-<li><span class="math">\(v_{min}\)</span>: Minimum value that the variables of <span class="math">\(f\)</span> can take.</li>
-<li><span class="math">\(v_{max}\)</span>: Maximum value that the variables of <span class="math">\(f\)</span> can take.</li>
-<li><span class="math">\(\xi\)</span>: A random value in <span class="math">\(\left[0, 1\right]\)</span></li>
+<li><span class="arithmatex">\(v_{min}\)</span>: Minimum value that the variables of <span class="arithmatex">\(f\)</span> can take.</li>
+<li><span class="arithmatex">\(v_{max}\)</span>: Maximum value that the variables of <span class="arithmatex">\(f\)</span> can take.</li>
+<li><span class="arithmatex">\(\xi\)</span>: A random value in <span class="arithmatex">\(\left[0, 1\right]\)</span></li>
 </ul>
 <p>Simply put: <strong>each value inside the crystal is randomly chosen</strong> within a predefined range,
 set according to the domain of the problem.
-Each of these crystals is a candidate solution to the problem <span class="math">\(f\)</span>.<br/>
-Being a candidate solution means that, by <strong>replacing the elements of the crystal with the variables of the function</strong> <span class="math">\(f\)</span>,
-we get a numerical result. And what we want is to find the <strong>maximum</strong> or the <strong>minimum</strong> of <span class="math">\(f\)</span>, depending on the problem.</p>
+Each of these crystals is a candidate solution to the problem <span class="arithmatex">\(f\)</span>.<br/>
+Being a candidate solution means that, by <strong>replacing the elements of the crystal with the variables of the function</strong> <span class="arithmatex">\(f\)</span>,
+we get a numerical result. And what we want is to find the <strong>maximum</strong> or the <strong>minimum</strong> of <span class="arithmatex">\(f\)</span>, depending on the problem.</p>
 <p>In crystallography, the bases located at the corners of the lattice, for example, like those at the vertices of the cube in Figure 1, play a fundamental role:
 they are the <strong>origin of the crystal structure</strong>. By analogy, the initial crystals created (the random ones) are called <strong>main crystals</strong> and
-are denoted as <span class="math">\(C_{r_{main}}\)</span>.
+are denoted as <span class="arithmatex">\(C_{r_{main}}\)</span>.
 These main crystals are the <strong>starting point</strong> of the algorithm, which, as mentioned earlier,  is structured into
 <strong>four update phases</strong> for the solutions.
 Each phase corresponds to a variant of the cubic structure:</p>
 <ul>
 <li><strong>Simple Cubicle</strong>:</li>
 <li>
-<p>
-<div class="math">$$C_{r_{new}} = C_{r_{old}} + r C_{r_{main}}$$</div>
-</p>
+<div class="arithmatex">\[
+C_{r_{new}} = C_{r_{old}} + r C_{r_{main}}
+\]</div>
 </li>
 <li>
 <p><strong>Cubicle with the Best Crystals</strong>:</p>
 </li>
 </ul>
-<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}}$$</div>
+<div class="arithmatex">\[
+C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}}
+\]</div>
 <ul>
 <li><strong>Cubicle with the Mean Crystals</strong>:</li>
 </ul>
-<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} F_{c}$$</div>
+<div class="arithmatex">\[
+C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} F_{c}
+\]</div>
 <ul>
 <li><strong>Cubicle with the Best and Mean Crystals</strong>:</li>
 </ul>
-<div class="math">$$C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}} + r_{3} F_{c}$$</div>
+<div class="arithmatex">\[
+C_{r_{new}} = C_{r_{old}} + r_{1} C_{r_{main}} + r_{2} C_{r_{b}} + r_{3} F_{c}
+\]</div>
 <p>As mentioned at the beginning, this algorithm <strong>does not use external parameters</strong> to balance exploration (finding new solutions) and exploitation (refining the good ones).
 The balance happens naturally, thanks to the update equations we’ve just seen.<br/>
 But let’s get back on track... we’ve created <strong>four new crystals</strong> starting from the previous ones. And what do we do with them?
 We’ll see that in a moment. First, let me explain the sorcery behind those mysterious names:</p>
 <ul>
-<li><span class="math">\(C_{r_{main}}\)</span> : A randomly selected old crystal.</li>
-<li><span class="math">\(C_{r_{new}}\)</span> : The new crystal created from previous ones.</li>
-<li><span class="math">\(C_{r_{old}}\)</span> : The original crystal, before the update.</li>
-<li><span class="math">\(C_{r_{b}}\)</span> : The crystal with the best configuration, i.e., the one that gives the best value for the function <span class="math">\(f\)</span>.</li>
-<li><span class="math">\(F_{c}\)</span> : An average of the values from a crystal randomly chosen among the existing ones.
-<span class="math">\(r, r_{1}, r_{2}, r_{3}\)</span> : Here they are, our old friends! These <span class="math">\(r\)</span>’s are no longer direction vectors, but random integers.
+<li><span class="arithmatex">\(C_{r_{main}}\)</span> : A randomly selected old crystal.</li>
+<li><span class="arithmatex">\(C_{r_{new}}\)</span> : The new crystal created from previous ones.</li>
+<li><span class="arithmatex">\(C_{r_{old}}\)</span> : The original crystal, before the update.</li>
+<li><span class="arithmatex">\(C_{r_{b}}\)</span> : The crystal with the best configuration, i.e., the one that gives the best value for the function <span class="arithmatex">\(f\)</span>.</li>
+<li><span class="arithmatex">\(F_{c}\)</span> : An average of the values from a crystal randomly chosen among the existing ones.
+<span class="arithmatex">\(r, r_{1}, r_{2}, r_{3}\)</span> : Here they are, our old friends! These <span class="arithmatex">\(r\)</span>’s are no longer direction vectors, but random integers.
 That’s what the authors of the paper decided… and who am I to argue?</li>
 </ul>
 <p>The newly created crystals are used, as will be seen in the pseudocode, to replace the "old and imperfect" ones with something newer and more refined.
-By applying these formulas <span class="math">\(n\)</span> times to the <span class="math">\(m\)</span> crystals, the algorithm tries, in a probabilistic way, to find the crystal that best optimizes the problem.<br/>
+By applying these formulas <span class="arithmatex">\(n\)</span> times to the <span class="arithmatex">\(m\)</span> crystals, the algorithm tries, in a probabilistic way, to find the crystal that best optimizes the problem.<br/>
 We’ve now reached the end of the mathematical model.  </p>
 <h3 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link"> </a></h3>
 <p>At this point, let’s try to put everything together in pseudocode:</p>
@@ -332,18 +342,20 @@ We’ve now reached the end of the mathematical model.  </p>
 <strong>modify their internal structure</strong> (i.e., their numerical values) in order to achieve the optimal arrangement of the basis within the lattice.</p>
 <p>I’d like to wrap up with an application example of CryStAl on a function called the <a href="https://www.indusmic.com/post/bird-function"><strong>Bird Function</strong></a>,
 which has the following form:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x, y) = sin(x) \cdot e^{(1-cos(y))^2} + cos(x) \cdot e^{(1-sin(x))^2} + (x-y)^2
-$$</div>
+\]</div>
 <p>where:</p>
-<div class="math">$$x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]$$</div>
+<div class="arithmatex">\[
+x \in [-2\pi, 2\pi], y \in [-2\pi, 2\pi]
+\]</div>
 <p>The plot of the function is quite complex (see Figure 3), and finding the minimum is <strong>anything but trivial</strong> from an analytical point of view.</p>
 <p class="image-caption"><img alt="Bird Function" class="image" src="https://www.lucadivita.it/en/images/metaeuristica/crystal/bird.png"/>
 Figura 3. Bird Function</p>
-<p>Its <strong>global minimum</strong> is approximately <span class="math">\(f(x, y) = -106.764\)</span> at the points:</p>
+<p>Its <strong>global minimum</strong> is approximately <span class="arithmatex">\(f(x, y) = -106.764\)</span> at the points:</p>
 <ul>
-<li><span class="math">\(p_1 = (4.701, 3.152)\)</span></li>
-<li><span class="math">\(p_2 = (−1.582, −3.130)\)</span></li>
+<li><span class="arithmatex">\(p_1 = (4.701, 3.152)\)</span></li>
+<li><span class="arithmatex">\(p_2 = (−1.582, −3.130)\)</span></li>
 </ul>
 <p>Let’s see what happens if we try to solve it using CryStAl:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Bird Function Definition</span>
@@ -366,68 +378,6 @@ If you want to tinker with the algorithm, you can find the <strong>full source c
 And if you’ve fallen in love with CryStAl like I did, I also recommend checking out the <a href="https://www.researchgate.net/publication/351503962_Crystal_Structure_Algorithm_CryStAl_A_Metaheuristic_Optimization_Method"><strong>paper</strong></a>
 where it all started.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -478,6 +428,10 @@ where it all started.</p>
                 <li><a href="https://www.lucadivita.it/en/tag/optimization.html">optimization</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>

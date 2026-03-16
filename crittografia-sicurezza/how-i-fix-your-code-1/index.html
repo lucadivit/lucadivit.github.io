@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-1/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Come Ti Rettifico Il Codice - 1</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/crittografia-sicurezza.html">Crittografia & Sicurezza</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2026-03-01T00:00:00+01:00">01 marzo 2026</time>
-                - <a href="https://www.lucadivita.it/category/crittografia-sicurezza.html">Crittografia & Sicurezza</a>
             </small>
         </p>
     </header>
@@ -170,7 +170,7 @@ cacciare due soldi per i <strong>divisori</strong>. Pidocchiosi. Come se me ne f
 il tizio che spara dardi di plastica col Nerf 2.0 (quello sono io, e non sto scherzando, è stato il miglior acquisto del 2025). 
 Insomma, una cazzo di <strong>lambada</strong>. Ecco: i <strong>canali di comunicazione</strong> sono uguali. Ci sono migliaia di motivi di distrazione: 
 <strong>interferenze</strong> con altri canali di comunicazione, <strong>deterioramento</strong> delle apparecchiature, <strong>impulsi elettrici</strong> e chi più ne 
-ha più ne metta. E quando un bit si distrae, parte che è <span class="math">\(0\)</span> ed arriva che è <span class="math">\(1\)</span> (o viceversa). Tutto questo si 
+ha più ne metta. E quando un bit si distrae, parte che è <span class="arithmatex">\(0\)</span> ed arriva che è <span class="arithmatex">\(1\)</span> (o viceversa). Tutto questo si 
 chiama <strong>rumore</strong>, ed è il Moriarty delle comunicazioni: criminale invisibile, ma sempre presente.</p>
 <p>Così come sostenere una conversazione in un open space diventa sempre più difficile man mano che il rumore aumenta, allo 
 stesso modo la trasmissione dei dati diventa più complessa quando il canale di comunicazione è più 
@@ -184,133 +184,129 @@ geriatrico ma più <strong>matematico</strong>, e consideriamo il seguente diagr
 <p class="image-caption"><img alt="Noise Channel" class="image" src="https://www.lucadivita.it/images/crittografia_sicurezza/how_i_fix_your_code_1/noise_channel.svg"/>
 Figura 1. Trasmissione Rumorosa</p>
 <p>Supponiamo di avere un <strong>canale di comunicazione</strong>, magari due bicchieri collegati con uno spago, nel quale la <strong>probabilità di corruzione</strong> del messaggio
-è <span class="math">\(p=0.1\)</span> cioè del <span class="math">\(10\%\)</span> (che sembra bassa ma è altissima. Immaginate che una lettera ogni <span class="math">\(10\)</span> in un testo, sia sbagliata). Supponiamo inoltre che Alice 
-voglia inviare a Bob un messaggio, e che questo messaggio sia una molto esplicativa lettera <span class="math">\(C\)</span>. C'è il <span class="math">\(90\%\)</span> di probabilità che il messaggio che arriva a Bob
-sia effettivamente <span class="math">\(C\)</span>, ma <strong>non possiamo esserne sicuri</strong>. Quindi Alice ha una grande idea: <strong>trasmette più volte</strong> lo stesso messaggio.
-Invia quindi il messaggio <span class="math">\(CCC\)</span>. Vediamo cosa succede: la probabilità di ricevere correttamente un messaggio è <span class="math">\(p=0.9\)</span> per cui la probabilità
-di ricevere correttamente tutte e tre le <span class="math">\(C\)</span>, essendo eventi <strong>indipendenti</strong>, è:</p>
-<div class="math">$$
+è <span class="arithmatex">\(p=0.1\)</span> cioè del <span class="arithmatex">\(10\%\)</span> (che sembra bassa ma è altissima. Immaginate che una lettera ogni <span class="arithmatex">\(10\)</span> in un testo, sia sbagliata). Supponiamo inoltre che Alice 
+voglia inviare a Bob un messaggio, e che questo messaggio sia una molto esplicativa lettera <span class="arithmatex">\(C\)</span>. C'è il <span class="arithmatex">\(90\%\)</span> di probabilità che il messaggio che arriva a Bob
+sia effettivamente <span class="arithmatex">\(C\)</span>, ma <strong>non possiamo esserne sicuri</strong>. Quindi Alice ha una grande idea: <strong>trasmette più volte</strong> lo stesso messaggio.
+Invia quindi il messaggio <span class="arithmatex">\(CCC\)</span>. Vediamo cosa succede: la probabilità di ricevere correttamente un messaggio è <span class="arithmatex">\(p=0.9\)</span> per cui la probabilità
+di ricevere correttamente tutte e tre le <span class="arithmatex">\(C\)</span>, essendo eventi <strong>indipendenti</strong>, è:</p>
+<div class="arithmatex">\[
 p \left( \text{zero errori} \right) = 0.9 \cdot 0.9 \cdot 0.9 = 0.729
-$$</div>
+\]</div>
 <p>Supponiamo che avvenga un <strong>errore di trasmissione</strong> nei messaggi. Bob, che sa di aver ricevuto tre volte lo stesso messaggio, si affida alla <strong>maggioranza</strong> pensando:
-<em>se ricevo due <span class="math">\(C\)</span> e una <span class="math">\(B\)</span>, dato che la probabilità di trasmissione corretta è più alta di quella errata, è probabile che la <span class="math">\(B\)</span> fosse in realtà una <span class="math">\(C\)</span></em>. La 
-sa lunga il buon Bob. Quindi è confidente del fatto che il messaggio da ricevere sia la lettera <span class="math">\(C\)</span>, ed ha ragione. Ma vediamo perché. Supponendo che sia avvenuto uno,
-ed un solo errore di trasmissione, in cui la <span class="math">\(C\)</span> è diventata una <span class="math">\(B\)</span>. Il messaggio ricevuto è <strong>necessariamente</strong> uno di questi: <span class="math">\(CCB\)</span>, <span class="math">\(CBC\)</span>, <span class="math">\(BCC\)</span>.
+<em>se ricevo due <span class="arithmatex">\(C\)</span> e una <span class="arithmatex">\(B\)</span>, dato che la probabilità di trasmissione corretta è più alta di quella errata, è probabile che la <span class="arithmatex">\(B\)</span> fosse in realtà una <span class="arithmatex">\(C\)</span></em>. La 
+sa lunga il buon Bob. Quindi è confidente del fatto che il messaggio da ricevere sia la lettera <span class="arithmatex">\(C\)</span>, ed ha ragione. Ma vediamo perché. Supponendo che sia avvenuto uno,
+ed un solo errore di trasmissione, in cui la <span class="arithmatex">\(C\)</span> è diventata una <span class="arithmatex">\(B\)</span>. Il messaggio ricevuto è <strong>necessariamente</strong> uno di questi: <span class="arithmatex">\(CCB\)</span>, <span class="arithmatex">\(CBC\)</span>, <span class="arithmatex">\(BCC\)</span>.
 Andiamo a vedere con quale probabilità si puó presentare ogni messaggio con esattamente un errore:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{aligned}
     p \left( CCB \right) &amp;= 0.9 \cdot 0.9 \cdot 0.1 = 0.081 \\[6pt]
     p \left( CBC \right) &amp;= 0.9 \cdot 0.1 \cdot 0.9 = 0.081 \\[6pt]
     p \left( BCC \right) &amp;= 0.1 \cdot 0.9 \cdot 0.9 = 0.081 \\[6pt]
 \end{aligned}
-$$</div>
+\]</div>
 <p>E quindi la <strong>probabilità</strong> di ricevere uno, tra i messaggi errati è:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 p \left( \text{un errore} \right) = 3 \cdot 0.081 = 0.243
-$$</div>
+\]</div>
 <p>Arrivati a questo punto sappiamo tre cose:</p>
 <ol>
-<li>La probabilità di ricevere il <strong>messaggio senza errori</strong> è <span class="math">\(p=0.729\)</span>.</li>
-<li>La probabilità di ricevere un <strong>messaggio con esattamente un errore</strong> è <span class="math">\(p=0.243\)</span>.</li>
+<li>La probabilità di ricevere il <strong>messaggio senza errori</strong> è <span class="arithmatex">\(p=0.729\)</span>.</li>
+<li>La probabilità di ricevere un <strong>messaggio con esattamente un errore</strong> è <span class="arithmatex">\(p=0.243\)</span>.</li>
 <li>Quando si riceve un messaggio con esattamente un errore, Bob riesce a <strong>ricostruire il messaggio correttamente</strong>.</li>
 </ol>
 <p>Questo vuol dire che il messaggio arriva a destinazione e viene decodificato correttamente in quattro differenti casi. Possiamo quindi scrivere la
 probabilità che il messaggio sia decodificato <strong>correttamente</strong> come:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 p \left( \text{decodifica corretta} \right) = p \left( \text{un errore} \right) + p \left( \text{zero errori} \right) = 0.243 + 0.729 = 0.972
-$$</div>
+\]</div>
 <p>Di conseguenza la probabilità di decodifica <strong>errata</strong> è:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 p \left( \text{decodifica errata} \right) = 1 - p \left( \text{decodifica corretta} \right) = 1 - 0.972 = 0.028
-$$</div>
-<p>Direi perfetto. Abbiamo visto come avere ridondanza nelle trasmissioni, ha portato a un <strong>calo</strong> della probabilità di errore dal <span class="math">\(10\%\)</span> al <span class="math">\(2.8\%\)</span>.
+\]</div>
+<p>Direi perfetto. Abbiamo visto come avere ridondanza nelle trasmissioni, ha portato a un <strong>calo</strong> della probabilità di errore dal <span class="arithmatex">\(10\%\)</span> al <span class="arithmatex">\(2.8\%\)</span>.
 Bel risultato no?! In ogni caso, come tutti sappiamo, nelle trasmissioni non si inviano lettere ma sequenze binarie. Supponendo di avere dispositivi
-che inviano solo <span class="math">\(4\)</span> simboli: <span class="math">\(A, \, B, \, C, \, D\)</span>, questi saranno codificati in questo modo:</p>
+che inviano solo <span class="arithmatex">\(4\)</span> simboli: <span class="arithmatex">\(A, \, B, \, C, \, D\)</span>, questi saranno codificati in questo modo:</p>
 <ul>
-<li><span class="math">\(A=00\)</span></li>
-<li><span class="math">\(B=01\)</span></li>
-<li><span class="math">\(C=10\)</span></li>
-<li><span class="math">\(D=11\)</span></li>
+<li><span class="arithmatex">\(A=00\)</span></li>
+<li><span class="arithmatex">\(B=01\)</span></li>
+<li><span class="arithmatex">\(C=10\)</span></li>
+<li><span class="arithmatex">\(D=11\)</span></li>
 </ul>
 <p>Inviare un messaggio con uno di questi simboli, sfruttando la ridondanza vista in precedenza, vuol dire inviare:</p>
 <ul>
-<li><span class="math">\(000000\)</span> per inviare la lettera <span class="math">\(A\)</span></li>
-<li><span class="math">\(010101\)</span> per inviare la lettera <span class="math">\(B\)</span></li>
-<li><span class="math">\(101010\)</span> per inviare la lettera <span class="math">\(C\)</span></li>
-<li><span class="math">\(111111\)</span> per inviare la lettera <span class="math">\(D\)</span></li>
+<li><span class="arithmatex">\(000000\)</span> per inviare la lettera <span class="arithmatex">\(A\)</span></li>
+<li><span class="arithmatex">\(010101\)</span> per inviare la lettera <span class="arithmatex">\(B\)</span></li>
+<li><span class="arithmatex">\(101010\)</span> per inviare la lettera <span class="arithmatex">\(C\)</span></li>
+<li><span class="arithmatex">\(111111\)</span> per inviare la lettera <span class="arithmatex">\(D\)</span></li>
 </ul>
 <p>Chi decodifica il messaggio, aspetta di ricevere il <strong>codeword</strong> cioè l'insieme (in questo caso) di sei bit, prima di iniziare la decodifica.
 Per concludere questo paragrafo, se ve lo steste chiedendo la <strong>formula generica</strong> per il calcolo della probabilità di errore 
 di un singolo bit, è:</p>
-<p><a id="error-proba"></a>
-</p>
-<div class="math">$$
+<p><a id="error-proba"></a></p>
+<div class="arithmatex">\[
 p_e = \sum_{k=\lceil n/2\rceil}^{n} \binom{n}{k}\,p^k(1-p)^{\,n-k}
-$$</div>
-<p class="formula-caption">
-Formula 1. Probabilità Di Errore</p>
+\]</div>
+<p class="formula-caption">Formula 1. Probabilità Di Errore</p>
 <p>dove:</p>
 <ul>
-<li><span class="math">\(p_e\)</span> è la <strong>probabilità</strong> che la decodifica sia errata</li>
-<li><span class="math">\(n\)</span> è il numero di <strong>ripetizioni</strong></li>
-<li><span class="math">\(p\)</span> è la probabilità che un bit venga <strong>flippato</strong></li>
-<li><span class="math">\(k\)</span> è il numero di bit <strong>errati</strong></li>
-<li><span class="math">\(\binom{n}{k}\)</span> numero di <strong>modi diversi</strong> in cui possono esserci <span class="math">\(k\)</span> errori</li>
-<li><span class="math">\(p^k\)</span> probabilità che quei <span class="math">\(k\)</span> bit siano <strong>errati</strong></li>
-<li><span class="math">\((1-p)^{\,n-k}\)</span> probabilità che gli altri <span class="math">\(n-k\)</span> siano <strong>corretti</strong></li>
-<li><span class="math">\(\lceil n/2\rceil\)</span> <strong>soglia</strong> di maggioranza oltre la quale la decodifica fallisce</li>
-<li><span class="math">\(\sum\)</span> somma di tutti gli eventi che portano a <strong>errore</strong></li>
+<li><span class="arithmatex">\(p_e\)</span> è la <strong>probabilità</strong> che la decodifica sia errata</li>
+<li><span class="arithmatex">\(n\)</span> è il numero di <strong>ripetizioni</strong></li>
+<li><span class="arithmatex">\(p\)</span> è la probabilità che un bit venga <strong>flippato</strong></li>
+<li><span class="arithmatex">\(k\)</span> è il numero di bit <strong>errati</strong></li>
+<li><span class="arithmatex">\(\binom{n}{k}\)</span> numero di <strong>modi diversi</strong> in cui possono esserci <span class="arithmatex">\(k\)</span> errori</li>
+<li><span class="arithmatex">\(p^k\)</span> probabilità che quei <span class="arithmatex">\(k\)</span> bit siano <strong>errati</strong></li>
+<li><span class="arithmatex">\((1-p)^{\,n-k}\)</span> probabilità che gli altri <span class="arithmatex">\(n-k\)</span> siano <strong>corretti</strong></li>
+<li><span class="arithmatex">\(\lceil n/2\rceil\)</span> <strong>soglia</strong> di maggioranza oltre la quale la decodifica fallisce</li>
+<li><span class="arithmatex">\(\sum\)</span> somma di tutti gli eventi che portano a <strong>errore</strong></li>
 </ul>
 <p>La formula fornisce la probabilità di errore di <strong>un singolo bit informativo</strong>, codificato mediante un <strong>codice a ripetizione</strong> di lunghezza
-<span class="math">\(n\)</span>, da cui otteniamo che la probabilità che un messaggio sia ricevuto correttamente è:</p>
-<div class="math">$$
+<span class="arithmatex">\(n\)</span>, da cui otteniamo che la probabilità che un messaggio sia ricevuto correttamente è:</p>
+<div class="arithmatex">\[
 p_c = 1-p_e
-$$</div>
+\]</div>
 <p>Se vogliamo calcolare la probabilità che un messaggio di <strong>lunghezza arbitraria</strong> sia decodificato correttamente, basta scrivere:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 p_c = (1-p_e)^L
-$$</div>
-<p>dove <span class="math">\(L\)</span> è il <strong>numero di bit</strong> del messaggio da inviare. Ad esempio se il messaggio è uno tra:</p>
-<div class="math">$$
+\]</div>
+<p>dove <span class="arithmatex">\(L\)</span> è il <strong>numero di bit</strong> del messaggio da inviare. Ad esempio se il messaggio è uno tra:</p>
+<div class="arithmatex">\[
 00, \, 01, \, 10, \, 11
-$$</div>
-<p>come visto in precedenza, abbiamo che <span class="math">\(L=2\)</span>.</p>
+\]</div>
+<p>come visto in precedenza, abbiamo che <span class="arithmatex">\(L=2\)</span>.</p>
 <h3 id="un-po-costoso-il-divisorio">Un Po’ Costoso Il Divisorio<a class="headerlink" href="#un-po-costoso-il-divisorio" title="Permanent link"> </a></h3>
 <p>Nel paragrafo precedente abbiamo visto un esempio molto semplice di ridondanza, che ha permesso non solo di <strong>rilevare</strong> un errore, ma anche di <strong>correggerlo</strong>.
-Ma questo a quale prezzo? Dovevamo inviare <span class="math">\(2\)</span> bit e ne abbiamo inviati <span class="math">\(6\)</span>. Direi un pó <strong>costosetto</strong>, triplica la lunghezza del messaggio. Quindi la domanda è: davvero abbiamo bisogno 
+Ma questo a quale prezzo? Dovevamo inviare <span class="arithmatex">\(2\)</span> bit e ne abbiamo inviati <span class="arithmatex">\(6\)</span>. Direi un pó <strong>costosetto</strong>, triplica la lunghezza del messaggio. Quindi la domanda è: davvero abbiamo bisogno 
 di correggere l'errore? Magari siamo in una situazione in cui conviene <strong>reinviare</strong> il messaggio piuttosto che appesantirlo, e quindi ci basta
 anche solo accorgerci dell'errore. In questi casi possiamo sempre sfruttare l'ormai amica ridondanza, ma in maniera molto più <strong>economica</strong>.</p>
 <p>Introduciamo quindi il <strong>parity check</strong>. È un semplicissimo meccanismo per stabilire se c'è stato un <strong>errore di trasmissione</strong> ma con l'aggiunta di <strong>un solo</strong>
-misero bit. Andiamolo a vedere con un esempio. Supponiamo di dover inviare un messaggio a <span class="math">\(7\)</span> bit (è solo per fare un esempio, il numero di bit
-puó ovviamente essere arbitrario): <span class="math">\(0110010\)</span>. Quello che facciamo è <strong>aggiungere</strong> un bit, chiamato <strong>bit di parità</strong> che serve a <strong>rendere pari</strong> il numero di bit uguali a
-<span class="math">\(1\)</span>, nel messaggio da inviare. Da questa definizione quindi, possiamo formulare il bit di parità come:</p>
-<p><a id="parity"></a>
-</p>
-<div class="math">$$
+misero bit. Andiamolo a vedere con un esempio. Supponiamo di dover inviare un messaggio a <span class="arithmatex">\(7\)</span> bit (è solo per fare un esempio, il numero di bit
+puó ovviamente essere arbitrario): <span class="arithmatex">\(0110010\)</span>. Quello che facciamo è <strong>aggiungere</strong> un bit, chiamato <strong>bit di parità</strong> che serve a <strong>rendere pari</strong> il numero di bit uguali a
+<span class="arithmatex">\(1\)</span>, nel messaggio da inviare. Da questa definizione quindi, possiamo formulare il bit di parità come:</p>
+<p><a id="parity"></a></p>
+<div class="arithmatex">\[
 p = s \pmod 2
-$$</div>
-<p class="formula-caption">
-Formula 2. Definizione Bit Di Parità</p>
-<p>dove <span class="math">\(s\)</span> è il numero di bit pari ad <span class="math">\(1\)</span>. Per cui:</p>
+\]</div>
+<p class="formula-caption">Formula 2. Definizione Bit Di Parità</p>
+<p>dove <span class="arithmatex">\(s\)</span> è il numero di bit pari ad <span class="arithmatex">\(1\)</span>. Per cui:</p>
 <ul>
-<li>se <span class="math">\(s\)</span> è pari, <span class="math">\(p=0\)</span></li>
-<li>se <span class="math">\(s\)</span> è dispari, <span class="math">\(p=1\)</span></li>
+<li>se <span class="arithmatex">\(s\)</span> è pari, <span class="arithmatex">\(p=0\)</span></li>
+<li>se <span class="arithmatex">\(s\)</span> è dispari, <span class="arithmatex">\(p=1\)</span></li>
 </ul>
-<p>Se non sapete perché è evidente che non avete letto <a href="/teoria-matematica/qui-crescono-solo-polinomi/" target="_blank">questo articolo</a> 
-dove parlo (anche) di aritmetica modulare. Nel messaggio precedente, ci sono tre bit pari ad <span class="math">\(1\)</span> quindi, essendo notoriamente un numero dispari, 
-abbiamo che <span class="math">\(p=1\)</span>. Il messaggio che sarà inviato per cui è: <span class="math">\(0110010\color{green}{1}\)</span>. </p>
+<p>Se non sapete perché è evidente che non avete letto <a href="/teoria-matematica/qui-crescono-solo-polinomi/">questo articolo</a> 
+dove parlo (anche) di aritmetica modulare. Nel messaggio precedente, ci sono tre bit pari ad <span class="arithmatex">\(1\)</span> quindi, essendo notoriamente un numero dispari, 
+abbiamo che <span class="arithmatex">\(p=1\)</span>. Il messaggio che sarà inviato per cui è: <span class="arithmatex">\(0110010\textcolor{green}{1}\)</span>. </p>
 <p>Se avviene un errore, o più in generale un <strong>numero dispari di errori</strong>, la parità <strong>cambia</strong> e quindi siamo in grado
-di dire che c'è stato un <strong>errore di trasmissione</strong>. Consideriamo il seguente messaggio: <span class="math">\(1110010\)</span>. In questo caso <span class="math">\(s=4\)</span> e quindi <span class="math">\(p=0\)</span>, per cui il messaggio inviato 
-sarà: <span class="math">\(11100100\)</span>. Supponiamo che avviene un errore di trasmissione e un bit passa da <span class="math">\(0\)</span> a <span class="math">\(1\)</span>:</p>
-<div class="math">$$
-11100100 \rightarrow 111\color{red}{1}0100
-$$</div>
-<p>Vediamo che l'ultimo bit è <span class="math">\(0\)</span> quindi il numero di <span class="math">\(1\)</span> <strong>dovrebbe essere pari</strong>, ma invece è dispari perché con la corruzione non sono più quattro, ma cinque.
+di dire che c'è stato un <strong>errore di trasmissione</strong>. Consideriamo il seguente messaggio: <span class="arithmatex">\(1110010\)</span>. In questo caso <span class="arithmatex">\(s=4\)</span> e quindi <span class="arithmatex">\(p=0\)</span>, per cui il messaggio inviato 
+sarà: <span class="arithmatex">\(11100100\)</span>. Supponiamo che avviene un errore di trasmissione e un bit passa da <span class="arithmatex">\(0\)</span> a <span class="arithmatex">\(1\)</span>:</p>
+<div class="arithmatex">\[
+11100100 \rightarrow 111\textcolor{red}{1}0100
+\]</div>
+<p>Vediamo che l'ultimo bit è <span class="arithmatex">\(0\)</span> quindi il numero di <span class="arithmatex">\(1\)</span> <strong>dovrebbe essere pari</strong>, ma invece è dispari perché con la corruzione non sono più quattro, ma cinque.
 C'è quindi un <strong>errore</strong>, e anche se <strong>non sappiamo dove</strong> chissene, chiediamo la ritrasmissione. Ma vediamo cosa succede con due errori:</p>
-<div class="math">$$
-11100100 \rightarrow 111\color{red}{11}100
-$$</div>
-<p>L'ultimo bit è sempre <span class="math">\(0\)</span> ma essendoci stati due errori abbiamo sei bit pari ad <span class="math">\(1\)</span>. La parità non è cambiata e quindi <strong>non ci accorgiamo</strong> dell'errore.</p>
+<div class="arithmatex">\[
+11100100 \rightarrow 111\textcolor{red}{11}100
+\]</div>
+<p>L'ultimo bit è sempre <span class="arithmatex">\(0\)</span> ma essendoci stati due errori abbiamo sei bit pari ad <span class="arithmatex">\(1\)</span>. La parità non è cambiata e quindi <strong>non ci accorgiamo</strong> dell'errore.</p>
 <p>Il parity check è quindi un codice che usa ridondanza per accorgersi degli errori, ma <strong>non</strong> per correggerli. È <strong>economico</strong>, <strong>veloce</strong>, e profondamente limitato.</p>
 <h3 id="un-divisorio-ma-meglio">Un Divisorio, Ma Meglio<a class="headerlink" href="#un-divisorio-ma-meglio" title="Permanent link"> </a></h3>
 <p>Abbiamo visto che il parity check è economico, veloce e limitato. Sa dirci che qualcosa è andato storto, 
@@ -321,49 +317,49 @@ di bit in fila indiana, lo disponiamo sotto forma di <strong>matrice</strong>. N
 di controllare il messaggio in <strong>due direzioni indipendenti</strong>: righe e colonne. A questo punto aggiungiamo <strong>bit di parità</strong> e non uno solo, ma per 
 ogni <strong>riga</strong> e per ogni <strong>colonna</strong>. La ridondanza non cresce in modo esplosivo, ma viene <strong>distribuita</strong>. Il risultato è che un singolo errore rompe 
 una riga e una colonna ben precise, individuando le <strong>coordinate</strong> dell'errore stesso. Ma bando alle parole e mostriamo un esempio. Supponiamo 
-di dover inviare un messaggio da <span class="math">\(20\)</span> bit: <span class="math">\(10011011001100101011\)</span>, usare la ridondanza è un bagno di sangue per cui disponiamo i bit in una matrice
-<span class="math">\(4 \times 5\)</span>.</p>
-<div class="math">$$
+di dover inviare un messaggio da <span class="arithmatex">\(20\)</span> bit: <span class="arithmatex">\(10011011001100101011\)</span>, usare la ridondanza è un bagno di sangue per cui disponiamo i bit in una matrice
+<span class="arithmatex">\(4 \times 5\)</span>.</p>
+<div class="arithmatex">\[
 \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1
 \end{pmatrix}
-$$</div>
+\]</div>
 <p>Calcoliamo i bit di parità sulle righe e sulle colonne ed otteniamo</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{pmatrix}
-1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; \color{green}{1} \\
-0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; \color{green}{0} \\
-1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; \color{green}{1} \\
-0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; \color{green}{1} \\
-\color{green}{0} &amp; \color{green}{1} &amp; \color{green}{1} &amp; \color{green}{0} &amp; \color{green}{1} &amp; \color{green}{1}
+1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; \textcolor{green}{1} \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; \textcolor{green}{0} \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; \textcolor{green}{1} \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; \textcolor{green}{1} \\
+\textcolor{green}{0} &amp; \textcolor{green}{1} &amp; \textcolor{green}{1} &amp; \textcolor{green}{0} &amp; \textcolor{green}{1} &amp; \textcolor{green}{1}
 \end{pmatrix}
-$$</div>
-<p>Ed abbiamo ottenuto una matrice <span class="math">\(5 \times 6\)</span>. Su <span class="math">\(20\)</span> bit abbiamo aggiunto <span class="math">\(10\)</span> bit di ridondanza (e non <span class="math">\(40\)</span>).
+\]</div>
+<p>Ed abbiamo ottenuto una matrice <span class="arithmatex">\(5 \times 6\)</span>. Su <span class="arithmatex">\(20\)</span> bit abbiamo aggiunto <span class="arithmatex">\(10\)</span> bit di ridondanza (e non <span class="arithmatex">\(40\)</span>).
 Supponiamo che il ricevente ottenga la seguente matrice:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
-1 &amp; 1 &amp; 0 &amp; \color{red}{1} &amp; 1 &amp; 1 \\
+1 &amp; 1 &amp; 0 &amp; \textcolor{red}{1} &amp; 1 &amp; 1 \\
 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\
 \end{pmatrix}
-$$</div>
-<p>andando a controllare i bit di parità sull'<strong>ultima riga</strong> e l'<strong>ultima colonna</strong>, vediamo che sulla terza riga c'è un numero dispari di <span class="math">\(1\)</span>,
-e stessa cosa nella quarta colonna. Per cui l'errore è avvenuto nelle <strong>coordinate</strong> <span class="math">\((3, \, 4)\)</span>. Non solo abbiamo <strong>riconosciuto</strong> un errore,
+\]</div>
+<p>andando a controllare i bit di parità sull'<strong>ultima riga</strong> e l'<strong>ultima colonna</strong>, vediamo che sulla terza riga c'è un numero dispari di <span class="arithmatex">\(1\)</span>,
+e stessa cosa nella quarta colonna. Per cui l'errore è avvenuto nelle <strong>coordinate</strong> <span class="arithmatex">\((3, \, 4)\)</span>. Non solo abbiamo <strong>riconosciuto</strong> un errore,
 ma possiamo anche correggerlo. Supponiamo ora di ricevere questa matrice:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{pmatrix}
 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
-0 &amp; \color{red}{0} &amp; \color{red}{0} &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; \textcolor{red}{0} &amp; \textcolor{red}{0} &amp; 0 &amp; 0 &amp; 0 \\
 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\
 \end{pmatrix}
-$$</div>
+\]</div>
 <p>In questo caso sono avvenuti <strong>due errori</strong>, in particolare nella colonna due e colonna tre della seconda riga. Il bit di parità
 sulla riga peró rimane <strong>corretto</strong>, mentre quelli delle colonne due e tre sono <strong>sbagliati</strong>. Per cui sappiamo che è avvenuto un errore,
 ma <strong>non siamo in grado</strong> di identificare una posizione. Quindi questo metodo è più intelligente ma ha dei limiti. Riesco ad accorgermi che 
@@ -372,111 +368,107 @@ qualcosa è andato storto anche con più errori, ma posso correggerne <strong>un
 <p>A questo punto la domanda sorge spontanea: esiste una <strong>legge</strong> che metta in relazione il <strong>numero di bit</strong> che aggiungiamo e la nostra capacità di 
 <strong>correggere</strong> gli errori? Cioè, possiamo quantificare quanto un codice sia <strong>robusto</strong> al rumore?
 Partiamo da una situazione volutamente <strong>banale</strong>. Supponiamo che gli unici messaggi validi siano</p>
-<div class="math">$$
+<div class="arithmatex">\[
 000000 \text{ e } 111111
-$$</div>
+\]</div>
 <p>Se il ricevente ottiene</p>
-<div class="math">$$
-000\color{red}{1}00
-$$</div>
-<p>non ci sono grandi dubbi: questo messaggio assomiglia molto di più a <span class="math">\(000000\)</span> che a <span class="math">\(111111\)</span> e quindi è semplice intuire il messaggio originale.
+<div class="arithmatex">\[
+000\textcolor{red}{1}00
+\]</div>
+<p>non ci sono grandi dubbi: questo messaggio assomiglia molto di più a <span class="arithmatex">\(000000\)</span> che a <span class="arithmatex">\(111111\)</span> e quindi è semplice intuire il messaggio originale.
 Ma se invece ricevesse</p>
-<div class="math">$$
-000\color{red}{111}
-$$</div>
+<div class="arithmatex">\[
+000\textcolor{red}{111}
+\]</div>
 <p>che facciamo?! Non possiamo più sapere quale dei due è quello <strong>originale</strong>. Il problema non è l’errore in sé, ma l’<strong>ambiguità</strong>: 
 il messaggio ricevuto è <strong>compatibile</strong> con due messaggi <strong>validi</strong> diversi. Quello che stiamo facendo, anche se non lo stiamo ancora chiamando 
 per nome, è <strong>contare</strong> in quanti bit i messaggi differiscono, stiamo cioè misurando la <strong>distanza di Hamming</strong>. Nel nostro esempio abbiamo
-due soli messaggi inviabili che differiscono tra loro in tutti e sei i bit, la <strong>distanza minima</strong> del codice è quindi <span class="math">\(d_{min}=6\)</span>. La distanza minima del codice
+due soli messaggi inviabili che differiscono tra loro in tutti e sei i bit, la <strong>distanza minima</strong> del codice è quindi <span class="arithmatex">\(d_{min}=6\)</span>. La distanza minima del codice
 è il <em>numero minimo di bit che devono essere alterati per trasformare un messaggio valido in un altro messaggio valido</em>. Quando un messaggio viene ricevuto
 quello che facciamo è applicare il <strong>nearest neighbor decoding</strong>, cioè scegliere il <strong>messaggio valido più vicino</strong> in termini di bit diversi. 
 Finché il messaggio ricevuto è più <strong>vicino</strong> a una sola <strong>codeword</strong>, la decodifica è possibile. 
 Quando invece finisce esattamente “a metà strada”, ogni decisione diventa <strong>arbitraria</strong>. Vediamo in numeri cosa si intende:</p>
-<div class="math">$$
-d(000000, 000\color{red}{1}00) = 1 \\
-d(111111, 000\color{red}{1}00) = 5
-$$</div>
-<p>Nel caso di un solo errore, la distanza di Hamming minore tra <span class="math">\(000100\)</span> e le codewords possibili è <span class="math">\(1\)</span> per cui sappiamo che la codeword corretta 
-è <span class="math">\(000000\)</span>.</p>
-<div class="math">$$
-d(000000, 000\color{red}{11}0) = 2 \\
-d(111111, 000\color{red}{11}0) = 4
-$$</div>
-<p>Nel caso di due errori, la distanza di Hamming minore è <span class="math">\(2\)</span>, per cui vale lo stesso discorso di prima.</p>
-<div class="math">$$
-d(000000, 000\color{red}{111}) = 3 \\
-d(111111, 000\color{red}{111}) = 3
-$$</div>
+<div class="arithmatex">\[
+d(000000, 000\textcolor{red}{1}00) = 1 \\
+d(111111, 000\textcolor{red}{1}00) = 5
+\]</div>
+<p>Nel caso di un solo errore, la distanza di Hamming minore tra <span class="arithmatex">\(000100\)</span> e le codewords possibili è <span class="arithmatex">\(1\)</span> per cui sappiamo che la codeword corretta 
+è <span class="arithmatex">\(000000\)</span>.</p>
+<div class="arithmatex">\[
+d(000000, 000\textcolor{red}{11}0) = 2 \\
+d(111111, 000\textcolor{red}{11}0) = 4
+\]</div>
+<p>Nel caso di due errori, la distanza di Hamming minore è <span class="arithmatex">\(2\)</span>, per cui vale lo stesso discorso di prima.</p>
+<div class="arithmatex">\[
+d(000000, 000\textcolor{red}{111}) = 3 \\
+d(111111, 000\textcolor{red}{111}) = 3
+\]</div>
 <p>Nel caso di tre errori, non c'è una distanza di Hamming minore, per cui abbiamo una <strong>ambiguità</strong>.
-Da qui discende una prima conseguenza importante. Diciamo che un codice è in grado di <strong>rilevare</strong> (e non correggere) fino a <span class="math">\(s\)</span>
-errori, se cambiando al più <span class="math">\(s\)</span> bit <em>non è possibile trasformare una codeword valida in un’altra</em>. Questo accade quando</p>
-<div class="math">$$
+Da qui discende una prima conseguenza importante. Diciamo che un codice è in grado di <strong>rilevare</strong> (e non correggere) fino a <span class="arithmatex">\(s\)</span>
+errori, se cambiando al più <span class="arithmatex">\(s\)</span> bit <em>non è possibile trasformare una codeword valida in un’altra</em>. Questo accade quando</p>
+<div class="arithmatex">\[
 d_{min} \geq s + 1
-$$</div>
-<p>Torniamo al nostro esempio. La diseguaglianza ci dice che fino a <span class="math">\(s=5\)</span> possiamo accorgerci che è avvenuto un errore, infatti
+\]</div>
+<p>Torniamo al nostro esempio. La diseguaglianza ci dice che fino a <span class="arithmatex">\(s=5\)</span> possiamo accorgerci che è avvenuto un errore, infatti
 la condizione </p>
-<div class="math">$$
+<div class="arithmatex">\[
 6 \geq 5 + 1
-$$</div>
-<p>è vera, e quindi fino a <span class="math">\(s=5\)</span> abbiamo una codeword <strong>non valida</strong> rispetto quelle <strong>possibili</strong>. 
-Se invece <span class="math">\(s=6\)</span>, stiamo trasformando tutti i bit e quindi passiamo dalla codeword valida <span class="math">\(000000\)</span> all'altra valida <span class="math">\(111111\)</span>
+\]</div>
+<p>è vera, e quindi fino a <span class="arithmatex">\(s=5\)</span> abbiamo una codeword <strong>non valida</strong> rispetto quelle <strong>possibili</strong>. 
+Se invece <span class="arithmatex">\(s=6\)</span>, stiamo trasformando tutti i bit e quindi passiamo dalla codeword valida <span class="arithmatex">\(000000\)</span> all'altra valida <span class="arithmatex">\(111111\)</span>
 e non siamo più in grado di dire se è avvenuto un errore.</p>
 <p>Abbiamo trovato una <strong>condizione</strong> che collega la rilevazione degli errori alla distanza minima, ma correggerli è tutta un'altra storia. 
 Non basta sapere che qualcosa è andato storto, bisogna anche sapere da che parte <strong>tornare indietro</strong>.
 Per evitare ambiguità, il messaggio ricevuto deve rimanere <strong>più vicino</strong> a una sola codeword valida. Questo è possibile solo finché <em>il numero 
 di errori è strettamente minore di metà della distanza minima</em>.
 Il <strong>numero massimo</strong> di errori correggibili è quindi</p>
-<div class="math">$$
+<div class="arithmatex">\[
 t = \left\lfloor \frac{d_{min} - 1}{2} \right\rfloor
-$$</div>
-<p>Nel nostro esempio, con <span class="math">\(d_{min} = 6\)</span>, otteniamo:</p>
-<div class="math">$$
+\]</div>
+<p>Nel nostro esempio, con <span class="arithmatex">\(d_{min} = 6\)</span>, otteniamo:</p>
+<div class="arithmatex">\[
 t = \left\lfloor \frac{6 - 1}{2} \right\rfloor = 2
-$$</div>
+\]</div>
 <p>Il che significa che fino a due errori il messaggio ricevuto resta sempre più vicino a una sola codeword, il che torna
 con quanto visto in precedenza.</p>
-<p>Per riassumere questo ginepraio di numeri e lettere, possiamo dire che la distanza minima di un codice <span class="math">\(d_{min}\)</span>, <strong>governa</strong> la robustezza al rumore
+<p>Per riassumere questo ginepraio di numeri e lettere, possiamo dire che la distanza minima di un codice <span class="arithmatex">\(d_{min}\)</span>, <strong>governa</strong> la robustezza al rumore
 e ci permette di definire <strong>due condizioni</strong>:</p>
-<p><a id="correzione"></a>
-</p>
-<div class="math">$$
+<p><a id="correzione"></a></p>
+<div class="arithmatex">\[
 d_{min} \geq 2t + 1
-$$</div>
-<p class="formula-caption">
-Formula 3. Condizione Di Correzione</p>
+\]</div>
+<p class="formula-caption">Formula 3. Condizione Di Correzione</p>
 <p>e</p>
-<p><a id="rilevazione"></a>
-</p>
-<div class="math">$$
+<p><a id="rilevazione"></a></p>
+<div class="arithmatex">\[
 d_{min} \geq s + 1
-$$</div>
-<p class="formula-caption">
-Formula 4. Condizione Di Rilevazione</p>
-<p>Se vera, la <a href="#correzione">condizione di correzione</a> ci dice che il codice può <strong>correggere</strong> fino a <span class="math">\(t\)</span> errori e, se vera
-la <a href="#rilevazione">condizione di rilevazione</a>, ci dice che il codice può <strong>rilevare</strong> fino a <span class="math">\(s\)</span> errori.</p>
+\]</div>
+<p class="formula-caption">Formula 4. Condizione Di Rilevazione</p>
+<p>Se vera, la <a href="#correzione">condizione di correzione</a> ci dice che il codice può <strong>correggere</strong> fino a <span class="arithmatex">\(t\)</span> errori e, se vera
+la <a href="#rilevazione">condizione di rilevazione</a>, ci dice che il codice può <strong>rilevare</strong> fino a <span class="arithmatex">\(s\)</span> errori.</p>
 <p>Facciamo un piccolo passo indietro e applichiamo le leggi appena trovate.</p>
 <h4 id="caso-1">Caso 1<a class="headerlink" href="#caso-1" title="Permanent link"> </a></h4>
 <p>Riprendiamo <a href="#finalmente-un-divisorio">questo esempio</a>. Il codice definito era:</p>
 <ul>
-<li><span class="math">\(000000\)</span> per inviare la lettera <span class="math">\(A\)</span></li>
-<li><span class="math">\(010101\)</span> per inviare la lettera <span class="math">\(B\)</span></li>
-<li><span class="math">\(101010\)</span> per inviare la lettera <span class="math">\(C\)</span></li>
-<li><span class="math">\(111111\)</span> per inviare la lettera <span class="math">\(D\)</span></li>
+<li><span class="arithmatex">\(000000\)</span> per inviare la lettera <span class="arithmatex">\(A\)</span></li>
+<li><span class="arithmatex">\(010101\)</span> per inviare la lettera <span class="arithmatex">\(B\)</span></li>
+<li><span class="arithmatex">\(101010\)</span> per inviare la lettera <span class="arithmatex">\(C\)</span></li>
+<li><span class="arithmatex">\(111111\)</span> per inviare la lettera <span class="arithmatex">\(D\)</span></li>
 </ul>
-<p>quindi la distanza minima (che trasformi ad esempio <span class="math">\(A\)</span> in <span class="math">\(B\)</span>) è <span class="math">\(d_{min}=3\)</span> (e piú in generale, <span class="math">\(d_{min}\)</span> è <strong>pari al numero di ripetizioni</strong>). 
+<p>quindi la distanza minima (che trasformi ad esempio <span class="arithmatex">\(A\)</span> in <span class="arithmatex">\(B\)</span>) è <span class="arithmatex">\(d_{min}=3\)</span> (e piú in generale, <span class="arithmatex">\(d_{min}\)</span> è <strong>pari al numero di ripetizioni</strong>). 
 Questa ci permette di ricavare dalla <a href="#rilevazione">condizione di rilevazione</a>, che possiamo
-riconoscere fino a <span class="math">\(s=2\)</span> errori, e da <a href="#correzione">quella di correzione</a> che possiamo correggere <span class="math">\(t=1\)</span> errore, che torna con quanto visto.</p>
+riconoscere fino a <span class="arithmatex">\(s=2\)</span> errori, e da <a href="#correzione">quella di correzione</a> che possiamo correggere <span class="arithmatex">\(t=1\)</span> errore, che torna con quanto visto.</p>
 <h4 id="caso-2">Caso 2<a class="headerlink" href="#caso-2" title="Permanent link"> </a></h4>
-<p>Riprendiamo gli esempi visti <a href="#un-po-costoso-il-divisorio">qui</a>. Nel caso monodimensionale avevamo messaggi di lunghezza <span class="math">\(8\)</span> con bit di parità.
-La distanza minima è <span class="math">\(d_{min}=2\)</span>, se prima era più intuitivo questa volta lo spiego. Consideriamo il messaggio <span class="math">\(00000000\)</span>, supponendo che un bit venga
-<strong>corrotto</strong> otteniamo <span class="math">\(\color{red}{1}0000000\)</span> che non è valido in quanto <strong>non torna con la parità</strong> e quindi non fa parte dell'insieme dei codewords.
-Invece con due errori potremmo ottenere <span class="math">\(\color{red}{1}000000\color{red}{1}\)</span> che è un <strong>messaggio valido</strong>, e dista <span class="math">\(2\)</span>. Applicando le solite condizioni abbiamo che 
-<span class="math">\(s=1\)</span> e <span class="math">\(t=0\)</span> e quindi ci accorgiamo di un errore ma non ne correggiamo nessuno.</p>
+<p>Riprendiamo gli esempi visti <a href="#un-po-costoso-il-divisorio">qui</a>. Nel caso monodimensionale avevamo messaggi di lunghezza <span class="arithmatex">\(8\)</span> con bit di parità.
+La distanza minima è <span class="arithmatex">\(d_{min}=2\)</span>, se prima era più intuitivo questa volta lo spiego. Consideriamo il messaggio <span class="arithmatex">\(00000000\)</span>, supponendo che un bit venga
+<strong>corrotto</strong> otteniamo <span class="arithmatex">\(\textcolor{red}{1}0000000\)</span> che non è valido in quanto <strong>non torna con la parità</strong> e quindi non fa parte dell'insieme dei codewords.
+Invece con due errori potremmo ottenere <span class="arithmatex">\(\textcolor{red}{1}000000\textcolor{red}{1}\)</span> che è un <strong>messaggio valido</strong>, e dista <span class="arithmatex">\(2\)</span>. Applicando le solite condizioni abbiamo che 
+<span class="arithmatex">\(s=1\)</span> e <span class="arithmatex">\(t=0\)</span> e quindi ci accorgiamo di un errore ma non ne correggiamo nessuno.</p>
 <p>Considerando il caso bidimensionale invece, per passare da una codeword valida ad un'altra valida, devo rompere almeno due righe e due colonne e quindi
-<span class="math">\(d_{min}=4\)</span> da cui abbiamo che rileviamo fino a <span class="math">\(s=3\)</span> errori, e correggiamo fino a <span class="math">\(t=1\)</span> errore. </p>
+<span class="arithmatex">\(d_{min}=4\)</span> da cui abbiamo che rileviamo fino a <span class="arithmatex">\(s=3\)</span> errori, e correggiamo fino a <span class="arithmatex">\(t=1\)</span> errore. </p>
 <p>In questi ultimi due esempi c'è da fare una <strong>riflessione</strong>. Infatti se nell'esempio riportato (ma un discorso simile si puó fare anche per il caso
-monodimensionale) avvenisse un errore per colonna, noi ci accorgeremmo di tutti gli errori superando il valore di <span class="math">\(s\)</span> trovato. 
-Ma questo non rompe la condizione perché mentre la <strong>condizione ci dà una garanzia</strong>, rilevare più di <span class="math">\(s\)</span> errori non è sempre garantito, 
+monodimensionale) avvenisse un errore per colonna, noi ci accorgeremmo di tutti gli errori superando il valore di <span class="arithmatex">\(s\)</span> trovato. 
+Ma questo non rompe la condizione perché mentre la <strong>condizione ci dà una garanzia</strong>, rilevare più di <span class="arithmatex">\(s\)</span> errori non è sempre garantito, 
 infatti ce ne accorgiamo solo in casi particolari (come appunto un errore per colonna).</p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Siamo arrivati alla fine di questo primo articolo. Vi dirò, la strada è ancora tanta e qui si è solo scalfita la <strong>superficie</strong>.
@@ -484,70 +476,8 @@ Abbiamo visto, con esempi <strong>semplici</strong> ma <strong>concreti</strong>
 e come una migliore <strong>organizzazione</strong> dell’informazione possa permetterci non solo di rilevare gli errori, 
 ma anche di correggerli, spesso con uno sforzo sorprendentemente contenuto. Nei prossimi articoli entreremo nel vivo con esempi più 
 <strong>strutturati</strong> e potenti: <strong>codice di Hamming</strong>, <strong>Reed-Solomon</strong> e compagnia bella. Lì vedremo come queste tengono in piedi il mondo digitale di tutti i giorni.
-Per chi volesse smanettare un po’, ho scritto gli esempi visti in questo <a href="https://github.com/lucadivit/HowIFixYouCode" target="_blank">repo</a> così potete sporcarvi le mani senza dover reinventare la ruota.</p>
+Per chi volesse smanettare un po’, ho scritto gli esempi visti in questo <a href="https://github.com/lucadivit/HowIFixYouCode">repo</a> così potete sporcarvi le mani senza dover reinventare la ruota.</p>
 <p>Alla Prossima.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -587,6 +517,10 @@ Per chi volesse smanettare un po’, ho scritto gli esempi visti in questo <a hr
                 <li><a href="https://www.lucadivita.it/tag/controllo_di_parita.html">controllo_di_parità</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
     </div>
 
 </article>

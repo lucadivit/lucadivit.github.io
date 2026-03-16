@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Where Only Polynomials Grow</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/teoria-matematica.html">Theory & Math</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-12-01T00:00:00+01:00">December 01, 2025</time>
-                - <a href="https://www.lucadivita.it/en/category/teoria-matematica.html">Theory & Math</a>
             </small>
         </p>
     </header>
@@ -154,40 +154,38 @@ which are the supporting pillars of all modern cryptography. Small spoiler: ther
 <p>As anticipated in this first paragraph we introduce a fundamental little block: <strong>modular arithmetic</strong>. 
 I know that when you see numbers it is you who spins, but the title as we will see fits the topic.
 Modular arithmetic is that branch of mathematics that studies the properties and the relations between integers, through the concepts
-of <strong>congruence</strong> and <strong>modulus</strong>. What?! You ask when two numbers <span class="math">\(a\)</span> and <span class="math">\(b\)</span> are congruent modulo <span class="math">\(n\)</span> ? Well when <span class="math">\(b\)</span> is the <strong>remainder of the division</strong>
-between <span class="math">\(a\)</span> and <span class="math">\(n\)</span>. This relation is written as follows:</p>
-<p><a id="forma-base-congruenza"></a>
-</p>
-<div class="math">$$
+of <strong>congruence</strong> and <strong>modulus</strong>. What?! You ask when two numbers <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> are congruent modulo <span class="arithmatex">\(n\)</span> ? Well when <span class="arithmatex">\(b\)</span> is the <strong>remainder of the division</strong>
+between <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(n\)</span>. This relation is written as follows:</p>
+<p><a id="forma-base-congruenza"></a></p>
+<div class="arithmatex">\[
 a \equiv b \pmod{n}
-$$</div>
-<p class="formula-caption">
-Formula 1. Base Form of Congruence</p>
+\]</div>
+<p class="formula-caption">Formula 1. Base Form of Congruence</p>
 <p>Yes, written like this it looks like some abstract thing but in reality it is very simple and with a few examples it becomes clear immediately.
-Suppose we have <span class="math">\(a=5\)</span> and <span class="math">\(n=3\)</span>. The division <span class="math">\(\frac{5}{3}\)</span> has result <span class="math">\(1\)</span> with remainder <span class="math">\(2\)</span>, therefore the congruence is true</p>
-<div class="math">$$
+Suppose we have <span class="arithmatex">\(a=5\)</span> and <span class="arithmatex">\(n=3\)</span>. The division <span class="arithmatex">\(\frac{5}{3}\)</span> has result <span class="arithmatex">\(1\)</span> with remainder <span class="arithmatex">\(2\)</span>, therefore the congruence is true</p>
+<div class="arithmatex">\[
 5 \equiv 2 \pmod{3}
-$$</div>
+\]</div>
 <p>So, in modular arithmetic, writing</p>
-<div class="math">$$
+<div class="arithmatex">\[
 5 \pmod{3}
-$$</div>
+\]</div>
 <p>or writing</p>
-<div class="math">$$
+<div class="arithmatex">\[
 2 \pmod{3}
-$$</div>
+\]</div>
 <p>is completely <strong>equivalent</strong>. With this logic this congruence is also true:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 6 \equiv 0 \pmod{3}
-$$</div>
-<p>since <span class="math">\(\frac{6}{3}\)</span> has result <span class="math">\(2\)</span> with remainder <span class="math">\(0\)</span>.</p>
+\]</div>
+<p>since <span class="arithmatex">\(\frac{6}{3}\)</span> has result <span class="arithmatex">\(2\)</span> with remainder <span class="arithmatex">\(0\)</span>.</p>
 <p>Now, I know it is not the most fun but you can indulge yourselves by writing all the congruences you want. In fact they are just relations between
 numbers. And do not make the mistake of thinking they are useless, in reality you use them more often than you might imagine.</p>
-<p>A simple example is reading the time. Every time you look at a clock, you are unknowingly working <span class="math">\(\pmod{24}\)</span>. 
+<p>A simple example is reading the time. Every time you look at a clock, you are unknowingly working <span class="arithmatex">\(\pmod{24}\)</span>. 
 When the day ends, you do not keep counting the hours beyond 24, you start again. 
 So 25 becomes 1, 27 becomes 3, and so on until the end of your days. 
 Each "round" of the clock is a <strong>modular operation</strong>.</p>
-<p>Since <span class="math">\(b\)</span> is a remainder, it goes without saying that it <strong>can never be negative</strong>, but will always be <strong>between</strong> <span class="math">\(0\)</span> and <span class="math">\(n-1\)</span>.
+<p>Since <span class="arithmatex">\(b\)</span> is a remainder, it goes without saying that it <strong>can never be negative</strong>, but will always be <strong>between</strong> <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(n-1\)</span>.
 If you get a remainder below zero you have made a mistake: too good to go shopping, have a “negative remainder” and see
 the cashier giving you money. Unfortunately it does not work like this, neither in supermarkets, nor in modular arithmetic.
 This characteristic leads to a fundamental property: modular arithmetic is <strong>cyclic</strong>. Once the modulus is exceeded,
@@ -195,173 +193,152 @@ numbers wrap around themselves starting the count again from 0. And even if it s
 all modern <strong>cryptography</strong> is based exactly on this.</p>
 <h4 id="one-rule-to-rule-them">One Rule To Rule Them<a class="headerlink" href="#one-rule-to-rule-them" title="Permanent link"> </a></h4>
 <p>Solving a congruence is very simple. Suppose you have the following relation:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x \equiv a \pmod{n}
-$$</div>
-<p>What the equation is asking you is to find the <strong>remainder</strong> of the division of <span class="math">\(a\)</span> by <span class="math">\(n\)</span>.
+\]</div>
+<p>What the equation is asking you is to find the <strong>remainder</strong> of the division of <span class="arithmatex">\(a\)</span> by <span class="arithmatex">\(n\)</span>.
 To solve it you follow three very simple steps:</p>
 <ol>
 <li>
 <p>You compute:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 z = \left\lfloor \frac{a}{n} \right\rfloor
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
 <p>You compute:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 y = n \cdot z
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
 <p>You compute:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x = a - y
-$$</div>
-</p>
+\]</div>
 </li>
 </ol>
 <p>These three simple steps handle both congruences with <strong>positive</strong> values and those with <strong>negative</strong> values:</p>
 <ol>
 <li>
 <p>Case 1:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x \equiv 13 \pmod{5} \\
 z = \left\lfloor \frac{13}{5} \right\rfloor = \left\lfloor 2.6 \right\rfloor = 2 \\
 y = 5 \cdot 2 = 10 \\
 x = 13 - 10 = 3
-$$</div>
-</p>
+\]</div>
 <p>and indeed</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 13 \equiv 3 \pmod{5}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
 <p>Case 2:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x \equiv -3 \pmod{5} \\
 z = \left\lfloor \frac{-3}{5} \right\rfloor = \left\lfloor -0.6 \right\rfloor = -1 \\
 y = 5 \cdot -1 = -5 \\
 x = -3 - (-5) = 2
-$$</div>
-</p>
+\]</div>
 <p>from which</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 -3 \equiv 2 \pmod{5}
-$$</div>
-</p>
+\]</div>
 </li>
 </ol>
 <p>The positive case is very intuitive, unlike the negative one which seems made up out of nowhere, right? No! That one also makes sense.
 If you are looking at the clock and it is exactly midnight, <strong>modularly</strong> speaking it is:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 0 \pmod{24}
-$$</div>
+\]</div>
 <p>And if I asked you: <em>"what time was it one hour ago?"</em> mathematically it would be:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 -1 \pmod{24}
-$$</div>
+\]</div>
 <p>But you, with your extraordinary ability to conceive time, would answer:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 23 \pmod{24}
-$$</div>
+\]</div>
 <p>(of the previous day).</p>
 <h4 id="yes-even-fractions">Yes, Even Fractions<a class="headerlink" href="#yes-even-fractions" title="Permanent link"> </a></h4>
 <p>We have seen positive numbers and negative numbers, but it does not end here. Just because remainders are always integers, it does not mean that modular
 arithmetic is not able to handle <strong>divisions</strong>. If negative numbers seemed strange to you, <strong>modular fractions</strong> are no less.
 The matter here becomes a little more elaborate in fact, given the equation</p>
-<div class="math">$$
+<div class="arithmatex">\[
 ax \equiv 1 \pmod{n}
-$$</div>
+\]</div>
 <p>so that the result exists the condition must hold:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 GCD(a, \, n) = 1
-$$</div>
-<p>where the <span class="math">\(GCD\)</span> is nothing more than the greatest common divisor. When it holds the numbers are said to be <strong>coprime</strong> with each other and we can solve
+\]</div>
+<p>where the <span class="arithmatex">\(GCD\)</span> is nothing more than the greatest common divisor. When it holds the numbers are said to be <strong>coprime</strong> with each other and we can solve
 divisions. The matter certainly does not end here, because in order to solve it is necessary to apply the algorithm of <a href="https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm"><strong>extended Euclid</strong></a> and find the
 coefficients of <a href="https://en.wikipedia.org/wiki/B%C3%A9zout%27s_identity"><strong>Bézout identity</strong></a>. Without going too much into detail let us see an
 example, just to show you that I am not talking nonsense. Suppose we have to solve:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 3x \equiv 1 \pmod{7}
-$$</div>
+\]</div>
 <p>That they are coprime does not need to be proven so we start immediately by applying the extended Euclidean algorithm which allows us to write:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 ax + ny = GCD(a, \, n)
-$$</div>
-<p>and in this equality, the <span class="math">\(x\)</span> is exactly the solution we are looking for.</p>
+\]</div>
+<p>and in this equality, the <span class="arithmatex">\(x\)</span> is exactly the solution we are looking for.</p>
 <p>Making the proper substitutions we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 3x + 7y = 1
-$$</div>
-<p>This one we can also solve mentally, in fact by setting <span class="math">\(x=-2\)</span> and <span class="math">\(y=1\)</span>, we make the equality true. So the solution is <span class="math">\(x=-2\)</span>,
+\]</div>
+<p>This one we can also solve mentally, in fact by setting <span class="arithmatex">\(x=-2\)</span> and <span class="arithmatex">\(y=1\)</span>, we make the equality true. So the solution is <span class="arithmatex">\(x=-2\)</span>,
 but by now we know that in modular arithmetic negative numbers <strong>disgust us</strong>, so bringing it back to positive values we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x = -2 \equiv 5 \pmod{7}
-$$</div>
+\]</div>
 <p>So in our initial equation we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 3 \cdot 5 = 15 \equiv 1 \pmod{7}
-$$</div>
-<p>What we have done in practice is find a <strong>multiplicative inverse</strong>, that is, we have found a number (the <span class="math">\(5\)</span>) such that, multiplied by a
-second one (the <span class="math">\(3\)</span>), and reduced modulo (of <span class="math">\(7\)</span>) gives remainder <span class="math">\(1\)</span>. This is easy in everyday mathematics, for example the multiplicative
-inverse of <span class="math">\(3\)</span> is <span class="math">\(\frac{1}{3}\)</span>. But modular arithmetic lives in a world of its own and the inverse of <span class="math">\(3\pmod{7}\)</span> is <span class="math">\(5\)</span>.</p>
+\]</div>
+<p>What we have done in practice is find a <strong>multiplicative inverse</strong>, that is, we have found a number (the <span class="arithmatex">\(5\)</span>) such that, multiplied by a
+second one (the <span class="arithmatex">\(3\)</span>), and reduced modulo (of <span class="arithmatex">\(7\)</span>) gives remainder <span class="arithmatex">\(1\)</span>. This is easy in everyday mathematics, for example the multiplicative
+inverse of <span class="arithmatex">\(3\)</span> is <span class="arithmatex">\(\frac{1}{3}\)</span>. But modular arithmetic lives in a world of its own and the inverse of <span class="arithmatex">\(3\pmod{7}\)</span> is <span class="arithmatex">\(5\)</span>.</p>
 <p>Knowing the multiplicative inverse, you can also solve <strong>equations</strong>. Suppose we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 2x + 7 \equiv 3 \pmod{17} \Rightarrow 2x \equiv -4 \pmod{17}
-$$</div>
-<p>If you were to calculate the multiplicative inverse of <span class="math">\(2\pmod{17}\)</span> you would see that it is <span class="math">\(9\)</span>, so we can write:</p>
-<div class="math">$$
+\]</div>
+<p>If you were to calculate the multiplicative inverse of <span class="arithmatex">\(2\pmod{17}\)</span> you would see that it is <span class="arithmatex">\(9\)</span>, so we can write:</p>
+<div class="arithmatex">\[
 2x \cdot 9 \equiv -4 \cdot 9 \pmod{17} \Rightarrow x \equiv -36 \pmod{17} \Rightarrow x \equiv 15 \pmod{17}
-$$</div>
-<p>
-These are simple examples, but very explanatory of how the calculation of the inverse works in modular arithmetic. 
+\]</div>
+<p>These are simple examples, but very explanatory of how the calculation of the inverse works in modular arithmetic. 
 You can obviously make more complex examples but they fall outside my purpose of giving an overview of these concepts.</p>
 <p>Now that we have become familiar let us take a step back. Earlier I wrote that it is necessary that the numbers be coprime.
 Well I lied, at least partly. Even if a bit tricky, there are ways to solve cases in which for a congruence it results</p>
-<div class="math">$$
+<div class="arithmatex">\[
 GCD(a, \, n) = d &gt; 1
-$$</div>
+\]</div>
 <p>Without going too much into the subject it is enough for you to know this:</p>
 <ul>
-<li>If <span class="math">\(GCD(a, n) = d &gt; 1\)</span> the congruence is <strong>solvable</strong> if and only if <span class="math">\(d \mid b\)</span> (that is, <span class="math">\(d\)</span> divides <span class="math">\(b\)</span> giving an integer result).</li>
-<li>If <span class="math">\(d \mid b\)</span> we have <strong>more than one solution</strong> for the congruence (exactly <span class="math">\(d\)</span>).</li>
+<li>If <span class="arithmatex">\(GCD(a, n) = d &gt; 1\)</span> the congruence is <strong>solvable</strong> if and only if <span class="arithmatex">\(d \mid b\)</span> (that is, <span class="arithmatex">\(d\)</span> divides <span class="arithmatex">\(b\)</span> giving an integer result).</li>
+<li>If <span class="arithmatex">\(d \mid b\)</span> we have <strong>more than one solution</strong> for the congruence (exactly <span class="arithmatex">\(d\)</span>).</li>
 </ul>
 <p>To give you some examples:</p>
 <ul>
 <li>
 <p>Possible case example</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
   4x \equiv 8 \pmod{12}
-$$</div>
-</p>
-<p>We have that <span class="math">\(GCD(4, 12) = 4\)</span> and since <span class="math">\(4\)</span> divides <span class="math">\(8\)</span> we have 4 solutions which are </p>
-<p>
-<div class="math">$$
+\]</div>
+<p>We have that <span class="arithmatex">\(GCD(4, 12) = 4\)</span> and since <span class="arithmatex">\(4\)</span> divides <span class="arithmatex">\(8\)</span> we have 4 solutions which are </p>
+<div class="arithmatex">\[
   x=2, 5, 8, 11
-$$</div>
-</p>
+\]</div>
 <p>Even if I have omitted the procedure because out of scope, try it to believe it.</p>
 </li>
 <li>
 <p>Impossible case example:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
   4x \equiv 1 \pmod{12}
-$$</div>
-</p>
-<p>We have that <span class="math">\(GCD(4, 12) = 4\)</span> and since <span class="math">\(4\)</span> does not divide <span class="math">\(1\)</span> we have no solutions.</p>
+\]</div>
+<p>We have that <span class="arithmatex">\(GCD(4, 12) = 4\)</span> and since <span class="arithmatex">\(4\)</span> does not divide <span class="arithmatex">\(1\)</span> we have no solutions.</p>
 </li>
 </ul>
 <p>Obviously this is not all, you can also solve <strong>quadratic equations</strong>, <strong>systems of equations</strong>, etc. But these are all topics that fall outside
@@ -373,29 +350,29 @@ going gets tough the tough get going and some cryptographic algorithms, without 
 Elliptic curves are <strong>greedy</strong>, they want more elements. And this is where the infamous <strong>fields</strong> come into play. Not just any fields, but <strong>finite fields</strong>, but let us proceed step by step.</p>
 <p>What is a field... A field is nothing more than a <strong>set of elements</strong> which allow the operations of <strong>addition</strong> and <strong>multiplication</strong> that satisfy some requirements:</p>
 <ol>
-<li><strong>Closure</strong>: by adding and/or multiplying the elements of the field, we obtain an element in the field. Suppose we have a field <span class="math">\(\mathbb{A}\)</span> and two elements <span class="math">\(a, \, b \neq 0 \, \in \mathbb{A}\)</span>, 
-    then having a <strong>closed field</strong> means that <span class="math">\(a + b \in \mathbb{A}\)</span> and <span class="math">\(a \cdot b \in \mathbb{A}\)</span>.</li>
+<li><strong>Closure</strong>: by adding and/or multiplying the elements of the field, we obtain an element in the field. Suppose we have a field <span class="arithmatex">\(\mathbb{A}\)</span> and two elements <span class="arithmatex">\(a, \, b \neq 0 \, \in \mathbb{A}\)</span>, 
+    then having a <strong>closed field</strong> means that <span class="arithmatex">\(a + b \in \mathbb{A}\)</span> and <span class="arithmatex">\(a \cdot b \in \mathbb{A}\)</span>.</li>
 <li><strong>Abelian Group</strong>: the operations of addition and multiplication must have <strong>the neutral element</strong>, their <strong>inverse</strong> and must satisfy the <strong>associative</strong>, <strong>commutative</strong> and <strong>distributive</strong> properties. 
-   This in plain words means that, given the field <span class="math">\(\mathbb{A}\)</span>, <span class="math">\(a, \, b, \, c \in \mathbb{A}\)</span> and <span class="math">\(a, \, b, \, c \neq 0\)</span>:<ul>
-<li>The term <span class="math">\(0\)</span> exists which allows us to write <span class="math">\(a + 0 = a\)</span> (<strong>neutral element of addition</strong>).</li>
-<li>The term <span class="math">\(1\)</span> exists which allows us to write <span class="math">\(a \cdot 1 = a\)</span> (<strong>neutral element of multiplication</strong>).</li>
-<li>The term <span class="math">\(-a\)</span> exists which allows us to write <span class="math">\(a - a = 0\)</span> (<strong>inverse of addition</strong>).</li>
-<li>The term <span class="math">\(a^{-1}\)</span> exists which allows us to write <span class="math">\(a \cdot a^{-1} = 1\)</span> with the exception of <span class="math">\(0\)</span> (<strong>inverse of multiplication</strong>).</li>
-<li><span class="math">\(a + b = b + a\)</span> and <span class="math">\((a + b) + c = a + (b + c)\)</span> (<strong>commutative and associative properties of addition</strong>).</li>
-<li><span class="math">\(a \cdot b = b \cdot a\)</span> and <span class="math">\((a \cdot b) \cdot c = a \cdot (b \cdot c)\)</span> (<strong>commutative and associative properties of multiplication</strong>).</li>
-<li><span class="math">\(a \cdot (b + c) = a \cdot b + a \cdot c\)</span> (<strong>distributive property</strong>)</li>
+   This in plain words means that, given the field <span class="arithmatex">\(\mathbb{A}\)</span>, <span class="arithmatex">\(a, \, b, \, c \in \mathbb{A}\)</span> and <span class="arithmatex">\(a, \, b, \, c \neq 0\)</span>:<ul>
+<li>The term <span class="arithmatex">\(0\)</span> exists which allows us to write <span class="arithmatex">\(a + 0 = a\)</span> (<strong>neutral element of addition</strong>).</li>
+<li>The term <span class="arithmatex">\(1\)</span> exists which allows us to write <span class="arithmatex">\(a \cdot 1 = a\)</span> (<strong>neutral element of multiplication</strong>).</li>
+<li>The term <span class="arithmatex">\(-a\)</span> exists which allows us to write <span class="arithmatex">\(a - a = 0\)</span> (<strong>inverse of addition</strong>).</li>
+<li>The term <span class="arithmatex">\(a^{-1}\)</span> exists which allows us to write <span class="arithmatex">\(a \cdot a^{-1} = 1\)</span> with the exception of <span class="arithmatex">\(0\)</span> (<strong>inverse of multiplication</strong>).</li>
+<li><span class="arithmatex">\(a + b = b + a\)</span> and <span class="arithmatex">\((a + b) + c = a + (b + c)\)</span> (<strong>commutative and associative properties of addition</strong>).</li>
+<li><span class="arithmatex">\(a \cdot b = b \cdot a\)</span> and <span class="arithmatex">\((a \cdot b) \cdot c = a \cdot (b \cdot c)\)</span> (<strong>commutative and associative properties of multiplication</strong>).</li>
+<li><span class="arithmatex">\(a \cdot (b + c) = a \cdot b + a \cdot c\)</span> (<strong>distributive property</strong>)</li>
 </ul>
 </li>
 </ol>
 <p>It seems like a big list of stuff but if you read carefully everything is quite <strong>simple</strong>. There are no strange properties, in fact they are all things learned in elementary school.
-An example of a field is something you actually use every day, the set of <strong>real</strong> numbers <span class="math">\(\mathbb{R}\)</span>. Take any two real numbers and consider the listed points one by one.
-You will see that all of them are satisfied. The same cannot be said, for example, for the set of <strong>natural</strong> numbers <span class="math">\(\mathbb{N}\)</span>. Natural numbers (depending on the convention, with or without zero)
-are all positive integers <span class="math">\({0, \, 1, \, 2, \, \dots}\)</span>, therefore they cannot include a negative number and consequently the additive inverse element is missing
+An example of a field is something you actually use every day, the set of <strong>real</strong> numbers <span class="arithmatex">\(\mathbb{R}\)</span>. Take any two real numbers and consider the listed points one by one.
+You will see that all of them are satisfied. The same cannot be said, for example, for the set of <strong>natural</strong> numbers <span class="arithmatex">\(\mathbb{N}\)</span>. Natural numbers (depending on the convention, with or without zero)
+are all positive integers <span class="arithmatex">\({0, \, 1, \, 2, \, \dots}\)</span>, therefore they cannot include a negative number and consequently the additive inverse element is missing
 (just to give an example, since other properties are not satisfied as well).</p>
 <h4 id="prairies-and-little-gardens">Prairies And Little Gardens<a class="headerlink" href="#prairies-and-little-gardens" title="Permanent link"> </a></h4>
 <p>If you have made it this far, congratulations, now you know what a field is. That said, when is a field defined as <strong>finite</strong>? Nothing more intuitive. When it has a <strong>finite set of elements</strong>.
 When you can <strong>count</strong> the elements of the field knowing that sooner or later the count ends. So not only must it satisfy the previously defined points, but it must also have a finite
-number of elements. So <span class="math">\(\mathbb{R}\)</span> is indeed a field, but it is not a finite field because it contains an infinite number of elements. If it is <strong>conceptually simple</strong> to know what a finite field is,
+number of elements. So <span class="arithmatex">\(\mathbb{R}\)</span> is indeed a field, but it is not a finite field because it contains an infinite number of elements. If it is <strong>conceptually simple</strong> to know what a finite field is,
 building one is not so <strong>immediate</strong>. Or at least it is not if you want to make elliptic curves happy (yes I am aware that I have mentioned them twice but have not said what they are, it is enough for you
 to know that they are algebraic curves used in cryptography, maybe one day I will talk about them). So let us proceed step by step. We know what a finite field is, well finite field is a different name to
 indicate a <strong>Galois field</strong>. They are exactly the same thing and  </p>
@@ -403,303 +380,246 @@ indicate a <strong>Galois field</strong>. They are exactly the same thing and  <
 tender age of 20. At that age I used to <strong>get drunk</strong> at university parties, he invented a branch of <strong>abstract algebra</strong>. But at least I made it past 20 (only because duels to the death no longer exist). 
 But let us get back to us...</p>
 <p>In reality, in the previous paragraph we started to see finite fields, but it is not enough, we need to add something. Let us go back to good old modular arithmetic considering
-the <a href="#forma-base-congruenza">base form</a>, and let us suppose we take a <strong>prime number</strong> as the value of <span class="math">\(n\)</span> (that prime numbers are those numbers divisible only by 1 and by themselves does
-not need to be said, right?!). Considering <span class="math">\(n=5\)</span> we have:</p>
-<div class="math">$$
+the <a href="#forma-base-congruenza">base form</a>, and let us suppose we take a <strong>prime number</strong> as the value of <span class="arithmatex">\(n\)</span> (that prime numbers are those numbers divisible only by 1 and by themselves does
+not need to be said, right?!). Considering <span class="arithmatex">\(n=5\)</span> we have:</p>
+<div class="arithmatex">\[
 a \equiv b \pmod{5}
-$$</div>
+\]</div>
 <p>From the previous paragraph you should know that all the <strong>possible remainders</strong> are in the set</p>
-<div class="math">$$
+<div class="arithmatex">\[
 b \in \mathbb I = \{ 0, \, 1, \, 2, \, 3, \, 4 \}
-$$</div>
+\]</div>
 <p>Let us go and check the conditions one by one:</p>
 <ol>
 <li>
 <p><strong>Closure</strong>:</p>
-<p>Let us consider the addition operation and take, for example, the values <span class="math">\(4\)</span> and <span class="math">\(3\)</span> (but it is valid for all, trust me)</p>
-<p>
-<div class="math">$$
+<p>Let us consider the addition operation and take, for example, the values <span class="arithmatex">\(4\)</span> and <span class="arithmatex">\(3\)</span> (but it is valid for all, trust me)</p>
+<div class="arithmatex">\[
 4 + 3 = 7 \equiv 2 \pmod{5}
-$$</div>
-</p>
-<p>that is, writing <span class="math">\(7 \pmod{5}\)</span> is equivalent to writing <span class="math">\(2 \pmod{5}\)</span>, so we are back in the set <span class="math">\(\mathbb I\)</span>. 
+\]</div>
+<p>that is, writing <span class="arithmatex">\(7 \pmod{5}\)</span> is equivalent to writing <span class="arithmatex">\(2 \pmod{5}\)</span>, so we are back in the set <span class="arithmatex">\(\mathbb I\)</span>. 
 With multiplication we obtain the same thing:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 4 \cdot 3 = 12 \equiv 2 \pmod{5}
-$$</div>
-we are still inside <span class="math">\(\mathbb{I}\)</span>.</p>
+\]</div>
+<p>we are still inside <span class="arithmatex">\(\mathbb{I}\)</span>.</p>
 </li>
 <li>
 <p><strong>Neutral element of addition</strong>:</p>
-<p>Let us consider the addition operation and take, for example, the value <span class="math">\(4\)</span> (but here too it is valid for all, trust me)</p>
-<p>
-<div class="math">$$
+<p>Let us consider the addition operation and take, for example, the value <span class="arithmatex">\(4\)</span> (but here too it is valid for all, trust me)</p>
+<div class="arithmatex">\[
 4 + 0 = 4 \equiv 4 \pmod{5}
-$$</div>
-</p>
+\]</div>
 <p>This also checks out, great.</p>
 </li>
 <li>
 <p><strong>Neutral element of multiplication</strong>:</p>
-<p>Let us consider the multiplication operation and take, for example, the value <span class="math">\(4\)</span> (but here too it is valid for all, trust me)</p>
-<p>
-<div class="math">$$
+<p>Let us consider the multiplication operation and take, for example, the value <span class="arithmatex">\(4\)</span> (but here too it is valid for all, trust me)</p>
+<div class="arithmatex">\[
 4 \cdot 1 = 4 \equiv 4 \pmod{5}
-$$</div>
-</p>
+\]</div>
 <p>This also checks out, yu-hu.</p>
 </li>
 <li>
 <p><strong>Additive inverse</strong>:</p>
-<p>Let us consider the addition operation and take, for example, the value <span class="math">\(4\)</span> (same story). The additive inverse is <span class="math">\(-4\)</span>, but by now you know
+<p>Let us consider the addition operation and take, for example, the value <span class="arithmatex">\(4\)</span> (same story). The additive inverse is <span class="arithmatex">\(-4\)</span>, but by now you know
 how to handle negative values right?! So skipping the steps we write:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 -4 \equiv 1 \pmod{5}
-$$</div>
-</p>
-<p>therefore the additive inverse of <span class="math">\(4\)</span> is <span class="math">\(1\)</span>. In fact:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>therefore the additive inverse of <span class="arithmatex">\(4\)</span> is <span class="arithmatex">\(1\)</span>. In fact:</p>
+<div class="arithmatex">\[
 1 + 4 = 5 \equiv 0 \pmod{5}
-$$</div>
-</p>
+\]</div>
 <p>This also checks out, yay.</p>
 </li>
 <li>
-<p><strong>Multiplicative inverse</strong>: here I will not go through the steps but let us reflect on the set <span class="math">\(\mathbb I - \{ 0 \}\)</span>. Once we remove <span class="math">\(0\)</span> which <strong>by definition has no inverse</strong>, every element of <span class="math">\(\mathbb I\)</span> is coprime with 
-    <span class="math">\(5\)</span> since the latter is a prime number. And earlier I clearly wrote that if the numbers are coprime, the inverse exists. So we are certain that for every element of <span class="math">\(\mathbb I - \{ 0 \}\)</span> we have an inverse
+<p><strong>Multiplicative inverse</strong>: here I will not go through the steps but let us reflect on the set <span class="arithmatex">\(\mathbb I - \{ 0 \}\)</span>. Once we remove <span class="arithmatex">\(0\)</span> which <strong>by definition has no inverse</strong>, every element of <span class="arithmatex">\(\mathbb I\)</span> is coprime with 
+    <span class="arithmatex">\(5\)</span> since the latter is a prime number. And earlier I clearly wrote that if the numbers are coprime, the inverse exists. So we are certain that for every element of <span class="arithmatex">\(\mathbb I - \{ 0 \}\)</span> we have an inverse
     and consequently we can also check off this point.</p>
 </li>
 <li>
 <p>Well guys, I would be a bit fed up. The last three are variants of additions and multiplications, if you feel like it take paper and pen and do them, otherwise trust me that those also check out.</p>
 </li>
 </ol>
-<p>We have therefore shown that if <span class="math">\(n\)</span> is a prime number, the set of remainders forms a Galois field and its <strong>formal notation</strong> is <span class="math">\(GF(p)\)</span> or <span class="math">\(\mathbb{F}_p\)</span> where <span class="math">\(p\)</span> is the chosen prime number.</p>
-<p>Let us see why, if <span class="math">\(p\)</span> were not prime, we could not have a Galois field. Let us consider the case <span class="math">\(p=8\)</span>, we have that the set of remainders is:</p>
-<div class="math">$$
+<p>We have therefore shown that if <span class="arithmatex">\(n\)</span> is a prime number, the set of remainders forms a Galois field and its <strong>formal notation</strong> is <span class="arithmatex">\(GF(p)\)</span> or <span class="arithmatex">\(\mathbb{F}_p\)</span> where <span class="arithmatex">\(p\)</span> is the chosen prime number.</p>
+<p>Let us see why, if <span class="arithmatex">\(p\)</span> were not prime, we could not have a Galois field. Let us consider the case <span class="arithmatex">\(p=8\)</span>, we have that the set of remainders is:</p>
+<div class="arithmatex">\[
 \mathbb{I} = \{ 0, \, 1, \, 2, \, 3, \, 4, \, 5, \, 6, \, 7 \}
-$$</div>
-<p>Let us take one of the remainders, <span class="math">\(b=2\)</span>, and look for its multiplicative inverse. To do this we must write the congruence:</p>
-<div class="math">$$
+\]</div>
+<p>Let us take one of the remainders, <span class="arithmatex">\(b=2\)</span>, and look for its multiplicative inverse. To do this we must write the congruence:</p>
+<div class="arithmatex">\[
 2x \equiv 1 \pmod{8}
-$$</div>
+\]</div>
 <p>From which:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 GCD(2, \, 8) = 2
-$$</div>
-<p>Checking the divisibility we have that <span class="math">\(2 \nmid 1\)</span>, and we can conclude that <span class="math">\(2 \pmod{8}\)</span> has no multiplicative inverse, and this violates
+\]</div>
+<p>Checking the divisibility we have that <span class="arithmatex">\(2 \nmid 1\)</span>, and we can conclude that <span class="arithmatex">\(2 \pmod{8}\)</span> has no multiplicative inverse, and this violates
 one of the required properties of fields.</p>
 <h4 id="from-the-little-garden-to-the-plantation">From The Little Garden To The Plantation<a class="headerlink" href="#from-the-little-garden-to-the-plantation" title="Permanent link"> </a></h4>
-<p>We have seen that <span class="math">\(p\)</span> must be prime in order to define a Galois field. But what if I told you that instead you can define fields of the type
-<span class="math">\(\mathbb{F}_8\)</span>? No, I am not crazy. It can be done, but in a slightly different way than before. First of all let us start by saying that the argument
-of the field <strong>cannot be just any number</strong>, but must be a <strong>power of a prime number</strong>. So why can <span class="math">\(\mathbb{F}_8\)</span> exist? Because we can
-write <span class="math">\(8=2^3\)</span>, that is, <span class="math">\(8\)</span> as a power of the prime number <span class="math">\(2\)</span>.</p>
+<p>We have seen that <span class="arithmatex">\(p\)</span> must be prime in order to define a Galois field. But what if I told you that instead you can define fields of the type
+<span class="arithmatex">\(\mathbb{F}_8\)</span>? No, I am not crazy. It can be done, but in a slightly different way than before. First of all let us start by saying that the argument
+of the field <strong>cannot be just any number</strong>, but must be a <strong>power of a prime number</strong>. So why can <span class="arithmatex">\(\mathbb{F}_8\)</span> exist? Because we can
+write <span class="arithmatex">\(8=2^3\)</span>, that is, <span class="arithmatex">\(8\)</span> as a power of the prime number <span class="arithmatex">\(2\)</span>.</p>
 <p>Even if it is not so, let us suppose you are asking yourself why it is useful to do this. In the previous paragraph we saw that to obtain a Galois field
-it is necessary to have a prime number <span class="math">\(p\)</span>, and the field <span class="math">\(\mathbb{F}_p\)</span> will have exactly <span class="math">\(p\)</span> elements:</p>
-<div class="math">$$
+it is necessary to have a prime number <span class="arithmatex">\(p\)</span>, and the field <span class="arithmatex">\(\mathbb{F}_p\)</span> will have exactly <span class="arithmatex">\(p\)</span> elements:</p>
+<div class="arithmatex">\[
 \{0, \, \dots, \, p-1 \}
-$$</div>
-<p>This is a bit <strong>limiting</strong>, don't you think? If we wanted a very <strong>large</strong> Galois field but with <strong>small</strong> primes? For example with <span class="math">\(2\)</span>? This would allow us to have
-all the numerical terms in <span class="math">\(\{0, \, 1\}\)</span> but with a number of elements greater than two. This would allow us not only to obtain a field with many more elements, 
-but also to work with values that are extremely easy to handle: by restricting ourselves to <span class="math">\(0\)</span> and <span class="math">\(1\)</span>, the operations become naturally <strong>efficient</strong> for 
+\]</div>
+<p>This is a bit <strong>limiting</strong>, don't you think? If we wanted a very <strong>large</strong> Galois field but with <strong>small</strong> primes? For example with <span class="arithmatex">\(2\)</span>? This would allow us to have
+all the numerical terms in <span class="arithmatex">\(\{0, \, 1\}\)</span> but with a number of elements greater than two. This would allow us not only to obtain a field with many more elements, 
+but also to work with values that are extremely easy to handle: by restricting ourselves to <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(1\)</span>, the operations become naturally <strong>efficient</strong> for 
 computers to represent and execute, resulting in significant <strong>performance</strong> benefits. No it is not witchcraft. It can be done and it is very useful to do it, 
 because it allows us to have <strong>numbers of low value</strong>, but in <strong>very large fields</strong> (which increases the security of the infamous elliptic curves). Ok, 
 but how? If the numbers are those what do we use to increase the <strong>cardinality</strong> of the field? The answer is: <strong>polynomials</strong>.
-Polynomials act as <strong>building blocks</strong>: they combine the values of <span class="math">\(\mathbb{F}_p\)</span> into more complex structures, allowing us to create many more 
+Polynomials act as <strong>building blocks</strong>: they combine the values of <span class="arithmatex">\(\mathbb{F}_p\)</span> into more complex structures, allowing us to create many more 
 elements <strong>without introducing new numbers</strong>, but simply new <strong>combinations</strong> of the same coefficients.
-Therefore, given a prime number <span class="math">\(p\)</span> and given an exponent <span class="math">\(m\)</span>, we can define thanks to polynomials a field <span class="math">\(\mathbb{F}_{p^m}\)</span> of <span class="math">\(p^m\)</span> elements, whose numerical terms
-are in <span class="math">\(\{ 0, \, \dots, \, p - 1 \}\)</span>. </p>
-<p>Considering the case <span class="math">\(\mathbb{F}_{2^3}\)</span>, let us see step by step (or rather, by degrees), how to proceed:</p>
+Therefore, given a prime number <span class="arithmatex">\(p\)</span> and given an exponent <span class="arithmatex">\(m\)</span>, we can define thanks to polynomials a field <span class="arithmatex">\(\mathbb{F}_{p^m}\)</span> of <span class="arithmatex">\(p^m\)</span> elements, whose numerical terms
+are in <span class="arithmatex">\(\{ 0, \, \dots, \, p - 1 \}\)</span>. </p>
+<p>Considering the case <span class="arithmatex">\(\mathbb{F}_{2^3}\)</span>, let us see step by step (or rather, by degrees), how to proceed:</p>
 <ul>
 <li>
-<p>Degree <span class="math">\(m=0\)</span>: This case is simple, we must take the <strong>polynomials of degree</strong> <span class="math">\(0\)</span> which are in fact just the <strong>coefficients</strong>. Since we are in <span class="math">\(p=2\)</span>, the coefficients are</p>
-<p>
-<div class="math">$$
+<p>Degree <span class="arithmatex">\(m=0\)</span>: This case is simple, we must take the <strong>polynomials of degree</strong> <span class="arithmatex">\(0\)</span> which are in fact just the <strong>coefficients</strong>. Since we are in <span class="arithmatex">\(p=2\)</span>, the coefficients are</p>
+<div class="arithmatex">\[
 \{0, \, 1 \}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p>Degree <span class="math">\(m=1\)</span>: In this case we take all the <strong>polynomials of degree at most</strong> <span class="math">\(1\)</span>. The family of these is given by </p>
-<p>
-<div class="math">$$
+<p>Degree <span class="arithmatex">\(m=1\)</span>: In this case we take all the <strong>polynomials of degree at most</strong> <span class="arithmatex">\(1\)</span>. The family of these is given by </p>
+<div class="arithmatex">\[
 q(x) = ax + b
-$$</div>
-</p>
-<p>since the coefficients must be in <span class="math">\(\{0, \, 1 \}\)</span>, we have that these polynomials are:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>since the coefficients must be in <span class="arithmatex">\(\{0, \, 1 \}\)</span>, we have that these polynomials are:</p>
+<div class="arithmatex">\[
 \{x, \, x + 1 \}
-$$</div>
-</p>
+\]</div>
 <p>In fact if:</p>
 <ul>
-<li><span class="math">\(a=0, \, b=0\)</span> <span class="math">\(\Rightarrow q(x)=0\)</span>. Already considered previously.</li>
-<li><span class="math">\(a=0, \, b=1\)</span> <span class="math">\(\Rightarrow q(x)=1\)</span>. Already considered previously.</li>
-<li><span class="math">\(a=1, \, b=0\)</span> <span class="math">\(\Rightarrow q(x)=x\)</span>.</li>
-<li><span class="math">\(a=1, \, b=1\)</span> <span class="math">\(\Rightarrow q(x)=x + 1\)</span>.</li>
+<li><span class="arithmatex">\(a=0, \, b=0\)</span> <span class="arithmatex">\(\Rightarrow q(x)=0\)</span>. Already considered previously.</li>
+<li><span class="arithmatex">\(a=0, \, b=1\)</span> <span class="arithmatex">\(\Rightarrow q(x)=1\)</span>. Already considered previously.</li>
+<li><span class="arithmatex">\(a=1, \, b=0\)</span> <span class="arithmatex">\(\Rightarrow q(x)=x\)</span>.</li>
+<li><span class="arithmatex">\(a=1, \, b=1\)</span> <span class="arithmatex">\(\Rightarrow q(x)=x + 1\)</span>.</li>
 </ul>
-<p>There cannot be polynomials of degree <span class="math">\(1\)</span> such as <span class="math">\(2x\)</span> because working, in this case, with <span class="math">\(\pmod{2}\)</span> we have that</p>
-<p>
-<div class="math">$$
+<p>There cannot be polynomials of degree <span class="arithmatex">\(1\)</span> such as <span class="arithmatex">\(2x\)</span> because working, in this case, with <span class="arithmatex">\(\pmod{2}\)</span> we have that</p>
+<div class="arithmatex">\[
 2 \equiv 0 \pmod{2} \Rightarrow 2x \equiv 0 \pmod{2}
-$$</div>
-</p>
-<p>which we already considered in the case <span class="math">\(m=0\)</span>.</p>
+\]</div>
+<p>which we already considered in the case <span class="arithmatex">\(m=0\)</span>.</p>
 </li>
 <li>
-<p>Degree <span class="math">\(m=2\)</span>: Similarly to before, we take all the <strong>polynomials of degree at most</strong> <span class="math">\(2\)</span> whose coefficients are in <span class="math">\(\{0, \, 1 \}\)</span>. The family of these is given by </p>
-<p>
-<div class="math">$$
+<p>Degree <span class="arithmatex">\(m=2\)</span>: Similarly to before, we take all the <strong>polynomials of degree at most</strong> <span class="arithmatex">\(2\)</span> whose coefficients are in <span class="arithmatex">\(\{0, \, 1 \}\)</span>. The family of these is given by </p>
+<div class="arithmatex">\[
 q(x) = ax^2 + bx + c
-$$</div>
-</p>
+\]</div>
 <p>So, expanding, and ignoring all those already considered previously we have:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 \{x^2, \, x^2 + 1, \, x^2 + x, \, x^2 + x + 1 \}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p>Degree <span class="math">\(m=3\)</span>: Eh, here the situation changes. Let us start by saying that working in <span class="math">\(m=3\)</span> we <strong>must not go beyond</strong>. These polynomials <strong>will not be part of the field</strong>,
+<p>Degree <span class="arithmatex">\(m=3\)</span>: Eh, here the situation changes. Let us start by saying that working in <span class="arithmatex">\(m=3\)</span> we <strong>must not go beyond</strong>. These polynomials <strong>will not be part of the field</strong>,
     but will define the <strong>modulus of the field</strong>. When we look for the polynomials of maximum degree with respect to the field, we must make sure they are
     <strong>irreducible</strong>, that is, that <em>they cannot be written as a product of polynomials</em> among those listed so far. The polynomials are of the family </p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 q(x) = ax^3 + bx^2 + cx + d
-$$</div>
-</p>
-<p>In total there are <span class="math">\(8\)</span> polynomials, but the irreducible ones are only two:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>In total there are <span class="arithmatex">\(8\)</span> polynomials, but the irreducible ones are only two:</p>
+<div class="arithmatex">\[
 \{x^3 + x + 1, \, x^3 + x^2 + 1 \}
-$$</div>
-</p>
+\]</div>
 <p>Try as much as you like, you will never manage to write these two polynomials as the product of two polynomials of lower degree. Let us briefly see
 why we ignore the others. Suppose we have:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 q(x) = x^3 + x^2 + x
-$$</div>
-</p>
+\]</div>
 <p>We can also write this as:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 q(x) = x^3 + x^2 + x = x \cdot (x^2 + x + 1)
-$$</div>
-</p>
+\]</div>
 <p>Since it can be written as the product of two polynomials of lower degree, we discard it because it would mean introducing elements that do not have a multiplicative inverse.</p>
 </li>
 </ul>
 <p>We are almost at the end. Now that we have the irreducible polynomials we choose one <strong>at will</strong>, whichever you prefer (even if I would get myself checked if I preferred
 one polynomial over another). In this case the fields are said to be <strong>isomorphic</strong> (same <strong>cardinality</strong>, same <strong>field structure</strong> but <strong>different</strong> irreducible polynomial).
 Let us suppose we choose the polynomial:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 q(x) = x^3 + x^2 + 1
-$$</div>
-<p>we have found our Galois field <span class="math">\(\mathbb{F}_{8}\)</span> which contains exactly <span class="math">\(8\)</span> elements reduced modulo the chosen polynomial, all coefficients computed <span class="math">\(\pmod{2}\)</span> and which satisfies the properties
+\]</div>
+<p>we have found our Galois field <span class="arithmatex">\(\mathbb{F}_{8}\)</span> which contains exactly <span class="arithmatex">\(8\)</span> elements reduced modulo the chosen polynomial, all coefficients computed <span class="arithmatex">\(\pmod{2}\)</span> and which satisfies the properties
 mentioned above (otherwise it would not be a Galois field):</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \mathbb{F}_{8} = \{ 0, \, 1, \, x, \, x + 1, \, x^2, \, x^2 + 1, \, x^2 + x, \, x^2 + x + 1 \} \pmod{x^3 + x^2 + 1}
-$$</div>
+\]</div>
 <p>Let us take two random values and see how, by performing addition and multiplication of the elements in the field, we never leave the field itself.
-Let us take <span class="math">\(f(x) = x^2 + 1\)</span> and <span class="math">\(g(x) = x + 1\)</span>.</p>
+Let us take <span class="arithmatex">\(f(x) = x^2 + 1\)</span> and <span class="arithmatex">\(g(x) = x + 1\)</span>.</p>
 <ul>
 <li>
 <p>Addition:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) + g(x) = x^2 + x + 2
-$$</div>
-</p>
-<p>Since we are in <span class="math">\(\pmod{2}\)</span> we have that</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>Since we are in <span class="arithmatex">\(\pmod{2}\)</span> we have that</p>
+<div class="arithmatex">\[
 2 \equiv 0 \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>Therefore we can write</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^2 + x + 2 \equiv x^2 + x \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>that is, it has gone back to being a polynomial <strong>belonging to the field</strong> defined earlier.</p>
 </li>
 <li>
 <p>Product: </p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) \cdot g(x) = (x^2 + 1) \cdot (x + 1) = x^3 + x^2 + x + 1
-$$</div>
-</p>
-<p>Since our irreducible polynomial is <span class="math">\(x^3 + x^2 + 1\)</span> we can write this relation:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>Since our irreducible polynomial is <span class="arithmatex">\(x^3 + x^2 + 1\)</span> we can write this relation:</p>
+<div class="arithmatex">\[
 x^3 + x^2 + 1 \equiv 0 \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
+\]</div>
 <p>From which</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^3 \equiv -x^2 - 1 \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
-<p>However I remind you, that in modular arithmetic, negative numbers are not liked but we already know how to bring ourselves back to positive remainders <span class="math">\(\pmod{2}\)</span>.
+\]</div>
+<p>However I remind you, that in modular arithmetic, negative numbers are not liked but we already know how to bring ourselves back to positive remainders <span class="arithmatex">\(\pmod{2}\)</span>.
 Omitting the steps (which you should already know but which you can read <a href="#one-rule-to-rule-them">here</a>), we have that:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 -1 \equiv 1 \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>So we can write this:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 -x^2 - 1 \equiv x^2 + 1 \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>from which we can write:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^3 \equiv x^2 + 1 \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
+\]</div>
 <p>Returning now to the initial polynomial we can write:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^3 + x^2 + x + 1 \equiv x^2 + 1 + x^2 + x + 1 \equiv 2x^2 + x + 2 \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
-<p>Since, as already said and repeated, shown and re-shown, we are in <span class="math">\(\pmod{2}\)</span> we have that:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>Since, as already said and repeated, shown and re-shown, we are in <span class="arithmatex">\(\pmod{2}\)</span> we have that:</p>
+<div class="arithmatex">\[
 2x^2 \equiv 0 \pmod{2}, \, 2 \equiv 0 \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>We have therefore reached the conclusion that:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 (x^2 + 1) \cdot (x + 1) \equiv x \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
-<p>and as luck would have it, <span class="math">\(x\)</span> is a polynomial of the Galois field.</p>
+\]</div>
+<p>and as luck would have it, <span class="arithmatex">\(x\)</span> is a polynomial of the Galois field.</p>
 </li>
 </ul>
 <p>For obvious reasons I have shown you only the closure property, but you are completely free to do all your experiments. I am right anyway.</p>
 <p>To conclude this paragraph, I invite you to use a reducible polynomial as the modulus of the field. With pen and paper in hand, you will see that <strong>there will be at least one element
 of the field that does not have a multiplicative inverse belonging to the field itself</strong>, violating one of the properties.</p>
 <h4 id="weeds-grow-cyclically">Weeds Grow Cyclically<a class="headerlink" href="#weeds-grow-cyclically" title="Permanent link"> </a></h4>
-<p>A very useful and elegant concept is the <strong>cyclicity property of exponentiation</strong>. Let us consider all powers from <span class="math">\(0\)</span> to <span class="math">\(p^m - 1\)</span>. As long as the element <span class="math">\(x^{a}\)</span> 
-has an exponent <span class="math">\(a &lt; m\)</span>, the element belongs to the field; however, when <span class="math">\(x^a\)</span> has an exponent <span class="math">\(a \geq m\)</span>, reductions begin to occur. 
+<p>A very useful and elegant concept is the <strong>cyclicity property of exponentiation</strong>. Let us consider all powers from <span class="arithmatex">\(0\)</span> to <span class="arithmatex">\(p^m - 1\)</span>. As long as the element <span class="arithmatex">\(x^{a}\)</span> 
+has an exponent <span class="arithmatex">\(a &lt; m\)</span>, the element belongs to the field; however, when <span class="arithmatex">\(x^a\)</span> has an exponent <span class="arithmatex">\(a \geq m\)</span>, reductions begin to occur. 
 Up to this point, nothing new, right? Therefore, by considering our now <strong>well-known field</strong>, we can construct the table:</p>
-<p><a id="tabella-campo"></a>
-</p>
-<div class="math">$$
-\begin{array}
-{|r|l|l|l|}
+<p><a id="tabella-campo"></a></p>
+<div class="arithmatex">\[
+\begin{array}{|r|l|l|l|}
 \hline
 \textbf{Power} &amp; \textbf{Reduced Polynomial} &amp; \textbf{Coefficients} &amp; \textbf{Integer} \\
 \hline
@@ -720,32 +640,31 @@ x^5 &amp; x + 1 &amp; 0, 1, 1 &amp; 3 \\
 x^6 &amp; x^2 + x &amp; 1, 1, 0 &amp; 6 \\
 \hline
 \end{array}
-$$</div>
-<p class="formula-caption">
-Table 1. Elements Of Field <span class="math">\(\mathbb{F}_{8}\)</span> reduced <span class="math">\(\pmod{x^3 + x^2 + 1}\)</span></p>
+\]</div>
+<p class="formula-caption">Table 1. Elements Of Field <span class="arithmatex">\(\mathbb{F}_{8}\)</span> reduced <span class="arithmatex">\(\pmod{x^3 + x^2 + 1}\)</span></p>
 <p>where the integer is constructed by treating the polynomial coefficients as <strong>binary values</strong>, which allows an association between integers and polynomials. 
-As you can see, up to the term <span class="math">\(x^2\)</span> the power is reported exactly as it is; starting from <span class="math">\(x^3\)</span> onward, reductions begin, generating the other elements of the field.
-At this point, however, if I were to ask you for the value of the power <span class="math">\(x^7\)</span>, what would happen? What happens with powers greater than <span class="math">\(p^m - 1\)</span>?
+As you can see, up to the term <span class="arithmatex">\(x^2\)</span> the power is reported exactly as it is; starting from <span class="arithmatex">\(x^3\)</span> onward, reductions begin, generating the other elements of the field.
+At this point, however, if I were to ask you for the value of the power <span class="arithmatex">\(x^7\)</span>, what would happen? What happens with powers greater than <span class="arithmatex">\(p^m - 1\)</span>?
 This is where the cyclicity property comes into play. Indeed, the following simple rule applies:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^a = x^{a \bmod{n}}
-$$</div>
-<p>where <span class="math">\(n = p^m - 1\)</span>. Therefore, we can write:</p>
-<div class="math">$$
+\]</div>
+<p>where <span class="arithmatex">\(n = p^m - 1\)</span>. Therefore, we can write:</p>
+<div class="arithmatex">\[
 x^7 \equiv x^{7 \bmod 7} \equiv x^0 = 1
-$$</div>
-<p>That is, we have returned to the first element of the table (excluding <span class="math">\(0\)</span>). Cyclicity also makes the inversion of polynomials straightforward. In fact, since the relation</p>
-<div class="math">$$
+\]</div>
+<p>That is, we have returned to the first element of the table (excluding <span class="arithmatex">\(0\)</span>). Cyclicity also makes the inversion of polynomials straightforward. In fact, since the relation</p>
+<div class="arithmatex">\[
 x^k \cdot x^{n-k} = x^n = 1
-$$</div>
-<p>holds, we have that <span class="math">\(x^{n-k}\)</span> is <strong>always</strong> the multiplicative inverse of <span class="math">\(x^{k}\)</span>. Therefore, if we are looking for the inverse of <span class="math">\(x^2 + 1\)</span>, we can look at our table and write:</p>
-<div class="math">$$
+\]</div>
+<p>holds, we have that <span class="arithmatex">\(x^{n-k}\)</span> is <strong>always</strong> the multiplicative inverse of <span class="arithmatex">\(x^{k}\)</span>. Therefore, if we are looking for the inverse of <span class="arithmatex">\(x^2 + 1\)</span>, we can look at our table and write:</p>
+<div class="arithmatex">\[
 (x^2 + 1)^{-1} = (x^3)^{-1}
-$$</div>
+\]</div>
 <p>from which</p>
-<div class="math">$$
+<div class="arithmatex">\[
 (x^3)^{-1} = x^{7-3} = x^{4} = x^2 + x + 1
-$$</div>
+\]</div>
 <p>which is the desired inverse. <strong>Seeing is believing</strong>.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>When I started writing this article I imagined it shorter, much shorter. But this time I did not get carried away, the problem is that,
@@ -757,68 +676,6 @@ If you feel safe when performing online operations, if you feel protected under 
 thanks to these <strong>basic elements</strong>, and one day I will talk to you about them. Until then however, do not come to me saying “my password got hacked”,
 because cryptography is secure, it is the passwords <em>1234</em> and <em>hot mom 3km</em> from you that are not. So it is your fault.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -859,6 +716,10 @@ because cryptography is secure, it is the passwords <em>1234</em> and <em>hot mo
                 <li><a href="https://www.lucadivita.it/en/tag/galois_fields.html">galois_fields</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>

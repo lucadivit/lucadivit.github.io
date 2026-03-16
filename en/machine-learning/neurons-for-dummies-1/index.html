@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-1/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Neurons for Dummies - 1</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/machine-learning.html">Machine Learning</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-04-30T00:00:00+02:00">April 30, 2025</time>
-                - <a href="https://www.lucadivita.it/en/category/machine-learning.html">Machine Learning</a>
             </small>
         </p>
     </header>
@@ -158,7 +158,7 @@ Let's start by talking about what we have in front of our eyes:</p>
 <li>Dots</li>
 </ul>
 <p>Each little ball is called a <strong>neuron</strong> (or <strong>perceptron</strong>), and as you can see, they are arranged into <strong>layers</strong> (or, if you prefer, <strong>strata</strong>). Each
-layer is <strong>fully connected</strong> to the next — meaning: all the neurons in one layer are linked to all the neurons in the next layer.
+layer is <strong>fully connected</strong> to the next, meaning: all the neurons in one layer are linked to all the neurons in the next layer.
 This already explains why these architectures are called <strong>MLP</strong>, or <strong>Multi Layer Perceptron</strong>. There are three types of layers:</p>
 <ul>
 <li><strong>Input Layer</strong>: Takes the data we provide as input. In the image, it is the yellow layer.</li>
@@ -167,12 +167,10 @@ This already explains why these architectures are called <strong>MLP</strong>, o
 </ul>
 <p>To give a practical example, let's suppose <strong>we can't recognize</strong> whether a picture shows a dog or a cat (and I sincerely hope this is just a supposition),
 we feed our picture into the input layer, which receives the data.
-This data is then processed by the hidden layers, and finally we get the result — <strong>dog or cat</strong> — in the output layer.<br/>
+This data is then processed by the hidden layers, and finally we get the result, <strong>dog or cat</strong>, in the output layer.<br/>
 But before the network can say "dog" or "cat," it needs <strong>to be trained</strong>.
 Training a neural network simply means giving it lots of pictures of dogs and cats, and <em>correcting</em> it every time it makes a mistake, in order to adjust the aim for future predictions.
-If you’ve made it this far, you might be wondering:
-<em>"Ok, but how...?"</em>
-Hold your horses, cowboy — we’ll get there.</p>
+If you’ve made it this far, you might be wondering: <em>"Ok, but how...?"</em>, hold your horses cowboy, we’ll get there.</p>
 <h3 id="from-the-network-to-the-neuron">From the Network to the Neuron<a class="headerlink" href="#from-the-network-to-the-neuron" title="Permanent link"> </a></h3>
 <p>We have talked about networks, layers, arrows, and dots.<br/>
 But to truly understand how a neural network makes decisions (and how it learns from its mistakes), we need to go down a level. Down to the level of the dot.<br/>
@@ -196,17 +194,16 @@ Figura 3. Artificial Neuron</p>
 <li><strong>Activation Function</strong>: it transforms the result of the transfer function. The output is connected to the neurons of the next layer, somewhat like the axon in biological neurons.</li>
 <li><strong>Bias</strong>: it is a pure number whose role we will soon explain.</li>
 </ul>
-<p>Putting all the individual pieces together, we have that: the inputs <span class="math">\(x_i\)</span> and the weights <span class="math">\(w_i\)</span> pass through the transfer function <strong><span class="math">\(H\)</span></strong>, defined as:
-</p>
-<div class="math">$$
+<p>Putting all the individual pieces together, we have that: the inputs <span class="arithmatex">\(x_i\)</span> and the weights <span class="arithmatex">\(w_i\)</span> pass through the transfer function <strong><span class="arithmatex">\(H\)</span></strong>, defined as:</p>
+<div class="arithmatex">\[
 net = H(w_i, x_i) = \sum{x_i \cdot w_i} + b = x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b
-$$</div>
+\]</div>
 <p>performing what is called a <strong>weighted sum</strong>: each input is multiplied by its weight, everything is summed up, and the bias is added.<br/>
-The result of the weighted sum is then passed through the activation function <span class="math">\(\sigma(H)\)</span>.<br/>
+The result of the weighted sum is then passed through the activation function <span class="arithmatex">\(\sigma(H)\)</span>.<br/>
 The <strong>output</strong> of the single neuron is therefore:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 p = \sigma(H) = \sigma(x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) 
-$$</div>
+\]</div>
 <p>There are many <a href="https://en.wikipedia.org/wiki/Activation_function">activation functions</a>, and their selection depends on various technical factors.<br/>
 While it would be worth dedicating a full article to them, for now it’s enough to know that they are fundamental for introducing <a href="https://en.wikipedia.org/wiki/Nonlinear_system">non-linearity</a>.<br/>
 Which, for friends, simply means: without them, the network wouldn't even be able to correctly predict a dog from a cat.</p>
@@ -214,11 +211,10 @@ Which, for friends, simply means: without them, the network wouldn't even be abl
 <p>I would be surprised if you weren't. But don't worry, because now we have all the ingredients to see how a neuron works mathematically, and everything will become much clearer with a numerical example.</p>
 <h3 id="a-numerical-example-the-and-problem">A Numerical Example. The AND Problem.<a class="headerlink" href="#a-numerical-example-the-and-problem" title="Permanent link"> </a></h3>
 <p>Let's start this new paragraph by introducing the problem to solve, the <strong>AND problem</strong>. The AND between two binary variables is a simple logical operation: 
-the result is <span class="math">\(1\)</span> only if both variables are <span class="math">\(1\)</span> in all other cases, it is <span class="math">\(0\)</span>.
-To be more formal, let's consider two variables <span class="math">\(A \in \{0, 1\}\)</span> and <span class="math">\(B \in \{0, 1\}\)</span> the result of <span class="math">\(AND(x_1, x_2)\)</span> is summarized in the following table, called <strong>the truth table</strong>:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|}
+the result is <span class="arithmatex">\(1\)</span> only if both variables are <span class="arithmatex">\(1\)</span> in all other cases, it is <span class="arithmatex">\(0\)</span>.
+To be more formal, let's consider two variables <span class="arithmatex">\(A \in \{0, 1\}\)</span> and <span class="arithmatex">\(B \in \{0, 1\}\)</span> the result of <span class="arithmatex">\(AND(x_1, x_2)\)</span> is summarized in the following table, called <strong>the truth table</strong>:</p>
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|}
 \hline 
 A &amp; B &amp; AND(A, B) \\ 
 \hline 
@@ -228,12 +224,11 @@ A &amp; B &amp; AND(A, B) \\
 \hline 1 &amp; 1 &amp; 1 \\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <p>Here we presented the simplest case of the AND problem, but there’s no restriction on the number of variables.<br/>
 For example, with three variables, we would get the following truth table:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|}
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|r|}
 \hline 
 A &amp; B &amp; C &amp; AND(A, B, C) \\ 
 \hline 
@@ -247,9 +242,9 @@ A &amp; B &amp; C &amp; AND(A, B, C) \\
 \hline 1 &amp; 1 &amp; 1 &amp; 1 \\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <p>Let's now consider a neural network, the <strong>simplest possible</strong>: composed of a single perceptron. The goal is to solve the two-variable AND problem, that is: given the inputs
-<span class="math">\(x_1\)</span> and <span class="math">\(x_2\)</span>, predict what the output of <span class="math">\(AND(x_1, x_2)\)</span> which can be <span class="math">\(0\)</span> or <span class="math">\(1\)</span>. Since the output can take only two distinct values, <strong>either salt or pepper</strong>,
+<span class="arithmatex">\(x_1\)</span> and <span class="arithmatex">\(x_2\)</span>, predict what the output of <span class="arithmatex">\(AND(x_1, x_2)\)</span> which can be <span class="arithmatex">\(0\)</span> or <span class="arithmatex">\(1\)</span>. Since the output can take only two distinct values, <strong>either salt or pepper</strong>,
 the problem we are dealing with is a typical <strong>classification problem</strong>.</p>
 <p>Good: we have defined the problem and the architecture of the neural network.<br/>
 Now, three things remain to be established:</p>
@@ -261,11 +256,11 @@ Now, three things remain to be established:</p>
 <p>Let's answer right away:</p>
 <ol>
 <li>The number of inputs depends on the variables of the problem. Since the AND problem is <strong>two-variable</strong>, also called <strong>features</strong> in the context of Machine Learning, 
-the neuron will have two inputs <span class="math">\(x_1\)</span> e <span class="math">\(x_2\)</span>, whose values can be <span class="math">\(0\)</span> o <span class="math">\(1\)</span>.</li>
+the neuron will have two inputs <span class="arithmatex">\(x_1\)</span> e <span class="arithmatex">\(x_2\)</span>, whose values can be <span class="arithmatex">\(0\)</span> o <span class="arithmatex">\(1\)</span>.</li>
 <li>At this stage, we will assign the <strong>weights and bias</strong> ourselves. Let's suppose that:<ul>
-<li>the weight related to the input <span class="math">\(x_1\)</span> is <span class="math">\(w_1 = 0.5\)</span>,</li>
-<li>the weight related to the input <span class="math">\(x_2\)</span> is <span class="math">\(w_2 = 0.5\)</span>,</li>
-<li>the bias is <span class="math">\(b=1\)</span>.</li>
+<li>the weight related to the input <span class="arithmatex">\(x_1\)</span> is <span class="arithmatex">\(w_1 = 0.5\)</span>,</li>
+<li>the weight related to the input <span class="arithmatex">\(x_2\)</span> is <span class="arithmatex">\(w_2 = 0.5\)</span>,</li>
+<li>the bias is <span class="arithmatex">\(b=1\)</span>.</li>
 </ul>
 </li>
 <li>We choose the <a href="https://en.wikipedia.org/wiki/Heaviside_step_function">Heaviside step function</a> as the activation function</li>
@@ -273,59 +268,64 @@ the neuron will have two inputs <span class="math">\(x_1\)</span> e <span class=
 <p>The <strong>Heaviside step</strong> is a simple function whose graph is as follows:</p>
 <p class="image-caption"><img alt="Step Function" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/step.png"/>
 Figura 4. Heaviside Step</p>
-<p>In short, given any value <span class="math">\(x\)</span> as input, the Heaviside step function returns:</p>
+<p>In short, given any value <span class="arithmatex">\(x\)</span> as input, the Heaviside step function returns:</p>
 <ul>
-<li><span class="math">\(0\)</span> if <span class="math">\(x &lt; 0\)</span>, </li>
-<li><span class="math">\(1\)</span> otherwise. </li>
+<li><span class="arithmatex">\(0\)</span> if <span class="arithmatex">\(x &lt; 0\)</span>, </li>
+<li><span class="arithmatex">\(1\)</span> otherwise. </li>
 </ul>
 <p>Mathematically:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \sigma(x) = 
 \begin{cases} 
 0 &amp; \text{if } x &lt; 0 \\
 1 &amp; \text{if } x \geq 0
 \end{cases}
-$$</div>
+\]</div>
 <p>Why the Heaviside step function, you might be wondering?<br/>
 Well, as mentioned earlier, there are many technical factors to consider, but suffice it to say that it’s the one that best fits our purpose:<br/>
-the problem requires a solution that is either <span class="math">\(0\)</span> o <span class="math">\(1\)</span>, and the Heaviside step function returns exactly an output of <span class="math">\(0\)</span> o <span class="math">\(1\)</span>.
+the problem requires a solution that is either <span class="arithmatex">\(0\)</span> o <span class="arithmatex">\(1\)</span>, and the Heaviside step function returns exactly an output of <span class="arithmatex">\(0\)</span> o <span class="arithmatex">\(1\)</span>.
 I'd say it's a perfect match, wouldn't you agree!?
 <strong>But nope</strong>. For now for the sake of <strong>simplicity</strong>, we’ll settle for this, and the reason why... we’ll discover it later.</p>
 <p>At this point, all that's left is to see how a neural network makes its predictions. And how do we see it? With a simple substitution of variables.<br/>
 There are four possible cases. Remember that</p>
-<div class="math">$$
+<div class="arithmatex">\[
 H = x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b
-$$</div>
-<p>that <span class="math">\(w_1 = 0.5, w_2 = 0.5, b = 1\)</span> and <span class="math">\(\sigma(H) = 1\)</span> only if <span class="math">\(H \geq 0\)</span></p>
+\]</div>
+<p>that <span class="arithmatex">\(w_1 = 0.5, w_2 = 0.5, b = 1\)</span> and <span class="arithmatex">\(\sigma(H) = 1\)</span> only if <span class="arithmatex">\(H \geq 0\)</span></p>
 <p>We have:</p>
 <ul>
-<li><strong>Case 1</strong>: <span class="math">\(x_1 = 0, x_2 = 0\)</span>
-<span class="math center-math">\(H= 0 \cdot 0.5 + 0 \cdot 0.5 + 1 = 1 \Rightarrow p = \sigma(H) = \sigma(1) = 1\)</span></li>
-<li><strong>Case 2</strong>: <span class="math">\(x_1 = 1, x_2 = 0\)</span>
-<span class="math center-math">\(H= 1 \cdot 0.5 + 0 \cdot 0.5 + 1 = 1.5 \Rightarrow p = \sigma(H) = \sigma(1.5) = 1\)</span></li>
-<li><strong>Case 3</strong>: <span class="math">\(x_1 = 0, x_2 = 1\)</span>
-<span class="math center-math">\(H= 0 \cdot 0.5 + 1 \cdot 0.5 + 1 = 1.5 \Rightarrow p = \sigma(H) = \sigma(1.5) = 1\)</span></li>
-<li><strong>Case 4</strong>: <span class="math">\(x_1 = 1, x_2 = 1\)</span>
-<span class="math center-math">\(H= 1 \cdot 0.5 + 1 \cdot 0.5 + 1 = 2 \Rightarrow p = \sigma(H) = \sigma(2) = 1\)</span></li>
+<li><strong>Case 1</strong>: <span class="arithmatex">\(x_1 = 0, x_2 = 0\)</span></li>
 </ul>
+<div class="arithmatex">\[H= 0 \cdot 0.5 + 0 \cdot 0.5 + 1 = 1 \Rightarrow p = \sigma(H) = \sigma(1) = 1\]</div>
+<ul>
+<li><strong>Case 2</strong>: <span class="arithmatex">\(x_1 = 1, x_2 = 0\)</span></li>
+</ul>
+<div class="arithmatex">\[H= 1 \cdot 0.5 + 0 \cdot 0.5 + 1 = 1.5 \Rightarrow p = \sigma(H) = \sigma(1.5) = 1\]</div>
+<ul>
+<li><strong>Case 3</strong>: <span class="arithmatex">\(x_1 = 0, x_2 = 1\)</span></li>
+</ul>
+<div class="arithmatex">\[H= 0 \cdot 0.5 + 1 \cdot 0.5 + 1 = 1.5 \Rightarrow p = \sigma(H) = \sigma(1.5) = 1\]</div>
+<ul>
+<li><strong>Case 4</strong>: <span class="arithmatex">\(x_1 = 1, x_2 = 1\)</span></li>
+</ul>
+<div class="arithmatex">\[H= 1 \cdot 0.5 + 1 \cdot 0.5 + 1 = 2 \Rightarrow p = \sigma(H) = \sigma(2) = 1\]</div>
 <p>Let's now repeat the truth table, also showing the predictions made by the created perceptron, 
 with incorrect ones highlighted in red and correct ones in green:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|}
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|r|}
 \hline 
 x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; p \\ 
 \hline 
-0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+0 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \textcolor{green}{\mathbf{1}}\\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <p>As we can see, our perceptron made <strong>only one correct prediction out of four</strong>. We can say it without mincing words: <strong>it sucks quite a bit</strong>, right?! 
 So why all this fuss to reach such a poor result? Simple: because this is just the foundation.<br/>
-Now, we still need to understand <strong>how to improve</strong> the results — that is, how to train the neural network so that it stops sucking and starts making sensible predictions...<br/>
+Now, we still need to understand <strong>how to improve</strong> the results, that is, how to train the neural network so that it stops sucking and starts making sensible predictions...<br/>
 But in the meantime, you've already achieved an important milestone:<br/>
 Now you know that the "magic" behind predictions, or at least a good chunk of it, <strong>isn't that magical after all</strong>.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
@@ -378,68 +378,6 @@ You can't live without knowing <em>how it learns</em>.
 Yes, I know, <em>I'm worse than the De Agostini magazine series... but that's how it is</em>.
 While waiting for the second part, I bid you farewell.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -484,6 +422,10 @@ While waiting for the second part, I bid you farewell.</p>
                 <li><a href="https://www.lucadivita.it/en/tag/neurons.html">neurons</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>

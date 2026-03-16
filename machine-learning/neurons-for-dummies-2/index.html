@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-2/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Neurons for Dummies - 2</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/machine-learning.html">Machine Learning</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-05-15T00:00:00+02:00">15 maggio 2025</time>
-                - <a href="https://www.lucadivita.it/category/machine-learning.html">Machine Learning</a>
             </small>
         </p>
     </header>
@@ -148,33 +148,31 @@ Oggi, finalmente, proviamo a fare un po’ di chiarezza.</p>
 Perché sono l’unico punto su cui possiamo intervenire. Non possiamo certo modificare l'input. Quello arriva dal problema e ce lo becchiamo
 cosi com'è. Quindi se vogliamo cambiare il valore della <strong>funzione di trasferimento</strong>, e quindi anche <strong>l'output</strong>, dobbiamo per forza agire su di loro.
 Tenendo presente questa premessa e tenendo presente le predizioni fatte nella prima parte, l'obiettivo da raggiungere è passare da questi risultati:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|}
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|r|}
 \hline 
 x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
 \hline 
-0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+0 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \textcolor{green}{\mathbf{1}}\\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <p>a questi:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|}
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|r|}
 \hline 
 x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
 \hline 
-0 &amp; 0 &amp; 0 &amp; \color{green}{\mathbf{0}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \color{green}{\mathbf{0}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \color{green}{\mathbf{0}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+0 &amp; 0 &amp; 0 &amp; \textcolor{green}{\mathbf{0}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \textcolor{green}{\mathbf{0}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \textcolor{green}{\mathbf{0}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \textcolor{green}{\mathbf{1}}\\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <p>In altre parole, vogliamo che tutte le predizioni siano corrette oppure, detto in termini più tecnici, che <strong>l'errore nelle predizioni sia il più piccolo possibile</strong>.
 Quindi il primo passo da fare è evidente: <strong>misurare l'errore</strong>.<br/>
 Per fare questo è necessario definire una <strong>Funzione di Errore</strong> o <a href="https://it.wikipedia.org/wiki/Funzione_obiettivo"><strong>Funzione di Loss</strong></a>, cioè un qualcosa che ci dice quanto siamo lontani dalla situazione ideale, che per semplicità, 
@@ -183,38 +181,40 @@ considereremo come quella in cui l’errore è pari a zero.</p>
 Nel nostro caso, che vi ricordo essere il <strong>problema AND</strong>, siamo in presenza di un problema di <strong>classificazione binaria</strong> e quindi la funzione più adatta non può che
 essere la <strong>Binary Cross Entropy - BCE</strong>.</p>
 <p>Andiamo quindi a scrivere la formula:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 BCE_i = -[y_i \cdot ln(p_i) + (1 - y_i) \cdot ln(1 - p_i)]
-$$</div>
-<p>
-Dove:</p>
+\]</div>
+<p>Dove:</p>
 <ul>
-<li><span class="math">\(ln(\cdot)\)</span> Logaritmo Naturale</li>
-<li><span class="math">\(y_i\)</span> Risultato del problema (o <em>True Label</em>) relativo all'i-esimo input.</li>
-<li><span class="math">\(p_i\)</span> Probabilità predetta dal percettrone per quello stesso input.</li>
+<li><span class="arithmatex">\(ln(\cdot)\)</span> Logaritmo Naturale</li>
+<li><span class="arithmatex">\(y_i\)</span> Risultato del problema (o <em>True Label</em>) relativo all'i-esimo input.</li>
+<li><span class="arithmatex">\(p_i\)</span> Probabilità predetta dal percettrone per quello stesso input.</li>
 </ul>
 <p>Applichiamo questa formula alla seguente tabella di verità:</p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|}
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|r|}
 \hline 
 x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
 \hline 
-0 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \color{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \color{green}{\mathbf{1}}\\ 
+0 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}} \\ 
+\hline 0 &amp; 1 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
+\hline 1 &amp; 1 &amp; 1 &amp; \textcolor{green}{\mathbf{1}}\\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <p>Per la prima riga abbiamo:</p>
-<p><span class="math center-math">\(y_0 = 0, p_0 = 1 \Rightarrow BCE_0 = -[0 \cdot ln(1) + (1 - 0) \cdot ln(1 - 1)] = -\infty\)</span></p>
+<div class="arithmatex">\[
+y_0 = 0, p_0 = 1 \Rightarrow BCE_0 = -[0 \cdot ln(1) + (1 - 0) \cdot ln(1 - 1)] = -\infty
+\]</div>
 <p>Come si può vedere, <strong>l’errore è massimo</strong> e in effetti, la predizione è <strong>l’opposto esatto</strong> del risultato reale.</p>
 <p>Applicandola sull'ultima invece si ha:</p>
-<p><span class="math center-math">\(y_3 = 1, p_3 = 1 \Rightarrow BCE_3 = -[1 \cdot ln(1) + (1 - 1) \cdot ln(1 - 1)] = 0\)</span></p>
+<div class="arithmatex">\[
+y_3 = 1, p_3 = 1 \Rightarrow BCE_3 = -[1 \cdot ln(1) + (1 - 1) \cdot ln(1 - 1)] = 0
+\]</div>
 <p>In questo caso <strong>l'errore è nullo</strong> dato che la predizione è <strong>esattamente quella attesa</strong>.</p>
 <p>Sommando tutte le componenti dell'errore, otteniamo l'errore totale:</p>
-<p><span class="math center-math">\(BCE = \sum_{i}{BCE_i}\)</span></p>
+<div class="arithmatex">\[BCE = \sum_{i}{BCE_i}\]</div>
 <p>Ma attenzione: in questo caso l’errore risulta <strong>infinito</strong> e questo può avere senso... ma anche no.
 Ma tranquilli, tra poco sistemiamo anche questo dettaglio. Per ora, continuiamo così.</p>
 <p>Ora che abbiamo introdotto il concetto di errore, sarà più chiaro perché i pesi sono davvero al centro di tutto.
@@ -226,45 +226,51 @@ Matematicamente, quale è lo strumento che ci permette di minimizzare o massimiz
 Ok lo ammetto: è una domanda po' tosta se non avete dimestichezza di <strong>analisi matematica</strong>. Quindi ve la risparmio e vi do subito la risposta, 
 senza farvi sudare troppo.
 Parliamo del <strong>Gradiente</strong> o, per i più facinorosi, il vettore delle <strong>Derivate Parziali</strong>. 
-Indicando con <span class="math">\(L\)</span> la funzione di errore e con <span class="math">\(w_i\)</span> un peso generico, possiamo scrivere:</p>
-<div class="math">$$\nabla L = \left (\frac{\partial L}{\partial w_0}, \frac{\partial L}{\partial w_1}, \dots, \frac{\partial L}{\partial w_n} \right)$$</div>
+Indicando con <span class="arithmatex">\(L\)</span> la funzione di errore e con <span class="arithmatex">\(w_i\)</span> un peso generico, possiamo scrivere:</p>
+<div class="arithmatex">\[
+\nabla L = \left (\frac{\partial L}{\partial w_0}, \frac{\partial L}{\partial w_1}, \dots, \frac{\partial L}{\partial w_n} \right)
+\]</div>
 <p>Sì, lo so. Sembra ostrogoto. E forse, in questo momento, mi volete anche un po’ picchiare. Ma in realtà, quello che dice ogni componente 
 della formula, in soldoni, è molto semplice:<br/>
-<strong>Quanto incide un generico <span class="math">\(w_i\)</span> sul valore dell'errore, se lo variassi?</strong><br/>
+<strong>Quanto incide un generico <span class="arithmatex">\(w_i\)</span> sul valore dell'errore, se lo variassi?</strong><br/>
 E guardando all’intero gradiente, la domanda diventa:<br/>
-<strong>Quale è il valore delle singole <span class="math">\(w_i\)</span> per ottenere il minimo (o massimo) dell’errore?</strong></p>
+<strong>Quale è il valore delle singole <span class="arithmatex">\(w_i\)</span> per ottenere il minimo (o massimo) dell’errore?</strong></p>
 <p>Se pensate che la complessità finisca qui... mi spiace deludervi, ci sono ancora un paio di step da affrontare.</p>
 <h3 id="errare-errare-errare-preferisco-ottimizzare">Errare Errare Errare... Preferisco Ottimizzare<a class="headerlink" href="#errare-errare-errare-preferisco-ottimizzare" title="Permanent link"> </a></h3>
 <p>Giusto perché ci piace complicarci la vita, riprendiamo tutta la catena di calcoli che un percettrone esegue, dall’<strong>input</strong> fino alla misura dell’<strong>errore</strong>:</p>
 <ul>
-<li>Calcoliamo la <strong>somma pesata degli ingressi</strong> tramite <strong>funzione di trasferimento</strong>: 
-<span class="math center-math">\(net=H(x_i, w_i)\)</span></li>
-<li>Calcoliamo la <strong>predizione</strong> applicando una <strong>funzione di attivazione</strong> <span class="math">\(\sigma\)</span> all'output della funzione di trasferimento: 
-<span class="math center-math">\(p=\sigma(net)=\sigma(H(x_i, w_i))\)</span></li>
-<li>Calcoliamo l'<strong>errore</strong> tramite una <strong>funzione di errore</strong> <span class="math">\(L\)</span> sull'output della funzione di attivazione:
-<span class="math center-math">\(loss =L(p) = L(\sigma(net))=L(\sigma(H(x_i, w_i)))\)</span></li>
+<li>Calcoliamo la <strong>somma pesata degli ingressi</strong> tramite <strong>funzione di trasferimento</strong>: </li>
 </ul>
-<p>Quindi tutta la catena è rappresentata da questa formula:
-<span class="math center-math">\(L(\sigma(H(x_i, w_i)))\)</span>
-Dal paragrafo precedente inoltre, sapete che:</p>
+<div class="arithmatex">\[net=H(x_i, w_i)\]</div>
+<ul>
+<li>Calcoliamo la <strong>predizione</strong> applicando una <strong>funzione di attivazione</strong> <span class="arithmatex">\(\sigma\)</span> all'output della funzione di trasferimento: </li>
+</ul>
+<div class="arithmatex">\[p=\sigma(net)=\sigma(H(x_i, w_i))\]</div>
+<ul>
+<li>Calcoliamo l'<strong>errore</strong> tramite una <strong>funzione di errore</strong> <span class="arithmatex">\(L\)</span> sull'output della funzione di attivazione:</li>
+</ul>
+<div class="arithmatex">\[loss =L(p) = L(\sigma(net))=L(\sigma(H(x_i, w_i)))\]</div>
+<p>Quindi tutta la catena è rappresentata da questa formula:</p>
+<div class="arithmatex">\[L(\sigma(H(x_i, w_i)))\]</div>
+<p>Dal paragrafo precedente inoltre, sapete che:</p>
 <ol>
-<li>Vogliamo <strong>minimizzare</strong> <span class="math">\(L\)</span>.</li>
+<li>Vogliamo <strong>minimizzare</strong> <span class="arithmatex">\(L\)</span>.</li>
 <li>Lo facciamo <strong>derivando rispetto i pesi</strong>.</li>
 </ol>
 <p>Che <strong>matematicamente</strong> vuol dire scrivere questo:</p>
-<div class="math">$$\frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i}$$</div>
+<div class="arithmatex">\[
+\frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i}
+\]</div>
 <p>Per derivare questo mostro, dobbiamo alla <strong>regola della catena</strong>. Lungi da me scrivere un trattato di analisi matematica, se vuoi trovi una <strong>spiegazione rapida</strong>
-<a href="/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">qui</a>. Applicando la regola alla nostra <strong>funzione composta di errore</strong>, otteniamo:
-</p>
-<div class="math">$$
+<a href="/machine-learning/neurons-for-dummies-3/#la-regola-della-catena">qui</a>. Applicando la regola alla nostra <strong>funzione composta di errore</strong>, otteniamo:</p>
+<div class="arithmatex">\[
 \frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i}=\frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_i}
-$$</div>
-<p>
-Dove:</p>
+\]</div>
+<p>Dove:</p>
 <ul>
-<li><span class="math large-math">\(\frac{\partial L }{\partial p}\)</span>: E' la derivata <strong>dell'errore rispetto alla predizione</strong>.</li>
-<li><span class="math large-math">\(\frac{\partial p }{\partial net}\)</span>: E' la derivata della <strong>funzione di attivazione rispetto l'output della funzione di trasferimento</strong>.</li>
-<li><span class="math large-math">\(\frac{\partial net }{\partial w_i}\)</span>: E' la derivata della <strong>funzione di trasferimento rispetto un generico peso</strong> <span class="math">\(w_i\)</span>.</li>
+<li><span class="arithmatex">\(\frac{\partial L }{\partial p}\)</span>: E' la derivata <strong>dell'errore rispetto alla predizione</strong>.</li>
+<li><span class="arithmatex">\(\frac{\partial p }{\partial net}\)</span>: E' la derivata della <strong>funzione di attivazione rispetto l'output della funzione di trasferimento</strong>.</li>
+<li><span class="arithmatex">\(\frac{\partial net }{\partial w_i}\)</span>: E' la derivata della <strong>funzione di trasferimento rispetto un generico peso</strong> <span class="arithmatex">\(w_i\)</span>.</li>
 </ul>
 <p>Ragazzi, ci siamo quasi, siamo in <strong>dirittura di arrivo</strong>. Un ultimo sforzo concettuale...</p>
 <p>Sappiamo come <strong>calcolare l’errore</strong>.<br/>
@@ -285,19 +291,21 @@ Se sentite che in una direzione il terreno sale, andate nella direzione <strong>
 Quello che state facendo è sostanzialmente un controllo locale, per piccoli passi, e non uno globale. Perchè per fare quello globale dovreste conoscere perfettamente la montagna e voi siete bendati.
 Ecco: <strong>la discesa del gradiente è esattamente questo</strong>. Procedere per <strong>piccoli step</strong> la volta perchè non abbiamo <strong>conoscenza globale</strong> della funzione di errore ma sappiamo <strong>localmente</strong>, con i <strong>pesi a disposizione</strong>, come stiamo andando.
 In formule si scrive così:</p>
-<div class="math">$$w_i^{new} \leftarrow w_i - \eta \cdot \frac{\partial L }{\partial w_i}$$</div>
+<div class="arithmatex">\[
+w_i^{new} \leftarrow w_i - \eta \cdot \frac{\partial L }{\partial w_i}
+\]</div>
 <p>Dove:</p>
 <ul>
-<li><span class="math">\(w_i^{new}\)</span>: E' il nuovo peso trovato facendo una piccola variazione di quello corrente. <em>La nuova posizione dello scalatore</em>.</li>
-<li><span class="math">\(w_i\)</span>: E' il peso corrente. <em>La posizione attuale dello scalatore</em>.</li>
-<li><span class="math">\(\eta\)</span>: Si chiama <strong>learning rate</strong> e indica di quanto <strong>variare il peso</strong>. Rappresenta <em>l'ampiezza del passo dello scalatore</em>.
-Se <span class="math">\(\eta = 0\)</span> lo scalatore rimane immobile ed il nuovo peso è uguale al vecchio. Se <span class="math">\(\eta\)</span> è troppo grande è pericoloso perchè non sai dove metti i piedi
+<li><span class="arithmatex">\(w_i^{new}\)</span>: E' il nuovo peso trovato facendo una piccola variazione di quello corrente. <em>La nuova posizione dello scalatore</em>.</li>
+<li><span class="arithmatex">\(w_i\)</span>: E' il peso corrente. <em>La posizione attuale dello scalatore</em>.</li>
+<li><span class="arithmatex">\(\eta\)</span>: Si chiama <strong>learning rate</strong> e indica di quanto <strong>variare il peso</strong>. Rappresenta <em>l'ampiezza del passo dello scalatore</em>.
+Se <span class="arithmatex">\(\eta = 0\)</span> lo scalatore rimane immobile ed il nuovo peso è uguale al vecchio. Se <span class="arithmatex">\(\eta\)</span> è troppo grande è pericoloso perchè non sai dove metti i piedi
  che matematicamente vuol dire <em>superare la zona dove l'errore era basso</em>.</li>
-<li><span class="math">\(-\frac{\partial L }{\partial w_i}\)</span>: E' la derivata dell'errore rispetto al peso, cioè la direzione in cui l’errore cresce o diminuisce.
+<li><span class="arithmatex">\(-\frac{\partial L }{\partial w_i}\)</span>: E' la derivata dell'errore rispetto al peso, cioè la direzione in cui l’errore cresce o diminuisce.
 Il segno <strong>meno</strong> indica che vogliamo andare nella direzione che fa <strong>diminuire l’errore</strong>.
 Rappresenta la <em>capacità dello scalatore di intuire dove si scende e dove si sale</em>. Infatti se:<ul>
-<li><span class="math">\(\frac{\partial L }{\partial w_i} &gt; 0\)</span>: all'aumentare di <span class="math">\(w_i\)</span>, l'errore <strong>aumenta</strong> e quindi vogliamo che <span class="math">\(w_i^{new}\)</span> diminuisca.</li>
-<li><span class="math">\(\frac{\partial L }{\partial w_i} &lt; 0\)</span>: all'aumentare di <span class="math">\(w_i\)</span>, l'errore <strong>diminuisce</strong> e quindi vogliamo che <span class="math">\(w_i^{new}\)</span> aumenti.</li>
+<li><span class="arithmatex">\(\frac{\partial L }{\partial w_i} &gt; 0\)</span>: all'aumentare di <span class="arithmatex">\(w_i\)</span>, l'errore <strong>aumenta</strong> e quindi vogliamo che <span class="arithmatex">\(w_i^{new}\)</span> diminuisca.</li>
+<li><span class="arithmatex">\(\frac{\partial L }{\partial w_i} &lt; 0\)</span>: all'aumentare di <span class="arithmatex">\(w_i\)</span>, l'errore <strong>diminuisce</strong> e quindi vogliamo che <span class="arithmatex">\(w_i^{new}\)</span> aumenti.</li>
 </ul>
 </li>
 </ul>
@@ -312,96 +320,124 @@ Figura 1. Discesa Del Gradiente</p>
 Vi avevo o no anticipato di non affezionarvi al gradino di Heaviside? E' arrivato il momento di <strong>abbandonarlo</strong>. Sapete come si dice, morta un'attivazione se ne fa un'altra,
 e noi prendiamo la funzione <a href="https://it.wikipedia.org/wiki/Funzione_sigmoidea"><strong>Sigmoide</strong></a>. Siete curiosi di sapere il perchè Heaviside <strong>non è adatto</strong>? Fate un salto <a href="/machine-learning/neurons-for-dummies-3/#sulle-funzioni-di-attivazione">qui</a>.</p>
 <p>La funzione Sigmoidea ha questa formulazione:</p>
-<div class="math">$$\sigma(x)=\frac{1}{1+e^{-x}}$$</div>
+<div class="arithmatex">\[
+\sigma(x)=\frac{1}{1+e^{-x}}
+\]</div>
 <p>Ed ha questo andamento grafico:</p>
 <p class="image-caption"><img alt="SIGMOID" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_2/sigmoid.png"/>
 Figura 2. Funzione Sigmoide</p>
-<p>Come potete vedere, l'output è sempre compreso nel range <span class="math">\((0, 1)\)</span>.<br/>
-Voi date <span class="math">\(x=\infty\)</span>? La sigmoide se ne frega e vi da <span class="math">\(1.\)</span><br/>
-Voi date <span class="math">\(x=-\infty\)</span>? La sigmoide se ne frega e vi da <span class="math">\(0\)</span>.<br/>
+<p>Come potete vedere, l'output è sempre compreso nel range <span class="arithmatex">\((0, 1)\)</span>.<br/>
+Voi date <span class="arithmatex">\(x=\infty\)</span>? La sigmoide se ne frega e vi da <span class="arithmatex">\(1.\)</span><br/>
+Voi date <span class="arithmatex">\(x=-\infty\)</span>? La sigmoide se ne frega e vi da <span class="arithmatex">\(0\)</span>.<br/>
 La sigmoide è troppo forte. Non sfidate la sigmoide perchè tanto perdete.</p>
 <p>Prove di forza a parte, ne converrete che la sigmoide è la funzione ideale per rappresentare una <strong>probabilità</strong>. Una probabilità, in fondo, 
-non è altro che un <strong>numero decimale</strong> compreso tra <span class="math">\([0, 1]\)</span> dove:</p>
+non è altro che un <strong>numero decimale</strong> compreso tra <span class="arithmatex">\([0, 1]\)</span> dove:</p>
 <ul>
-<li><span class="math">\(1\)</span> indica <em>sicuramente sì</em> </li>
-<li><span class="math">\(0\)</span> indica <em>sicuramente no</em></li>
-<li><span class="math">\(0.5\)</span> indica <em>boh</em></li>
+<li><span class="arithmatex">\(1\)</span> indica <em>sicuramente sì</em> </li>
+<li><span class="arithmatex">\(0\)</span> indica <em>sicuramente no</em></li>
+<li><span class="arithmatex">\(0.5\)</span> indica <em>boh</em></li>
 </ul>
 <p>Ora che siamo ormai esperti di <strong>sigmoidi</strong>, riprendiamo in mano il nostro caro <strong>percettrone</strong>:</p>
 <p class="image-caption"><img alt="Artificial Neuron" class="image" src="https://www.lucadivita.it/images/machine_learning/neurons_for_dummies_2/artificial_neuron.png"/>
 Figura 3. Neurone Artificiale*</p>
 <p>e, riprendiamo i nostri pesi e bias:</p>
 <ul>
-<li><span class="math">\(w_1 = 0.5\)</span></li>
-<li><span class="math">\(w_2 = 0.5\)</span></li>
-<li><span class="math">\(b=1\)</span></li>
+<li><span class="arithmatex">\(w_1 = 0.5\)</span></li>
+<li><span class="arithmatex">\(w_2 = 0.5\)</span></li>
+<li><span class="arithmatex">\(b=1\)</span></li>
 </ul>
-<p>Consideriamo il caso 
-<span class="math center-math">\(x_1 = 0, x_2 = 1 \Rightarrow y=0\)</span>
-L'output della funzione di attivazione sarà:
-<span class="math center-math">\(net = 0 \cdot 0.5 + 1 \cdot 0.5 + 1 = 1.5\)</span>
-e di conseguenza l'output della sigmoide è:
-<span class="math center-math">\( p = \sigma(1.5) \approx 0.817\)</span>
-Vogliamo calcolare la derivata dell'errore rispetto i pesi (e del bias) giusto?! Ossia:</p>
-<div class="math">$$\frac{\partial L }{\partial w_1} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_1}$$</div>
-<div class="math">$$\frac{\partial L }{\partial w_2} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_2}$$</div>
-<div class="math">$$\frac{\partial L }{\partial b} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial b}$$</div>
+<p>Consideriamo il caso </p>
+<div class="arithmatex">\[x_1 = 0, x_2 = 1 \Rightarrow y=0\]</div>
+<p>L'output della funzione di attivazione sarà:</p>
+<div class="arithmatex">\[net = 0 \cdot 0.5 + 1 \cdot 0.5 + 1 = 1.5\]</div>
+<p>e di conseguenza l'output della sigmoide è:</p>
+<div class="arithmatex">\[p = \sigma(1.5) \approx 0.817\]</div>
+<p>Vogliamo calcolare la derivata dell'errore rispetto i pesi (e del bias) giusto?! Ossia:</p>
+<div class="arithmatex">\[
+\frac{\partial L }{\partial w_1} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_1}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L }{\partial w_2} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_2}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L }{\partial b} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial b}
+\]</div>
 <p>Ora sappiamo come si calcola un errore, giusto? Abbiamo introdotto la <strong>Binary Cross Entropy (BCE)</strong> proprio per questo. Quindi, vediamo <strong>passo dopo passo</strong> cosa succede davvero.</p>
 <ul>
-<li><span class="math large-math">\(\frac{\partial L }{\partial p}\)</span>: E' la derivata della funzione di errore rispetto la predizione. Dall’analisi matematica sappiamo che per la Binary Cross Entropy, si calcola così:
-<div class="math">$$\left( \frac{y}{p} + \frac{ 1 - y}{ 1 - p} \right)$$</div>
-Sostituendo con <span class="math">\(p=0.817\)</span> e <span class="math">\(y=0\)</span>, otteniamo:
-<div class="math">$$\left( \frac{0}{0.817} + \frac{ 1 - 0}{ 1 - 0.817} \right) \approx 5.481$$</div>
-</li>
-<li><span class="math large-math">\(\frac{\partial p }{\partial net}\)</span>: E' la derivata della funzione di attivazione rispetto l'output della funzione di trasferimento. Nel caso della sigmoide, l’analisi matematica ci dice che:
-<div class="math">$$\frac{\partial p }{\partial net} = \sigma(net) \cdot (1 - \sigma(net)) = p \cdot (1 - p)$$</div>
-Sostituendo con <span class="math">\(p=0.817\)</span>, otteniamo:
-<div class="math">$$\frac{\partial p }{\partial net} = p \cdot (1 - p) = 0.817 \cdot (1-0.817) \approx 0.149$$</div>
-</li>
-<li><span class="math large-math">\(\frac{\partial net }{\partial w_i}\)</span>: E' la derivata della funzione di trasferimento rispetto un generico peso. Dall'analisi matematica sappiamo che la sua derivata 
+<li><span class="arithmatex">\(\frac{\partial L }{\partial p}\)</span>: E' la derivata della funzione di errore rispetto la predizione. Dall’analisi matematica sappiamo che per la Binary Cross Entropy, si calcola così:
+$$
+\left( \frac{y}{p} + \frac{ 1 - y}{ 1 - p} \right)
+$$
+Sostituendo con <span class="arithmatex">\(p=0.817\)</span> e <span class="arithmatex">\(y=0\)</span>, otteniamo:
+$$
+\left( \frac{0}{0.817} + \frac{ 1 - 0}{ 1 - 0.817} \right) \approx 5.481
+$$</li>
+<li><span class="arithmatex">\(\frac{\partial p }{\partial net}\)</span>: E' la derivata della funzione di attivazione rispetto l'output della funzione di trasferimento. Nel caso della sigmoide, l’analisi matematica ci dice che:
+$$
+\frac{\partial p }{\partial net} = \sigma(net) \cdot (1 - \sigma(net)) = p \cdot (1 - p)
+$$
+Sostituendo con <span class="arithmatex">\(p=0.817\)</span>, otteniamo:
+$$
+\frac{\partial p }{\partial net} = p \cdot (1 - p) = 0.817 \cdot (1-0.817) \approx 0.149
+$$</li>
+<li><span class="arithmatex">\(\frac{\partial net }{\partial w_i}\)</span>: E' la derivata della funzione di trasferimento rispetto un generico peso. Dall'analisi matematica sappiamo che la sua derivata 
 è:
-<div class="math">$$ \frac{\partial net }{\partial w_i} = \frac{\partial (x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) }{\partial w_i} = x_i$$</div> 
+$$
+\frac{\partial net }{\partial w_i} = \frac{\partial (x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) }{\partial w_i} = x_i
+$$
 Insomma, è molto semplice: la derivata è il <strong>valore dell’ingresso associato a quel peso</strong>.
 Nel nostro caso:
-<div class="math">$$\frac{\partial net }{\partial w_1} = x_1 = 0$$</div>
-<div class="math">$$\frac{\partial net }{\partial w_2} = x_2 = 1$$</div>
-</li>
-<li><span class="math large-math">\(\frac{\partial net }{\partial b}\)</span>: E' la derivata della funzione di trasferimento rispetto il bias. Dall'analisi matematica sappiamo che la sua derivata 
+$$
+\frac{\partial net }{\partial w_1} = x_1 = 0
+$$
+$$
+\frac{\partial net }{\partial w_2} = x_2 = 1
+$$</li>
+<li><span class="arithmatex">\(\frac{\partial net }{\partial b}\)</span>: E' la derivata della funzione di trasferimento rispetto il bias. Dall'analisi matematica sappiamo che la sua derivata 
 è:
-<div class="math">$$ \frac{\partial net }{\partial b} = \frac{\partial (x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) }{\partial b} = 1$$</div> 
+$$
+\frac{\partial net }{\partial b} = \frac{\partial (x_1 \cdot w_1 + x_2 \cdot w_2 + \dots + x_n \cdot w_n + b) }{\partial b} = 1
+$$
 Come puoi vedere, il bias è sempre <strong>derivabile con valore 1</strong>, perché è una <strong>costante additiva indipendente</strong> dagli ingressi.</li>
 </ul>
 <p>Ora abbiamo <strong>tutto quello che ci serve</strong> per calcolare la derivata dell’errore rispetto ai pesi.</p>
-<div class="math">$$\frac{\partial L }{\partial w_1} = 5.481 \cdot 0.149 \cdot 0 = 0$$</div>
-<div class="math">$$\frac{\partial L }{\partial w_2} = 5.481 \cdot 0.149 \cdot 1 \approx 0.8175$$</div>
-<div class="math">$$\frac{\partial L }{\partial b} = 5.481 \cdot 0.149 \cdot 1 \approx 0.8175$$</div>
-<p>Ed infine, ponendo <span class="math">\(\eta = 0.5\)</span>, possiamo calcolare i <strong>nuovi pesi aggiornati</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
+\frac{\partial L }{\partial w_1} = 5.481 \cdot 0.149 \cdot 0 = 0
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L }{\partial w_2} = 5.481 \cdot 0.149 \cdot 1 \approx 0.8175
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial L }{\partial b} = 5.481 \cdot 0.149 \cdot 1 \approx 0.8175
+\]</div>
+<p>Ed infine, ponendo <span class="arithmatex">\(\eta = 0.5\)</span>, possiamo calcolare i <strong>nuovi pesi aggiornati</strong>:</p>
+<div class="arithmatex">\[
 w_1 = w_1 - \eta \cdot \frac{\partial L }{\partial w_1} = 0.5 - 0.5 \cdot 0 = 0.5
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 w_2 = w_2 - \eta \cdot \frac{\partial L }{\partial w_2} = 0.5 - 0.5 \cdot 0.817 \approx 0.091
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 b = b - \eta \cdot \frac{\partial L }{\partial b} = 1. - 0.5 \cdot 0.817 \approx 0.591
-$$</div>
+\]</div>
 <p>Questi nuovi pesi sostituiscono i vecchi, e a quel punto ci ritroviamo con una <strong>rete neurale aggiornata</strong>.
-Questo processo si ripete per <span class="math">\(n\)</span> iterazioni (o <strong>epoche</strong>). 
+Questo processo si ripete per <span class="arithmatex">\(n\)</span> iterazioni (o <strong>epoche</strong>). 
 E in ogni epoca, addestriamo il percettrone con lo stesso procedimento su <strong>tutti i casi</strong> del problema.<br/>
 Ora, senza rifare i calcoli per ogni singolo campione, vediamo cosa succede con lo stesso esempio ma alla seconda epoca.
-Fate un piccolo <em>atto di fede</em> quando vi dico che i pesi valgono: 
-<span class="math center-math">\(w_1 = 0.356\)</span>
-<span class="math center-math">\(w_2 = 0.3216\)</span>
-<span class="math center-math">\(b = 0.1703\)</span>
-e quindi la funzione di trasferimento vale:
-<span class="math center-math">\(net = 0 \cdot 0.356 + 1 \cdot 0.3216 + 0.1703 \approx 0.49\)</span>
-da cui:
-<span class="math center-math">\( p = \sigma(0.49) \approx 0.66\)</span>
-Avete visto cos’è successo?<br/>
-Siamo passati da <span class="math">\(p=0.81\)</span> a <span class="math">\(p=0.66\)</span>.<br/>
-Questo vuol dire che il percettrone ha <em>capito</em> che <span class="math">\(p=0.81\)</span> non era la risposta giusta, e ha iniziato ad <strong>abbassare la probabilità</strong> che l'output sia <span class="math">\(1\)</span>. 
+Fate un piccolo <em>atto di fede</em> quando vi dico che i pesi valgono: </p>
+<div class="arithmatex">\[
+w_1 = 0.356 \\
+w_2 = 0.3216 \\
+b = 0.1703
+\]</div>
+<p>e quindi la funzione di trasferimento vale:</p>
+<div class="arithmatex">\[net = 0 \cdot 0.356 + 1 \cdot 0.3216 + 0.1703 \approx 0.49\]</div>
+<p>da cui:</p>
+<div class="arithmatex">\[p = \sigma(0.49) \approx 0.66\]</div>
+<p>Avete visto cos’è successo? Siamo passati da <span class="arithmatex">\(p=0.81\)</span> a <span class="arithmatex">\(p=0.66\)</span>. 
+Questo vuol dire che il percettrone ha <em>capito</em> che <span class="arithmatex">\(p=0.81\)</span> non era la risposta giusta, e ha iniziato ad <strong>abbassare la probabilità</strong> che l'output sia <span class="arithmatex">\(1\)</span>. 
 Con il proseguire dell’addestramento, quel valore <strong>continuerà a scendere</strong> fino ad arrivare sotto la soglia 
-<span class="math">\(p &lt; 0.5\)</span> cioè: è <strong>più probabile che la risposta</strong> sia <span class="math">\(0\)</span>, che guarda caso è la predizione corretta per quella casistica nel problema AND.<br/>
+<span class="arithmatex">\(p &lt; 0.5\)</span> cioè: è <strong>più probabile che la risposta</strong> sia <span class="arithmatex">\(0\)</span>, che guarda caso è la predizione corretta per quella casistica nel problema AND.<br/>
 Quello che avete appena visto si chiama <strong>Propagazione dell'Errore</strong> o, per gli amici, <strong>Backpropagation</strong>.
 Ora che siete arrivati fin qui, immaginate questi passaggi, semplici o complessi giudicatelo voi, non su un singolo percettrone ma su <a href="/machine-learning/neurons-for-dummies-3/#da-uno-a-molti">centinaia</a> disposti su più layer. 
 <strong>Da spararsi vero!?</strong><br/>
@@ -417,80 +453,77 @@ ma ora sapete <em>perchè</em> dietro le reti neurali non c'è magia... solo mol
 <li>uno <strong>snippet di codice</strong> che mette insieme tutto quanto</li>
 </ul>
 <p>Considerando come pesi di partenza:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 w_1=0.5, w_2=0.5, b = 1.
-$$</div>
+\]</div>
 <p>come funzione di attivazione una Sigmoide, e un learning rate pari a:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \eta = 0.5
-$$</div>
+\]</div>
 <p>definiamo la <strong>predizione binaria</strong> nel seguente modo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \overline{p} = 
 \begin{cases}
 1 &amp; \text{se } p \geq 0.5 \\
 0 &amp; \text{se } p &lt; 0.5
 \end{cases}
-$$</div>
+\]</div>
 <p>ed indichiamo infine con:</p>
 <ul>
-<li><span class="math">\(p_{old}/p\)</span> la <strong>probabilità predetta</strong> prima e dopo dell'aggiornamento dei pesi</li>
-<li><span class="math">\(\overline{p_{old}}/\overline{p}\)</span> la <strong>predizione binaria</strong> prima e dopo dell'aggiornamento dei pesi</li>
-<li><span class="math">\(w_i^{old}/w_i\)</span> i <strong>pesi</strong> prima e dopo dell'aggiornamento</li>
-<li><span class="math">\(b^{old}/b\)</span> il <strong>bias</strong> prima e dopo dell'aggiornamento</li>
+<li><span class="arithmatex">\(p_{old}/p\)</span> la <strong>probabilità predetta</strong> prima e dopo dell'aggiornamento dei pesi</li>
+<li><span class="arithmatex">\(\overline{p_{old}}/\overline{p}\)</span> la <strong>predizione binaria</strong> prima e dopo dell'aggiornamento dei pesi</li>
+<li><span class="arithmatex">\(w_i^{old}/w_i\)</span> i <strong>pesi</strong> prima e dopo dell'aggiornamento</li>
+<li><span class="arithmatex">\(b^{old}/b\)</span> il <strong>bias</strong> prima e dopo dell'aggiornamento</li>
 </ul>
 <p>I risultati ottenuti su <strong>3 epoche</strong> sono i seguenti:</p>
 <p><strong>Epoca 1</strong></p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|r|r|r|r|r|r|r|r|r|}
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|r|r|r|r|r|r|r|r|r|}
 \hline 
 x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
 \hline 
-0 &amp; 1 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.5 &amp; 0.5 &amp; 1.0 &amp; 0.81 &amp; 0.66 &amp; \color{red}{\mathbf{1}} &amp; \color{red}{\mathbf{1}} &amp; 0 \\ 
+0 &amp; 1 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.5 &amp; 0.5 &amp; 1.0 &amp; 0.81 &amp; 0.66 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{red}{\mathbf{1}} &amp; 0 \\ 
 \hline 
-1 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.74 &amp; 0.58 &amp; \color{red}{\mathbf{1}} &amp; \color{red}{\mathbf{1}} &amp; 0 \\ 
+1 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.74 &amp; 0.58 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{red}{\mathbf{1}} &amp; 0 \\ 
 \hline 
-0 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.55 &amp; 0.48 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+0 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.55 &amp; 0.48 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
 \hline 
-1 &amp; 1 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.53 &amp; 0.70 &amp; \color{green}{\mathbf{1}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
+1 &amp; 1 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.53 &amp; 0.70 &amp; \textcolor{green}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{1}} &amp; 1 \\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <p><strong>Epoca 2</strong></p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|r|r|r|r|r|r|r|r|r|}
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|r|r|r|r|r|r|r|r|r|}
 \hline 
 x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
 \hline 
-0 &amp; 1 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.62 &amp; 0.46 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+0 &amp; 1 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.62 &amp; 0.46 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
 \hline 
-1 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.55 &amp; 0.41 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+1 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.55 &amp; 0.41 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
 \hline 
-0 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.39 &amp; 0.35 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+0 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.39 &amp; 0.35 &amp; \textcolor{green}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
 \hline 
-1 &amp; 1 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.37 &amp; 0.60 &amp; \color{red}{\mathbf{0}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
+1 &amp; 1 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.37 &amp; 0.60 &amp; \textcolor{red}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{1}} &amp; 1 \\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <p><strong>Epoca 3</strong></p>
-<div class="math">$$
-\begin{array} 
-{|r|r|r|r|r|r|r|r|r|r|r|r|}
+<div class="arithmatex">\[
+\begin{array}{|r|r|r|r|r|r|r|r|r|r|r|r|}
 \hline 
 x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
 \hline 
-0 &amp; 1 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.50 &amp; 0.38 &amp; \color{red}{\mathbf{1}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+0 &amp; 1 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.50 &amp; 0.38 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
 \hline 
-1 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.45 &amp; 0.34 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+1 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.45 &amp; 0.34 &amp; \textcolor{green}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
 \hline 
-0 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.31 &amp; 0.28 &amp; \color{green}{\mathbf{0}} &amp; \color{green}{\mathbf{0}} &amp; 0 \\ 
+0 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.31 &amp; 0.28 &amp; \textcolor{green}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
 \hline 
-1 &amp; 1 &amp; 0.49 &amp; 0.40 &amp; -0.60 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.33 &amp; 0.57 &amp; \color{red}{\mathbf{0}} &amp; \color{green}{\mathbf{1}} &amp; 1 \\ 
+1 &amp; 1 &amp; 0.49 &amp; 0.40 &amp; -0.60 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.33 &amp; 0.57 &amp; \textcolor{red}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{1}} &amp; 1 \\ 
 \hline  
 \end{array}
-$$</div>
+\]</div>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">Perceptron</span> <span class="kn">import</span> <span class="n">Perceptron</span>
 
 <span class="k">class</span> <span class="nc">WeightedSum</span><span class="p">(</span><span class="n">TransferFunction</span><span class="p">):</span>
@@ -604,68 +637,6 @@ $$</div>
 Ultimissima nota prima di chiudere. Questo codice è da considerarsi meramente <strong>educativo</strong>. Nella realtà si utilizzano librerie come PyTorch o Keras, per <strong>astrarre</strong> questo livello 
 di complessità. Sappiate in ogni caso che non è finita qui, c'è la <strong>parte tre</strong> ad attendervi...</p>
 <p>Alla Prossima.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -729,6 +700,10 @@ di complessità. Sappiate in ogni caso che non è finita qui, c'è la <strong>pa
                 <li><a href="https://www.lucadivita.it/tag/neuroni.html">neuroni</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
     </div>
 
 </article>

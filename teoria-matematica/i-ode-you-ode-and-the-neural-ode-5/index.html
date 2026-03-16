@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Io ODO, Tu ODI e la Neural ODE - 5</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/teoria-matematica.html">Teoria & Matematica</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-10-01T00:00:00+02:00">01 ottobre 2025</time>
-                - <a href="https://www.lucadivita.it/category/teoria-matematica.html">Teoria & Matematica</a>
             </small>
         </p>
     </header>
@@ -255,9 +255,9 @@ data = data_creator.prepare_data(data)
 </code></pre></div>
 <p>quello che stiamo chiedendo è di avere un dataset composto da:</p>
 <ul>
-<li><span class="math">\(350\)</span> samples di train campionati <strong>casualmente</strong> nel range temporale <span class="math">\((0, 12)\)</span> secondi, ed i relativi <strong>istanti temporali</strong>.</li>
-<li><span class="math">\(200\)</span> samples di test campionati <strong>casualmente</strong> nel range temporale <span class="math">\((0, 12)\)</span> secondi, ed i relativi <strong>istanti temporali</strong>.</li>
-<li><span class="math">\(300\)</span> samples di <strong>forecast</strong> nel range <span class="math">\((12, 18)\)</span> secondi (utilizzati solo per verificare se le predizioni sono corrette), ed i relativi <strong>istanti temporali</strong>.</li>
+<li><span class="arithmatex">\(350\)</span> samples di train campionati <strong>casualmente</strong> nel range temporale <span class="arithmatex">\((0, 12)\)</span> secondi, ed i relativi <strong>istanti temporali</strong>.</li>
+<li><span class="arithmatex">\(200\)</span> samples di test campionati <strong>casualmente</strong> nel range temporale <span class="arithmatex">\((0, 12)\)</span> secondi, ed i relativi <strong>istanti temporali</strong>.</li>
+<li><span class="arithmatex">\(300\)</span> samples di <strong>forecast</strong> nel range <span class="arithmatex">\((12, 18)\)</span> secondi (utilizzati solo per verificare se le predizioni sono corrette), ed i relativi <strong>istanti temporali</strong>.</li>
 </ul>
 <p>Questi dataset sono strutturati in questo modo:</p>
 <div class="highlight"><pre><span></span><code>idx   t_i      x_i                  t_next   x_next               dt      
@@ -272,18 +272,18 @@ data = data_creator.prepare_data(data)
 </code></pre></div>
 <p>dove:</p>
 <ul>
-<li><span class="math">\(t_i\)</span>: E' <strong>l'attuale</strong> istante temporale.</li>
-<li><span class="math">\(x_i\)</span>: E' lo stato nell'istante <strong>attuale</strong>, calcolato sia con l'aggiunta di <strong>rumore</strong> che senza, nel caso di <code>train</code> e <code>test</code>.</li>
-<li><span class="math">\(t_{next}\)</span>: E' l'istante temporale <strong>successivo</strong>.</li>
-<li><span class="math">\(x_{next}\)</span>: E' lo <strong>stato</strong> nell'istante temporale successivo. Nel caso di <code>train</code>, lo stato è il valore a <span class="math">\(K\)</span> <strong>passi di distanza</strong>, con <span class="math">\(K\)</span> intero casuale.</li>
-<li><span class="math">\(dt\)</span>: E' il <strong>delta</strong> trascorso dai due istanti temporali.</li>
+<li><span class="arithmatex">\(t_i\)</span>: E' <strong>l'attuale</strong> istante temporale.</li>
+<li><span class="arithmatex">\(x_i\)</span>: E' lo stato nell'istante <strong>attuale</strong>, calcolato sia con l'aggiunta di <strong>rumore</strong> che senza, nel caso di <code>train</code> e <code>test</code>.</li>
+<li><span class="arithmatex">\(t_{next}\)</span>: E' l'istante temporale <strong>successivo</strong>.</li>
+<li><span class="arithmatex">\(x_{next}\)</span>: E' lo <strong>stato</strong> nell'istante temporale successivo. Nel caso di <code>train</code>, lo stato è il valore a <span class="arithmatex">\(K\)</span> <strong>passi di distanza</strong>, con <span class="arithmatex">\(K\)</span> intero casuale.</li>
+<li><span class="arithmatex">\(dt\)</span>: E' il <strong>delta</strong> trascorso dai due istanti temporali.</li>
 </ul>
 <p>Facendo il plot di questi dati otteniamo l'immagine che segue:</p>
 <p class="image-caption"><img alt="TrueData" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_5/dataset_LotkaVolterra_train.svg"/>
 Figura 1. Dataset di Train Vero e Rumoroso</p>
-<p>Se vi steste chiedendo come, di fatto, risolviamo la dinamica, lo facciamo tramite il metodo <code>odeint</code> definito dalla libreria <a href="https://github.com/rtqichen/torchdiffeq" target="_blank"><strong>torchdiffeq</strong></a>,
+<p>Se vi steste chiedendo come, di fatto, risolviamo la dinamica, lo facciamo tramite il metodo <code>odeint</code> definito dalla libreria <a href="https://github.com/rtqichen/torchdiffeq"><strong>torchdiffeq</strong></a>,
 che fornisce metodi di <strong>alto livello</strong> per la gestione delle NODE. Questo metodo implementa vari ODESolver, 
-e nel nostro caso è stato utilizzato <a href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method" target="_blank"><strong>dopri5</strong></a></p>
+e nel nostro caso è stato utilizzato <a href="https://en.wikipedia.org/wiki/Dormand%E2%80%93Prince_method"><strong>dopri5</strong></a></p>
 <h5 id="definizione-delle-reti">Definizione Delle Reti<a class="headerlink" href="#definizione-delle-reti" title="Permanent link"> </a></h5>
 <p>Dato che l'obiettivo principale è comparare i risultati a <strong>parità di condizioni</strong>, si sono utilizzate due reti quasi identiche. Andiamo a vedere perché sono <em>quasi identiche</em>
 e non <em>identiche</em>.</p>
@@ -324,18 +324,18 @@ e non <em>identiche</em>.</p>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">SimpleNet</span><span class="p">(),</span><span class="w"> </span><span class="nx">NODE</span><span class="p">()</span>
 </code></pre></div>
-<p>Mentre per le NODE, l'utilizzo del tempo <span class="math">\(t\)</span> è <strong>implicito</strong> nella loro natura, questo non è vero per le reti classiche.
+<p>Mentre per le NODE, l'utilizzo del tempo <span class="arithmatex">\(t\)</span> è <strong>implicito</strong> nella loro natura, questo non è vero per le reti classiche.
 Quindi per queste ultime, dobbiamo considerare esplicitamente il fattore tempo e lo facciamo considerandolo come <strong>feature aggiuntiva</strong>. Per via di ciò la rete neurale classica, che chiamiamo 
 <code>SimpleNet</code> ha una dimensione in più in input. </p>
-<p>La <code>NODE</code> invece, accetta il parametro <span class="math">\(t\)</span> in fase di forward ma viene utilizzato per il calcolo della <strong>dinamica</strong> e non
+<p>La <code>NODE</code> invece, accetta il parametro <span class="arithmatex">\(t\)</span> in fase di forward ma viene utilizzato per il calcolo della <strong>dinamica</strong> e non
 come feature in maniera diretta. Quindi è <strong>necessario</strong> passarlo, ma non incide sul numero di <strong>neuroni</strong>, che rimangono pari al numero di <strong>variabili</strong> del problema. Avendo quindi
 due architetture quasi uguali ma non identiche, mi sono dovuto accontentare di avere due <strong>inizializzazioni</strong> diverse dei pesi, ahimè non si può avere tutto nella vita. Ma almeno la 
-salute c'è (per ora). Ultima nota. No non sono impazzito, se ho utilizzato le <code>Tanh</code> come funzioni di <strong>attivazione</strong> è perché <code>torchdiffeq</code> <a href="https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md" target="_blank"><strong>specifica</strong> di evitare</a> 
+salute c'è (per ora). Ultima nota. No non sono impazzito, se ho utilizzato le <code>Tanh</code> come funzioni di <strong>attivazione</strong> è perché <code>torchdiffeq</code> <a href="https://github.com/rtqichen/torchdiffeq/blob/master/FAQ.md"><strong>specifica</strong> di evitare</a> 
 l'utilizzo di attivazioni non smooth. </p>
 <p>Ora che abbiamo due modelli pronti e un dataset su cui metterli alla prova, passiamo finalmente all’<strong>addestramento</strong>.</p>
 <h5 id="addestramento">Addestramento<a class="headerlink" href="#addestramento" title="Permanent link"> </a></h5>
-<p>Essendo le reti di <strong>natura</strong> diversa, lo sarà anche il train. Ad alto livello neanche troppo a dire la verità ma a basso livello beh...leggetevi la <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" target="_blank">quarta parte</a> 
-e la serie di articoli sui <a href="/machine-learning/neurons-for-dummies-1/" target="_blank">neuroni</a> per capire quanto in realtà siano profondamente diversi. Dato che, fortunatamente,
+<p>Essendo le reti di <strong>natura</strong> diversa, lo sarà anche il train. Ad alto livello neanche troppo a dire la verità ma a basso livello beh...leggetevi la <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">quarta parte</a> 
+e la serie di articoli sui <a href="/machine-learning/neurons-for-dummies-1/">neuroni</a> per capire quanto in realtà siano profondamente diversi. Dato che, fortunatamente,
 qualcuno ha già smazzato il lavoro sporco per noi, questa differenza ad <strong>alto livello</strong> si nota ben poco. Andiamola a vedere:</p>
 <div class="highlight"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">train_mlp</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">train_loader</span><span class="p">,</span><span class="w"> </span><span class="n">resamp_loader</span><span class="p">)</span><span class="err">:</span>
 <span class="w">    </span><span class="p">...</span>
@@ -377,21 +377,21 @@ qualcuno ha già smazzato il lavoro sporco per noi, questa differenza ad <strong
 <span class="w">        </span><span class="p">...</span>
 </code></pre></div>
 <p>Come si può vedere, quando andiamo ad addestrare <code>SimpleNet</code> attraverso la funzione <code>train_mlp</code>, forniamo i dati in <strong>batch</strong>. Questo perché nel suo utilizzo classico, la rete neurale può gestirlo. Per cui quello che facciamo 
-è fornire in batch, alla rete, delle coppie <span class="math">\((x_i, dt)\)</span>. La generica predizione <span class="math">\(y\)</span> della rete, ottenuta per ogni coppia, rappresenta quanto <strong>varrà</strong> lo stato di input <span class="math">\(x_i\)</span>, 
-trascorsi <span class="math">\(dt\)</span> secondi. La loss, che è una <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html" target="_blank"><strong>MSE</strong></a>, viene calcolata usando lo <strong>stato predetto</strong> <span class="math">\(y\)</span> e lo <strong>stato di arrivo</strong> vero <span class="math">\(x_{next}\)</span>.</p>
+è fornire in batch, alla rete, delle coppie <span class="arithmatex">\((x_i, dt)\)</span>. La generica predizione <span class="arithmatex">\(y\)</span> della rete, ottenuta per ogni coppia, rappresenta quanto <strong>varrà</strong> lo stato di input <span class="arithmatex">\(x_i\)</span>, 
+trascorsi <span class="arithmatex">\(dt\)</span> secondi. La loss, che è una <a href="https://docs.pytorch.org/docs/stable/generated/torch.nn.MSELoss.html"><strong>MSE</strong></a>, viene calcolata usando lo <strong>stato predetto</strong> <span class="arithmatex">\(y\)</span> e lo <strong>stato di arrivo</strong> vero <span class="arithmatex">\(x_{next}\)</span>.</p>
 <p>Per quanto riguarda <code>NODE</code> invece, come si può vedere, usa al suo interno il <strong>metodo</strong> <code>odeint</code> ma questa volta non forniamo una ODE rappresentante la dinamica, bensì la <strong>rete neurale</strong>
 stessa, e lo scopo è far si che <strong>impari</strong> la dinamica a partire dai dati, e quindi fare la <strong>corretta previsione di come evolverà il sistema</strong>. Mentre nelle <code>SimpleNet</code> la differenza temporale era fornita 
 e quindi si possono gestire i batch, qui questo concetto <strong>viene meno</strong>. Questo perché il tempo è <strong>implicito</strong> nelle NODE come detto, ma <code>odeint</code> lavora con <strong>un solo range temporale</strong> la volta, mentre
-per ogni <span class="math">\(x_i\)</span> del dataset, il <span class="math">\(dt\)</span> cambia. Quindi quello che avviene <strong>ciclicamente</strong> nel train è questo:</p>
+per ogni <span class="arithmatex">\(x_i\)</span> del dataset, il <span class="arithmatex">\(dt\)</span> cambia. Quindi quello che avviene <strong>ciclicamente</strong> nel train è questo:</p>
 <ol>
-<li>Prendiamo lo stato <span class="math">\(x_i\)</span> come <strong>stato iniziale</strong>.</li>
-<li>Prendiamo <strong>l'istante temporale</strong> <span class="math">\(t_i\)</span> associato allo stato <span class="math">\(x_i\)</span>.</li>
-<li>Prendiamo <strong>l'istante finale</strong> <span class="math">\(t_{next}\)</span> associato allo stato finale <span class="math">\(x_{next}\)</span>.</li>
-<li><strong>Integriamo</strong> tramite un ODESolver la dinamica <span class="math">\(f\)</span> rappresentata dalla rete <code>NODE</code> dall'istante iniziale <span class="math">\(t_i\)</span> a quello finale <span class="math">\(t_{next}\)</span>, con condizione iniziale <span class="math">\(x_i\)</span>.</li>
-<li>Prendiamo lo <strong>stato finale</strong> <span class="math">\(x_T\)</span> che rappresenta il valore predetto.</li>
+<li>Prendiamo lo stato <span class="arithmatex">\(x_i\)</span> come <strong>stato iniziale</strong>.</li>
+<li>Prendiamo <strong>l'istante temporale</strong> <span class="arithmatex">\(t_i\)</span> associato allo stato <span class="arithmatex">\(x_i\)</span>.</li>
+<li>Prendiamo <strong>l'istante finale</strong> <span class="arithmatex">\(t_{next}\)</span> associato allo stato finale <span class="arithmatex">\(x_{next}\)</span>.</li>
+<li><strong>Integriamo</strong> tramite un ODESolver la dinamica <span class="arithmatex">\(f\)</span> rappresentata dalla rete <code>NODE</code> dall'istante iniziale <span class="arithmatex">\(t_i\)</span> a quello finale <span class="arithmatex">\(t_{next}\)</span>, con condizione iniziale <span class="arithmatex">\(x_i\)</span>.</li>
+<li>Prendiamo lo <strong>stato finale</strong> <span class="arithmatex">\(x_T\)</span> che rappresenta il valore predetto.</li>
 </ol>
-<p>Questi passaggi avvengono per tutti i campioni del dataset e, una volta completato il ciclo, calcoliamo la loss MSE usando <strong>stati predetti</strong> <span class="math">\(x_T\)</span> e <strong>stati veri</strong> <span class="math">\(x_{next}\)</span>. 
-Addestrando le reti con <span class="math">\(100\)</span> epoche, l'output di questa fase è qualcosa del tipo:</p>
+<p>Questi passaggi avvengono per tutti i campioni del dataset e, una volta completato il ciclo, calcoliamo la loss MSE usando <strong>stati predetti</strong> <span class="arithmatex">\(x_T\)</span> e <strong>stati veri</strong> <span class="arithmatex">\(x_{next}\)</span>. 
+Addestrando le reti con <span class="arithmatex">\(100\)</span> epoche, l'output di questa fase è qualcosa del tipo:</p>
 <div class="highlight"><pre><span></span><code><span class="n">Loading</span><span class="w"> </span><span class="n">Dataset</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">LotkaVolterra</span>
 <span class="o">[</span><span class="n">ckpt</span><span class="o">]</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">best</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="n">epoch</span><span class="w"> </span><span class="mi">0</span><span class="err">:</span><span class="w"> </span><span class="n">train</span><span class="o">=</span><span class="mf">3.042975</span><span class="p">,</span><span class="w"> </span><span class="n">resamp</span><span class="o">=</span><span class="mf">2.176756</span>
 <span class="n">Epoch</span><span class="w"> </span><span class="mi">000</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">train</span><span class="w"> </span><span class="mf">3.042975</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">resamp</span><span class="w"> </span><span class="mf">2.176756</span>
@@ -413,13 +413,13 @@ Addestrando le reti con <span class="math">\(100\)</span> epoche, l'output di qu
 <span class="n">NODE</span><span class="w"> </span><span class="n">Train</span><span class="w"> </span><span class="n">Done</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mf">512.356</span><span class="n">s</span>
 </code></pre></div>
 <p>Notiamo subito che la NODE ci ha messo non tanto, ma <strong>tantissimo</strong> di più rispetto la rete tradizionale. Se vi steste chiedendo il perché beh, non avete letto la 
-<a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/" target="_blank">quarta parte</a>. Ma non fermiamoci solo ai numeri e vediamo con i <strong>nostri
+<a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">quarta parte</a>. Ma non fermiamoci solo ai numeri e vediamo con i <strong>nostri
 occhi</strong> come è andato il train. Ecco il risultato visivo del <strong>processo di addestramento</strong> per entrambi i modelli, riprodotto in tempo reale:</p>
 <p class="image-caption"><img alt="LVMLP" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_5/lv_mlp.gif"/>
 Figura 2. Addestramento su Lotka-Volterra di <code>SimpleNet</code></p>
 <p class="image-caption"><img alt="LVNODE" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_5/lv_node.gif"/>
 Figura 3. Addestramento su Lotka-Volterra di <code>NODE</code></p>
-<p>Già da queste gif, si può vedere che con sole <span class="math">\(100\)</span> epoche, la <code>NODE</code> sembra aver <strong>capito la dinamica</strong> molto meglio della <code>SimpleNet</code>.
+<p>Già da queste gif, si può vedere che con sole <span class="arithmatex">\(100\)</span> epoche, la <code>NODE</code> sembra aver <strong>capito la dinamica</strong> molto meglio della <code>SimpleNet</code>.
 Ma addestrare non basta. Vediamo ora come si comportano questi modelli quando li mettiamo alla prova <strong>fuori</strong> dal range di training.</p>
 <h5 id="forecast">Forecast<a class="headerlink" href="#forecast" title="Permanent link"> </a></h5>
 <p>Nella fase di train abbiamo insegnato, o almeno ci abbiamo provato, alle reti <code>NODE</code> e <code>SimpleNet</code> a seguire l'andamento di un sistema dinamico. 
@@ -427,7 +427,7 @@ Ok si, era il Lotka-Volterra, ma questo le reti non lo sanno. Quello che hanno v
 Ma come facciamo a verificare se effettivamente hanno <strong>capito</strong>? Per quel che ne sappiamo, potrebbero aver imparato benissimo il <code>train</code> e <code>test</code> set, 
 ma senza essere in grado di <strong>generalizzare</strong>. Quello che vogliamo è verificare che:</p>
 <blockquote>
-<p>Dati i campioni da <span class="math">\((0, \, 12)\)</span> secondi, riesco a prevedere l'andamento da <span class="math">\(12\)</span> secondi in poi?</p>
+<p>Dati i campioni da <span class="arithmatex">\((0, \, 12)\)</span> secondi, riesco a prevedere l'andamento da <span class="arithmatex">\(12\)</span> secondi in poi?</p>
 </blockquote>
 <p>Per fare questo dobbiamo procedere in due modi <strong>differenti</strong> per <code>SimpleNet</code> e <code>NODE</code>. Questo perché mentre la <em>predizione in avanti</em> é implicita nelle NODE, non lo é per 
 le reti classiche. Per <code>SimpleNet</code> quindi, utilizziamo un approccio <strong>autoregressivo</strong>, cioé si sfrutta lo stato predetto come input per <strong>quantificare</strong> lo stato successivo.
@@ -452,11 +452,11 @@ Andiamo a vedere in codice cosa significa:</p>
     <span class="o">...</span>
     <span class="k">return</span> <span class="n">traj</span><span class="p">,</span> <span class="n">tgt</span>
 </code></pre></div>
-<p>Nella funzione <code>predict_mlp</code>, utilizzata per fare le <strong>predizioni</strong> tramite <code>SimpleNet</code>, prendiamo un valore di partenza che può essere lo stato <span class="math">\(x\)</span> in <span class="math">\(t=12\)</span> secondi. Facciamo
-la predizione usando come <strong>input</strong> <span class="math">\(x\)</span> e andando in <strong>avanti</strong> di un tempo <span class="math">\(dt\)</span>. L'output, cioé lo stato al tempo <span class="math">\(dt\)</span>, viene utilizzato come <strong>input</strong> per fare la predizione dello 
-stato successivo al <span class="math">\(dt\)</span> <strong>successivo</strong>. Dato che noi vogliamo fare predizioni nel range <span class="math">\((12, 18)\)</span> secondi, questo ciclo continua fino ad arrivare a <span class="math">\(t=18\)</span>. Questo tipo di predizione iterativa però è 
+<p>Nella funzione <code>predict_mlp</code>, utilizzata per fare le <strong>predizioni</strong> tramite <code>SimpleNet</code>, prendiamo un valore di partenza che può essere lo stato <span class="arithmatex">\(x\)</span> in <span class="arithmatex">\(t=12\)</span> secondi. Facciamo
+la predizione usando come <strong>input</strong> <span class="arithmatex">\(x\)</span> e andando in <strong>avanti</strong> di un tempo <span class="arithmatex">\(dt\)</span>. L'output, cioé lo stato al tempo <span class="arithmatex">\(dt\)</span>, viene utilizzato come <strong>input</strong> per fare la predizione dello 
+stato successivo al <span class="arithmatex">\(dt\)</span> <strong>successivo</strong>. Dato che noi vogliamo fare predizioni nel range <span class="arithmatex">\((12, 18)\)</span> secondi, questo ciclo continua fino ad arrivare a <span class="arithmatex">\(t=18\)</span>. Questo tipo di predizione iterativa però è 
 <strong>fragile</strong>: ogni errore si <strong>propaga nel tempo</strong>, rendendo più difficile una buona <strong>generalizzazione</strong>. </p>
-<p>Per quanto riguarda la <code>NODE</code> invece, ci semplifica di molto le cose dato che proprio per la sua natura, quando andiamo a <strong>integrare</strong> da <span class="math">\(12\)</span> a <span class="math">\(18\)</span> secondi, stiamo calcolando la
+<p>Per quanto riguarda la <code>NODE</code> invece, ci semplifica di molto le cose dato che proprio per la sua natura, quando andiamo a <strong>integrare</strong> da <span class="arithmatex">\(12\)</span> a <span class="arithmatex">\(18\)</span> secondi, stiamo calcolando la
 <strong>dinamica</strong> e quindi <strong>tutti gli stati</strong> di quel range temporale. In pratica, è sufficiente chiamare <code>odeint</code> una sola volta con tutti i tempi nel range 
 desiderato, e il modello restituirà <strong>l'intera traiettoria</strong> prevista. Ma bando alle parole e vediamo come se la sono cavata le nostre reti a <strong>predire il futuro</strong>.</p>
 <p class="image-caption"><img alt="LVMLPPred" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_5/LotkaVolterra_predictions_mlp.svg"/>
@@ -476,60 +476,60 @@ In questo paragrafo mi limiterò a dire come sono passato da un <strong>problema
 Figura 6. Massa Attaccata ad una Molla</p>
 <p>Se provaste a <strong>tirare e rilasciare</strong> la massa, quest'ultima <strong>oscillerebbe</strong> intorno al suo punto di equilibro fino a tornare alla <strong>situazione stabile</strong> in cui è fermo. 
 Questo moto si chiama oscillatore armonico. Vediamone le <strong>leggi fisiche</strong>. Dalla legge di Newton sappiamo che una forza è pari alla massa per una accelerazione. 
-Ma cosa è una accelerazione? Dalla <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/" target="_blank">parte 1</a> sappiamo che la velocità è 
+Ma cosa è una accelerazione? Dalla <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">parte 1</a> sappiamo che la velocità è 
 la derivata prima dello spazio rispetto al tempo. Dato che l'accelerazione è la derivata prima della velocità rispetto al tempo, abbiamo di conseguenza, 
-che l'accelerazione è la <strong>derivata seconda</strong> dello spazio rispetto al tempo. Nell'immagine in alto noi uno spazio lo abbiamo. E' la <strong>distanza</strong> tra la <strong>massa</strong> <span class="math">\(m\)</span> e il suo 
-<strong>punto di equilibrio</strong>, e nell'immagine è <span class="math">\(x\)</span>. Per cui scriviamo:</p>
-<div class="math">$$
+che l'accelerazione è la <strong>derivata seconda</strong> dello spazio rispetto al tempo. Nell'immagine in alto noi uno spazio lo abbiamo. E' la <strong>distanza</strong> tra la <strong>massa</strong> <span class="arithmatex">\(m\)</span> e il suo 
+<strong>punto di equilibrio</strong>, e nell'immagine è <span class="arithmatex">\(x\)</span>. Per cui scriviamo:</p>
+<div class="arithmatex">\[
 F_{tot} = m \cdot a = m \frac{d^{2}x(t)}{dt^{2}}
-$$</div>
-<p>Ma dalla <strong>legge di Hooke</strong> sappiamo che la <strong>forza elastica</strong> è una forza opposta allo spostamento fatto che dipende dalla <strong>costante elastica</strong> <span class="math">\(k\)</span> della molla
+\]</div>
+<p>Ma dalla <strong>legge di Hooke</strong> sappiamo che la <strong>forza elastica</strong> è una forza opposta allo spostamento fatto che dipende dalla <strong>costante elastica</strong> <span class="arithmatex">\(k\)</span> della molla
 e dallo spostamento stesso, per cui possiamo scrivere:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 F_{el} = -k \cdot x(t)
-$$</div>
+\]</div>
 <p>Quindi, se non ci sono altre forze in gioco, la <strong>forza totale</strong> è data dalla sola componente elastica. Per cui scriviamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 F_{tot} = F_{el} \Rightarrow m \frac{d^{2}x(t)}{dt^{2}} = -k \cdot x(t)
-$$</div>
+\]</div>
 <p>Supponiamo che la massa posi su un <strong>pavimento di plastica</strong> che fa molto <strong>attrito</strong>. Per definizione una forza di attrito è pari alla <strong>velocità</strong> per un 
 <strong>coefficiente di attrito</strong>. La velocità come abbiamo detto, è la derivata prima dello spazio rispetto al tempo. Inoltre, essendo una forza <strong>dissipativa</strong>, sottrae 
 energia al sistema. Quindi scriviamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 F_{att} = - \beta \cdot \frac{dx(t)}{dt}
-$$</div>
+\]</div>
 <p>Considerando anche questa forza in tutto il sistema, abbiamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 F_{tot} = F_{el} + F_{att} \Rightarrow m \frac{d^{2}x(t)}{dt^{2}} = -k \cdot x(t) - \beta \cdot \frac{dx(t)}{dt}
-$$</div>
+\]</div>
 <p>Da cui</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{d^{2}x(t)}{dt^{2}} = -\frac{k}{m} \cdot x(t) - \frac{\beta}{m} \cdot \frac{dx(t)}{dt}
-$$</div>
+\]</div>
 <p>Ponendo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 -\frac{k}{m} = \omega^2, \, \frac{\beta}{m} = \gamma
-$$</div>
-<p>Dove <span class="math">\(\omega^2\)</span> è chiamato <strong>frequenza naturale dell'oscillatore</strong> e <span class="math">\(\gamma\)</span> <strong>coefficiente di smorzamento</strong>. Quindi:</p>
-<div class="math">$$
+\]</div>
+<p>Dove <span class="arithmatex">\(\omega^2\)</span> è chiamato <strong>frequenza naturale dell'oscillatore</strong> e <span class="arithmatex">\(\gamma\)</span> <strong>coefficiente di smorzamento</strong>. Quindi:</p>
+<div class="arithmatex">\[
 \frac{d^{2}x(t)}{dt^{2}} + \gamma \frac{dx(t)}{dt}  + \omega^2 \cdot x(t) = 0
-$$</div>
+\]</div>
 <p>Siamo arrivati alla <strong>forma differenziale</strong> dell'oscillatore armonico. Ma ancora non abbiamo finito, perché gli ODESolver lavorano solo con <strong>equazioni differenziali di 
 primo grado</strong>, quindi cosi come é non sappiamo cosa farcene. Allora scomodiamo una <strong>proprietà</strong> delle equazioni differenziali, in particolare quella che dice che:</p>
 <blockquote>
-<p>Ogni equazione differenziale ordinaria di ordine <span class="math">\(n\)</span>, può essere riscritta come un sistema equivalente di <span class="math">\(n\)</span> equazioni del primo ordine.</p>
+<p>Ogni equazione differenziale ordinaria di ordine <span class="arithmatex">\(n\)</span>, può essere riscritta come un sistema equivalente di <span class="arithmatex">\(n\)</span> equazioni del primo ordine.</p>
 </blockquote>
 <p>Facciamo quindi un semplice <strong>cambio di variabile</strong> e poniamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x_1(t) = x(t), \, x_2(t) = \frac{dx(t)}{dt} = \frac{dx_1(t)}{dt} \Rightarrow \frac{dx_2(t)}{dt} = \frac{dx^2(t)}{dt^2} = \frac{dx_1^2(t)}{dt^2}
-$$</div>
+\]</div>
 <p>Dopo questo cambio di variabili possiamo scrivere la precedente equazione differenziale di ordine due, in due equazioni differenziali del <strong>primo ordine</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx_1(t)}{dt} = x_2(t) \\
 \frac{dx_2(t)}{dt} = - \omega^2 \cdot x_1(t) - \gamma \cdot x_2(t)
 \end{cases}
-$$</div>
+\]</div>
 <p>Questa è una forma che un ODESolver può risolvere e rappresenta la nostra <strong>dinamica da risolvere</strong>. In termini di codice questa dinamica diventa:</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">HarmonicOscillator</span><span class="p">(</span><span class="n">DatasetProvider</span><span class="p">):</span>
 
@@ -569,73 +569,11 @@ Figura 8. Forecast dell'Oscillatore Armonico con <code>NODE</code></p>
 Prima di concludere, ci terrei a mettere i <strong>puntini</strong> sulle i su un paio di aspetti. Partiamo dalle reti classiche, che qui sembrano un pò <strong>bistrattate</strong>. In realtà non è 
 così. Per mantenere il confronto equo ho usato <strong>un solo approccio di train</strong>, ma con le giuste attenzioni anche una rete classica può cavarsela <strong>egregiamente</strong>. L'altro punto da sollevare è sulle NODE. 
 Ho finito la serie di articoli, è vero, ma le NODE sono solo la base. Coloro che hanno dato il via. Qui le ho utilizzate per fare forecast ma, esattamente come le reti classiche, si possono usare per classificazione, regressione, generazione... E non solo: dalle NODE 
-nascono tante altre architetture interessanti. Dai <strong>CNF</strong> per la generazione di immagini, alle <a href="https://arxiv.org/pdf/2006.04439" target="_blank"><strong>Liquid Neural Network</strong></a> per robotica e controllo, fino alle <a href="https://arxiv.org/pdf/2503.18181" target="_blank"><strong>Physics Informed 
+nascono tante altre architetture interessanti. Dai <strong>CNF</strong> per la generazione di immagini, alle <a href="https://arxiv.org/pdf/2006.04439"><strong>Liquid Neural Network</strong></a> per robotica e controllo, fino alle <a href="https://arxiv.org/pdf/2503.18181"><strong>Physics Informed 
 Neural Network</strong></a> (Reti Lagrangiane, Reti Hamiltoniane, ...) reti che incorporano la fisica per modellare fenomeni complessi. Insomma, chi più ne ha più ne metta. E ognuna
 di queste architetture merita una <strong>dissertazione</strong> a parte. Chissà, magari un giorno ve la propinerò.</p>
-<p>Detto questo, vi invito come sempre a leggere il codice completo <a href="https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5" target="_blank"><strong>qui</strong></a> e anche a lanciarlo voi stessi.</p>
+<p>Detto questo, vi invito come sempre a leggere il codice completo <a href="https://github.com/lucadivit/NeuralODEBlog/tree/main/part_5"><strong>qui</strong></a> e anche a lanciarlo voi stessi.</p>
 <p>Alla Prossima.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -710,6 +648,10 @@ di queste architetture merita una <strong>dissertazione</strong> a parte. Chiss�
                 <li><a href="https://www.lucadivita.it/tag/metodi_numerici.html">metodi_numerici</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
     </div>
 
 </article>

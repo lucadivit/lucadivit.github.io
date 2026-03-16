@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/metaeuristica/chernobyl-disaster-optimization/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/metaeuristica/chernobyl-disaster-optimization/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/metaeuristica/chernobyl-disaster-optimization/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/metaeuristica/chernobyl-disaster-optimization/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Chernobyl Disaster Optimization</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/metaeuristica.html">Metaeuristica</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2026-02-01T00:00:00+01:00">01 febbraio 2026</time>
-                - <a href="https://www.lucadivita.it/category/metaeuristica.html">Metaeuristica</a>
             </small>
         </p>
     </header>
@@ -161,13 +161,13 @@ arriveremo. Ora lungi da me spiegare la fisica delle <strong>particelle</strong>
 mi sembra un pò <strong>overkill</strong>. In ogni caso quando esplode una centrale nucleare, tra i vari <strong>isotopi</strong> e <strong>particelle</strong> emesse dal nucleo instabile,
 ci sono i tre protagonisti della nostra storia che sono <strong>particelle alfa, particelle beta e raggi gamma</strong>.</p>
 <ul>
-<li>Le particelle <strong>Alfa</strong> sono quelle dalle ossa grosse, e quindi piú "lente". Pensante che arrivano a solo <span class="math">\(\sim 5 \%\)</span> della velocità della luce, 
+<li>Le particelle <strong>Alfa</strong> sono quelle dalle ossa grosse, e quindi piú "lente". Pensante che arrivano a solo <span class="arithmatex">\(\sim 5 \%\)</span> della velocità della luce, 
 <strong>povere sfigate</strong>! In ogni caso sono composte da due <strong>protoni</strong> e due <strong>neutroni</strong>. Hanno quindi una carica <strong>positiva</strong> che nella materia è molto alta, 
-e proprio per questo sono fortemente <strong>ionizzanti</strong> (per inciso, ionizzante <span class="math">\(\rightarrow\)</span> distruzione molecolare <span class="math">\(\rightarrow\)</span> avvelenamento da 
-radiazioni <span class="math">\(\rightarrow\)</span> ti sciogli <span class="math">\(\rightarrow\)</span> muori).
+e proprio per questo sono fortemente <strong>ionizzanti</strong> (per inciso, ionizzante <span class="arithmatex">\(\rightarrow\)</span> distruzione molecolare <span class="arithmatex">\(\rightarrow\)</span> avvelenamento da 
+radiazioni <span class="arithmatex">\(\rightarrow\)</span> ti sciogli <span class="arithmatex">\(\rightarrow\)</span> muori).
 Il fatto che sono molto ingombranti peró, le rende anche <strong>poco penetranti</strong>. A capirci se state dietro un foglio di carta state al <strong>sicuro</strong>, 
 almeno fino a quando non le respirate e/o ingerite, in tal caso è stato bello e ci vedremo dall'altra parte dello <strong>Stige</strong>.</li>
-<li>Le particelle <strong>Beta</strong> hanno seguito la chetogenica e sono un “pochino” più snelle: arrivano a circa il <span class="math">\(\sim 30–90 \%\)</span> della velocità della luce. 
+<li>Le particelle <strong>Beta</strong> hanno seguito la chetogenica e sono un “pochino” più snelle: arrivano a circa il <span class="arithmatex">\(\sim 30–90 \%\)</span> della velocità della luce. 
 La loro massa è ridotta, essendo composte da un <strong>elettrone</strong>, ed hanno carica <strong>negativa</strong>. Sono un pó più insidiose delle alfa, soprattutto dall’esterno, 
 ma si <strong>schermano</strong> tranquillamente con pochi millimetri di <strong>metallo</strong> come l’alluminio. Se non siete dietro una schermatura, però, cavoli vostri. Sono meno 
 ionizzanti delle alfa, ma essendo spesso <strong>molto energetiche</strong>, l’interazione con gli atomi del nostro corpo fa schizzare via gli elettroni orbitanti 
@@ -195,18 +195,16 @@ Questo vuol dire ricercare l'ottimo nel <strong>Chernobyl Disaster Optimizer</st
 <h4 id="luomo">L'Uomo<a class="headerlink" href="#luomo" title="Permanent link"> </a></h4>
 <p>L'uomo, la nostra vittima <strong>sacrificale</strong>. Il futuro Hulk dei poveri. Come abbiamo detto lui scappa, ed intuitivamente piú si allontana piú si sente al <strong>sicuro</strong>, fino a <strong>fermarsi</strong>.
 Questo viene <strong>modellato</strong> tramite la seguente formula:</p>
-<p><a id="human-speed"></a>
-</p>
-<div class="math">$$
+<p><a id="human-speed"></a></p>
+<div class="arithmatex">\[
 WS = 3 - \left( 3 \cdot \frac{it}{n_{it}} \right) 
-$$</div>
-<p class="formula-caption">
-Formula 1. Decadimento Della Velocità</p>
-<p>Cioè la velocità di fuga è inizialmente <strong>massima</strong>, <span class="math">\(3mph\)</span> (si, l'autore usa le <strong>miglia orarie</strong> come unità), e man mano che <strong>l'algoritmo iterativo</strong> procede, la velocità <strong>diminuisce</strong> 
+\]</div>
+<p class="formula-caption">Formula 1. Decadimento Della Velocità</p>
+<p>Cioè la velocità di fuga è inizialmente <strong>massima</strong>, <span class="arithmatex">\(3mph\)</span> (si, l'autore usa le <strong>miglia orarie</strong> come unità), e man mano che <strong>l'algoritmo iterativo</strong> procede, la velocità <strong>diminuisce</strong> 
 fino ad <strong>azzerarsi</strong>. Nella formula:</p>
 <ul>
-<li><span class="math">\(it\)</span> è <strong>l'iterazione corrente</strong></li>
-<li><span class="math">\(n_{it}\)</span> è il <strong>numero di iterazioni</strong> che saranno svolte dall'algoritmo.</li>
+<li><span class="arithmatex">\(it\)</span> è <strong>l'iterazione corrente</strong></li>
+<li><span class="arithmatex">\(n_{it}\)</span> è il <strong>numero di iterazioni</strong> che saranno svolte dall'algoritmo.</li>
 </ul>
 <p>Come si vedrà dalle formule successive, Le particelle <strong>non vedono l’uomo e non sanno dove si trovi</strong>, ma vengono premiate quando gli si <strong>avvicinano</strong>. 
 Chi si avvicina di più diventa <strong>guida</strong> per le altre.</p>
@@ -264,91 +262,78 @@ l'esplorazione dello spazio di ricerca delle altre, in una data iterazione. Inol
 dalla funzione <code>_update_best_particles</code>. Questo permette di <strong>non avere cambiamenti continui</strong> e quindi di avere una <strong>evoluzione controllata</strong> 
 delle posizioni delle particelle, favorendo la <strong>convergenza</strong> della soluzione.</p>
 <p>Fin qui abbastanza chiaro, no? <strong>Particelle</strong> a caso, <strong>fitness</strong>, <strong>migliori</strong> che emergono. Ora arriva la parte interessante: come diavolo le facciamo <strong>muovere</strong>?</p>
-<p>Iniziano ora un pò di formulette. Per ogni particella <span class="math">\(\xi\)</span>, o meglio per ogni <strong>componente</strong> <span class="math">\(col\)</span> di ogni <strong>particella</strong> <span class="math">\(\xi\)</span>, calcoliamo quello che l'autore chiama <strong>Gradient
+<p>Iniziano ora un pò di formulette. Per ogni particella <span class="arithmatex">\(\xi\)</span>, o meglio per ogni <strong>componente</strong> <span class="arithmatex">\(col\)</span> di ogni <strong>particella</strong> <span class="arithmatex">\(\xi\)</span>, calcoliamo quello che l'autore chiama <strong>Gradient
 Descent Factor</strong>. Non lasciatevi però ingannare dal nome, non si tratta di un gradiente poiché non compare alcuna derivata. È invece un <strong>coefficiente</strong> 
 che indica <strong>quanto fortemente una componente viene spinta verso una delle particelle leader</strong> (alpha, beta o gamma), che in quel momento rappresentano 
 le <strong>migliori soluzioni</strong> trovate. In formule abbiamo:</p>
-<p><a id="gdf"></a>
-</p>
-<div class="math">$$
+<p><a id="gdf"></a></p>
+<div class="arithmatex">\[
 GDF_{p} = \varphi_{p} \cdot \left( POS_{p}^{col} - PROP_{p} \cdot D_{p} \right)
-$$</div>
-<p class="formula-caption">
-Formula 2. Gradiente Di Discesa</p>
-<p>Si ok sono tante scritte. Ma andiamo per ordine. Prima di tutto inizio dicendo che la <span class="math">\(p\)</span> al pedice, serve a indicare il <strong>leader di riferimento</strong>,
-quindi <span class="math">\(p=\alpha, \, \beta, \, \gamma\)</span>. Questo perché le formule <strong>cambiano</strong> a seconda del <strong>leader</strong> considerato, a partire dalla <strong>grandezza</strong> <span class="math">\(\varphi_{p}\)</span> che puó essere interpretata
+\]</div>
+<p class="formula-caption">Formula 2. Gradiente Di Discesa</p>
+<p>Si ok sono tante scritte. Ma andiamo per ordine. Prima di tutto inizio dicendo che la <span class="arithmatex">\(p\)</span> al pedice, serve a indicare il <strong>leader di riferimento</strong>,
+quindi <span class="arithmatex">\(p=\alpha, \, \beta, \, \gamma\)</span>. Questo perché le formule <strong>cambiano</strong> a seconda del <strong>leader</strong> considerato, a partire dalla <strong>grandezza</strong> <span class="arithmatex">\(\varphi_{p}\)</span> che puó essere interpretata
 come un <strong>fattore di scala</strong>:</p>
-<p><a id="fs"></a>
-</p>
-<div class="math">$$
+<p><a id="fs"></a></p>
+<div class="arithmatex">\[
 \begin{aligned}
   \varphi_{\alpha} &amp;= 0.25 \\[6pt]
   \varphi_{\beta} &amp;= 0.5 \\[6pt]
   \varphi_{\gamma} &amp;= 1.
 \end{aligned}
-$$</div>
-<p class="formula-caption">
-Formula 3. Fattori Di Scala</p>
-<p>Per quanto riguarda il termine <span class="math">\(POS_{p}^{col}\)</span>, rappresenta semplicemente la <strong>componente posizione</strong> della particella leader. Infatti abbiamo detto che ogni 
-particella è una lista, e quel <span class="math">\(col\)</span> serve ad indicare <strong>l'i-esimo elemento</strong> della lista. A scanso di equivoci, se considerassimo un problema di ottimizzazione
+\]</div>
+<p class="formula-caption">Formula 3. Fattori Di Scala</p>
+<p>Per quanto riguarda il termine <span class="arithmatex">\(POS_{p}^{col}\)</span>, rappresenta semplicemente la <strong>componente posizione</strong> della particella leader. Infatti abbiamo detto che ogni 
+particella è una lista, e quel <span class="arithmatex">\(col\)</span> serve ad indicare <strong>l'i-esimo elemento</strong> della lista. A scanso di equivoci, se considerassimo un problema di ottimizzazione
 bidimensionale, la <a href="#gdf">Formula 2</a> verrebbe eseguita <strong>sei volte</strong> per ogni particella. Questo perché viene eseguita una volta per ogni elemento della lista,
-e per ogni elemento si considera prima il leader <span class="math">\(\alpha\)</span>, poi il <span class="math">\(\beta\)</span> ed infine il <span class="math">\(\gamma\)</span>.</p>
-<p>Passiamo al termine successivo, <span class="math">\(PROP_{p}\)</span>. Possiamo vederla come <strong>un'area di influenza</strong>: più questa area è ampia, più particelle 
+e per ogni elemento si considera prima il leader <span class="arithmatex">\(\alpha\)</span>, poi il <span class="arithmatex">\(\beta\)</span> ed infine il <span class="arithmatex">\(\gamma\)</span>.</p>
+<p>Passiamo al termine successivo, <span class="arithmatex">\(PROP_{p}\)</span>. Possiamo vederla come <strong>un'area di influenza</strong>: più questa area è ampia, più particelle 
 ricadono sotto <strong>l’effetto</strong> del leader e quindi tendono a <strong>seguirlo</strong>, ossia il loro spostamento viene calcolato rispetto a questa <strong>regione</strong>. E' definito cosí:</p>
-<p><a id="fp"></a>
-</p>
-<div class="math">$$
+<p><a id="fp"></a></p>
+<div class="arithmatex">\[
 PROP_{p} = \frac{\pi \cdot r_{1, \, p}^2}{\varphi_{p} \cdot \upsilon_{p}} - \left( rand_p \left( 0, \, 1 \right) \cdot WS \right)
-$$</div>
-<p class="formula-caption">
-Formula 4. Fattori Di Propagazione</p>
-<p>In questa formula vediamo vecchi e nuovi amici. Abbiamo già introdotto <span class="math">\(\varphi_{p}\)</span> e <span class="math">\(WS\)</span>. Non c'è bisogno di dirvi cosa è <span class="math">\(\pi\)</span>. Invece <span class="math">\(r_{1, \, p}^2\)</span>,
-è un <strong>valore numerico casuale</strong> compreso tra <span class="math">\(0\)</span> e <span class="math">\(1\)</span> (il pedice <span class="math">\(p\)</span> serve a indicare che ogni <strong>leader</strong> avrà un proprio <strong>raggio</strong> casuale), <span class="math">\(rand_p \left( 0, \, 1 \right)\)</span> è stessa identica cosa. 
-Molto piú interessante invece è <span class="math">\(\upsilon_{p}\)</span>. Questa rappresenta una <strong>velocità associata al leader</strong> ed è in funzione del leader considerato. E' definita cosí:</p>
-<p><a id="speed"></a>
-</p>
-<div class="math">$$
+\]</div>
+<p class="formula-caption">Formula 4. Fattori Di Propagazione</p>
+<p>In questa formula vediamo vecchi e nuovi amici. Abbiamo già introdotto <span class="arithmatex">\(\varphi_{p}\)</span> e <span class="arithmatex">\(WS\)</span>. Non c'è bisogno di dirvi cosa è <span class="arithmatex">\(\pi\)</span>. Invece <span class="arithmatex">\(r_{1, \, p}^2\)</span>,
+è un <strong>valore numerico casuale</strong> compreso tra <span class="arithmatex">\(0\)</span> e <span class="arithmatex">\(1\)</span> (il pedice <span class="arithmatex">\(p\)</span> serve a indicare che ogni <strong>leader</strong> avrà un proprio <strong>raggio</strong> casuale), <span class="arithmatex">\(rand_p \left( 0, \, 1 \right)\)</span> è stessa identica cosa. 
+Molto piú interessante invece è <span class="arithmatex">\(\upsilon_{p}\)</span>. Questa rappresenta una <strong>velocità associata al leader</strong> ed è in funzione del leader considerato. E' definita cosí:</p>
+<p><a id="speed"></a></p>
+<div class="arithmatex">\[
 \begin{aligned}
   \upsilon_{\alpha} &amp;= log_{10} \left( rand(1, \, 16.000) \right) \\[6pt]
   \upsilon_{\beta} &amp;= log_{10} \left( rand(1, \, 270.000) \right) \\[6pt]
   \upsilon_{\gamma} &amp;= log_{10} \left( rand(1, \, 300.000) \right)
 \end{aligned}
-$$</div>
-<p class="formula-caption">
-Formula 5. Velocità Dei Leader</p>
+\]</div>
+<p class="formula-caption">Formula 5. Velocità Dei Leader</p>
 <p>Se ricordate, nei paragrafi precedenti avevo parlato di quanto fossero veloci le particelle. Ebbene quel discorso è stato necessario proprio per arrivare 
-a questo momento. Ogni leader ha una sua <strong>velocità</strong> definita come il <strong>logaritmo</strong> in base <span class="math">\(10\)</span> di un numero casuale preso tra <span class="math">\(1\)</span> e la <strong>velocità massima</strong> per 
+a questo momento. Ogni leader ha una sua <strong>velocità</strong> definita come il <strong>logaritmo</strong> in base <span class="arithmatex">\(10\)</span> di un numero casuale preso tra <span class="arithmatex">\(1\)</span> e la <strong>velocità massima</strong> per 
 quel tipo di particella. L’uso del logaritmo serve a <strong>ridurre</strong> valori potenzialmente molto grandi, evitando <strong>l'instabilità</strong> dell'algoritmo.</p>
-<p>Ci siamo quasi, manca l'ultimo <strong>ingrediente</strong>. <span class="math">\(D_{p}\)</span> rappresenta la <strong>distanza</strong> tra la particella <strong>corrente</strong> <span class="math">\(\xi\)</span> e l’effetto del <strong>leader</strong> <span class="math">\(p\)</span>, 
+<p>Ci siamo quasi, manca l'ultimo <strong>ingrediente</strong>. <span class="arithmatex">\(D_{p}\)</span> rappresenta la <strong>distanza</strong> tra la particella <strong>corrente</strong> <span class="arithmatex">\(\xi\)</span> e l’effetto del <strong>leader</strong> <span class="arithmatex">\(p\)</span>, 
 tenendo conto della sua <strong>propagazione</strong>. E' definita cosí:</p>
-<p><a id="distance"></a>
-</p>
-<div class="math">$$
+<p><a id="distance"></a></p>
+<div class="arithmatex">\[
 D_{p} = \left| A_{p} \cdot POS_{p}^{col} - \xi_i^{col} \right|
-$$</div>
-<p class="formula-caption">
-Formula 6. Distanza</p>
-<p>In questa formula abbiamo: <span class="math">\(A_{p}\)</span> che è <strong>l'area di propagazione</strong> associata al leader <span class="math">\(p\)</span> ed è una misura dell'<strong>estensione del suo spazio di ricerca</strong>. 
+\]</div>
+<p class="formula-caption">Formula 6. Distanza</p>
+<p>In questa formula abbiamo: <span class="arithmatex">\(A_{p}\)</span> che è <strong>l'area di propagazione</strong> associata al leader <span class="arithmatex">\(p\)</span> ed è una misura dell'<strong>estensione del suo spazio di ricerca</strong>. 
 Analogamente a prima, si calcola in questo modo:</p>
-<p><a id="area"></a>
-</p>
-<div class="math">$$
+<p><a id="area"></a></p>
+<div class="arithmatex">\[
 \begin{aligned}
   r_{2, \, p} &amp;= rand \left( 0, \, 1 \right) \\[6pt]
   A_{p} &amp;= \pi \cdot r_{2, \, p}^2
 \end{aligned}
-$$</div>
-<p class="formula-caption">
-Formula 7. Area Di Propagazione</p>
-<p>E <span class="math">\(\xi_i^{col}\)</span> e <span class="math">\(POS_{p}^{col}\)</span> che sono già stati introdotti. Dato che <strong>repetita iuvant</strong>, <span class="math">\(\xi_i^{col}\)</span> è il <strong>valore</strong> contenuto nella <strong>posizione</strong> <span class="math">\(col\)</span> 
-della <strong>particella</strong> <span class="math">\(i-esima\)</span> (da non confondere con la leader), e <span class="math">\(POS_{p}^{col}\)</span> è il <strong>valore</strong> contenuto nella <strong>posizione</strong> <span class="math">\(col\)</span> della particella <strong>leader</strong> <span class="math">\(p\)</span>.</p>
-<p>Ok scherzavo, non era proprio l'ultimo ingrediente. Ma ora che abbiamo definito tutte le <strong>formule necessarie</strong> possiamo calcolare <a href="#gdf"><span class="math">\(GDF_{p}\)</span></a> e quindi procedere
-con il calcolo del nuovo valore delle <strong>componenti posizione</strong> di ogni particella. Per cui <strong>aggiorniamo</strong> il valore di <span class="math">\(\xi_i^{col}\)</span> nel seguente modo:</p>
-<div class="math">$$
+\]</div>
+<p class="formula-caption">Formula 7. Area Di Propagazione</p>
+<p>E <span class="arithmatex">\(\xi_i^{col}\)</span> e <span class="arithmatex">\(POS_{p}^{col}\)</span> che sono già stati introdotti. Dato che <strong>repetita iuvant</strong>, <span class="arithmatex">\(\xi_i^{col}\)</span> è il <strong>valore</strong> contenuto nella <strong>posizione</strong> <span class="arithmatex">\(col\)</span> 
+della <strong>particella</strong> <span class="arithmatex">\(i-esima\)</span> (da non confondere con la leader), e <span class="arithmatex">\(POS_{p}^{col}\)</span> è il <strong>valore</strong> contenuto nella <strong>posizione</strong> <span class="arithmatex">\(col\)</span> della particella <strong>leader</strong> <span class="arithmatex">\(p\)</span>.</p>
+<p>Ok scherzavo, non era proprio l'ultimo ingrediente. Ma ora che abbiamo definito tutte le <strong>formule necessarie</strong> possiamo calcolare <a href="#gdf"><span class="arithmatex">\(GDF_{p}\)</span></a> e quindi procedere
+con il calcolo del nuovo valore delle <strong>componenti posizione</strong> di ogni particella. Per cui <strong>aggiorniamo</strong> il valore di <span class="arithmatex">\(\xi_i^{col}\)</span> nel seguente modo:</p>
+<div class="arithmatex">\[
 \xi_i^{col} \leftarrow \frac{GDF_{\alpha} + GDF_{\beta} + GDF_{\gamma}}{3}
-$$</div>
-<p class="formula-caption">
-Formula 8. Aggiornamento Componente Posizione</p>
+\]</div>
+<p class="formula-caption">Formula 8. Aggiornamento Componente Posizione</p>
 <p>Si, sono tantissime formule ma giuro che sono <strong>finite</strong>. Per cui ecco uno snippet di codice che <strong>implementa</strong> quanto scritto:</p>
 <p><a id="snippet2"></a></p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -416,13 +401,13 @@ che grazie a velocità e propagazioni maggiori <strong>esplorano</strong> region
 <li><code>n_particles</code> indica il <strong>numero di particelle</strong> che volete nella vostra <strong>popolazione</strong> di particelle. Tendenzialmente piú è alto, <strong>maggiore</strong> è la <strong>probabilità</strong> 
 di raggiungere l'ottimo, ma comporta un <strong>rallentamento</strong> dell'algoritmo.</li>
 <li><code>function_to_optimize</code> e <code>dim</code> sono la <strong>funzione</strong> matematica da <strong>ottimizzare</strong>, e la sua <strong>dimensionalità</strong>. Nel mio caso specifico ho usato come funzione la 
-<a href="https://al-roomi.org/benchmarks/unconstrained/2-dimensions/29-bird-function">Bird Function</a> che ha dimensione <span class="math">\(2\)</span> ed è nota per la sua difficoltà nel calcolo del <strong>minimo</strong>.</li>
+<a href="https://al-roomi.org/benchmarks/unconstrained/2-dimensions/29-bird-function">Bird Function</a> che ha dimensione <span class="arithmatex">\(2\)</span> ed è nota per la sua difficoltà nel calcolo del <strong>minimo</strong>.</li>
 <li><code>approach</code> indica se si vuole <strong>minimizzare</strong> (<code>min</code>) o <strong>massimizzare</strong> (<code>max</code>).</li>
 <li><code>bounds</code> indica i <strong>limiti di esistenza</strong> della funzione. E' utile quando sappiamo di dover cercare l'ottimo in una determinata <strong>porzione</strong> del <strong>dominio</strong>.</li>
 </ul>
 <p>Lanciando <a href="#snippet3">questo snippet</a> dovreste ricevere un output simile:</p>
 <p><code>Best Fitness is -106.3248972989146 with Particle [4.74192243 3.21810325]</code></p>
-<p>dove i valori contenuti all'interno della particella sono le <strong>coordinate</strong> <span class="math">\((x, \, y)\)</span> che portano vicinissimi al <strong>minimo</strong> della funzione, nel dominio fornito.
+<p>dove i valori contenuti all'interno della particella sono le <strong>coordinate</strong> <span class="arithmatex">\((x, \, y)\)</span> che portano vicinissimi al <strong>minimo</strong> della funzione, nel dominio fornito.
 Degno di specifica è l'utilizzo della parola 'dovreste', dato che è un <strong>processo probabilistico</strong>.</p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Questi algoritmi esotici devo dire che mi piacciono molto ed è stato <strong>divertente</strong> studiarlo e implementarlo. Ma questo con il senno di poi. Il 
@@ -434,68 +419,6 @@ un lavoro di <strong>ingegneria inversa</strong> e ricostruzione delle informazi
 Come sempre, vi lascio il <a href="https://github.com/lucadivit/ChernobylDisasterOptimization">link alla <strong>mia implementazione</strong></a> per poter 
 dare un’occhiata al <strong>codice</strong> e fare i vostri <strong>esperimenti</strong>. Occhio alle radiazioni.</p>
 <p>Alla Prossima.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -539,6 +462,10 @@ dare un’occhiata al <strong>codice</strong> e fare i vostri <strong>esperiment
                 <li><a href="https://www.lucadivita.it/tag/ottimizzazione.html">ottimizzazione</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
     </div>
 
 </article>

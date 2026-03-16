@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Io ODO, Tu ODI e la Neural ODE - 3</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/teoria-matematica.html">Teoria & Matematica</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-07-30T00:00:00+02:00">30 luglio 2025</time>
-                - <a href="https://www.lucadivita.it/category/teoria-matematica.html">Teoria & Matematica</a>
             </small>
         </p>
     </header>
@@ -156,152 +156,148 @@ eleganti, spesso sporchi, ma tremendamente <strong>efficaci</strong>. Non ti dan
 <strong>Google Maps</strong> (<em>che vi dice che arriverete tra 10 minuti e ce ne mettete 17</em>), quando mettete un <strong>pizzico</strong> di sale (<em>dove il "pizzico" è un cucchiaio da cucina</em>), 
 quando leggete il mio <strong>blog</strong> (<em>che dovrebbe essere divulgativo invece aiuta più me a ricordare che voi a imparare</em>)... </p>
 <p>Ma bando agli indugi, dato che non state più nella pelle vediamo questi famosi metodi numerici. Ma prima, se non l'hai fatto,
-recupera la <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Parte 1</a> e la <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">Parte 2</a>.</p>
+recupera la <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Parte 1</a> e la <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">Parte 2</a>.</p>
 <h3 id="ode-a-piccoli-passi">ODE a Piccoli Passi<a class="headerlink" href="#ode-a-piccoli-passi" title="Permanent link"> </a></h3>
-<p>Riprendiamo il tanto decantato <strong>sistema di Lotka-Volterra</strong> introdotto <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame" target="_blank">qui</a>.</p>
-<div class="math">$$
+<p>Riprendiamo il tanto decantato <strong>sistema di Lotka-Volterra</strong> introdotto <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame">qui</a>.</p>
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx}{dt} = \alpha x - \beta x y \\
 \frac{dy}{dt} = \delta x y - \gamma y
 \end{cases}
-$$</div>
+\]</div>
 <p>dove:</p>
 <ul>
-<li><span class="math">\(x(t)\)</span> è il <strong>numero di prede</strong> (es. conigli).</li>
-<li><span class="math">\(y(t)\)</span> è il <strong>numero di predatori</strong> (es. volpi).</li>
-<li><span class="math">\(\alpha\)</span> è il <strong>tasso di crescita delle prede</strong>. Descrive quanto velocemente si 
+<li><span class="arithmatex">\(x(t)\)</span> è il <strong>numero di prede</strong> (es. conigli).</li>
+<li><span class="arithmatex">\(y(t)\)</span> è il <strong>numero di predatori</strong> (es. volpi).</li>
+<li><span class="arithmatex">\(\alpha\)</span> è il <strong>tasso di crescita delle prede</strong>. Descrive quanto velocemente si 
 riproducono le prede in assenza di predatori (che nei conigli sembra essere alto come vuole la leggenda).</li>
-<li><span class="math">\(\beta\)</span> è il <strong>tasso di predazione</strong>. Dice quanto le prede vengono uccise dai predatori. </li>
-<li><span class="math">\(\delta\)</span> è il <strong>tasso di conversione</strong>. Dice quanti nuovi predatori nascono ad ogni preda mangiata e digerita.</li>
-<li><span class="math">\(\gamma\)</span> è il <strong>tasso di mortalità dei predatori</strong>. Rappresenta la morte naturale dei predatori in assenza di prede. 
+<li><span class="arithmatex">\(\beta\)</span> è il <strong>tasso di predazione</strong>. Dice quanto le prede vengono uccise dai predatori. </li>
+<li><span class="arithmatex">\(\delta\)</span> è il <strong>tasso di conversione</strong>. Dice quanti nuovi predatori nascono ad ogni preda mangiata e digerita.</li>
+<li><span class="arithmatex">\(\gamma\)</span> è il <strong>tasso di mortalità dei predatori</strong>. Rappresenta la morte naturale dei predatori in assenza di prede. 
 Se non mangiano muoiono di fame.</li>
 </ul>
 <p><strong>Non c'è</strong> un metodo analitico noto per risolvere simbolicamente questo sistema quindi ricorriamo ai metodi numerici.
 Sono strategie per ottenere una <strong>soluzione approssimata</strong>, per <strong>passi piccoli</strong>, <strong>discreti</strong> e speranzosi. Tutto nasce grazie al 
 <strong>sommo Eulero</strong> che, oltre a regalarci il famosissimo tatuaggio </p>
-<div class="math">$$
+<div class="arithmatex">\[
 e^{i \pi} + 1 = 0
-$$</div>
+\]</div>
 <p>(<em>no serio ragà, smettete di tatuarvelo se non sapete manco cos’è il pi greco</em>), ci ha dato anche il <strong>capostipite</strong> di tutti i metodi numerici: il <strong>metodo di Eulero</strong>. 
 La convergenza di questo metodo è stata dimostrata dal sommo Cauchy ed è stato poi generalizzato
 dai sommi Runge e Kutta con la famiglia dei <strong>metodi RK</strong>. Insomma qui tutti sono sommi e il mondo dei metodi numerici è 
 più <strong>affollato</strong> dell'algoritmo di TikTok. Ce ne sarebbero tanti altri da affrontare ma ci limiteremo solo ad alcuni.</p>
 <h3 id="metodo-di-eulero">Metodo Di Eulero<a class="headerlink" href="#metodo-di-eulero" title="Permanent link"> </a></h3>
-<p>Riprendiamo la formula dell'<strong>espansione di Taylor</strong>. Ricordi? Ne ho già parlato <a href="/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente" target="_blank">qui</a>.
+<p>Riprendiamo la formula dell'<strong>espansione di Taylor</strong>. Ricordi? Ne ho già parlato <a href="/machine-learning/neurons-for-dummies-3/#la-discesa-del-gradiente">qui</a>.
 La serie di Taylor è un po' un jolly, si usa ovunque.</p>
 <p>Consideriamo in particolare una <strong>espansione al primo ordine</strong> cioè del tipo</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) = f(a) + f'(a) \cdot (\bar x) + O(\bar x^2)
-$$</div>
+\]</div>
 <p>dove </p>
-<div class="math">$$
+<div class="arithmatex">\[
 \bar x = (x - a)
-$$</div>
-<p>cioè stiamo <strong>valutando</strong> la funzione in <span class="math">\(x\)</span>, considerando le derivate in un punto <strong>distante</strong> <span class="math">\(a\)</span> da <span class="math">\(x\)</span> stesso. 
+\]</div>
+<p>cioè stiamo <strong>valutando</strong> la funzione in <span class="arithmatex">\(x\)</span>, considerando le derivate in un punto <strong>distante</strong> <span class="arithmatex">\(a\)</span> da <span class="arithmatex">\(x\)</span> stesso. 
 Consideriamo ora un generico problema di Cauchy</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 y'(t) = f(y(t), t) \\
 y(t_0) = y_0
 \end{cases}
-$$</div>
-<p>e consideriamo la <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato" target="_blank">definizione di derivata</a>. Possiamo
-scrivere, per <span class="math">\(h \rightarrow 0\)</span>:</p>
-<div class="math">$$
+\]</div>
+<p>e consideriamo la <a href="/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-principio-era-derivato">definizione di derivata</a>. Possiamo
+scrivere, per <span class="arithmatex">\(h \rightarrow 0\)</span>:</p>
+<div class="arithmatex">\[
 y'(t) \approx \frac{y(t+h) - y(t)}{h}
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow h \cdot y'(t) \approx y(t+h) - y(t)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow y(t+h) \approx y(t) + h \cdot y'(t)
-$$</div>
+\]</div>
 <p>Vi ricorda qualcosa? Esatto proprio uno sviluppo di Taylor al primo ordine ma dove:</p>
 <ul>
-<li><span class="math">\(x = t + h\)</span></li>
-<li><span class="math">\(a = t\)</span></li>
+<li><span class="arithmatex">\(x = t + h\)</span></li>
+<li><span class="arithmatex">\(a = t\)</span></li>
 </ul>
-<p>Cioè calcoliamo la <strong>derivata</strong> nel punto <span class="math">\(t\)</span> e valutiamo lo <strong>sviluppo</strong> nel punto <span class="math">\(t+h\)</span>. Ora facciamo un altro sforzo e supponiamo 
-di partire dal punto <span class="math">\(t_0\)</span> che è noto dato che, vi ricordo, siamo in un problema di Cauchy. Facciamo un <strong>passettino infinitesimo</strong> <span class="math">\(h\)</span> in avanti 
-e finiamo nel punto <span class="math">\(t_1\)</span>. Per cui scriviamo</p>
-<div class="math">$$
+<p>Cioè calcoliamo la <strong>derivata</strong> nel punto <span class="arithmatex">\(t\)</span> e valutiamo lo <strong>sviluppo</strong> nel punto <span class="arithmatex">\(t+h\)</span>. Ora facciamo un altro sforzo e supponiamo 
+di partire dal punto <span class="arithmatex">\(t_0\)</span> che è noto dato che, vi ricordo, siamo in un problema di Cauchy. Facciamo un <strong>passettino infinitesimo</strong> <span class="arithmatex">\(h\)</span> in avanti 
+e finiamo nel punto <span class="arithmatex">\(t_1\)</span>. Per cui scriviamo</p>
+<div class="arithmatex">\[
 y(t_1) = y(t_0 + h) \approx y(t_0) + h \cdot y'(t_0)
-$$</div>
+\]</div>
 <p>dove</p>
-<div class="math">$$
+<div class="arithmatex">\[
 t_1 = t_0 + h
-$$</div>
-<p>Una volta che conosciamo <span class="math">\(t_1\)</span>, possiamo andare in <span class="math">\(t_2\)</span> con lo stesso principio</p>
-<div class="math">$$
+\]</div>
+<p>Una volta che conosciamo <span class="arithmatex">\(t_1\)</span>, possiamo andare in <span class="arithmatex">\(t_2\)</span> con lo stesso principio</p>
+<div class="arithmatex">\[
 y(t_2) = y(t_1 + h) \approx y(t_1) + h \cdot y'(t_1)
-$$</div>
+\]</div>
 <p>dove</p>
-<div class="math">$$
+<div class="arithmatex">\[
 t_2 = t_1 + h = t_0 + 2h
-$$</div>
+\]</div>
 <p>Capita l'antifona? Possiamo quindi <strong>generalizzare</strong> in questo modo</p>
-<p><a id="sviluppo-ode-1"></a>
-</p>
-<div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n)$$</div>
-<p class="formula-caption">
-Formula 1. Sviluppo della ODE di Ordine Uno</p>
+<div class="arithmatex">\[
+y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n)
+\]</div>
+<p class="formula-caption">Formula 1. Sviluppo della ODE di Ordine Uno <a id="sviluppo-ode-1"></a></p>
 <p>Quindi</p>
-<p><a id="tempo-discretizzato"></a>
-</p>
-<div class="math">$$t_{n+1} = t_n + h = t_0 + n \cdot h$$</div>
-<p class="formula-caption">
-Formula 2. Discretizzazione del Tempo</p>
+<div class="arithmatex">\[
+t_{n+1} = t_n + h = t_0 + n \cdot h
+\]</div>
+<p class="formula-caption">Formula 2. Discretizzazione del Tempo <a id="tempo-discretizzato"></a></p>
 <p>Dove:</p>
 <ul>
-<li><span class="math">\(t_0\)</span> è <strong>l'istante iniziale</strong></li>
-<li><span class="math">\(t_{n+1}\)</span> è <strong>l'istante finale</strong></li>
-<li><span class="math">\(h\)</span> è il <strong>passo di integrazione</strong>, scelto a piacere</li>
-<li><span class="math">\(n\)</span> è il <strong>numero di iterazioni</strong></li>
+<li><span class="arithmatex">\(t_0\)</span> è <strong>l'istante iniziale</strong></li>
+<li><span class="arithmatex">\(t_{n+1}\)</span> è <strong>l'istante finale</strong></li>
+<li><span class="arithmatex">\(h\)</span> è il <strong>passo di integrazione</strong>, scelto a piacere</li>
+<li><span class="arithmatex">\(n\)</span> è il <strong>numero di iterazioni</strong></li>
 </ul>
-<p>In pratica stiamo discretizzando il tempo. Più <span class="math">\(h\)</span> è piccolo, più il metodo è <strong>accurato</strong> ma <strong>computazionalmente oneroso</strong>.</p>
+<p>In pratica stiamo discretizzando il tempo. Più <span class="arithmatex">\(h\)</span> è piccolo, più il metodo è <strong>accurato</strong> ma <strong>computazionalmente oneroso</strong>.</p>
 <p>Riprendiamo ora il problema di Cauchy e abbiamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y'(t) = f(y(t), t)
-$$</div>
-<p>e quindi possiamo sostituire <span class="math">\(y'(t)\)</span> nel metodo di Eulero, ottenendo la <strong>formulazione finale</strong>:</p>
-<p><a id="metodo-eulero-esplicito"></a>
-</p>
-<div class="math">$$y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n)$$</div>
-<p class="formula-caption">
-Formula 3. Metodo di Eulero Esplicito</p>
+\]</div>
+<p>e quindi possiamo sostituire <span class="arithmatex">\(y'(t)\)</span> nel metodo di Eulero, ottenendo la <strong>formulazione finale</strong>:</p>
+<div class="arithmatex">\[
+y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n)
+\]</div>
+<p class="formula-caption">Formula 3. Metodo di Eulero Esplicito <a id="metodo-eulero-esplicito"></a></p>
 <p>Quella scritta è la formula del <strong>Metodo di Eulero Esplicito</strong>. Perché esplicito? Perché usiamo tutti valori che conosciamo già. Infatti 
-supponiamo di voler calcolare <span class="math">\(y(t_1)\)</span>, dovremmo calcolare:</p>
+supponiamo di voler calcolare <span class="arithmatex">\(y(t_1)\)</span>, dovremmo calcolare:</p>
 <ul>
-<li><span class="math">\(y(t_0)\)</span> che è il <strong>valore noto</strong> del problema di Cauchy</li>
-<li><span class="math">\(f(y(t_0), t_0)\)</span> calcolabile tramite semplice <strong>sostituzione di valori</strong></li>
+<li><span class="arithmatex">\(y(t_0)\)</span> che è il <strong>valore noto</strong> del problema di Cauchy</li>
+<li><span class="arithmatex">\(f(y(t_0), t_0)\)</span> calcolabile tramite semplice <strong>sostituzione di valori</strong></li>
 </ul>
 <p>Se esiste il metodo esplicito ovviamente esiste anche <strong>l'implicito</strong> la cui formula, omettendo la dimostrazione, è:</p>
-<p><a id="metodo-eulero-implicito"></a>
-</p>
-<div class="math">$$y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_{n+1}), t_{n+1})$$</div>
-<p class="formula-caption">
-Formula 4. Metodo di Eulero Implicito</p>
-<p>E' implicito perché, come potete vedere, il valore da calcolare <span class="math">\(t_{n+1}\)</span> compare in <strong>entrambi</strong> i lati dell'equazione.
-Non sempre si risolve con facilità. In determinati casi, sono necessari metodi iterativi come il <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method" target="_blank"><strong>metodo delle sostituzioni successive</strong></a>.
+<div class="arithmatex">\[
+y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_{n+1}), t_{n+1})
+\]</div>
+<p class="formula-caption">Formula 4. Metodo di Eulero Implicito <a id="metodo-eulero-implicito"></a></p>
+<p>E' implicito perché, come potete vedere, il valore da calcolare <span class="arithmatex">\(t_{n+1}\)</span> compare in <strong>entrambi</strong> i lati dell'equazione.
+Non sempre si risolve con facilità. In determinati casi, sono necessari metodi iterativi come il <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method"><strong>metodo delle sostituzioni successive</strong></a>.
 Ma questo esula questo articolo quindi, dato che la vita ce la siamo già complicati abbastanza, vi lascio alla vostra volontà di <strong>approfondire</strong>.</p>
 <h4 id="esempio-eulero">Esempio Eulero<a class="headerlink" href="#esempio-eulero" title="Permanent link"> </a></h4>
 <p>Tutto troppo teorico fino ad ora lo so, quindi vediamo qualcosa di pratico con un esercizio. Consideriamo il seguente problema di Cauchy
 rappresentante il <strong>decadimento esponenziale</strong>. Sembra fine a se stesso, in realtà molti fenomeni naturali seguono questa legge 
 come il decadimento radioattivo, la scarica del condensatore nei circuiti RC...</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 y' = -ky \\
 y(t_0) = 1 \\
 k = 1
 \end{cases}
-$$</div>
-<p>dove <span class="math">\(k\)</span> è il <strong>tasso di decadimento</strong> e, in questo caso, lo scegliamo noi. La soluzione della ODE è:</p>
-<div class="math">$$
+\]</div>
+<p>dove <span class="arithmatex">\(k\)</span> è il <strong>tasso di decadimento</strong> e, in questo caso, lo scegliamo noi. La soluzione della ODE è:</p>
+<div class="arithmatex">\[
 y(t) = e^{-1 \cdot t}
-$$</div>
+\]</div>
 <p>Se volete i passaggi <strong>fateveli</strong>. Conoscete gli <strong>strumenti</strong> per risolverla. Per l'esempio ho scelto questa ODE (che è risolvibile analiticamente come avete visto),
-per poter mostrare la <strong>differenza tra una soluzione esatta e una numerica</strong>. Vediamo quanto vale nei punti <span class="math">\(t=1, \text{ } t=2\)</span></p>
-<div class="math">$$
+per poter mostrare la <strong>differenza tra una soluzione esatta e una numerica</strong>. Vediamo quanto vale nei punti <span class="arithmatex">\(t=1, \text{ } t=2\)</span></p>
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|}
 \hline
 t &amp; y(t) &amp; \text{Result} \\
@@ -313,46 +309,45 @@ t &amp; y(t) &amp; \text{Result} \\
 2 &amp; e^{-1 \cdot 2} &amp; 0.135 \\
 \hline
 \end{array}
-$$</div>
+\]</div>
 <p>Ora risolviamo con il metodo di Eulero. Dalla formula di <a href="#tempo-discretizzato">discretizzazione del tempo</a> sappiamo già quanti sono 
-gli step da fare posto <span class="math">\(h=0.1\)</span>, istante iniziale <span class="math">\(t_0=0\)</span> e istante finale <span class="math">\(t_{n}=2\)</span>:</p>
-<div class="math">$$
+gli step da fare posto <span class="arithmatex">\(h=0.1\)</span>, istante iniziale <span class="arithmatex">\(t_0=0\)</span> e istante finale <span class="arithmatex">\(t_{n}=2\)</span>:</p>
+<div class="arithmatex">\[
 t_{n} - t_0 = n \cdot h \Rightarrow 2-0 = n \cdot h \Rightarrow n = 20
-$$</div>
-<p>Per chiarezza di esposizione, eseguiamolo <strong>step by step</strong>. Il valore in <span class="math">\(t_0\)</span> è noto dal problema di Cauchy, quindi:</p>
+\]</div>
+<p>Per chiarezza di esposizione, eseguiamolo <strong>step by step</strong>. Il valore in <span class="arithmatex">\(t_0\)</span> è noto dal problema di Cauchy, quindi:</p>
 <ul>
-<li>Passo <span class="math">\(n=1\)</span>
-<div class="math">$$
+<li>Passo <span class="arithmatex">\(n=1\)</span></li>
+</ul>
+<div class="arithmatex">\[
 t_{1} = t_0 + 1 \cdot 0.1 = 0.1
-$$</div>
-</li>
-</ul>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(t_1) \approx y(t_0) + h \cdot f(y(t_0), t_0)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(0.1) \approx y(0) + 0.1 \cdot f(y(0), 0)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(0.1) \approx 1 + 0.1 \cdot (-1 \cdot 1) = 0.9
-$$</div>
+\]</div>
 <ul>
-<li>Passo <span class="math">\(n=2\)</span></li>
+<li>Passo <span class="arithmatex">\(n=2\)</span></li>
 </ul>
-<div class="math">$$
+<div class="arithmatex">\[
 t_2 = t_0 + 2 \cdot 0.1 = 0.2
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(t_2) \approx y(t_1) + h \cdot f(y(t_1), t_1)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(0.2) \approx y(0.1) + 0.1 \cdot f(y(0.1), 0.1)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(0.2) \approx 0.9 + 0.1 \cdot (-1 \cdot 0.9) = 0.81
-$$</div>
+\]</div>
 <p>E così via. Fidatevi quando vi dico che i <strong>risultati</strong> sono quelli riportati in questa tabella:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|}
 \hline
 n &amp; t_n &amp; \text{Result} \\
@@ -372,9 +367,9 @@ n &amp; t_n &amp; \text{Result} \\
 20 &amp; 2 &amp; 0.122 \\
 \hline
 \end{array}
-$$</div>
-<p>Ora vediamo che succede ponendo <span class="math">\(h=0.5\)</span>. Non lo farò step by step perché ora sapete come si fa, quindi <strong>beccatevi</strong> sta tabella:</p>
-<div class="math">$$
+\]</div>
+<p>Ora vediamo che succede ponendo <span class="arithmatex">\(h=0.5\)</span>. Non lo farò step by step perché ora sapete come si fa, quindi <strong>beccatevi</strong> sta tabella:</p>
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|}
 \hline
 n &amp; t_n &amp; \text{Result} \\
@@ -390,14 +385,14 @@ n &amp; t_n &amp; \text{Result} \\
 4 &amp; 2 &amp; 0.062 \\
 \hline
 \end{array}
-$$</div>
+\]</div>
 <p>Ecco un <strong>confronto sintetico</strong> tra la soluzione <strong>analitica</strong> e le due approssimazioni <strong>numeriche</strong>:</p>
 <ul>
-<li><span class="math">\(y(t)\)</span> soluzione analitica</li>
-<li><span class="math">\(E(h=0.1)\)</span> Eulero con <span class="math">\(h=0.1\)</span></li>
-<li><span class="math">\(E(h=0.5)\)</span> Eulero con <span class="math">\(h=0.5\)</span></li>
+<li><span class="arithmatex">\(y(t)\)</span> soluzione analitica</li>
+<li><span class="arithmatex">\(E(h=0.1)\)</span> Eulero con <span class="arithmatex">\(h=0.1\)</span></li>
+<li><span class="arithmatex">\(E(h=0.5)\)</span> Eulero con <span class="arithmatex">\(h=0.5\)</span></li>
 </ul>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|c|}
 \hline
 t &amp; y(t) &amp; E(h=0.1) &amp; E(h=0.5) \\
@@ -409,12 +404,12 @@ t &amp; y(t) &amp; E(h=0.1) &amp; E(h=0.5) \\
 2 &amp; 0.135 &amp; 0.122 &amp; 0.062 \\
 \hline
 \end{array}
-$$</div>
-<p>Come potete vedere, al netto di <span class="math">\(n=0\)</span> che è la <strong>soluzione nota</strong>, <span class="math">\(h=0.1\)</span> approssima molto <strong>meglio</strong> rispetto a <span class="math">\(h=0.5\)</span> ma ha <strong>richiesto</strong> <span class="math">\(20\)</span> passi rispetto ai <span class="math">\(4\)</span> del secondo.</p>
+\]</div>
+<p>Come potete vedere, al netto di <span class="arithmatex">\(n=0\)</span> che è la <strong>soluzione nota</strong>, <span class="arithmatex">\(h=0.1\)</span> approssima molto <strong>meglio</strong> rispetto a <span class="arithmatex">\(h=0.5\)</span> ma ha <strong>richiesto</strong> <span class="arithmatex">\(20\)</span> passi rispetto ai <span class="arithmatex">\(4\)</span> del secondo.</p>
 <p>Quanto detto può essere <strong>riassunto</strong> dalla seguente immagine</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_3/comparison_euler.png"/>
 Figura 1. Comparazione Risultati</p>
-<p>La <strong>soluzione esatta</strong> è quella rossa, e al <strong>diminuire</strong> di <span class="math">\(h\)</span> <strong>l'approssimazione</strong> è via via migliore.
+<p>La <strong>soluzione esatta</strong> è quella rossa, e al <strong>diminuire</strong> di <span class="arithmatex">\(h\)</span> <strong>l'approssimazione</strong> è via via migliore.
 Bene, è il momento di passare al prossimo round dove i <strong>Runge-Kutta</strong> vi stenderanno.</p>
 <h3 id="la-famiglia-mans-rk">La Famiglia Mans... RK<a class="headerlink" href="#la-famiglia-mans-rk" title="Permanent link"> </a></h3>
 <p>Diamo a Cesare quel che è di Cesare, il metodo di Eulero è il <strong>patriarca</strong> di tutti i metodi numerici. Ma è davvero così buono? 
@@ -427,57 +422,54 @@ che mantengono la stessa idea di base di Eulero. <strong>Procedere per piccoli p
 proprio sullo sviluppo di ordini superiori della serie di Taylor. Eulero quindi può essere visto come un metodo <strong>RK1</strong>
 cioè <strong>Runge Kutta del primo ordine</strong>. Vediamo cosa succede se non ci accontentiamo del primo ordine ed arriviamo al secondo, partendo dalla
 <a href="#sviluppo-ode-1">Formula del Primo Ordine</a>:</p>
-<div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n) + \frac{h^2}{2} \cdot y''(t_n)$$</div>
+<div class="arithmatex">\[
+y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n) + \frac{h^2}{2} \cdot y''(t_n)
+\]</div>
 <p>Dato che</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y'(t_n) = f(y(t_n), t_n)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow y''(t_n) = f'(y(t_n), t_n)
-$$</div>
-<p><a id="sviluppo-ode-2"></a>
-</p>
-<div class="math">$$\Rightarrow y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n) + \frac{h^2}{2} \cdot f'(y(t_n), t_n)$$</div>
-<p class="formula-caption">
-Formula 5. Sviluppo della ODE di Ordine Due</p>
-<p>Possiamo quindi utilizzare la definizione della derivata prima e sviluppare il rapporto incrementale di <span class="math">\(f'\)</span>:</p>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
+\Rightarrow y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n) + \frac{h^2}{2} \cdot f'(y(t_n), t_n)
+\]</div>
+<p class="formula-caption">Formula 5. Sviluppo della ODE di Ordine Due <a id="sviluppo-ode-2"></a></p>
+<p>Possiamo quindi utilizzare la definizione della derivata prima e sviluppare il rapporto incrementale di <span class="arithmatex">\(f'\)</span>:</p>
+<div class="arithmatex">\[
 f'(y(t_n), t_n) \approx \frac{f(y(t_n + h), t_n+h) - f(y(t_n), t_n)}{h} = \frac{f(y(t_{n+1}), t_{n+1}) - f(y(t_n), t_n)}{h}
-$$</div>
+\]</div>
 <p>Ma da Eulero sappiamo che </p>
-<div class="math">$$
+<div class="arithmatex">\[
 y(t_{n+1}) = y_{n+1} = y_n + h \cdot f(y_n, t_n)
-$$</div>
+\]</div>
 <p>per cui, sostituendo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f'(y_n, t_n) \approx \frac{f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n)}{h}
-$$</div>
+\]</div>
 <p>Sostituendo ancora, nella formula dello <a href="#sviluppo-ode-2"><strong>Sviluppo di Ordine Due</strong></a> abbiamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y_{n+1} \approx y_n + h \cdot f(y_n, t_n) + \frac{h}{2} \cdot \left [ f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n) \right]
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow y_{n+1} \approx y_n + \frac{h}{2} \cdot \left [ f(y_n + h \cdot f(y_n, t_n), t_{n+1}) + f(y_n, t_n) \right]
-$$</div>
-<p>Quindi posti:
-</p>
-<div class="math">$$
+\]</div>
+<p>Quindi posti:</p>
+<div class="arithmatex">\[
 k_1 = f(y_n, t_n)
 \\
 k_2 = f(y_n + h \cdot f(y_n, t_n), t_{n+1}) = f(y_n + h \cdot k_1, t_{n+1})
-$$</div>
+\]</div>
 <p>troviamo il cosiddetto <strong>Metodo RK2</strong> o <strong>Metodo di Heun</strong></p>
-<p><a id="metodo-heun"></a>
-</p>
-<div class="math">$$
+<div class="arithmatex">\[
     \begin{cases}
     k_1 = f(y_n, t_n)  \\
     k_2 = f(y_n + h k_1, t_n + h) \\
     y_{n+1} \approx y_n + \frac{h}{2} (k_1 + k_2)
     \end{cases}
-$$</div>
-<p class="formula-caption">
-Formula 6. Metodo di Heun</p>
+\]</div>
+<p class="formula-caption">Formula 6. Metodo di Heun <a id="metodo-heun"></a></p>
 <p>Con la stessa logica, si possono calcolare <strong>ordini superiori</strong> sviluppando ulteriormente la serie di Taylor:</p>
 <ul>
 <li><strong>RK3</strong> o <strong>Shu-Osher</strong></li>
@@ -486,9 +478,7 @@ Formula 6. Metodo di Heun</p>
 <li>... e tanti altri.</li>
 </ul>
 <p>Data la sua importanza, non si può non riportare la formulazione di RK4 che è un <strong>ottimo compromesso tra precisione e complessità computazionale</strong>:</p>
-<p><a id="metodo-rk4"></a>
-</p>
-<div class="math">$$
+<div class="arithmatex">\[
     \begin{cases}
     k_1 = f(y_n, t_n)  \\
     k_2 = f(y_n + \frac{h}{2} k_1, t_n + \frac{h}{2}) \\
@@ -496,14 +486,13 @@ Formula 6. Metodo di Heun</p>
     k_4 = f(y_n + h k_3, t_n + h) \\
     y_{n+1} \approx y_n + \frac{h}{6} (k_1 + 2k_2 + 2k_3 + k_4)
     \end{cases}
-$$</div>
-<p class="formula-caption">
-Formula 7. Metodo RK4</p>
+\]</div>
+<p class="formula-caption">Formula 7. Metodo RK4 <a id="metodo-rk4"></a></p>
 <p>Da notare che, sempre perché vi voglio bene, abbiamo considerato unicamente i <strong>metodi espliciti</strong>, ma solo perché abbiamo la testa sotto la sabbia non vuol dire che quelli <strong>impliciti</strong>
 (perché sì, esistono gli RK impliciti) non possano farvi del male.</p>
 <h4 id="esempio-rk">Esempio RK<a class="headerlink" href="#esempio-rk" title="Permanent link"> </a></h4>
 <p>Se siete arrivati qui avrete sentito <strong>millanta</strong> volta Lotka-Volterra. Dato che ora possiamo, perché non risolverlo?! Consideriamo quindi la seguente istanza:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx}{dt} = \alpha x - \beta x y \\
 \frac{dy}{dt} = \delta x y - \gamma y \\
@@ -514,108 +503,108 @@ Formula 7. Metodo RK4</p>
 x_0 = 10 \\
 y_0 = 5
 \end{cases}
-$$</div>
+\]</div>
 <p>ovviamente, data tutta la paturnia sopra, usiamo i metodi numerici con</p>
-<div class="math">$$
+<div class="arithmatex">\[
 h=0.1 
 \\
 t \in [0, 2]
-$$</div>
+\]</div>
 <p>in particolare sviluppiamo per Heun e RK4. Tranquilli, è giusto per farvi vedere come funzionano quindi
 svilupperemo solo per un passo.</p>
 <ul>
-<li>Heun, <span class="math">\(n=1\)</span></li>
+<li>Heun, <span class="arithmatex">\(n=1\)</span></li>
 </ul>
 <p>Vi ricordo che Lotka-Volterra è un sistema di due ODE, quindi la faccenda si complica un pochino ma nulla
-di astruso, <strong>niente panico</strong>. Iniziamo calcolando <span class="math">\(k_1\)</span> e <span class="math">\(k_2\)</span>. Dato che le <strong>ODE sono due</strong>, sono calcoleremo</p>
+di astruso, <strong>niente panico</strong>. Iniziamo calcolando <span class="arithmatex">\(k_1\)</span> e <span class="arithmatex">\(k_2\)</span>. Dato che le <strong>ODE sono due</strong>, sono calcoleremo</p>
 <ul>
-<li><span class="math">\(k_1^x, k_2^x\)</span> per la prima ODE</li>
-<li><span class="math">\(k_1^y, k_2^y\)</span> per la seconda ODE</li>
+<li><span class="arithmatex">\(k_1^x, k_2^x\)</span> per la prima ODE</li>
+<li><span class="arithmatex">\(k_1^y, k_2^y\)</span> per la seconda ODE</li>
 </ul>
-<div class="math">$$
+<div class="arithmatex">\[
 k_1^x = \alpha x_0 - \beta x_0 y_0 \\
 k_1^y = \delta x_0 y_0 - \gamma y_0 
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_2^x = \alpha (x_0 + h k_1^x) - \beta (x_0 + h k_1^x) \cdot (y_0 + h k_1^y) \\
 k_2^y = \delta (x_0 + h k_1^x) \cdot (y_0 + h k_1^y) - \gamma (y_0 + h k_1^y)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 x_1 = x_0 + \frac{h}{2} (k_1^x + k_2^x) \\
 y_1 = y_0 + \frac{h}{2} (k_1^y + k_2^y)
-$$</div>
+\]</div>
 <p>Sostituendo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 k_1^x = 1.1 \cdot 10 - 0.4 \cdot 10 \cdot 5 = 11 - 20 = -9 \\
 k_1^y = 0.1 \cdot 10 \cdot 5 - 0.4 \cdot 5 = 5 - 2 = 3
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_2^x = 1.1 \cdot (10 - 0.1 \cdot 9) - 0.4 \cdot (10 - 0.1 \cdot 9) \cdot (5 + 0.1 \cdot 3) \approx 10.01 - 19.292 = -9.282 \\
 k_2^y = 0.1 \cdot (10 - 0.1 \cdot 9) \cdot (5 + 0.1 \cdot 3) - 0.4 \cdot (5 + 0.1 \cdot 3) \approx 4.823 - 2.12 = 2.703
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 x_1 = 10 + 0.05 \cdot (-9 - 9.282) = 9.086 \\
 y_1 = 5 + 0.05 \cdot (3 + 2.703) = 5.285
-$$</div>
-<p>I più attenti di voi si chiederanno perché <span class="math">\(t+h\)</span>, che è richiesto per il calcolo di <span class="math">\(k_2\)</span>, di fatto <strong>non appare mai</strong>. 
-Presto detto, tutte le ODE del sistema, <strong>non dipendono esplicitamente</strong> dalla variabile tempo <span class="math">\(t\)</span>, 
+\]</div>
+<p>I più attenti di voi si chiederanno perché <span class="arithmatex">\(t+h\)</span>, che è richiesto per il calcolo di <span class="arithmatex">\(k_2\)</span>, di fatto <strong>non appare mai</strong>. 
+Presto detto, tutte le ODE del sistema, <strong>non dipendono esplicitamente</strong> dalla variabile tempo <span class="arithmatex">\(t\)</span>, 
 quindi è <strong>ininfluente</strong> ai fini del calcolo; ma se fosse apparso, il <strong>tempo corrente</strong> è quello calcolato
 tramite la <a href="#tempo-discretizzato">Formula di Discretizzazione del Tempo</a> mostrata nel <a href="#esempio-eulero">paragrafo precedente</a>.</p>
 <ul>
-<li>RK4, <span class="math">\(n=1\)</span></li>
+<li>RK4, <span class="arithmatex">\(n=1\)</span></li>
 </ul>
 <p>Per lo stesso principio di prima, calcoliamo:</p>
 <ul>
-<li><span class="math">\(k_1^x, k_2^x, k_3^x, k_4^x\)</span> per la prima ODE</li>
-<li><span class="math">\(k_1^y, k_2^y, k_3^y, k_4^y\)</span> per la seconda ODE</li>
+<li><span class="arithmatex">\(k_1^x, k_2^x, k_3^x, k_4^x\)</span> per la prima ODE</li>
+<li><span class="arithmatex">\(k_1^y, k_2^y, k_3^y, k_4^y\)</span> per la seconda ODE</li>
 </ul>
-<div class="math">$$
+<div class="arithmatex">\[
 k_1^x = \alpha x_0 - \beta x_0 y_0 \\
 k_1^y = \delta x_0 y_0 - \gamma y_0
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_2^x = \alpha \cdot (x_0 + \frac{h}{2} \cdot k_1^x) - \beta \cdot (x_0 + \frac{h}{2} \cdot k_1^x) \cdot (y_0 + \frac{h}{2} \cdot k_1^y) \\
 k_2^y = \delta \cdot (x_0 + \frac{h}{2} \cdot k_1^x) \cdot (y_0 + \frac{h}{2} \cdot k_1^y) - \gamma \cdot (y_0 + \frac{h}{2} \cdot k_1^y)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_3^x = \alpha \cdot (x_0 + \frac{h}{2} \cdot k_2^x) - \beta \cdot (x_0 + \frac{h}{2} \cdot k_2^x) \cdot (y_0 + \frac{h}{2} \cdot k_2^y) \\
 k_3^y = \delta \cdot (x_0 + \frac{h}{2} \cdot k_2^x) \cdot (y_0 + \frac{h}{2} \cdot k_2^y) - \gamma \cdot (y_0 + \frac{h}{2} \cdot k_2^y)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_4^x = \alpha \cdot (x_0 + h \cdot k_3^x) - \beta \cdot (x_0 + h \cdot k_3^x) \cdot (y_0 + h \cdot k_3^y) \\
 k_4^y = \delta \cdot (x_0 + h \cdot k_3^x) \cdot (y_0 + h \cdot k_3^y) - \gamma \cdot (y_0 + h \cdot k_3^y)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 x_1 = x_0 + \frac{h}{6} (k_1^x + 2k_2^x + 2k_3^x + k_4^x) \\
 y_1 = y_0 + \frac{h}{6} (k_1^y + 2k_2^y + 2k_3^y + k_4^y)
-$$</div>
+\]</div>
 <p>Sostituendo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 k_1^x = 1.1 \cdot 10 - 0.4 \cdot 10 \cdot 5 = 11 - 20 = -9 \\
 k_1^y = 0.1 \cdot 10 \cdot 5 - 0.4 \cdot 5 = 5 - 2 = 3
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_2^x = 1.1 \cdot (10 - 0.05 \cdot 9) - 0.4 \cdot (10 - 0.05 \cdot 9) \cdot (5 + 0.05 \cdot 3) = 10.5 - 19.64 = -9.14 \\
 k_2^y = 0.1 \cdot (10 - 0.05 \cdot 9) \cdot (5 + 0.05 \cdot 3) - 0.4 \cdot (5 + 0.05 \cdot 3) = 4.91 - 2.06 = 2.85
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_3^x = 1.1 \cdot (10 - 0.05 \cdot 9.14) - 0.4 \cdot (10 - 0.05 \cdot 9.14) \cdot (5 + 0.05 \cdot 2.85) = -9.13 \\
 k_3^y = 0.1 \cdot (10 - 0.05 \cdot 9.14) \cdot (5 + 0.05 \cdot 2.85) - 0.4 \cdot (5 + 0.05 \cdot 2.85) = 2.84
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_4^x = 1.1 \cdot (10 - 0.1 \cdot 9.13) - 0.4 \cdot (10 - 0.1 \cdot 9.13) \cdot (5 + 0.1 \cdot 2.84) = -9.21 \\
 k_4^y = 0.1 \cdot (10 - 0.1 \cdot 9.13) \cdot (5 + 0.1 \cdot 2.84) - 0.4 \cdot (5 + 0.1 \cdot 2.84) = 2.68
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 x_1 = 10 + \frac{0.1}{6} \cdot (-9 + 2 \cdot (-9.14) + 2 \cdot (-9.13) + (-9.21)) = 9.085 \\
 y_1 = 5 + \frac{0.1}{6} \cdot (3 + 2 \cdot (2.85) + 2 \cdot (2.84) + 2.68) = 5.285
-$$</div>
+\]</div>
 <p>Si lo so, <strong>è una palla infinita</strong> e sembra chissà quale cosa complessa, ma in realtà una volta arrivati 
 alla formulazione del metodo, si tratta solo di fare attenzione ad effettuare le <strong>sostituzioni giuste</strong>.</p>
 <p>Così come fatto per il metodo di Eulero, portiamo anche qui una <strong>tabella di confronto</strong>. Ma questa volta non dividiamo per 
-<span class="math">\(h\)</span>, bensì per metodo, e confrontiamo i risultati dei metodi RK4, Heun e Eulero. Per l'ennesima volta, dato che non possiamo
+<span class="arithmatex">\(h\)</span>, bensì per metodo, e confrontiamo i risultati dei metodi RK4, Heun e Eulero. Per l'ennesima volta, dato che non possiamo
 calcolare la soluzione analitica, non possiamo avere il valore esatto ma solo gli approssimati.</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|c|c|}
 \hline
 n &amp; t_n &amp; \text{Euler} &amp; \text{Heun} &amp; \text{RK4} \\
@@ -635,88 +624,26 @@ n &amp; t_n &amp; \text{Euler} &amp; \text{Heun} &amp; \text{RK4} \\
 20 &amp; 2 &amp; x=0.83, y=4.97 &amp; x=0.96, y=4.8 &amp; x=0.95, y=4.81 \\
 \hline
 \end{array}
-$$</div>
-<p>Come si può vedere dalla tabella, Heun e RK4 danno risultati <strong>molto simili</strong> e si hanno delle variazioni solo dopo <span class="math">\(t=2\)</span> secondi,
-mentre Eulero già dal secondo <span class="math">\(t=0.1\)</span> inizia ad <strong>approssimare male</strong>. Nell'immagine che segue potete vedere <strong>l'andamento di fase</strong>.</p>
+\]</div>
+<p>Come si può vedere dalla tabella, Heun e RK4 danno risultati <strong>molto simili</strong> e si hanno delle variazioni solo dopo <span class="arithmatex">\(t=2\)</span> secondi,
+mentre Eulero già dal secondo <span class="arithmatex">\(t=0.1\)</span> inizia ad <strong>approssimare male</strong>. Nell'immagine che segue potete vedere <strong>l'andamento di fase</strong>.</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_3/phase_comparison_1.png"/>
-Figura 2. Comparazione Risultati per <span class="math">\(t=2\)</span></p>
-<p>Vediamo infine cosa succede passando da <span class="math">\(t=2\)</span> a <span class="math">\(t=15\)</span>.</p>
+Figura 2. Comparazione Risultati per <span class="arithmatex">\(t=2\)</span></p>
+<p>Vediamo infine cosa succede passando da <span class="arithmatex">\(t=2\)</span> a <span class="arithmatex">\(t=15\)</span>.</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_3/phase_comparison_2.png"/>
-Figura 3. Comparazione Risultati per <span class="math">\(t=15\)</span></p>
+Figura 3. Comparazione Risultati per <span class="arithmatex">\(t=15\)</span></p>
 <p>Come si nota, mentre Heun e RK4 hanno un andamento molto simile e <strong>coerente</strong> con la teoria creando una <strong>orbita chiusa</strong> (leggete 
 i predenti articoli se non ricordate a cosa mi riferisco), <strong>l'errore</strong> che Eulero accumula e continua ad accumulare, è talmente 
 grande che l'andamento della soluzione <strong>prende una strada tutta sua</strong>.</p>
-<p>Per completezza vediamo anche l'andamento di prede e predatori, cioè di <span class="math">\(x\)</span> e <span class="math">\(y\)</span>, rispetto al tempo <span class="math">\(t\)</span></p>
+<p>Per completezza vediamo anche l'andamento di prede e predatori, cioè di <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span>, rispetto al tempo <span class="arithmatex">\(t\)</span></p>
 <p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/images/teoria_matematica/neural_ode_3/time_series_comparison.png"/>
-Figura 4. Andamento di <span class="math">\(x\)</span> e <span class="math">\(y\)</span> rispetto al tempo <span class="math">\(t=15\)</span></p>
+Figura 4. Andamento di <span class="arithmatex">\(x\)</span> e <span class="arithmatex">\(y\)</span> rispetto al tempo <span class="arithmatex">\(t=15\)</span></p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Eccoci giunti alla fine di questo terzo articolo. Arrivati a questo punto <strong>dovreste sapere</strong> (o quanto meno ricordare per chi già aveva conoscenza),
 cosa sono derivate, integrali, equazioni differenziali e metodi numerici. E ci sarebbe tantissimo altro da dire, ho cercato di essere <strong>sintetico</strong>.
 Non c'è bisogno che mi <strong>ringraziate</strong>. In ogni caso, ora abbiamo tutti gli ingredienti per parlare delle <strong>Neural ODE</strong>. E se ve lo steste sì, anche lì ci 
 sarà molta matematica. Concludo come sempre con il <a href="https://github.com/lucadivit/NeuralODEBlog">link al repo</a> per vedere, in codice, quanto detto.</p>
 <p>Alla Prossima.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -772,6 +699,10 @@ sarà molta matematica. Concludo come sempre con il <a href="https://github.com/
                 <li><a href="https://www.lucadivita.it/tag/metodi_numerici.html">metodi_numerici</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
     </div>
 
 </article>

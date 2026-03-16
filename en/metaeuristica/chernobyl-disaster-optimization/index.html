@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/metaeuristica/chernobyl-disaster-optimization/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/metaeuristica/chernobyl-disaster-optimization/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/metaeuristica/chernobyl-disaster-optimization/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/metaeuristica/chernobyl-disaster-optimization/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Chernobyl Disaster Optimization</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/metaeuristica.html">Metaheuristic</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2026-02-01T00:00:00+01:00">February 01, 2026</time>
-                - <a href="https://www.lucadivita.it/en/category/metaeuristica.html">Metaheuristic</a>
             </small>
         </p>
     </header>
@@ -161,13 +161,13 @@ Now, far be it from me to explain the physics of <strong>particles</strong>, als
 seems a bit <strong>overkill</strong>. In any case, when a nuclear power plant explodes, among the various <strong>isotopes</strong> and <strong>particles</strong> emitted by the unstable core,
 there are the three protagonists of our story, which are <strong>alpha particles, beta particles, and gamma rays</strong>.</p>
 <ul>
-<li><strong>Alpha</strong> particles are the big boned ones, and therefore more "slow". Think that they reach only about <span class="math">\(\sim 5 \%\)</span> of the speed of light,
+<li><strong>Alpha</strong> particles are the big boned ones, and therefore more "slow". Think that they reach only about <span class="arithmatex">\(\sim 5 \%\)</span> of the speed of light,
 <strong>poor losers</strong>. In any case they are composed of two <strong>protons</strong> and two <strong>neutrons</strong>. They therefore have a <strong>positive</strong> charge which in matter is very high,
-and precisely for this reason they are strongly <strong>ionizing</strong> (for the record, ionizing <span class="math">\(\rightarrow\)</span> molecular destruction <span class="math">\(\rightarrow\)</span> radiation poisoning
-<span class="math">\(\rightarrow\)</span> you melt <span class="math">\(\rightarrow\)</span> you die).
+and precisely for this reason they are strongly <strong>ionizing</strong> (for the record, ionizing <span class="arithmatex">\(\rightarrow\)</span> molecular destruction <span class="arithmatex">\(\rightarrow\)</span> radiation poisoning
+<span class="arithmatex">\(\rightarrow\)</span> you melt <span class="arithmatex">\(\rightarrow\)</span> you die).
 The fact that they are very bulky, however, also makes them <strong>poorly penetrating</strong>. To be clear, if you are behind a sheet of paper you are <strong>safe</strong>,
 at least until you breathe them in and or ingest them, in that case it has been nice and we will see each other on the other side of the <strong>Styx</strong>.</li>
-<li><strong>Beta</strong> particles have followed the ketogenic diet and are a little more slim: they reach about <span class="math">\(\sim 30–90 \%\)</span> of the speed of light.
+<li><strong>Beta</strong> particles have followed the ketogenic diet and are a little more slim: they reach about <span class="arithmatex">\(\sim 30–90 \%\)</span> of the speed of light.
 Their mass is small, since they are composed of an <strong>electron</strong>, and they have a <strong>negative</strong> charge. They are a bit more insidious than alpha particles, especially from the outside,
 but they can be easily <strong>shielded</strong> with a few millimeters of <strong>metal</strong> such as aluminum. If you are not behind shielding, however, tough luck.
 They are less ionizing than alpha particles, but since they are often <strong>very energetic</strong>, the interaction with the atoms of our body makes the orbiting electrons fly away
@@ -196,18 +196,16 @@ This is what it means to search for the optimum in the <strong>Chernobyl Disaste
 <h4 id="the-human">The Human<a class="headerlink" href="#the-human" title="Permanent link"> </a></h4>
 <p>The human, our <strong>sacrificial</strong> victim. The poor man future Hulk. As we said, he runs away, and intuitively the farther he gets the more <strong>safe</strong> he feels, until he <strong>stops</strong>.
 This is <strong>modeled</strong> through the following formula:</p>
-<p><a id="human-speed"></a>
-</p>
-<div class="math">$$
+<p><a id="human-speed"></a></p>
+<div class="arithmatex">\[
 WS = 3 - \left( 3 \cdot \frac{it}{n_{it}} \right)
-$$</div>
-<p class="formula-caption">
-Formula 1. Speed Decay</p>
-<p>That is, the escape speed is initially <strong>maximum</strong>, <span class="math">\(3mph\)</span> (yes, the author uses <strong>miles per hour</strong> as the unit), and as the <strong>iterative algorithm</strong> progresses, the speed <strong>decreases</strong>
+\]</div>
+<p class="formula-caption">Formula 1. Speed Decay</p>
+<p>That is, the escape speed is initially <strong>maximum</strong>, <span class="arithmatex">\(3mph\)</span> (yes, the author uses <strong>miles per hour</strong> as the unit), and as the <strong>iterative algorithm</strong> progresses, the speed <strong>decreases</strong>
 until it <strong>reaches zero</strong>. In the formula:</p>
 <ul>
-<li><span class="math">\(it\)</span> is the <strong>current iteration</strong></li>
-<li><span class="math">\(n_{it}\)</span> is the <strong>number of iterations</strong> that will be performed by the algorithm.</li>
+<li><span class="arithmatex">\(it\)</span> is the <strong>current iteration</strong></li>
+<li><span class="arithmatex">\(n_{it}\)</span> is the <strong>number of iterations</strong> that will be performed by the algorithm.</li>
 </ul>
 <p>As will be seen from the following formulas, the particles <strong>do not see the man and do not know where he is</strong>, but they are rewarded when they <strong>get closer</strong> to him.
 Whoever gets closest becomes a <strong>guide</strong> for the others.</p>
@@ -265,92 +263,79 @@ the exploration of the search space of the others, in a given iteration. Moreove
 from the <code>_update_best_particles</code> function. This allows <strong>avoiding continuous changes</strong> and therefore having a <strong>controlled evolution</strong>
 of the particle positions, favoring the <strong>convergence</strong> of the solution.</p>
 <p>Up to this point it is fairly clear, right? Random <strong>particles</strong>, <strong>fitness</strong>, <strong>best</strong> ones that emerge. Now comes the interesting part: how the hell do we make them <strong>move</strong>?</p>
-<p>Now a few formulas begin. For each particle <span class="math">\(\xi\)</span>, or rather for each <strong>component</strong> <span class="math">\(col\)</span> of each <strong>particle</strong> <span class="math">\(\xi\)</span>, we compute what the author calls the <strong>Gradient
+<p>Now a few formulas begin. For each particle <span class="arithmatex">\(\xi\)</span>, or rather for each <strong>component</strong> <span class="arithmatex">\(col\)</span> of each <strong>particle</strong> <span class="arithmatex">\(\xi\)</span>, we compute what the author calls the <strong>Gradient
 Descent Factor</strong>. Do not be misled by the name though, this is not a gradient since no derivative appears. It is instead a <strong>coefficient</strong>
 that indicates <strong>how strongly a component is pushed toward one of the leader particles</strong> (alpha, beta, or gamma), which at that moment represent
 the <strong>best solutions</strong> found. In formulas we have:</p>
-<p><a id="gdf"></a>
-</p>
-<div class="math">$$
+<p><a id="gdf"></a></p>
+<div class="arithmatex">\[
 GDF_{p} = \varphi_{p} \cdot \left( POS_{p}^{col} - PROP_{p} \cdot D_{p} \right)
-$$</div>
-<p class="formula-caption">
-Formula 2. Gradient Descent</p>
-<p>Alright, that is a lot of symbols. But let's go in order. First of all, I start by saying that the <span class="math">\(p\)</span> in the subscript is used to indicate the <strong>reference leader</strong>,
-so <span class="math">\(p=\alpha, \, \beta, \, \gamma\)</span>. This is because the formulas <strong>change</strong> depending on the <strong>leader</strong> considered, starting from the <strong>quantity</strong> <span class="math">\(\varphi_{p}\)</span> which can be interpreted
+\]</div>
+<p class="formula-caption">Formula 2. Gradient Descent</p>
+<p>Alright, that is a lot of symbols. But let's go in order. First of all, I start by saying that the <span class="arithmatex">\(p\)</span> in the subscript is used to indicate the <strong>reference leader</strong>,
+so <span class="arithmatex">\(p=\alpha, \, \beta, \, \gamma\)</span>. This is because the formulas <strong>change</strong> depending on the <strong>leader</strong> considered, starting from the <strong>quantity</strong> <span class="arithmatex">\(\varphi_{p}\)</span> which can be interpreted
 as a <strong>scaling factor</strong>:</p>
-<p><a id="fs"></a>
-</p>
-<div class="math">$$
+<p><a id="fs"></a></p>
+<div class="arithmatex">\[
 \begin{aligned}
   \varphi_{\alpha} &amp;= 0.25 \\[6pt]
   \varphi_{\beta} &amp;= 0.5 \\[6pt]
   \varphi_{\gamma} &amp;= 1.
 \end{aligned}
-$$</div>
-<p class="formula-caption">
-Formula 3. Scaling Factors</p>
-<p>As for the term <span class="math">\(POS_{p}^{col}\)</span>, it simply represents the <strong>position component</strong> of the leader particle. In fact, we said that each
-particle is a list, and that <span class="math">\(col\)</span> is used to indicate the <strong>i-th element</strong> of the list. To avoid any confusion, if we considered a
+\]</div>
+<p class="formula-caption">Formula 3. Scaling Factors</p>
+<p>As for the term <span class="arithmatex">\(POS_{p}^{col}\)</span>, it simply represents the <strong>position component</strong> of the leader particle. In fact, we said that each
+particle is a list, and that <span class="arithmatex">\(col\)</span> is used to indicate the <strong>i-th element</strong> of the list. To avoid any confusion, if we considered a
 two-dimensional optimization problem, <a href="#gdf">Formula 2</a> would be executed <strong>six times</strong> for each particle. This is because it is executed once for each element of the list,
-and for each element the leader <span class="math">\(\alpha\)</span> is considered first, then <span class="math">\(\beta\)</span>, and finally <span class="math">\(\gamma\)</span>.</p>
-<p>Let's move on to the next term, <span class="math">\(PROP_{p}\)</span>. We can see it as an <strong>area of influence</strong>: the larger this area is, the more particles
+and for each element the leader <span class="arithmatex">\(\alpha\)</span> is considered first, then <span class="arithmatex">\(\beta\)</span>, and finally <span class="arithmatex">\(\gamma\)</span>.</p>
+<p>Let's move on to the next term, <span class="arithmatex">\(PROP_{p}\)</span>. We can see it as an <strong>area of influence</strong>: the larger this area is, the more particles
 fall under the <strong>effect</strong> of the leader and therefore tend to <strong>follow it</strong>, that is their movement is computed with respect to this <strong>region</strong>. It is defined as follows:</p>
-<p><a id="fp"></a>
-</p>
-<div class="math">$$
+<p><a id="fp"></a></p>
+<div class="arithmatex">\[
 PROP_{p} = \frac{\pi \cdot r_{1, \, p}^2}{\varphi_{p} \cdot \upsilon_{p}} - \left( rand_p \left( 0, \, 1 \right) \cdot WS \right)
-$$</div>
-<p class="formula-caption">
-Formula 4. Propagation Factors</p>
-<p>In this formula we see old and new friends. We have already introduced <span class="math">\(\varphi_{p}\)</span> and <span class="math">\(WS\)</span>. There is no need to tell you what <span class="math">\(\pi\)</span> is. Instead, <span class="math">\(r_{1, \, p}^2\)</span>
-is a <strong>random numerical value</strong> between <span class="math">\(0\)</span> and <span class="math">\(1\)</span> (the subscript <span class="math">\(p\)</span> is used to indicate that each <strong>leader</strong> will have its own random <strong>radius</strong>),
-<span class="math">\(rand_p \left( 0, \, 1 \right)\)</span> is exactly the same thing.
-Much more interesting, instead, is <span class="math">\(\upsilon_{p}\)</span>. This represents a <strong>velocity associated with the leader</strong> and is a function of the leader considered. It is defined as follows:</p>
-<p><a id="speed"></a>
-</p>
-<div class="math">$$
+\]</div>
+<p class="formula-caption">Formula 4. Propagation Factors</p>
+<p>In this formula we see old and new friends. We have already introduced <span class="arithmatex">\(\varphi_{p}\)</span> and <span class="arithmatex">\(WS\)</span>. There is no need to tell you what <span class="arithmatex">\(\pi\)</span> is. Instead, <span class="arithmatex">\(r_{1, \, p}^2\)</span>
+is a <strong>random numerical value</strong> between <span class="arithmatex">\(0\)</span> and <span class="arithmatex">\(1\)</span> (the subscript <span class="arithmatex">\(p\)</span> is used to indicate that each <strong>leader</strong> will have its own random <strong>radius</strong>),
+<span class="arithmatex">\(rand_p \left( 0, \, 1 \right)\)</span> is exactly the same thing.
+Much more interesting, instead, is <span class="arithmatex">\(\upsilon_{p}\)</span>. This represents a <strong>velocity associated with the leader</strong> and is a function of the leader considered. It is defined as follows:</p>
+<p><a id="speed"></a></p>
+<div class="arithmatex">\[
 \begin{aligned}
   \upsilon_{\alpha} &amp;= log_{10} \left( rand(1, \, 16.000) \right) \\[6pt]
   \upsilon_{\beta} &amp;= log_{10} \left( rand(1, \, 270.000) \right) \\[6pt]
   \upsilon_{\gamma} &amp;= log_{10} \left( rand(1, \, 300.000) \right)
 \end{aligned}
-$$</div>
-<p class="formula-caption">
-Formula 5. Leader Velocities</p>
+\]</div>
+<p class="formula-caption">Formula 5. Leader Velocities</p>
 <p>If you remember, in the previous paragraphs I had talked about how fast the particles were. Well, that discussion was necessary precisely to get
-to this point. Each leader has its own <strong>velocity</strong> defined as the base <span class="math">\(10\)</span> <strong>logarithm</strong> of a random number taken between <span class="math">\(1\)</span> and the <strong>maximum speed</strong>
+to this point. Each leader has its own <strong>velocity</strong> defined as the base <span class="arithmatex">\(10\)</span> <strong>logarithm</strong> of a random number taken between <span class="arithmatex">\(1\)</span> and the <strong>maximum speed</strong>
 for that type of particle. The use of the logarithm serves to <strong>reduce</strong> potentially very large values, avoiding <strong>instability</strong> of the algorithm.</p>
-<p>We are almost there, one last <strong>ingredient</strong> is missing. <span class="math">\(D_{p}\)</span> represents the <strong>distance</strong> between the <strong>current</strong> particle <span class="math">\(\xi\)</span> and the effect of the <strong>leader</strong> <span class="math">\(p\)</span>,
+<p>We are almost there, one last <strong>ingredient</strong> is missing. <span class="arithmatex">\(D_{p}\)</span> represents the <strong>distance</strong> between the <strong>current</strong> particle <span class="arithmatex">\(\xi\)</span> and the effect of the <strong>leader</strong> <span class="arithmatex">\(p\)</span>,
 taking into account its <strong>propagation</strong>. It is defined as follows:</p>
-<p><a id="distance"></a>
-</p>
-<div class="math">$$
+<p><a id="distance"></a></p>
+<div class="arithmatex">\[
 D_{p} = \left| A_{p} \cdot POS_{p}^{col} - \xi_i^{col} \right|
-$$</div>
-<p class="formula-caption">
-Formula 6. Distance</p>
-<p>In this formula we have <span class="math">\(A_{p}\)</span> which is the <strong>propagation area</strong> associated with the leader <span class="math">\(p\)</span> and is a measure of the <strong>extension of its search space</strong>.
+\]</div>
+<p class="formula-caption">Formula 6. Distance</p>
+<p>In this formula we have <span class="arithmatex">\(A_{p}\)</span> which is the <strong>propagation area</strong> associated with the leader <span class="arithmatex">\(p\)</span> and is a measure of the <strong>extension of its search space</strong>.
 Similarly to before, it is computed as follows:</p>
-<p><a id="area"></a>
-</p>
-<div class="math">$$
+<p><a id="area"></a></p>
+<div class="arithmatex">\[
 \begin{aligned}
   r_{2, \, p} &amp;= rand \left( 0, \, 1 \right) \\[6pt]
   A_{p} &amp;= \pi \cdot r_{2, \, p}^2
 \end{aligned}
-$$</div>
-<p class="formula-caption">
-Formula 7. Propagation Area</p>
-<p>And <span class="math">\(\xi_i^{col}\)</span> and <span class="math">\(POS_{p}^{col}\)</span>, which have already been introduced. Since <strong>repetita iuvant</strong>, <span class="math">\(\xi_i^{col}\)</span> is the <strong>value</strong> contained in the <strong>position</strong> <span class="math">\(col\)</span>
-of the <strong>i-th</strong> particle (not to be confused with the leader), and <span class="math">\(POS_{p}^{col}\)</span> is the <strong>value</strong> contained in the <strong>position</strong> <span class="math">\(col\)</span> of the <strong>leader</strong> particle <span class="math">\(p\)</span>.</p>
-<p>Alright, I was joking, it was not really the last ingredient. But now that we have defined all the <strong>necessary formulas</strong> we can compute <a href="#gdf"><span class="math">\(GDF_{p}\)</span></a> and therefore proceed
-with the calculation of the new value of the <strong>position components</strong> of each particle. So we <strong>update</strong> the value of <span class="math">\(\xi_i^{col}\)</span> in the following way:</p>
-<div class="math">$$
+\]</div>
+<p class="formula-caption">Formula 7. Propagation Area</p>
+<p>And <span class="arithmatex">\(\xi_i^{col}\)</span> and <span class="arithmatex">\(POS_{p}^{col}\)</span>, which have already been introduced. Since <strong>repetita iuvant</strong>, <span class="arithmatex">\(\xi_i^{col}\)</span> is the <strong>value</strong> contained in the <strong>position</strong> <span class="arithmatex">\(col\)</span>
+of the <strong>i-th</strong> particle (not to be confused with the leader), and <span class="arithmatex">\(POS_{p}^{col}\)</span> is the <strong>value</strong> contained in the <strong>position</strong> <span class="arithmatex">\(col\)</span> of the <strong>leader</strong> particle <span class="arithmatex">\(p\)</span>.</p>
+<p>Alright, I was joking, it was not really the last ingredient. But now that we have defined all the <strong>necessary formulas</strong> we can compute <a href="#gdf"><span class="arithmatex">\(GDF_{p}\)</span></a> and therefore proceed
+with the calculation of the new value of the <strong>position components</strong> of each particle. So we <strong>update</strong> the value of <span class="arithmatex">\(\xi_i^{col}\)</span> in the following way:</p>
+<div class="arithmatex">\[
 \xi_i^{col} \leftarrow \frac{GDF_{\alpha} + GDF_{\beta} + GDF_{\gamma}}{3}
-$$</div>
-<p class="formula-caption">
-Formula 8. Position Component Update</p>
+\]</div>
+<p class="formula-caption">Formula 8. Position Component Update</p>
 <p>Yes, there are a lot of formulas, but I swear they are <strong>finished</strong>. So here is a code snippet that <strong>implements</strong> what has been written:</p>
 <p><a id="snippet2"></a></p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -418,13 +403,13 @@ thanks to higher speed and propagation <strong>explore</strong> regions farther 
 <li><code>n_particles</code> indicates the <strong>number of particles</strong> you want in your particle <strong>population</strong>. Generally, the higher it is, the <strong>greater</strong> the <strong>probability</strong>
 of reaching the optimum, but it results in a <strong>slowdown</strong> of the algorithm.</li>
 <li><code>function_to_optimize</code> and <code>dim</code> are the mathematical <strong>function</strong> to <strong>optimize</strong>, and its <strong>dimensionality</strong>. In my specific case I used the
-<a href="https://al-roomi.org/benchmarks/unconstrained/2-dimensions/29-bird-function">Bird Function</a>, which has dimension <span class="math">\(2\)</span> and is known for the difficulty of computing its <strong>minimum</strong>.</li>
+<a href="https://al-roomi.org/benchmarks/unconstrained/2-dimensions/29-bird-function">Bird Function</a>, which has dimension <span class="arithmatex">\(2\)</span> and is known for the difficulty of computing its <strong>minimum</strong>.</li>
 <li><code>approach</code> indicates whether you want to <strong>minimize</strong> (<code>min</code>) or <strong>maximize</strong> (<code>max</code>).</li>
 <li><code>bounds</code> indicates the <strong>existence limits</strong> of the function. It is useful when we know that we need to search for the optimum in a specific <strong>portion</strong> of the <strong>domain</strong>.</li>
 </ul>
 <p>By running <a href="#snippet3">this snippet</a> you should get an output similar to:</p>
 <p><code>Best Fitness is -106.3248972989146 with Particle [4.74192243 3.21810325]</code></p>
-<p>where the values contained inside the particle are the <strong>coordinates</strong> <span class="math">\((x, \, y)\)</span> that get very close to the <strong>minimum</strong> of the function, within the given domain.
+<p>where the values contained inside the particle are the <strong>coordinates</strong> <span class="arithmatex">\((x, \, y)\)</span> that get very close to the <strong>minimum</strong> of the function, within the given domain.
 Worth noting is the use of the word "should", since this is a <strong>probabilistic process</strong>.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>I have to say that I really like these exotic algorithms and it was <strong>fun</strong> to study and implement it. But this is with hindsight.
@@ -437,68 +422,6 @@ a work of <strong>reverse engineering</strong> and reconstruction of information
 As always, I leave you the <a href="https://github.com/lucadivit/ChernobylDisasterOptimization">link to <strong>my implementation</strong></a> so that you can
 take a look at the <strong>code</strong> and run your <strong>experiments</strong>. Watch out for radiation.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -542,6 +465,10 @@ take a look at the <strong>code</strong> and run your <strong>experiments</stron
                 <li><a href="https://www.lucadivita.it/en/tag/optimization.html">optimization</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>

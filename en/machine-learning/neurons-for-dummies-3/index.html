@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-3/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-3/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/machine-learning/neurons-for-dummies-3/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-3/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Neurons for Dummies - 3</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/machine-learning.html">Machine Learning</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-05-16T00:00:00+02:00">May 16, 2025</time>
-                - <a href="https://www.lucadivita.it/en/category/machine-learning.html">Machine Learning</a>
             </small>
         </p>
     </header>
@@ -151,179 +151,171 @@ that <strong>wrap</strong> other functions inside them. Simply put:  </p>
 <blockquote>
 <p>The derivative of a composite function is obtained by differentiating the outer function and multiplying by the derivative of the inner function.</p>
 </blockquote>
-<p>In formulas, if we have two functions:<br/>
-<span class="math center-math">\(v = h(z), u = g(v), y = f(u) \Rightarrow y = f(g(h(z)))\)</span><br/>
-then differentiating gives:<br/>
-</p>
-<div class="math">$$
+<p>In formulas, if we have two functions: </p>
+<div class="arithmatex">\[v = h(z), u = g(v), y = f(u) \Rightarrow y = f(g(h(z)))\]</div>
+<p>then differentiating gives:  </p>
+<div class="arithmatex">\[
 \frac{\partial y }{\partial z} = \frac{\partial f(g(h(z))) }{\partial z}=\frac{\partial f }{\partial u} \cdot \frac{\partial u }{\partial v} \cdot \frac{\partial v }{\partial z}
-$$</div>
-<p><br/>
-An alternative representation is:<br/>
-</p>
-<div class="math">$$
+\]</div>
+<p>An alternative representation is:  </p>
+<div class="arithmatex">\[
 \frac{\partial y }{\partial z} = f'(g(h(z))) \cdot g'(h(z)) \cdot h'(z)
-$$</div>
-<p><strong>For example</strong>, given:<br/>
-</p>
-<div class="math">$$
+\]</div>
+<p><strong>For example</strong>, given:  </p>
+<div class="arithmatex">\[
 h(z) = z^2
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 g(v) = 3v + 1
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 f(u) = \sin(u)
-$$</div>
-<p>The function becomes:<br/>
-</p>
-<div class="math">$$
+\]</div>
+<p>The function becomes:  </p>
+<div class="arithmatex">\[
 y = f(g(h(z))) = \sin(3z^2 + 1) 
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \frac{\partial v }{\partial z} = 2z
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \frac{\partial u }{\partial v} = 3
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \frac{\partial f }{\partial u} = \cos(u)
-$$</div>
-<p>And the derivative is:<br/>
-</p>
-<div class="math">$$
+\]</div>
+<p>And the derivative is:  </p>
+<div class="arithmatex">\[
 \frac{\partial y }{\partial z} = \cos(u) \cdot 3 \cdot 2z = 6z \cdot \cos(3z^2 + 1)
-$$</div>
+\]</div>
 <h3 id="gradient-descent">Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permanent link"> </a></h3>
 <p>In this section we look at <strong>how we arrive</strong> at the formulation for gradient descent. This is not a math textbook, just a way to offer 
 a <strong>general intuition</strong> of why it works, so I’ll omit many technical details to keep it simple.<br/>
 <strong>Math purists among you, forgive me.</strong><br/>
-First, let’s introduce the <a href="https://en.wikipedia.org/wiki/Taylor_series"><strong>Taylor Series</strong></a>. This allows us to <strong>approximate a function</strong> <span class="math">\(f(x)\)</span> 
-near a known point <span class="math">\(x_0\)</span>, using the derivatives of <span class="math">\(f\)</span> at that point. Isn't that exactly what we do with the loss function?! 
+First, let’s introduce the <a href="https://en.wikipedia.org/wiki/Taylor_series"><strong>Taylor Series</strong></a>. This allows us to <strong>approximate a function</strong> <span class="arithmatex">\(f(x)\)</span> 
+near a known point <span class="arithmatex">\(x_0\)</span>, using the derivatives of <span class="arithmatex">\(f\)</span> at that point. Isn't that exactly what we do with the loss function?! 
 We <strong>evaluate</strong> the function near our current point, to <strong>decide</strong> where to go next.<br/>
-Mathematically, it’s written like this:
-</p>
-<div class="math">$$
+Mathematically, it’s written like this:</p>
+<div class="arithmatex">\[
 f(x) \approx \sum_{i=0}^{\infty} \frac{f^{(n)}(x_0)}{n!} \cdot (x - x_0)^n = f(x_0) + \frac{f'(x_0)}{1!} \cdot (x - x_0)^1 + \frac{f''(x_0)}{2!} \cdot (x - x_0)^2 + \cdots
-$$</div>
+\]</div>
 <p>Let’s take a numerical example:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) = x^2 \quad \text{ with } \quad x_0 = 1
-$$</div>
-<p><br/>
-The derivatives are:</p>
-<div class="math">$$
+\]</div>
+<p>The derivatives are:</p>
+<div class="arithmatex">\[
 f(x) = x^2 \Rightarrow f(x_0) = f(1) = x_0^2 = 1^2 = 1
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 f'(x) = 2x \Rightarrow f'(x_0) = f'(1) = 2 \cdot x_0 = 2 \cdot 1 = 2
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 f''(x) = 2 \Rightarrow f''(x_0) = f''(1) = 2
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 f^{(n)}(x) = 0 \quad \forall \quad n \geq 3 
-$$</div>
+\]</div>
 <p>So, with substitution:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^2 \approx f(x_0) + \frac{f'(x_0)}{1!} \cdot (x - x_0)^1 + \frac{f''(x_0)}{2!} \cdot (x - x_0)^2 = 1 + 2 \cdot (x - 1) + (x - 1)^2
-$$</div>
+\]</div>
 <p>Let’s compare the graphs of:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 g(x) = 1 + 2 \cdot (x - 1) + (x - 1)^2 \quad \text{and} \quad f(x) = x^2
-$$</div>
+\]</div>
 <p class="image-caption"><img alt="Taylor" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/taylor.png"/>
 Figure 1. Taylor Approximation</p>
-<p>As you can see, the two functions <strong>behave similarly</strong> near <span class="math">\(x_0 = 1\)</span>, so <span class="math">\(g(x)\)</span> correctly approximates <span class="math">\(f(x)\)</span> in that region.</p>
+<p>As you can see, the two functions <strong>behave similarly</strong> near <span class="arithmatex">\(x_0 = 1\)</span>, so <span class="arithmatex">\(g(x)\)</span> correctly approximates <span class="arithmatex">\(f(x)\)</span> in that region.</p>
 <p>The more terms (thus <strong>more derivatives</strong>) we consider in the Taylor series, the <strong>better</strong> the approximation. 
 But for our purposes, we’re happy stopping at the <strong>first derivative</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) \approx f(x_0) + f'(x_0) \cdot (x-x_0)
-$$</div>
-<p>This formula tells us how the function <strong>locally</strong> behaves. The first derivative <span class="math">\(f'(x_0)\)</span> tells us the <strong>speed</strong> 
-and <strong>direction</strong> of increase, while <span class="math">\((x - x_0)\)</span> represents a <strong>step</strong> from the starting point.<br/>
+\]</div>
+<p>This formula tells us how the function <strong>locally</strong> behaves. The first derivative <span class="arithmatex">\(f'(x_0)\)</span> tells us the <strong>speed</strong> 
+and <strong>direction</strong> of increase, while <span class="arithmatex">\((x - x_0)\)</span> represents a <strong>step</strong> from the starting point.<br/>
 But remember: our goal is to <strong>minimize</strong>. We don’t want to go toward growth, but in the <strong>opposite direction</strong>, 
 and we want to do it with a <strong>small step</strong>, chosen arbitrarily. 
 So we write the step as:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x - x_0 = -\eta \cdot f'(x_0)
-$$</div>
+\]</div>
 <p>where:</p>
 <ul>
-<li><span class="math">\(\eta\)</span> is the <strong>step size</strong></li>
-<li><span class="math">\(-f'(x_0)\)</span> is the <strong>opposite direction</strong> of increase</li>
+<li><span class="arithmatex">\(\eta\)</span> is the <strong>step size</strong></li>
+<li><span class="arithmatex">\(-f'(x_0)\)</span> is the <strong>opposite direction</strong> of increase</li>
 </ul>
 <p>So we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x = x_0 - \eta \cdot f'(x_0)
-$$</div>
+\]</div>
 <p><strong>Sound familiar?</strong></p>
 <p>Going back, if we substitute this into Taylor's formula, we get:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x_0 - \eta \cdot f'(x_0)) \approx f(x_0) - \eta \cdot f'(x_0)^2
-$$</div>
+\]</div>
 <p>Let’s simplify the notation:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x_0 = x_t
-$$</div>
+\]</div>
 <p>and</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x_t - \eta \cdot f'(x_t) = x_{t+1}
-$$</div>
+\]</div>
 <p>where:</p>
 <ul>
-<li><span class="math">\(x_t\)</span> is the <strong>starting point</strong> </li>
-<li><span class="math">\(x_{t+1}\)</span> is the <strong>next point</strong></li>
+<li><span class="arithmatex">\(x_t\)</span> is the <strong>starting point</strong> </li>
+<li><span class="arithmatex">\(x_{t+1}\)</span> is the <strong>next point</strong></li>
 </ul>
 <p>So:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x_{t+1}) \approx f(x_t) - \eta \cdot f'(x_t)^2
-$$</div>
-<p>Now suppose <span class="math">\(f\)</span> is a <a href="https://en.wikipedia.org/wiki/Convex_function"><strong>Convex Function</strong></a> and <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity"><strong>Lipschitz Continuous</strong></a>, 
+\]</div>
+<p>Now suppose <span class="arithmatex">\(f\)</span> is a <a href="https://en.wikipedia.org/wiki/Convex_function"><strong>Convex Function</strong></a> and <a href="https://en.wikipedia.org/wiki/Lipschitz_continuity"><strong>Lipschitz Continuous</strong></a>, 
 we can then assert this <strong>inequality</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x_{t+1}) \leq f(x_t) - \frac{\eta}{2} \cdot f'(x_t)^2
-$$</div>
+\]</div>
 <p>with</p>
-<div class="math">$$
+<div class="arithmatex">\[
 0 &lt; \eta \leq \frac{1}{L}
-$$</div>
-<p>where <span class="math">\(L\)</span> is a <strong>Lipschitz constant</strong>.</p>
-<p>In words: <em>the function <span class="math">\(f\)</span>, when moving from</em> <span class="math">\(x_t\)</span> <em>to</em> <span class="math">\(x_{t+1}\)</span>, <em>decreases</em>, as long as we choose 
-<span class="math">\(\eta\)</span> <strong>small enough</strong>. And that’s exactly what we wanted!<br/>
+\]</div>
+<p>where <span class="arithmatex">\(L\)</span> is a <strong>Lipschitz constant</strong>.</p>
+<p>In words: <em>the function <span class="arithmatex">\(f\)</span>, when moving from</em> <span class="arithmatex">\(x_t\)</span> <em>to</em> <span class="arithmatex">\(x_{t+1}\)</span>, <em>decreases</em>, as long as we choose 
+<span class="arithmatex">\(\eta\)</span> <strong>small enough</strong>. And that’s exactly what we wanted!<br/>
 With the rule</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x = x_0 - \eta \cdot f'(x_0)
-$$</div>
+\]</div>
 <p>the function <strong>decreases</strong> with each step.</p>
-<p>So, if <span class="math">\(f\)</span> is the <strong>loss function</strong> and <span class="math">\(x\)</span> is some <strong>generic weight</strong>,<br/>
+<p>So, if <span class="arithmatex">\(f\)</span> is the <strong>loss function</strong> and <span class="arithmatex">\(x\)</span> is some <strong>generic weight</strong>,<br/>
 we’ve just <strong>derived</strong> the formula for gradient descent.</p>
 <p>This was meant to give a "simple" <strong>intuition</strong>. 
 If you're looking for a formal, rigorous proof, I recommend <a href="https://www.mit.edu/~gfarina/2024/67220s24_L07_gradient_descent/L07.pdf">this source</a>.</p>
 <h3 id="about-activation-functions">About Activation Functions<a class="headerlink" href="#about-activation-functions" title="Permanent link"> </a></h3>
 <p>In this section we finally answer why the <strong>Heaviside Step</strong> was ruthlessly <strong>discarded</strong> as an activation function. 
 If you’ve read the whole article, you’ve seen that <strong>backpropagation</strong> requires this computation:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{\partial L }{\partial w_i} = \frac{\partial L(\sigma(H(x_i, w_i))) }{\partial w_i} = \frac{\partial L }{\partial p} \cdot \frac{\partial p }{\partial net} \cdot \frac{\partial net }{\partial w_i}
-$$</div>
+\]</div>
 <p>where:</p>
 <ul>
-<li><span class="math large-math">\(\frac{\partial p }{\partial net}\)</span> is the <strong>derivative of the activation function</strong> with respect to the transfer-function output.  </li>
-<li><span class="math large-math">\(\frac{\partial L }{\partial p}\)</span> is the <strong>derivative of the loss</strong> with respect to the prediction.  </li>
+<li><span class="arithmatex">\(\frac{\partial p }{\partial net}\)</span> is the <strong>derivative of the activation function</strong> with respect to the transfer-function output.  </li>
+<li><span class="arithmatex">\(\frac{\partial L }{\partial p}\)</span> is the <strong>derivative of the loss</strong> with respect to the prediction.  </li>
 </ul>
-<p>To compute these derivatives, both the loss <span class="math">\(L\)</span> and the activation <span class="math">\(\sigma\)</span> <strong>must be differentiable</strong>. 
-The trouble is that the <strong>Heaviside step</strong> has a <strong>discontinuity</strong> at <span class="math">\(x = 0\)</span>, so it’s not classically differentiable. 
+<p>To compute these derivatives, both the loss <span class="arithmatex">\(L\)</span> and the activation <span class="arithmatex">\(\sigma\)</span> <strong>must be differentiable</strong>. 
+The trouble is that the <strong>Heaviside step</strong> has a <strong>discontinuity</strong> at <span class="arithmatex">\(x = 0\)</span>, so it’s not classically differentiable. 
 (Strictly speaking it <em>is</em> differentiable in the <strong>theory of distributions</strong>: its derivative is the <a href="https://en.wikipedia.org/wiki/Dirac_delta_function"><strong>Dirac Delta</strong></a>.) 
-But that derivative isn’t something we can drop directly into our algorithm. Notice that <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)"><strong>ReLU</strong></a> is also non-differentiable at <span class="math">\(x = 0\)</span>, yet no one rejects it for that reason. 
+But that derivative isn’t something we can drop directly into our algorithm. Notice that <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks)"><strong>ReLU</strong></a> is also non-differentiable at <span class="arithmatex">\(x = 0\)</span>, yet no one rejects it for that reason. 
 In the image below, you can see how it <strong>behaves</strong>:</p>
 <p class="image-caption"><img alt="ReLU" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/relu.png"/>
 Figure 2. ReLU</p>
 <p><strong>So why all the hostility toward Heaviside?</strong> </p>
-<p>Although ReLU is non-differentiable at <span class="math">\(x = 0\)</span>, it is <strong>continuous</strong> there, so we can assign an <strong>artificial</strong> sub-gradient between 0 and 1: the function is <a href="https://en.wikipedia.org/wiki/Subderivative"><strong>sub-differentiable</strong></a>. 
+<p>Although ReLU is non-differentiable at <span class="arithmatex">\(x = 0\)</span>, it is <strong>continuous</strong> there, so we can assign an <strong>artificial</strong> sub-gradient between 0 and 1: the function is <a href="https://en.wikipedia.org/wiki/Subderivative"><strong>sub-differentiable</strong></a>. 
 With Heaviside that’s <strong>impossible</strong>. And even if (for argument’s sake) we chose to use the Dirac Delta as its derivative... look here:</p>
 <p class="image-caption"><img alt="Dirac Delta" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/delta_dirac.png"/>
 Figure 3. Dirac Delta</p>
-<p>As you can see, it is zero <strong>everywhere</strong> except at <span class="math">\(x = 0\)</span>.<br/>
+<p>As you can see, it is zero <strong>everywhere</strong> except at <span class="arithmatex">\(x = 0\)</span>.<br/>
 That means the gradient would be <strong>always zero</strong>, the weights would <strong>never change</strong>, and <em>the neural network would learn nothing</em>.<br/>
 Finally, there’s a secondary snag: <strong>Binary Cross-Entropy</strong> blows up to <strong>infinity</strong> if the prediction is exactly 0 or 1. 
 The <strong>sigmoid</strong> avoids that because it only reaches those values <strong>asymptotically</strong>.</p>
@@ -331,19 +323,17 @@ The <strong>sigmoid</strong> avoids that because it only reaches those values <s
 <p>This last section gives a <strong>general</strong> idea of why we need networks with <strong>many neurons</strong>.<br/>
 We’ve seen that a single <strong>perceptron</strong> can reach a <strong>solution</strong>, it eventually separates the AND problem correctly. 
 So <strong>why add complexity</strong>?<br/>
-First examine the <strong>transfer function</strong>. For the two-dimensional AND problem we have
-</p>
-<div class="math">$$
+First examine the <strong>transfer function</strong>. For the two-dimensional AND problem we have</p>
+<div class="arithmatex">\[
 net = w_1 \cdot x_1 + w_2 \cdot x_2 + b
-$$</div>
-<p>
-For some of you, this formula won’t mean much. For others, it may dredge up bad memories of the <a href="https://en.wikipedia.org/wiki/Linear_equation"><strong>line equation</strong></a> in its implicit form. 
+\]</div>
+<p>For some of you, this formula won’t mean much. For others, it may dredge up bad memories of the <a href="https://en.wikipedia.org/wiki/Linear_equation"><strong>line equation</strong></a> in its implicit form. 
 Back-propagation is finding the <strong>line’s coefficients</strong> so that we can do this:</p>
 <p class="image-caption"><img alt="Line AND" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/retta_and.png"/>
 Figure 4. Line on the AND Problem</p>
 <p>That is, <strong>separate the 0-cases from the 1-cases</strong>. If you can do that, the data are <strong>linearly separable</strong>, and one perceptron suffices.<br/>
 Now look at the <a href="https://en.wikipedia.org/wiki/Exclusive_or"><strong>XOR</strong></a> problem. It’s a <strong>logical operation</strong> like the AND problem, but it has a different truth table:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{array}{|r|r|r|}
 \hline
 x_1 &amp; x_2 &amp; XOR(x_1,x_2)\\
@@ -357,7 +347,7 @@ x_1 &amp; x_2 &amp; XOR(x_1,x_2)\\
 1 &amp; 1 &amp; 0\\
 \hline
 \end{array}
-$$</div>
+\]</div>
 <p>Let’s see what happens <strong>geometrically</strong>:</p>
 <p class="image-caption"><img alt="Line XOR" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/retta_xor.png"/>
 Figure 5. Line on the XOR Problem</p>
@@ -375,41 +365,41 @@ Figure 7. Neural Network for XOR Problem</p>
 But classic feed-forward networks <strong>insist</strong> that the number of input neurons <strong>matches the number of features</strong>, so you’re stuck with this setup. 
 Maybe one day I’ll tell you the incredible story of <strong>neuroevolution</strong>, where things get very different. But back to us...<br/>
 Everything else actually stays the same; the only twist is that we have to dig deeper into the equation for the <strong>derivative of the error 
-with respect to a weight</strong>, because now the output of one neuron becomes the input of the next. Focusing on neurons <span class="math">\(Y\)</span> and <span class="math">\(H_1\)</span>, the output of <span class="math">\(H_1\)</span> is:</p>
-<div class="math">$$
+with respect to a weight</strong>, because now the output of one neuron becomes the input of the next. Focusing on neurons <span class="arithmatex">\(Y\)</span> and <span class="arithmatex">\(H_1\)</span>, the output of <span class="arithmatex">\(H_1\)</span> is:</p>
+<div class="arithmatex">\[
 h_1 = \sigma_{H_1}(net_{H_1}) = \sigma(w_1 \cdot x_1 + b_1)
-$$</div>
-<p>and <span class="math">\(Y\)</span>'s output is:</p>
-<div class="math">$$
+\]</div>
+<p>and <span class="arithmatex">\(Y\)</span>'s output is:</p>
+<div class="arithmatex">\[
 \sigma_Y(net_Y) = \sigma\!\bigl(w_5 \cdot \sigma_{H_1}(net_{H_1}) + b_3\bigr)
                  = \sigma\!\bigl(w_5 \cdot \sigma(w_1 \cdot x_1 + b_1) + b_3\bigr)
-$$</div>
+\]</div>
 <p>Rewriting it in a form we’ve already used, we get:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{\partial L}{\partial w_5} = \frac{\partial L}{\partial p} \cdot \frac{\partial p}{\partial net_Y} \cdot \frac{\partial net_Y}{\partial w_5}
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \frac{\partial L}{\partial w_1} = \frac{\partial L}{\partial p} \cdot \frac{\partial p}{\partial net_Y} \cdot
                                    \left( \frac{\partial net_Y}{\partial h_1} \cdot
                                           \frac{\partial h_1}{\partial net_{H_1}} \cdot
                                           \frac{\partial net_{H_1}}{\partial w_1}\right)
-$$</div>
+\]</div>
 <p>where:</p>
 <ul>
-<li><span class="math large-math">\(\frac{\partial net_Y}{\partial h_1}\)</span> is the derivative of <span class="math">\(Y\)</span>'s transfer function with respect to <span class="math">\(H_1\)</span>'s activation function</li>
-<li><span class="math large-math">\(\frac{\partial h_1}{\partial net_{H_1}}\)</span> is the derivative of <span class="math">\(H_1\)</span>'s activation function with respect to its transfer function</li>
-<li><span class="math large-math">\(\frac{\partial net_{H_1}}{\partial w_1}\)</span> is the derivative of <span class="math">\(H_1\)</span>'s transfer function with respect to the weight <span class="math">\(w_1\)</span></li>
+<li><span class="arithmatex">\(\frac{\partial net_Y}{\partial h_1}\)</span> is the derivative of <span class="arithmatex">\(Y\)</span>'s transfer function with respect to <span class="arithmatex">\(H_1\)</span>'s activation function</li>
+<li><span class="arithmatex">\(\frac{\partial h_1}{\partial net_{H_1}}\)</span> is the derivative of <span class="arithmatex">\(H_1\)</span>'s activation function with respect to its transfer function</li>
+<li><span class="arithmatex">\(\frac{\partial net_{H_1}}{\partial w_1}\)</span> is the derivative of <span class="arithmatex">\(H_1\)</span>'s transfer function with respect to the weight <span class="arithmatex">\(w_1\)</span></li>
 </ul>
 <p>And I’d say, for the <strong>sake of our sanity</strong>, we can stop here, but the very same reasoning applies to:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{\partial L}{\partial w_2} \quad \text{and} \quad \frac{\partial L}{\partial w_6}.
-$$</div>
-<p>With <span class="math">\(n\)</span> neurons you have <span class="math">\(n\)</span> lines (or <strong>segments</strong>) forming a <strong>piece-wise curve</strong> that separates data that are <strong>not linearly separable</strong>, In short...
+\]</div>
+<p>With <span class="arithmatex">\(n\)</span> neurons you have <span class="arithmatex">\(n\)</span> lines (or <strong>segments</strong>) forming a <strong>piece-wise curve</strong> that separates data that are <strong>not linearly separable</strong>, In short...
 it can effortlessly pull off this <strong>monstrosity</strong>.</p>
 <p class="image-caption"><img alt="n-segment Boundary" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies_3/n_layer.png"/>
 Figure 8. Network Decision Boundary with Many Neurons</p>
 <p><strong>One last note</strong> before we get to the conclusions. For simplicity, we focused on the <strong>two-dimensional</strong> case and therefore talked about <strong>lines</strong>, but the same reasoning holds 
-in higher-dimensional spaces. There, we speak of <a href="https://en.wikipedia.org/wiki/Hyperplane" target="_blank"><strong>hyperplanes</strong></a> instead of lines.</p>
+in higher-dimensional spaces. There, we speak of <a href="https://en.wikipedia.org/wiki/Hyperplane"><strong>hyperplanes</strong></a> instead of lines.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>Alright folks, we’ve reached the <strong>end</strong> of our series of articles on the neuron. And to borrow a famous quote:</p>
 <blockquote>
@@ -419,68 +409,6 @@ in higher-dimensional spaces. There, we speak of <a href="https://en.wikipedia.o
 In life, only a few things are certain: <strong>death, taxes, and another one of my articles</strong>. 
 I hope you enjoyed this series as much as I enjoyed writing it.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -550,6 +478,10 @@ I hope you enjoyed this series as much as I enjoyed writing it.</p>
                 <li><a href="https://www.lucadivita.it/en/tag/neurons.html">neurons</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>

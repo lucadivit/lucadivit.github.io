@@ -11,13 +11,16 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/tag/neural_ode.html">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +36,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" >Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" aria-current="page">Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +75,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" >Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" aria-current="page">Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -120,23 +115,23 @@
         <ul class="link-rows">
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">Io ODO, Tu ODI e la Neural ODE - 5</a>
-                <small><time datetime="2025-10-01T00:00:00+02:00">01 ottobre 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-10-01T00:00:00+02:00">01 ottobre 2025</time></small>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">Io ODO, Tu ODI e la Neural ODE - 4</a>
-                <small><time datetime="2025-09-12T00:00:00+02:00">12 settembre 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-09-12T00:00:00+02:00">12 settembre 2025</time></small>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">Io ODO, Tu ODI e la Neural ODE - 3</a>
-                <small><time datetime="2025-07-30T00:00:00+02:00">30 luglio 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-07-30T00:00:00+02:00">30 luglio 2025</time></small>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">Io ODO, Tu ODI e la Neural ODE - 2</a>
-                <small><time datetime="2025-07-21T00:00:00+02:00">21 luglio 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-07-21T00:00:00+02:00">21 luglio 2025</time></small>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Io ODO, Tu ODI e la Neural ODE - 1</a>
-                <small><time datetime="2025-07-15T00:00:00+02:00">15 luglio 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-07-15T00:00:00+02:00">15 luglio 2025</time></small>
             </li>
         </ul>
     </section>

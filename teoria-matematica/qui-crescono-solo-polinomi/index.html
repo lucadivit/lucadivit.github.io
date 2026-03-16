@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" aria-current="page">Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Qui Crescono Solo Polinomi</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/teoria-matematica.html">Teoria & Matematica</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-12-01T00:00:00+01:00">01 dicembre 2025</time>
-                - <a href="https://www.lucadivita.it/category/teoria-matematica.html">Teoria & Matematica</a>
             </small>
         </p>
     </header>
@@ -155,40 +155,38 @@ Nulla di ingestibile, ma se la matematica non vi piace, arrangiatevi.</p>
 <p>Come anticipato in questo primo paragrafo introduciamo un mattoncino fondamentale: <strong>l'aritmetica modulare</strong>. 
 So che quando vedete i numeri è altro che vi gira, ma il titolo come vedremo è adatto all'argomento.
 L'aritmetica modulare è quella branca della matematica che studia le proprietà e le relazioni tra numeri interi, attraverso i concetti
-di <strong>congruenza</strong> e <strong>modulo</strong>. Cosa?! Chiedete quando due numeri <span class="math">\(a\)</span> e <span class="math">\(b\)</span> sono congruenti modulo <span class="math">\(n\)</span> ? Ebbene quando <span class="math">\(b\)</span> è il <strong>resto della divisione</strong>
-tra <span class="math">\(a\)</span> ed <span class="math">\(n\)</span>. Questa relazione si scrive così:</p>
-<p><a id="forma-base-congruenza"></a>
-</p>
-<div class="math">$$
+di <strong>congruenza</strong> e <strong>modulo</strong>. Cosa?! Chiedete quando due numeri <span class="arithmatex">\(a\)</span> e <span class="arithmatex">\(b\)</span> sono congruenti modulo <span class="arithmatex">\(n\)</span> ? Ebbene quando <span class="arithmatex">\(b\)</span> è il <strong>resto della divisione</strong>
+tra <span class="arithmatex">\(a\)</span> ed <span class="arithmatex">\(n\)</span>. Questa relazione si scrive così:</p>
+<p><a id="forma-base-congruenza"></a></p>
+<div class="arithmatex">\[
 a \equiv b \pmod{n}
-$$</div>
-<p class="formula-caption">
-Formula 1. Forma Base Congruenza</p>
+\]</div>
+<p class="formula-caption">Formula 1. Forma Base Congruenza</p>
 <p>Sì, messa così sembra chissà quale cosa astratta ma in realtà è molto semplice e con qualche esempio è subito chiaro.
-Supponiamo di avere <span class="math">\(a=5\)</span> e <span class="math">\(n=3\)</span>. La divisione <span class="math">\(\frac{5}{3}\)</span> ha risultato <span class="math">\(1\)</span> con resto di <span class="math">\(2\)</span>, per cui è vera la congruenza</p>
-<div class="math">$$
+Supponiamo di avere <span class="arithmatex">\(a=5\)</span> e <span class="arithmatex">\(n=3\)</span>. La divisione <span class="arithmatex">\(\frac{5}{3}\)</span> ha risultato <span class="arithmatex">\(1\)</span> con resto di <span class="arithmatex">\(2\)</span>, per cui è vera la congruenza</p>
+<div class="arithmatex">\[
 5 \equiv 2 \pmod{3}
-$$</div>
+\]</div>
 <p>Quindi, in aritmetica modulare, scrivere</p>
-<div class="math">$$
+<div class="arithmatex">\[
 5 \pmod{3}
-$$</div>
+\]</div>
 <p>o scrivere</p>
-<div class="math">$$
+<div class="arithmatex">\[
 2 \pmod{3}
-$$</div>
+\]</div>
 <p>è del tutto <strong>equivalente</strong>. Con questa logica è vera anche questa di congruenza:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 6 \equiv 0 \pmod{3}
-$$</div>
-<p>dato che <span class="math">\(\frac{6}{3}\)</span> ha risultato <span class="math">\(2\)</span> con resto di <span class="math">\(0\)</span>.</p>
+\]</div>
+<p>dato che <span class="arithmatex">\(\frac{6}{3}\)</span> ha risultato <span class="arithmatex">\(2\)</span> con resto di <span class="arithmatex">\(0\)</span>.</p>
 <p>Ora, so che non è il massimo del divertimento ma potete sbizzarrirvi a scrivere tutte le congruenze che volete. Di fatto sono solo relazioni tra
 numeri. E non fare l'errore di pensare che sono inutili, in realtà le utilizzate più spesso di quanto possiate immaginare.</p>
-<p>Un esempio semplice è la lettura dell'ora. Ogni volta che guardate un orologio, state inconsapevolmente lavorando <span class="math">\(\pmod{24}\)</span>. 
+<p>Un esempio semplice è la lettura dell'ora. Ogni volta che guardate un orologio, state inconsapevolmente lavorando <span class="arithmatex">\(\pmod{24}\)</span>. 
 Quando la giornata finisce, non continuate a contare le ore oltre il 24, ricominciate da capo. 
 Così le 25 diventano l'1, le 27 diventano le 3, e via dicendo fino alla fine dei vostri giorni. 
 Ogni "giro" dell’orologio è un'<strong>operazione modulare</strong>.</p>
-<p>Essendo <span class="math">\(b\)</span> un resto, va da sé che <strong>non potrà mai essere negativo</strong>, ma sarà sempre <strong>compreso</strong> tra <span class="math">\(0\)</span> e <span class="math">\(n-1\)</span>.
+<p>Essendo <span class="arithmatex">\(b\)</span> un resto, va da sé che <strong>non potrà mai essere negativo</strong>, ma sarà sempre <strong>compreso</strong> tra <span class="arithmatex">\(0\)</span> e <span class="arithmatex">\(n-1\)</span>.
 Se vi esce un resto sotto lo zero avete sbagliato qualcosa: troppo bello andare a fare la spesa, avere un “resto negativo” e vedere 
 il cassiere che vi dà dei soldi. Purtroppo non funziona così, né nei supermercati, né nell'aritmetica modulare.
 Questa caratteristica porta a una proprietà fondamentale: l’aritmetica modulare è <strong>ciclica</strong>. Superato il modulo, 
@@ -196,173 +194,152 @@ i numeri si avvolgono su se stessi ricominciando il conteggio da 0. E anche se v
 tutta la moderna <strong>crittografia</strong> si basa proprio su questo.</p>
 <h4 id="una-regola-per-domarli">Una Regola Per Domarli<a class="headerlink" href="#una-regola-per-domarli" title="Permanent link"> </a></h4>
 <p>Risolvere una congruenza è molto semplice. Supponete di avere la seguente relazione:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x \equiv a \pmod{n}
-$$</div>
-<p>Quello che l'equazione vi sta chiedendo è di trovare il <strong>resto</strong> della divisione di <span class="math">\(a\)</span> per <span class="math">\(n\)</span>.
+\]</div>
+<p>Quello che l'equazione vi sta chiedendo è di trovare il <strong>resto</strong> della divisione di <span class="arithmatex">\(a\)</span> per <span class="arithmatex">\(n\)</span>.
 Per risolverla si seguono tre passaggi molto semplici:</p>
 <ol>
 <li>
 <p>Si calcola:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 z = \left\lfloor \frac{a}{n} \right\rfloor
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
 <p>Si calcola:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 y = n \cdot z
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
 <p>Si calcola:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x = a - y
-$$</div>
-</p>
+\]</div>
 </li>
 </ol>
 <p>Questi tre semplici passaggi gestiscono sia le congruenze con valori <strong>positivi</strong> che quelle con valori <strong>negativi</strong>:</p>
 <ol>
 <li>
 <p>Caso 1:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x \equiv 13 \pmod{5} \\
 z = \left\lfloor \frac{13}{5} \right\rfloor = \left\lfloor 2.6 \right\rfloor = 2 \\
 y = 5 \cdot 2 = 10 \\
 x = 13 - 10 = 3
-$$</div>
-</p>
+\]</div>
 <p>ed infatti</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 13 \equiv 3 \pmod{5}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
 <p>Caso 2:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x \equiv -3 \pmod{5} \\
 z = \left\lfloor \frac{-3}{5} \right\rfloor = \left\lfloor -0.6 \right\rfloor = -1 \\
 y = 5 \cdot -1 = -5 \\
 x = -3 - (-5) = 2
-$$</div>
-</p>
+\]</div>
 <p>da cui</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 -3 \equiv 2 \pmod{5}
-$$</div>
-</p>
+\]</div>
 </li>
 </ol>
 <p>Il caso positivo è molto intuitivo, contrariamente a quello negativo che sembra campato in aria, no? No! Ha senso anche quello.
 Se state guardando l'orologio ed è precisamente mezzanotte, <strong>modularmente</strong> parlando sono le:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 0 \pmod{24}
-$$</div>
+\]</div>
 <p>E se vi chiedessi: <em>"un'ora fa che ore erano?"</em> matematicamente sarebbe:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 -1 \pmod{24}
-$$</div>
+\]</div>
 <p>Ma voi, dall'alto della vostra straordinaria capacità di concepire il tempo, rispondereste:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 23 \pmod{24}
-$$</div>
+\]</div>
 <p>(del giorno prima).</p>
 <h4 id="si-anche-le-frazioni">Si, Anche Le Frazioni<a class="headerlink" href="#si-anche-le-frazioni" title="Permanent link"> </a></h4>
 <p>Abbiamo visto numeri positivi e numeri negativi, ma non finisce qui. Solo perché i resti sono sempre degli interi, non vuol dire che l'aritmetica
 modulare non sia in grado di gestire le <strong>divisioni</strong>. Se vi facevano strano i negativi, anche le <strong>frazioni modulari</strong> non sono da meno.
 La faccenda qui si fa un pochino più elaborata infatti, data l'equazione</p>
-<div class="math">$$
+<div class="arithmatex">\[
 ax \equiv 1 \pmod{n}
-$$</div>
+\]</div>
 <p>affinché il risultato esista deve essere vera la condizione:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 GCD(a, \, n) = 1
-$$</div>
-<p>dove il <span class="math">\(GCD\)</span> altro non è che il massimo comune divisore. Quando è vera i numeri si dicono tra di loro <strong>coprimi</strong> e possiamo risolvere le 
+\]</div>
+<p>dove il <span class="arithmatex">\(GCD\)</span> altro non è che il massimo comune divisore. Quando è vera i numeri si dicono tra di loro <strong>coprimi</strong> e possiamo risolvere le 
 divisioni. La cosa non finisce certo qui, perché per poter risolvere è necessario applicare l'algoritmo di <a href="https://it.wikipedia.org/wiki/Algoritmo_esteso_di_Euclide"><strong>Euclide esteso</strong></a> e trovare i 
 coefficienti dell'<a href="https://it.wikipedia.org/wiki/Identit%C3%A0_di_B%C3%A9zout"><strong>identità di Bézout</strong></a>. Senza entrare troppo nel dettaglio vediamo un 
 esempio, solo per mostrarvi che non dico castronerie. Supponiamo di dover risolvere:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 3x \equiv 1 \pmod{7}
-$$</div>
+\]</div>
 <p>Che siano coprimi non c'è bisogno di dimostrarlo per cui partiamo subito applicando l'algoritmo di Euclide esteso che ci permette di scrivere:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 ax + ny = GCD(a, \, n)
-$$</div>
-<p>e in questa uguaglianza, la <span class="math">\(x\)</span> è proprio la soluzione che cerchiamo.</p>
+\]</div>
+<p>e in questa uguaglianza, la <span class="arithmatex">\(x\)</span> è proprio la soluzione che cerchiamo.</p>
 <p>Facendo le dovute sostituzioni abbiamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 3x + 7y = 1
-$$</div>
-<p>Questa possiamo risolverla anche a mente, infatti ponendo <span class="math">\(x=-2\)</span> e <span class="math">\(y=1\)</span>, rendiamo vera l'uguaglianza. Quindi la soluzione è <span class="math">\(x=-2\)</span>, 
+\]</div>
+<p>Questa possiamo risolverla anche a mente, infatti ponendo <span class="arithmatex">\(x=-2\)</span> e <span class="arithmatex">\(y=1\)</span>, rendiamo vera l'uguaglianza. Quindi la soluzione è <span class="arithmatex">\(x=-2\)</span>, 
 ma ormai sappiamo che in aritmetica modulare i numeri negativi ci <strong>fanno schifo</strong>, per cui riportandoci a valori positivi abbiamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x = -2 \equiv 5 \pmod{7}
-$$</div>
+\]</div>
 <p>Quindi nella nostra equazione iniziale abbiamo:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 3 \cdot 5 = 15 \equiv 1 \pmod{7}
-$$</div>
-<p>Quello che abbiamo fatto in pratica, è stato trovare un <strong>inverso moltiplicativo</strong>, cioè abbiamo trovato un numero (il <span class="math">\(5\)</span>) tale per cui, moltiplicato per un 
-secondo (il <span class="math">\(3\)</span>), e ridotto a modulo (di <span class="math">\(7\)</span>) dia come resto <span class="math">\(1\)</span>. Questo è facile nella matematica di tutti i giorni, ad esempio l'inverso 
-moltiplicativo di <span class="math">\(3\)</span> è <span class="math">\(\frac{1}{3}\)</span>. Ma l'aritmetica modulare vive in un mondo tutto suo e l'inverso di <span class="math">\(3\pmod{7}\)</span> è <span class="math">\(5\)</span>.</p>
+\]</div>
+<p>Quello che abbiamo fatto in pratica, è stato trovare un <strong>inverso moltiplicativo</strong>, cioè abbiamo trovato un numero (il <span class="arithmatex">\(5\)</span>) tale per cui, moltiplicato per un 
+secondo (il <span class="arithmatex">\(3\)</span>), e ridotto a modulo (di <span class="arithmatex">\(7\)</span>) dia come resto <span class="arithmatex">\(1\)</span>. Questo è facile nella matematica di tutti i giorni, ad esempio l'inverso 
+moltiplicativo di <span class="arithmatex">\(3\)</span> è <span class="arithmatex">\(\frac{1}{3}\)</span>. Ma l'aritmetica modulare vive in un mondo tutto suo e l'inverso di <span class="arithmatex">\(3\pmod{7}\)</span> è <span class="arithmatex">\(5\)</span>.</p>
 <p>Conoscendo l'inverso moltiplicativo, si possono risolvere anche le <strong>equazioni</strong>. Supponiamo di avere:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 2x + 7 \equiv 3 \pmod{17} \Rightarrow 2x \equiv -4 \pmod{17}
-$$</div>
-<p>Se andaste a calcolare l'inverso moltiplicativo di <span class="math">\(2\pmod{17}\)</span> vedreste che è <span class="math">\(9\)</span>, per cui possiamo scrivere:</p>
-<div class="math">$$
+\]</div>
+<p>Se andaste a calcolare l'inverso moltiplicativo di <span class="arithmatex">\(2\pmod{17}\)</span> vedreste che è <span class="arithmatex">\(9\)</span>, per cui possiamo scrivere:</p>
+<div class="arithmatex">\[
 2x \cdot 9 \equiv -4 \cdot 9 \pmod{17} \Rightarrow x \equiv -36 \pmod{17} \Rightarrow x \equiv 15 \pmod{17}
-$$</div>
-<p>
-Questi sono esempi semplici, ma molto esplicativi di come funziona il calcolo dell'inverso in aritmetica modulare. 
+\]</div>
+<p>Questi sono esempi semplici, ma molto esplicativi di come funziona il calcolo dell'inverso in aritmetica modulare. 
 Si possono fare ovviamente esempi più complessi ma esulano i miei scopi di dare una infarinata di questi concetti.</p>
 <p>Ora che abbiamo preso confidenza facciamo un passo indietro. Prima ho scritto che è necessario che i numeri siano coprimi.
 Ecco ho mentito, almeno in parte. Anche se un po' tricky, ci sono dei modi per risolvere i casi in cui per una congruenza risulta</p>
-<div class="math">$$
+<div class="arithmatex">\[
 GCD(a, \, n) = d &gt; 1
-$$</div>
+\]</div>
 <p>Senza entrare troppo nel merito vi basti sapere questo:</p>
 <ul>
-<li>Se <span class="math">\(GCD(a, n) = d &gt; 1\)</span> la congruenza è <strong>risolvibile</strong> se e solo se <span class="math">\(d \mid b\)</span> (cioè <span class="math">\(d\)</span> divide <span class="math">\(b\)</span> dando un risultato intero).</li>
-<li>Se <span class="math">\(d \mid b\)</span> abbiamo <strong>più di una soluzione</strong> per la congruenza (esattamente <span class="math">\(d\)</span>).</li>
+<li>Se <span class="arithmatex">\(GCD(a, n) = d &gt; 1\)</span> la congruenza è <strong>risolvibile</strong> se e solo se <span class="arithmatex">\(d \mid b\)</span> (cioè <span class="arithmatex">\(d\)</span> divide <span class="arithmatex">\(b\)</span> dando un risultato intero).</li>
+<li>Se <span class="arithmatex">\(d \mid b\)</span> abbiamo <strong>più di una soluzione</strong> per la congruenza (esattamente <span class="arithmatex">\(d\)</span>).</li>
 </ul>
 <p>Per farvi degli esempi:</p>
 <ul>
 <li>
 <p>Esempio caso possibile</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
   4x \equiv 8 \pmod{12}
-$$</div>
-</p>
-<p>Abbiamo che <span class="math">\(GCD(4, 12) = 4\)</span> e dato che <span class="math">\(4\)</span> divide <span class="math">\(8\)</span> abbiamo 4 soluzioni che sono </p>
-<p>
-<div class="math">$$
+\]</div>
+<p>Abbiamo che <span class="arithmatex">\(GCD(4, 12) = 4\)</span> e dato che <span class="arithmatex">\(4\)</span> divide <span class="arithmatex">\(8\)</span> abbiamo 4 soluzioni che sono </p>
+<div class="arithmatex">\[
   x=2, 5, 8, 11
-$$</div>
-</p>
+\]</div>
 <p>Anche se ho omesso il procedimento perché out of scope, provare per credere.</p>
 </li>
 <li>
 <p>Esempio caso impossibile:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
   4x \equiv 1 \pmod{12}
-$$</div>
-</p>
-<p>Abbiamo che <span class="math">\(GCD(4, 12) = 4\)</span> e dato che <span class="math">\(4\)</span> non divide <span class="math">\(1\)</span> non abbiamo soluzioni.</p>
+\]</div>
+<p>Abbiamo che <span class="arithmatex">\(GCD(4, 12) = 4\)</span> e dato che <span class="arithmatex">\(4\)</span> non divide <span class="arithmatex">\(1\)</span> non abbiamo soluzioni.</p>
 </li>
 </ul>
 <p>Ovviamente non è tutto qui, si possono anche risolvere le <strong>equazioni di secondo grado</strong>, i <strong>sistemi di equazioni</strong>, ecc. Ma sono tutti argomenti che esulano 
@@ -374,29 +351,29 @@ gioco si fa duro i duri cominciano a giocare e alcuni algoritmi di crittografia,
 Le curve ellittiche sono <strong>ingorde</strong>, vogliono più elementi. Ed è qui che entrano in gioco i famigerati <strong>campi</strong>. Non dei campi qualsiasi, bensí i <strong>campi finiti</strong>, ma andiamo per gradi.</p>
 <p>Cosa è un campo... Un campo altro non è che un <strong>insieme di elementi</strong> i quali permettono di effettuare le operazioni di <strong>somma</strong> e <strong>moltiplicazione</strong> che rispettano alcuni requisiti:</p>
 <ol>
-<li><strong>Chiusura</strong>: sommando e/o moltiplicando gli elementi del campo, otteniamo un elemento nel campo. Supponiamo di avere un campo <span class="math">\(\mathbb{A}\)</span> e due elementi <span class="math">\(a, \, b \neq 0 \, \in \mathbb{A}\)</span>, 
-    allora avere un <strong>campo chiuso</strong> vuol dire che <span class="math">\(a + b \in \mathbb{A}\)</span> e <span class="math">\(a \cdot b \in \mathbb{A}\)</span>.</li>
+<li><strong>Chiusura</strong>: sommando e/o moltiplicando gli elementi del campo, otteniamo un elemento nel campo. Supponiamo di avere un campo <span class="arithmatex">\(\mathbb{A}\)</span> e due elementi <span class="arithmatex">\(a, \, b \neq 0 \, \in \mathbb{A}\)</span>, 
+    allora avere un <strong>campo chiuso</strong> vuol dire che <span class="arithmatex">\(a + b \in \mathbb{A}\)</span> e <span class="arithmatex">\(a \cdot b \in \mathbb{A}\)</span>.</li>
 <li><strong>Gruppo Abeliano</strong>: le operazioni di somma e moltiplicazione, devono avere <strong>l'elemento neutro</strong>, il suo <strong>inverso</strong> e devono rispettare le proprietà <strong>associativa</strong>, <strong>commutativa</strong> e <strong>distributiva</strong>. 
-   Questo in parole povere vuol dire che, dato il campo <span class="math">\(\mathbb{A}\)</span>, <span class="math">\(a, \, b, \, c \in \mathbb{A}\)</span> e <span class="math">\(a, \, b, \, c \neq 0\)</span>:<ul>
-<li>Esiste il termine <span class="math">\(0\)</span> che permette di scrivere <span class="math">\(a + 0 = a\)</span> (<strong>elemento neutro dell'addizione</strong>).</li>
-<li>Esiste il termine <span class="math">\(1\)</span> che permette di scrivere <span class="math">\(a \cdot 1 = a\)</span> (<strong>elemento neutro della moltiplicazione</strong>).</li>
-<li>Esiste il termine <span class="math">\(-a\)</span> che permette di scrivere <span class="math">\(a - a = 0\)</span> (<strong>inverso dell'addizione</strong>).</li>
-<li>Esiste il termine <span class="math">\(a^{-1}\)</span> che permette di scrivere <span class="math">\(a \cdot a^{-1} = 1\)</span> ad esclusione dello <span class="math">\(0\)</span> (<strong>inverso della moltiplicazione</strong>).</li>
-<li><span class="math">\(a + b = b + a\)</span> e <span class="math">\((a + b) + c = a + (b + c)\)</span> (<strong>proprietà commutativa e associativa dell'addizione</strong>).</li>
-<li><span class="math">\(a \cdot b = b \cdot a\)</span> e <span class="math">\((a \cdot b) \cdot c = a \cdot (b \cdot c)\)</span> (<strong>proprietà commutativa e associativa della moltiplicazione</strong>).</li>
-<li><span class="math">\(a \cdot (b + c) = a \cdot b + a \cdot c\)</span> (<strong>proprietà distributiva</strong>)</li>
+   Questo in parole povere vuol dire che, dato il campo <span class="arithmatex">\(\mathbb{A}\)</span>, <span class="arithmatex">\(a, \, b, \, c \in \mathbb{A}\)</span> e <span class="arithmatex">\(a, \, b, \, c \neq 0\)</span>:<ul>
+<li>Esiste il termine <span class="arithmatex">\(0\)</span> che permette di scrivere <span class="arithmatex">\(a + 0 = a\)</span> (<strong>elemento neutro dell'addizione</strong>).</li>
+<li>Esiste il termine <span class="arithmatex">\(1\)</span> che permette di scrivere <span class="arithmatex">\(a \cdot 1 = a\)</span> (<strong>elemento neutro della moltiplicazione</strong>).</li>
+<li>Esiste il termine <span class="arithmatex">\(-a\)</span> che permette di scrivere <span class="arithmatex">\(a - a = 0\)</span> (<strong>inverso dell'addizione</strong>).</li>
+<li>Esiste il termine <span class="arithmatex">\(a^{-1}\)</span> che permette di scrivere <span class="arithmatex">\(a \cdot a^{-1} = 1\)</span> ad esclusione dello <span class="arithmatex">\(0\)</span> (<strong>inverso della moltiplicazione</strong>).</li>
+<li><span class="arithmatex">\(a + b = b + a\)</span> e <span class="arithmatex">\((a + b) + c = a + (b + c)\)</span> (<strong>proprietà commutativa e associativa dell'addizione</strong>).</li>
+<li><span class="arithmatex">\(a \cdot b = b \cdot a\)</span> e <span class="arithmatex">\((a \cdot b) \cdot c = a \cdot (b \cdot c)\)</span> (<strong>proprietà commutativa e associativa della moltiplicazione</strong>).</li>
+<li><span class="arithmatex">\(a \cdot (b + c) = a \cdot b + a \cdot c\)</span> (<strong>proprietà distributiva</strong>)</li>
 </ul>
 </li>
 </ol>
 <p>Sembra un listone di roba invece se leggete attentamente è tutto abbastanza <strong>semplice</strong>. Non ci sono proprietà strane, anzi sono tutte cose che si imparano alle elementari.
-Un esempio di campo è qualcosa che di fatto usate ogni giorno, l'insieme dei numeri <strong>reali</strong> <span class="math">\(\mathbb{R}\)</span>. Prendete due numeri reali qualsiasi e considerate uno per uno i punti elencati.
-Vedrete che tutti vengono soddisfatti. Lo stesso non si può dire ad esempio, per l'insieme dei numeri <strong>naturali</strong> <span class="math">\(\mathbb{N}\)</span>. I numeri naturali (a seconda della convenzione, con o senza lo zero) 
-sono tutti gli interi positivi <span class="math">\({0, \, 1, \, 2, \, \dots}\)</span>, quindi non può essere comprensivo di un numero negativo e di conseguenza manca l'elemento inverso dell'addizione 
+Un esempio di campo è qualcosa che di fatto usate ogni giorno, l'insieme dei numeri <strong>reali</strong> <span class="arithmatex">\(\mathbb{R}\)</span>. Prendete due numeri reali qualsiasi e considerate uno per uno i punti elencati.
+Vedrete che tutti vengono soddisfatti. Lo stesso non si può dire ad esempio, per l'insieme dei numeri <strong>naturali</strong> <span class="arithmatex">\(\mathbb{N}\)</span>. I numeri naturali (a seconda della convenzione, con o senza lo zero) 
+sono tutti gli interi positivi <span class="arithmatex">\({0, \, 1, \, 2, \, \dots}\)</span>, quindi non può essere comprensivo di un numero negativo e di conseguenza manca l'elemento inverso dell'addizione 
 (per fare un esempio, dato che anche altre proprietà non vengono rispettate).</p>
 <h4 id="praterie-e-orticelli">Praterie E Orticelli<a class="headerlink" href="#praterie-e-orticelli" title="Permanent link"> </a></h4>
 <p>Se siete arrivati fin qui, complimenti, ora sapete cosa è un campo. Detto questo, quand'è che un campo si definisce <strong>finito</strong>? Nulla di più intuitivo. Quando ha un <strong>insieme finito di elementi</strong>.
 Quando potete <strong>contare</strong> gli elementi del campo sapendo che prima o poi il conteggio termina. Quindi non solo deve rispettare i punti definiti in precedenza, ma deve anche avere un numero 
-finito di elementi. Quindi <span class="math">\(\mathbb{R}\)</span> è sí un campo, ma non è un campo finito perché contiene un numero infinito di elementi. Se è <strong>concettualmente semplice</strong> sapere cosa è un campo finito,
+finito di elementi. Quindi <span class="arithmatex">\(\mathbb{R}\)</span> è sí un campo, ma non è un campo finito perché contiene un numero infinito di elementi. Se è <strong>concettualmente semplice</strong> sapere cosa è un campo finito,
 costruirlo non è così <strong>immediato</strong>. O almeno non lo è per far contente le curve ellittiche (sí sono cosciente del fatto che sono due volte che le nomino ma non dico cosa sono, vi basti sapere
 che sono curve algebriche usate in ambito crittografia, magari un giorno ne parlerò). Quindi andiamo per passi. Sappiamo cosa è un campo finito, ebbene campo finito è un nome diverso per
 indicare un <strong>campo di Galois</strong>. Sono esattamente la stessa cosa.</p>
@@ -404,303 +381,246 @@ indicare un <strong>campo di Galois</strong>. Sono esattamente la stessa cosa.</
 tenera età di 20 anni. Io a quell'età mi <strong>ubriacavo</strong> alle serate universitarie, lui inventava una branca dell'<strong>algebra astratta</strong>. Ma almeno io i 20 anni li ho superati (solo perché i duelli a singolar
 tenzone non esistono più). Ma torniamo a noi...</p>
 <p>In realtà, nel paragrafo precedente abbiamo iniziato a vedere i campi finiti, ma non basta, dobbiamo aggiungere qualcosa. Torniamo alla cara aritmetica modulare considerando 
-la <a href="#forma-base-congruenza">forma base</a>, e supponiamo di prendere un <strong>numero primo</strong> come valore di <span class="math">\(n\)</span> (che i numeri primi siano quei numeri divisibili solo per 1 e per se stessi non 
-c'è bisogno di dirlo vero?!). Considerando <span class="math">\(n=5\)</span> abbiamo:</p>
-<div class="math">$$
+la <a href="#forma-base-congruenza">forma base</a>, e supponiamo di prendere un <strong>numero primo</strong> come valore di <span class="arithmatex">\(n\)</span> (che i numeri primi siano quei numeri divisibili solo per 1 e per se stessi non 
+c'è bisogno di dirlo vero?!). Considerando <span class="arithmatex">\(n=5\)</span> abbiamo:</p>
+<div class="arithmatex">\[
 a \equiv b \pmod{5}
-$$</div>
+\]</div>
 <p>Dal paragrafo precedente dovreste sapere che tutti i <strong>possibili resti</strong> sono nell'insieme</p>
-<div class="math">$$
+<div class="arithmatex">\[
 b \in \mathbb I = \{ 0, \, 1, \, 2, \, 3, \, 4 \}
-$$</div>
+\]</div>
 <p>Andiamo a verificare una per una le condizioni:</p>
 <ol>
 <li>
 <p><strong>Chiusura</strong>:</p>
-<p>Consideriamo l'operazione di addizione e prendiamo, ad esempio, i valori <span class="math">\(4\)</span> e <span class="math">\(3\)</span> (ma è valido per tutti, fidatevi)</p>
-<p>
-<div class="math">$$
+<p>Consideriamo l'operazione di addizione e prendiamo, ad esempio, i valori <span class="arithmatex">\(4\)</span> e <span class="arithmatex">\(3\)</span> (ma è valido per tutti, fidatevi)</p>
+<div class="arithmatex">\[
 4 + 3 = 7 \equiv 2 \pmod{5}
-$$</div>
-</p>
-<p>cioè scrivere <span class="math">\(7 \pmod{5}\)</span> è equivalente a scrivere <span class="math">\(2 \pmod{5}\)</span>, quindi siamo tornati nell'insieme <span class="math">\(\mathbb I\)</span>. 
+\]</div>
+<p>cioè scrivere <span class="arithmatex">\(7 \pmod{5}\)</span> è equivalente a scrivere <span class="arithmatex">\(2 \pmod{5}\)</span>, quindi siamo tornati nell'insieme <span class="arithmatex">\(\mathbb I\)</span>. 
 Con la moltiplicazione otteniamo la stessa cosa:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 4 \cdot 3 = 12 \equiv 2 \pmod{5}
-$$</div>
-siamo ancora all'interno di <span class="math">\(\mathbb{I}\)</span>.</p>
+\]</div>
+<p>siamo ancora all'interno di <span class="arithmatex">\(\mathbb{I}\)</span>.</p>
 </li>
 <li>
 <p><strong>Elemento neutro dell'addizione</strong>:</p>
-<p>Consideriamo l'operazione di addizione e prendiamo, ad esempio, il valore <span class="math">\(4\)</span> (ma anche qui è valido per tutti, fidatevi)</p>
-<p>
-<div class="math">$$
+<p>Consideriamo l'operazione di addizione e prendiamo, ad esempio, il valore <span class="arithmatex">\(4\)</span> (ma anche qui è valido per tutti, fidatevi)</p>
+<div class="arithmatex">\[
 4 + 0 = 4 \equiv 4 \pmod{5}
-$$</div>
-</p>
+\]</div>
 <p>Anche questo torna, ottimo.</p>
 </li>
 <li>
 <p><strong>Elemento neutro della moltiplicazione</strong>:</p>
-<p>Consideriamo l'operazione di moltiplicazione e prendiamo, ad esempio, il valore <span class="math">\(4\)</span> (ma anche qui è valido per tutti, fidatevi)</p>
-<p>
-<div class="math">$$
+<p>Consideriamo l'operazione di moltiplicazione e prendiamo, ad esempio, il valore <span class="arithmatex">\(4\)</span> (ma anche qui è valido per tutti, fidatevi)</p>
+<div class="arithmatex">\[
 4 \cdot 1 = 4 \equiv 4 \pmod{5}
-$$</div>
-</p>
+\]</div>
 <p>Anche questo torna, yu-hu.</p>
 </li>
 <li>
 <p><strong>Inverso dell'addizione</strong>:</p>
-<p>Consideriamo l'operazione di addizione e prendiamo, ad esempio, il valore <span class="math">\(4\)</span> (stessa storia). L'inverso additivo è <span class="math">\(-4\)</span>, ma ormai sapete
+<p>Consideriamo l'operazione di addizione e prendiamo, ad esempio, il valore <span class="arithmatex">\(4\)</span> (stessa storia). L'inverso additivo è <span class="arithmatex">\(-4\)</span>, ma ormai sapete
 come gestire i valori negativi no?! Per cui saltando i passaggi scriviamo:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 -4 \equiv 1 \pmod{5}
-$$</div>
-</p>
-<p>quindi l'inverso additivo di <span class="math">\(4\)</span>, è <span class="math">\(1\)</span>. Infatti:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>quindi l'inverso additivo di <span class="arithmatex">\(4\)</span>, è <span class="arithmatex">\(1\)</span>. Infatti:</p>
+<div class="arithmatex">\[
 1 + 4 = 5 \equiv 0 \pmod{5}
-$$</div>
-</p>
+\]</div>
 <p>Anche questo torna, evvai.</p>
 </li>
 <li>
-<p><strong>Inverso della moltiplicazione</strong>: qui non faró i passaggi ma riflettiamo sull'insieme <span class="math">\(\mathbb I - \{ 0 \}\)</span>. Una volta eliminato lo <span class="math">\(0\)</span> che <strong>per definizione non ha inverso</strong>, ogni elemento di <span class="math">\(\mathbb I\)</span> è coprimo con 
-    <span class="math">\(5\)</span> essendo quest'ultimo un numero primo. E prima ho chiaramente scritto che se i numeri sono coprimi, esiste l'inverso. Quindi abbiamo la certezza che per ogni elemento di <span class="math">\(\mathbb I - \{ 0 \}\)</span> abbiamo un inverso
+<p><strong>Inverso della moltiplicazione</strong>: qui non faró i passaggi ma riflettiamo sull'insieme <span class="arithmatex">\(\mathbb I - \{ 0 \}\)</span>. Una volta eliminato lo <span class="arithmatex">\(0\)</span> che <strong>per definizione non ha inverso</strong>, ogni elemento di <span class="arithmatex">\(\mathbb I\)</span> è coprimo con 
+    <span class="arithmatex">\(5\)</span> essendo quest'ultimo un numero primo. E prima ho chiaramente scritto che se i numeri sono coprimi, esiste l'inverso. Quindi abbiamo la certezza che per ogni elemento di <span class="arithmatex">\(\mathbb I - \{ 0 \}\)</span> abbiamo un inverso
     e di conseguenza anche questo punto ce lo portiamo a casa.</p>
 </li>
 <li>
 <p>Beh ragá, io mi sarei pure un pó stufato. Gli ultimi tre sono varianti di addizioni e moltiplicazioni, se avete sbatti di prendere carta e penna e fatele, altrimenti fidatevi che anche quelli tornano.</p>
 </li>
 </ol>
-<p>Abbiamo quindi mostrato che se <span class="math">\(n\)</span> è un numero primo, l'insieme dei resti forma un campo di Galois e la sua <strong>notazione formale</strong> è <span class="math">\(GF(p)\)</span> o <span class="math">\(\mathbb{F}_p\)</span> dove <span class="math">\(p\)</span> è il numero primo scelto.</p>
-<p>Vediamo perché, se <span class="math">\(p\)</span> fosse non primo, non potremmo avere un campo di Galois. Consideriamo il caso <span class="math">\(p=8\)</span>, abbiamo che l'insieme dei resti è:</p>
-<div class="math">$$
+<p>Abbiamo quindi mostrato che se <span class="arithmatex">\(n\)</span> è un numero primo, l'insieme dei resti forma un campo di Galois e la sua <strong>notazione formale</strong> è <span class="arithmatex">\(GF(p)\)</span> o <span class="arithmatex">\(\mathbb{F}_p\)</span> dove <span class="arithmatex">\(p\)</span> è il numero primo scelto.</p>
+<p>Vediamo perché, se <span class="arithmatex">\(p\)</span> fosse non primo, non potremmo avere un campo di Galois. Consideriamo il caso <span class="arithmatex">\(p=8\)</span>, abbiamo che l'insieme dei resti è:</p>
+<div class="arithmatex">\[
 \mathbb{I} = \{ 0, \, 1, \, 2, \, 3, \, 4, \, 5, \, 6, \, 7 \}
-$$</div>
-<p>Prendiamo uno dei resti, <span class="math">\(b=2\)</span>, e cerchiamone l'inverso moltiplicativo. Per farlo dobbiamo scrivere la congruenza:</p>
-<div class="math">$$
+\]</div>
+<p>Prendiamo uno dei resti, <span class="arithmatex">\(b=2\)</span>, e cerchiamone l'inverso moltiplicativo. Per farlo dobbiamo scrivere la congruenza:</p>
+<div class="arithmatex">\[
 2x \equiv 1 \pmod{8}
-$$</div>
+\]</div>
 <p>Da cui:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 GCD(2, \, 8) = 2
-$$</div>
-<p>Andando a controllare la divisibilità si ha che <span class="math">\(2 \nmid 1\)</span>, e possiamo concludere che <span class="math">\(2 \pmod{8}\)</span> non ha inverso moltiplicativo, e questo viola
+\]</div>
+<p>Andando a controllare la divisibilità si ha che <span class="arithmatex">\(2 \nmid 1\)</span>, e possiamo concludere che <span class="arithmatex">\(2 \pmod{8}\)</span> non ha inverso moltiplicativo, e questo viola
 una delle proprietà richieste dai campi.</p>
 <h4 id="dallorticello-alla-piantagione">Dall'Orticello Alla Piantagione<a class="headerlink" href="#dallorticello-alla-piantagione" title="Permanent link"> </a></h4>
-<p>Abbiamo visto che <span class="math">\(p\)</span> deve essere primo per poter definire un campo di Galois. Ma se vi dicessi che invece si possono definire campi del tipo 
-<span class="math">\(\mathbb{F}_8\)</span>? No non sono impazzito. Si può fare, ma in maniera leggermente diversa rispetto a prima. Innanzi tutto iniziamo dicendo che l'argomento
-del campo, <strong>non può essere un numero qualsiasi</strong>, ma deve essere <strong>potenza di un numero primo</strong>. Quindi perché può esistere <span class="math">\(\mathbb{F}_8\)</span>? Perché possiamo 
-scrivere <span class="math">\(8=2^3\)</span>, cioè <span class="math">\(8\)</span> come potenza del numero primo <span class="math">\(2\)</span>.</p>
+<p>Abbiamo visto che <span class="arithmatex">\(p\)</span> deve essere primo per poter definire un campo di Galois. Ma se vi dicessi che invece si possono definire campi del tipo 
+<span class="arithmatex">\(\mathbb{F}_8\)</span>? No non sono impazzito. Si può fare, ma in maniera leggermente diversa rispetto a prima. Innanzi tutto iniziamo dicendo che l'argomento
+del campo, <strong>non può essere un numero qualsiasi</strong>, ma deve essere <strong>potenza di un numero primo</strong>. Quindi perché può esistere <span class="arithmatex">\(\mathbb{F}_8\)</span>? Perché possiamo 
+scrivere <span class="arithmatex">\(8=2^3\)</span>, cioè <span class="arithmatex">\(8\)</span> come potenza del numero primo <span class="arithmatex">\(2\)</span>.</p>
 <p>Anche se non è così, supponiamo che vi stiate chiedendo il perché sia utile farlo. Nel paragrafo precedente abbiamo visto che per ottenere un campo 
-di Galois è necessario avere un numero primo <span class="math">\(p\)</span>, e il campo <span class="math">\(\mathbb{F}_p\)</span> avrà esattamente <span class="math">\(p\)</span> elementi:</p>
-<div class="math">$$
+di Galois è necessario avere un numero primo <span class="arithmatex">\(p\)</span>, e il campo <span class="arithmatex">\(\mathbb{F}_p\)</span> avrà esattamente <span class="arithmatex">\(p\)</span> elementi:</p>
+<div class="arithmatex">\[
 \{0, \, \dots, \, p-1 \}
-$$</div>
-<p>Questo è un pó <strong>limitante</strong> non vi pare? Se volessimo un campo di Galois molto <strong>grande</strong> ma con primi <strong>piccoli</strong>? Ad esempio con <span class="math">\(2\)</span>? Questo permetterebbe di avere 
-tutti i termini numerici in <span class="math">\(\{0, \, 1\}\)</span> ma con un numero di elementi più elevato di due. Questo ci permetterebbe non solo di ottenere un campo con molti più elementi, 
-ma anche di lavorare con valori estremamente facili da gestire: rimanendo confinati a <span class="math">\(0\)</span> e <span class="math">\(1\)</span>, le operazioni diventano naturalmente <strong>efficienti</strong> da 
+\]</div>
+<p>Questo è un pó <strong>limitante</strong> non vi pare? Se volessimo un campo di Galois molto <strong>grande</strong> ma con primi <strong>piccoli</strong>? Ad esempio con <span class="arithmatex">\(2\)</span>? Questo permetterebbe di avere 
+tutti i termini numerici in <span class="arithmatex">\(\{0, \, 1\}\)</span> ma con un numero di elementi più elevato di due. Questo ci permetterebbe non solo di ottenere un campo con molti più elementi, 
+ma anche di lavorare con valori estremamente facili da gestire: rimanendo confinati a <span class="arithmatex">\(0\)</span> e <span class="arithmatex">\(1\)</span>, le operazioni diventano naturalmente <strong>efficienti</strong> da 
 rappresentare e da eseguire nei calcolatori, con notevoli vantaggi in termini di <strong>performance</strong>. No non è stregoneria. Si può fare ed è molto utile farlo, 
 perché permette di avere <strong>numeri di valore basso</strong>, ma in <strong>campi molto grandi</strong> (il che aumenta la sicurezza delle famigerate curve ellittiche). 
 Ok, ma come? Se i numeri sono quelli a cosa ricorriamo per aumentare la <strong>cardinalità</strong> del campo? La risposta è: ai <strong>polinomi</strong>.
-I polinomi agiscono come <strong>blocchi costruttivi</strong>: combinano i valori di <span class="math">\(\mathbb{F}_p\)</span> in forme complesse, permettendoci di creare molti più elementi 
+I polinomi agiscono come <strong>blocchi costruttivi</strong>: combinano i valori di <span class="arithmatex">\(\mathbb{F}_p\)</span> in forme complesse, permettendoci di creare molti più elementi 
 <strong>senza introdurre nuovi numeri</strong>, ma solo come nuove <strong>combinazioni</strong> degli stessi coefficienti.
-Per cui, dato un numero primo <span class="math">\(p\)</span> e dato un esponente <span class="math">\(m\)</span>, possiamo definire grazie ai polinomi un campo <span class="math">\(\mathbb{F}_{p^m}\)</span> di <span class="math">\(p^m\)</span> elementi, i cui termini 
-numerici sono in <span class="math">\(\{ 0, \, \dots, \, p - 1 \}\)</span>. </p>
-<p>Considerando il caso <span class="math">\(\mathbb{F}_{2^3}\)</span>, andiamo a vedere per step (anzi, per gradi), come procedere:</p>
+Per cui, dato un numero primo <span class="arithmatex">\(p\)</span> e dato un esponente <span class="arithmatex">\(m\)</span>, possiamo definire grazie ai polinomi un campo <span class="arithmatex">\(\mathbb{F}_{p^m}\)</span> di <span class="arithmatex">\(p^m\)</span> elementi, i cui termini 
+numerici sono in <span class="arithmatex">\(\{ 0, \, \dots, \, p - 1 \}\)</span>. </p>
+<p>Considerando il caso <span class="arithmatex">\(\mathbb{F}_{2^3}\)</span>, andiamo a vedere per step (anzi, per gradi), come procedere:</p>
 <ul>
 <li>
-<p>Grado <span class="math">\(m=0\)</span>: Questo caso è semplice, dobbiamo prendere i <strong>polinomi di grado</strong> <span class="math">\(0\)</span> che di fatto sono i soli <strong>coefficienti</strong>. Dato che siamo in <span class="math">\(p=2\)</span>, i coefficienti sono</p>
-<p>
-<div class="math">$$
+<p>Grado <span class="arithmatex">\(m=0\)</span>: Questo caso è semplice, dobbiamo prendere i <strong>polinomi di grado</strong> <span class="arithmatex">\(0\)</span> che di fatto sono i soli <strong>coefficienti</strong>. Dato che siamo in <span class="arithmatex">\(p=2\)</span>, i coefficienti sono</p>
+<div class="arithmatex">\[
 \{0, \, 1 \}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p>Grado <span class="math">\(m=1\)</span>: In questo caso prendiamo tutti i <strong>polinomi di grado al più</strong> <span class="math">\(1\)</span>. La famiglia di questi è data da </p>
-<p>
-<div class="math">$$
+<p>Grado <span class="arithmatex">\(m=1\)</span>: In questo caso prendiamo tutti i <strong>polinomi di grado al più</strong> <span class="arithmatex">\(1\)</span>. La famiglia di questi è data da </p>
+<div class="arithmatex">\[
 q(x) = ax + b
-$$</div>
-</p>
-<p>dato che i coefficienti devono essere in <span class="math">\(\{0, \, 1 \}\)</span>, abbiamo che questi polinomi sono:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>dato che i coefficienti devono essere in <span class="arithmatex">\(\{0, \, 1 \}\)</span>, abbiamo che questi polinomi sono:</p>
+<div class="arithmatex">\[
 \{x, \, x + 1 \}
-$$</div>
-</p>
+\]</div>
 <p>Infatti se:</p>
 <ul>
-<li><span class="math">\(a=0, \, b=0\)</span> <span class="math">\(\Rightarrow q(x)=0\)</span>. Giá considerato in precedenza.</li>
-<li><span class="math">\(a=0, \, b=1\)</span> <span class="math">\(\Rightarrow q(x)=1\)</span>. Giá considerato in precedenza.</li>
-<li><span class="math">\(a=1, \, b=0\)</span> <span class="math">\(\Rightarrow q(x)=x\)</span>.</li>
-<li><span class="math">\(a=1, \, b=1\)</span> <span class="math">\(\Rightarrow q(x)=x + 1\)</span>.</li>
+<li><span class="arithmatex">\(a=0, \, b=0\)</span> <span class="arithmatex">\(\Rightarrow q(x)=0\)</span>. Giá considerato in precedenza.</li>
+<li><span class="arithmatex">\(a=0, \, b=1\)</span> <span class="arithmatex">\(\Rightarrow q(x)=1\)</span>. Giá considerato in precedenza.</li>
+<li><span class="arithmatex">\(a=1, \, b=0\)</span> <span class="arithmatex">\(\Rightarrow q(x)=x\)</span>.</li>
+<li><span class="arithmatex">\(a=1, \, b=1\)</span> <span class="arithmatex">\(\Rightarrow q(x)=x + 1\)</span>.</li>
 </ul>
-<p>Non ci possono essere polinomi di grado <span class="math">\(1\)</span> come <span class="math">\(2x\)</span> perché lavorando, in questo caso, con <span class="math">\(\pmod{2}\)</span> abbiamo che</p>
-<p>
-<div class="math">$$
+<p>Non ci possono essere polinomi di grado <span class="arithmatex">\(1\)</span> come <span class="arithmatex">\(2x\)</span> perché lavorando, in questo caso, con <span class="arithmatex">\(\pmod{2}\)</span> abbiamo che</p>
+<div class="arithmatex">\[
 2 \equiv 0 \pmod{2} \Rightarrow 2x \equiv 0 \pmod{2}
-$$</div>
-</p>
-<p>che abbiamo giá considerato nel caso <span class="math">\(m=0\)</span>.</p>
+\]</div>
+<p>che abbiamo giá considerato nel caso <span class="arithmatex">\(m=0\)</span>.</p>
 </li>
 <li>
-<p>Grado <span class="math">\(m=2\)</span>: Analogamente a prima, prendiamo tutti i <strong>polinomi di grado al più</strong> <span class="math">\(2\)</span> i cui coefficienti sono in <span class="math">\(\{0, \, 1 \}\)</span>. La famiglia di questi è data da </p>
-<p>
-<div class="math">$$
+<p>Grado <span class="arithmatex">\(m=2\)</span>: Analogamente a prima, prendiamo tutti i <strong>polinomi di grado al più</strong> <span class="arithmatex">\(2\)</span> i cui coefficienti sono in <span class="arithmatex">\(\{0, \, 1 \}\)</span>. La famiglia di questi è data da </p>
+<div class="arithmatex">\[
 q(x) = ax^2 + bx + c
-$$</div>
-</p>
+\]</div>
 <p>Quindi andando a sviluppare, e ignorando tutti quelli giá considerati in precedenza abbiamo:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 \{x^2, \, x^2 + 1, \, x^2 + x, \, x^2 + x + 1 \}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p>Grado <span class="math">\(m=3\)</span>: Eh, qui la situazione cambia. Iniziamo dicendo che lavorando in <span class="math">\(m=3\)</span> <strong>non dobbiamo andare oltre</strong>. Questi polinomi <strong>non andranno a fare parte del campo</strong>,
+<p>Grado <span class="arithmatex">\(m=3\)</span>: Eh, qui la situazione cambia. Iniziamo dicendo che lavorando in <span class="arithmatex">\(m=3\)</span> <strong>non dobbiamo andare oltre</strong>. Questi polinomi <strong>non andranno a fare parte del campo</strong>,
     bensì andranno a definire il <strong>modulo del campo</strong>. Quando andiamo a cercare i polinomi di grado massimo rispetto al campo, dobbiamo assicurarci che siano
     <strong>irriducibili</strong>, cioè che <em>non possano essere scritti come prodotto dei polinomi</em> tra quelli finora elencati. I polinomi sono della famiglia </p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 q(x) = ax^3 + bx^2 + cx + d
-$$</div>
-</p>
-<p>In totale ci sono <span class="math">\(8\)</span> polinomi, ma quelli irriducibili sono solo due:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>In totale ci sono <span class="arithmatex">\(8\)</span> polinomi, ma quelli irriducibili sono solo due:</p>
+<div class="arithmatex">\[
 \{x^3 + x + 1, \, x^3 + x^2 + 1 \}
-$$</div>
-</p>
+\]</div>
 <p>Provateci quanto vi pare, non riuscirete mai a scrivere questi due polinomi, come prodotto di due polinomi di grado inferiore. Vediamo rapidamente
 perché ignoriamo gli altri. Supponiamo di avere:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 q(x) = x^3 + x^2 + x
-$$</div>
-</p>
+\]</div>
 <p>Questo possiamo scriverlo anche come:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 q(x) = x^3 + x^2 + x = x \cdot (x^2 + x + 1)
-$$</div>
-</p>
+\]</div>
 <p>Essendo scrivibile come prodotto di due polinomi di grado inferiore, lo scartiamo perché vorrebbe dire introdurre elementi che non hanno inverso moltiplicativo.</p>
 </li>
 </ul>
 <p>Siamo quasi giunti alla fine. Ora che abbiamo i polinomi irriducibili ne scegliamo uno a <strong>piacere</strong>, quello che preferite (anche se io mi farei controllare se preferissi
 un polinomio rispetto un altro). In questo caso i campi si dicono <strong>isomorfi</strong> (stessa <strong>cardinalità</strong>, stessa <strong>struttura</strong> di campo ma polinomio irriducibile <strong>diverso</strong>).
 Supponiamo di scegliere il polinomio:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 q(x) = x^3 + x^2 + 1
-$$</div>
-<p>abbiamo trovato il nostro campo di Galois <span class="math">\(\mathbb{F}_{8}\)</span> che contiene esattamente <span class="math">\(8\)</span> elementi ridotti modulo il polinomio scelto, tutti i coefficienti calcolati <span class="math">\(\pmod{2}\)</span> e che rispetta le proprietà
+\]</div>
+<p>abbiamo trovato il nostro campo di Galois <span class="arithmatex">\(\mathbb{F}_{8}\)</span> che contiene esattamente <span class="arithmatex">\(8\)</span> elementi ridotti modulo il polinomio scelto, tutti i coefficienti calcolati <span class="arithmatex">\(\pmod{2}\)</span> e che rispetta le proprietà
 sopra menzionate (altrimenti non sarebbe un campo di Galois):</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \mathbb{F}_{8} = \{ 0, \, 1, \, x, \, x + 1, \, x^2, \, x^2 + 1, \, x^2 + x, \, x^2 + x + 1 \} \pmod{x^3 + x^2 + 1}
-$$</div>
+\]</div>
 <p>Prendiamo due valori a caso e vediamo come, fare somma e prodotto degli elementi nel campo, non ci fa mai uscire dal campo stesso.
-Prendiamo <span class="math">\(f(x) = x^2 + 1\)</span> e <span class="math">\(g(x) = x + 1\)</span>.</p>
+Prendiamo <span class="arithmatex">\(f(x) = x^2 + 1\)</span> e <span class="arithmatex">\(g(x) = x + 1\)</span>.</p>
 <ul>
 <li>
 <p>Somma:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) + g(x) = x^2 + x + 2
-$$</div>
-</p>
-<p>Dato che siamo in <span class="math">\(\pmod{2}\)</span> abbiamo che</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>Dato che siamo in <span class="arithmatex">\(\pmod{2}\)</span> abbiamo che</p>
+<div class="arithmatex">\[
 2 \equiv 0 \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>Per cui possiamo scrivere</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^2 + x + 2 \equiv x^2 + x \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>cioè è tornato ad essere un polinomio <strong>appartenente al campo</strong> definito in precedenza.</p>
 </li>
 <li>
 <p>Prodotto: </p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) \cdot g(x) = (x^2 + 1) \cdot (x + 1) = x^3 + x^2 + x + 1
-$$</div>
-</p>
-<p>Dato che il nostro polinomio irriducibile è <span class="math">\(x^3 + x^2 + 1\)</span> possiamo scrivere questa relazione:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>Dato che il nostro polinomio irriducibile è <span class="arithmatex">\(x^3 + x^2 + 1\)</span> possiamo scrivere questa relazione:</p>
+<div class="arithmatex">\[
 x^3 + x^2 + 1 \equiv 0 \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
+\]</div>
 <p>Da cui</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^3 \equiv -x^2 - 1 \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
-<p>Vi ricordo però, che all'aritmetica modulare, i numeri negativi non piacciono ma sappiamo giá come riportarci in resti positivi <span class="math">\(\pmod{2}\)</span>.
+\]</div>
+<p>Vi ricordo però, che all'aritmetica modulare, i numeri negativi non piacciono ma sappiamo giá come riportarci in resti positivi <span class="arithmatex">\(\pmod{2}\)</span>.
 Omettendo i passaggi (che giá dovreste conoscere ma che potete leggere <a href="#una-regola-per-domarli">qui</a>), abbiamo che:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 -1 \equiv 1 \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>Quindi possiamo scrivere questo:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 -x^2 - 1 \equiv x^2 + 1 \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>da cui possiamo scrivere:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^3 \equiv x^2 + 1 \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
+\]</div>
 <p>Tornando ora al polinomio iniziale possiamo scrivere:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^3 + x^2 + x + 1 \equiv x^2 + 1 + x^2 + x + 1 \equiv 2x^2 + x + 2 \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
-<p>Dato che, come giá detto e ridetto, mostrato e rimostrato, siamo in <span class="math">\(\pmod{2}\)</span> abbiamo che:</p>
-<p>
-<div class="math">$$
+\]</div>
+<p>Dato che, come giá detto e ridetto, mostrato e rimostrato, siamo in <span class="arithmatex">\(\pmod{2}\)</span> abbiamo che:</p>
+<div class="arithmatex">\[
 2x^2 \equiv 0 \pmod{2}, \, 2 \equiv 0 \pmod{2}
-$$</div>
-</p>
+\]</div>
 <p>Siamo quindi giunti alla conclusione che:</p>
-<p>
-<div class="math">$$
+<div class="arithmatex">\[
 (x^2 + 1) \cdot (x + 1) \equiv x \pmod{x^3 + x^2 + 1}
-$$</div>
-</p>
-<p>e guarda caso, <span class="math">\(x\)</span> è un polinomio del campo di Galois.</p>
+\]</div>
+<p>e guarda caso, <span class="arithmatex">\(x\)</span> è un polinomio del campo di Galois.</p>
 </li>
 </ul>
 <p>Per ovvi motivi vi ho dimostrato solo la proprietà di chiusura, ma siete liberissimi di fare tutti i vostri esperimenti. Tanto ho ragione io.</p>
 <p>Per concludere questo paragrafo, vi invito ad usare un polinomio riducibile come modulo del campo. Carta e penna alla mano, vedrete che <strong>ci sarà almeno un elemento
 del campo che non ha un inverso moltiplicativo appartenente al campo stesso</strong>, violando una delle proprietà.</p>
 <h4 id="le-erbacce-crescono-ciclicamente">Le Erbacce Crescono Ciclicamente<a class="headerlink" href="#le-erbacce-crescono-ciclicamente" title="Permanent link"> </a></h4>
-<p>Molto utile e carina è la <strong>proprietà di ciclicità della potenza</strong>. Consideriamo tutte le potenze da <span class="math">\(0\)</span> a <span class="math">\(p^m - 1\)</span>. Fin quando l'elemento <span class="math">\(x^{a}\)</span> ha potenza <span class="math">\(a &lt; m\)</span>,
-l'elemento è nel campo, ma se <span class="math">\(x^a\)</span> ha una potenza <span class="math">\(a \geq m\)</span>, iniziano le riduzioni. Fin qui niente di nuovo no? Per cui possiamo, considerando l'ormai
+<p>Molto utile e carina è la <strong>proprietà di ciclicità della potenza</strong>. Consideriamo tutte le potenze da <span class="arithmatex">\(0\)</span> a <span class="arithmatex">\(p^m - 1\)</span>. Fin quando l'elemento <span class="arithmatex">\(x^{a}\)</span> ha potenza <span class="arithmatex">\(a &lt; m\)</span>,
+l'elemento è nel campo, ma se <span class="arithmatex">\(x^a\)</span> ha una potenza <span class="arithmatex">\(a \geq m\)</span>, iniziano le riduzioni. Fin qui niente di nuovo no? Per cui possiamo, considerando l'ormai
 <strong>affezionato campo</strong>, la tabella:</p>
-<p><a id="tabella-campo"></a>
-</p>
-<div class="math">$$
-\begin{array} 
-{|r|l|l|l|}
+<p><a id="tabella-campo"></a></p>
+<div class="arithmatex">\[
+\begin{array}{|r|l|l|l|}
 \hline 
 \textbf{Potenza} &amp; \textbf{Polinomio Ridotto} &amp; \textbf{Coefficienti} &amp; \textbf{Intero} \\ 
 \hline 
@@ -721,33 +641,32 @@ x^5 &amp; x + 1          &amp; 0, 1, 1 &amp; 3 \\
 x^6 &amp; x^2 + x        &amp; 1, 1, 0 &amp; 6 \\ 
 \hline 
 \end{array}
-$$</div>
-<p class="formula-caption">
-Tabella 1. Elementi Del Campo <span class="math">\(\mathbb{F}_{8}\)</span> ridotto <span class="math">\(\pmod{x^3 + x^2 + 1}\)</span></p>
+\]</div>
+<p class="formula-caption">Tabella 1. Elementi Del Campo <span class="arithmatex">\(\mathbb{F}_{8}\)</span> ridotto <span class="arithmatex">\(\pmod{x^3 + x^2 + 1}\)</span></p>
 <p>dove l'intero è costruito considerando i coefficienti dei polinomi come <strong>valori binari</strong> e questo permette una associazione tra interi e polinomi. Come potete vedere,
-fino al termine <span class="math">\(x^2\)</span>, la potenza è riportata cosí come è, da <span class="math">\(x^3\)</span> in poi iniziano le riduzioni, generando gli altri elementi del campo.
-Ma a questo punto, se io vi chiedesse la potenza di <span class="math">\(x^7\)</span>? Cosa succede con potenze maggiori di <span class="math">\(p^m - 1\)</span>? 
+fino al termine <span class="arithmatex">\(x^2\)</span>, la potenza è riportata cosí come è, da <span class="arithmatex">\(x^3\)</span> in poi iniziano le riduzioni, generando gli altri elementi del campo.
+Ma a questo punto, se io vi chiedesse la potenza di <span class="arithmatex">\(x^7\)</span>? Cosa succede con potenze maggiori di <span class="arithmatex">\(p^m - 1\)</span>? 
 Qui interviene la proprietà di ciclicità. Infatti vale la regoletta:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^a = x^{a \bmod{n}}
-$$</div>
-<p>dove <span class="math">\(n = p^m - 1\)</span>. E quindi possiamo scrivere:</p>
-<div class="math">$$
+\]</div>
+<p>dove <span class="arithmatex">\(n = p^m - 1\)</span>. E quindi possiamo scrivere:</p>
+<div class="arithmatex">\[
 x^7 \equiv x^{7 \bmod 7} \equiv x^0 = 1
-$$</div>
-<p>Cioè siamo tornati al primo elemento della tabella (escludendo lo <span class="math">\(0\)</span>). La ciclicità rende semplice anche l'operazione di inversione dei polinomi. Infatti 
+\]</div>
+<p>Cioè siamo tornati al primo elemento della tabella (escludendo lo <span class="arithmatex">\(0\)</span>). La ciclicità rende semplice anche l'operazione di inversione dei polinomi. Infatti 
 dato che è vera la relazione:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x^k \cdot x^{n-k} = x^n = 1
-$$</div>
-<p>abbiamo che <span class="math">\(x^{n-k}\)</span> è <strong>sempre</strong> l'inverso moltiplicativo di <span class="math">\(x^{k}\)</span>. Per cui se cerchiamo l'inverso di <span class="math">\(x^2 + 1\)</span> possiamo guardare la nostra tabellina e scrivere:</p>
-<div class="math">$$
+\]</div>
+<p>abbiamo che <span class="arithmatex">\(x^{n-k}\)</span> è <strong>sempre</strong> l'inverso moltiplicativo di <span class="arithmatex">\(x^{k}\)</span>. Per cui se cerchiamo l'inverso di <span class="arithmatex">\(x^2 + 1\)</span> possiamo guardare la nostra tabellina e scrivere:</p>
+<div class="arithmatex">\[
 (x^2 + 1)^{-1} = (x^3)^{-1}
-$$</div>
+\]</div>
 <p>da cui</p>
-<div class="math">$$
+<div class="arithmatex">\[
 (x^3)^{-1} = x^{7-3} = x^{4} = x^2 + x + 1
-$$</div>
+\]</div>
 <p>che è l'inverso cercato. <strong>Provare per credere</strong>.</p>
 <h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
 <p>Quando ho iniziato a scrivere questo articolo me lo ero figurato più corto, molto più corto. Ma questa volta non mi sono lasciato prendere la mano, il problema è che, 
@@ -759,68 +678,6 @@ Se vi sentite al sicuro quando effettuate operazioni online, se vi sentite prote
 grazie a questi <strong>elementi base</strong>, e un giorno ve ne parlerò. Fino ad allora però, non mi venite a dire "mi hanno hackerato la password", 
 perché la crittografia è sicura, sono le password <em>1234</em> e la <em>mamma calda a 3km</em> da voi a non esserlo. Quindi è colpa vostra.</p>
 <p>Alla Prossima.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -861,6 +718,10 @@ perché la crittografia è sicura, sono le password <em>1234</em> e la <em>mamma
                 <li><a href="https://www.lucadivita.it/tag/campi_di_galois.html">campi_di_galois</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
     </div>
 
 </article>

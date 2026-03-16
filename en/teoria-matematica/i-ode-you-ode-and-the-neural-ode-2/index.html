@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>I ODE, You ODE and the Neural ODE - 2</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/teoria-matematica.html">Theory & Math</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-07-21T00:00:00+02:00">July 21, 2025</time>
-                - <a href="https://www.lucadivita.it/en/category/teoria-matematica.html">Theory & Math</a>
             </small>
         </p>
     </header>
@@ -178,345 +178,285 @@ There’s no single method available instead, depending on the structure of the 
 <li><strong>Laplace Transform</strong> method</li>
 <li>...and many more, but trust me, the list is <strong>long</strong></li>
 </ul>
-<p>Will we look at all of them? <strong>Absolutely not</strong>. We’ll go over just the first two to show I’m not making this stuff up. But if you want a complete and detailed overview, I recommend reading <a href="https://users.math.msu.edu/users/gnagy/teaching/ode.pdf" target="_blank">this</a>.</p>
+<p>Will we look at all of them? <strong>Absolutely not</strong>. We’ll go over just the first two to show I’m not making this stuff up. But if you want a complete and detailed overview, I recommend reading <a href="https://users.math.msu.edu/users/gnagy/teaching/ode.pdf">this</a>.</p>
 <h4 id="separation-of-variables">Separation of Variables<a class="headerlink" href="#separation-of-variables" title="Permanent link"> </a></h4>
 <p>The <strong>separation of variables</strong> method is one of those techniques that make you go <em>“okay, that’s cool, but when would I ever use it?”</em>. In fact, it’s applicable <strong>only</strong> when an ODE can be written like this:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{dy}{dt} = f(y) \cdot g(t)
-$$</div>
+\]</div>
 <p>Having this structure allows us to do the following:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{dy}{f(y)} = g(t) \cdot dt
-$$</div>
-<p>That is, we multiply both sides of the equation by <span class="math">\(dt\)</span> and divide both by <span class="math">\(f(y)\)</span>. Basically, we’ve <strong>separated</strong> the equation, putting all <span class="math">\(y\)</span>-related terms on one side and all <span class="math">\(t\)</span>-related terms on the other. To get a better feel for this, try playing with the following ODE:</p>
-<div class="math">$$
+\]</div>
+<p>That is, we multiply both sides of the equation by <span class="arithmatex">\(dt\)</span> and divide both by <span class="arithmatex">\(f(y)\)</span>. Basically, we’ve <strong>separated</strong> the equation, putting all <span class="arithmatex">\(y\)</span>-related terms on one side and all <span class="arithmatex">\(t\)</span>-related terms on the other. To get a better feel for this, try playing with the following ODE:</p>
+<div class="arithmatex">\[
 \frac{dy}{dt} = 2yt + t
-$$</div>
-<p>Swear, curse, and bang your head against the wall, you’ll <strong>never be able</strong> to separate <span class="math">\(y\)</span> from <span class="math">\(t\)</span>. In at least one side of the equation, there will always be an <strong>intruder</strong>, whether it’s related to <span class="math">\(y\)</span> or to <span class="math">\(t\)</span>.</p>
+\]</div>
+<p>Swear, curse, and bang your head against the wall, you’ll <strong>never be able</strong> to separate <span class="arithmatex">\(y\)</span> from <span class="arithmatex">\(t\)</span>. In at least one side of the equation, there will always be an <strong>intruder</strong>, whether it’s related to <span class="arithmatex">\(y\)</span> or to <span class="arithmatex">\(t\)</span>.</p>
 <p>At this point, all that’s left is to <strong>integrate both sides</strong> of the equation, solving the ODE:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \int \frac{dy}{f(y)} = \int g(t) \cdot dt
-$$</div>
+\]</div>
 <h5 id="example">Example<a class="headerlink" href="#example" title="Permanent link"> </a></h5>
-<p>Great, we can finally look at an <strong>example</strong>. In <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law" target="_blank">this paragraph</a>
+<p>Great, we can finally look at an <strong>example</strong>. In <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law">this paragraph</a>
 I casually dropped an ODE along with its solution, without telling you <strong>where it came from</strong>. Let’s pick it up again:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{dy}{dt} = 3y(t)
-$$</div>
+\]</div>
 <p>This fits very well with separation of variables, it’s already written in the form we need:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{dy}{dt} = f(y) \cdot g(t) = y(t) \cdot 3
-$$</div>
+\]</div>
 <p>where:</p>
 <ul>
-<li><span class="math">\(f(y) = y(t)\)</span></li>
-<li><span class="math">\(g(t) = 3\)</span></li>
+<li><span class="arithmatex">\(f(y) = y(t)\)</span></li>
+<li><span class="arithmatex">\(g(t) = 3\)</span></li>
 </ul>
-<p>So we do our <strong>little magic trick</strong> to separate the <span class="math">\(y\)</span> terms from the <span class="math">\(t\)</span> terms:</p>
-<div class="math">$$
+<p>So we do our <strong>little magic trick</strong> to separate the <span class="arithmatex">\(y\)</span> terms from the <span class="arithmatex">\(t\)</span> terms:</p>
+<div class="arithmatex">\[
 \frac{dy}{y(t)} = 3 \cdot dt
-$$</div>
-<p>Now that we’re <strong>wizards</strong> with derivatives, when we see <span class="math">\(d-something\)</span>, we know it’s an infinitesimal, and we need to <strong>integrate</strong> 
+\]</div>
+<p>Now that we’re <strong>wizards</strong> with derivatives, when we see <span class="arithmatex">\(d-something\)</span>, we know it’s an infinitesimal, and we need to <strong>integrate</strong> 
 to find the <strong>antiderivative</strong>. So we integrate both sides, <strong>indefinitely</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \int \frac{1}{y(t)} \cdot dy = \int 3 \cdot dt
-$$</div>
-<p>Using the table of <a href="https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions" target="_blank">notable integrals</a>, we can easily solve these:</p>
-<div class="math">$$
+\]</div>
+<p>Using the table of <a href="https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions">notable integrals</a>, we can easily solve these:</p>
+<div class="arithmatex">\[
 \ln \left | y(t) \right | + C_1 = 3t + C_2 
-$$</div>
+\]</div>
 <p>from which:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \ln \left | y(t) \right | = 3t + (C_2 - C_1)
-$$</div>
-<p>Since <span class="math">\(C_2\)</span> and <span class="math">\(C_1\)</span> are <strong>arbitrary constants</strong>, which can take any value (reflect on this point <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#indefinite-integral" target="_blank">here</a>)
+\]</div>
+<p>Since <span class="arithmatex">\(C_2\)</span> and <span class="arithmatex">\(C_1\)</span> are <strong>arbitrary constants</strong>, which can take any value (reflect on this point <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#indefinite-integral">here</a>)
 we can, with a light heart, set:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 (C_2 - C_1) = C
-$$</div>
+\]</div>
 <p>So the solution becomes:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \ln \left | y(t) \right | = 3t + C
-$$</div>
-<p>To <strong>isolate</strong> <span class="math">\(y\)</span>, we need to invert the <strong>natural logarithm</strong>, so we raise both sides as powers of <a href="https://en.wikipedia.org/wiki/Natural_logarithm" target="_blank"><span class="math">\(e\)</span></a> and get:</p>
-<div class="math">$$
+\]</div>
+<p>To <strong>isolate</strong> <span class="arithmatex">\(y\)</span>, we need to invert the <strong>natural logarithm</strong>, so we raise both sides as powers of <a href="https://en.wikipedia.org/wiki/Natural_logarithm"><span class="arithmatex">\(e\)</span></a> and get:</p>
+<div class="arithmatex">\[
 y(t) = e^{3t + C} = e^{3t} \cdot e^C
-$$</div>
-<p>Following the same principle as before, <span class="math">\(e^C\)</span> is an <strong>arbitrary constant</strong>, so we can simply <strong>rename it</strong>:</p>
-<div class="math">$$
+\]</div>
+<p>Following the same principle as before, <span class="arithmatex">\(e^C\)</span> is an <strong>arbitrary constant</strong>, so we can simply <strong>rename it</strong>:</p>
+<div class="arithmatex">\[
 e^C = K
-$$</div>
+\]</div>
 <p>and therefore</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y(t) = K \cdot e^{3t}
-$$</div>
+\]</div>
 <p>This proves that I <strong>wasn’t talking nonsense</strong> in part 1. <strong>Everything checks out</strong>, and the world can resume spinning.
 Now we’re left with the bitter taste of <em>“okay, but what’s the value of K?”</em> The problem doesn’t provide enough information, so as posed 
-we can’t know it. To determine <span class="math">\(K\)</span> we’d need a <strong>Cauchy problem</strong>. What’s left...? Ah yes, to show the <strong>graphical behavior</strong>.
+we can’t know it. To determine <span class="arithmatex">\(K\)</span> we’d need a <strong>Cauchy problem</strong>. What’s left...? Ah yes, to show the <strong>graphical behavior</strong>.
 Here it is</p>
 <p class="image-caption"><img alt="Plot Sostituzione" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_2/substitution_plot.png"/>
-Figure 1. Plot of <span class="math">\(y=K \cdot e^{3t}\)</span></p>
+Figure 1. Plot of <span class="arithmatex">\(y=K \cdot e^{3t}\)</span></p>
 <p><strong>Let’s comment</strong> on this graph. As you know, or at least should from part one, it’s a <strong>direction field</strong> graph. 
-Even though we know the <strong>general form</strong> of the solution, without knowing the value of <span class="math">\(K\)</span> we <strong>can’t trace the exact curve</strong>.
-However, the direction field <strong>helps us</strong>: it shows how solutions <strong>behave</strong> for different values of <span class="math">\(K\)</span>, even without knowing them <strong>explicitly</strong>.
+Even though we know the <strong>general form</strong> of the solution, without knowing the value of <span class="arithmatex">\(K\)</span> we <strong>can’t trace the exact curve</strong>.
+However, the direction field <strong>helps us</strong>: it shows how solutions <strong>behave</strong> for different values of <span class="arithmatex">\(K\)</span>, even without knowing them <strong>explicitly</strong>.
 What we notice is that there are <strong>three families</strong> of solutions:</p>
 <ul>
-<li>The <strong>increasing</strong> family: arrows for <span class="math">\(y&gt;0\)</span> <strong>diverge</strong> upwards.</li>
-<li>The <strong>decreasing</strong> family: arrows for <span class="math">\(y&lt;0\)</span> <strong>diverge</strong> downwards.</li>
-<li>The <strong>constant</strong> family: consisting of a single lonely member, always <strong>zero</strong>, corresponding to <span class="math">\(y=0\)</span>.</li>
+<li>The <strong>increasing</strong> family: arrows for <span class="arithmatex">\(y&gt;0\)</span> <strong>diverge</strong> upwards.</li>
+<li>The <strong>decreasing</strong> family: arrows for <span class="arithmatex">\(y&lt;0\)</span> <strong>diverge</strong> downwards.</li>
+<li>The <strong>constant</strong> family: consisting of a single lonely member, always <strong>zero</strong>, corresponding to <span class="arithmatex">\(y=0\)</span>.</li>
 </ul>
 <h4 id="integrating-factor">Integrating Factor<a class="headerlink" href="#integrating-factor" title="Permanent link"> </a></h4>
 <p>Remember that little <em>ODElette</em> (who’s not the wife of <em>ODEman</em>... ok, I disgust myself), which in the previous paragraph <strong>couldn’t</strong> be solved?
 I mean this one:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y' = 2yt + t
-$$</div>
-<p>Quick note: <span class="math">\(y\)</span> is <strong>always</strong> a function of time, so you might read <span class="math">\(y\)</span> instead of <span class="math">\(y(t)\)</span>, but they’re entirely <strong>equivalent</strong>.</p>
-<p>Well, with the <strong>integrating factor</strong> method we can go where separation of variables couldn’t. This method requires the ODE to be <strong>first-order linear</strong> (read more <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law" target="_blank">here</a>), 
+\]</div>
+<p>Quick note: <span class="arithmatex">\(y\)</span> is <strong>always</strong> a function of time, so you might read <span class="arithmatex">\(y\)</span> instead of <span class="arithmatex">\(y(t)\)</span>, but they’re entirely <strong>equivalent</strong>.</p>
+<p>Well, with the <strong>integrating factor</strong> method we can go where separation of variables couldn’t. This method requires the ODE to be <strong>first-order linear</strong> (read more <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#when-change-becomes-law">here</a>), 
 and it must be written in the form:</p>
-<p><a id="formula-fattore-integrante-base"></a>
-</p>
-<div class="math">$$y' + p(t) \cdot y = q(t)$$</div>
-<p class="formula-caption">
-Formula 1. Base Form for Integrating Factor</p>
+<p><a id="formula-fattore-integrante-base"></a></p>
+<div class="arithmatex">\[
+y' + p(t) \cdot y = q(t)
+\]</div>
+<p class="formula-caption">Formula 1. Base Form for Integrating Factor</p>
 <p>At this point, the method requires us to define the <strong>integrating factor</strong> as:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \mu (t) = e^{\int p(t) dt} 
-$$</div>
-<p>and we <strong>multiply</strong> every term of the ODE by <span class="math">\(\mu (t)\)</span>:</p>
-<p><a id="formula-fattore-integrante"></a>
-</p>
-<div class="math">$$y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt} = e^{\int p(t) dt} \cdot q(t)$$</div>
-<p class="formula-caption">
-Formula 2. Integrating Factor</p>
-<p>Now we use a <strong>math trick</strong>. Let’s take <a href="https://en.wikipedia.org/wiki/Product_rule" target="_blank">the product rule for derivatives</a>:</p>
-<p><a id="derivata-prodotto"></a>
-</p>
-<div class="math">$$\frac{d}{dt} \left( f(t) \cdot g(t) \right) = f'(t) \cdot g(t) + f(t) \cdot g'(t)$$</div>
-<p class="formula-caption">
-Formula 3: Product Rule</p>
+\]</div>
+<p>and we <strong>multiply</strong> every term of the ODE by <span class="arithmatex">\(\mu (t)\)</span>:</p>
+<p><a id="formula-fattore-integrante"></a></p>
+<div class="arithmatex">\[
+y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt} = e^{\int p(t) dt} \cdot q(t)
+\]</div>
+<p class="formula-caption">Formula 2. Integrating Factor</p>
+<p>Now we use a <strong>math trick</strong>. Let’s take <a href="https://en.wikipedia.org/wiki/Product_rule">the product rule for derivatives</a>:</p>
+<p><a id="derivata-prodotto"></a></p>
+<div class="arithmatex">\[
+\frac{d}{dt} \left( f(t) \cdot g(t) \right) = f'(t) \cdot g(t) + f(t) \cdot g'(t)
+\]</div>
+<p class="formula-caption">Formula 3: Product Rule</p>
 <p>Since we’re dealing with a <strong>first-order ODE</strong>, we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f'(t) = y'
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 f(t) = y
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 g(t) = \mu (t) = e^{\int p(t) dt}
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 g'(t) = \mu ' (t) = e^{\int p(t) dt} \left[ \frac{d}{dt} \left( \int p(t) dt \right) \cdot \ln(e) \right]
-$$</div>
+\]</div>
 <p>so that:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{d}{dt} \left( \int p(t) dt \right) = p(t)
-$$</div>
+\]</div>
 <p>since we’re <strong>differentiating an integral</strong>, and</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \ln(e) = 1
-$$</div>
-<p>because <span class="math">\(e\)</span> is the <strong>base</strong> of the natural logarithm. Therefore:</p>
-<div class="math">$$
+\]</div>
+<p>because <span class="arithmatex">\(e\)</span> is the <strong>base</strong> of the natural logarithm. Therefore:</p>
+<div class="arithmatex">\[
 \mu'(t) = p(t) \cdot e^{\int p(t) dt}
-$$</div>
+\]</div>
 <p>Plugging this into <a href="#derivata-prodotto">Formula 3</a>, we get:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{d}{dt} \left( f(t) \cdot g(t) \right) = \frac{d}{dt} \left( y \cdot \mu(t) \right)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \frac{d}{dt} \left( y \cdot \mu(t) \right) = y' \cdot \mu (t) + y \cdot \mu'(t)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y' \cdot \mu (t) + y \cdot \mu'(t) = y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt}
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow \frac{d}{dt} \left( y \cdot \mu(t) \right) = y' \cdot e^{\int p(t) dt} + y \cdot p(t) \cdot e^{\int p(t) dt}
-$$</div>
+\]</div>
 <p>Since last time I checked, <a href="#formula-fattore-integrante">Formula 2</a> still holds, we can write:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{d}{dt} \left( y \cdot e^{\int p(t) dt} \right) = e^{\int p(t) dt} \cdot q(t)
-$$</div>
+\]</div>
 <p><strong>Integrating</strong> both sides gives:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y \cdot e^{\int p(t) dt} = \int q(t) \cdot e^{\int p(t) dt} dt + C
-$$</div>
-<p>Finally, ladies and gentlemen, dividing by <span class="math">\(\mu(t)\)</span> we get the final formulation of <span class="math">\(y\)</span>:</p>
-<p><a id="fattore-integrante-soluzione"></a>
-</p>
-<div class="math">$$y = e^{-\int p(t) dt} \cdot \int q(t) \cdot e^{\int p(t) dt} dt + e^{-\int p(t) dt} \cdot C$$</div>
-<p class="formula-caption">
-Formula 4. Integrating Factor Solution</p>
-<p>As we’ve seen, with not a few hurdles <strong>let’s be honest</strong>, when we can apply the integrating factor, we have a nice little “<strong>formula</strong>” ready to <strong>explicitly solve</strong> the elusive <span class="math">\(y\)</span>. I’d say it’s time to look at an example.</p>
+\]</div>
+<p>Finally, ladies and gentlemen, dividing by <span class="arithmatex">\(\mu(t)\)</span> we get the final formulation of <span class="arithmatex">\(y\)</span>:</p>
+<p><a id="fattore-integrante-soluzione"></a></p>
+<div class="arithmatex">\[
+y = e^{-\int p(t) dt} \cdot \int q(t) \cdot e^{\int p(t) dt} dt + e^{-\int p(t) dt} \cdot C
+\]</div>
+<p class="formula-caption">Formula 4. Integrating Factor Solution</p>
+<p>As we’ve seen, with not a few hurdles <strong>let’s be honest</strong>, when we can apply the integrating factor, we have a nice little “<strong>formula</strong>” ready to <strong>explicitly solve</strong> the elusive <span class="arithmatex">\(y\)</span>. I’d say it’s time to look at an example.</p>
 <h4 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link"> </a></h4>
 <p>The ODE we wanted to solve was this:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y' = 2yt + t
-$$</div>
+\]</div>
 <p>Right!? Great, even better! This one <strong>lends itself</strong> to the integrating factor method. So let’s revisit the ODE, but this time we solve a <strong>Cauchy problem</strong>, and assume 
-we not only have the ODE, but also the value of the solution <span class="math">\(y(t)\)</span> at <span class="math">\(t=0\)</span>, which we’ll <strong>assume</strong> to be <span class="math">\(0\)</span> (but it could also have been <span class="math">\(y(t)=5\)</span> at <span class="math">\(t=214\)</span>, we just need 
+we not only have the ODE, but also the value of the solution <span class="arithmatex">\(y(t)\)</span> at <span class="arithmatex">\(t=0\)</span>, which we’ll <strong>assume</strong> to be <span class="arithmatex">\(0\)</span> (but it could also have been <span class="arithmatex">\(y(t)=5\)</span> at <span class="arithmatex">\(t=214\)</span>, we just need 
 to know <strong>at least one value of the function at a specific time</strong>):</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 y' = 2yt + t \\
 y(0) = 0
 \end{cases}
-$$</div>
+\]</div>
 <p>Let’s start from the ODE:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y' - 2yt = t
-$$</div>
+\]</div>
 <p>So:</p>
 <ul>
-<li><span class="math">\(p(t) = -2t\)</span></li>
-<li><span class="math">\(q(t) = t\)</span></li>
+<li><span class="arithmatex">\(p(t) = -2t\)</span></li>
+<li><span class="arithmatex">\(q(t) = t\)</span></li>
 </ul>
 <p>From the <a href="#fattore-integrante-soluzione">integrating factor solution formula</a>, we need to compute:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \int p(t) = \int -2t = -t^2 + C_1
-$$</div>
+\]</div>
 <p>Which gives:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y = e^{t^2 - C_1} \cdot \int t \cdot e^{-t^2 + C_1} dt + e^{t^2 - C_1} \cdot C
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y = e^{t^2} \cdot \int t \cdot e^{-t^2} dt + e^{t^2} e^{-C_1}\cdot C
-$$</div>
+\]</div>
 <p>Now we need to solve:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \int t \cdot e^{-t^2}
-$$</div>
+\]</div>
 <p>I can feel it, the <em>terror gripping the hearts</em> of anyone who took Calculus 1, because 
-solving this integral requires the <a href="https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf" target="_blank"><strong>substitution method</strong></a>, 
+solving this integral requires the <a href="https://www.ucd.ie/msc/t4media/Integration%20by%20Substitution.pdf"><strong>substitution method</strong></a>, 
 which I won’t explain here but I’ll leave you with a source to <strong>dig deeper</strong>. So let’s set:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 u = -t^2 \Rightarrow du = -2t dt \Rightarrow tdt = -\frac{du}{2}
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow \int t \cdot e^{-t^2} dt = -\frac{1}{2} \int e^u du = -\frac{e^u}{2} + K
-$$</div>
+\]</div>
 <p>Back to original variables:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 -t^2 = u \Rightarrow -\frac{e^u}{2} + K = -\frac{e^{-t^2}}{2} + K
-$$</div>
+\]</div>
 <p>and so:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \int t \cdot e^{-t^2} dt = -\frac{e^{-t^2}}{2} + K
-$$</div>
-<p>Returning to our <span class="math">\(y\)</span>:</p>
-<div class="math">$$
+\]</div>
+<p>Returning to our <span class="arithmatex">\(y\)</span>:</p>
+<div class="arithmatex">\[
 y = e^{t^2} \cdot \left[ -\frac{e^{-t^2}}{2} + K \right] + e^{t^2} e^{-C_1}\cdot C
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y = -\frac{1}{2} + K_1 \cdot e^{t^2} + K_2 \cdot e^{t^2}
-$$</div>
+\]</div>
 <p>Where, <strong>being arbitrary constants</strong>, we set:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 K_1 = K \text{ and } K_2 = Ce^{-C_1}
-$$</div>
+\]</div>
 <p>Thus:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y = -\frac{1}{2} + e^{t^2} \left( K_1 + K_2 \right) = -\frac{1}{2} + K \cdot e^{t^2}
-$$</div>
-<p>Remember we’re solving a Cauchy problem where at <span class="math">\(t=0\)</span>, <span class="math">\(y=0\)</span>, so:</p>
-<div class="math">$$
+\]</div>
+<p>Remember we’re solving a Cauchy problem where at <span class="arithmatex">\(t=0\)</span>, <span class="arithmatex">\(y=0\)</span>, so:</p>
+<div class="arithmatex">\[
 -\frac{1}{2} + K \cdot e^{(0)^2} = K -\frac{1}{2} = 0
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow K = \frac{1}{2} \Rightarrow y = \frac{e^{t^2} - 1}{2}
-$$</div>
-<p>Thanks to the <strong>initial condition</strong>, we’ve found the value of <span class="math">\(K\)</span>, which lets us compute 
-<span class="math">\(y\)</span> at any <strong>point in time</strong>. If you were paying attention, you know the value of <span class="math">\(y\)</span> at <span class="math">\(t=0\)</span>. So let’s now compute it for <span class="math">\(t=1\)</span>:</p>
-<div class="math">$$
+\]</div>
+<p>Thanks to the <strong>initial condition</strong>, we’ve found the value of <span class="arithmatex">\(K\)</span>, which lets us compute 
+<span class="arithmatex">\(y\)</span> at any <strong>point in time</strong>. If you were paying attention, you know the value of <span class="arithmatex">\(y\)</span> at <span class="arithmatex">\(t=0\)</span>. So let’s now compute it for <span class="arithmatex">\(t=1\)</span>:</p>
+<div class="arithmatex">\[
 y = \frac{e - 1}{2} \approx 0.859
-$$</div>
-<p>Exactly as I hinted, having an initial condition allows us to determine the <strong>value of the ODE</strong> at any moment in time <span class="math">\(t\)</span>. Of course, the initial condition can alter the ODE’s behavior.
+\]</div>
+<p>Exactly as I hinted, having an initial condition allows us to determine the <strong>value of the ODE</strong> at any moment in time <span class="arithmatex">\(t\)</span>. Of course, the initial condition can alter the ODE’s behavior.
 Let’s take a look at the <strong>direction field</strong> and <strong>phase diagram</strong>.</p>
 <p class="image-caption"><img alt="Plot Fattore Integrante" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_2/integrating_factor_plot.png"/>
-Figure 2. Plot of <span class="math">\(y=-\frac{1}{2} + K \cdot e^{t^2}\)</span></p>
+Figure 2. Plot of <span class="arithmatex">\(y=-\frac{1}{2} + K \cdot e^{t^2}\)</span></p>
 <p>Remember when I said in part one that phase diagrams are used for <strong>systems</strong> of ODEs? Well, that’s not <strong>entirely</strong> true,
-because even a single ODE, if it comes with an initial condition, produces a <strong>well-defined curve</strong> in the <span class="math">\((y,t)\)</span> plane. That’s exactly what I’m doing here. But why is it possible in this case?
-Simply because now we have a <strong>Cauchy problem</strong>, not just a plain ODE. So with an <strong>initial condition</strong>, I can compute <span class="math">\(K\)</span> and see 
-the behavior of <span class="math">\(y\)</span> over time with <span class="math">\(K\)</span> known. 
-Thus, the direction field shows us <strong>all possible solutions</strong>: the initial value determines which of these, our </p>
-<div class="math">$$y(t)$$</div>
-<p> will follow.
-In our case, the initial condition is <span class="math">\(y(0) = 0\)</span> which implies <span class="math">\(K=\frac{1}{2}\)</span>. In the plot, this specific case is shown by the <strong>green line</strong> (and no, don’t switch to RAI 1). 
+because even a single ODE, if it comes with an initial condition, produces a <strong>well-defined curve</strong> in the <span class="arithmatex">\((y,t)\)</span> plane. That’s exactly what I’m doing here. But why is it possible in this case?
+Simply because now we have a <strong>Cauchy problem</strong>, not just a plain ODE. So with an <strong>initial condition</strong>, I can compute <span class="arithmatex">\(K\)</span> and see 
+the behavior of <span class="arithmatex">\(y\)</span> over time with <span class="arithmatex">\(K\)</span> known. 
+Thus, the direction field shows us <strong>all possible solutions</strong>: the initial value determines which of these, our</p>
+<div class="arithmatex">\[
+y(t)
+\]</div>
+<p>will follow.
+In our case, the initial condition is <span class="arithmatex">\(y(0) = 0\)</span> which implies <span class="arithmatex">\(K=\frac{1}{2}\)</span>. In the plot, this specific case is shown by the <strong>green line</strong> (and no, don’t switch to RAI 1). 
 Here too, just like before, we have <strong>three distinct families</strong>:</p>
 <ul>
-<li><span class="math">\(y &gt; -\frac{1}{2}\)</span>: Field lines <strong>decrease rapidly</strong> (see the <strong>steepness</strong> of the arrows) and then start to <strong>increase</strong> again.</li>
-<li><span class="math">\(y &lt; -\frac{1}{2}\)</span>: Field lines <strong>increase rapidly</strong> and then start to <strong>decrease</strong> again.</li>
-<li><span class="math">\(y = -\frac{1}{2}\)</span>: The function remains <strong>constant and zero-valued</strong></li>
+<li><span class="arithmatex">\(y &gt; -\frac{1}{2}\)</span>: Field lines <strong>decrease rapidly</strong> (see the <strong>steepness</strong> of the arrows) and then start to <strong>increase</strong> again.</li>
+<li><span class="arithmatex">\(y &lt; -\frac{1}{2}\)</span>: Field lines <strong>increase rapidly</strong> and then start to <strong>decrease</strong> again.</li>
+<li><span class="arithmatex">\(y = -\frac{1}{2}\)</span>: The function remains <strong>constant and zero-valued</strong></li>
 </ul>
-<p>If you want to <strong>verify</strong> for yourself, try setting the initial condition <span class="math">\(y(0) = -\frac{1}{2}\)</span> and go through the math. You’ll find that it implies <span class="math">\(K=0\)</span>.</p>
+<p>If you want to <strong>verify</strong> for yourself, try setting the initial condition <span class="arithmatex">\(y(0) = -\frac{1}{2}\)</span> and go through the math. You’ll find that it implies <span class="arithmatex">\(K=0\)</span>.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>I swear I started with the <strong>best intentions</strong>, but I got a bit carried away. So here we are, at the end of a second part that was <strong>mathematically</strong> pretty intense. 
 As for the third part, well I can’t promise it’ll be any easier, but you’ve started dancing, so now <strong>KEEP DANCING!</strong>
-As always, here’s the <a href="https://github.com/lucadivit/NeuralODEBlog" target="_blank">link to the repo</a>.<br/>
+As always, here’s the <a href="https://github.com/lucadivit/NeuralODEBlog">link to the repo</a>.<br/>
 Oh, and in case it wasn’t obvious, the next article in our beloved series will be about <strong>numerical methods</strong>.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -578,6 +518,10 @@ Oh, and in case it wasn’t obvious, the next article in our beloved series will
                 <li><a href="https://www.lucadivita.it/en/tag/numeric_methods.html">numeric_methods</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>

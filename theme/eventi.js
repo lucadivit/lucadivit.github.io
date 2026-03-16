@@ -1,15 +1,42 @@
 (function () {
     "use strict";
 
-    document.addEventListener("DOMContentLoaded", function () {
-        var translationsNode = document.getElementById("eventi-translations");
-        var pageTranslations = JSON.parse(translationsNode.textContent);
+    function init() {
+        function parsePageTranslations() {
+            var translationsNode = document.getElementById("eventi-translations");
 
-        var normalizedMap = Object.fromEntries(
-            Object.entries(pageTranslations).map(function (entry) {
-                return [String(entry[0]).toLowerCase().trim(), entry[1]];
-            })
-        );
+            if (!translationsNode) {
+                return {};
+            }
+
+            var rawSource = "";
+
+            if (translationsNode.tagName === "TEMPLATE") {
+                rawSource = (translationsNode.content && translationsNode.content.textContent) || translationsNode.innerHTML || "";
+            } else {
+                rawSource = translationsNode.textContent || "";
+            }
+
+            var rawJson = rawSource.trim();
+
+            if (!rawJson) {
+                return {};
+            }
+
+            try {
+                var parsed = JSON.parse(rawJson);
+                return parsed && typeof parsed === "object" ? parsed : {};
+            } catch (error) {
+                return {};
+            }
+        }
+
+        var pageTranslations = parsePageTranslations();
+        var normalizedMap = Object.create(null);
+
+        Object.entries(pageTranslations).forEach(function (entry) {
+            normalizedMap[String(entry[0]).toLowerCase().trim()] = entry[1];
+        });
         var sessionizeRoot = document.querySelector(".page-body.article-body") || document.body;
         var observerMaxMs = 12000;
         var observerStopAt = Date.now() + observerMaxMs;
@@ -181,5 +208,11 @@
         window.setTimeout(function () {
             stopObserver();
         }, observerMaxMs + 100);
-    });
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+        init();
+    }
 })();

@@ -16,19 +16,24 @@ This directory stores third-party frontend assets copied for static hosting.
 - Upstream: https://github.com/instantpage/instant.page
 - License: MIT
 
-## MathJax v3
+If you add/update files in `vendor/`, keep package name, version, source URL,
+and license aligned in this document.
 
-- Package: `mathjax`
-- Version: `3.x` (`es5/tex-mml-chtml.js` bundle)
-- Upstream: https://github.com/mathjax/MathJax
-- License: Apache-2.0
+## Katex
 
-## MathJax v2
+- Package: `katex`
+- Version: `0.16.9`
+- Upstream: https://cdnjs.com/libraries/KaTeX
+- License: MIT
 
-- Package: `MathJax`
-- Version: `2.7.9` (`MathJax.js` + `TeX-AMS_CHTML-full` config)
-- Upstream: https://github.com/mathjax/MathJax/tree/2.7.9
-- License: Apache-2.0
+## Umami
+
+- Package: `umami`
+- Version: `vendored script.js (snapshot)`
+- Updated: `2026-03-04`
+- Upstream: https://cloud.umami.is/script.js
+- License: MIT
+- Notes: served locally to satisfy CSP; events are still sent to `api-gateway.umami.dev`.
 
 If you add/update files in `vendor/`, keep package name, version, source URL,
 and license aligned in this document.

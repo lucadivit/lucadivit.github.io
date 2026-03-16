@@ -10,6 +10,48 @@ html {
     scrollbar-gutter: stable;
 }
 
+body.redirect-page {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+}
+
+.redirect-shell {
+    width: min(100%, 42rem);
+    padding: 1.25rem;
+}
+
+.redirect-card {
+    text-align: center;
+    margin: 0;
+}
+
+.redirect-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+}
+
+.redirect-logo {
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+}
+
+.redirect-card h1 {
+    margin-bottom: 0.6rem;
+}
+
+.redirect-card p {
+    margin-bottom: 0;
+    overflow-wrap: anywhere;
+}
+
 .bio-pic {
     display: block;
     max-width: 14rem;
@@ -27,7 +69,6 @@ html {
 }
 
 .image-caption,
-.formula-caption,
 .code-snippet {
     margin: -0.35rem auto 1rem;
     text-align: center;
@@ -35,30 +76,17 @@ html {
     font-size: 0.95em;
 }
 
+.formula-caption {
+    margin: 0.3rem auto 1rem;
+    text-align: center;
+    color: var(--pico-muted-color);
+    font-size: 0.88em;
+    font-style: italic;
+    line-height: 1.4;
+}
+
 .center-math {
     text-align: center;
-}
-
-.article-body .MathJax_Display,
-.page-body .MathJax_Display {
-    display: block;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-
-.article-body .MathJax_Display > span,
-.page-body .MathJax_Display > span,
-.article-body .MathJax_Display .MathJax,
-.page-body .MathJax_Display .MathJax,
-.article-body .MathJax_Display .MathJax span.MJXp-mtable,
-.page-body .MathJax_Display .MathJax span.MJXp-mtable,
-.article-body .MathJax_Display span.MathJax_SVG,
-.page-body .MathJax_Display span.MathJax_SVG {
-    display: block;
-    max-width: 100%;
-    box-sizing: border-box;
 }
 
 .highlight {
@@ -348,8 +376,9 @@ html {
 .article-body table,
 .page-body table {
     display: block;
-    width: 100%;
+    width: fit-content;
     max-width: 100%;
+    margin-inline: auto;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -361,6 +390,34 @@ html {
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+}
+
+.article-body .katex-display,
+.page-body .katex-display {
+    display: block;
+    margin: 1.25rem 0;
+    padding-block: 0.3rem;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    color: inherit;
+}
+
+.article-body .katex,
+.page-body .katex {
+    color: inherit;
+}
+
+.article-body .katex-display + .formula-caption,
+.page-body .katex-display + .formula-caption {
+    margin-top: 0;
+}
+
+.article-body .katex-display > .katex,
+.page-body .katex-display > .katex {
+    display: inline-block;
+    min-width: max-content;
 }
 
 .article-body :where(p, li, td, th, blockquote, code),
@@ -449,6 +506,16 @@ html {
 .article-tags-list a:hover,
 .article-tags-list a:focus-visible {
     background: color-mix(in oklab, var(--pico-muted-color) 14%, transparent);
+}
+
+.article-feedback {
+    margin-top: calc(var(--pico-block-spacing-vertical, 1.5rem) * 1.35);
+    color: var(--pico-muted-color);
+    font-size: 0.9em;
+}
+
+.article-feedback p {
+    margin: 0;
 }
 
 .tag-index-list {
@@ -594,8 +661,66 @@ html {
     text-decoration: underline;
 }
 
+.archive-meta {
+    display: block;
+    margin-top: calc(var(--pico-spacing) * 0.25);
+    font-size: 0.85em;
+}
+
+.archive-category {
+    display: block;
+    margin-top: calc(var(--pico-spacing) * 0.25);
+    font-size: 0.95em;
+    color: var(--pico-muted-color);
+}
+
+.archive-category a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.archive-category a:hover,
+.archive-category a:focus-visible {
+    text-decoration: underline;
+}
+
+main#content > article > header > h1 {
+    margin-bottom: 0;
+}
+
+main#content > article > header > p {
+    margin: calc(var(--pico-spacing) * 0.25) 0 0;
+    display: grid;
+    gap: calc(var(--pico-spacing) * 0.25);
+}
+
+main#content > article > header > p > .archive-category,
+main#content > article > header > p > .archive-meta {
+    margin-top: 0;
+}
+
+.archive-meta time {
+    white-space: nowrap;
+}
+
+main#content > article > header > h1 {
+    margin-bottom: 0;
+}
+
+main#content > article > header > p {
+    margin: calc(var(--pico-spacing) * 0.25) 0 0;
+    display: grid;
+    gap: calc(var(--pico-spacing) * 0.25);
+}
+
+main#content > article > header > p > .archive-category,
+main#content > article > header > p > .archive-meta {
+    margin-top: 0;
+}
+
 @media (max-width: 45rem) {
-    .latest-rows li > small {
+    .latest-rows li > small,
+    .link-rows li > small {
         display: block;
         margin-top: calc(var(--pico-spacing) * 0.2);
     }

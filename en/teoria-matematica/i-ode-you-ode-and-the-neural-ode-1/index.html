@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>I ODE, You ODE and the Neural ODE - 1</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/teoria-matematica.html">Theory & Math</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-07-15T00:00:00+02:00">July 15, 2025</time>
-                - <a href="https://www.lucadivita.it/en/category/teoria-matematica.html">Theory & Math</a>
             </small>
         </p>
     </header>
@@ -172,105 +172,105 @@ Let’s be honest: since we graduated, who’s actually solved one? And if you h
 In any case, to fully understand Neural ODEs, we need to go <em>waaay</em> back: to the concept of the <strong>derivative</strong>.</p>
 <p>When we talk about derivatives, we talk about <strong>change</strong>. In particular, we’re answering the question:</p>
 <blockquote>
-<p>How does the value of <span class="math">\(f(x)\)</span> change when I slightly change the value of <span class="math">\(x\)</span>?</p>
+<p>How does the value of <span class="arithmatex">\(f(x)\)</span> change when I slightly change the value of <span class="arithmatex">\(x\)</span>?</p>
 </blockquote>
-<p>Let’s translate this sentence into the language of mathematics. We’re changing the value of <span class="math">\(x\)</span> by 
-adding a very small amount: <span class="math">\(h\)</span>. But what we want to measure is the <strong>change</strong>, so we write:</p>
-<div class="math">$$
+<p>Let’s translate this sentence into the language of mathematics. We’re changing the value of <span class="arithmatex">\(x\)</span> by 
+adding a very small amount: <span class="arithmatex">\(h\)</span>. But what we want to measure is the <strong>change</strong>, so we write:</p>
+<div class="arithmatex">\[
 \Delta f = f(x+h) - f(x)
-$$</div>
+\]</div>
 <p>We now have our change, but change relative to what!? The formula as it is, doesn’t answer that. 
 It’s like saying: <em>I got a raise of €1000</em>.<br/>
 Good for you, but €1000 over what time period? If it’s €1000 per year, that’s not so impressive; 
 if it’s €1000 per hour, I’m coming to work with you.<br/>
 A single additional word changed everything. That’s because that word gave us the <strong>rate of change</strong>.<br/>
 So, let’s add a term to our formula to reflect the <strong>rate</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \Delta f = \frac{f(x+h) - f(x)}{h}
-$$</div>
-<p>Great, we’re almost there. We said the change in <span class="math">\(x\)</span> must be minimal, right? And what’s the tool we use to represent 
-something <em>infinitely small</em>? Exactly, the <strong>limit</strong>. Our <span class="math">\(h\)</span> has to be so small it’s almost <span class="math">\(0\)</span>. So we write:</p>
-<div class="math">$$
+\]</div>
+<p>Great, we’re almost there. We said the change in <span class="arithmatex">\(x\)</span> must be minimal, right? And what’s the tool we use to represent 
+something <em>infinitely small</em>? Exactly, the <strong>limit</strong>. Our <span class="arithmatex">\(h\)</span> has to be so small it’s almost <span class="arithmatex">\(0\)</span>. So we write:</p>
+<div class="arithmatex">\[
 f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
-$$</div>
+\]</div>
 <p>This function is called the <strong>difference quotient</strong> and it’s the mathematical definition of the derivative. 
 Its <strong>sign</strong> tells us the <strong>direction</strong> in which the function changes:</p>
 <ul>
-<li>if <span class="math">\(f'(x) &gt; 0\)</span>: it increases and the function <strong>rises</strong> (positive rate).</li>
-<li>if <span class="math">\(f'(x) &lt; 0\)</span>: it decreases and the function <strong>falls</strong> (negative rate).</li>
-<li>if <span class="math">\(f'(x) = 0\)</span>: it remains constant and the function <strong>doesn’t change</strong>.</li>
+<li>if <span class="arithmatex">\(f'(x) &gt; 0\)</span>: it increases and the function <strong>rises</strong> (positive rate).</li>
+<li>if <span class="arithmatex">\(f'(x) &lt; 0\)</span>: it decreases and the function <strong>falls</strong> (negative rate).</li>
+<li>if <span class="arithmatex">\(f'(x) = 0\)</span>: it remains constant and the function <strong>doesn’t change</strong>.</li>
 </ul>
 <p>Let’s see <strong>geometrically</strong> what happens:</p>
 <p class="image-caption"><img alt="Plot Derivata" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/plot_geo.png"/>
 Figure 1. Geometric Interpretation</p>
-<p>The thin curve is our <span class="math">\(f(x)\)</span>. As you can see, given a value <span class="math">\(x_0\)</span> we find the point <span class="math">\(P=(x_0, f(x_0))\)</span>. 
-If we consider an infinitesimal increase of <span class="math">\(h\)</span>, we get a second point: <span class="math">\(Q=(x_0 + h, f(x_0 + h))\)</span>. 
+<p>The thin curve is our <span class="arithmatex">\(f(x)\)</span>. As you can see, given a value <span class="arithmatex">\(x_0\)</span> we find the point <span class="arithmatex">\(P=(x_0, f(x_0))\)</span>. 
+If we consider an infinitesimal increase of <span class="arithmatex">\(h\)</span>, we get a second point: <span class="arithmatex">\(Q=(x_0 + h, f(x_0 + h))\)</span>. 
 Now I’m fairly certain (I checked this morning) that it’s still true that</p>
 <blockquote>
 <p>Through two points there passes exactly one line (at least in Euclidean geometry).</p>
 </blockquote>
 <p>This line is called the <strong>secant</strong> and it’s the black line. Let’s go deeper and look at the explicit equation 
 of the line:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y = mx + q
-$$</div>
-<p>where <span class="math">\(m\)</span> is the <strong>slope</strong> of the line. Assuming we know two points on the line, we can write 
+\]</div>
+<p>where <span class="arithmatex">\(m\)</span> is the <strong>slope</strong> of the line. Assuming we know two points on the line, we can write 
 (if you want the proof, take a look <a href="https://en.wikipedia.org/wiki/Slope">here</a>):</p>
-<div class="math">$$
+<div class="arithmatex">\[
 m = \frac{y_2-y_1}{x_2-x_1}
-$$</div>
+\]</div>
 <p>But wait, we do have those points:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 P=(x_1, y_1)=(x_0, f(x_0))
-$$</div>
+\]</div>
 <p>and </p>
-<div class="math">$$
+<div class="arithmatex">\[
 Q=(x_2, y_2)=(x_0+h, f(x_0+h))
-$$</div>
+\]</div>
 <p>So we write:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 m = \frac{f(x_0+h) - f(x_0)}{x_0+h-x_0} = \frac{f(x_0+h) - f(x_0)}{h}
-$$</div>
+\]</div>
 <p>Sound familiar?!<br/>
 So what we’re saying is that the difference quotient is nothing but the slope of the secant line. 
-As <span class="math">\(h\)</span> becomes infinitesimally small, the distance between <span class="math">\(f(x_0+h)\)</span> and <span class="math">\(f(x_0)\)</span> shrinks. 
-This means that <span class="math">\(Q\)</span> moves closer and closer to <span class="math">\(P\)</span> until they become the same point. 
-Therefore, as <span class="math">\(h\)</span> tends to <span class="math">\(0\)</span>, just like in the definition of <strong>derivative</strong>, the secant becomes the <strong>tangent</strong>, the red line in the plot. 
+As <span class="arithmatex">\(h\)</span> becomes infinitesimally small, the distance between <span class="arithmatex">\(f(x_0+h)\)</span> and <span class="arithmatex">\(f(x_0)\)</span> shrinks. 
+This means that <span class="arithmatex">\(Q\)</span> moves closer and closer to <span class="arithmatex">\(P\)</span> until they become the same point. 
+Therefore, as <span class="arithmatex">\(h\)</span> tends to <span class="arithmatex">\(0\)</span>, just like in the definition of <strong>derivative</strong>, the secant becomes the <strong>tangent</strong>, the red line in the plot. 
 All of this leads us to say that the <strong>limit</strong> of the difference quotient, or 
 the derivative among friends, represents the <strong>slope</strong> of the <strong>tangent line</strong> to the graph of the function. </p>
 <ul>
-<li>If the line slopes upward from left to right, then <span class="math">\(f'(x) &gt; 0\)</span> and the function is increasing.</li>
-<li>If it slopes downward from left to right, then <span class="math">\(f'(x) &lt; 0\)</span> and the function is decreasing.</li>
-<li>If it’s horizontal, then <span class="math">\(f'(x) = 0\)</span> and the function is steady.</li>
+<li>If the line slopes upward from left to right, then <span class="arithmatex">\(f'(x) &gt; 0\)</span> and the function is increasing.</li>
+<li>If it slopes downward from left to right, then <span class="arithmatex">\(f'(x) &lt; 0\)</span> and the function is decreasing.</li>
+<li>If it’s horizontal, then <span class="arithmatex">\(f'(x) = 0\)</span> and the function is steady.</li>
 </ul>
 <p>The slope of the line also tells us the rate of change. The steeper the line, the faster the function changes. 
 For example, consider the function:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x)=x^2
-$$</div>
+\]</div>
 <p>Its derivative is:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f'(x) = 2x
-$$</div>
-<p>Given <span class="math">\(x=1\)</span>, we have:</p>
-<div class="math">$$
+\]</div>
+<p>Given <span class="arithmatex">\(x=1\)</span>, we have:</p>
+<div class="arithmatex">\[
 f(x) = x^2 = 1^2 = 1
-$$</div>
+\]</div>
 <p>and </p>
-<div class="math">$$
+<div class="arithmatex">\[
 f'(x)=2 \cdot 1 = 2
-$$</div>
+\]</div>
 <p>Which means that at the point:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 P=(x, f(x)) = (1, 1)
-$$</div>
-<p>the function <em>increases</em> with a rate of <span class="math">\(2\)</span>, i.e., for every unit increase in <span class="math">\(x\)</span>, the value of <span class="math">\(f(x)\)</span> increases by 2.</p>
+\]</div>
+<p>the function <em>increases</em> with a rate of <span class="arithmatex">\(2\)</span>, i.e., for every unit increase in <span class="arithmatex">\(x\)</span>, the value of <span class="arithmatex">\(f(x)\)</span> increases by 2.</p>
 <p>Here’s a graphical representation of what we’ve discussed:</p>
 <p class="image-caption"><img alt="Plot Derivata" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/plot.png"/>
 Figure 2. Graphical Behavior of the Derivative</p>
 <p>From left to right, you can see the three cases: <strong>increasing</strong> function, <strong>constant</strong> function, and <strong>decreasing</strong> function.</p>
-<p>Although there’s much more to say about derivatives, like their <a href="https://en.wikipedia.org/wiki/Differentiation_rules" target="_blank">rules</a>, 
-I’ll just add that from this point on, I won’t use only the <span class="math">\(f'(x)\)</span> notation for derivatives, but also the <span class="math">\(\frac{d f}{d x}\)</span> notation, 
+<p>Although there’s much more to say about derivatives, like their <a href="https://en.wikipedia.org/wiki/Differentiation_rules">rules</a>, 
+I’ll just add that from this point on, I won’t use only the <span class="arithmatex">\(f'(x)\)</span> notation for derivatives, but also the <span class="arithmatex">\(\frac{d f}{d x}\)</span> notation, 
 called the <strong>Leibniz</strong> notation. Why?! Because I’m a supporter of Leibniz’s claim to the invention of calculus... 
 but that’s another story. Just know they’re two ways to represent the <strong>same</strong> thing.</p>
 <p>So, we’ve covered the mathematical and geometric interpretation of the derivative. 
@@ -279,48 +279,52 @@ So here’s the example below, figure it out from there.</p>
 <h4 id="from-definition-to-action">From Definition to Action<a class="headerlink" href="#from-definition-to-action" title="Permanent link"> </a></h4>
 <p>Let’s consider a very simple example to better explain the concept of the derivative and its physical meaning. 
 Suppose we’re driving a car, and our position over time is given by this function:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 s(t) = -t^2 + 10t
-$$</div>
+\]</div>
 <p>Then we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 s(t+h) = -(t+h)^2 + 10 \cdot (t+h)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 s(t+h) = -t^2 -h^2 -2ht + 10h + 10t
-$$</div>
+\]</div>
 <p>So:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 s(t+h) - s(t) = -t^2 -h^2 -2ht + 10h + 10t - (-t^2 + 10t)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 s(t+h) - s(t) = -2ht -h^2 + 10h = h \cdot (-2t -h + 10)
-$$</div>
+\]</div>
 <p>Thus:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{s(t+h) - s(t)}{h} = \frac{h \cdot (-2t -h + 10)}{h} = -2t -h + 10
-$$</div>
-<p>Finally, we consider the limit as <span class="math">\(h \rightarrow 0\)</span>:</p>
-<div class="math">$$
+\]</div>
+<p>Finally, we consider the limit as <span class="arithmatex">\(h \rightarrow 0\)</span>:</p>
+<div class="arithmatex">\[
 \frac{d s}{d t} = \lim_{h \to 0} -2t -h + 10 = -2t + 10
-$$</div>
+\]</div>
 <p>We’ve now computed the derivative of the position function. But what does it represent?<br/>
 Remember, the derivative measures the <strong>rate of change</strong> of the function. 
 In our case, it represents the <em>rate at which position changes with respect to time</em>. 
 We’ve thus obtained the <strong>velocity function</strong>. 
 Let’s analyze it in detail by looking at its value at different time instants:</p>
 <ol>
-<li>Suppose <span class="math">\(t=0\)</span>:<br/>
-<span class="math center-math">\(\frac{d s}{d t} = 10\)</span></li>
-<li>Suppose <span class="math">\(t=5\)</span>:<br/>
-<span class="math center-math">\(\frac{d s}{d t} = -10 + 10 = 0\)</span></li>
-<li>Suppose <span class="math">\(t=7\)</span>:<br/>
-<span class="math center-math">\(\frac{d s}{d t} = -14 + 10 = -4\)</span></li>
+<li>Suppose <span class="arithmatex">\(t=0\)</span>: </li>
 </ol>
-<p>At the initial moment (case 1), the velocity is <span class="math">\(10 \frac{m}{s}\)</span>, 
-but after <span class="math">\(5\)</span> seconds (case 2), we are instantaneously at rest. 
+<p><span class="arithmatex">\(\frac{d s}{d t} = 10\)</span>$</p>
+<ol>
+<li>Suppose <span class="arithmatex">\(t=5\)</span>: </li>
+</ol>
+<div class="arithmatex">\[\frac{d s}{d t} = -10 + 10 = 0\]</div>
+<ol>
+<li>Suppose <span class="arithmatex">\(t=7\)</span>: </li>
+</ol>
+<div class="arithmatex">\[\frac{d s}{d t} = -14 + 10 = -4\]</div>
+<p>At the initial moment (case 1), the velocity is <span class="arithmatex">\(10 \frac{m}{s}\)</span>, 
+but after <span class="arithmatex">\(5\)</span> seconds (case 2), we are instantaneously at rest. 
 This means velocity is decreasing: we are decelerating. 
-After <span class="math">\(5\)</span> seconds (case 3), velocity becomes negative: 
+After <span class="arithmatex">\(5\)</span> seconds (case 3), velocity becomes negative: 
 we are moving backward, literally. So the car’s behavior is this: it was moving forward but <strong>slowing down</strong>, 
 we came to a <strong>stop</strong>, and then began to <strong>reverse</strong>.</p>
 <p>Who would have thought a simple formula could tell such a story? 
@@ -339,152 +343,156 @@ Integrals are more of a <strong>pattern matching</strong> game, the solution isn
 </blockquote>
 <p>That is, to solve an integral, we have to recognize it as the <em>derivative of something</em>. 
 But let’s start from the beginning.<br/>
-In derivatives, <span class="math">\(h\)</span> represented an <strong>infinitesimal increment</strong>. Now we change notation and use <span class="math">\(dx\)</span> instead of <span class="math">\(h\)</span>. 
+In derivatives, <span class="arithmatex">\(h\)</span> represented an <strong>infinitesimal increment</strong>. Now we change notation and use <span class="arithmatex">\(dx\)</span> instead of <span class="arithmatex">\(h\)</span>. 
 We have the infinitesimal change, so we can estimate the <strong>variation</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \Delta{f}=f(x+dx) - f(x)
-$$</div>
+\]</div>
 <p>From the derivative formula, we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f'(x) = \frac{f(x+dx) - f(x)}{dx}
-$$</div>
+\]</div>
 <p>and thus:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \Delta{f} \approx f'(x) \cdot dx
-$$</div>
-<p>Graphically, what we’re calculating is the <strong>area</strong> of an infinitesimal rectangle under the function <span class="math">\(f'(x)\)</span>, 
-where the <strong>height</strong> is given by the value of <span class="math">\(f'(x)\)</span> at a given point, and the <strong>base</strong> is the <strong>infinitesimal increment</strong> <span class="math">\(dx\)</span>. 
+\]</div>
+<p>Graphically, what we’re calculating is the <strong>area</strong> of an infinitesimal rectangle under the function <span class="arithmatex">\(f'(x)\)</span>, 
+where the <strong>height</strong> is given by the value of <span class="arithmatex">\(f'(x)\)</span> at a given point, and the <strong>base</strong> is the <strong>infinitesimal increment</strong> <span class="arithmatex">\(dx\)</span>. 
 You might be wondering why I used the approximation symbol instead of equality. Take a look at the image below.</p>
 <p><img alt="Plot Integrale" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/integrale.png"/>
 Figure 3. Infinitesimal Area</p>
 <p>As you can see, a rectangle can never perfectly fit a curve, 
-but the “narrower” the rectangle, that is, the smaller the <span class="math">\(dx\)</span>, the better the approximation. 
-And for <span class="math">\(dx \rightarrow 0\)</span>, the approximation becomes equality.</p>
+but the “narrower” the rectangle, that is, the smaller the <span class="arithmatex">\(dx\)</span>, the better the approximation. 
+And for <span class="arithmatex">\(dx \rightarrow 0\)</span>, the approximation becomes equality.</p>
 <p>As mentioned earlier, to recover the original function, we must <strong>sum</strong> all these areas. And how many are there? 
 Since the increment is infinitesimal, it makes sense to think we have <strong>infinitely many increments</strong>. 
 So we can write:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) \approx \sum_{i=0}^{+\infty} f'(x) \cdot dx
-$$</div>
+\]</div>
 <p>This sum is an approximation, and when taken to infinity, it becomes the <strong>integral</strong>. 
 Mathematically, it’s written as:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 F(x) + C = \int f'(x) \cdot dx
-$$</div>
+\]</div>
 <p>This formula is the <strong>fundamental theorem of calculus</strong> and tells us, in simple terms, 
 that the integral is the <strong>inverse operation</strong> of the derivative. 
-The generic <span class="math">\(F(x)\)</span> is called the <strong>antiderivative</strong>, and it's the function whose derivative gives back the <strong>argument</strong> (what we’re integrating) of the integral.</p>
+The generic <span class="arithmatex">\(F(x)\)</span> is called the <strong>antiderivative</strong>, and it's the function whose derivative gives back the <strong>argument</strong> (what we’re integrating) of the integral.</p>
 <p>Now you might be asking: <em>what the heck is this C?</em><br/>
-If you apply the difference quotient to a constant function, you get <span class="math">\(0\)</span>. 
+If you apply the difference quotient to a constant function, you get <span class="arithmatex">\(0\)</span>. 
 This means that in differentiation, we <strong>lose all information about constants</strong>. 
-That’s why when we integrate, we always add the constant <span class="math">\(C\)</span>, to compensate for this loss of information.</p>
+That’s why when we integrate, we always add the constant <span class="arithmatex">\(C\)</span>, to compensate for this loss of information.</p>
 <p>What we just defined is called the <strong>indefinite integral</strong>. 
 And yes, if there’s an indefinite one, there’s also a <strong>definite</strong> one. 
 The definite integral doesn’t compute a function, but a number, and it’s written like this:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \int_{a}^{b} f'(x) \cdot dx = (F(b) + C) - (F(a) + C) = F(b) - F(a)
-$$</div>
-<p>That is, the difference between the antiderivative evaluated at <span class="math">\(b\)</span> and at <span class="math">\(a\)</span>.<br/>
+\]</div>
+<p>That is, the difference between the antiderivative evaluated at <span class="arithmatex">\(b\)</span> and at <span class="arithmatex">\(a\)</span>.<br/>
 What you just had the "pleasure" of reading is <strong>Riemann integration</strong>. 
 There are many others, like <strong>Lebesgue</strong> integration,  but don’t worry, we won’t go into that. I’m tired, and I bet you are too. 
 Now we have everything we need for two examples.</p>
 <h5 id="indefinite-integral">Indefinite Integral<a class="headerlink" href="#indefinite-integral" title="Permanent link"> </a></h5>
 <p>Suppose we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{d f(x)}{d x} = x
-$$</div>
-<p>and we want to recover <span class="math">\(f(x)\)</span>, we get:</p>
-<div class="math">$$
+\]</div>
+<p>and we want to recover <span class="arithmatex">\(f(x)\)</span>, we get:</p>
+<div class="arithmatex">\[
 f(x) = \int x \cdot dx = \frac{x^2}{2} + C
-$$</div>
+\]</div>
 <p>How do we get there?<br/>
-The mental process should be: <em>what is the function whose derivative is <span class="math">\(x\)</span>?</em><br/>
-Let’s apply the difference quotient to the resulting <span class="math">\(f(x)\)</span> and see if it works!</p>
-<div class="math">$$
+The mental process should be: <em>what is the function whose derivative is <span class="arithmatex">\(x\)</span>?</em><br/>
+Let’s apply the difference quotient to the resulting <span class="arithmatex">\(f(x)\)</span> and see if it works!</p>
+<div class="arithmatex">\[
 \frac{d}{dx} = \lim_{h \to 0} \frac{ \left( \frac{(x+h)^2}{2} + C \right) - \left( \frac{x^2}{2} + C \right)}{h} =
 \lim_{h \to 0} \frac{ \frac{2xh + h^2}{2} }{h} = \lim_{h \to 0} \frac{2x + h}{2} = x
-$$</div>
-<p>To wrap up this example, the original <span class="math">\(f(x)\)</span> could simply have been <span class="math">\(\frac{(x+h)^2}{2}\)</span>, or 
-<span class="math">\(\frac{(x+h)^2}{2} + 1\)</span>, or even <span class="math">\(\frac{(x+h)^2}{2} + 100000\)</span>. <strong>Constant values are always lost</strong> in derivative calculations. 
+\]</div>
+<p>To wrap up this example, the original <span class="arithmatex">\(f(x)\)</span> could simply have been <span class="arithmatex">\(\frac{(x+h)^2}{2}\)</span>, or 
+<span class="arithmatex">\(\frac{(x+h)^2}{2} + 1\)</span>, or even <span class="arithmatex">\(\frac{(x+h)^2}{2} + 100000\)</span>. <strong>Constant values are always lost</strong> in derivative calculations. 
 So, when using an integral to move from a derivative to the <strong>antiderivative</strong>, we must account for those constants 
-with a generic <span class="math">\(C\)</span>. Otherwise, you’ll lose a point on a five-point exam. Trust me...</p>
+with a generic <span class="arithmatex">\(C\)</span>. Otherwise, you’ll lose a point on a five-point exam. Trust me...</p>
 <h5 id="definite-integral">Definite Integral<a class="headerlink" href="#definite-integral" title="Permanent link"> </a></h5>
 <p>For this second example, besides applying the integral formula, I also want to show you why the idea of <strong>infinite summation</strong> of 
 rectangle areas works.</p>
-<p>Let’s suppose we want to compute the <strong>area</strong> under the function <span class="math">\(f(x) = 2x\)</span> in <span class="math">\([0, 2]\)</span>. 
+<p>Let’s suppose we want to compute the <strong>area</strong> under the function <span class="arithmatex">\(f(x) = 2x\)</span> in <span class="arithmatex">\([0, 2]\)</span>. 
 Note that there’s <strong>no</strong> derivative symbol here. That’s because derivatives are the classic <strong>shadow consultant</strong>: 
 they’re there, doing all the work, but you don’t see or hear them (don’t worry, they don’t want to see or hear you either).<br/>
-Back to the topic. Using the integral in its strict form, and aided by the table of <a href="https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions" target="_blank">indefinite integrals</a>, we write:</p>
-<div class="math">$$
+Back to the topic. Using the integral in its strict form, and aided by the table of <a href="https://en.wikipedia.org/wiki/List_of_integrals_of_rational_functions">indefinite integrals</a>, we write:</p>
+<div class="arithmatex">\[
 \int_{0}^{2} 2x dx = 2 \int_{0}^{2} x dx = \left. 2 \cdot \frac{x^2}{2} \right|_{0}^{2} = \left. x^2 \right|_{0}^{2} = 2^2 - 0^2 = 4
-$$</div>
-<p>So, the area under <span class="math">\(f(x) = 2x\)</span> from <span class="math">\([0, 2]\)</span> is <span class="math">\(4\)</span>, and the problem would be solved. 
+\]</div>
+<p>So, the area under <span class="arithmatex">\(f(x) = 2x\)</span> from <span class="arithmatex">\([0, 2]\)</span> is <span class="arithmatex">\(4\)</span>, and the problem would be solved. 
 But since I’m <strong>cruel</strong>, let’s apply the theory strictly and do that cursed infinite summation. 
-We’re in the interval <span class="math">\([0, 2]\)</span>, and we want to divide it into infinitesimally small pieces <span class="math">\(dx\)</span>. We use:</p>
-<div class="math">$$
+We’re in the interval <span class="arithmatex">\([0, 2]\)</span>, and we want to divide it into infinitesimally small pieces <span class="arithmatex">\(dx\)</span>. We use:</p>
+<div class="arithmatex">\[
 dx = \frac{2-0}{n}
-$$</div>
-<p>where <span class="math">\(n \rightarrow \infty\)</span>, meaning we have <strong>infinitely many small pieces</strong> (or rectangles) of the interval. 
+\]</div>
+<p>where <span class="arithmatex">\(n \rightarrow \infty\)</span>, meaning we have <strong>infinitely many small pieces</strong> (or rectangles) of the interval. 
 The area of one piece is:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \Delta f = f(x_i) \cdot dx
-$$</div>
+\]</div>
 <p>and summing all these areas gives:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \text{Total Area} = \sum_{i=0}^{n} f(x_i) \cdot dx = \sum_{i=0}^{n} 2x_i \cdot \frac{2}{n}
-$$</div>
-<p>Now pay attention here. We must evaluate each point on the graph of <span class="math">\(2x_i\)</span>. But this graph is 
-split into many <span class="math">\(dx\)</span> as described. The first rectangle spans <span class="math">\([0, dx]\)</span>, the second <span class="math">\([dx, 2dx]\)</span>, and so on. 
-We said <span class="math">\(dx = \frac{2}{n}\)</span>, right? So the first rectangle is <span class="math">\([0, \frac{2}{n}]\)</span>, the second <span class="math">\([\frac{2}{n}, 2 \cdot \frac{2}{n}]\)</span>, and so on. 
+\]</div>
+<p>Now pay attention here. We must evaluate each point on the graph of <span class="arithmatex">\(2x_i\)</span>. But this graph is 
+split into many <span class="arithmatex">\(dx\)</span> as described. The first rectangle spans <span class="arithmatex">\([0, dx]\)</span>, the second <span class="arithmatex">\([dx, 2dx]\)</span>, and so on. 
+We said <span class="arithmatex">\(dx = \frac{2}{n}\)</span>, right? So the first rectangle is <span class="arithmatex">\([0, \frac{2}{n}]\)</span>, the second <span class="arithmatex">\([\frac{2}{n}, 2 \cdot \frac{2}{n}]\)</span>, and so on. 
 Noticing the <strong>pattern</strong>? Please say yes... 
 To summarize, the <strong>base points of the rectangles follow the rule</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 i \cdot dx = i \cdot \frac{2}{n}
-$$</div>
+\]</div>
 <p>To better visualize this, refer to the image below:</p>
 <p class="image-caption"><img alt="Plot Integrale" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/integrale_definito.png"/>
 Figure 4. Domain Partitioning</p>
-<p>Now we can compute <span class="math">\(f(x_i)\)</span> at each point:</p>
+<p>Now we can compute <span class="arithmatex">\(f(x_i)\)</span> at each point:</p>
 <ul>
-<li>At <span class="math">\(i=0\)</span><br/>
-<span class="math">\(2x_i = 2 \cdot 0 \cdot \frac{2}{n} = 0\)</span> </li>
-<li>At <span class="math">\(i=1\)</span><br/>
-<span class="math">\(2x_i = 2 \cdot 1 \cdot \frac{2}{n} = \frac{4}{n}\)</span> </li>
-<li>At <span class="math">\(i=2\)</span><br/>
-<span class="math">\(2x_i = 2 \cdot 2 \cdot \frac{2}{n} = \frac{8}{n}\)</span> </li>
+<li>At <span class="arithmatex">\(i=0\)</span><br/>
+<span class="arithmatex">\(2x_i = 2 \cdot 0 \cdot \frac{2}{n} = 0\)</span> </li>
+<li>At <span class="arithmatex">\(i=1\)</span><br/>
+<span class="arithmatex">\(2x_i = 2 \cdot 1 \cdot \frac{2}{n} = \frac{4}{n}\)</span> </li>
+<li>At <span class="arithmatex">\(i=2\)</span><br/>
+<span class="arithmatex">\(2x_i = 2 \cdot 2 \cdot \frac{2}{n} = \frac{8}{n}\)</span> </li>
 <li>...</li>
 </ul>
 <p>So in our summation, we can <strong>substitute</strong> </p>
-<div class="math">$$f(x_i) = 2x_i$$</div>
+<div class="arithmatex">\[
+f(x_i) = 2x_i
+\]</div>
 <p>with its value:</p>
-<div class="math">$$2 \cdot i \cdot \frac{2}{n}$$</div>
+<div class="arithmatex">\[
+2 \cdot i \cdot \frac{2}{n}
+\]</div>
 <p>yielding:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \text{Total Area} = \sum_{i=0}^{n} 2 \cdot i \cdot \frac{2}{n} \cdot \frac{2}{n} = \sum_{i=0}^{+\infty} \frac{8i}{n^2}
-$$</div>
-<p>Only <span class="math">\(i\)</span> is tied to the summation. To solve, we sum infinite <span class="math">\(i\)</span> values:</p>
-<div class="math">$$
+\]</div>
+<p>Only <span class="arithmatex">\(i\)</span> is tied to the summation. To solve, we sum infinite <span class="arithmatex">\(i\)</span> values:</p>
+<div class="arithmatex">\[
 \sum_{i=0}^{n} i = 0 + 1 + 2 + ...
-$$</div>
+\]</div>
 <p>How much is this sum? If you studied calculus and don’t know, you should be <strong>ashamed</strong>. 
-For everyone else: it has a <strong>well-proven</strong> solution by good ol’ <a href="https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF" target="_blank">Gauss</a>:</p>
-<div class="math">$$
+For everyone else: it has a <strong>well-proven</strong> solution by good ol’ <a href="https://en.wikipedia.org/wiki/1_%2B_2_%2B_3_%2B_4_%2B_%E2%8B%AF">Gauss</a>:</p>
+<div class="arithmatex">\[
 \sum_{i=0}^{n} i = \frac{n (n+1)}{2}
-$$</div>
+\]</div>
 <p>So we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \sum_{i=0}^{n} \frac{8i}{n} = 8 \cdot \frac{\frac{n (n+1)}{2}}{n^2} = 8 \cdot \frac{(n+1)}{2n}
-$$</div>
-<p>and since <span class="math">\(n \rightarrow \infty\)</span>, we write:</p>
-<div class="math">$$
+\]</div>
+<p>and since <span class="arithmatex">\(n \rightarrow \infty\)</span>, we write:</p>
+<div class="arithmatex">\[
 \text{Total Area} = \lim_{n \to \infty} 8 \cdot \frac{(n+1)}{2n} = \frac{8}{2} = 4
-$$</div>
+\]</div>
 <p>We got <strong>exactly</strong> the same result.<br/>
 Didn’t I tell you that an integral is the sum of infinite rectangle areas!?<br/>
 What’s that? You still want a (completely uncalled-for) <strong>physical interpretation</strong>? Fine, remember when we said that <strong>velocity is 
 the derivative of position with respect to time</strong>? Well, since <strong>integration is the inverse of derivation</strong>, integrating <strong>velocity</strong> (yes, we have <strong>velocity function</strong>) over time 
-gives us <strong>position</strong>. So, if we traveled at a <strong>speed</strong> of <span class="math">\(2t\)</span> for <span class="math">\(2\)</span> seconds, how much distance would we cover? Exactly 
-<span class="math">\(4\)</span> meters.</p>
+gives us <strong>position</strong>. So, if we traveled at a <strong>speed</strong> of <span class="arithmatex">\(2t\)</span> for <span class="arithmatex">\(2\)</span> seconds, how much distance would we cover? Exactly 
+<span class="arithmatex">\(4\)</span> meters.</p>
 <h3 id="when-change-becomes-law">When Change Becomes Law<a class="headerlink" href="#when-change-becomes-law" title="Permanent link"> </a></h3>
 <p>Alright, now things are getting serious, but let’s stay calm. </p>
 <p>In the previous section, we looked at the derivative as the main tool to measure <strong>how a function changes</strong> over time. 
@@ -500,106 +508,106 @@ There are <strong>PDEs</strong> (partial differential equations), <strong>SDEs</
 And each one, in its own way, will hurt you. <strong>Hurt you deeply</strong>. But since I’m still too young to die from this, 
 let’s focus on ODEs for now,  we’ll see what comes next. But what does an ODE look like? An ODE is like COVID... you can’t see it or hear it, but it’s out there threatening you, and someone will deny its existence. 
 Basically, it’s an equation that <strong>involves at least one derivative</strong> and tells us <strong>how something should change</strong>. 
-Everything revolves around <strong>a single independent variable</strong>, usually <strong>time</strong> <span class="math">\(t\)</span> (but it could also be space, temperature, or how much will to live you’ve got left). 
-Instead of knowing the function <span class="math">\(y(t)\)</span> directly, we know its derivative, in other words, how <span class="math">\(y(t)\)</span> <strong>changes over time</strong>.<br/>
+Everything revolves around <strong>a single independent variable</strong>, usually <strong>time</strong> <span class="arithmatex">\(t\)</span> (but it could also be space, temperature, or how much will to live you’ve got left). 
+Instead of knowing the function <span class="arithmatex">\(y(t)\)</span> directly, we know its derivative, in other words, how <span class="arithmatex">\(y(t)\)</span> <strong>changes over time</strong>.<br/>
 Let’s start with the simplest ODE example:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{dy}{dt} = f(y(t), t)
-$$</div>
+\]</div>
 <p>Where:</p>
 <ul>
-<li><span class="math">\(t\)</span> is the independent variable (often time),</li>
-<li><span class="math">\(y\)</span> is the unknown function we want to find,</li>
-<li><span class="math">\(f(y(t), t)\)</span> is the function describing how <span class="math">\(y(t)\)</span> changes over time.</li>
+<li><span class="arithmatex">\(t\)</span> is the independent variable (often time),</li>
+<li><span class="arithmatex">\(y\)</span> is the unknown function we want to find,</li>
+<li><span class="arithmatex">\(f(y(t), t)\)</span> is the function describing how <span class="arithmatex">\(y(t)\)</span> changes over time.</li>
 </ul>
 <p>For example:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \frac{dy}{dt} = 3y(t)
-$$</div>
-<p>As you can see, we don’t know the function <span class="math">\(y(t)\)</span>, but we know that <span class="math">\(y\)</span> grows proportionally 
-to its <strong>own value</strong> with a factor of <span class="math">\(3\)</span>. The goal, then, is to find the function <span class="math">\(y(t)\)</span> that satisfies this growth law. 
+\]</div>
+<p>As you can see, we don’t know the function <span class="arithmatex">\(y(t)\)</span>, but we know that <span class="arithmatex">\(y\)</span> grows proportionally 
+to its <strong>own value</strong> with a factor of <span class="arithmatex">\(3\)</span>. The goal, then, is to find the function <span class="arithmatex">\(y(t)\)</span> that satisfies this growth law. 
 In this case, the solution is:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y(t) = Ce^{3t}
-$$</div>
+\]</div>
 <p>How did I find that? We’ll figure it out soon...<br/>
 For now, let’s highlight a few more facts about ODEs. 
 The one we just saw is an <strong>ordinary differential equation of first order, linear, explicit, and with constant coefficients</strong>.</p>
 <ul>
-<li><strong>First order</strong> means it contains only the first derivative <span class="math">\(\frac{dy}{dt}\)</span>, not higher ones like <span class="math">\(\frac{d^2y}{dt^2}\)</span>.</li>
-<li><strong>Linear</strong> means that <span class="math">\(y\)</span> and its derivatives appear to the first power, there are no powers, products, or non-linear functions of <span class="math">\(y\)</span>.</li>
-<li><strong>Explicit</strong> means the derivative is isolated on one side of the equation, like: <span class="math">\(\frac{dy}{dt} = f(t, y)\)</span>.</li>
-<li><strong>Constant coefficients</strong> means the terms multiplying <span class="math">\(y\)</span> or its derivatives are fixed numbers and not functions of <span class="math">\(t\)</span>.</li>
+<li><strong>First order</strong> means it contains only the first derivative <span class="arithmatex">\(\frac{dy}{dt}\)</span>, not higher ones like <span class="arithmatex">\(\frac{d^2y}{dt^2}\)</span>.</li>
+<li><strong>Linear</strong> means that <span class="arithmatex">\(y\)</span> and its derivatives appear to the first power, there are no powers, products, or non-linear functions of <span class="arithmatex">\(y\)</span>.</li>
+<li><strong>Explicit</strong> means the derivative is isolated on one side of the equation, like: <span class="arithmatex">\(\frac{dy}{dt} = f(t, y)\)</span>.</li>
+<li><strong>Constant coefficients</strong> means the terms multiplying <span class="arithmatex">\(y\)</span> or its derivatives are fixed numbers and not functions of <span class="arithmatex">\(t\)</span>.</li>
 </ul>
 <p>Now that you’ve seen what a <strong>nice and cuddly</strong> ODE looks like, let’s balance things out with one that’ll make you curse:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 t \cdot \frac{d^2y}{dt^2} = -y^2
-$$</div>
+\]</div>
 <p>Here we have the complete opposite:</p>
 <ul>
-<li>It’s <strong>second order</strong>, meaning <span class="math">\(y(t)\)</span> has been differentiated twice, as seen in the term <span class="math">\(\frac{d^2y}{dt^2}\)</span>.</li>
-<li>It’s <strong>non-linear</strong> since <span class="math">\(y\)</span> is squared.</li>
-<li>It’s <strong>implicit</strong> because the derivative is multiplied by a factor of <span class="math">\(t\)</span>.</li>
-<li>It has <strong>variable coefficients</strong> because <span class="math">\(y\)</span> or its derivatives are multiplied by a value that changes (in this case, <span class="math">\(t\)</span>).</li>
+<li>It’s <strong>second order</strong>, meaning <span class="arithmatex">\(y(t)\)</span> has been differentiated twice, as seen in the term <span class="arithmatex">\(\frac{d^2y}{dt^2}\)</span>.</li>
+<li>It’s <strong>non-linear</strong> since <span class="arithmatex">\(y\)</span> is squared.</li>
+<li>It’s <strong>implicit</strong> because the derivative is multiplied by a factor of <span class="arithmatex">\(t\)</span>.</li>
+<li>It has <strong>variable coefficients</strong> because <span class="arithmatex">\(y\)</span> or its derivatives are multiplied by a value that changes (in this case, <span class="arithmatex">\(t\)</span>).</li>
 </ul>
 <h4 id="not-great-not-terrible-just-cauchy">Not Great, Not Terrible. Just... Cauchy.<a class="headerlink" href="#not-great-not-terrible-just-cauchy" title="Permanent link"> </a></h4>
 <p>Earlier I said that the <strong>solution</strong> to an ODE is a <strong>function</strong>, and that’s true. 
-But I never said it’s not possible to know the value of <span class="math">\(y(t)\)</span> at a specific time <span class="math">\(t\)</span>. 
-All we need is a <strong>starting point</strong>, that is, we need to know the value of <span class="math">\(y(t)\)</span> at least at one moment in time. 
+But I never said it’s not possible to know the value of <span class="arithmatex">\(y(t)\)</span> at a specific time <span class="arithmatex">\(t\)</span>. 
+All we need is a <strong>starting point</strong>, that is, we need to know the value of <span class="arithmatex">\(y(t)\)</span> at least at one moment in time. 
 Once we have that, we can know its value everywhere. This starting point is called an <strong>initial condition</strong>, 
 and if we have it, we’re dealing with a <strong>Cauchy problem</strong> or <strong>IVP (Initial Value Problem)</strong>. An IVP is structured like this:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dy}{dt} = f(y(t), t) \\
 y(k) = z
 \end{cases}
 k \in \mathbb{R}, z \in \mathbb{R}
-$$</div>
-<p>That is, after solving the ODE, we know that at time <span class="math">\(t = k\)</span>, <span class="math">\(y(t)\)</span> is <span class="math">\(z\)</span>.</p>
+\]</div>
+<p>That is, after solving the ODE, we know that at time <span class="arithmatex">\(t = k\)</span>, <span class="arithmatex">\(y(t)\)</span> is <span class="arithmatex">\(z\)</span>.</p>
 <h4 id="from-law-to-system">From Law to System<a class="headerlink" href="#from-law-to-system" title="Permanent link"> </a></h4>
 <p>Unfortunately (or fortunately), the world doesn’t work with just one <strong>variable</strong>. 
 When we want to describe multiple <strong>interacting phenomena</strong>, 
 we need to move from a single equation to a <strong>system of ODEs</strong>. 
 A system of ODEs is a set of equations that describes <strong>multiple evolving quantities</strong>, all interconnected. For example:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx}{dt} = f_1(x(t), y(t), t) \\
 \frac{dy}{dt} = f_2(x(t), y(t), t)
 \end{cases}
-$$</div>
-<p>Here, the functions <span class="math">\(x(t)\)</span> and <span class="math">\(y(t)\)</span> <strong>influence</strong> one another. 
+\]</div>
+<p>Here, the functions <span class="arithmatex">\(x(t)\)</span> and <span class="arithmatex">\(y(t)\)</span> <strong>influence</strong> one another. 
 You can’t just solve one and then the other: they’re coupled and must be solved <strong>together</strong>. 
 And if we also have initial conditions for both ODEs, then we’re dealing with an <strong>IVP</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx}{dt} = f_1(x(t), y(t), t) \\
 \frac{dy}{dt} = f_2(x(t), y(t), t) \\
 y(k_1) = z_1 \\
 x(k_2) = z_2
 \end{cases}
-$$</div>
+\]</div>
 <h4 id="ode-hall-of-fame">ODE Hall of Fame<a class="headerlink" href="#ode-hall-of-fame" title="Permanent link"> </a></h4>
 <p>Yes, I know, up to this point it’s all been <strong>complicated</strong> and <strong>abstract</strong>, 
 but even if it doesn’t seem like it, we’re surrounded by ODEs. <strong>ODEs everywhere</strong>. 
 An example? Newton’s famous formula, the <strong>second law of motion</strong> (yeah yeah, we’ll give Leibniz a break):</p>
-<div class="math">$$
+<div class="arithmatex">\[
 F=ma
-$$</div>
+\]</div>
 <p>Even though it doesn’t look like it, <strong>acceleration</strong> is the derivative of velocity, 
 which in turn is the derivative of position over time. 
 So acceleration is the second derivative of position over time, and we can write:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 F = m\frac{d^2 s}{dt^2}
-$$</div>
+\]</div>
 <p>Another famous example is the <strong>Lotka-Volterra system</strong>, or the <strong>predator-prey</strong> model. 
 This system of ODEs represents the <strong>equilibrium</strong> created in an environment with <strong>prey</strong> and <strong>predators</strong> (e.g., rabbits and foxes). 
 The system looks like this:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx}{dt} = \alpha x - \beta x y \\
 \frac{dy}{dt} = \delta x y - \gamma y
 \end{cases}
-$$</div>
+\]</div>
 <p>The graphical behavior of this system is shown in the diagram below, called a <strong>direction and phase diagram</strong>:</p>
 <p class="image-caption"><img alt="Plot LV" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/lotka_volterra.png"/>
 Figure 5. Lotka-Volterra Direction and Phase</p>
@@ -609,7 +617,7 @@ The <strong>direction field</strong> is used for first-order ODEs and visually r
 So now you know it shows not just the <strong>direction</strong> but also the <strong>rate</strong> of change of the ODE. 
 If that’s still unclear, <strong>don’t tell me</strong>, otherwise all of this was <strong>pointless</strong>.</p>
 <p>The <strong>phase diagram</strong>, on the other hand, is used for <strong>ODE systems</strong> and shows the evolution of <strong>relationships between variables</strong>. 
-Back to the graph: <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are foxes and rabbits. 
+Back to the graph: <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are foxes and rabbits. 
 As you can see, their interaction forms a <strong>closed system</strong>. 
 When foxes increase, there are too many predators, and rabbits decrease. 
 Once rabbits become too few, there’s not enough food for the predators, so they decrease too, 
@@ -619,13 +627,13 @@ giving rabbits a chance to repopulate. The different colored lines represent the
 Ever heard of the <strong>butterfly effect</strong>? 
 That idea that <strong>small actions</strong> can lead to <strong>large and unpredictable</strong> long-term consequences? 
 Well, that effect originates from the following ODE system called the <strong>Lorenz system</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx}{dt} = \sigma (y - x) \\
 \frac{dy}{dt} = x (\rho - z) - y \\
 \frac{dz}{dt} = xy - \beta z
 \end{cases}
-$$</div>
+\]</div>
 <p>Here’s what its graph looks like:</p>
 <p class="image-caption"><img alt="Plot Lorenz" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode/lorenz.png"/>
 Figure 6. Lorenz Attractor Phase</p>
@@ -633,7 +641,7 @@ Figure 6. Lorenz Attractor Phase</p>
 But what’s fascinating about this ODE system is this: 
 the graph <strong>never passes through the same trajectory twice</strong>. 
 Also, since the variables influence each other through <strong>multiplicative factors</strong>, 
-a tiny variation <strong>grows</strong> significantly over time <span class="math">\(t\)</span>, which is why it’s associated with <strong>chaos</strong>. 
+a tiny variation <strong>grows</strong> significantly over time <span class="arithmatex">\(t\)</span>, which is why it’s associated with <strong>chaos</strong>. 
 A final point worth noting is the presence of <strong>attractors</strong>, points that pull solutions of the ODE toward them. 
 Even though, like lightning, the Lorenz system never strikes the same point twice, 
 the system is <strong>attracted</strong> to those points, <strong>orbiting</strong> around them. 
@@ -659,70 +667,8 @@ There’s much more to discuss, like for instance:</p>
 <p><em>How the heck do you solve ODEs?</em></p>
 <p>But since this is just <strong>one</strong> in a <strong>series</strong> of articles, 
 we’ll save that answer for later, let’s just swallow this <strong>bitter pill</strong> for now. In the meantime, 
-you can head over to <a href="https://github.com/lucadivit/NeuralODEBlog" target="_blank">this repo</a> to see some of the topics covered in action.</p>
+you can head over to <a href="https://github.com/lucadivit/NeuralODEBlog">this repo</a> to see some of the topics covered in action.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -771,6 +717,10 @@ you can head over to <a href="https://github.com/lucadivit/NeuralODEBlog" target
                 <li><a href="https://www.lucadivita.it/en/tag/theory.html">theory</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>

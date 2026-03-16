@@ -106,33 +106,6 @@ code {
     word-break: break-word !important;
 }
 
-/* Gli elementi con entrambe le classi */
-.math.center-math{
-    /*font-size: x-large !important;*/
-    display: block !important;
-    text-align: center !important;
-    margin: 1em auto !important;
-    white-space: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    max-width: 100%;
-    vertical-align: middle;
-}
-
-.math.large-math{
-    font-size: x-large !important;
-}
-
-.MathJax_Display {
-    /* font-size: medium !important; */
-    overflow-x: auto;
-    overflow-y: hidden;
-    max-width: 100%;
-    box-sizing: border-box;
-    padding: 0.5em 0;
-    display: block;
-    white-space: nowrap;
-}
 
 .references .related-posts-list li a {
   white-space: normal;

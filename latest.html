@@ -11,13 +11,16 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/latest.html">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +36,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" aria-current="page">Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" >Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +75,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" aria-current="page">Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" >Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" >Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -120,77 +115,77 @@
         <ul class="link-rows latest-rows">
             <li>
                 <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/">Come Ti Rettifico Il Codice - 1</a>
-                <small><time datetime="2026-03-01T00:00:00+01:00">01 marzo 2026</time></small>
+                <small class="archive-meta"><time datetime="2026-03-01T00:00:00+01:00">01 marzo 2026</time></small>
                 <p>Hai letto il titolo e ti sei incazzato, vero? Ti sei detto, tra te e te: ma come si permette questo str*** di correggere il mio codice? E invece no. Prematurata la supercazzola. Del tuo codice sorgente non me ne frega assolutamente niente. Compilalo, interpretalo, pushalo fixalo: fa il cavolo …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/metaeuristica/chernobyl-disaster-optimization/">Chernobyl Disaster Optimization</a>
-                <small><time datetime="2026-02-01T00:00:00+01:00">01 febbraio 2026</time></small>
+                <small class="archive-meta"><time datetime="2026-02-01T00:00:00+01:00">01 febbraio 2026</time></small>
                 <p>Sono da poco passate le feste. E sì, lo so che siamo a febbraio, ma la stesura di questo articolo è iniziata il 5 di gennaio quindi niente, sono da poco passate le feste. Tutti noi abbiamo fatti pranzi, cene e cenette e sono sicuro che siete stati ammorbati dai …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/">Condividi I Tuoi Segreti Con Shamir</a>
-                <small><time datetime="2026-01-07T00:00:00+01:00">07 gennaio 2026</time></small>
+                <small class="archive-meta"><time datetime="2026-01-07T00:00:00+01:00">07 gennaio 2026</time></small>
                 <p>Lo scorso articolo, avevo parlato di due belle cosette: aritmetica modulare e campi di Galois. E li avevo introdotti in previsione di questo giorno. Sí, perché oggi parlerò di un algoritmo di crittografia. Algoritmo non solo veramente figo, ma che ha anche un valore affettivo in quanto conosciuto tempo fa …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/">Qui Crescono Solo Polinomi</a>
-                <small><time datetime="2025-12-01T00:00:00+01:00">01 dicembre 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-12-01T00:00:00+01:00">01 dicembre 2025</time></small>
                 <p>Chi mi conosce sa che uno dei temi che più mi appassionano è la crittografia. Per cui non era questione di se bensì di quando, avrei scritto un articolo a riguardo. Da che mondo e mondo però non si può partire a bomba, e questo articolo serve proprio a questo …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/tra-codice-e-vita/elogio-al-quasi-ottimo/">Elogio Al (quasi) Ottimo</a>
-                <small><time datetime="2025-11-13T00:00:00+01:00">13 novembre 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-11-13T00:00:00+01:00">13 novembre 2025</time></small>
                 <p>Questo mio articolo è diverso da tutti quelli che ho scritto finora. Non troverete formule, algoritmi o altre stregonerie mind-blowing. Voglio invece parlare di un tema a cui tengo: le metaeuristiche. Quell’arte di cercare in maniera non intuitiva soluzioni abbastanza buone, quando l'ottimo è un miraggio. E voglio farlo …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-5/">Io ODO, Tu ODI e la Neural ODE - 5</a>
-                <small><time datetime="2025-10-01T00:00:00+02:00">01 ottobre 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-10-01T00:00:00+02:00">01 ottobre 2025</time></small>
                 <p>Dai che ci siamo. Siamo arrivati alla quinta e ultima parte della serie sulle NODE. Prendete questa affermazione con le pinze però, che se non mi basta questo spazio vi beccate anche la sesta. In ogni caso in questa (spero) ultima parte, vedremo un po' di codice e di applicazione …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-4/">Io ODO, Tu ODI e la Neural ODE - 4</a>
-                <small><time datetime="2025-09-12T00:00:00+02:00">12 settembre 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-09-12T00:00:00+02:00">12 settembre 2025</time></small>
                 <p>Si lo so, post vacanze è dura per tutti. Ma qualcuno deve pur farlo il lavoro sporco no? Quindi riprendiamo, dopo qualche settimana di pausa, il nostro bel discorsetto sulle Neural ODE o NODE. Discorsetto che potete recuperare leggendo le prime tre parti linkate a fine articolo. Per farla breve …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">Io ODO, Tu ODI e la Neural ODE - 3</a>
-                <small><time datetime="2025-07-30T00:00:00+02:00">30 luglio 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-07-30T00:00:00+02:00">30 luglio 2025</time></small>
                 <p>C'è un momento nella vita di ogni matematico, ingegnere e figure mitologiche simili, in cui Ti piace l'analitica eh!? Allora beccati sta ODE. E te ne sbatte in faccia una non lineare, accoppiata, implicita, con coefficienti che cambiano neanche fossero le scale di Hogwarts. L'unica cosa che puoi farci è …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">Io ODO, Tu ODI e la Neural ODE - 2</a>
-                <small><time datetime="2025-07-21T00:00:00+02:00">21 luglio 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-07-21T00:00:00+02:00">21 luglio 2025</time></small>
                 <p>Rieccoci con la seconda parte della serie dedicata alle Neural ODE. Se il primo articolo è stata una violenza mentale questo lo sarà un po' meno. Ma non illudetevi: non è ancora una passeggiata di salute. Abbiamo già affondato le mani nella melma di derivata, integrale ed equazione differenziale. E …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Io ODO, Tu ODI e la Neural ODE - 1</a>
-                <small><time datetime="2025-07-15T00:00:00+02:00">15 luglio 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-07-15T00:00:00+02:00">15 luglio 2025</time></small>
                 <p>C'era una volta una rete neurale che non voleva funzionare layer su layer come tutte le sue amiche. No, lei voleva essere continua, fluida, dinamica. Voleva essere una equazione differenziale. Questo non è il classico incubo dei matematici. Non c'è Freddy Krueger che li sveglia nel cuore della notte sussurrando …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/metaeuristica/not-only-backprop/">BackProp? Anche No</a>
-                <small><time datetime="2025-06-03T00:00:00+02:00">03 giugno 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-06-03T00:00:00+02:00">03 giugno 2025</time></small>
                 <p>Vi capita mai di svegliarvi al mattino e pensare: Cavolo, oggi ho proprio voglia di retropropagare l’errore... ma dovrei stare attento alla linea! No!? Strano, ma contenti voi. In ogni caso, anche se nessuno l'ha chiesto, ho la soluzione che fa per voi: il compromesso giusto tra godimento e …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-3/">Neurons for Dummies - 3</a>
-                <small><time datetime="2025-05-16T00:00:00+02:00">16 maggio 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-05-16T00:00:00+02:00">16 maggio 2025</time></small>
                 <p>Ed eccoci qui, con la terza parte dell'articolo dedicato al neurone. Inizialmente ne avevo preventivate due ma che volete che vi dica, mi sono lasciato prendere la mano. Non potevo mica lasciarvi senza spiegare perché le reti sono composte da tanti neuroni o come si arriva alla formulazione dell'aggiornamento dei …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/">Neurons for Dummies - 2</a>
-                <small><time datetime="2025-05-15T00:00:00+02:00">15 maggio 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-05-15T00:00:00+02:00">15 maggio 2025</time></small>
                 <p>Rieccoci qui per la seconda parte dell'articolo dedicato al neurone. Se sei capitato qui per sbaglio... SCAPPA! No scherzo, ovviamente sei invitato a leggere la prima parte qui. Detto questo, nella prima parte vi ho lasciato con più domande che risposte. Oggi, finalmente, proviamo a fare un po’ di chiarezza …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/">Neurons for Dummies - 1</a>
-                <small><time datetime="2025-04-30T00:00:00+02:00">30 aprile 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-04-30T00:00:00+02:00">30 aprile 2025</time></small>
                 <p>Se avete mai sentito parlare di reti neurali e avete pensato: "ma come diavolo fanno ad imparare?" siete approdati nel posto giusto. Iniziamo subito con un spoiler fresco di giornata: non c'è nessuna magia, solo taaaaante moltiplicazioni, somme e derivate. In questo articolo voglio raccontarvi con calma e senza panico …</p>
             </li>
             <li>
                 <a href="https://www.lucadivita.it/metaeuristica/crystal-structure-algorithm/">Crystal Structure Algorithm</a>
-                <small><time datetime="2025-04-07T00:00:00+02:00">07 aprile 2025</time></small>
+                <small class="archive-meta"><time datetime="2025-04-07T00:00:00+02:00">07 aprile 2025</time></small>
                 <p>Per questo mio primo articolo vorrei parlare di un argomento che mi sta molto a cuore: la Metaeuristica, che non è il nome di un demone assiro ma una famiglia di algoritmi per la risoluzione di problemi computazionali e di ottimizzazione ossia di massimo o di minimo. Quando ci troviamo …</p>
             </li>
         </ul>

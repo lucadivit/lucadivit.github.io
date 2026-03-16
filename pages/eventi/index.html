@@ -3,21 +3,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Eventi &amp; Sessioni - Bit Di Vita</title>
+    <title>Eventi &amp; Talks - Bit Di Vita</title>
     <meta name="description" content="">
     <meta property="og:site_name" content="Bit Di Vita">
-    <meta property="og:title" content="Eventi &amp; Sessioni - Bit Di Vita">
+    <meta property="og:title" content="Eventi &amp; Talks - Bit Di Vita">
     <meta property="og:description" content="">
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/pages/eventi/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/pages/eventi/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/pages/eventi/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/pages/eventi/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" >Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" aria-current="page">Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/latest.html" >Recenti</a></li>
-        <li><a href="https://www.lucadivita.it/archives.html" >Archivio</a></li>
-        <li><a href="https://www.lucadivita.it/categories.html" >Argomenti</a></li>
-        <li><a href="https://www.lucadivita.it/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/pages/eventi/" aria-current="page">Eventi & Sessioni</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
         <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/pages/contatti/" >Contatti</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -113,7 +111,7 @@
 <main id="content" class="container">
 <article>
     <header>
-        <h1>Eventi & Sessioni</h1>
+        <h1>Eventi & Talks</h1>
     </header>
 
 
@@ -134,7 +132,7 @@
 <script type="module" defer src="/theme/vendor/instant.page/instantpage.js"></script>
 
 
-<script type="application/json" id="eventi-translations">{"april": "Aprile", "august": "Agosto", "december": "Dicembre", "event": "Partecipazioni Ad Eventi", "february": "Febbraio", "italy": "Italia", "january": "Gennaio", "july": "Luglio", "june": "Giugno", "march": "Marzo", "may": "Maggio", "milan": "Milano", "november": "Novembre", "october": "Ottobre", "page_content": "Contenuti", "rome": "Roma", "september": "Settembre", "talk": "I Miei Interventi"}</script>
+<template id="eventi-translations">{"april": "Aprile", "august": "Agosto", "december": "Dicembre", "event": "Partecipazioni Ad Eventi", "february": "Febbraio", "italy": "Italia", "january": "Gennaio", "july": "Luglio", "june": "Giugno", "march": "Marzo", "may": "Maggio", "milan": "Milano", "november": "Novembre", "october": "Ottobre", "page_content": "Contenuti", "rome": "Roma", "september": "Settembre", "talk": "I Miei Talks"}</template>
 <script defer src="/theme/eventi.js"></script>
 </body>
 </html>

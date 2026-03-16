@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/i-ode-you-ode-and-the-neural-ode-3/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>I ODE, You ODE and the Neural ODE - 3</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/teoria-matematica.html">Theory & Math</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2025-07-30T00:00:00+02:00">July 30, 2025</time>
-                - <a href="https://www.lucadivita.it/en/category/teoria-matematica.html">Theory & Math</a>
             </small>
         </p>
     </header>
@@ -157,145 +157,141 @@ you really can’t complain. After all, although it might not seem like it, we a
 when you use <strong>Google Maps</strong> (<em>that tells you’ll arrive in 10 minutes and you get there in 17</em>), when you 
 add a <strong>pinch</strong> of salt (<em>where “pinch” means a tablespoon</em>), when you read my <strong>blog</strong> (<em>which is supposed to 
 be educational but helps me more to remember than you to learn</em>)...</p>
-<p>But enough chit-chat, since you’re probably on the edge of your seat, let’s finally look at these famous numerical methods. But first, if you haven’t already, go check out <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Part 1</a> and <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/" target="_blank">Part 2</a>.</p>
+<p>But enough chit-chat, since you’re probably on the edge of your seat, let’s finally look at these famous numerical methods. But first, if you haven’t already, go check out <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/">Part 1</a> and <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-2/">Part 2</a>.</p>
 <h3 id="ode-in-small-steps">ODE in Small Steps<a class="headerlink" href="#ode-in-small-steps" title="Permanent link"> </a></h3>
-<p>Let's revisit the much-praised <strong>Lotka-Volterra system</strong> introduced <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame" target="_blank">here</a>.</p>
-<div class="math">$$
+<p>Let's revisit the much-praised <strong>Lotka-Volterra system</strong> introduced <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#ode-hall-of-fame">here</a>.</p>
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx}{dt} = \alpha x - \beta x y \\
 \frac{dy}{dt} = \delta x y - \gamma y
 \end{cases}
-$$</div>
+\]</div>
 <p>where:</p>
 <ul>
-<li><span class="math">\(x(t)\)</span> is the <strong>number of prey</strong> (e.g., rabbits).</li>
-<li><span class="math">\(y(t)\)</span> is the <strong>number of predators</strong> (e.g., foxes).</li>
-<li><span class="math">\(\alpha\)</span> is the <strong>prey growth rate</strong>. It describes how quickly prey reproduce in the absence of predators (which, in the case of rabbits, is apparently quite high according to legend).</li>
-<li><span class="math">\(\beta\)</span> is the <strong>predation rate</strong>. It indicates how often prey are killed by predators.</li>
-<li><span class="math">\(\delta\)</span> is the <strong>conversion rate</strong>. It tells how many new predators are born per prey eaten and digested.</li>
-<li><span class="math">\(\gamma\)</span> is the <strong>predator mortality rate</strong>. It represents the natural death rate of predators in the absence of prey. If they don’t eat, they starve.</li>
+<li><span class="arithmatex">\(x(t)\)</span> is the <strong>number of prey</strong> (e.g., rabbits).</li>
+<li><span class="arithmatex">\(y(t)\)</span> is the <strong>number of predators</strong> (e.g., foxes).</li>
+<li><span class="arithmatex">\(\alpha\)</span> is the <strong>prey growth rate</strong>. It describes how quickly prey reproduce in the absence of predators (which, in the case of rabbits, is apparently quite high according to legend).</li>
+<li><span class="arithmatex">\(\beta\)</span> is the <strong>predation rate</strong>. It indicates how often prey are killed by predators.</li>
+<li><span class="arithmatex">\(\delta\)</span> is the <strong>conversion rate</strong>. It tells how many new predators are born per prey eaten and digested.</li>
+<li><span class="arithmatex">\(\gamma\)</span> is the <strong>predator mortality rate</strong>. It represents the natural death rate of predators in the absence of prey. If they don’t eat, they starve.</li>
 </ul>
 <p>There is <strong>no known analytical method</strong> to symbolically solve this system, so we turn to numerical methods.
 These are strategies to obtain an <strong>approximate solution</strong>, using <strong>small</strong>, <strong>discrete</strong>, and hopeful steps. All thanks to the 
 <strong>great Euler</strong>, who, in addition to giving us the iconic tattoo</p>
-<div class="math">$$
+<div class="arithmatex">\[
 e^{i \pi} + 1 = 0
-$$</div>
+\]</div>
 <p>(<em>no seriously folks, stop getting it tattooed if you don’t even know what pi is</em>), also gave us the <strong>progenitor</strong> of all numerical methods: the <strong>Euler method</strong>.
 The convergence of this method was proven by the venerable Cauchy and later generalized 
 by the eminent Runge and Kutta with the family of <strong>RK methods</strong>. Basically, everyone here is great, and the world of numerical methods is 
 more <strong>crowded</strong> than TikTok’s algorithm. There are many more we could cover, but we’ll stick to a select few.</p>
 <h3 id="eulers-method">Euler's Method<a class="headerlink" href="#eulers-method" title="Permanent link"> </a></h3>
-<p>Let’s go back to the <strong>Taylor series expansion</strong>. Remember? I already talked about it <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent" target="_blank">here</a>.
+<p>Let’s go back to the <strong>Taylor series expansion</strong>. Remember? I already talked about it <a href="/en/machine-learning/neurons-for-dummies-3/#gradient-descent">here</a>.
 The Taylor series is like a wildcard, it shows up everywhere.</p>
 <p>Let’s consider in particular a <strong>first-order expansion</strong>, i.e.,</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) = f(a) + f'(a) \cdot (\bar x) + O(\bar x^2)
-$$</div>
+\]</div>
 <p>where</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \bar x = (x - a)
-$$</div>
-<p>In other words, we are <strong>evaluating</strong> the function at <span class="math">\(x\)</span>, using derivatives calculated at a point <span class="math">\(a\)</span> that is <strong>offset</strong> from <span class="math">\(x\)</span>.
+\]</div>
+<p>In other words, we are <strong>evaluating</strong> the function at <span class="arithmatex">\(x\)</span>, using derivatives calculated at a point <span class="arithmatex">\(a\)</span> that is <strong>offset</strong> from <span class="arithmatex">\(x\)</span>.
 Now let’s consider a generic Cauchy problem:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 y'(t) = f(y(t), t) \\
 y(t_0) = y_0
 \end{cases}
-$$</div>
-<p>and recall the <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative" target="_blank">definition of derivative</a>. For <span class="math">\(h \rightarrow 0\)</span> we can write:</p>
-<div class="math">$$
+\]</div>
+<p>and recall the <a href="/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/#in-the-beginning-was-the-derivative">definition of derivative</a>. For <span class="arithmatex">\(h \rightarrow 0\)</span> we can write:</p>
+<div class="arithmatex">\[
 y'(t) \approx \frac{y(t+h) - y(t)}{h}
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow h \cdot y'(t) \approx y(t+h) - y(t)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow y(t+h) \approx y(t) + h \cdot y'(t)
-$$</div>
+\]</div>
 <p>Does it look familiar? Exactly, a first-order Taylor expansion, where:</p>
 <ul>
-<li><span class="math">\(x = t + h\)</span></li>
-<li><span class="math">\(a = t\)</span></li>
+<li><span class="arithmatex">\(x = t + h\)</span></li>
+<li><span class="arithmatex">\(a = t\)</span></li>
 </ul>
-<p>So we calculate the <strong>derivative</strong> at time <span class="math">\(t\)</span> and use it to estimate the function at <span class="math">\(t+h\)</span>. Now let’s go further and assume 
-we start at time <span class="math">\(t_0\)</span>, which we know because we’re solving a Cauchy problem. We take a <strong>tiny step</strong> <span class="math">\(h\)</span> forward 
-and land at <span class="math">\(t_1\)</span>. Thus:</p>
-<div class="math">$$
+<p>So we calculate the <strong>derivative</strong> at time <span class="arithmatex">\(t\)</span> and use it to estimate the function at <span class="arithmatex">\(t+h\)</span>. Now let’s go further and assume 
+we start at time <span class="arithmatex">\(t_0\)</span>, which we know because we’re solving a Cauchy problem. We take a <strong>tiny step</strong> <span class="arithmatex">\(h\)</span> forward 
+and land at <span class="arithmatex">\(t_1\)</span>. Thus:</p>
+<div class="arithmatex">\[
 y(t_1) = y(t_0 + h) \approx y(t_0) + h \cdot y'(t_0)
-$$</div>
+\]</div>
 <p>where</p>
-<div class="math">$$
+<div class="arithmatex">\[
 t_1 = t_0 + h
-$$</div>
-<p>Once we have <span class="math">\(t_1\)</span>, we can move to <span class="math">\(t_2\)</span> in the same way:</p>
-<div class="math">$$
+\]</div>
+<p>Once we have <span class="arithmatex">\(t_1\)</span>, we can move to <span class="arithmatex">\(t_2\)</span> in the same way:</p>
+<div class="arithmatex">\[
 y(t_2) = y(t_1 + h) \approx y(t_1) + h \cdot y'(t_1)
-$$</div>
+\]</div>
 <p>where</p>
-<div class="math">$$
+<div class="arithmatex">\[
 t_2 = t_1 + h = t_0 + 2h
-$$</div>
+\]</div>
 <p>Get the idea? We can <strong>generalize</strong> it like this:</p>
-<p><a id="sviluppo-ode-1"></a>
-</p>
-<div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n)$$</div>
-<p class="formula-caption">
-Formula 1. First-Order ODE Expansion</p>
+<div class="arithmatex">\[
+y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n)
+\]</div>
+<p class="formula-caption">Formula 1. First-Order ODE Expansion <a id="sviluppo-ode-1"></a></p>
 <p>Thus:</p>
-<p><a id="tempo-discretizzato"></a>
-</p>
-<div class="math">$$t_{n+1} = t_n + h = t_0 + n \cdot h$$</div>
-<p class="formula-caption">
-Formula 2. Time Discretization</p>
+<div class="arithmatex">\[
+t_{n+1} = t_n + h = t_0 + n \cdot h
+\]</div>
+<p class="formula-caption">Formula 2. Time Discretization <a id="tempo-discretizzato"></a></p>
 <p>Where:</p>
 <ul>
-<li><span class="math">\(t_0\)</span> is the <strong>initial time</strong></li>
-<li><span class="math">\(t_{n+1}\)</span> is the <strong>final time</strong></li>
-<li><span class="math">\(h\)</span> is the <strong>integration step size</strong>, freely chosen</li>
-<li><span class="math">\(n\)</span> is the <strong>number of iterations</strong></li>
+<li><span class="arithmatex">\(t_0\)</span> is the <strong>initial time</strong></li>
+<li><span class="arithmatex">\(t_{n+1}\)</span> is the <strong>final time</strong></li>
+<li><span class="arithmatex">\(h\)</span> is the <strong>integration step size</strong>, freely chosen</li>
+<li><span class="arithmatex">\(n\)</span> is the <strong>number of iterations</strong></li>
 </ul>
-<p>In short, we’re discretizing time. The smaller <span class="math">\(h\)</span> is, the more <strong>accurate</strong> the method, but also more <strong>computationally expensive</strong>.</p>
+<p>In short, we’re discretizing time. The smaller <span class="arithmatex">\(h\)</span> is, the more <strong>accurate</strong> the method, but also more <strong>computationally expensive</strong>.</p>
 <p>Going back to the Cauchy problem:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y'(t) = f(y(t), t)
-$$</div>
+\]</div>
 <p>we can plug this into Euler’s method and get the <strong>final formulation</strong>:</p>
-<p><a id="metodo-eulero-esplicito"></a>
-</p>
-<div class="math">$$y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n)$$</div>
-<p class="formula-caption">
-Formula 3. Explicit Euler Method</p>
-<p>That’s the formula for the <strong>Explicit Euler Method</strong>. Why “explicit”? Because we use only known values. Suppose we want to compute <span class="math">\(y(t_1)\)</span>:</p>
+<div class="arithmatex">\[
+y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n)
+\]</div>
+<p class="formula-caption">Formula 3. Explicit Euler Method <a id="metodo-eulero-esplicito"></a></p>
+<p>That’s the formula for the <strong>Explicit Euler Method</strong>. Why “explicit”? Because we use only known values. Suppose we want to compute <span class="arithmatex">\(y(t_1)\)</span>:</p>
 <ul>
-<li><span class="math">\(y(t_0)\)</span> is <strong>given</strong> by the Cauchy problem</li>
-<li><span class="math">\(f(y(t_0), t_0)\)</span> can be calculated by <strong>simple substitution</strong></li>
+<li><span class="arithmatex">\(y(t_0)\)</span> is <strong>given</strong> by the Cauchy problem</li>
+<li><span class="arithmatex">\(f(y(t_0), t_0)\)</span> can be calculated by <strong>simple substitution</strong></li>
 </ul>
 <p>And of course, if there’s an explicit method, there’s also an <strong>implicit</strong> one, whose formula (without proof) is:</p>
-<p><a id="metodo-eulero-implicito"></a>
-</p>
-<div class="math">$$y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_{n+1}), t_{n+1})$$</div>
-<p class="formula-caption">
-Formula 4. Implicit Euler Method</p>
-<p>It’s called implicit because, as you can see, the value we want to compute, <span class="math">\(y(t_{n+1})\)</span>, appears on <strong>both sides</strong> of the equation.
-It’s not always easy to solve. In some cases, iterative methods like the <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method" target="_blank"><strong>successive substitution method</strong></a> are needed.
+<div class="arithmatex">\[
+y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_{n+1}), t_{n+1})
+\]</div>
+<p class="formula-caption">Formula 4. Implicit Euler Method <a id="metodo-eulero-implicito"></a></p>
+<p>It’s called implicit because, as you can see, the value we want to compute, <span class="arithmatex">\(y(t_{n+1})\)</span>, appears on <strong>both sides</strong> of the equation.
+It’s not always easy to solve. In some cases, iterative methods like the <a href="https://www.researchgate.net/publication/379666225_Successive_Substitution_Method"><strong>successive substitution method</strong></a> are needed.
 But that’s beyond the scope of this article, and since we’ve already made life complicated enough, I’ll leave it to your curiosity to <strong>dig deeper</strong>.</p>
 <h4 id="euler-example">Euler Example<a class="headerlink" href="#euler-example" title="Permanent link"> </a></h4>
 <p>All of this has been a bit too theoretical so far, I know, so let’s look at something practical with an exercise. Let’s consider the following Cauchy problem representing <strong>exponential decay</strong>. It may seem pointless, but many natural phenomena follow this law, such as radioactive decay, capacitor discharge in RC circuits, etc.</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 y' = -ky \\
 y(t_0) = 1 \\
 k = 1
 \end{cases}
-$$</div>
-<p>where <span class="math">\(k\)</span> is the <strong>decay rate</strong>, and in this case, we choose it ourselves. The solution to this ODE is:</p>
-<div class="math">$$
+\]</div>
+<p>where <span class="arithmatex">\(k\)</span> is the <strong>decay rate</strong>, and in this case, we choose it ourselves. The solution to this ODE is:</p>
+<div class="arithmatex">\[
 y(t) = e^{-1 \cdot t}
-$$</div>
-<p>If you want the steps, <strong>do them yourself</strong>. You already know the <strong>tools</strong> to solve it. I chose this ODE (which can be solved analytically, as you've seen) to show the <strong>difference between an exact and a numerical solution</strong>. Let’s see the values at <span class="math">\(t=1\)</span> and <span class="math">\(t=2\)</span>.</p>
-<div class="math">$$
+\]</div>
+<p>If you want the steps, <strong>do them yourself</strong>. You already know the <strong>tools</strong> to solve it. I chose this ODE (which can be solved analytically, as you've seen) to show the <strong>difference between an exact and a numerical solution</strong>. Let’s see the values at <span class="arithmatex">\(t=1\)</span> and <span class="arithmatex">\(t=2\)</span>.</p>
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|}
 \hline
 t &amp; y(t) &amp; \text{Result} \\
@@ -307,45 +303,44 @@ t &amp; y(t) &amp; \text{Result} \\
 2 &amp; e^{-1 \cdot 2} &amp; 0.135 \\
 \hline
 \end{array}
-$$</div>
-<p>Now let’s solve it using Euler’s method. From the <a href="#tempo-discretizzato">time discretization formula</a>, we already know how many steps we need using <span class="math">\(h=0.1\)</span>, initial time <span class="math">\(t_0=0\)</span>, and final time <span class="math">\(t_n=2\)</span>:</p>
-<div class="math">$$
+\]</div>
+<p>Now let’s solve it using Euler’s method. From the <a href="#tempo-discretizzato">time discretization formula</a>, we already know how many steps we need using <span class="arithmatex">\(h=0.1\)</span>, initial time <span class="arithmatex">\(t_0=0\)</span>, and final time <span class="arithmatex">\(t_n=2\)</span>:</p>
+<div class="arithmatex">\[
 t_{n} - t_0 = n \cdot h \Rightarrow 2 - 0 = n \cdot h \Rightarrow n = 20
-$$</div>
-<p>For clarity, let’s go <strong>step by step</strong>. The value at <span class="math">\(t_0\)</span> is given in the Cauchy problem, so:</p>
+\]</div>
+<p>For clarity, let’s go <strong>step by step</strong>. The value at <span class="arithmatex">\(t_0\)</span> is given in the Cauchy problem, so:</p>
 <ul>
-<li>Step <span class="math">\(n=1\)</span>
-<div class="math">$$
+<li>Step <span class="arithmatex">\(n=1\)</span></li>
+</ul>
+<div class="arithmatex">\[
 t_1 = t_0 + 1 \cdot 0.1 = 0.1
-$$</div>
-</li>
-</ul>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(t_1) \approx y(t_0) + h \cdot f(y(t_0), t_0)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(0.1) \approx y(0) + 0.1 \cdot f(y(0), 0)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(0.1) \approx 1 + 0.1 \cdot (-1 \cdot 1) = 0.9
-$$</div>
+\]</div>
 <ul>
-<li>Step <span class="math">\(n=2\)</span></li>
+<li>Step <span class="arithmatex">\(n=2\)</span></li>
 </ul>
-<div class="math">$$
+<div class="arithmatex">\[
 t_2 = t_0 + 2 \cdot 0.1 = 0.2
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(t_2) \approx y(t_1) + h \cdot f(y(t_1), t_1)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(0.2) \approx y(0.1) + 0.1 \cdot f(y(0.1), 0.1)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 y(0.2) \approx 0.9 + 0.1 \cdot (-1 \cdot 0.9) = 0.81
-$$</div>
+\]</div>
 <p>And so on. Trust me when I say the <strong>results</strong> are those shown in this table:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|}
 \hline
 n &amp; t_n &amp; \text{Result} \\
@@ -365,9 +360,9 @@ n &amp; t_n &amp; \text{Result} \\
 20 &amp; 2 &amp; 0.122 \\
 \hline
 \end{array}
-$$</div>
-<p>Now let’s see what happens with <span class="math">\(h=0.5\)</span>. I won’t go step by step because you know how it’s done now, so just <strong>take</strong> this table:</p>
-<div class="math">$$
+\]</div>
+<p>Now let’s see what happens with <span class="arithmatex">\(h=0.5\)</span>. I won’t go step by step because you know how it’s done now, so just <strong>take</strong> this table:</p>
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|}
 \hline
 n &amp; t_n &amp; \text{Result} \\
@@ -383,14 +378,14 @@ n &amp; t_n &amp; \text{Result} \\
 4 &amp; 2 &amp; 0.062 \\
 \hline
 \end{array}
-$$</div>
+\]</div>
 <p>Here’s a <strong>summary comparison</strong> between the <strong>analytical solution</strong> and the two <strong>numerical approximations</strong>:</p>
 <ul>
-<li><span class="math">\(y(t)\)</span> is the analytical solution</li>
-<li><span class="math">\(E(h=0.1)\)</span> is Euler with <span class="math">\(h=0.1\)</span></li>
-<li><span class="math">\(E(h=0.5)\)</span> is Euler with <span class="math">\(h=0.5\)</span></li>
+<li><span class="arithmatex">\(y(t)\)</span> is the analytical solution</li>
+<li><span class="arithmatex">\(E(h=0.1)\)</span> is Euler with <span class="arithmatex">\(h=0.1\)</span></li>
+<li><span class="arithmatex">\(E(h=0.5)\)</span> is Euler with <span class="arithmatex">\(h=0.5\)</span></li>
 </ul>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|c|}
 \hline
 t &amp; y(t) &amp; E(h=0.1) &amp; E(h=0.5) \\
@@ -402,69 +397,66 @@ t &amp; y(t) &amp; E(h=0.1) &amp; E(h=0.5) \\
 2 &amp; 0.135 &amp; 0.122 &amp; 0.062 \\
 \hline
 \end{array}
-$$</div>
-<p>As you can see, apart from <span class="math">\(n=0\)</span>, the <strong>known solution</strong>, <span class="math">\(h=0.1\)</span> gives a much <strong>better approximation</strong> than <span class="math">\(h=0.5\)</span>, but it also <strong>requires</strong> 20 steps compared to just 4 in the latter case.</p>
+\]</div>
+<p>As you can see, apart from <span class="arithmatex">\(n=0\)</span>, the <strong>known solution</strong>, <span class="arithmatex">\(h=0.1\)</span> gives a much <strong>better approximation</strong> than <span class="arithmatex">\(h=0.5\)</span>, but it also <strong>requires</strong> 20 steps compared to just 4 in the latter case.</p>
 <p>All of this can be <strong>summarized</strong> by the following image:</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_3/comparison_euler.png"/>
 Figure 1. Results Comparison</p>
-<p>The <strong>exact solution</strong> is the red one, and as <span class="math">\(h\)</span> <strong>decreases</strong>, the <strong>approximation</strong> gets better and better.
+<p>The <strong>exact solution</strong> is the red one, and as <span class="arithmatex">\(h\)</span> <strong>decreases</strong>, the <strong>approximation</strong> gets better and better.
 Alright, time to move on to the next round where the <strong>Runge-Kutta</strong> methods will knock you out.</p>
 <h3 id="the-mans-rk-family">The Mans... RK Family<a class="headerlink" href="#the-mans-rk-family" title="Permanent link"> </a></h3>
 <p>Let’s give credit where credit is due: Euler’s method is the <strong>patriarch</strong> of all numerical methods. But is it really that good? 
 Well, as always... it depends. For instance, on the type of problem you’re dealing with. For problems that are too complex, it can <strong>fail miserably</strong>. So yes, it’s good and dear, but let’s be honest, it’s getting old. We need fresh blood, brave and strong youngsters. That brings us to the <strong>Runge-Kutta methods</strong>, or simply <strong>RK</strong>.</p>
 <p>RK methods are like a sprawling dynasty, and each has its own quirks. The only certainty, besides death, is that they keep Euler’s core idea: <strong>proceed in small steps</strong>.</p>
 <p>Let’s go back to the Taylor expansion. As you’ll remember, the higher the order of expansion, the <strong>better the approximation</strong>. RK methods are built exactly on higher-order Taylor expansions. So Euler can be viewed as a method of <strong>order 1</strong>, i.e., <strong>RK1</strong>, or <strong>first-order Runge-Kutta</strong>. Now let’s see what happens when we go beyond first order and move to the second, starting from the <a href="#sviluppo-ode-1">First-Order Formula</a>:</p>
-<div class="math">$$y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n) + \frac{h^2}{2} \cdot y''(t_n)$$</div>
+<div class="arithmatex">\[
+y(t_{n+1}) = y(t_n + h) \approx y(t_n) + h \cdot y'(t_n) + \frac{h^2}{2} \cdot y''(t_n)
+\]</div>
 <p>Given that</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y'(t_n) = f(y(t_n), t_n)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow y''(t_n) = f'(y(t_n), t_n)
-$$</div>
-<p><a id="sviluppo-ode-2"></a>
-</p>
-<div class="math">$$\Rightarrow y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n) + \frac{h^2}{2} \cdot f'(y(t_n), t_n)$$</div>
-<p class="formula-caption">
-Formula 5. Second-Order ODE Expansion</p>
-<p>We can then use the definition of the first derivative and expand <span class="math">\(f'\)</span> using a finite difference:</p>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
+\Rightarrow y(t_{n+1}) \approx y(t_n) + h \cdot f(y(t_n), t_n) + \frac{h^2}{2} \cdot f'(y(t_n), t_n)
+\]</div>
+<p class="formula-caption">Formula 5. Second-Order ODE Expansion <a id="sviluppo-ode-2"></a></p>
+<p>We can then use the definition of the first derivative and expand <span class="arithmatex">\(f'\)</span> using a finite difference:</p>
+<div class="arithmatex">\[
 f'(y(t_n), t_n) \approx \frac{f(y(t_n + h), t_n+h) - f(y(t_n), t_n)}{h} = \frac{f(y(t_{n+1}), t_{n+1}) - f(y(t_n), t_n)}{h}
-$$</div>
+\]</div>
 <p>But from Euler’s method we know that</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y(t_{n+1}) = y_{n+1} = y_n + h \cdot f(y_n, t_n)
-$$</div>
+\]</div>
 <p>Substituting in:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f'(y_n, t_n) \approx \frac{f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n)}{h}
-$$</div>
+\]</div>
 <p>Substituting again into the <a href="#sviluppo-ode-2"><strong>Second-Order Expansion</strong></a>, we get:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y_{n+1} \approx y_n + h \cdot f(y_n, t_n) + \frac{h}{2} \cdot \left [ f(y_n + h \cdot f(y_n, t_n), t_{n+1}) - f(y_n, t_n) \right]
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 \Rightarrow y_{n+1} \approx y_n + \frac{h}{2} \cdot \left [ f(y_n + h \cdot f(y_n, t_n), t_{n+1}) + f(y_n, t_n) \right]
-$$</div>
-<p>So let’s define:
-</p>
-<div class="math">$$
+\]</div>
+<p>So let’s define:</p>
+<div class="arithmatex">\[
 k_1 = f(y_n, t_n)
 \\
 k_2 = f(y_n + h \cdot f(y_n, t_n), t_{n+1}) = f(y_n + h \cdot k_1, t_{n+1})
-$$</div>
+\]</div>
 <p>and we obtain the so-called <strong>RK2 Method</strong>, or <strong>Heun’s Method</strong>:</p>
-<p><a id="metodo-heun"></a>
-</p>
-<div class="math">$$
+<div class="arithmatex">\[
     \begin{cases}
     k_1 = f(y_n, t_n)  \\
     k_2 = f(y_n + h k_1, t_n + h) \\
     y_{n+1} \approx y_n + \frac{h}{2} (k_1 + k_2)
     \end{cases}
-$$</div>
-<p class="formula-caption">
-Formula 6. Heun’s Method</p>
+\]</div>
+<p class="formula-caption">Formula 6. Heun’s Method <a id="metodo-heun"></a></p>
 <p>Following the same logic, you can derive <strong>higher-order methods</strong> by expanding Taylor’s series further:</p>
 <ul>
 <li><strong>RK3</strong> or <strong>Shu-Osher</strong></li>
@@ -473,9 +465,7 @@ Formula 6. Heun’s Method</p>
 <li>... and many more.</li>
 </ul>
 <p>Given its importance, we must include the RK4 formulation, it’s an <strong>excellent balance between precision and computational complexity</strong>:</p>
-<p><a id="metodo-rk4"></a>
-</p>
-<div class="math">$$
+<div class="arithmatex">\[
     \begin{cases}
     k_1 = f(y_n, t_n)  \\
     k_2 = f(y_n + \frac{h}{2} k_1, t_n + \frac{h}{2}) \\
@@ -483,13 +473,12 @@ Formula 6. Heun’s Method</p>
     k_4 = f(y_n + h k_3, t_n + h) \\
     y_{n+1} \approx y_n + \frac{h}{6} (k_1 + 2k_2 + 2k_3 + k_4)
     \end{cases}
-$$</div>
-<p class="formula-caption">
-Formula 7. RK4 Method</p>
+\]</div>
+<p class="formula-caption">Formula 7. RK4 Method <a id="metodo-rk4"></a></p>
 <p>Note that, just because I care, we’ve only considered <strong>explicit methods</strong> here. But sticking our heads in the sand doesn’t mean that <strong>implicit</strong> RK methods (yes, they exist) can’t hurt you.</p>
 <h4 id="rk-example">RK Example<a class="headerlink" href="#rk-example" title="Permanent link"> </a></h4>
 <p>If you’ve made it this far, you’ve probably heard about <strong>Lotka-Volterra</strong> a bazillion times. And now that we can, why not solve it?! So let’s take the following setup:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
 \frac{dx}{dt} = \alpha x - \beta x y \\
 \frac{dy}{dt} = \delta x y - \gamma y \\
@@ -500,101 +489,101 @@ Formula 7. RK4 Method</p>
 x_0 = 10 \\
 y_0 = 5
 \end{cases}
-$$</div>
+\]</div>
 <p>Obviously, after all the rambling above, we’ll use numerical methods with:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 h = 0.1 \\
 t \in [0, 2]
-$$</div>
+\]</div>
 <p>Specifically, we’ll apply both Heun and RK4. Don’t worry, this is just to show you how they work, so we’ll only carry out one step.</p>
 <ul>
-<li>Heun, <span class="math">\(n=1\)</span></li>
+<li>Heun, <span class="arithmatex">\(n=1\)</span></li>
 </ul>
-<p>Remember, Lotka-Volterra is a system of two ODEs, so it gets a little more involved, but nothing crazy. <strong>Don’t panic</strong>. Let's start by calculating <span class="math">\(k_1\)</span> and <span class="math">\(k_2\)</span>. Since we have <strong>two ODEs</strong>, we’ll compute:</p>
+<p>Remember, Lotka-Volterra is a system of two ODEs, so it gets a little more involved, but nothing crazy. <strong>Don’t panic</strong>. Let's start by calculating <span class="arithmatex">\(k_1\)</span> and <span class="arithmatex">\(k_2\)</span>. Since we have <strong>two ODEs</strong>, we’ll compute:</p>
 <ul>
-<li><span class="math">\(k_1^x, k_2^x\)</span> for the first ODE</li>
-<li><span class="math">\(k_1^y, k_2^y\)</span> for the second ODE</li>
+<li><span class="arithmatex">\(k_1^x, k_2^x\)</span> for the first ODE</li>
+<li><span class="arithmatex">\(k_1^y, k_2^y\)</span> for the second ODE</li>
 </ul>
-<div class="math">$$
+<div class="arithmatex">\[
 k_1^x = \alpha x_0 - \beta x_0 y_0 \\
 k_1^y = \delta x_0 y_0 - \gamma y_0 
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_2^x = \alpha (x_0 + h k_1^x) - \beta (x_0 + h k_1^x) \cdot (y_0 + h k_1^y) \\
 k_2^y = \delta (x_0 + h k_1^x) \cdot (y_0 + h k_1^y) - \gamma (y_0 + h k_1^y)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 x_1 = x_0 + \frac{h}{2} (k_1^x + k_2^x) \\
 y_1 = y_0 + \frac{h}{2} (k_1^y + k_2^y)
-$$</div>
+\]</div>
 <p>Substituting:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 k_1^x = 1.1 \cdot 10 - 0.4 \cdot 10 \cdot 5 = 11 - 20 = -9 \\
 k_1^y = 0.1 \cdot 10 \cdot 5 - 0.4 \cdot 5 = 5 - 2 = 3
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_2^x = 1.1 \cdot (10 - 0.1 \cdot 9) - 0.4 \cdot (10 - 0.1 \cdot 9) \cdot (5 + 0.1 \cdot 3) \approx 10.01 - 19.292 = -9.282 \\
 k_2^y = 0.1 \cdot (10 - 0.1 \cdot 9) \cdot (5 + 0.1 \cdot 3) - 0.4 \cdot (5 + 0.1 \cdot 3) \approx 4.823 - 2.12 = 2.703
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 x_1 = 10 + 0.05 \cdot (-9 - 9.282) = 9.086 \\
 y_1 = 5 + 0.05 \cdot (3 + 2.703) = 5.285
-$$</div>
-<p>The sharpest among you may wonder why <span class="math">\(t+h\)</span>, required for computing <span class="math">\(k_2\)</span>, <strong>doesn’t appear anywhere</strong>.
-Simple: all the ODEs in the system <strong>don’t explicitly depend</strong> on time <span class="math">\(t\)</span>,
+\]</div>
+<p>The sharpest among you may wonder why <span class="arithmatex">\(t+h\)</span>, required for computing <span class="arithmatex">\(k_2\)</span>, <strong>doesn’t appear anywhere</strong>.
+Simple: all the ODEs in the system <strong>don’t explicitly depend</strong> on time <span class="arithmatex">\(t\)</span>,
 so it’s <strong>irrelevant</strong> for the computation. But if it did matter, the <strong>current time</strong> would be calculated using the <a href="#tempo-discretizzato">Time Discretization Formula</a> shown in the <a href="#esempio-eulero">previous section</a>.</p>
 <ul>
-<li>RK4, <span class="math">\(n=1\)</span></li>
+<li>RK4, <span class="arithmatex">\(n=1\)</span></li>
 </ul>
 <p>Using the same idea, we calculate:</p>
 <ul>
-<li><span class="math">\(k_1^x, k_2^x, k_3^x, k_4^x\)</span> for the first ODE</li>
-<li><span class="math">\(k_1^y, k_2^y, k_3^y, k_4^y\)</span> for the second ODE</li>
+<li><span class="arithmatex">\(k_1^x, k_2^x, k_3^x, k_4^x\)</span> for the first ODE</li>
+<li><span class="arithmatex">\(k_1^y, k_2^y, k_3^y, k_4^y\)</span> for the second ODE</li>
 </ul>
-<div class="math">$$
+<div class="arithmatex">\[
 k_1^x = \alpha x_0 - \beta x_0 y_0 \\
 k_1^y = \delta x_0 y_0 - \gamma y_0
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_2^x = \alpha \cdot (x_0 + \frac{h}{2} \cdot k_1^x) - \beta \cdot (x_0 + \frac{h}{2} \cdot k_1^x) \cdot (y_0 + \frac{h}{2} \cdot k_1^y) \\
 k_2^y = \delta \cdot (x_0 + \frac{h}{2} \cdot k_1^x) \cdot (y_0 + \frac{h}{2} \cdot k_1^y) - \gamma \cdot (y_0 + \frac{h}{2} \cdot k_1^y)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_3^x = \alpha \cdot (x_0 + \frac{h}{2} \cdot k_2^x) - \beta \cdot (x_0 + \frac{h}{2} \cdot k_2^x) \cdot (y_0 + \frac{h}{2} \cdot k_2^y) \\
 k_3^y = \delta \cdot (x_0 + \frac{h}{2} \cdot k_2^x) \cdot (y_0 + \frac{h}{2} \cdot k_2^y) - \gamma \cdot (y_0 + \frac{h}{2} \cdot k_2^y)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_4^x = \alpha \cdot (x_0 + h \cdot k_3^x) - \beta \cdot (x_0 + h \cdot k_3^x) \cdot (y_0 + h \cdot k_3^y) \\
 k_4^y = \delta \cdot (x_0 + h \cdot k_3^x) \cdot (y_0 + h \cdot k_3^y) - \gamma \cdot (y_0 + h \cdot k_3^y)
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 x_1 = x_0 + \frac{h}{6} (k_1^x + 2k_2^x + 2k_3^x + k_4^x) \\
 y_1 = y_0 + \frac{h}{6} (k_1^y + 2k_2^y + 2k_3^y + k_4^y)
-$$</div>
+\]</div>
 <p>Substituting:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 k_1^x = 1.1 \cdot 10 - 0.4 \cdot 10 \cdot 5 = 11 - 20 = -9 \\
 k_1^y = 0.1 \cdot 10 \cdot 5 - 0.4 \cdot 5 = 5 - 2 = 3
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_2^x = 1.1 \cdot (10 - 0.05 \cdot 9) - 0.4 \cdot (10 - 0.05 \cdot 9) \cdot (5 + 0.05 \cdot 3) = 10.5 - 19.64 = -9.14 \\
 k_2^y = 0.1 \cdot (10 - 0.05 \cdot 9) \cdot (5 + 0.05 \cdot 3) - 0.4 \cdot (5 + 0.05 \cdot 3) = 4.91 - 2.06 = 2.85
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_3^x = 1.1 \cdot (10 - 0.05 \cdot 9.14) - 0.4 \cdot (10 - 0.05 \cdot 9.14) \cdot (5 + 0.05 \cdot 2.85) = -9.13 \\
 k_3^y = 0.1 \cdot (10 - 0.05 \cdot 9.14) \cdot (5 + 0.05 \cdot 2.85) - 0.4 \cdot (5 + 0.05 \cdot 2.85) = 2.84
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 k_4^x = 1.1 \cdot (10 - 0.1 \cdot 9.13) - 0.4 \cdot (10 - 0.1 \cdot 9.13) \cdot (5 + 0.1 \cdot 2.84) = -9.21 \\
 k_4^y = 0.1 \cdot (10 - 0.1 \cdot 9.13) \cdot (5 + 0.1 \cdot 2.84) - 0.4 \cdot (5 + 0.1 \cdot 2.84) = 2.68
-$$</div>
-<div class="math">$$
+\]</div>
+<div class="arithmatex">\[
 x_1 = 10 + \frac{0.1}{6} \cdot (-9 + 2 \cdot (-9.14) + 2 \cdot (-9.13) + (-9.21)) = 9.085 \\
 y_1 = 5 + \frac{0.1}{6} \cdot (3 + 2 \cdot (2.85) + 2 \cdot (2.84) + 2.68) = 5.285
-$$</div>
+\]</div>
 <p>Yeah, I know, <strong>it's a lot</strong> and seems overly complicated, but once you have the method’s formula, it’s just about making the <strong>right substitutions</strong> carefully.</p>
-<p>Just like with Euler’s method, let’s provide a <strong>comparison table</strong> here. This time, we’ll group by method rather than <span class="math">\(h\)</span>, and compare the results of RK4, Heun, and Euler. As we cannot compute the analytical solution here, all we have are <strong>approximations</strong>.</p>
-<div class="math">$$
+<p>Just like with Euler’s method, let’s provide a <strong>comparison table</strong> here. This time, we’ll group by method rather than <span class="arithmatex">\(h\)</span>, and compare the results of RK4, Heun, and Euler. As we cannot compute the analytical solution here, all we have are <strong>approximations</strong>.</p>
+<div class="arithmatex">\[
 \begin{array}{|c|c|c|c|c|}
 \hline
 n &amp; t_n &amp; \text{Euler} &amp; \text{Heun} &amp; \text{RK4} \\
@@ -614,86 +603,24 @@ n &amp; t_n &amp; \text{Euler} &amp; \text{Heun} &amp; \text{RK4} \\
 20 &amp; 2 &amp; x=0.83, y=4.97 &amp; x=0.96, y=4.8 &amp; x=0.95, y=4.81 \\
 \hline
 \end{array}
-$$</div>
-<p>As seen from the table, Heun and RK4 give <strong>very similar results</strong>, with differences appearing only after <span class="math">\(t=2\)</span> seconds. In contrast, Euler starts to <strong>deviate poorly</strong> as early as <span class="math">\(t=0.1\)</span>. The following image shows the <strong>phase behavior</strong>:</p>
+\]</div>
+<p>As seen from the table, Heun and RK4 give <strong>very similar results</strong>, with differences appearing only after <span class="arithmatex">\(t=2\)</span> seconds. In contrast, Euler starts to <strong>deviate poorly</strong> as early as <span class="arithmatex">\(t=0.1\)</span>. The following image shows the <strong>phase behavior</strong>:</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_3/phase_comparison_1.png"/>
-Figure 2. Results Comparison at <span class="math">\(t=2\)</span></p>
-<p>Finally, let’s see what happens when we extend the time from <span class="math">\(t=2\)</span> to <span class="math">\(t=15\)</span>.</p>
+Figure 2. Results Comparison at <span class="arithmatex">\(t=2\)</span></p>
+<p>Finally, let’s see what happens when we extend the time from <span class="arithmatex">\(t=2\)</span> to <span class="arithmatex">\(t=15\)</span>.</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_3/phase_comparison_2.png"/>
-Figure 3. Results Comparison at <span class="math">\(t=15\)</span></p>
+Figure 3. Results Comparison at <span class="arithmatex">\(t=15\)</span></p>
 <p>As you can see, Heun and RK4 have very similar, <strong>theoretically consistent</strong> behavior, forming a <strong>closed orbit</strong> (read previous posts if you don’t remember what that means). Meanwhile, <strong>Euler accumulates error</strong> so heavily that its solution <strong>goes completely off track</strong>.</p>
-<p>To be thorough, here’s the time series of prey and predator populations, i.e., <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, over time <span class="math">\(t\)</span>:</p>
+<p>To be thorough, here’s the time series of prey and predator populations, i.e., <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, over time <span class="arithmatex">\(t\)</span>:</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="https://www.lucadivita.it/en/images/teoria_matematica/neural_ode_3/time_series_comparison.png"/>
-Figure 4. Behavior of <span class="math">\(x\)</span> and <span class="math">\(y\)</span> over time <span class="math">\(t=15\)</span></p>
+Figure 4. Behavior of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> over time <span class="arithmatex">\(t=15\)</span></p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>Here we are at the end of this third article. By now, you <strong>should know</strong> (or at least remember, if you already had the knowledge) what derivatives, 
 integrals, differential equations, and numerical methods are. There’s so much more to say, but I tried to keep it <strong>concise</strong>. No need to <strong>thank me</strong>. 
 In any case, we now have all the ingredients to talk about <strong>Neural ODEs</strong>. And in case you were wondering, yes, 
-there will be plenty of math there too. As always, I’ll end with the <a href="https://github.com/lucadivit/NeuralODEBlog" target="_blank">link to the repo</a> where 
+there will be plenty of math there too. As always, I’ll end with the <a href="https://github.com/lucadivit/NeuralODEBlog">link to the repo</a> where 
 you can see the code behind everything we’ve discussed.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -749,6 +676,10 @@ you can see the code behind everything we’ve discussed.</p>
                 <li><a href="https://www.lucadivita.it/en/tag/numeric_methods.html">numeric_methods</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>

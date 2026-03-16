@@ -11,13 +11,19 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
-    <link rel="dns-prefetch" href="//cloud.umami.is">
-    <link rel="preconnect" href="https://cloud.umami.is" crossorigin>
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3" integrity="sha384-njZ5sCqL2nQlDz+tuOzt4BOOdB4zc8UVx7AiE6EGDrjYZPfNHel8zAmY2ESoQilv" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -33,13 +39,9 @@
                 <div class="site-nav-panel site-nav-panel-desktop">
                     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -76,13 +78,9 @@
 <div class="site-nav-panel site-nav-panel-drawer">
     <ul class="site-nav-menu">
         <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
-        <li><a href="https://www.lucadivita.it/en/latest.html" >Latest</a></li>
         <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
-        <li><a href="https://www.lucadivita.it/en/categories.html" aria-current="page">Categories</a></li>
-        <li><a href="https://www.lucadivita.it/en/tags.html" >Tags</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/eventi/" >Events & Sessions</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
         <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
-        <li><a href="https://www.lucadivita.it/en/pages/contatti/" >Contacts</a></li>
     </ul>
     <ul class="site-nav-lang">
         <li>
@@ -115,9 +113,11 @@
     <header>
         <h1>Share Your Secrets With Shamir</h1>
         <p>
-            <small>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/crittografia-sicurezza.html">Encryption & Security</a>
+            </small>
+            <small class="archive-meta">
                 <time datetime="2026-01-07T00:00:00+01:00">January 07, 2026</time>
-                - <a href="https://www.lucadivita.it/en/category/crittografia-sicurezza.html">Encryption & Security</a>
             </small>
         </p>
     </header>
@@ -160,7 +160,7 @@ Don’t worry he’s not dead, he has “only”, to my great displeasure, chang
 The algorithm I will discuss is <strong>Shamir's Secret Sharing</strong> (abbreviated SSS, luckily there are three words 
 otherwise try explaining it to readers), devised by Adi Shamir, who is a cryptography guru (the "S" in the RSA algorithm comes from him).
 Before starting, I strongly recommend, if you haven’t done so already, 
-that you read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" target="_blank">here</a>, the article on <strong>finite fields</strong>.</p>
+that you read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">here</a>, the article on <strong>finite fields</strong>.</p>
 <h3 id="in-addition">In Addition<a class="headerlink" href="#in-addition" title="Permanent link"> </a></h3>
 <p>I have already explained modular arithmetic and Galois fields, so my conscience is clear on that front. However, 
 there is still one last <strong>tool</strong> missing in order to explain the SSS algorithm, and since I am a perfectionist, 
@@ -170,216 +170,196 @@ far be it from me to deprive you of everything you need. What we need now is <st
 <li>He is a great ITALIAN mathematician and not French.</li>
 </ol>
 <p>Let us resume. I know this is probably not your first problem in the morning, 
-but what would you do if you wanted to <strong>determine a polynomial of degree</strong> <span class="math">\(n\)</span> that passes through <span class="math">\(n+1\)</span> given points:</p>
-<div class="math">$$
+but what would you do if you wanted to <strong>determine a polynomial of degree</strong> <span class="arithmatex">\(n\)</span> that passes through <span class="arithmatex">\(n+1\)</span> given points:</p>
+<div class="arithmatex">\[
 (x_0, \, y_0), \, (x_1, \, y_1), \, \dots, \, (x_n, \, y_n)
-$$</div>
+\]</div>
 <p>The problem may seem extremely complex, but in reality it is 
 nothing abstruse. Let us look at a first <strong>solution method</strong>.</p>
 <h4 id="the-naive-addition">The "Naive" Addition<a class="headerlink" href="#the-naive-addition" title="Permanent link"> </a></h4>
 <p>I do not want to start at full speed right away, so let us warm up first, otherwise we might get hurt, and look at a <em>simple</em> method.
-The goal of the problem is to find a polynomial of degree <span class="math">\(n\)</span>, right? So let us start by taking a <strong>generic</strong> one:</p>
-<p><a id="polinomio-generico"></a>
-</p>
-<div class="math">$$
+The goal of the problem is to find a polynomial of degree <span class="arithmatex">\(n\)</span>, right? So let us start by taking a <strong>generic</strong> one:</p>
+<p><a id="polinomio-generico"></a></p>
+<div class="arithmatex">\[
 y = a_0 + a_1x + a_2x^2 + \dots + a_nx^n
-$$</div>
-<p class="formula-caption">
-Formula 1. Generic Polynomial</p>
-<p>Where <span class="math">\(x\)</span> and <span class="math">\(y\)</span> are generic coordinates, and <span class="math">\(a_i\)</span> is a generic coefficient.
-What do we want from this polynomial? We want it to pass through <span class="math">\(n+1\)</span> points. Let us start from the first point:</p>
+\]</div>
+<p class="formula-caption">Formula 1. Generic Polynomial</p>
+<p>Where <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are generic coordinates, and <span class="arithmatex">\(a_i\)</span> is a generic coefficient.
+What do we want from this polynomial? We want it to pass through <span class="arithmatex">\(n+1\)</span> points. Let us start from the first point:</p>
 <ul>
 <li>
-<p><span class="math">\((x_0, \, y_0)\)</span>: From this point we know the values of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, which are precisely <span class="math">\(x_0\)</span> and <span class="math">\(y_0\)</span>. Let us plug them into our formula.</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\((x_0, \, y_0)\)</span>: From this point we know the values of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, which are precisely <span class="arithmatex">\(x_0\)</span> and <span class="arithmatex">\(y_0\)</span>. Let us plug them into our formula.</p>
+<div class="arithmatex">\[
     y_0 = a_0 + a_1x_0 + a_2x_0^2 + \dots + a_nx_0^n
-$$</div>
-</p>
-<p>What we want to do is <strong>compute the coefficients</strong> <span class="math">\(a_i\)</span>, and is this single formula enough to solve the problem? No. Because the <span class="math">\(a_i\)</span> we are looking for are <span class="math">\(n+1\)</span>, and here we only have one equation. If there is one thing we learned in middle school by solving systems, it is that if we have <span class="math">\(m\)</span> <strong>unknowns</strong>, we <strong>need</strong> <span class="math">\(m\)</span> equations to determine them all. We have <span class="math">\(n+1\)</span> <span class="math">\(a\)</span>'s, but we also have <span class="math">\(n+1\)</span> points, right? So we can write a second <strong>equality</strong>...</p>
+\]</div>
+<p>What we want to do is <strong>compute the coefficients</strong> <span class="arithmatex">\(a_i\)</span>, and is this single formula enough to solve the problem? No. Because the <span class="arithmatex">\(a_i\)</span> we are looking for are <span class="arithmatex">\(n+1\)</span>, and here we only have one equation. If there is one thing we learned in middle school by solving systems, it is that if we have <span class="arithmatex">\(m\)</span> <strong>unknowns</strong>, we <strong>need</strong> <span class="arithmatex">\(m\)</span> equations to determine them all. We have <span class="arithmatex">\(n+1\)</span> <span class="arithmatex">\(a\)</span>'s, but we also have <span class="arithmatex">\(n+1\)</span> points, right? So we can write a second <strong>equality</strong>...</p>
 </li>
 <li>
-<p><span class="math">\((x_1, \, y_1)\)</span>: From this point we know the values of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, which are precisely <span class="math">\(x_1\)</span> and <span class="math">\(y_1\)</span>. Let us plug them into our formula.</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\((x_1, \, y_1)\)</span>: From this point we know the values of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, which are precisely <span class="arithmatex">\(x_1\)</span> and <span class="arithmatex">\(y_1\)</span>. Let us plug them into our formula.</p>
+<div class="arithmatex">\[
     y_1 = a_0 + a_1x_1 + a_2x_1^2 + \dots + a_nx_1^n
-$$</div>
-</p>
+\]</div>
 <p>I would say the pattern is quite clear. So let us <strong>skip</strong> straight to the last point.</p>
 </li>
 <li>
-<p><span class="math">\(...\)</span></p>
+<p><span class="arithmatex">\(...\)</span></p>
 </li>
 <li>
-<p><span class="math">\((x_n, \, y_n)\)</span>: From this point we know the values of <span class="math">\(x\)</span> and <span class="math">\(y\)</span>, which are precisely <span class="math">\(x_n\)</span> and <span class="math">\(y_n\)</span>. As usual, let us plug them into our formula.</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\((x_n, \, y_n)\)</span>: From this point we know the values of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>, which are precisely <span class="arithmatex">\(x_n\)</span> and <span class="arithmatex">\(y_n\)</span>. As usual, let us plug them into our formula.</p>
+<div class="arithmatex">\[
     y_n = a_0 + a_1x_n + a_2x_n^2 + \dots + a_nx_n^n
-$$</div>
-</p>
-<p>At this point it is clear that we <strong>have</strong> <span class="math">\(n+1\)</span> <strong>equations</strong>, and therefore we can be happy, since we can now <strong>compute</strong> the <span class="math">\(n+1\)</span> unknowns <span class="math">\(a\)</span>.</p>
+\]</div>
+<p>At this point it is clear that we <strong>have</strong> <span class="arithmatex">\(n+1\)</span> <strong>equations</strong>, and therefore we can be happy, since we can now <strong>compute</strong> the <span class="arithmatex">\(n+1\)</span> unknowns <span class="arithmatex">\(a\)</span>.</p>
 </li>
 </ul>
 <p>What we obtained is a <strong>system of equations</strong>, that is, that set of equations which, once the unknown values are substituted, <strong>satisfy all the given equality conditions</strong>. Let us write it in a more mathematical form:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
-y_0 = a_0 + a_1 x_0 + a_2 x_0^2 + \dots + a_n x_0^n \\
-y_1 = a_0 + a_1 x_1 + a_2 x_1^2 + \dots + a_n x_1^n \\
-\vdots \\
+y_0 = a_0 + a_1 x_0 + a_2 x_0^2 + \dots + a_n x_0^n \\[6pt]
+y_1 = a_0 + a_1 x_1 + a_2 x_1^2 + \dots + a_n x_1^n \\[6pt]
+\vdots \\[6pt]
 y_n = a_0 + a_1 x_n + a_2 x_n^2 + \dots + a_n x_n^n
 \end{cases}
-$$</div>
+\]</div>
 <p>two paths are possible at this point: either we do it by hand, or we get clever and write the linear system in <strong>matrix form</strong>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 V \cdot \vec{a} = \vec{y}
-$$</div>
+\]</div>
 <p>where:</p>
 <ul>
 <li>
-<p><span class="math">\(V\)</span> is a matrix called the <strong>Vandermonde matrix</strong>, and it is defined as follows:</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(V\)</span> is a matrix called the <strong>Vandermonde matrix</strong>, and it is defined as follows:</p>
+<div class="arithmatex">\[
     V =
     \begin{bmatrix}
-    1 &amp; x_0 &amp; x_0^2 &amp; \dots &amp; x_0^n \\
-    1 &amp; x_1 &amp; x_1^2 &amp; \dots &amp; x_1^n \\
-    \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    1 &amp; x_0 &amp; x_0^2 &amp; \dots &amp; x_0^n \\[6pt]
+    1 &amp; x_1 &amp; x_1^2 &amp; \dots &amp; x_1^n \\[6pt]
+    \vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\[6pt]
     1 &amp; x_n &amp; x_n^2 &amp; \dots &amp; x_n^n
     \end{bmatrix}
-$$</div>
-</p>
-<p>I remind you that we already have all the elements of this matrix: they are the <span class="math">\(x\)</span> <strong>coordinates</strong> (and their powers) <strong>through which we want the polynomial to pass</strong>.</p>
+\]</div>
+<p>I remind you that we already have all the elements of this matrix: they are the <span class="arithmatex">\(x\)</span> <strong>coordinates</strong> (and their powers) <strong>through which we want the polynomial to pass</strong>.</p>
 </li>
 <li>
-<p><span class="math">\(\vec{a}\)</span> is the vector of unknowns, that is, the <strong>polynomial coefficients</strong> we are looking for.</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(\vec{a}\)</span> is the vector of unknowns, that is, the <strong>polynomial coefficients</strong> we are looking for.</p>
+<div class="arithmatex">\[
     \vec{a} =
     \begin{bmatrix}
-    a_0 \\
-    a_1 \\
-    \vdots \\
+    a_0 \\[6pt]
+    a_1 \\[6pt]
+    \vdots \\[6pt]
     a_n
     \end{bmatrix}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p><span class="math">\(\vec{y}\)</span> is the vector of <strong>known terms</strong>, we know these as well since they come from the <span class="math">\(y\)</span> <strong>coordinates</strong> through which we want the polynomial to pass.</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(\vec{y}\)</span> is the vector of <strong>known terms</strong>, we know these as well since they come from the <span class="arithmatex">\(y\)</span> <strong>coordinates</strong> through which we want the polynomial to pass.</p>
+<div class="arithmatex">\[
     \vec{y} =
     \begin{bmatrix}
-    y_0 \\
-    y_1 \\
-    \vdots \\
+    y_0 \\[6pt]
+    y_1 \\[6pt]
+    \vdots \\[6pt]
     y_n
     \end{bmatrix}
-$$</div>
-</p>
+\]</div>
 </li>
 </ul>
 <p>By rewriting the system in full we have:</p>
-<p><a id="interpolazione-matriciale"></a>
-</p>
-<div class="math">$$
+<p><a id="interpolazione-matriciale"></a></p>
+<div class="arithmatex">\[
 \begin{bmatrix}
-1 &amp; x_0 &amp; x_0^2 &amp; \dots &amp; x_0^n \\
-1 &amp; x_1 &amp; x_1^2 &amp; \dots &amp; x_1^n \\
-\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x_0 &amp; x_0^2 &amp; \dots &amp; x_0^n \\[6pt]
+1 &amp; x_1 &amp; x_1^2 &amp; \dots &amp; x_1^n \\[6pt]
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\[6pt]
 1 &amp; x_n &amp; x_n^2 &amp; \dots &amp; x_n^n
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-a_0 \\
-a_1 \\
-\vdots \\
+a_0 \\[6pt]
+a_1 \\[6pt]
+\vdots \\[6pt]
 a_n
 \end{bmatrix}
 =
 \begin{bmatrix}
-y_0 \\
-y_1 \\
-\vdots \\
+y_0 \\[6pt]
+y_1 \\[6pt]
+\vdots \\[6pt]
 y_n
 \end{bmatrix}
-$$</div>
-<p class="formula-caption">
-Formula 2. Matrix Form of Interpolation</p>
+\]</div>
+<p class="formula-caption">Formula 2. Matrix Form of Interpolation</p>
 <p>Good, at this point there are two ways to solve the problem.</p>
 <ol>
 <li>
-<p>The one that <strong>pisses off</strong> my professor of numerical calculus and complex analysis, which involves <strong>inverting</strong> <span class="math">\(V\)</span>:</p>
-<p>
-<div class="math">$$
+<p>The one that <strong>pisses off</strong> my professor of numerical calculus and complex analysis, which involves <strong>inverting</strong> <span class="arithmatex">\(V\)</span>:</p>
+<div class="arithmatex">\[
    \vec{a} = V^{-1} \cdot \vec{b}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p>A smarter method, such as the <a href="https://en.wikipedia.org/wiki/Gaussian_elimination" target="_blank">Gauss method</a>, <a href="https://en.wikipedia.org/wiki/LU_decomposition" target="_blank">LU factorization</a>, and so on.</p>
+<p>A smarter method, such as the <a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gauss method</a>, <a href="https://en.wikipedia.org/wiki/LU_decomposition">LU factorization</a>, and so on.</p>
 </li>
 </ol>
 <p>Now we will not look at either of them, because that would mean explaining what a <strong>determinant</strong> is, what the <strong>inverse of a matrix</strong> is, and what happens when it is not invertible (to put it very briefly: either there are no solutions or there are infinitely many), why <strong>it is not advisable to invert a matrix</strong> and to do a decomposition instead. Then I would also have to explain the <strong>decompositions</strong>. Too much stuff.
 Let us consider a small example to solve by hand, just to help you understand what we obtain.</p>
 <h5 id="example">Example<a class="headerlink" href="#example" title="Permanent link"> </a></h5>
-<p>Let us assume we want to compute a polynomial of degree <span class="math">\(2\)</span> that passes through the points:</p>
-<div class="math">$$
-(x_0, \, y_0) = (0, \, 1) \\[6pt]
-(x_1, \, y_1) = (1, \, 2) \\[6pt]
+<p>Let us assume we want to compute a polynomial of degree <span class="arithmatex">\(2\)</span> that passes through the points:</p>
+<div class="arithmatex">\[
+(x_0, \, y_0) = (0, \, 1) \\[6pt][6pt]
+(x_1, \, y_1) = (1, \, 2) \\[6pt][6pt]
 (x_2, \, y_2) = (2, \, 5)
-$$</div>
+\]</div>
 <p>The polynomial will have the form:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 y = a_0 + a_1 x + a_2 x^2
-$$</div>
+\]</div>
 <p>Let us write our <strong>system of three equations</strong>, simply by substituting the points as shown previously:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{cases}
-1 = a_0 + a_1 \cdot (0) + a_2 \cdot (0)^2 \\
-2 = a_0 + a_1 \cdot (1) + a_2 \cdot (1)^2 \\
+1 = a_0 + a_1 \cdot (0) + a_2 \cdot (0)^2 \\[6pt]
+2 = a_0 + a_1 \cdot (1) + a_2 \cdot (1)^2 \\[6pt]
 5 = a_0 + a_1 \cdot (2) + a_2 \cdot (2)^2
 \end{cases}
-$$</div>
+\]</div>
 <p>from which:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{aligned}
 \begin{cases}
-a_0 = 1 \\
-1 = a_1 + a_2 \\
+a_0 = 1 \\[6pt]
+1 = a_1 + a_2 \\[6pt]
 4 = 2a_1 + 4a_2
 \end{cases} \\[6pt]
 \Rightarrow a_1 = 0, \, a_2 = 1
 \end{aligned}
-$$</div>
-<p>We have found all the coefficients <span class="math">\(a_0, \, a_1, \, a_2\)</span>, so we can write our polynomial, which will be:</p>
-<div class="math">$$
+\]</div>
+<p>We have found all the coefficients <span class="arithmatex">\(a_0, \, a_1, \, a_2\)</span>, so we can write our polynomial, which will be:</p>
+<div class="arithmatex">\[
 \begin{aligned}
 y &amp;= a_0 + a_1 x + a_2 x^2 \\[6pt]
 \Rightarrow y &amp;= 1 + x^2
 \end{aligned}
-$$</div>
+\]</div>
 <p>Let us look at its graphical behavior:</p>
 <p class="image-caption"><img alt="plot" class="image" src="https://www.lucadivita.it/en/images/crittografia_sicurezza/share_your_secret_shamir/simple_ex.svg"/>
-Figure 1. Plot of the Polynomial <span class="math">\(y = 1 + x^2\)</span></p>
+Figure 1. Plot of the Polynomial <span class="arithmatex">\(y = 1 + x^2\)</span></p>
 <p>Look carefully at the graph to see where the red crosses are placed. <strong>It passes exactly through the required points</strong>.</p>
 <h4 id="the-lagrange-addition">The Lagrange Addition<a class="headerlink" href="#the-lagrange-addition" title="Permanent link"> </a></h4>
 <p>Now that you know what we are trying to do, <strong>throw away</strong> the entire previous method. It was certainly useful because it allowed us to understand, in a fairly intuitive way, what the point was. But since there is another way to do it, and since you are dying to learn it, who am I to deprive you of it?
-The time has come for Lagrange interpolation, so let us start by defining our polynomial <span class="math">\(y\)</span>.
+The time has come for Lagrange interpolation, so let us start by defining our polynomial <span class="arithmatex">\(y\)</span>.
 This time we define it through a <strong>summation</strong>, in the following way:</p>
-<p><a id="interpolazione-lagrange"></a>
-</p>
-<div class="math">$$
+<p><a id="interpolazione-lagrange"></a></p>
+<div class="arithmatex">\[
 y = \sum_{i=0}^{n} y_i \cdot L_i(x)
-$$</div>
-<p class="formula-caption">
-Formula 3. Lagrange Interpolation</p>
-<p>where the generic <span class="math">\(L_i(x)\)</span> is a <strong>product</strong> defined as follows:</p>
-<div class="math">$$
+\]</div>
+<p class="formula-caption">Formula 3. Lagrange Interpolation</p>
+<p>where the generic <span class="arithmatex">\(L_i(x)\)</span> is a <strong>product</strong> defined as follows:</p>
+<div class="arithmatex">\[
 L_i(x) = \prod_{j=0, \, j \neq i}^{n} \frac{x-x_j}{x_i-x_j}
-$$</div>
+\]</div>
 <p>Expanding it explicitly, we have that a <strong>generic polynomial</strong> has the form:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{aligned}
 y &amp;=
 y_0 \cdot
@@ -402,441 +382,355 @@ y_n \cdot
 \frac{(x - x_0)(x - x_1)\cdots(x - x_{n-1})}
 {(x_n - x_0)(x_n - x_1)\cdots(x_n - x_{n-1})}
 \end{aligned}
-$$</div>
+\]</div>
 <p>Here as well, it may look like something extremely complex, but in reality it is very simple. Let us see it with an example.</p>
 <h5 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link"> </a></h5>
 <p>Let us consider the same example as before and look for the polynomial that passes through the points:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 (x_0, \, y_0) = (0, \, 1) \\[6pt]
 (x_1, \, y_1) = (1, \, 2) \\[6pt]
 (x_2, \, y_2) = (2, \, 5)
-$$</div>
-<p>Let us compute the required <span class="math">\(L_i\)</span>:</p>
+\]</div>
+<p>Let us compute the required <span class="arithmatex">\(L_i\)</span>:</p>
 <ul>
 <li>
-<p><span class="math">\(L_0\)</span> uses the point <span class="math">\((x_0, \, y_0) = (0, \, 1)\)</span>:</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(L_0\)</span> uses the point <span class="arithmatex">\((x_0, \, y_0) = (0, \, 1)\)</span>:</p>
+<div class="arithmatex">\[
 \begin{aligned}
 L_0(x)
-&amp;= \frac{x - x_1}{x_0 - x_1} \cdot \frac{x - x_2}{x_0 - x_2} \\
-&amp;= \frac{x - 1}{0 - 1} \cdot \frac{x - 2}{0 - 2} \\
-&amp;= \frac{x - 1}{-1} \cdot \frac{x - 2}{-2} \\[6pt]
+&amp;= \frac{x - x_1}{x_0 - x_1} \cdot \frac{x - x_2}{x_0 - x_2} \\[6pt]
+&amp;= \frac{x - 1}{0 - 1} \cdot \frac{x - 2}{0 - 2} \\[6pt]
+&amp;= \frac{x - 1}{-1} \cdot \frac{x - 2}{-2} \\[6pt][6pt]
 &amp;= \frac{(x - 1)(x - 2)}{2}
 \end{aligned}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p><span class="math">\(L_1\)</span> uses the point <span class="math">\((x_1, \, y_1) = (1, \, 2)\)</span>:</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(L_1\)</span> uses the point <span class="arithmatex">\((x_1, \, y_1) = (1, \, 2)\)</span>:</p>
+<div class="arithmatex">\[
 \begin{aligned}
 L_1(x)
-&amp;= \frac{x - x_0}{x_1 - x_0} \cdot \frac{x - x_2}{x_1 - x_2} \\
-&amp;= \frac{x - 0}{1 - 0} \cdot \frac{x - 2}{1 - 2} \\
-&amp;= x \cdot \frac{x - 2}{-1} \\[6pt]
+&amp;= \frac{x - x_0}{x_1 - x_0} \cdot \frac{x - x_2}{x_1 - x_2} \\[6pt]
+&amp;= \frac{x - 0}{1 - 0} \cdot \frac{x - 2}{1 - 2} \\[6pt]
+&amp;= x \cdot \frac{x - 2}{-1} \\[6pt][6pt]
 &amp;= -x(x - 2)
 \end{aligned}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p><span class="math">\(L_2\)</span> uses the point <span class="math">\((x_2, \, y_2) = (2, \, 5)\)</span>:</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(L_2\)</span> uses the point <span class="arithmatex">\((x_2, \, y_2) = (2, \, 5)\)</span>:</p>
+<div class="arithmatex">\[
 \begin{aligned}
 L_2(x)
-&amp;= \frac{x - x_0}{x_2 - x_0} \cdot \frac{x - x_1}{x_2 - x_1}\\
-&amp;= \frac{x - 0}{2 - 0} \cdot \frac{x - 1}{2 - 1}\\
-&amp;= \frac{x}{2}(x - 1)\\[6pt]
+&amp;= \frac{x - x_0}{x_2 - x_0} \cdot \frac{x - x_1}{x_2 - x_1}\\[6pt]
+&amp;= \frac{x - 0}{2 - 0} \cdot \frac{x - 1}{2 - 1}\\[6pt]
+&amp;= \frac{x}{2}(x - 1)\\[6pt][6pt]
 &amp;= \frac{x(x - 1)}{2}
 \end{aligned}
-$$</div>
-</p>
+\]</div>
 </li>
 </ul>
-<p>Note that we are not using the <span class="math">\(y\)</span> values yet. They come into play exactly here:</p>
-<div class="math">$$
-y = y_0 \cdot L_0(x) + y_1 \cdot L_1(x) + y_2 \cdot L_2(x) \\[10pt]
+<p>Note that we are not using the <span class="arithmatex">\(y\)</span> values yet. They come into play exactly here:</p>
+<div class="arithmatex">\[
+y = y_0 \cdot L_0(x) + y_1 \cdot L_1(x) + y_2 \cdot L_2(x) \\[6pt][10pt]
 \Rightarrow \; y = 1 \cdot \frac{(x - 1)(x - 2)}{2} \;+\; 2 \cdot (-x(x - 2)) \;+\; 5 \cdot \frac{x(x - 1)}{2}
-$$</div>
+\]</div>
 <p>By expanding this expression we obtain:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{aligned}
 y &amp;= \frac{(x - 1)(x - 2)}{2}
      - 2x(x - 2)
-     + 5 \cdot \frac{x(x - 1)}{2} \\[6pt]
+     + 5 \cdot \frac{x(x - 1)}{2} \\[6pt][6pt]
   &amp;= \frac{x^2 - 3x + 2}{2}
      - 2x^2 + 4x
-     + \frac{5x^2 - 5x}{2} \\[6pt]
+     + \frac{5x^2 - 5x}{2} \\[6pt][6pt]
   &amp;= \left( \frac{x^2 - 3x + 2}{2}
            + \frac{5x^2 - 5x}{2} \right)
-     - 2x^2 + 4x \\[6pt]
+     - 2x^2 + 4x \\[6pt][6pt]
   &amp;= \frac{x^2 - 3x + 2 + 5x^2 - 5x}{2}
-     - 2x^2 + 4x \\[6pt]
+     - 2x^2 + 4x \\[6pt][6pt]
   &amp;= \frac{6x^2 - 8x + 2}{2}
      - 2x^2 + 4x \\[6pt]
   &amp;= 3x^2 - 4x + 1 - 2x^2 + 4x \\[10pt]
   &amp;= x^2 + 1.
 \end{aligned}
-$$</div>
+\]</div>
 <p>And, as it turns out, this is the same result obtained previously. To conclude this paragraph, why should we prefer this method? Not so much for performance reasons, but because, for the use we will make of it, it is better suited to solving the problem.</p>
 <h3 id="it-is-time-to-share">It Is Time to Share<a class="headerlink" href="#it-is-time-to-share" title="Permanent link"> </a></h3>
 <p>Now that we have all the necessary tools, we can finally get to the heart of today’s algorithm.
 The idea behind SSS is as simple as it is elegant: <strong>take a secret</strong>, <strong>hide it in the constant term of a carefully chosen polynomial</strong>, and <strong>distribute to the participants</strong> points that lie on that polynomial. Taken individually, those points <strong>reveal nothing</strong>, but when enough of them are combined, they allow us to <strong>reconstruct exactly the original polynomial</strong> via Lagrange interpolation, and therefore recover the constant term, i.e., the secret. In other words, mathematics becomes the mechanism of distributed trust: each participant holds a fragment of the information and only if there is a <strong>large enough</strong> group, it becomes possible to reveal the secret.</p>
 <p>The steps are simple. We start by <strong>choosing</strong> two parameters:</p>
 <ol>
-<li>The <strong>number of participants</strong> <span class="math">\(s\)</span>, representing the <strong>number of points</strong> of the polynomial that we want to <strong>generate and distribute</strong>.</li>
-<li>The <strong>minimum threshold</strong> <span class="math">\(t\)</span>, representing the <strong>number of participants needed to reconstruct the secret</strong>. This value determines that we will use a polynomial of degree <span class="math">\(t-1\)</span>.</li>
+<li>The <strong>number of participants</strong> <span class="arithmatex">\(s\)</span>, representing the <strong>number of points</strong> of the polynomial that we want to <strong>generate and distribute</strong>.</li>
+<li>The <strong>minimum threshold</strong> <span class="arithmatex">\(t\)</span>, representing the <strong>number of participants needed to reconstruct the secret</strong>. This value determines that we will use a polynomial of degree <span class="arithmatex">\(t-1\)</span>.</li>
 </ol>
 <p>The relationship between these two variables is that the following constraint must be satisfied:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 t \leq s \leq Card(\mathbb{F}) - 1
-$$</div>
-<p>that is, the number of distributed points must be (obviously) greater than the number of participants needed to reconstruct the message, and it cannot be greater than the cardinality of the finite field from which the elements are taken (as I will show later), excluding the zero element. So, assuming we have <span class="math">\(s=3\)</span> and <span class="math">\(t=2\)</span>, we are saying that we create and distribute <span class="math">\(s=3\)</span> points, and to reconstruct the message it is necessary that at least <span class="math">\(t=2\)</span> participants agree. The opposite, even intuitively, makes no sense: how can we create and distribute <span class="math">\(s=2\)</span> but require the agreement of <span class="math">\(t=3\)</span> people? Or, how can we distribute more elements than are available in the field? Obviously you cannot, this is not Italian public debt. This is <strong>mathematics</strong>.</p>
-<p>Once the values of <span class="math">\(s\)</span> and <span class="math">\(t\)</span> have been established, we build our polynomial:</p>
-<p><a id="polinomio-shamir"></a>
-</p>
-<div class="math">$$
+\]</div>
+<p>that is, the number of distributed points must be (obviously) greater than the number of participants needed to reconstruct the message, and it cannot be greater than the cardinality of the finite field from which the elements are taken (as I will show later), excluding the zero element. So, assuming we have <span class="arithmatex">\(s=3\)</span> and <span class="arithmatex">\(t=2\)</span>, we are saying that we create and distribute <span class="arithmatex">\(s=3\)</span> points, and to reconstruct the message it is necessary that at least <span class="arithmatex">\(t=2\)</span> participants agree. The opposite, even intuitively, makes no sense: how can we create and distribute <span class="arithmatex">\(s=2\)</span> but require the agreement of <span class="arithmatex">\(t=3\)</span> people? Or, how can we distribute more elements than are available in the field? Obviously you cannot, this is not Italian public debt. This is <strong>mathematics</strong>.</p>
+<p>Once the values of <span class="arithmatex">\(s\)</span> and <span class="arithmatex">\(t\)</span> have been established, we build our polynomial:</p>
+<p><a id="polinomio-shamir"></a></p>
+<div class="arithmatex">\[
 f(x) = S + a_1x + a_2x^2 + \dots + a_{t-1}x^{t-1}
-$$</div>
-<p class="formula-caption">
-Formula 4. Sharing Polynomial</p>
+\]</div>
+<p class="formula-caption">Formula 4. Sharing Polynomial</p>
 <p>This polynomial is very similar to the one defined <a href="#polinomio-generico">here</a>, but there are two small differences:</p>
 <ul>
-<li><span class="math">\(S\)</span> is the <strong>secret to hide in the polynomial</strong></li>
-<li>the <span class="math">\(a_i\)</span> are <strong>coefficients taken from the Galois field</strong></li>
+<li><span class="arithmatex">\(S\)</span> is the <strong>secret to hide in the polynomial</strong></li>
+<li>the <span class="arithmatex">\(a_i\)</span> are <strong>coefficients taken from the Galois field</strong></li>
 </ul>
-<p>The polynomial built this way <strong>must never be revealed in full</strong>, each participant receives only a pair <span class="math">\((x_i, \, f(x_i))\)</span>, that is, the <strong>evaluation of the polynomial at a point</strong>. Taken individually, this value contains no information about the secret, nor about the other coefficients of the polynomial. The secret is reconstructed only when at least <span class="math">\(t\)</span> participants <strong>put their points together</strong>. To reconstruct <span class="math">\(S\)</span>, it is enough to evaluate the polynomial <span class="math">\(f\)</span> at the point <span class="math">\(0\)</span>, by computing <span class="math">\(f(0)\)</span>. In fact, precisely because of how the polynomial <span class="math">\(f(x)\)</span> is constructed, by setting <span class="math">\(x=0\)</span> all terms (except <span class="math">\(S\)</span>) become zero. Therefore, what we know is:</p>
+<p>The polynomial built this way <strong>must never be revealed in full</strong>, each participant receives only a pair <span class="arithmatex">\((x_i, \, f(x_i))\)</span>, that is, the <strong>evaluation of the polynomial at a point</strong>. Taken individually, this value contains no information about the secret, nor about the other coefficients of the polynomial. The secret is reconstructed only when at least <span class="arithmatex">\(t\)</span> participants <strong>put their points together</strong>. To reconstruct <span class="arithmatex">\(S\)</span>, it is enough to evaluate the polynomial <span class="arithmatex">\(f\)</span> at the point <span class="arithmatex">\(0\)</span>, by computing <span class="arithmatex">\(f(0)\)</span>. In fact, precisely because of how the polynomial <span class="arithmatex">\(f(x)\)</span> is constructed, by setting <span class="arithmatex">\(x=0\)</span> all terms (except <span class="arithmatex">\(S\)</span>) become zero. Therefore, what we know is:</p>
 <ul>
-<li>The secret is at point <span class="math">\(0\)</span> of the polynomial <span class="math">\(f(x)\)</span>.</li>
-<li>We do not have access to the polynomial <span class="math">\(f(x)\)</span>.</li>
+<li>The secret is at point <span class="arithmatex">\(0\)</span> of the polynomial <span class="arithmatex">\(f(x)\)</span>.</li>
+<li>We do not have access to the polynomial <span class="arithmatex">\(f(x)\)</span>.</li>
 </ul>
-<p>In this context, Lagrange interpolation comes into play. It allows us to <strong>extract</strong> <span class="math">\(S\)</span> (that is, the polynomial evaluated at <span class="math">\(0\)</span>) <strong>without knowing</strong> the polynomial itself, but only the <strong>points</strong> that lie on it.
+<p>In this context, Lagrange interpolation comes into play. It allows us to <strong>extract</strong> <span class="arithmatex">\(S\)</span> (that is, the polynomial evaluated at <span class="arithmatex">\(0\)</span>) <strong>without knowing</strong> the polynomial itself, but only the <strong>points</strong> that lie on it.
 In particular, what one does is compute:</p>
-<p><a id="decifatura"></a>
-</p>
-<div class="math">$$
+<p><a id="decifatura"></a></p>
+<div class="arithmatex">\[
 S = f(0) = \sum_{i \in I} y_i \cdot L_i(0) \\[10pt]
 L_i(0) = \prod_{j=0, \, j \neq i}^{n} \frac{0-x_j}{x_i-x_j}
-$$</div>
-<p class="formula-caption">
-Formula 5. Decryption Formulas</p>
-<p>With <span class="math">\(I\)</span> being the <strong>set of shares</strong> (and later we will see what those are). Up to this point, that is all, and if you think about it, it is not particularly complicated.
+\]</div>
+<p class="formula-caption">Formula 5. Decryption Formulas</p>
+<p>With <span class="arithmatex">\(I\)</span> being the <strong>set of shares</strong> (and later we will see what those are). Up to this point, that is all, and if you think about it, it is not particularly complicated.
 But that is the beauty of cryptography: using simple tools that are terribly powerful.</p>
 <p>Enough chatter, let us look at an example.</p>
 <h4 id="encryption-example">Encryption Example<a class="headerlink" href="#encryption-example" title="Permanent link"> </a></h4>
-<p>I could use a simple Galois field such as <span class="math">\(\mathbb{F}_{11}\)</span>. Since it is composed only of numbers, given that <span class="math">\(p\)</span> is a prime and has power <span class="math">\(1\)</span>, performing addition and multiplication operations is simple. Too simple.
+<p>I could use a simple Galois field such as <span class="arithmatex">\(\mathbb{F}_{11}\)</span>. Since it is composed only of numbers, given that <span class="arithmatex">\(p\)</span> is a prime and has power <span class="arithmatex">\(1\)</span>, performing addition and multiplication operations is simple. Too simple.
 So why not <strong>make life more complicated</strong>?
-Why not use a field <span class="math">\(\mathbb{F}_{2^3}\)</span> where the coefficients are <strong>polynomials</strong>? And above all, what would I be here for otherwise?
+Why not use a field <span class="arithmatex">\(\mathbb{F}_{2^3}\)</span> where the coefficients are <strong>polynomials</strong>? And above all, what would I be here for otherwise?
 Let us take a look.</p>
-<p>Let us assume we have a <strong>dealer</strong>, that is, a <strong>key distributor</strong>, who uses the field <span class="math">\(\mathbb{F}_{2^3}\)</span> with irreducible polynomial <span class="math">\(\alpha^3 + \alpha^2 + 1\)</span>.
+<p>Let us assume we have a <strong>dealer</strong>, that is, a <strong>key distributor</strong>, who uses the field <span class="arithmatex">\(\mathbb{F}_{2^3}\)</span> with irreducible polynomial <span class="arithmatex">\(\alpha^3 + \alpha^2 + 1\)</span>.
 With this field we can <strong>hide</strong> at most 3 bits of information. If you have something larger to hide, either use <strong>larger</strong> fields or split the information into <strong>batches</strong>.
-I will only explain how to do it. In any case, as we know from <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#from-the-little-garden-to-the-plantation" target="_blank">here</a>, the elements of the field in question are:</p>
-<div class="math">$$
+I will only explain how to do it. In any case, as we know from <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#from-the-little-garden-to-the-plantation">here</a>, the elements of the field in question are:</p>
+<div class="arithmatex">\[
 \{ 0, \, 1, \, \alpha, \, \alpha + 1, \, \alpha^2, \, \alpha^2 + 1, \, \alpha^2 + \alpha, \, \alpha^2 + \alpha + 1 \}
-$$</div>
+\]</div>
 <p>Let us further assume that, for some reason, the dealer wants to hide the number of blasphemies I produce in the span of 1 minute, namely 6.
-Knowing that <span class="math">\(S\)</span> and the <strong>coefficients</strong> <span class="math">\(a_i\)</span> <strong>must belong to the field</strong>, the first thing the dealer does is convert <span class="math">\(6\)</span> into a value of the field (note that I chose the number 6 because it is fully representable with 3 bits).
+Knowing that <span class="arithmatex">\(S\)</span> and the <strong>coefficients</strong> <span class="arithmatex">\(a_i\)</span> <strong>must belong to the field</strong>, the first thing the dealer does is convert <span class="arithmatex">\(6\)</span> into a value of the field (note that I chose the number 6 because it is fully representable with 3 bits).
 Therefore we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 6_{10} = (\alpha^2 + \alpha)_{\mathbb{F}_{2^3}}
-$$</div>
-<p>If you are curious to know how I did it, read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically" target="_blank">here</a>.
-Now the dealer has to choose <strong>how many keys</strong> (or shares, which we mentioned earlier) to create. Let us assume they want to generate <span class="math">\(s=4\)</span>, and that they choose a minimum threshold for reconstructing the information <span class="math">\(t=3\)</span> (note that the field <span class="math">\(\mathbb{F}_{2^3}\)</span> has <span class="math">\(8\)</span> elements and we distribute <span class="math">\(4\)</span> of them, so everything is legitimate).
+\]</div>
+<p>If you are curious to know how I did it, read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically">here</a>.
+Now the dealer has to choose <strong>how many keys</strong> (or shares, which we mentioned earlier) to create. Let us assume they want to generate <span class="arithmatex">\(s=4\)</span>, and that they choose a minimum threshold for reconstructing the information <span class="arithmatex">\(t=3\)</span> (note that the field <span class="arithmatex">\(\mathbb{F}_{2^3}\)</span> has <span class="arithmatex">\(8\)</span> elements and we distribute <span class="arithmatex">\(4\)</span> of them, so everything is legitimate).
 The <strong>sharing polynomial</strong> will have the form:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) = S + a_1x + a_2x^2
-$$</div>
-<p>where <span class="math">\(S\)</span> is the information to hide, namely</p>
-<div class="math">$$
+\]</div>
+<p>where <span class="arithmatex">\(S\)</span> is the information to hide, namely</p>
+<div class="arithmatex">\[
 S = \alpha^2 + \alpha
-$$</div>
-<p>and <span class="math">\(a_1\)</span> and <span class="math">\(a_2\)</span> are field coefficients <strong>chosen at random</strong>. Let us assume:</p>
-<div class="math">$$
+\]</div>
+<p>and <span class="arithmatex">\(a_1\)</span> and <span class="arithmatex">\(a_2\)</span> are field coefficients <strong>chosen at random</strong>. Let us assume:</p>
+<div class="arithmatex">\[
 \begin{aligned}
 a_1 &amp;= \alpha + 1 \\[6pt]
 a_2 &amp;= \alpha^2 + 1
 \end{aligned}
-$$</div>
+\]</div>
 <p>and therefore the polynomial is:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 f(x) = \alpha^2 + \alpha + (\alpha + 1)x + (\alpha^2 + 1)x^2
-$$</div>
+\]</div>
 <p>where:</p>
 <ul>
-<li><span class="math">\(\alpha\)</span> is the <strong>symbol used to represent the elements of the field</strong> <span class="math">\(\mathbb{F}_{2^3}\)</span>.</li>
-<li><span class="math">\(x\)</span> is the <strong>variable of the sharing polynomial</strong> on which the evaluation will be performed.</li>
+<li><span class="arithmatex">\(\alpha\)</span> is the <strong>symbol used to represent the elements of the field</strong> <span class="arithmatex">\(\mathbb{F}_{2^3}\)</span>.</li>
+<li><span class="arithmatex">\(x\)</span> is the <strong>variable of the sharing polynomial</strong> on which the evaluation will be performed.</li>
 </ul>
 <p>Now that we have fixed the sharing polynomial, the dealer must generate the four shares.
-So what they do is choose <strong>four distinct</strong> <span class="math">\(x\)</span> values and <strong>evaluate the function</strong> <span class="math">\(f(x)\)</span> at the chosen points. 
+So what they do is choose <strong>four distinct</strong> <span class="arithmatex">\(x\)</span> values and <strong>evaluate the function</strong> <span class="arithmatex">\(f(x)\)</span> at the chosen points. 
 Do you remember that in <a href="#the-lagrange-addition">this section</a> we imposed points in the plane through which the polynomial had 
-to pass? Here it is exactly the same thing, but the <strong>domain is the Galois field</strong> excluding the point <span class="math">\(0\)</span> (because that is 
+to pass? Here it is exactly the same thing, but the <strong>domain is the Galois field</strong> excluding the point <span class="arithmatex">\(0\)</span> (because that is 
 the one that hides the information). Since I am as lazy as a sloth, and whoever knows me knows I am not exaggerating given 
 that I often do not even take care of my primary needs (but then I go to the gym, go figure...), let us choose points 
 that do not make the calculations (too) complicated:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 x_i = 1, \; \alpha, \; \alpha^2, \; 1 + \alpha
-$$</div>
+\]</div>
 <p>and let us start <strong>creating the shares to distribute</strong>:</p>
 <ul>
 <li>
 <p>Share 1:</p>
-<p>
-<div class="math">$$
-\begin{align}
+<div class="arithmatex">\[
+\begin{align*}
 (x_1, \, f(x_1)) &amp;= (1, \, f(1)) \\[6pt]
 f(1) &amp;= \alpha^2 + \alpha + (\alpha + 1)\cdot 1 + (\alpha^2 + 1)\cdot 1^2 \\[6pt]
 &amp;= 2\alpha^2 + \alpha + 2 \\[10pt]
 \Rightarrow (1, \, f(1)) &amp;= (1, \, 0)
-\end{align}
-$$</div>
-</p>
+\end{align*}
+\]</div>
 </li>
 <li>
 <p>Share 2:</p>
-<p>
-<div class="math">$$
-\begin{align}
+<div class="arithmatex">\[
+\begin{align*}
 (x_2, \, f(x_2)) &amp;= (\alpha, \, f(\alpha)) \\[6pt]
 f(\alpha) &amp;= \alpha^2 + \alpha + (\alpha + 1) \cdot \alpha + (\alpha^2 + 1) \cdot \alpha^2 \\[6pt]
 &amp;= \alpha^4 + 3\alpha^2 + 2\alpha \\[10pt]
 \Rightarrow (\alpha, \, f(\alpha)) &amp;= (\alpha, \, \alpha + 1)
-\end{align}
-$$</div>
-</p>
+\end{align*}
+\]</div>
 </li>
 <li>
 <p>Share 3:</p>
-<p>
-<div class="math">$$
-\begin{align}
+<div class="arithmatex">\[
+\begin{align*}
 (x_3, \, f(x_3)) &amp;= (\alpha^2, \, f(\alpha^2)) \\[6pt]
 f(\alpha^2) &amp;= \alpha^2 + \alpha + (\alpha + 1) \cdot \alpha^2 + (\alpha^2 + 1) \cdot \alpha^4 \\[6pt]
 &amp;= \alpha^6 + \alpha^4 + \alpha^3 + 2\alpha^2 + \alpha \\[10pt]
 \Rightarrow (\alpha^2, \, f(\alpha^2)) &amp;= (\alpha^2, \, \alpha)
-\end{align}
-$$</div>
-</p>
+\end{align*}
+\]</div>
 </li>
 <li>
 <p>Share 4:</p>
-<p>
-<div class="math">$$
-\begin{align}
+<div class="arithmatex">\[
+\begin{align*}
 (x_4, \, f(x_4)) &amp;= (1 + \alpha, \, f(1 + \alpha)) \\[6pt]
 f(1 + \alpha) &amp;= \alpha^2 + \alpha + (\alpha + 1) \cdot (1 + \alpha) + (\alpha^2 + 1) \cdot (1 + \alpha)^2 \\[6pt]
 &amp;= \alpha^3 + \alpha \\[10pt]
 \Rightarrow (1 + \alpha, \, f(1 + \alpha)) &amp;= (1 + \alpha, \, \alpha^2 + 1)
-\end{align}
-$$</div>
-</p>
+\end{align*}
+\]</div>
 </li>
 </ul>
-<p>In expanding the polynomials, the <strong>cyclic property of powers</strong> has been applied. If you want to know more, you just need to look <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically" target="_blank">here</a>.
+<p>In expanding the polynomials, the <strong>cyclic property of powers</strong> has been applied. If you want to know more, you just need to look <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically">here</a>.
 Let us get back to it. At this point the dealer is done. They have chosen what they needed to choose and generated what they needed to generate.
 They <strong>jealously</strong> keep the sharing polynomial, and <strong>distribute</strong> the <strong>shares</strong> (each person receives one and only one share) and the 
 field that was used. Let us assume the dealer distributes the shares to Ludwig, Pluto, Donald, and Mickey, claiming that 
 the top-secret information is the code to access Duckstein’s files (and who knows why the password is my number of blasphemies 
 per minute) and discover the truth about the relationships between Mr. T. (president of Duckburg) and Mr. B. (any reference 
-to facts and/or persons is purely coincidental). The dealer tells them that no one, alone, can access the files. It is necessary that at least <span class="math">\(3\)</span> people agree.</p>
+to facts and/or persons is purely coincidental). The dealer tells them that no one, alone, can access the files. It is necessary that at least <span class="arithmatex">\(3\)</span> people agree.</p>
 <h4 id="decryption-example">Decryption Example<a class="headerlink" href="#decryption-example" title="Permanent link"> </a></h4>
 <p>Since no one wants to undermine democracy the information is not used, after all, there is not much time left in the term. Then, however, 
 T. organizes an assault on Duckburg’s town hall to stay in power and, as they say, live by the sword, die by the sword. 
 The four start arguing among themselves and Pluto, who is a dog, is a fervent supporter of the 'Return Duckburg to Greatness' 
 movement and does not want to reveal anything. Fortunately, Ludwig, Donald, and Mickey, who do not live off other 
 people’s ignorance, agree to reveal the secrets that will open the eyes of Duckburg’s inhabitants and, hopefully, kick T. out.
-So they proceed as follows. Let us assume that three of them have the <strong>shares</strong> <span class="math">\((x_1, \, f(x_1))\)</span>, <span class="math">\((x_2, \, f(x_2))\)</span>, and <span class="math">\((x_4, \, f(x_4))\)</span>. They also know the <strong>finite field</strong> used:</p>
-<div class="math">$$
+So they proceed as follows. Let us assume that three of them have the <strong>shares</strong> <span class="arithmatex">\((x_1, \, f(x_1))\)</span>, <span class="arithmatex">\((x_2, \, f(x_2))\)</span>, and <span class="arithmatex">\((x_4, \, f(x_4))\)</span>. They also know the <strong>finite field</strong> used:</p>
+<div class="arithmatex">\[
 \mathbb{F}_{2^3} \pmod{\alpha^3 + \alpha^2 + 1}
-$$</div>
+\]</div>
 <p>From the <a href="#decifatura">decryption formulas</a>, we know that we must compute</p>
-<div class="math">$$
+<div class="arithmatex">\[
 L_1(0), \; L_2(0), \; L_4(0)
-$$</div>
+\]</div>
 <p>and therefore, given the shares:</p>
 <ul>
 <li>
-<p><span class="math">\(L_1(0)\)</span>:</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(L_1(0)\)</span>:</p>
+<div class="arithmatex">\[
 \begin{aligned}
 L_1(0)
-&amp;= \frac{0 - x_2}{x_1 - x_2} \cdot \frac{0 - x_4}{x_1 - x_4}\\
+&amp;= \frac{0 - x_2}{x_1 - x_2} \cdot \frac{0 - x_4}{x_1 - x_4}\\[6pt]
 &amp;= \frac{0 - \alpha}{1 - \alpha} \cdot \frac{0 - (1 + \alpha)}{1 - (1 + \alpha)}\\[6pt]
 &amp;= 1
 \end{aligned}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p><span class="math">\(L_2(0)\)</span>:</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(L_2(0)\)</span>:</p>
+<div class="arithmatex">\[
 \begin{aligned}
 L_2(0)
-&amp;= \frac{0 - x_1}{x_2 - x_1} \cdot \frac{0 - x_4}{x_2 - x_4}\\
+&amp;= \frac{0 - x_1}{x_2 - x_1} \cdot \frac{0 - x_4}{x_2 - x_4}\\[6pt]
 &amp;= \frac{0 - 1}{\alpha - 1} \cdot \frac{0 - (1 + \alpha)}{\alpha - (1 + \alpha)}\\[6pt]
 &amp;= 1
 \end{aligned}
-$$</div>
-</p>
+\]</div>
 </li>
 <li>
-<p><span class="math">\(L_4(0)\)</span>:</p>
-<p>
-<div class="math">$$
+<p><span class="arithmatex">\(L_4(0)\)</span>:</p>
+<div class="arithmatex">\[
 \begin{aligned}
 L_4(0)
-&amp;= \frac{0 - x_1}{x_4 - x_1} \cdot \frac{0 - x_2}{x_4 - x_2}\\
+&amp;= \frac{0 - x_1}{x_4 - x_1} \cdot \frac{0 - x_2}{x_4 - x_2}\\[6pt]
 &amp;= \frac{0 - 1}{(1 + \alpha) - 1} \cdot \frac{0 - \alpha}{(1 + \alpha) - \alpha}\\[6pt]
 &amp;= 1
 \end{aligned}
-$$</div>
-</p>
+\]</div>
 </li>
 </ul>
-<p>I would like to point out that the values of the <span class="math">\(L_i\)</span> are always <span class="math">\(1\)</span> because I chose an <strong>extremely small</strong> field. In any case, 
-we can now <strong>compute</strong> our <span class="math">\(S\)</span>. In fact, given the <span class="math">\(y_i\)</span> which are nothing but the <span class="math">\(f(x_i)\)</span> values of the shares, we apply again 
+<p>I would like to point out that the values of the <span class="arithmatex">\(L_i\)</span> are always <span class="arithmatex">\(1\)</span> because I chose an <strong>extremely small</strong> field. In any case, 
+we can now <strong>compute</strong> our <span class="arithmatex">\(S\)</span>. In fact, given the <span class="arithmatex">\(y_i\)</span> which are nothing but the <span class="arithmatex">\(f(x_i)\)</span> values of the shares, we apply again 
 the <a href="#decifratura">little decryption formula</a>:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{aligned}
 S = f(0) &amp;= f(x_1) \cdot L_1(0) + f(x_2) \cdot L_2(0) + f(x_4) \cdot L_4(0) \\[6pt]
 &amp;= 0 \cdot 1 + (\alpha + 1) \cdot 1 + (\alpha^2 + 1) \cdot 1 \\[10pt]
 &amp;= \alpha^2 + \alpha
 \end{aligned}
-$$</div>
-<p>So the secret is <span class="math">\(S=\alpha^2 + \alpha\)</span> and, knowing that we are in the field <span class="math">\(\mathbb{F}_{2^3} \pmod{\alpha^3 + \alpha^2 + 1}\)</span>, 
-we take its <strong>integer value</strong> using the now <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically" target="_blank">overused little table</a>:</p>
-<div class="math">$$
+\]</div>
+<p>So the secret is <span class="arithmatex">\(S=\alpha^2 + \alpha\)</span> and, knowing that we are in the field <span class="arithmatex">\(\mathbb{F}_{2^3} \pmod{\alpha^3 + \alpha^2 + 1}\)</span>, 
+we take its <strong>integer value</strong> using the now <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically">overused little table</a>:</p>
+<div class="arithmatex">\[
 (\alpha^2 + \alpha)_{\mathbb{F}_{2^3}} = (110)_{2} = 6_{10}
-$$</div>
+\]</div>
 <p>So now Ludwig, Donald, and Mickey together, and only together, not only know my blasphemy rate per minute but can access 
 Duckstein’s files and bring Duckburg back to reason. Try it and you will see: use <strong>any subset</strong> of 3 elements and you will see 
 that it works. Not one more (in the sense that one more is not necessary), not one less (in the sense that if you have just one less, 
 you cannot reconstruct the secret <strong>correctly</strong>). This is thanks to the interpolation property that says that, to uniquely 
-define a polynomial of degree <span class="math">\(k\)</span>, <strong><span class="math">\(k + 1\)</span> distinct</strong> points on the x-axis are <strong>necessary</strong>.</p>
+define a polynomial of degree <span class="arithmatex">\(k\)</span>, <strong><span class="arithmatex">\(k + 1\)</span> distinct</strong> points on the x-axis are <strong>necessary</strong>.</p>
 <h3 id="considerations">Considerations<a class="headerlink" href="#considerations" title="Permanent link"> </a></h3>
 <p>The example I presented, mixing political satire, mathematics, and poetic license, is very simple. 
-To recover the secret, a very trivial brute-force attack would be enough, since each generic <span class="math">\(L_i\)</span> 
-lies within the field <span class="math">\(\mathbb{F}_{2^3}\)</span>, which contains 8 elements. Since by design three shares are 
+To recover the secret, a very trivial brute-force attack would be enough, since each generic <span class="arithmatex">\(L_i\)</span> 
+lies within the field <span class="arithmatex">\(\mathbb{F}_{2^3}\)</span>, which contains 8 elements. Since by design three shares are 
 required, the number of attempts to be made is equal to all possible distinct triplets in a set of 8 
-elements. Using the formula of the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient" target="_blank">binomial coefficient</a>, 
+elements. Using the formula of the <a href="https://en.wikipedia.org/wiki/Binomial_coefficient">binomial coefficient</a>, 
 we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \binom{8}{3} = \frac{8!}{3!(8-3)!} = 56
-$$</div>
+\]</div>
 <p>we have 56 <strong>possible</strong> triplets. <strong>Absolutely feasible</strong>. But let us look at the general case:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \binom{n}{k} = \frac{n!}{k!(n-k)!}
-$$</div>
+\]</div>
 <p>From here we can proceed in two ways. Either we 
-use <a href="https://en.wikipedia.org/wiki/Stirling%27s_approximation" target="_blank">Stirling’s approximation</a> or 
+use <a href="https://en.wikipedia.org/wiki/Stirling%27s_approximation">Stirling’s approximation</a> or 
 we go with brutal simplifications. Since we are all tired, let us proceed with the latter.</p>
 <p>By definition, the <strong>factorial</strong> is:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 n! = n \cdot (n-1) \cdot (n-2) \cdots (n-k+1) \cdot (n-k) \cdot (n-k-1) \cdot (n-k-2) \cdots 1
-$$</div>
+\]</div>
 <p>Applying the definition recursively, we can write that:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 (n-k) \cdot (n-k-1) \cdot (n-k-2) \cdots 1 = (n-k)!
-$$</div>
+\]</div>
 <p>from which</p>
-<div class="math">$$
+<div class="arithmatex">\[
 n! = n \cdot (n-1) \cdot (n-2) \cdots (n-k)!
-$$</div>
+\]</div>
 <p>Using this in the initial formula we have:</p>
-<div class="math">$$
+<div class="arithmatex">\[
 \begin{aligned}
 \frac{n!}{k!(n-k)!} &amp;= \frac{n \cdot (n-1) \cdot (n-2) \cdots (n-k+1) \cdot (n-k)!}{k!(n-k)!} \\[6pt]
 &amp;= \frac{n \cdot (n-1) \cdot (n-2) \cdots (n-k+1)}{k!}
 \end{aligned}
-$$</div>
-<p>By grouping by <span class="math">\(n\)</span>, it is easy to obtain:</p>
-<div class="math">$$
+\]</div>
+<p>By grouping by <span class="arithmatex">\(n\)</span>, it is easy to obtain:</p>
+<div class="arithmatex">\[
 \frac{n \cdot (n-1) \cdot (n-2) \cdots (n-k+1)}{k!} = \frac{n^k}{k!} \cdot \left( 1 - \frac{1}{n} \right) \cdot \left( 1 - \frac{2}{n} \right) \cdots \left( 1 - \frac{k - 1}{n} \right)
-$$</div>
-<p>If we consider <span class="math">\(n \to \infty\)</span>, what remains is <span class="math">\(\frac{n^k}{k!}\)</span> and therefore, since <span class="math">\(k\)</span> is negligible if we consider it finite, we have that the computational complexity of testing all possible values is:</p>
-<div class="math">$$
+\]</div>
+<p>If we consider <span class="arithmatex">\(n \to \infty\)</span>, what remains is <span class="arithmatex">\(\frac{n^k}{k!}\)</span> and therefore, since <span class="arithmatex">\(k\)</span> is negligible if we consider it finite, we have that the computational complexity of testing all possible values is:</p>
+<div class="arithmatex">\[
 O(n^k)
-$$</div>
-<p>where <span class="math">\(n\)</span> is the cardinality of the finite field and <span class="math">\(k\)</span> is the minimum threshold to reconstruct the information, and 
-this is a <strong>monstrous complexity</strong>. Now consider that the fields used are of the type <span class="math">\(\mathbb{F}_{2^{256}}\)</span>, 
-which contain about <span class="math">\(\sim 10^{77}\)</span> elements. According to scientific estimates, the number of atoms in the universe 
-is on the order of <span class="math">\(\sim 10^{80}\)</span>.</p>
+\]</div>
+<p>where <span class="arithmatex">\(n\)</span> is the cardinality of the finite field and <span class="arithmatex">\(k\)</span> is the minimum threshold to reconstruct the information, and 
+this is a <strong>monstrous complexity</strong>. Now consider that the fields used are of the type <span class="arithmatex">\(\mathbb{F}_{2^{256}}\)</span>, 
+which contain about <span class="arithmatex">\(\sim 10^{77}\)</span> elements. According to scientific estimates, the number of atoms in the universe 
+is on the order of <span class="arithmatex">\(\sim 10^{80}\)</span>.</p>
 <h3 id="to-wrap-up">To Wrap Up<a class="headerlink" href="#to-wrap-up" title="Permanent link"> </a></h3>
 <p>Prefacing that I liked all the articles I have written (otherwise I simply would not have written them, obviously), among them all 
 this one was the most <strong>fun</strong> to write. Both because of the emotional value of its discovery, and because, come on, it is really 
-awesome. I liked it so much that I even wrote a <strong>repo</strong> about it. You can find it <a href="https://github.com/lucadivit/ShareYourSecret" target="_blank"><strong>here</strong></a>. 
+awesome. I liked it so much that I even wrote a <strong>repo</strong> about it. You can find it <a href="https://github.com/lucadivit/ShareYourSecret"><strong>here</strong></a>. 
 You will forgive me if I did not implement Galois fields raw; they are so beautiful and so dear to me, but implementing polynomial 
 reduction from scratch, no thanks at all. Luckily there is a library (<code>galois</code>, look at that creativity) that has implemented 
 much of the dirty work. In any case, I want to conclude the article by inviting you to 
-read <a href="https://apps.dtic.mil/sti/tr/pdf/ADA069397.pdf" target="_blank"><strong>Shamir’s original article</strong></a>, because it is very interesting.
+read <a href="https://apps.dtic.mil/sti/tr/pdf/ADA069397.pdf"><strong>Shamir’s original article</strong></a>, because it is very interesting.
 That said, I am going to <strong>share</strong> (in pieces, now that I can) my secrets with someone.</p>
 <p>Until next time.</p>
-<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
-    var align = "center",
-        indent = "0em",
-        linebreak = "false";
-
-    if (false) {
-        align = (screen.width < 768) ? "left" : align;
-        indent = (screen.width < 768) ? "0em" : indent;
-        linebreak = (screen.width < 768) ? 'true' : linebreak;
-    }
-
-    var mathjaxscript = document.createElement('script');
-    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
-    mathjaxscript.type = 'text/javascript';
-    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
-
-    var configscript = document.createElement('script');
-    configscript.type = 'text/x-mathjax-config';
-    configscript[(window.opera ? "innerHTML" : "text")] =
-        "MathJax.Hub.Config({" +
-        "    config: ['MMLorHTML.js']," +
-        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
-        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
-        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
-        "    displayAlign: '"+ align +"'," +
-        "    displayIndent: '"+ indent +"'," +
-        "    showMathMenu: false," +
-        "    messageStyle: 'normal'," +
-        "    tex2jax: { " +
-        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
-        "        displayMath: [ ['$$','$$'] ]," +
-        "        processEscapes: true," +
-        "        preview: 'TeX'," +
-        "    }, " +
-        "    'HTML-CSS': { " +
-        "        availableFonts: ['STIX', 'TeX']," +
-        "        preferredFont: 'STIX'," +
-        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
-        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
-        "    }, " +
-        "}); " +
-        "if ('default' !== 'default') {" +
-            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
-                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
-                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
-                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
-                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
-                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
-            "});" +
-        "}";
-
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
-    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
-}
-</script>
             </div>
         </section>
 
@@ -896,6 +790,10 @@ That said, I am going to <strong>share</strong> (in pieces, now that I can) my s
                 <li><a href="https://www.lucadivita.it/en/tag/lagrange_interpolation.html">lagrange_interpolation</a></li>
             </ul>
         </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
     </div>
 
 </article>
