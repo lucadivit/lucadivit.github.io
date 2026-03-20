@@ -5,16 +5,35 @@
     --site-inline-code-background-color: #eef2f7;
     --site-inline-code-border-color: #d5dde8;
     --link-rows-hover-bg: rgba(0, 0, 0, 0.06);
+    --link-rows-hover-shadow: 0 0.2rem 0.6rem rgba(15, 23, 42, 0.08);
+    --content-shell-shadow: 0 0.8rem 2rem rgba(15, 23, 42, 0.06);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
         --link-rows-hover-bg: rgba(255, 255, 255, 0.08);
+        --link-rows-hover-shadow: 0 0.3rem 0.9rem rgba(0, 0, 0, 0.32);
+        --content-shell-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.35);
     }
 }
 
 html {
     scrollbar-gutter: stable;
+}
+
+main#content {
+    width: min(100%, 70rem);
+    margin-inline: auto;
+    padding-inline: clamp(0.8rem, 3vw, 1.5rem);
+}
+
+main#content > article {
+    margin-block: clamp(1.1rem, 3.5vw, 1.8rem);
+    padding: clamp(1rem, 2.4vw, 1.35rem);
+    border: var(--pico-border-width) solid var(--pico-muted-border-color);
+    border-radius: var(--pico-border-radius);
+    background: var(--pico-card-background-color, var(--pico-background-color));
+    box-shadow: var(--content-shell-shadow);
 }
 
 body.redirect-page {
@@ -655,6 +674,7 @@ body.redirect-page {
 .page-body .sz-item:focus-within {
     background-color: var(--link-rows-hover-bg);
     background-color: color-mix(in oklab, var(--pico-muted-color) 12%, transparent);
+    box-shadow: var(--link-rows-hover-shadow);
 }
 
 .link-rows a,
@@ -751,17 +771,15 @@ main#content > article > header > p > .archive-meta {
     cursor: pointer;
     background: transparent;
     color: var(--pico-primary);
-    text-decoration: none;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.12em;
+    text-decoration-thickness: 0.08em;
 }
 
-.page-body .talks-list summary a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.page-body .talks-list summary a:hover,
-.page-body .talks-list summary a:focus-visible {
-    text-decoration: underline;
+.page-body .talks-list summary:hover,
+.page-body .talks-list summary:focus-visible {
+    text-decoration-color: currentColor;
 }
 
 .page-body .talks-list details > p {
@@ -799,6 +817,27 @@ main#content > article > header > p > .archive-meta {
     cursor: pointer;
     color: var(--pico-primary);
     background: transparent;
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.12em;
+    text-decoration-thickness: 0.08em;
+}
+
+.page-body .events-list summary:hover,
+.page-body .events-list summary:focus-visible {
+    text-decoration-color: currentColor;
+}
+
+.page-body .events-list details > p a {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.12em;
+    text-decoration-thickness: 0.08em;
+}
+
+.page-body .events-list details > p a:hover,
+.page-body .events-list details > p a:focus-visible {
+    text-decoration-color: currentColor;
 }
 
 .page-body .events-list details[open] > summary {
