@@ -4,6 +4,13 @@
     --site-inline-code-color: #1f2937;
     --site-inline-code-background-color: #eef2f7;
     --site-inline-code-border-color: #d5dde8;
+    --link-rows-hover-bg: rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --link-rows-hover-bg: rgba(255, 255, 255, 0.08);
+    }
 }
 
 html {
@@ -646,7 +653,8 @@ body.redirect-page {
 .link-rows li:focus-within,
 .page-body .sz-item:hover,
 .page-body .sz-item:focus-within {
-    background: color-mix(in oklab, var(--pico-muted-color) 12%, transparent);
+    background-color: var(--link-rows-hover-bg);
+    background-color: color-mix(in oklab, var(--pico-muted-color) 12%, transparent);
 }
 
 .link-rows a,
@@ -730,6 +738,79 @@ main#content > article > header > p > .archive-meta {
     list-style: disc;
     list-style-position: outside;
     padding-inline-start: calc(var(--pico-block-spacing-horizontal, var(--pico-spacing)) + 1.1rem);
+}
+
+.page-body .talks-list details {
+    margin: 0;
+    background: transparent;
+}
+
+.page-body .talks-list summary {
+    display: list-item;
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    color: var(--pico-primary);
+    text-decoration: none;
+}
+
+.page-body .talks-list summary a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.page-body .talks-list summary a:hover,
+.page-body .talks-list summary a:focus-visible {
+    text-decoration: underline;
+}
+
+.page-body .talks-list details > p {
+    margin: calc(var(--pico-spacing) * 0.35) 0 0;
+}
+
+.page-body .events-list details {
+    margin: 0;
+    background: transparent;
+}
+
+.page-body .events-section h4 {
+    counter-increment: none;
+    counter-reset: none;
+}
+
+.page-body .events-section h4::before {
+    content: none;
+}
+
+.page-body .events-section .events-meta-label {
+    font-weight: 500;
+    color: var(--pico-h4-color);
+}
+
+.page-body .events-section .events-list {
+    margin-bottom: calc(var(--pico-block-spacing-vertical, 1.5rem) * 1.1);
+}
+
+.page-body .events-section .events-list + h4 {
+    margin-top: calc(var(--pico-block-spacing-vertical, 1.5rem) * 1.25);
+}
+
+.page-body .events-list summary {
+    cursor: pointer;
+    color: var(--pico-primary);
+    background: transparent;
+}
+
+.page-body .events-list details[open] > summary {
+    margin-bottom: calc(var(--pico-spacing) * 0.45);
+}
+
+.page-body .events-list details > p {
+    margin: 0 0 0 calc(var(--pico-spacing) * 1.05);
+}
+
+.page-body .events-list details > p + p {
+    margin-top: calc(var(--pico-spacing) * 0.35);
 }
 
 .contact-logo {
