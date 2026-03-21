@@ -745,6 +745,7 @@ body.redirect-page {
     right: 0;
     width: 0.65rem;
     height: 0.65rem;
+    color: var(--pico-primary);
     background:
         linear-gradient(45deg, transparent 43%, currentColor 44% 56%, transparent 57%)
             left center / 50% 72% no-repeat,
