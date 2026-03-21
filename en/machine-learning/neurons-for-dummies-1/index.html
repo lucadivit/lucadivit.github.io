@@ -147,7 +147,7 @@ and we will do it step by step, with a practical example.</p>
 Let's start by saying that there are different types of neural networks: <strong>convolutional</strong>, <strong>recurrent</strong>, and many others.
 One or the other is chosen depending on the problem to be solved.
 In this article, we will focus on <strong>Multi Layer Perceptron</strong> networks (or <strong>MLP</strong>), which are usually represented like this:</p>
-<p class="image-caption"><img alt="MLP" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/mlp.png"/>
+<p class="image-caption"><img alt="MLP" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/mlp.jpg"/>
 Figure 1. Multi Layer Perceptron</p>
 <p>The image may look simple, but behind that simplicity hides a number of concepts enough to make you want to commit harakiri.<br/>
 And from this plethora of concepts... we will only scratch the surface.
@@ -175,16 +175,16 @@ If you’ve made it this far, you might be wondering: <em>"Ok, but how...?"</em>
 <p>We have talked about networks, layers, arrows, and dots.<br/>
 But to truly understand how a neural network makes decisions (and how it learns from its mistakes), we need to go down a level. Down to the level of the dot.<br/>
 Let's start by looking at the stylization of a biological neuron.</p>
-<p class="image-caption"><img alt="Biological Neuron" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/natural_neuron.png"/>
-Figura 2. Biological Neuron</p>
+<p class="image-caption"><img alt="Biological Neuron" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/natural_neuron.jpg"/>
+Figure 2. Biological Neuron</p>
 <p>In life, I have few certainties, but one of them is that I am not a neurologist, so I hope the experts will forgive the simplification that follows.
 The dendrites are <strong>stimulated</strong> by incoming electrical signals. The nucleus, together with the soma, <strong>processes</strong> the information, and the axon <strong>propagates</strong> it
 toward the synaptic connections, linking to the next neurons.</p>
 <p><strong>Does it ring a bell?</strong></p>
 <p>Now that we know how a biological neuron "works" (yes, the quotation marks are intentional), let's take a big leap of imagination and see how an <strong>artificial neuron</strong> is represented, 
 the now famous little dot:</p>
-<p class="image-caption"><img alt="Artificial Neuron" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/artificial_neuron.png"/>
-Figura 3. Artificial Neuron</p>
+<p class="image-caption"><img alt="Artificial Neuron" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/artificial_neuron.jpg"/>
+Figure 3. Artificial Neuron</p>
 <p>From this image, we can introduce many of the concepts necessary for our purpose:</p>
 <ul>
 <li><strong>Input</strong>: these are the neuron's inputs, meaning what stimulates the dendrites.</li>
@@ -266,8 +266,8 @@ the neuron will have two inputs <span class="arithmatex">\(x_1\)</span> e <span 
 <li>We choose the <a href="https://en.wikipedia.org/wiki/Heaviside_step_function">Heaviside step function</a> as the activation function</li>
 </ol>
 <p>The <strong>Heaviside step</strong> is a simple function whose graph is as follows:</p>
-<p class="image-caption"><img alt="Step Function" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/step.png"/>
-Figura 4. Heaviside Step</p>
+<p class="image-caption"><img alt="Step Function" class="image" src="https://www.lucadivita.it/en/images/machine_learning/neurons_for_dummies/step.jpg"/>
+Figure 4. Heaviside Step</p>
 <p>In short, given any value <span class="arithmatex">\(x\)</span> as input, the Heaviside step function returns:</p>
 <ul>
 <li><span class="arithmatex">\(0\)</span> if <span class="arithmatex">\(x &lt; 0\)</span>, </li>

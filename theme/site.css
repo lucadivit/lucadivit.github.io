@@ -1,6 +1,8 @@
 :root {
     --site-nav-layer-backdrop: 20;
     --site-nav-layer-panel: 30;
+    --site-content-shell-background: var(--pico-card-background-color,
+            var(--pico-background-color));
     --site-inline-code-color: #1f2937;
     --site-inline-code-background-color: #eef2f7;
     --site-inline-code-border-color: #d5dde8;
@@ -32,7 +34,7 @@ main#content > article {
     padding: clamp(1rem, 2.4vw, 1.35rem);
     border: var(--pico-border-width) solid var(--pico-muted-border-color);
     border-radius: var(--pico-border-radius);
-    background: var(--pico-card-background-color, var(--pico-background-color));
+    background: var(--site-content-shell-background);
     box-shadow: var(--content-shell-shadow);
 }
 
@@ -338,11 +340,29 @@ body.redirect-page {
     opacity: 0.7;
 }
 
-.article-extra-related .article-related-list li:hover,
-.article-extra-related .article-related-list li:focus-within,
-.article-extra-references .article-reference-list li:hover,
-.article-extra-references .article-reference-list li:focus-within {
-    background: color-mix(in oklab, var(--pico-muted-color) 12%, transparent);
+:where(.article-body, .page-body, main#content > article > section)
+    :is(ul, ol):not(.link-rows):not(.latest-rows):not(.article-related-list):not(.article-reference-list):not(.article-tags-list):not(.contact-links):not(.site-nav-menu):not(.site-nav-lang):not(.tag-index-list) > li {
+    border-radius: var(--pico-border-radius);
+    transition: background-color 120ms ease;
+}
+
+:where(.article-body, .page-body, main#content > article > section)
+    :is(ul, ol):not(.link-rows):not(.latest-rows):not(.article-related-list):not(.article-reference-list):not(.article-tags-list):not(.contact-links):not(.site-nav-menu):not(.site-nav-lang):not(.tag-index-list) > li:hover,
+:where(.article-body, .page-body, main#content > article > section)
+    :is(ul, ol):not(.link-rows):not(.latest-rows):not(.article-related-list):not(.article-reference-list):not(.article-tags-list):not(.contact-links):not(.site-nav-menu):not(.site-nav-lang):not(.tag-index-list) > li:focus-within {
+    background-color: var(--link-rows-hover-bg);
+    background-color: color-mix(in oklab, var(--pico-muted-color) 12%, transparent);
+}
+
+:where(.article-body, .page-body, main#content > article > section)
+    .toc :is(ul, ol) > li,
+:where(.article-body, .page-body, main#content > article > section)
+    .toc :is(ul, ol) > li:hover,
+:where(.article-body, .page-body, main#content > article > section)
+    .toc :is(ul, ol) > li:focus-within {
+    background: transparent;
+    border-radius: 0;
+    transition: none;
 }
 
 .article-body blockquote,
@@ -937,7 +957,7 @@ main#content > article > header > p > .archive-meta {
     top: 0;
     z-index: var(--site-nav-layer-panel);
     color: var(--pico-color);
-    background: var(--pico-background-color);
+    background: var(--site-content-shell-background);
     border-bottom: var(--pico-border-width) solid var(--pico-muted-border-color);
     box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.06);
     transition: none;
@@ -1219,7 +1239,7 @@ main#content > article > header > p > .archive-meta {
         height: 100vh;
         height: 100dvh;
         width: clamp(14rem, 72vw, 18rem);
-        background: var(--pico-background-color);
+        background: var(--site-content-shell-background);
         box-shadow: -0.75rem 0 2rem rgba(0, 0, 0, 0.2);
         padding: clamp(3.5rem, 7vh, 4.25rem) clamp(0.85rem, 2.5vw, 1.1rem) clamp(0.85rem, 2.5vw, 1.1rem);
         overflow: auto;
