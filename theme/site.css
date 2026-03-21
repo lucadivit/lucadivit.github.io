@@ -709,6 +709,97 @@ body.redirect-page {
     text-decoration: underline;
 }
 
+.link-rows li.link-row-detail > details {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: 0;
+}
+
+.link-rows summary.archive-entry-toggle {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0 calc(var(--pico-spacing) * 1.35) 0 0;
+    padding-left: 0;
+    border-radius: inherit;
+    background: transparent;
+    cursor: pointer;
+    list-style: none;
+}
+
+.link-rows summary.archive-entry-toggle::marker {
+    content: "";
+    font-size: 0;
+}
+
+.link-rows summary.archive-entry-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.link-rows summary.archive-entry-toggle::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 0.65rem;
+    height: 0.65rem;
+    background:
+        linear-gradient(45deg, transparent 43%, currentColor 44% 56%, transparent 57%)
+            left center / 50% 72% no-repeat,
+        linear-gradient(-45deg, transparent 43%, currentColor 44% 56%, transparent 57%)
+            right center / 50% 72% no-repeat;
+    transform: translateY(-50%);
+    transform-origin: center;
+    pointer-events: none;
+}
+
+.link-rows details.archive-entry[open] > summary.archive-entry-toggle::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.link-rows summary.archive-entry-toggle:focus-visible {
+    outline: var(--pico-outline-width) solid var(--pico-primary);
+    outline-offset: 0.15rem;
+}
+
+.link-rows summary.archive-entry-toggle a {
+    text-decoration: none;
+}
+
+.link-rows summary.archive-entry-toggle > a:first-child {
+    display: block;
+    margin: 0;
+}
+
+.link-rows summary.archive-entry-toggle > :first-child {
+    margin: 0;
+}
+
+.link-rows summary.archive-entry-toggle a:hover,
+.link-rows summary.archive-entry-toggle a:focus-visible {
+    text-decoration: underline;
+}
+
+.link-rows summary.archive-entry-toggle > .archive-category {
+    margin-top: calc(var(--pico-spacing) * 0.5);
+}
+
+.link-rows summary.archive-entry-toggle > .archive-meta {
+    margin-top: calc(var(--pico-spacing) * 0.5);
+}
+
+.link-rows details.archive-entry > div.archive-entry-summary {
+    margin-top: calc(var(--pico-spacing) * 0.45);
+    color: var(--pico-muted-color);
+    line-height: 1.55;
+}
+
+.link-rows details.archive-entry > div.archive-entry-summary > p {
+    margin: 0;
+}
+
 .archive-meta {
     display: block;
     margin-top: calc(var(--pico-spacing) * 0.25);
@@ -786,8 +877,13 @@ main#content > article > header > p > .archive-meta {
 }
 
 .page-body .talks-list summary {
-    display: list-item;
+    display: block;
+    position: relative;
     width: 100%;
+    margin: 0;
+    padding: 0 calc(var(--pico-spacing) * 1.35) 0 0;
+    padding-left: 0;
+    list-style: none;
     cursor: pointer;
     background: transparent;
     color: var(--pico-primary);
@@ -795,6 +891,36 @@ main#content > article > header > p > .archive-meta {
     text-decoration-color: transparent;
     text-underline-offset: 0.12em;
     text-decoration-thickness: 0.08em;
+}
+
+.page-body .talks-list summary::marker {
+    content: "";
+    font-size: 0;
+}
+
+.page-body .talks-list summary::-webkit-details-marker {
+    display: none;
+}
+
+.page-body .talks-list summary::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 0.65rem;
+    height: 0.65rem;
+    background:
+        linear-gradient(45deg, transparent 43%, currentColor 44% 56%, transparent 57%)
+            left center / 50% 72% no-repeat,
+        linear-gradient(-45deg, transparent 43%, currentColor 44% 56%, transparent 57%)
+            right center / 50% 72% no-repeat;
+    transform: translateY(-50%);
+    transform-origin: center;
+    pointer-events: none;
+}
+
+.page-body .talks-list details[open] > summary::after {
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .page-body .talks-list summary:hover,
@@ -834,6 +960,13 @@ main#content > article > header > p > .archive-meta {
 }
 
 .page-body .events-list summary {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0 calc(var(--pico-spacing) * 1.35) 0 0;
+    padding-left: 0;
+    list-style: none;
     cursor: pointer;
     color: var(--pico-primary);
     background: transparent;
@@ -841,6 +974,32 @@ main#content > article > header > p > .archive-meta {
     text-decoration-color: transparent;
     text-underline-offset: 0.12em;
     text-decoration-thickness: 0.08em;
+}
+
+.page-body .events-list summary::marker {
+    content: "";
+    font-size: 0;
+}
+
+.page-body .events-list summary::-webkit-details-marker {
+    display: none;
+}
+
+.page-body .events-list summary::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 0.65rem;
+    height: 0.65rem;
+    background:
+        linear-gradient(45deg, transparent 43%, currentColor 44% 56%, transparent 57%)
+            left center / 50% 72% no-repeat,
+        linear-gradient(-45deg, transparent 43%, currentColor 44% 56%, transparent 57%)
+            right center / 50% 72% no-repeat;
+    transform: translateY(-50%);
+    transform-origin: center;
+    pointer-events: none;
 }
 
 .page-body .events-list summary:hover,
@@ -862,6 +1021,10 @@ main#content > article > header > p > .archive-meta {
 
 .page-body .events-list details[open] > summary {
     margin-bottom: calc(var(--pico-spacing) * 0.45);
+}
+
+.page-body .events-list details[open] > summary::after {
+    transform: translateY(-50%) rotate(180deg);
 }
 
 .page-body .events-list details > p {
