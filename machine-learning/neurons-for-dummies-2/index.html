@@ -30,7 +30,7 @@
             <div>
                 <strong>
                     <a class="site-brand" href="https://www.lucadivita.it/">
-                        <img class="site-logo" src="/images/logo/logo.png" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <img class="site-logo" src="/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
                         <span>Bit Di Vita</span>
                     </a>
                 </strong>
@@ -55,13 +55,13 @@
         </li>
         <li>
             <a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/" hreflang="it" title="Italian" aria-current="page">
-                <img class="lang-flag" src="/images/flags/it.jpg" alt="Italian" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
             <a href="/en/machine-learning/neurons-for-dummies-2/" hreflang="en" title="English" >
-                <img class="lang-flag" src="/images/flags/en.jpg" alt="English" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
         </li>
@@ -94,13 +94,13 @@
         </li>
         <li>
             <a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-2/" hreflang="it" title="Italian" aria-current="page">
-                <img class="lang-flag" src="/images/flags/it.jpg" alt="Italian" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
             <a href="/en/machine-learning/neurons-for-dummies-2/" hreflang="en" title="English" >
-                <img class="lang-flag" src="/images/flags/en.jpg" alt="English" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
         </li>
@@ -182,7 +182,7 @@ Nel nostro caso, che vi ricordo essere il <strong>problema AND</strong>, siamo i
 essere la <strong>Binary Cross Entropy - BCE</strong>.</p>
 <p>Andiamo quindi a scrivere la formula:</p>
 <div class="arithmatex">\[
-BCE_i = -[y_i \cdot ln(p_i) + (1 - y_i) \cdot ln(1 - p_i)]
+BCE_i = -[y_i \cdot \ln(p_i) + (1 - y_i) \cdot \ln(1 - p_i)]
 \]</div>
 <p>Dove:</p>
 <ul>
@@ -205,12 +205,12 @@ x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\
 \]</div>
 <p>Per la prima riga abbiamo:</p>
 <div class="arithmatex">\[
-y_0 = 0, p_0 = 1 \Rightarrow BCE_0 = -[0 \cdot ln(1) + (1 - 0) \cdot ln(1 - 1)] = -\infty
+y_0 = 0, p_0 = 1 \Rightarrow BCE_0 = -[0 \cdot \ln(1) + (1 - 0) \cdot \ln(1 - 1)] = -\infty
 \]</div>
 <p>Come si può vedere, <strong>l’errore è massimo</strong> e in effetti, la predizione è <strong>l’opposto esatto</strong> del risultato reale.</p>
 <p>Applicandola sull'ultima invece si ha:</p>
 <div class="arithmatex">\[
-y_3 = 1, p_3 = 1 \Rightarrow BCE_3 = -[1 \cdot ln(1) + (1 - 1) \cdot ln(1 - 1)] = 0
+y_3 = 1, p_3 = 1 \Rightarrow BCE_3 = -[1 \cdot \ln(1) + (1 - 1) \cdot \ln(1 - 1)] = 0
 \]</div>
 <p>In questo caso <strong>l'errore è nullo</strong> dato che la predizione è <strong>esattamente quella attesa</strong>.</p>
 <p>Sommando tutte le componenti dell'errore, otteniamo l'errore totale:</p>

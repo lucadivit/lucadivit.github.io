@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Come Ti Rettifico Il Codice - 2 - Bit Di Vita</title>
+    <meta name="description" content="Ci siamo lasciati il mese scorso con dei codici a correzione giocattolo. Si può dire dai, ci siamo riscaldati. Non dico che abbiamo steso una raglia ma almeno le basi e qualche concetto fondamentale che si sa, sono sempre alla base di tutto. In questo secondo articolo non ci libereremo …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="Come Ti Rettifico Il Codice - 2 - Bit Di Vita">
+    <meta property="og:description" content="Ci siamo lasciati il mese scorso con dei codici a correzione giocattolo. Si può dire dai, ci siamo riscaldati. Non dico che abbiamo steso una raglia ma almeno le basi e qualche concetto fondamentale che si sa, sono sempre alla base di tutto. In questo secondo articolo non ci libereremo …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="/theme/site.css">
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/">
+                        <img class="site-logo" src="/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="en" title="English" >
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="en" title="English" >
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>Come Ti Rettifico Il Codice - 2</h1>
+        <p>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/crittografia-sicurezza.html">Crittografia & Sicurezza</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-04-01T00:00:00+02:00">01 aprile 2026</time>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contenuti</h2>
+                <div class="toc">
+<ul>
+<li><a href="#si-ancora-teoria">Sì, Ancora Teoria</a><ul>
+<li><a href="#un-limite-superiore">Un Limite Superiore</a></li>
+<li><a href="#un-limite-inferiore">Un Limite Inferiore</a></li>
+</ul>
+</li>
+<li><a href="#ok-ma">OK, Ma...?</a><ul>
+<li><a href="#codici-lineari">Codici Lineari</a></li>
+<li><a href="#il-codice-di-hamming">Il Codice Di Hamming</a></li>
+<li><a href="#una-piccola-precisazione">Una Piccola Precisazione</a></li>
+<li><a href="#il-metodo-sistematico">Il Metodo Sistematico</a></li>
+</ul>
+</li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+<li><a href="#related-posts">Consigliati</a></li><li><a href="#references">Riferimenti</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>Ci siamo lasciati il <a href="/crittografia-sicurezza/how-i-fix-your-code-1/">mese scorso</a> con dei codici a correzione giocattolo. 
+Si può dire dai, ci siamo riscaldati. Non dico che abbiamo steso una raglia ma almeno le <strong>basi</strong> e qualche <strong>concetto fondamentale</strong> che si sa, 
+sono sempre alla base di tutto. In questo secondo articolo non ci libereremo ancora dei concetti base, qualcosa
+va ancora detta, ma quanto meno ce li leviamo dalle scatole e inizieremo a vedere un codice a correzione più <strong>consolidato</strong>. Dopo questa premessa direi di iniziare.</p>
+<h3 id="si-ancora-teoria">Sì, Ancora Teoria<a class="headerlink" href="#si-ancora-teoria" title="Permanent link"> </a></h3>
+<p>Abbiamo parlato di <a href="/crittografia-sicurezza/how-i-fix-your-code-1/#raddrizziamo-sti-divisori">nearest neighbor</a>, quindi non torno 
+sull'argomento. Ma fermiamoci un secondo. Se abbiamo un codice di lunghezza <span class="arithmatex">\(n\)</span> e composto da <span class="arithmatex">\(M\)</span> codewords, bisogna calcolare <span class="arithmatex">\(M\)</span> distanze di Hamming per vedere quale è la codeword più vicina. E questa è una grandissima rottura perché se <span class="arithmatex">\(M\)</span>
+è troppo grande diventa un calcolo <strong>impraticabile</strong>. Come diceva il grande Sun Tzu, per vincere devi conoscere te stesso ed anche il tuo nemico. Per cui iniziamo 
+a dare una definizione di codice. Un codice altro non è che una <strong>tripletta</strong></p>
+<div class="arithmatex">\[
+\left( n, \, M, \, d \right)
+\]</div>
+<p>dove:</p>
+<ul>
+<li><span class="arithmatex">\(n\)</span> è la <strong>lunghezza della codeword</strong>, cioè il numero <strong>totale</strong> di simboli trasmessi</li>
+<li><span class="arithmatex">\(M\)</span> è il <strong>numero di codeword</strong> e misura la dimensione del codice</li>
+<li><span class="arithmatex">\(d\)</span> è la <strong>distanza minima</strong> tra codeword e misura la capacità di difendersi dal rumore</li>
+</ul>
+<p>Per un generico codice <span class="arithmatex">\(\left( n, \, M, \, d \right)\)</span> composto da <span class="arithmatex">\(q\)</span> simboli, possiamo definire il <strong>rate</strong> come:</p>
+<p><a id="rate-codice"></a></p>
+<div class="arithmatex">\[
+R = \frac{\log_{q}M}{n}
+\]</div>
+<p class="formula-caption">Formula 1. Rate Del Codice</p>
+<p>dove </p>
+<ul>
+<li><span class="arithmatex">\(log_{q}M\)</span> è la <strong>quantità di informazione</strong> in una codeword</li>
+<li><span class="arithmatex">\(n\)</span> è il numero di <strong>simboli trasmessi</strong></li>
+</ul>
+<p>Il rate misura la <strong>quantità di informazione trasmessa</strong>. Potete vederlo come <strong>l'efficienza</strong>:</p>
+<ul>
+<li>Se <span class="arithmatex">\(R=1\)</span> vuol dire che il nostro codice è composto da <strong>tutte</strong> le parole possibili di lunghezza <span class="arithmatex">\(n\)</span>, quindi non stiamo usando <strong>ridondanza</strong>.
+Siamo cioè molto efficienti in quanto non ci sono sprechi di risorse per trasmettere più bit del necessario, ma se sbagliamo ci attacchiamo. </li>
+<li>Se <span class="arithmatex">\(R&lt;1\)</span> vuol dire che stiamo usando della <strong>ridondanza</strong>, e in linea di massima più <span class="arithmatex">\(R\)</span> è piccolo più abbiamo ridondanza più il codice è 
+<strong>robusto</strong> e più <strong>sprechiamo</strong> risorse.</li>
+</ul>
+<p>Vediamolo con un esempio. Supponiamo di avere un codice binario (<span class="arithmatex">\(q=2\)</span>) <span class="arithmatex">\(\left( 2, \, 4, \, 1 \right)\)</span>. Abbiamo che </p>
+<div class="arithmatex">\[
+R = \frac{log_2 4}{2} = 1
+\]</div>
+<p>infatti le possibili codewords sono</p>
+<div class="arithmatex">\[
+C = \left \{ 00, \, 01, \, 10, \, 11 \right \}
+\]</div>
+<p>e inviando, ad esempio, il messaggio <span class="arithmatex">\(c=00\)</span>, se ricevessimo <span class="arithmatex">\(c=01\)</span> non ci accorgeremmo dell'errore, perché è una codeword valida.
+Non ci sono, in altre parole, codewords non valide.</p>
+<p>Consideriamo ora il parity check monodimensionale visto nella <a href="/crittografia-sicurezza/how-i-fix-your-code-1/">prima parte</a>. 
+Lì avevamo <span class="arithmatex">\(k=7\)</span> <strong>bit informativi</strong> per cui <span class="arithmatex">\(M=2^7\)</span>, ed i messaggi erano lunghi <span class="arithmatex">\(n=8\)</span> per via del controllo di parità. Per cui <span class="arithmatex">\(R\)</span> è semplicemente</p>
+<div class="arithmatex">\[
+R = \frac{log_2 2^7}{8} = 0.875
+\]</div>
+<p>Questo ci dice che c'è della ridondanza (dovuta alla parità) ma che il codice è poco robusto. Difatti ci possiamo accorgere di, al più, un errore.</p>
+<p>Quindi per ricapitolare:</p>
+<ul>
+<li><span class="arithmatex">\(R\)</span> alto <span class="arithmatex">\(\rightarrow\)</span> <strong>più throughput</strong>, <strong>meno robustezza</strong></li>
+<li><span class="arithmatex">\(R\)</span> basso <span class="arithmatex">\(\rightarrow\)</span> <strong>meno throughput</strong>, <strong>più robustezza</strong></li>
+</ul>
+<p>Perché questa formula è così importante?! Beh perché sostanzialmente ci dice che <em>non possiamo avere una efficienza alta ed allo stesso tempo una robustezza alta</em>,
+o meglio non possiamo aumentare in maniera arbitraria entrambe, se no sarebbe troppo bello no!? E invece <strong>la vita fa schifo</strong>.
+Anche se dalle formule sopra questa cosa è evidente, vale la pena vedere il perché. Ed è proprio in questo contesto che entrano a gamba tesa i concetti di <strong>bounds</strong>,
+che sono limiti matematici (e ragazzi da quelli non si scappa) sulle <strong>prestazioni</strong>.</p>
+<h4 id="un-limite-superiore">Un Limite Superiore<a class="headerlink" href="#un-limite-superiore" title="Permanent link"> </a></h4>
+<p>Il limite superiore ci dice:</p>
+<blockquote>
+<p>Nessun codice può fare meglio di così</p>
+</blockquote>
+<p>Per capire meglio, supponiamo di avere un codice di lunghezza <span class="arithmatex">\(n\)</span> e distanza <span class="arithmatex">\(d\)</span>. Vogliamo sapere quanto grande può essere <span class="arithmatex">\(M\)</span>. Esiste
+un limite superiore chiamato <strong>Singleton bound</strong> che matematicamente dice questo:</p>
+<p><a id="singleton-bound"></a></p>
+<div class="arithmatex">\[
+M \leq q^{n-d+1}
+\]</div>
+<p class="formula-caption">Formula 2. Singleton Bound</p>
+<p>Quindi <strong>non possiamo avere infinite codewords</strong>. Questo era evidente intuitivamente ed ora lo è anche <strong>matematicamente</strong>. Torniamo al nostro caro parity check 
+monodimensionale visto nella prima parte. I codewords erano lunghi <span class="arithmatex">\(n=8\)</span>, <span class="arithmatex">\(d=2\)</span> (questo era spiegato quindi recuperalo) e <span class="arithmatex">\(q=2\)</span> essendo
+il codice binario. Andando a sviluppare si ha:</p>
+<div class="arithmatex">\[
+M \leq 2^{8-2+1}
+\]</div>
+<p>E quindi con il parity check si possono avere al più <span class="arithmatex">\(2^7=128\)</span> codewords. E dato che come abbiamo visto sopra il parity check ha esattamente <span class="arithmatex">\(128\)</span> codewords,
+si dice che è <strong>MDS (Maximum Distance Separable)</strong>. </p>
+<p>La formula del <a href="#singleton-bound">Singleton Bound</a> nasconde altre informazioni interessanti. Infatti sviluppandola otteniamo:</p>
+<div class="arithmatex">\[
+d \leq n - log_q M + 1
+\]</div>
+<p>e da questa abbiamo una <strong>distanza massima</strong> che i codici possono avere. Ma non è finita qui, con una serie di passaggi matematici si ottiene</p>
+<div class="arithmatex">\[
+R \leq 1 - \frac{d-1}{n}
+\]</div>
+<p>che mostra esattamente quello che abbiamo detto. Infatti se <span class="arithmatex">\(d\)</span> è grande, anche il termine <span class="arithmatex">\(\frac{d-1}{n}\)</span> è grande (ma sempre minore di <span class="arithmatex">\(1\)</span>). Per cui
+il termine <span class="arithmatex">\(1 - \frac{d-1}{n}\)</span> tenderà ad un valore piccolo. Supponiamo ad esempio, di avere questo codice a ripetizione binario: <span class="arithmatex">\((5, 2, 5)\)</span>. Le due sole codewords
+possibili sono </p>
+<div class="arithmatex">\[
+C = \{ 00000, \, 11111 \}
+\]</div>
+<p>È un codice sicuramente <strong>molto robusto</strong>. Infatti se riceveste <span class="arithmatex">\(0000 \textcolor{red}{1}\)</span> sapete che in realtà è <span class="arithmatex">\(00000\)</span>, se riceveste <span class="arithmatex">\(000 \textcolor{red}{11}\)</span> 
+sapete che in realtà è <span class="arithmatex">\(00000\)</span> e così via. Ma usate tanti bit per un unico messaggio. Infatti:</p>
+<div class="arithmatex">\[
+R \leq 1 - 0.8
+\]</div>
+<p>e quindi per questo codice il rate sarà al <strong>massimo</strong> <span class="arithmatex">\(0.2\)</span> e anzi, dalla <a href="#rate-codice">formula esatta</a> possiamo scrivere che <span class="arithmatex">\(R=0.2\)</span> cioè meglio di così non possiamo fare
+(ed infatti i codici a ripetizione sono un'altra classe di codici MDS).</p>
+<h4 id="un-limite-inferiore">Un Limite Inferiore<a class="headerlink" href="#un-limite-inferiore" title="Permanent link"> </a></h4>
+<p>Sappiamo dal <a href="#un-limite-superiore">limite superiore</a> che <em>non possiamo fare meglio di così</em>. Quindi è logico pensare che il limite inferiore ci dica</p>
+<blockquote>
+<p>Non puoi fare più schifo di così</p>
+</blockquote>
+<p>(anche se al peggio non c'è mai fine). In questo caso si parla di <strong>Gilbert–Varshamov bound</strong>. Questa legge ci dice che esistono codici con almeno</p>
+<p><a id="gilbert–varshamov-bound"></a></p>
+<div class="arithmatex">\[
+M \geq \frac{q^n}{\sum_{i=0}^{d-1}\binom{n}{i}(q-1)^i}
+\]</div>
+<p class="formula-caption">Formula 3. Gilbert–Varshamov Bound</p>
+<p>codewords. Sì lo so che la formula sembra un po' complessa ma cerchiamo di vederla a pezzi.
+Il termine:</p>
+<ul>
+<li><span class="arithmatex">\(q^n\)</span>: ci dice <strong>quante</strong> sono tutte le parole possibili di lunghezza <span class="arithmatex">\(n\)</span>. </li>
+<li><span class="arithmatex">\(\sum_{i=0}^{d-1}\binom{n}{i}(q-1)^i\)</span>: conta <strong>quante parole possono differire</strong> da una data parola in al più <span class="arithmatex">\(d-1\)</span> posizioni.</li>
+</ul>
+<p>Vediamo con un esempio. Considerando l'ormai consolidato parity check monodimensionale abbiamo <span class="arithmatex">\(n=8\)</span> e <span class="arithmatex">\(q=2\)</span>. 
+Quindi ci sono <span class="arithmatex">\(2^8=256\)</span> parole (e non codewords) possibili. Inoltre la distanza, come visto e rivisto, è <span class="arithmatex">\(d=2\)</span> da cui</p>
+<div class="arithmatex">\[
+\sum_{i=0}^{2-1}\binom{8}{i}(2-1)^i = \binom{8}{0} + \binom{8}{1} = 1 + 8 = 9
+\]</div>
+<p>(se non sapete come si risolve un coefficiente binomiale, guardate <a href="/crittografia-sicurezza/share-your-secrets-with-shamir/#considerazioni">qui</a>).
+Abbiamo sostanzialmente contato <em>quante sono le parole che hanno distanza minore di <span class="arithmatex">\(2\)</span></em>. Questo vuol dire che:</p>
+<ul>
+<li>a distanza <span class="arithmatex">\(0\)</span>, data da <span class="arithmatex">\(\binom{8}{0}\)</span>, abbiamo <span class="arithmatex">\(1\)</span> parola (la parola stessa)</li>
+<li>a distanza <span class="arithmatex">\(1\)</span>, data da <span class="arithmatex">\(\binom{8}{1}\)</span>, abbiamo <span class="arithmatex">\(8\)</span> parole. Cioè data una parola, ce ne sono <span class="arithmatex">\(8\)</span> che distano <span class="arithmatex">\(1\)</span>.</li>
+</ul>
+<p>Per cui continuando, abbiamo</p>
+<div class="arithmatex">\[
+M \geq \frac{256}{9} \approx 28.4
+\]</div>
+<p><span class="arithmatex">\(M\)</span> deve essere intero (dato che non esistono frazioni di codewords) per cui arrotondiamo a <span class="arithmatex">\(29\)</span> (se vi state chiedendo il perché ho <strong>arrotondato per eccesso</strong>, 
+la risposta è che se lo avessi fatto per difetto la disuguaglianza non sarebbe stata rispettata). Quel <span class="arithmatex">\(M \geq 29\)</span> ci dice che esiste almeno un codice binario lungo
+<span class="arithmatex">\(n=8\)</span> e con distanza <span class="arithmatex">\(d=2\)</span>, che ha almeno <span class="arithmatex">\(29\)</span> codewords.</p>
+<p>Per fare un recap su limite superiore e inferiore quindi, abbiamo che applicando il <a href="#singleton-bound">bound Singleton</a> e il <a href="#gilbert–varshamov-bound">bound di Gilbert–Varshamov</a>
+su un codice binario <span class="arithmatex">\(q=2\)</span>, lungo <span class="arithmatex">\(n=8\)</span> e distante <span class="arithmatex">\(d=2\)</span> il numero di codewords è compreso tra </p>
+<div class="arithmatex">\[
+29 \leq M \leq 128
+\]</div>
+<p>Il parity check monodimensionale è uno dei codici con questi parametri, ed ha <span class="arithmatex">\(M=128\)</span> il che lo rende MDS.</p>
+<h3 id="ok-ma">OK, Ma...?<a class="headerlink" href="#ok-ma" title="Permanent link"> </a></h3>
+<p>Arrivati a questo punto non dico che la teoria è finita. Quella vi perseguita e <strong>perseguiterà</strong> sempre. <strong>È infinita</strong>. Però abbiamo tutte
+le conoscenze per iniziare a vedere qualche codice a correzione più impegnato. Prima di tutto premetto che esistono molti codici a correzione
+d'errore. Ed ognuno ha determinate <strong>caratteristiche</strong> che li denominano. Ci sono ad esempio i <strong>codici lineari</strong>, i <strong>codici ciclici</strong> quelli <strong>convoluzionali</strong> e chi
+più ne ha più ne metta. Queste caratteristiche però non sono mutuamente esclusive. Ad esempio il codice di Reed-Solomon è sia lineare che ciclico.
+Ma andiamo per passi ed iniziamo da uno dei codici miliari, il <strong>codice di Hamming</strong>. Dato che è un codice lineare però, ci serve prima sapere cosa sono.</p>
+<h4 id="codici-lineari">Codici Lineari<a class="headerlink" href="#codici-lineari" title="Permanent link"> </a></h4>
+<p>Quando inviamo un messaggio su un canale di comunicazione, questo può essere disturbato dal rumore. Se stiamo parlando al telefono ad esempio
+ci aspettiamo non solo che quello che diciamo arrivi in maniera <strong>integra</strong>, ma vogliamo che arrivi <strong>velocemente</strong>. Ve lo immaginate che casino 
+se parlo al telefono con una persona e il mio "ciao" arriva dopo due secondi?! Per cui eventuali correzioni devono avvenire in maniera <strong>super veloce</strong>.
+Bene, i codici lineari forniscono la struttura matematica per far si che la correzione avvenga, ed avvenga velocemente. Permettono
+di bilanciare tre aspetti: <strong>capacità di correzione</strong>, <strong>quantità di ridondanza</strong> e <strong>velocità</strong>.</p>
+<p>Un codice lineare è un particolare tipo di codice basato su una proprietà matematica:</p>
+<blockquote>
+<p>L'insieme delle parole del codice forma un sottospazio vettoriale</p>
+</blockquote>
+<p>Per capire meglio cosa significa questa definizione dobbiamo fare un piccolo passo nell’algebra lineare.
+Uno <strong>spazio vettoriale</strong> è un insieme di vettori su cui possiamo fare due operazioni fondamentali:</p>
+<ul>
+<li><strong>Somma</strong> tra vettori</li>
+</ul>
+<div class="arithmatex">\[
+    \begin{bmatrix}
+        a_0 \\
+        a_1 \\
+        \vdots \\
+        a_n
+    \end{bmatrix} + 
+    \begin{bmatrix}
+        b_0 \\
+        b_1 \\
+        \vdots \\
+        b_n
+    \end{bmatrix} =
+    \begin{bmatrix}
+        a_0 + b_0 \\
+        a_1 + b_1 \\
+        \vdots \\
+        a_n + b_n
+    \end{bmatrix}
+\]</div>
+<ul>
+<li><strong>Moltiplicazione</strong> di un vettore per uno scalare</li>
+</ul>
+<div class="arithmatex">\[
+    c \cdot 
+    \begin{bmatrix}
+        a_0 \\
+        a_1 \\
+        \vdots \\
+        a_n
+    \end{bmatrix} = 
+    \begin{bmatrix}
+        c \cdot a_0 \\
+        c \cdot a_1 \\
+        \vdots \\
+        c \cdot a_n
+    \end{bmatrix}
+\]</div>
+<p>E queste operazioni devono rispettare due proprietà fondamentali:</p>
+<ol>
+<li>Chiusura</li>
+<li>Gruppo Abeliano</li>
+</ol>
+<p>Se volete saperne di più ne ho già parlato <a href="/teoria-matematica/qui-crescono-solo-polinomi/">qui</a>, e vi conviene leggerlo perché darò per scontato che tutte le operazioni saranno fatte
+in <strong>aritmetica modulare</strong>, modulo <span class="arithmatex">\(2\)</span>. A questo punto possiamo introdurre il concetto di <strong>sottospazio vettoriale</strong>.
+Un sottospazio vettoriale è semplicemente un <strong>sottoinsieme di uno spazio vettoriale</strong> che mantiene la stessa struttura. 
+In pratica è un insieme di vettori tale che, se applichiamo le stesse operazioni dello spazio vettoriale, rimaniamo sempre all’interno dell’insieme.
+Supponiamo di avere l'insieme di vettori binari:</p>
+<div class="arithmatex">\[
+\mathbb{F}_2^2 = \{ (0, \, 0), \, (0, \, 1), \, (1, \, 0), \, (1, \, 1) \}
+\]</div>
+<p>Prendete due vettori <strong>a caso</strong> da questo insieme e sommateli. Il risultato è ancora un vettore di <span class="arithmatex">\(\mathbb{F}_2^2\)</span>. Lo stesso vale
+per la moltiplicazione per uno scalare del campo <span class="arithmatex">\(\mathbb{F}_2\)</span>. Queste proprietà garantiscono che <span class="arithmatex">\(\mathbb{F}_2^2\)</span> è uno spazio vettoriale.
+Consideriamo il sottoinsieme di <span class="arithmatex">\(\mathbb{F}_2^2\)</span></p>
+<div class="arithmatex">\[
+\mathbb{A} = \{ (0, \, 1), \, (1, \, 0) \}
+\]</div>
+<p>Questo <strong>non è</strong> un sottospazio vettoriale, perché sommandoli tra di loro otteniamo</p>
+<div class="arithmatex">\[
+    \vec{v} = 
+    \begin{bmatrix}
+    1 \\
+    1 
+    \end{bmatrix}
+\]</div>
+<p>che non appartiene ad <span class="arithmatex">\(\mathbb{A}\)</span> (ma prima di ignorarlo aspettate, perchè ci tornerà <strong>utile</strong>). Discorso diverso invece per </p>
+<div class="arithmatex">\[
+\mathbb{B} = \{ (0, \, 0), \, (1, \, 1) \}
+\]</div>
+<p>che è un sottospazio vettoriale di <span class="arithmatex">\(\mathbb{F}_2^2\)</span>.</p>
+<p>A questo punto c’è un <strong>dettaglio</strong> che vale la pena chiarire. Quando abbiamo scritto</p>
+<div class="arithmatex">\[
+\mathbb{F}_2^2
+\]</div>
+<p>non lo abbiamo fatto così per bellezza. Indica che gli elementi del vettore appartengono a un <strong>campo finito</strong>, cioè a un <strong>campo di Galois</strong>.
+Se non sapete di cosa sto parlando, male... molto male. Ma siete fortunati perchè ne ho parlato più nel dettaglio <a href="/teoria-matematica/qui-crescono-solo-polinomi/">qui</a>.
+Nel caso dei codici binari il campo è</p>
+<div class="arithmatex">\[
+\mathbb{F}_2 = \{0, \, 1 \}
+\]</div>
+<p>Per cui quando scriviamo uno spazio vettoriale come</p>
+<div class="arithmatex">\[
+\mathbb{F}_2^n
+\]</div>
+<p>stiamo dicendo che:</p>
+<ul>
+<li>i vettori hanno <strong>lunghezza</strong> <span class="arithmatex">\(n\)</span></li>
+<li>ogni coordinata appartiene al <strong>campo finito</strong> <span class="arithmatex">\(\mathbb{F}_2\)</span></li>
+<li>le operazioni tra vettori seguono <strong>l'aritmetica del campo</strong></li>
+</ul>
+<p>Quindi le componenti dei vettori appartengono a un campo di Galois, e lo spazio
+vettoriale è definito su quel campo. Le operazioni tra vettori e la moltiplicazione
+per scalare seguono quindi l'aritmetica del campo.</p>
+<p>In generale i codici possono essere definiti su <strong>campi finiti qualsiasi</strong> <span class="arithmatex">\(\mathbb{F}_q\)</span> ma,
+rimanendo nel mondo <strong>binario</strong> possiamo dire che un codice lineare lungo <span class="arithmatex">\(n\)</span> e composto
+da <span class="arithmatex">\(M\)</span> codeword è un sottospazio vettoriale di <span class="arithmatex">\(\mathbb{F}_2^n\)</span>. Dato che ogni sottospazio vettoriale di dimensione <span class="arithmatex">\(k\)</span> (dove <span class="arithmatex">\(k\)</span> è il numero di bit informativi)
+su <span class="arithmatex">\(\mathbb{F}_2\)</span> contiene <span class="arithmatex">\(2^k\)</span> elementi, abbiamo necessariamente</p>
+<div class="arithmatex">\[
+M = 2^k
+\]</div>
+<p>Per questo motivo spesso i codici lineari vengono indicati come <span class="arithmatex">\([n, \, k]\)</span> invece che <span class="arithmatex">\((n, \, M)\)</span>. Le due notazioni sono <strong>equivalenti</strong> e collegate dalla relazione <span class="arithmatex">\(M = 2^k\)</span>.
+A questo punto entra in gioco una proprietà fondamentale dell’algebra lineare, nota come <strong>teorema della base</strong>, che afferma che ogni spazio vettoriale di
+dimensione <span class="arithmatex">\(k\)</span> può essere generato da <span class="arithmatex">\(k\)</span> vettori <a href="https://it.wikipedia.org/wiki/Indipendenza_lineare">linearmente indipendenti</a> di <span class="arithmatex">\(\mathbb{F}_2^n\)</span>.
+Per farlo capire meglio torniamo al nostro spazio vettoriale</p>
+<div class="arithmatex">\[
+\mathbb{F}_2^2 = \{ (0, \, 0), \, (0, \, 1), \, (1, \, 0), \, (1, \, 1) \}
+\]</div>
+<p>Consideriamo ora i due vettori</p>
+<div class="arithmatex">\[
+(1, \, 0), \, (0, \, 1)
+\]</div>
+<p>Questi due vettori sono <strong>linearmente indipendenti</strong> e possono generare tutto lo spazio.
+Infatti, combinandoli tra loro otteniamo:</p>
+<ul>
+<li><span class="arithmatex">\(0 \cdot (1,0) + 0 \cdot (0,1) = (0,0)\)</span></li>
+<li><span class="arithmatex">\(1 \cdot (1,0) + 0 \cdot (0,1) = (1,0)\)</span></li>
+<li><span class="arithmatex">\(0 \cdot (1,0) + 1 \cdot (0,1) = (0,1)\)</span></li>
+<li><span class="arithmatex">\(1 \cdot (1,0) + 1 \cdot (0,1) = (1,1)\)</span></li>
+</ul>
+<p>Quindi <strong>tutti i vettori di <span class="arithmatex">\(\mathbb{F}_2^2\)</span> possono essere ottenuti come combinazione lineare
+di questi due vettori</strong> e l’insieme</p>
+<div class="arithmatex">\[
+\left\{ (1, \, 0), \, (0, \, 1) \right\}
+\]</div>
+<p>è una <strong>base</strong> di <span class="arithmatex">\(\mathbb{F}_2^2\)</span>. Quindi una base, non deve necessariamente essere un sottospazio.
+Tornando ai codici, questo significa che l’intero codice può essere generato a 
+partire da <span class="arithmatex">\(k\)</span> vettori linearmente indipendenti di <span class="arithmatex">\(\mathbb{F}_2^n\)</span>. Se disponiamo questi vettori come righe di una matrice</p>
+<div class="arithmatex">\[
+G =
+\begin{bmatrix}
+g_1 \\
+g_2 \\
+\vdots \\
+g_k
+\end{bmatrix}
+\]</div>
+<p>otteniamo una matrice <span class="arithmatex">\(k \times n\)</span> chiamata <strong>matrice generatrice</strong> <span class="arithmatex">\(G\)</span>. Le righe di <span class="arithmatex">\(G\)</span> costituiscono una <strong>base del codice</strong> e tutte le codeword
+possono essere ottenute come combinazioni lineari di queste righe. Dato <span class="arithmatex">\(v\)</span> di dimensioni <span class="arithmatex">\(1 \times k\)</span> è il vettore informativo, la corrispondente
+codeword di dimensioni <span class="arithmatex">\(1 \times n\)</span>, si ottiene come</p>
+<div class="arithmatex">\[
+\vec{c} = \vec{v} \cdot G
+\]</div>
+<p>La matrice generatrice ci permette di costruire tutte le codeword, 
+ma non è il modo più comodo per verificare se una <strong>parola ricevuta contiene errori</strong>. Per questo si introduce un’altra 
+matrice fondamentale, chiamata <strong>matrice di controllo di parità</strong>, indicata con <span class="arithmatex">\(H\)</span> e con dimensioni <span class="arithmatex">\((n-k) \times n\)</span>. 
+La matrice <span class="arithmatex">\(H\)</span> ha la proprietà che una parola <span class="arithmatex">\(c\)</span> appartiene al codice se e solo se</p>
+<p><a id="condizione-validita"></a></p>
+<div class="arithmatex">\[
+\vec{c} \cdot H^T = \vec{0}
+\]</div>
+<p class="formula-caption">Formula 4. Condizione Di Validità</p>
+<p>dove <span class="arithmatex">\(H^T\)</span> indica la <a href="https://it.wikipedia.org/wiki/Matrice_trasposta">matrice trasposta</a> di <span class="arithmatex">\(H\)</span>.
+In altre parole, se prendiamo una <strong>codeword valida</strong> e la moltiplichiamo per <span class="arithmatex">\(H^T\)</span> otteniamo
+sempre il <strong>vettore nullo</strong>. Questa proprietà ci permette di verificare molto rapidamente se
+una parola appartiene al codice oppure no. Supponiamo ora che il ricevente ottenga una parola <span class="arithmatex">\(\vec{r}\)</span>. Se il canale è rumoroso è possibile
+che <span class="arithmatex">\(\vec{r}\)</span> non sia una codeword valida. Possiamo allora calcolare</p>
+<p><a id="sindrome"></a></p>
+<div class="arithmatex">\[
+\vec{s} = \vec{r} \cdot H^T
+\]</div>
+<p class="formula-caption">Formula 5. Definizione Della Sindrome</p>
+<p>Il vettore <span class="arithmatex">\(\vec{s}\)</span> è chiamato <strong>sindrome</strong>, di dimensione <span class="arithmatex">\(1 \times (n-k)\)</span>.</p>
+<ul>
+<li>Se <span class="arithmatex">\(\vec{s} = \vec{0}\)</span> la parola è una <strong>codeword valida</strong>.</li>
+<li>Se <span class="arithmatex">\(\vec{s} \neq \vec{0}\)</span> significa che durante la trasmissione è avvenuto <strong>un errore</strong>.</li>
+</ul>
+<p>Ok, so che questo paragrafo può risultare un po' ostico. Sono tantissimi concetti. Ma questo vi fa anche capire del mondo 
+che c'è dietro un concetto apparentemente semplice e che <em>tiene in piedi il mondo IT</em> (e non è una esagerazione).</p>
+<p>Ora la domanda che può sorgere spontanea è </p>
+<blockquote>
+<p>Come diavolo costruisco <span class="arithmatex">\(G\)</span> e <span class="arithmatex">\(H\)</span>?</p>
+</blockquote>
+<p>Ed è una domanda che ha molto senso. Ma tranquilli, dedicherò una <a href="#il-metodo-sistematico">sezione apposta su questo</a>.</p>
+<h4 id="il-codice-di-hamming">Il Codice Di Hamming<a class="headerlink" href="#il-codice-di-hamming" title="Permanent link"> </a></h4>
+<p>Finalmente siamo arrivati al codice di Hamming e vi assicuro che non è stato un <strong>parto</strong> solo per voi.
+Fino ad ora abbiamo costruito l’impalcatura teorica: distanza di Hamming, rate, limiti matematici e struttura dei codici lineari. 
+Tutto questo però serviva per arrivare qui. Il codice di Hamming è infatti uno dei <strong>capisaldi</strong> della teoria dei codici correttori 
+di errore ed anche se è stato creato nel 1950, è ancora oggi <strong>utilizzato</strong>. Un esempio classico sono le <strong>memorie ECC</strong> (Error Correcting Code), 
+dove alcune <strong>varianti</strong> dei codici di Hamming permettono di correggere <strong>automaticamente</strong> gli errori 
+che possono verificarsi nei bit della memoria. E se vi steste chiedendo</p>
+<blockquote>
+<p>Ma quando mai ho utilizzato una ECC...</p>
+</blockquote>
+<p>Beh voi no, ma le <strong>workstation</strong>, i <strong>mega serveroni</strong> più comunemente noti come <strong>cloud</strong>, ed anche alcune <strong>sonde spaziali</strong>, sì.
+Quindi ora, quando caricherete un documento sul servizio di storage cloud che più vi piace, penserete ad Hamming e a quanto vi ho
+scassato con gli spazi vettoriali.</p>
+<p>I codici di Hamming sono una famiglia di codici lineari binari caratterizzati dai parametri</p>
+<p><a id="parametri-hamming"></a></p>
+<div class="arithmatex">\[
+    \begin{aligned}
+    n &amp;= 2^m - 1 \\
+    k &amp;= 2^m - m - 1 \\
+    d &amp;= 3
+    \end{aligned}
+\]</div>
+<p class="formula-caption">Formula 6. Parametri Codice Di Hamming</p>
+<p>Dove <span class="arithmatex">\(m=n-k\)</span> rappresenta il <strong>numero di bit di parità utilizzati</strong>. Questi parametri ci danno alcune informazioni importanti e, ormai,
+familiari. Ad esempio sappiamo che la distanza minima del codice è <span class="arithmatex">\(d=3\)</span> da cui ricaviamo che il codice può correggere 
+<span class="arithmatex">\(t=1\)</span> errore applicando la formuletta <a href="/teoria-matematica/qui-crescono-solo-polinomi/#non-tutti-i-campi-vengono-per-nuocere">qui</a> definita. 
+Supponiamo di prendere <span class="arithmatex">\(n=7\)</span> e <span class="arithmatex">\(k=4\)</span>, otteniamo il famoso codice <span class="arithmatex">\([7, \, 4]\)</span>.
+Dal paragrafo precedente sappiamo che la matrice generatrice avrà dimensione <span class="arithmatex">\(4 \times 7\)</span>. Per prima cosa quindi costruiamo 
+la matrice generatrice selezionando <span class="arithmatex">\(4\)</span> elementi <strong>linearmente indipendenti</strong> di <span class="arithmatex">\(\mathbb{F}_2^7\)</span>, e disponendoli come righe.
+Supponiamo di aver scelto:</p>
+<div class="arithmatex">\[
+    G =
+    \begin{bmatrix}
+    1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{bmatrix}
+\]</div>
+<p>Sappiamo che abbiamo bisogno della matrice <span class="arithmatex">\(H\)</span> di dimensioni <span class="arithmatex">\(3 \times 7\)</span>, che permette il controllo di parità. Questa non esce fuori dalla <strong>botola dei goblin</strong> ma dipende strettamente
+da <span class="arithmatex">\(G\)</span> (o meglio <span class="arithmatex">\(G\)</span> dipende da <span class="arithmatex">\(H\)</span>), ma per il momento sorvoliamo e <strong>beccatevela</strong> senza spiegazioni:</p>
+<div class="arithmatex">\[
+    H =
+    \begin{bmatrix}
+    1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+    1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+    \end{bmatrix}
+\]</div>
+<p>A questo punto vediamo come si mette insieme il tutto. Supponiamo di voler <strong>inviare</strong> il messaggio</p>
+<div class="arithmatex">\[
+\vec{v} = (1, \, 0, \, 1, \, 1)
+\]</div>
+<p>la codeword si ottiene come:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{c} = \vec{v} \cdot G &amp;= (1, \, 0, \, 1, \, 1) \cdot \begin{bmatrix}
+                                                1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+                                                0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+                                                0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+                                                0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+                                              \end{bmatrix}\\[6pt]
+&amp;= (1, \, 0, \, 1, \, 1, \, 0, \, 1, \, 0)
+\end{aligned}
+\]</div>
+<p>e questa è la parola che verrà <strong>trasmessa sul canale</strong>. Supponiamo che il destinatario riceva <span class="arithmatex">\(\vec{r}=\vec{c}\)</span>, quello che fa è calcolare la sindrome:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{s} = \vec{c} \cdot H^T &amp;= (1, \, 0, \, 1, \, 1, \, 0, \, 1, \, 0) \cdot \begin{bmatrix}
+                                                                    1 &amp; 1 &amp; 0 \\
+                                                                    1 &amp; 0 &amp; 1 \\
+                                                                    0 &amp; 1 &amp; 1 \\
+                                                                    1 &amp; 1 &amp; 1 \\
+                                                                    1 &amp; 0 &amp; 0 \\
+                                                                    0 &amp; 1 &amp; 0 \\
+                                                                    0 &amp; 0 &amp; 1
+                                                                    \end{bmatrix} \\[6pt]
+&amp;= (0, \, 0, \, 0)
+\end{aligned}
+\]</div>
+<p>Dato che la sindrome è nulla, sappiamo di aver ricevuto il messaggio <strong>correttamente</strong>. Infatti <span class="arithmatex">\(\vec{r}=\vec{c}\)</span>. Supponiamo però che durante la trasmissione
+<span class="arithmatex">\(\vec{r}\)</span> venga corrotto, e di ricevere:</p>
+<div class="arithmatex">\[
+\vec{r} = (1, \, 0, \, \textcolor{red}{0}, \, 1, \, 0, \, 1, \, 0)
+\]</div>
+<p>Calcolando la sindrome come in precedenza otteniamo:</p>
+<div class="arithmatex">\[
+\vec{s} = (0, \, 1, \, 1)
+\]</div>
+<p>Non è nulla, quindi c'è un errore. Quello che facciamo è prendere <span class="arithmatex">\(H\)</span> e cercare <strong>a quale colonna</strong> corrisponde <span class="arithmatex">\(\vec{s}\)</span>.
+Questo perché nei codici di Hamming <em>la sindrome coincide esattamente con la colonna della matrice <span class="arithmatex">\(H\)</span></em> 
+corrispondente al bit errato (se volete sapere il perché <a href="#una-piccola-precisazione">leggete qui</a>). 
+In questo caso vediamo che si trova nella terza colonna e da quindi il bit corrotto è 
+quello in terza posizione. Facendone il flip otteniamo il messaggio corretto.</p>
+<p>Supponiamo ora di avere <strong>sfiga</strong> e abbiamo due errori in <span class="arithmatex">\(\vec{r}\)</span>:</p>
+<div class="arithmatex">\[
+\vec{r} = (1, \, \textcolor{red}{1}, \, \textcolor{red}{0}, \, 1, \, 0, \, 1, \, 0)
+\]</div>
+<p>in questo caso possono succedere due cose:</p>
+<ol>
+<li>O la sindrome non è in <span class="arithmatex">\(H\)</span> e quindi non sappiamo cosa correggere (ma questo <strong>non può succedere</strong> nei codici di Hamming).</li>
+<li>O la sindrome è in <span class="arithmatex">\(H\)</span> e correggiamo il bit sbagliato <strong>peggiorando</strong> la situazione.</li>
+</ol>
+<p>In questo caso</p>
+<div class="arithmatex">\[
+\vec{s} = (1, \, 1, \, 0)
+\]</div>
+<p>che è la prima colonna di <span class="arithmatex">\(H\)</span>. Quindi erroneamente correggeremmo il primo bit.
+Proprio per evitare queste situazioni, si usa una variante di Hamming nota come <a href="https://en.wikipedia.org/wiki/Hamming_code#Hamming_codes_with_additional_parity_(SECDED)">SECDED</a> 
+che aggiunge un <strong>controllo di parità globale</strong> che permette di <strong>stabilire il numero di errori</strong>. 
+Se uguale a <span class="arithmatex">\(2\)</span> non correggiamo per evitare di aggravare la situazione.</p>
+<p>Il valore <span class="arithmatex">\(m\)</span> introdotto inizialmente <strong>controlla la lunghezza della codeword</strong> e quindi il numero di bit informativi che si possono
+spedire in un singolo invio. Degno di nota è il fatto che la lunghezza <span class="arithmatex">\(n\)</span> <strong>cresce esponenzialmente</strong> rispetto ad <span class="arithmatex">\(m\)</span>, quindi più è grande <span class="arithmatex">\(m\)</span>, 
+più il rate del codice è elevato (ma richiede più capacità di calcolo).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(m\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(n\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(k\)</span></th>
+<th style="text-align: center;">codice</th>
+<th style="text-align: center;"><span class="arithmatex">\(R=\frac{k}{n}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><span class="arithmatex">\([7,4]\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{4}{7} \approx 0.57\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;"><span class="arithmatex">\([15,11]\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{11}{15} \approx 0.73\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;"><span class="arithmatex">\([31,26]\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{26}{31} \approx 0.84\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Se vi state chiedendo tutto questo come avviene ad esempio nelle ECC, beh la risposta è che è <strong>integrato direttamente nei circuiti hardware</strong>.
+Cioè sono progettati in modo che queste operazioni vengano eseguite a livello hardware prima di scrivere il dato in memoria.</p>
+<h4 id="una-piccola-precisazione">Una Piccola Precisazione<a class="headerlink" href="#una-piccola-precisazione" title="Permanent link"> </a></h4>
+<p>Nel paragrafo precedente abbiamo detto che in caso di errore, la sindrome coincide con la colonna della matrice <span class="arithmatex">\(H\)</span> 
+corrispondente al bit errato. Questa non è stregoneria, è pura e semplice <strong>matematica</strong>. Ripartiamo dalla formula della 
+<a href="#condizione-validita">condizione di validità</a> di un codice lineare, dalla <a href="#sindrome">formula della sindrome</a>. 
+Supponendo che sia avvenuto un errore su uno dei bit di <span class="arithmatex">\(c\)</span>, possiamo scrivere la <span class="arithmatex">\(r\)</span> come:</p>
+<div class="arithmatex">\[
+\vec{r} = \vec{c} + \vec{e}_i
+\]</div>
+<p>dove <span class="arithmatex">\(e_i\)</span> è un vettore con tutti <span class="arithmatex">\(0\)</span> tranne che in <span class="arithmatex">\(i\)</span>-esima posizione. Per fare un esempio sia</p>
+<div class="arithmatex">\[
+\vec{c} = (1, \, 1, \, 0, \, \dots)
+\]</div>
+<p>supponendo un errore in prima posizione abbiamo</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{r} = \vec{c} + \vec{e}_0 &amp;= (1, \, 1, \, 0, \, \dots) + (1, \, 0, \, 0, \, \dots) \\[6pt]
+            &amp;= (0, \, 1, \, 0, \, \dots)
+\end{aligned}
+\]</div>
+<p>e quindi </p>
+<div class="arithmatex">\[
+\vec{s} = (\vec{c} + \vec{e}_0) \cdot H^T = \vec{c} \cdot H^T + \vec{e}_0 \cdot H^T
+\]</div>
+<p>ma dato che dalla condizione di validità abbiamo <span class="arithmatex">\(c \cdot H^T=0\)</span> rimane il solo termine <span class="arithmatex">\(e_0 \cdot H^T\)</span>.
+A questo punto essendo che <span class="arithmatex">\(e_i\)</span> è nullo ovunque tranne che nella posizione <span class="arithmatex">\(i\)</span>, il prodotto <strong>seleziona</strong> la riga <span class="arithmatex">\(i\)</span>-esima di
+<span class="arithmatex">\(H^T\)</span>, che è la colonna <span class="arithmatex">\(i\)</span>-esima di <span class="arithmatex">\(H\)</span>. Andiamo a vedere. Dato </p>
+<div class="arithmatex">\[
+    H =
+    \begin{bmatrix}
+    1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+    1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+    \end{bmatrix}
+\]</div>
+<p>da cui</p>
+<div class="arithmatex">\[
+    H^T = \begin{bmatrix}
+        1 &amp; 1 &amp; 0 \\
+        1 &amp; 0 &amp; 1 \\
+        0 &amp; 1 &amp; 1 \\
+        1 &amp; 1 &amp; 1 \\
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 1
+        \end{bmatrix}
+\]</div>
+<p>e dato </p>
+<div class="arithmatex">\[
+\vec{e}_0 = (1, \, 0, \, 0, \, 0, \, 0, \, 0, \, 0) 
+\]</div>
+<p>abbiamo</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{s} = \vec{e}_0 \cdot H^T &amp;= (1, \, 0, \, 0, \, 0, \, 0, \, 0, \, 0)  \cdot \begin{bmatrix}
+                                                                    1 &amp; 1 &amp; 0 \\
+                                                                    1 &amp; 0 &amp; 1 \\
+                                                                    0 &amp; 1 &amp; 1 \\
+                                                                    1 &amp; 1 &amp; 1 \\
+                                                                    1 &amp; 0 &amp; 0 \\
+                                                                    0 &amp; 1 &amp; 0 \\
+                                                                    0 &amp; 0 &amp; 1
+                                                                    \end{bmatrix} \\[6pt]
+                    &amp;= (1, \, 1, \, 0)
+\end{aligned}
+\]</div>
+<p>che è la prima riga di <span class="arithmatex">\(H^T\)</span> ossia prima colonna di <span class="arithmatex">\(H\)</span>.</p>
+<h4 id="il-metodo-sistematico">Il Metodo Sistematico<a class="headerlink" href="#il-metodo-sistematico" title="Permanent link"> </a></h4>
+<p>Ecco arrivati <strong>all'ultimo paragrafo</strong> prima delle conclusioni. Precedentemente abbiamo costruito la matrice generatrice 
+scegliendo alcuni vettori linearmente indipendenti di <span class="arithmatex">\(\mathbb{F}_2^7\)</span>. Questa scelta è stata fatta un po’ a <strong>sentimento</strong>, 
+giusto per avere un esempio. Nella pratica però esiste una metodologia per costruire i codici lineari, 
+nota come <strong>forma sistematica</strong>. Quello che si fa è costruire la matrice generatrice in questo modo:</p>
+<p><a id="g-sistemico"></a></p>
+<div class="arithmatex">\[
+G = \left[ I_k \, | \, P \right]
+\]</div>
+<p class="formula-caption">Formula 7. Metodo Sistematico Matrice G</p>
+<p>dove <span class="arithmatex">\(I_k\)</span> è la <a href="https://it.wikipedia.org/wiki/Matrice_identit%C3%A0"><strong>matrice identità</strong></a> di dimensione <span class="arithmatex">\(k \times k\)</span>. Nel caso di Hamming <span class="arithmatex">\([7, \, 4]\)</span></p>
+<div class="arithmatex">\[
+I_4 = \begin{bmatrix}
+        1 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+        \end{bmatrix}
+\]</div>
+<p>Per scegliere <span class="arithmatex">\(P\)</span> bisogna passare per il calcolo di <span class="arithmatex">\(H\)</span>. Quest'ultimo si definisce come</p>
+<p><a id="h-sistemico"></a></p>
+<div class="arithmatex">\[
+H = \left[ -P^T \, | \, I_m \right]
+\]</div>
+<p class="formula-caption">Formula 8. Metodo Sistematico Matrice H</p>
+<p>Dato che <span class="arithmatex">\(m=n-k=3\)</span> si ha</p>
+<div class="arithmatex">\[
+I_3 = \begin{bmatrix}
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 1
+        \end{bmatrix}
+\]</div>
+<p>Dalla teoria abbiamo un'altra informazione. Ossia che <span class="arithmatex">\(H\)</span> <em>deve contenere tutte le stringhe binarie non nulle di lunghezza <span class="arithmatex">\(m\)</span></em>
+Quindi escludendo <span class="arithmatex">\((0, \, 0, \, 0)\)</span>, <span class="arithmatex">\(H\)</span> conterrà nelle sue colonne</p>
+<div class="arithmatex">\[
+(0, \, 0, \, 1), \, (0, \, 1, \, 0), \, (0, \, 1, \, 1), \, (1, \, 0, \, 0), \, (1, \, 0, \, 1), \, (1, \, 1, \, 0), \, (1, \, 1, \, 1)
+\]</div>
+<p>Disponiamo questi vettori come colonne della matrice <span class="arithmatex">\(H\)</span> in modo che le ultime <span class="arithmatex">\(m\)</span> colonne formino la matrice identità <span class="arithmatex">\(I_m\)</span>.</p>
+<div class="arithmatex">\[
+    H =
+    \left[
+    \begin{array}{cccc|ccc}
+    1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+    1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+    \end{array}
+    \right]
+\]</div>
+<p>Come potete vedere l'ultima parte della matrice <span class="arithmatex">\(H\)</span>, contiene <span class="arithmatex">\(I_3\)</span> quindi siamo contenti, perché tutto ciò che è a sinistra 
+rappresenta <span class="arithmatex">\(-P^T\)</span>. Dato che il segno meno è indifferente essendo in aritmetica modulo <span class="arithmatex">\(2\)</span>, abbiamo:</p>
+<div class="arithmatex">\[
+    P^T =
+    \begin{bmatrix}
+    1 &amp; 1 &amp; 0 &amp; 1 \\
+    1 &amp; 0 &amp; 1 &amp; 1 \\
+    0 &amp; 1 &amp; 1 &amp; 1 
+    \end{bmatrix}
+\]</div>
+<p>da cui si ottiene </p>
+<div class="arithmatex">\[
+    P =
+    \begin{bmatrix}
+    1 &amp; 1 &amp; 0 \\
+    1 &amp; 0 &amp; 1 \\
+    0 &amp; 1 &amp; 1 \\
+    1 &amp; 1 &amp; 1 
+    \end{bmatrix}
+\]</div>
+<p>E ora che abbiamo <span class="arithmatex">\(P\)</span>, possiamo <strong>completare</strong> la nostra matrice <span class="arithmatex">\(G\)</span> rispettando la <a href="#g-sistemico">formula</a>:</p>
+<div class="arithmatex">\[
+    G =
+    \left[
+    \begin{array}{cccc|ccc}
+    1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{array}
+    \right]
+\]</div>
+<p>dove potete vedere che la sotto-matrice destra contiene la <span class="arithmatex">\(P\)</span> trovata, e quella di sinistra la matrice identità <span class="arithmatex">\(I_4\)</span>.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>E anche per questo mese siamo giunti alla <strong>fine</strong> di un articolo. Diciamocelo pure, <strong>bello pieno di concetti</strong>.
+Ma se siete arrivati alla fine, ora sapete (una piccola parte) cosa c'è dietro ciò che manda davvero avanti il mondo.
+Noi ci <strong>fidiamo</strong> ad occhi chiusi che, quando salviamo un file, questo sia sempre disponibile <strong>integro</strong>. Immaginatevi
+cosa potrebbe succedere ad esempio, a server che contengono dati sanitari <strong>completamente corrotti</strong>. Dietro la nostra fiducia
+in questi sistemi, altro non si celano che <strong>matrici</strong> e <strong>campi di Galois</strong>. In ogni caso vi lascio il 
+<a href="https://github.com/lucadivit/HowIFixYouCode/tree/master/part_2"><strong>link al repo</strong></a> dove c'è una implementazione 
+molto basilare del codice di Hamming. Ma la serie non finisce qui. Qualche giorno di pausa e si riprende con i codici. Non so ancora quale
+ma chi vivrà vedrà.</p>
+<p>Alla Prossima.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h2>Consigliati</h2>
+                <ol class="article-related-list">
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Qui Crescono Solo Polinomi</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Condividi I Tuoi Segreti Con Shamir</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 1</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h2>Riferimenti</h2>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/crittografia-sicurezza/how-i-fix-your-code-1/">/crittografia-sicurezza/how-i-fix-your-code-1/</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/how-i-fix-your-code-1/#raddrizziamo-sti-divisori">/crittografia-sicurezza/how-i-fix-your-code-1/#raddrizziamo-sti-divisori</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/share-your-secrets-with-shamir/#considerazioni">/crittografia-sicurezza/share-your-secrets-with-shamir/#considerazioni</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/qui-crescono-solo-polinomi/">/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="https://it.wikipedia.org/wiki/Indipendenza_lineare" rel="noopener noreferrer" target="_blank">https://it.wikipedia.org/wiki/Indipendenza_lineare</a>
+                    </li>
+                    <li>
+                        <a href="https://it.wikipedia.org/wiki/Matrice_trasposta" rel="noopener noreferrer" target="_blank">https://it.wikipedia.org/wiki/Matrice_trasposta</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/qui-crescono-solo-polinomi/#non-tutti-i-campi-vengono-per-nuocere">/teoria-matematica/qui-crescono-solo-polinomi/#non-tutti-i-campi-vengono-per-nuocere</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Hamming_code#Hamming_codes_with_additional_parity_(SECDED)" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Hamming_code#Hamming_codes_with_additional_parity_(SECDED)</a>
+                    </li>
+                    <li>
+                        <a href="https://it.wikipedia.org/wiki/Matrice_identit%C3%A0" rel="noopener noreferrer" target="_blank">https://it.wikipedia.org/wiki/Matrice_identit%C3%A0</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lucadivit/HowIFixYouCode/tree/master/part_2" rel="noopener noreferrer" target="_blank">https://github.com/lucadivit/HowIFixYouCode/tree/master/part_2</a>
+                    </li>
+                    <li>
+                        Introduction to Cryptography with Coding Theory - Trappe &amp; Washington
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="https://www.lucadivita.it/tag/matematica.html">matematica</a></li>
+                <li><a href="https://www.lucadivita.it/tag/teoria_dellinformazione.html">teoria_dellinformazione</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici.html">codici</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_a_correzione.html">codici_a_correzione</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_a_ripetizione.html">codici_a_ripetizione</a></li>
+                <li><a href="https://www.lucadivita.it/tag/controllo_di_parita.html">controllo_di_parità</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_lineari.html">codici_lineari</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codice_di_hamming.html">codice_di_hamming</a></li>
+                <li><a href="https://www.lucadivita.it/tag/matrice_generatrice.html">matrice_generatrice</a></li>
+                <li><a href="https://www.lucadivita.it/tag/sindrome.html">sindrome</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+</main>
+
+<script defer src="/theme/site.js"></script>
+
+<script defer src="/theme/umami-events.js"></script>
+
+<script type="module" defer src="/theme/vendor/instant.page/instantpage.js"></script>
+
+</body>
+</html>

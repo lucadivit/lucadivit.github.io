@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How I Fix Your Code - 2 - Bit Di Vita</title>
+    <meta name="description" content="We left off last month with some toy error-correcting codes. You could say we warmed up. I&#39;m not saying we knocked out a mule, but at least we laid down the basics and a few fundamental concepts that, as everyone knows, are always at the base of everything. In this …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="How I Fix Your Code - 2 - Bit Di Vita">
+    <meta property="og:description" content="We left off last month with some toy error-correcting codes. You could say we warmed up. I&#39;m not saying we knocked out a mule, but at least we laid down the basics and a few fundamental concepts that, as everyone knows, are always at the base of everything. In this …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="/theme/site.css">
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/en/">
+                        <img class="site-logo" src="/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/en/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="it" title="Italian" >
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="en" title="English" aria-current="page">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/en/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/en/archives.html" >Archives</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/info/" >Explore</a></li>
+        <li><a href="https://www.lucadivita.it/en/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/en/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="it" title="Italian" >
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="en" title="English" aria-current="page">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>How I Fix Your Code - 2</h1>
+        <p>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/en/category/crittografia-sicurezza.html">Encryption & Security</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-04-01T00:00:00+02:00">April 01, 2026</time>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+                <div class="toc">
+<ul>
+<li><a href="#yes-still-theory">Yes, Still Theory</a><ul>
+<li><a href="#an-upper-bound">An Upper Bound</a></li>
+<li><a href="#a-lower-bound">A Lower Bound</a></li>
+</ul>
+</li>
+<li><a href="#ok-but">OK, But...?</a><ul>
+<li><a href="#linear-codes">Linear Codes</a></li>
+<li><a href="#the-hamming-code">The Hamming Code</a></li>
+<li><a href="#a-small-clarification">A Small Clarification</a></li>
+<li><a href="#the-systematic-method">The Systematic Method</a></li>
+</ul>
+</li>
+<li><a href="#conclusions">Conclusions</a></li>
+<li><a href="#related-posts">Related Posts</a></li><li><a href="#references">References</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>We left off <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/">last month</a> with some toy error-correcting codes.
+You could say we warmed up. I'm not saying we knocked out a mule, but at least we laid down the <strong>basics</strong> and a few <strong>fundamental concepts</strong> that, as everyone knows,
+are always at the base of everything. In this second article we still won't get rid of the basic concepts, something
+still needs to be said, but at least we get them out of the way and we will start looking at a more <strong>consolidated</strong> error-correcting code. After this premise I'd say we can start.</p>
+<h3 id="yes-still-theory">Yes, Still Theory<a class="headerlink" href="#yes-still-theory" title="Permanent link"> </a></h3>
+<p>We talked about <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/#let-us-straighten-this-out">nearest neighbor</a>, so I won't go back
+to the topic. But let's stop for a second. If we have a code of length <span class="arithmatex">\(n\)</span> and composed of <span class="arithmatex">\(M\)</span> codewords, you need to compute <span class="arithmatex">\(M\)</span> Hamming distances to see which codeword is the closest. And this is a huge pain in the ass because if <span class="arithmatex">\(M\)</span>
+is too large it becomes an <strong>impractical</strong> computation. As the great Sun Tzu said, to win you must know yourself and also your enemy. So let's start
+by giving a definition of code. A code is nothing more than a <strong>triple</strong></p>
+<div class="arithmatex">\[
+\left( n, \, M, \, d \right)
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(n\)</span> is the <strong>length of the codeword</strong>, that is the <strong>total</strong> number of transmitted symbols</li>
+<li><span class="arithmatex">\(M\)</span> is the <strong>number of codewords</strong> and measures the size of the code</li>
+<li><span class="arithmatex">\(d\)</span> is the <strong>minimum distance</strong> between codewords and measures the ability to defend against noise</li>
+</ul>
+<p>For a generic code <span class="arithmatex">\(\left( n, \, M, \, d \right)\)</span> composed of <span class="arithmatex">\(q\)</span> symbols, we can define the <strong>rate</strong> as:</p>
+<p><a id="rate-codice"></a></p>
+<div class="arithmatex">\[
+R = \frac{\log_{q}M}{n}
+\]</div>
+<p class="formula-caption">Formula 1. Code Rate</p>
+<p>where</p>
+<ul>
+<li><span class="arithmatex">\(log_{q}M\)</span> is the <strong>amount of information</strong> in a codeword</li>
+<li><span class="arithmatex">\(n\)</span> is the number of <strong>transmitted symbols</strong></li>
+</ul>
+<p>The rate measures the <strong>amount of transmitted information</strong>. You can see it as <strong>efficiency</strong>:</p>
+<ul>
+<li>If <span class="arithmatex">\(R=1\)</span> it means that our code is composed of <strong>all</strong> possible words of length <span class="arithmatex">\(n\)</span>, so we are not using <strong>redundancy</strong>.
+We are therefore very efficient because there is no waste of resources to transmit more bits than necessary, but if we mess up we're screwed.</li>
+<li>If <span class="arithmatex">\(R&lt;1\)</span> it means that we are using some <strong>redundancy</strong>, and roughly speaking the smaller <span class="arithmatex">\(R\)</span> is the more redundancy we have, the more <strong>robust</strong> the code is, and the more we <strong>waste</strong> resources.</li>
+</ul>
+<p>Let's see it with an example. Suppose we have a binary code (<span class="arithmatex">\(q=2\)</span>) <span class="arithmatex">\(\left( 2, \, 4, \, 1 \right)\)</span>. We have that</p>
+<div class="arithmatex">\[
+R = \frac{\log_2 4}{2} = 1
+\]</div>
+<p>in fact the possible codewords are</p>
+<div class="arithmatex">\[
+C = \left \{ 00, \, 01, \, 10, \, 11 \right \}
+\]</div>
+<p>and by sending, for example, the message <span class="arithmatex">\(c=00\)</span>, if we received <span class="arithmatex">\(c=01\)</span> we would not notice the error, because it is a valid codeword.
+There are, in other words, no invalid codewords.</p>
+<p>Let us now consider the one-dimensional parity check seen in the <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/">first part</a>.
+There we had <span class="arithmatex">\(k=7\)</span> <strong>information bits</strong> so <span class="arithmatex">\(M=2^7\)</span>, and the messages were long <span class="arithmatex">\(n=8\)</span> because of the parity check. So <span class="arithmatex">\(R\)</span> is simply</p>
+<div class="arithmatex">\[
+R = \frac{log_2 2^7}{8} = 0.875
+\]</div>
+<p>This tells us that there is redundancy (due to parity) but that the code is not very robust. In fact we can notice, at most, one error.</p>
+<p>So to recap:</p>
+<ul>
+<li>high <span class="arithmatex">\(R\)</span> <span class="arithmatex">\(\rightarrow\)</span> <strong>more throughput</strong>, <strong>less robustness</strong></li>
+<li>low <span class="arithmatex">\(R\)</span> <span class="arithmatex">\(\rightarrow\)</span> <strong>less throughput</strong>, <strong>more robustness</strong></li>
+</ul>
+<p>Why is this formula so important?! Well because it basically tells us that <em>we cannot have high efficiency and at the same time high robustness</em>,
+or rather we cannot arbitrarily increase both, otherwise it would be too nice, right!? And instead <strong>life sucks</strong>.
+Even if from the formulas above this thing is evident, it is worth seeing why. And it is precisely in this context that the concept of <strong>bounds</strong> comes in with both feet,
+which are mathematical limits (and guys, you can't escape those) on <strong>performance</strong>.</p>
+<h4 id="an-upper-bound">An Upper Bound<a class="headerlink" href="#an-upper-bound" title="Permanent link"> </a></h4>
+<p>The upper bound tells us:</p>
+<blockquote>
+<p>No code can do better than this</p>
+</blockquote>
+<p>To understand better, suppose we have a code of length <span class="arithmatex">\(n\)</span> and distance <span class="arithmatex">\(d\)</span>. We want to know how large <span class="arithmatex">\(M\)</span> can be. There exists
+an upper bound called <strong>Singleton bound</strong> that mathematically says this:</p>
+<p><a id="singleton-bound"></a></p>
+<div class="arithmatex">\[
+M \leq q^{n-d+1}
+\]</div>
+<p class="formula-caption">Formula 2. Singleton Bound</p>
+<p>So <strong>we cannot have infinite codewords</strong>. This was obvious intuitively and now it is also <strong>mathematically</strong> obvious. Let's go back to our dear one-dimensional parity check seen in the first part. The codewords were long <span class="arithmatex">\(n=8\)</span>, <span class="arithmatex">\(d=2\)</span> (this was explained so go recover it) and <span class="arithmatex">\(q=2\)</span> since
+the code is binary. Expanding we have:</p>
+<div class="arithmatex">\[
+M \leq 2^{8-2+1}
+\]</div>
+<p>And therefore with parity check you can have at most <span class="arithmatex">\(2^7=128\)</span> codewords. And since as we saw above parity check has exactly <span class="arithmatex">\(128\)</span> codewords,
+we say that it is <strong>MDS (Maximum Distance Separable)</strong>.</p>
+<p>The <a href="#singleton-bound">Singleton Bound</a> formula hides other interesting information. In fact by expanding it we obtain:</p>
+<div class="arithmatex">\[
+d \leq n - log_q M + 1
+\]</div>
+<p>and from this we have a <strong>maximum distance</strong> that codes can have. But it is not over, with a series of mathematical steps we obtain</p>
+<div class="arithmatex">\[
+R \leq 1 - \frac{d-1}{n}
+\]</div>
+<p>which shows exactly what we said. In fact if <span class="arithmatex">\(d\)</span> is large, the term <span class="arithmatex">\(\frac{d-1}{n}\)</span> is also large (but always less than <span class="arithmatex">\(1\)</span>). So
+the term <span class="arithmatex">\(1 - \frac{d-1}{n}\)</span> will tend to a small value. Suppose for example, that we have this binary repetition code: <span class="arithmatex">\((5, 2, 5)\)</span>. The only two possible codewords
+are</p>
+<div class="arithmatex">\[
+C = \{ 00000, \, 11111 \}
+\]</div>
+<p>It is certainly a <strong>very robust</strong> code. In fact if you received <span class="arithmatex">\(0000 \textcolor{red}{1}\)</span> you know that in reality it is <span class="arithmatex">\(00000\)</span>, if you received <span class="arithmatex">\(000 \textcolor{red}{11}\)</span>
+you know that in reality it is <span class="arithmatex">\(00000\)</span> and so on. But you use many bits for a single message. In fact:</p>
+<div class="arithmatex">\[
+R \leq 1 - 0.8
+\]</div>
+<p>and therefore for this code the rate will be at <strong>most</strong> <span class="arithmatex">\(0.2\)</span> and in fact, from the <a href="#rate-codice">exact formula</a> we can write that <span class="arithmatex">\(R=0.2\)</span> that is we cannot do better than this
+(and in fact repetition codes are another class of MDS codes).</p>
+<h4 id="a-lower-bound">A Lower Bound<a class="headerlink" href="#a-lower-bound" title="Permanent link"> </a></h4>
+<p>We know from the <a href="#an-upper-bound">upper bound</a> that <em>we cannot do better than this</em>. So it is logical to think that the lower bound tells us</p>
+<blockquote>
+<p>You can't do worse than this</p>
+</blockquote>
+<p>(even if there is never an end to the worst). In this case we talk about <strong>Gilbert–Varshamov bound</strong>. This law tells us that there exist codes with at least</p>
+<p><a id="gilbert–varshamov-bound"></a></p>
+<div class="arithmatex">\[
+M \geq \frac{q^n}{\sum_{i=0}^{d-1}\binom{n}{i}(q-1)^i}
+\]</div>
+<p class="formula-caption">Formula 3. Gilbert–Varshamov Bound</p>
+<p>codewords. Yes I know the formula looks a bit complex but let's try to see it in pieces.
+The term:</p>
+<ul>
+<li><span class="arithmatex">\(q^n\)</span>: tells us <strong>how many</strong> are all the possible words of length <span class="arithmatex">\(n\)</span>.</li>
+<li><span class="arithmatex">\(\sum_{i=0}^{d-1}\binom{n}{i}(q-1)^i\)</span>: counts <strong>how many words can differ</strong> from a given word in at most <span class="arithmatex">\(d-1\)</span> positions.</li>
+</ul>
+<p>Let's see with an example. Considering the now consolidated one-dimensional parity check we have <span class="arithmatex">\(n=8\)</span> and <span class="arithmatex">\(q=2\)</span>.
+So there are <span class="arithmatex">\(2^8=256\)</span> possible words (and not codewords). Also the distance, as seen and seen again, is <span class="arithmatex">\(d=2\)</span> from which</p>
+<div class="arithmatex">\[
+\sum_{i=0}^{2-1}\binom{8}{i}(2-1)^i = \binom{8}{0} + \binom{8}{1} = 1 + 8 = 9
+\]</div>
+<p>(if you don't know how to solve a binomial coefficient, look <a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/#considerations">here</a>).
+We basically counted <em>how many words have distance less than <span class="arithmatex">\(2\)</span></em>. This means that:</p>
+<ul>
+<li>at distance <span class="arithmatex">\(0\)</span>, given by <span class="arithmatex">\(\binom{8}{0}\)</span>, we have <span class="arithmatex">\(1\)</span> word (the word itself)</li>
+<li>at distance <span class="arithmatex">\(1\)</span>, given by <span class="arithmatex">\(\binom{8}{1}\)</span>, we have <span class="arithmatex">\(8\)</span> words. That is given a word, there are <span class="arithmatex">\(8\)</span> that are at distance <span class="arithmatex">\(1\)</span>.</li>
+</ul>
+<p>So continuing, we have</p>
+<div class="arithmatex">\[
+M \geq \frac{256}{9} \approx 28.4
+\]</div>
+<p><span class="arithmatex">\(M\)</span> must be an integer (since fractions of codewords do not exist) so we round to <span class="arithmatex">\(29\)</span> (if you are wondering why I <strong>rounded up</strong>,
+the answer is that if I had done it down the inequality would not have been respected). That <span class="arithmatex">\(M \geq 29\)</span> tells us that there exists at least one binary code of length
+<span class="arithmatex">\(n=8\)</span> and with distance <span class="arithmatex">\(d=2\)</span>, that has at least <span class="arithmatex">\(29\)</span> codewords.</p>
+<p>To make a recap on upper and lower bound therefore, we have that by applying the <a href="#singleton-bound">Singleton bound</a> and the <a href="#gilbert–varshamov-bound">Gilbert–Varshamov bound</a>
+to a binary code <span class="arithmatex">\(q=2\)</span>, long <span class="arithmatex">\(n=8\)</span> and distant <span class="arithmatex">\(d=2\)</span> the number of codewords is between</p>
+<div class="arithmatex">\[
+29 \leq M \leq 128
+\]</div>
+<p>The one-dimensional parity check is one of the codes with these parameters, and it has <span class="arithmatex">\(M=128\)</span> which makes it MDS.</p>
+<h3 id="ok-but">OK, But...?<a class="headerlink" href="#ok-but" title="Permanent link"> </a></h3>
+<p>At this point I'm not saying the theory is over. That will haunt you and <strong>will haunt</strong> you forever. <strong>It is infinite</strong>. However we have all
+the knowledge to start looking at some more serious error-correcting codes. First of all I point out that there are many error-correcting
+codes. And each one has certain <strong>characteristics</strong> that define them. There are for example <strong>linear codes</strong>, <strong>cyclic codes</strong> the <strong>convolutional</strong> ones and whoever
+has more puts more. These characteristics, however, are not mutually exclusive. For example the Reed-Solomon code is both linear and cyclic.
+But let's go step by step and start from one of the milestone codes, the <strong>Hamming code</strong>. Since it is a linear code though, we first need to know what they are.</p>
+<h4 id="linear-codes">Linear Codes<a class="headerlink" href="#linear-codes" title="Permanent link"> </a></h4>
+<p>When we send a message over a communication channel, it can be disturbed by noise. If we are talking on the phone for example
+we expect not only that what we say arrives <strong>intact</strong>, but we want it to arrive <strong>quickly</strong>. Can you imagine what a mess it would be
+if I talk on the phone with someone and my "hi" arrives after two seconds?! So any corrections must happen <strong>super fast</strong>.
+Well, linear codes provide the mathematical structure to make correction happen, and happen quickly. They allow
+you to balance three aspects: <strong>correction capability</strong>, <strong>amount of redundancy</strong> and <strong>speed</strong>.</p>
+<p>A linear code is a particular type of code based on a mathematical property:</p>
+<blockquote>
+<p>The set of code words forms a vector subspace</p>
+</blockquote>
+<p>To better understand what this definition means we have to take a small step into linear algebra.
+A <strong>vector space</strong> is a set of vectors on which we can do two fundamental operations:</p>
+<ul>
+<li><strong>Sum</strong> between vectors</li>
+</ul>
+<div class="arithmatex">\[
+    \begin{bmatrix}
+        a_0 \\
+        a_1 \\
+        \vdots \\
+        a_n
+    \end{bmatrix} +
+    \begin{bmatrix}
+        b_0 \\
+        b_1 \\
+        \vdots \\
+        b_n
+    \end{bmatrix} =
+    \begin{bmatrix}
+        a_0 + b_0 \\
+        a_1 + b_1 \\
+        \vdots \\
+        a_n + b_n
+    \end{bmatrix}
+\]</div>
+<ul>
+<li><strong>Multiplication</strong> of a vector by a scalar</li>
+</ul>
+<div class="arithmatex">\[
+    c \cdot
+    \begin{bmatrix}
+        a_0 \\
+        a_1 \\
+        \vdots \\
+        a_n
+    \end{bmatrix} =
+    \begin{bmatrix}
+        c \cdot a_0 \\
+        c \cdot a_1 \\
+        \vdots \\
+        c \cdot a_n
+    \end{bmatrix}
+\]</div>
+<p>And these operations must satisfy two fundamental properties:</p>
+<ol>
+<li>Closure</li>
+<li>Abelian Group</li>
+</ol>
+<p>If you want to know more I have already talked about it <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">here</a>, and you should read it because I will take for granted that all operations will be done
+in <strong>modular arithmetic</strong>, modulo <span class="arithmatex">\(2\)</span>. At this point we can introduce the concept of <strong>vector subspace</strong>.
+A vector subspace is simply a <strong>subset of a vector space</strong> that maintains the same structure.
+In practice it is a set of vectors such that, if we apply the same operations of the vector space, we always remain within the set.
+Suppose we have the set of binary vectors:</p>
+<div class="arithmatex">\[
+\mathbb{F}_2^2 = \{ (0, \, 0), \, (0, \, 1), \, (1, \, 0), \, (1, \, 1) \}
+\]</div>
+<p>Pick two vectors <strong>at random</strong> from this set and add them. The result is still a vector of <span class="arithmatex">\(\mathbb{F}_2^2\)</span>. The same goes
+for multiplication by a scalar of the field <span class="arithmatex">\(\mathbb{F}_2\)</span>. These properties guarantee that <span class="arithmatex">\(\mathbb{F}_2^2\)</span> is a vector space.
+Consider the subset of <span class="arithmatex">\(\mathbb{F}_2^2\)</span></p>
+<div class="arithmatex">\[
+\mathbb{A} = \{ (0, \, 1), \, (1, \, 0) \}
+\]</div>
+<p>This is <strong>not</strong> a vector subspace, because by adding them together we get</p>
+<div class="arithmatex">\[
+    \vec{v} =
+    \begin{bmatrix}
+    1 \\
+    1
+    \end{bmatrix}
+\]</div>
+<p>which does not belong to <span class="arithmatex">\(\mathbb{A}\)</span> (but before ignoring it wait, because it will come back <strong>useful</strong>). Different story instead for</p>
+<div class="arithmatex">\[
+\mathbb{B} = \{ (0, \, 0), \, (1, \, 1) \}
+\]</div>
+<p>which is a vector subspace of <span class="arithmatex">\(\mathbb{F}_2^2\)</span>.</p>
+<p>At this point there is a <strong>detail</strong> worth clarifying. When we wrote</p>
+<div class="arithmatex">\[
+\mathbb{F}_2^2
+\]</div>
+<p>we didn't do it like that for beauty. It indicates that the elements of the vector belong to a <strong>finite field</strong>, that is a <strong>Galois field</strong>.
+If you don't know what I'm talking about, bad... very bad. But you are lucky because I talked about it in more detail <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">here</a>.
+In the case of binary codes the field is</p>
+<div class="arithmatex">\[
+\mathbb{F}_2 = \{0, \, 1 \}
+\]</div>
+<p>So when we write a vector space like</p>
+<div class="arithmatex">\[
+\mathbb{F}_2^n
+\]</div>
+<p>we are saying that:</p>
+<ul>
+<li>vectors have <strong>length</strong> <span class="arithmatex">\(n\)</span></li>
+<li>each coordinate belongs to the <strong>finite field</strong> <span class="arithmatex">\(\mathbb{F}_2\)</span></li>
+<li>operations between vectors follow the <strong>arithmetic of the field</strong></li>
+</ul>
+<p>So the components of the vectors belong to a Galois field, and the vector
+space is defined over that field. Operations between vectors and multiplication
+by a scalar therefore follow the arithmetic of the field.</p>
+<p>In general codes can be defined over <strong>any finite fields</strong> <span class="arithmatex">\(\mathbb{F}_q\)</span> but,
+staying in the <strong>binary</strong> world we can say that a linear code of length <span class="arithmatex">\(n\)</span> and composed
+of <span class="arithmatex">\(M\)</span> codewords is a vector subspace of <span class="arithmatex">\(\mathbb{F}_2^n\)</span>. Since every vector subspace of dimension <span class="arithmatex">\(k\)</span> (where <span class="arithmatex">\(k\)</span> is the number of information bits)
+on <span class="arithmatex">\(\mathbb{F}_2\)</span> contains <span class="arithmatex">\(2^k\)</span> elements, we necessarily have</p>
+<div class="arithmatex">\[
+M = 2^k
+\]</div>
+<p>For this reason linear codes are often denoted as <span class="arithmatex">\([n, \, k]\)</span> instead of <span class="arithmatex">\((n, \, M)\)</span>. The two notations are <strong>equivalent</strong> and connected by the relation <span class="arithmatex">\(M = 2^k\)</span>.
+At this point a fundamental property of linear algebra comes into play, known as the <strong>basis theorem</strong>, which states that every vector space of
+dimension <span class="arithmatex">\(k\)</span> can be generated by <span class="arithmatex">\(k\)</span> <a href="https://en.wikipedia.org/wiki/Linear_independence">linearly independent</a> vectors of <span class="arithmatex">\(\mathbb{F}_2^n\)</span>.
+To make it clearer let's go back to our vector space</p>
+<div class="arithmatex">\[
+\mathbb{F}_2^2 = \{ (0, \, 0), \, (0, \, 1), \, (1, \, 0), \, (1, \, 1) \}
+\]</div>
+<p>Let us now consider the two vectors</p>
+<div class="arithmatex">\[
+(1, \, 0), \, (0, \, 1)
+\]</div>
+<p>These two vectors are <strong>linearly independent</strong> and can generate the whole space.
+In fact, by combining them we get:</p>
+<ul>
+<li><span class="arithmatex">\(0 \cdot (1,0) + 0 \cdot (0,1) = (0,0)\)</span></li>
+<li><span class="arithmatex">\(1 \cdot (1,0) + 0 \cdot (0,1) = (1,0)\)</span></li>
+<li><span class="arithmatex">\(0 \cdot (1,0) + 1 \cdot (0,1) = (0,1)\)</span></li>
+<li><span class="arithmatex">\(1 \cdot (1,0) + 1 \cdot (0,1) = (1,1)\)</span></li>
+</ul>
+<p>So <strong>all vectors of <span class="arithmatex">\(\mathbb{F}_2^2\)</span> can be obtained as a linear combination
+of these two vectors</strong> and the set</p>
+<div class="arithmatex">\[
+\left\{ (1, \, 0), \, (0, \, 1) \right\}
+\]</div>
+<p>is a <strong>basis</strong> of <span class="arithmatex">\(\mathbb{F}_2^2\)</span>. So a basis does not necessarily have to be a subspace.
+Back to codes, this means that the entire code can be generated
+starting from <span class="arithmatex">\(k\)</span> linearly independent vectors of <span class="arithmatex">\(\mathbb{F}_2^n\)</span>. If we arrange these vectors as rows of a matrix</p>
+<div class="arithmatex">\[
+G =
+\begin{bmatrix}
+g_1 \\
+g_2 \\
+\vdots \\
+g_k
+\end{bmatrix}
+\]</div>
+<p>we obtain a <span class="arithmatex">\(k \times n\)</span> matrix called the <strong>generator matrix</strong> <span class="arithmatex">\(G\)</span>. The rows of <span class="arithmatex">\(G\)</span> constitute a <strong>basis of the code</strong> and all codewords
+can be obtained as linear combinations of these rows. Given <span class="arithmatex">\(v\)</span> of size <span class="arithmatex">\(1 \times k\)</span> is the information vector, the corresponding
+codeword of size <span class="arithmatex">\(1 \times n\)</span>, is obtained as</p>
+<div class="arithmatex">\[
+\vec{c} = \vec{v} \cdot G
+\]</div>
+<p>The generator matrix allows us to build all codewords,
+but it is not the most convenient way to check whether a <strong>received word contains errors</strong>. For this we introduce another
+fundamental matrix, called the <strong>parity-check matrix</strong>, denoted by <span class="arithmatex">\(H\)</span> and with size <span class="arithmatex">\((n-k) \times n\)</span>.
+The matrix <span class="arithmatex">\(H\)</span> has the property that a word <span class="arithmatex">\(c\)</span> belongs to the code if and only if</p>
+<p><a id="condizione-validita"></a></p>
+<div class="arithmatex">\[
+\vec{c} \cdot H^T = \vec{0}
+\]</div>
+<p class="formula-caption">Formula 4. Validity Condition</p>
+<p>where <span class="arithmatex">\(H^T\)</span> denotes the <a href="https://en.wikipedia.org/wiki/Transpose">transpose matrix</a> of <span class="arithmatex">\(H\)</span>.
+In other words, if we take a <strong>valid codeword</strong> and multiply it by <span class="arithmatex">\(H^T\)</span> we always obtain
+the <strong>zero vector</strong>. This property allows us to check very quickly whether
+a word belongs to the code or not. Suppose now that the receiver obtains a word <span class="arithmatex">\(\vec{r}\)</span>. If the channel is noisy it is possible
+that <span class="arithmatex">\(\vec{r}\)</span> is not a valid codeword. We can then compute</p>
+<p><a id="sindrome"></a></p>
+<div class="arithmatex">\[
+\vec{s} = \vec{r} \cdot H^T
+\]</div>
+<p class="formula-caption">Formula 5. Syndrome Definition</p>
+<p>The vector <span class="arithmatex">\(\vec{s}\)</span> is called <strong>syndrome</strong>, of size <span class="arithmatex">\(1 \times (n-k)\)</span>.</p>
+<ul>
+<li>If <span class="arithmatex">\(\vec{s} = \vec{0}\)</span> the word is a <strong>valid codeword</strong>.</li>
+<li>If <span class="arithmatex">\(\vec{s} \neq \vec{0}\)</span> it means that during transmission <strong>an error</strong> occurred.</li>
+</ul>
+<p>Ok, I know this paragraph can be a bit tough. It's a ton of concepts. But this also makes you understand the world
+that sits behind an apparently simple concept and that <em>keeps the IT world standing</em> (and that's not an exaggeration).</p>
+<p>Now the question that can arise spontaneously is</p>
+<blockquote>
+<p>How the hell do I build <span class="arithmatex">\(G\)</span> and <span class="arithmatex">\(H\)</span>?</p>
+</blockquote>
+<p>And it's a question that makes a lot of sense. But don't worry, I will dedicate a <a href="#the-systematic-method">specific section to this</a>.</p>
+<h4 id="the-hamming-code">The Hamming Code<a class="headerlink" href="#the-hamming-code" title="Permanent link"> </a></h4>
+<p>Finally we arrived at the Hamming code and I assure you it was not a <strong>labor</strong> just for you.
+Up to now we built the theoretical scaffolding: Hamming distance, rate, mathematical bounds and the structure of linear codes.
+All this however was needed to get here. The Hamming code is in fact one of the <strong>cornerstones</strong> of the theory of error-correcting
+codes and even though it was created in 1950, it is still <strong>used</strong> today. A classic example is <strong>ECC memories</strong> (Error Correcting Code),
+where some <strong>variants</strong> of Hamming codes allow you to <strong>automatically</strong> correct errors
+that may occur in the memory bits. And if you were wondering</p>
+<blockquote>
+<p>When have I ever used an ECC...</p>
+</blockquote>
+<p>Well you haven't, but <strong>workstations</strong>, <strong>mega big-ass servers</strong> more commonly known as the <strong>cloud</strong>, and also some <strong>space probes</strong>, yes.
+So now, when you upload a document to whatever cloud storage service you like, you will think of Hamming and how much I
+beat you up with vector spaces.</p>
+<p>Hamming codes are a family of binary linear codes characterized by the parameters</p>
+<p><a id="parametri-hamming"></a></p>
+<div class="arithmatex">\[
+    \begin{aligned}
+    n &amp;= 2^m - 1 \\
+    k &amp;= 2^m - m - 1 \\
+    d &amp;= 3
+    \end{aligned}
+\]</div>
+<p class="formula-caption">Formula 6. Hamming Code Parameters</p>
+<p>Where <span class="arithmatex">\(m=n-k\)</span> represents the <strong>number of parity bits used</strong>. These parameters give us some important and, by now,
+familiar information. For example we know that the minimum distance of the code is <span class="arithmatex">\(d=3\)</span> from which we derive that the code can correct
+<span class="arithmatex">\(t=1\)</span> error by applying the little formula defined <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#not-all-fields-come-to-harm">here</a>.
+Suppose we take <span class="arithmatex">\(n=7\)</span> and <span class="arithmatex">\(k=4\)</span>, we obtain the famous code <span class="arithmatex">\([7, \, 4]\)</span>.
+From the previous paragraph we know that the generator matrix will have size <span class="arithmatex">\(4 \times 7\)</span>. So first of all we build
+the generator matrix by selecting <span class="arithmatex">\(4\)</span> <strong>linearly independent</strong> elements of <span class="arithmatex">\(\mathbb{F}_2^7\)</span>, and arranging them as rows.
+Suppose we chose:</p>
+<div class="arithmatex">\[
+    G =
+    \begin{bmatrix}
+    1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{bmatrix}
+\]</div>
+<p>We know that we need the matrix <span class="arithmatex">\(H\)</span> of size <span class="arithmatex">\(3 \times 7\)</span>, which allows parity checking. This does not come out of the <strong>goblins' trapdoor</strong> but depends strictly
+on <span class="arithmatex">\(G\)</span> (or rather <span class="arithmatex">\(G\)</span> depends on <span class="arithmatex">\(H\)</span>), but for the moment let's gloss over it and <strong>take it</strong> without explanations:</p>
+<div class="arithmatex">\[
+    H =
+    \begin{bmatrix}
+    1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+    1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+    \end{bmatrix}
+\]</div>
+<p>At this point let's see how it all fits together. Suppose we want to <strong>send</strong> the message</p>
+<div class="arithmatex">\[
+\vec{v} = (1, \, 0, \, 1, \, 1)
+\]</div>
+<p>the codeword is obtained as:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{c} = \vec{v} \cdot G &amp;= (1, \, 0, \, 1, \, 1) \cdot \begin{bmatrix}
+                                                1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+                                                0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+                                                0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+                                                0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+                                              \end{bmatrix}\\[6pt]
+&amp;= (1, \, 0, \, 1, \, 1, \, 0, \, 1, \, 0)
+\end{aligned}
+\]</div>
+<p>and this is the word that will be <strong>transmitted on the channel</strong>. Suppose the recipient receives <span class="arithmatex">\(\vec{r}=\vec{c}\)</span>, what they do is compute the syndrome:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{s} = \vec{c} \cdot H^T &amp;= (1, \, 0, \, 1, \, 1, \, 0, \, 1, \, 0) \cdot \begin{bmatrix}
+                                                                    1 &amp; 1 &amp; 0 \\
+                                                                    1 &amp; 0 &amp; 1 \\
+                                                                    0 &amp; 1 &amp; 1 \\
+                                                                    1 &amp; 1 &amp; 1 \\
+                                                                    1 &amp; 0 &amp; 0 \\
+                                                                    0 &amp; 1 &amp; 0 \\
+                                                                    0 &amp; 0 &amp; 1
+                                                                    \end{bmatrix} \\[6pt]
+&amp;= (0, \, 0, \, 0)
+\end{aligned}
+\]</div>
+<p>Since the syndrome is null, we know we received the message <strong>correctly</strong>. In fact <span class="arithmatex">\(\vec{r}=\vec{c}\)</span>. Suppose however that during transmission
+<span class="arithmatex">\(\vec{r}\)</span> gets corrupted, and we receive:</p>
+<div class="arithmatex">\[
+\vec{r} = (1, \, 0, \, \textcolor{red}{0}, \, 1, \, 0, \, 1, \, 0)
+\]</div>
+<p>Computing the syndrome as before we get:</p>
+<div class="arithmatex">\[
+\vec{s} = (0, \, 1, \, 1)
+\]</div>
+<p>It is not null, so there is an error. What we do is take <span class="arithmatex">\(H\)</span> and look for <strong>which column</strong> corresponds to <span class="arithmatex">\(\vec{s}\)</span>.
+This is because in Hamming codes <em>the syndrome coincides exactly with the column of the matrix <span class="arithmatex">\(H\)</span></em>
+corresponding to the erroneous bit (if you want to know why <a href="#a-small-clarification">read here</a>).
+In this case we see that it is found in the third column and therefore the corrupted bit is
+the one in third position. Flipping it we get the correct message.</p>
+<p>Suppose now we are <strong>unlucky</strong> and we have two errors in <span class="arithmatex">\(\vec{r}\)</span>:</p>
+<div class="arithmatex">\[
+\vec{r} = (1, \, \textcolor{red}{1}, \, \textcolor{red}{0}, \, 1, \, 0, \, 1, \, 0)
+\]</div>
+<p>in this case two things can happen:</p>
+<ol>
+<li>Either the syndrome is not in <span class="arithmatex">\(H\)</span> and therefore we do not know what to correct (but this <strong>cannot happen</strong> in Hamming codes).</li>
+<li>Or the syndrome is in <span class="arithmatex">\(H\)</span> and we correct the wrong bit <strong>making</strong> the situation worse.</li>
+</ol>
+<p>In this case</p>
+<div class="arithmatex">\[
+\vec{s} = (1, \, 1, \, 0)
+\]</div>
+<p>which is the first column of <span class="arithmatex">\(H\)</span>. So we would mistakenly correct the first bit.
+Precisely to avoid these situations, a Hamming variant known as <a href="https://en.wikipedia.org/wiki/Hamming_code#Hamming_codes_with_additional_parity_(SECDED)">SECDED</a> is used
+which adds a <strong>global parity check</strong> that allows you to <strong>determine the number of errors</strong>. If it is equal to <span class="arithmatex">\(2\)</span> we do not correct to avoid making the situation worse.</p>
+<p>The value <span class="arithmatex">\(m\)</span> introduced initially <strong>controls the length of the codeword</strong> and therefore the number of information bits that can
+be sent in a single transmission. Worth noting is the fact that the length <span class="arithmatex">\(n\)</span> <strong>grows exponentially</strong> with respect to <span class="arithmatex">\(m\)</span>, so the larger <span class="arithmatex">\(m\)</span> is,
+the higher the rate of the code is (but it requires more computing power).</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(m\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(n\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(k\)</span></th>
+<th style="text-align: center;">code</th>
+<th style="text-align: center;"><span class="arithmatex">\(R=\frac{k}{n}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;"><span class="arithmatex">\([7,4]\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{4}{7} \approx 0.57\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">15</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;"><span class="arithmatex">\([15,11]\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{11}{15} \approx 0.73\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">31</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;"><span class="arithmatex">\([31,26]\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\frac{26}{31} \approx 0.84\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>If you are wondering how all this happens for example in ECCs, well the answer is that it is <strong>integrated directly into hardware circuits</strong>.
+That is, they are designed so that these operations are performed at the hardware level before writing the data to memory.</p>
+<h4 id="a-small-clarification">A Small Clarification<a class="headerlink" href="#a-small-clarification" title="Permanent link"> </a></h4>
+<p>In the previous paragraph we said that in case of error, the syndrome coincides with the column of the matrix <span class="arithmatex">\(H\)</span>
+corresponding to the erroneous bit. This is not sorcery, it is pure and simple <strong>mathematics</strong>. Let's start again from the formula of the
+<a href="#condizione-validita">validity condition</a> of a linear code, from the <a href="#sindrome">syndrome formula</a>.
+Assuming that an error occurred on one of the bits of <span class="arithmatex">\(c\)</span>, we can write <span class="arithmatex">\(r\)</span> as:</p>
+<div class="arithmatex">\[
+\vec{r} = \vec{c} + \vec{e}_i
+\]</div>
+<p>where <span class="arithmatex">\(e_i\)</span> is a vector with all <span class="arithmatex">\(0\)</span> except in the <span class="arithmatex">\(i\)</span>-th position. To give an example let</p>
+<div class="arithmatex">\[
+\vec{c} = (1, \, 1, \, 0, \, \dots)
+\]</div>
+<p>assuming an error in first position we have</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{r} = \vec{c} + \vec{e}_0 &amp;= (1, \, 1, \, 0, \, \dots) + (1, \, 0, \, 0, \, \dots) \\[6pt]
+            &amp;= (0, \, 1, \, 0, \, \dots)
+\end{aligned}
+\]</div>
+<p>and therefore</p>
+<div class="arithmatex">\[
+\vec{s} = (\vec{c} + \vec{e}_0) \cdot H^T = \vec{c} \cdot H^T + \vec{e}_0 \cdot H^T
+\]</div>
+<p>but since from the validity condition we have <span class="arithmatex">\(c \cdot H^T=0\)</span> only the term <span class="arithmatex">\(e_0 \cdot H^T\)</span> remains.
+At this point since <span class="arithmatex">\(e_i\)</span> is null everywhere except in position <span class="arithmatex">\(i\)</span>, the product <strong>selects</strong> the <span class="arithmatex">\(i\)</span>-th row of
+<span class="arithmatex">\(H^T\)</span>, which is the <span class="arithmatex">\(i\)</span>-th column of <span class="arithmatex">\(H\)</span>. Let's see. Given</p>
+<div class="arithmatex">\[
+    H =
+    \begin{bmatrix}
+    1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+    1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+    \end{bmatrix}
+\]</div>
+<p>from which</p>
+<div class="arithmatex">\[
+    H^T = \begin{bmatrix}
+        1 &amp; 1 &amp; 0 \\
+        1 &amp; 0 &amp; 1 \\
+        0 &amp; 1 &amp; 1 \\
+        1 &amp; 1 &amp; 1 \\
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 1
+        \end{bmatrix}
+\]</div>
+<p>and given</p>
+<div class="arithmatex">\[
+\vec{e}_0 = (1, \, 0, \, 0, \, 0, \, 0, \, 0, \, 0) 
+\]</div>
+<p>we have</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{s} = \vec{e}_0 \cdot H^T &amp;= (1, \, 0, \, 0, \, 0, \, 0, \, 0, \, 0)  \cdot \begin{bmatrix}
+                                                                    1 &amp; 1 &amp; 0 \\
+                                                                    1 &amp; 0 &amp; 1 \\
+                                                                    0 &amp; 1 &amp; 1 \\
+                                                                    1 &amp; 1 &amp; 1 \\
+                                                                    1 &amp; 0 &amp; 0 \\
+                                                                    0 &amp; 1 &amp; 0 \\
+                                                                    0 &amp; 0 &amp; 1
+                                                                    \end{bmatrix} \\[6pt]
+                    &amp;= (1, \, 1, \, 0)
+\end{aligned}
+\]</div>
+<p>which is the first row of <span class="arithmatex">\(H^T\)</span> that is the first column of <span class="arithmatex">\(H\)</span>.</p>
+<h4 id="the-systematic-method">The Systematic Method<a class="headerlink" href="#the-systematic-method" title="Permanent link"> </a></h4>
+<p>Here we are at <strong>the last paragraph</strong> before the conclusions. Previously we built the generator matrix
+choosing some linearly independent vectors of <span class="arithmatex">\(\mathbb{F}_2^7\)</span>. This choice was made a bit by <strong>feeling</strong>,
+just to have an example. In practice however there exists a methodology to build linear codes,
+known as <strong>systematic form</strong>. What you do is build the generator matrix like this:</p>
+<p><a id="g-sistemico"></a></p>
+<div class="arithmatex">\[
+G = \left[ I_k \, | \, P \right]
+\]</div>
+<p class="formula-caption">Formula 7. Systematic Method For Matrix G</p>
+<p>where <span class="arithmatex">\(I_k\)</span> is the <a href="https://en.wikipedia.org/wiki/Identity_matrix"><strong>identity matrix</strong></a> of size <span class="arithmatex">\(k \times k\)</span>. In the case of Hamming <span class="arithmatex">\([7, \, 4]\)</span></p>
+<div class="arithmatex">\[
+I_4 = \begin{bmatrix}
+        1 &amp; 0 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 &amp; 0 \\
+        0 &amp; 0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 0 &amp; 1
+        \end{bmatrix}
+\]</div>
+<p>To choose <span class="arithmatex">\(P\)</span> you have to go through the computation of <span class="arithmatex">\(H\)</span>. The latter is defined as</p>
+<p><a id="h-sistemico"></a></p>
+<div class="arithmatex">\[
+H = \left[ -P^T \, | \, I_m \right]
+\]</div>
+<p class="formula-caption">Formula 8. Systematic Method For Matrix H</p>
+<p>Since <span class="arithmatex">\(m=n-k=3\)</span> we have</p>
+<div class="arithmatex">\[
+I_3 = \begin{bmatrix}
+        1 &amp; 0 &amp; 0 \\
+        0 &amp; 1 &amp; 0 \\
+        0 &amp; 0 &amp; 1
+        \end{bmatrix}
+\]</div>
+<p>From theory we have another piece of information. That is that <span class="arithmatex">\(H\)</span> <em>must contain all non-zero binary strings of length <span class="arithmatex">\(m\)</span></em>
+So excluding <span class="arithmatex">\((0, \, 0, \, 0)\)</span>, <span class="arithmatex">\(H\)</span> will contain in its columns</p>
+<div class="arithmatex">\[
+(0, \, 0, \, 1), \, (0, \, 1, \, 0), \, (0, \, 1, \, 1), \, (1, \, 0, \, 0), \, (1, \, 0, \, 1), \, (1, \, 1, \, 0), \, (1, \, 1, \, 1)
+\]</div>
+<p>We arrange these vectors as columns of the matrix <span class="arithmatex">\(H\)</span> so that the last <span class="arithmatex">\(m\)</span> columns form the identity matrix <span class="arithmatex">\(I_m\)</span>.</p>
+<div class="arithmatex">\[
+    H =
+    \left[
+    \begin{array}{cccc|ccc}
+    1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+    1 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+    \end{array}
+    \right]
+\]</div>
+<p>As you can see the last part of the matrix <span class="arithmatex">\(H\)</span>, contains <span class="arithmatex">\(I_3\)</span> so we are happy, because everything to the left
+represents <span class="arithmatex">\(-P^T\)</span>. Since the minus sign is irrelevant in arithmetic modulo <span class="arithmatex">\(2\)</span>, we have:</p>
+<div class="arithmatex">\[
+    P^T =
+    \begin{bmatrix}
+    1 &amp; 1 &amp; 0 &amp; 1 \\
+    1 &amp; 0 &amp; 1 &amp; 1 \\
+    0 &amp; 1 &amp; 1 &amp; 1
+    \end{bmatrix}
+\]</div>
+<p>from which we obtain</p>
+<div class="arithmatex">\[
+    P =
+    \begin{bmatrix}
+    1 &amp; 1 &amp; 0 \\
+    1 &amp; 0 &amp; 1 \\
+    0 &amp; 1 &amp; 1 \\
+    1 &amp; 1 &amp; 1
+    \end{bmatrix}
+\]</div>
+<p>And now that we have <span class="arithmatex">\(P\)</span>, we can <strong>complete</strong> our matrix <span class="arithmatex">\(G\)</span> respecting the <a href="#g-sistemico">formula</a>:</p>
+<div class="arithmatex">\[
+    G =
+    \left[
+    \begin{array}{cccc|ccc}
+    1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+    0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1
+    \end{array}
+    \right]
+\]</div>
+<p>where you can see that the right sub-matrix contains the <span class="arithmatex">\(P\)</span> found, while the left one contains the identity matrix <span class="arithmatex">\(I_4\)</span>.</p>
+<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<p>And also for this month we have reached the <strong>end</strong> of an article. Let's be honest, <strong>nicely packed with concepts</strong>.
+But if you made it to the end, now you know (a small part) what sits behind what really drives the world forward.
+We <strong>trust</strong> blindly that, when we save a file, it is always available <strong>intact</strong>. Imagine
+what could happen for example, to servers that contain health data <strong>completely corrupted</strong>. Behind our trust
+in these systems, there is nothing hidden other than <strong>matrices</strong> and <strong>Galois fields</strong>. In any case I leave you the 
+<a href="https://github.com/lucadivit/HowIFixYouCode/tree/master/part_2"><strong>repo link</strong></a> where there is a very basic implementation
+of the Hamming code. But the series does not end here. A few days of break and we resume with codes. I still don't know which one
+but we'll see.</p>
+<p>See You Next Time.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h2>Related Posts</h2>
+                <ol class="article-related-list">
+                    <li><a href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Where Only Polynomials Grow</a></li>
+                    <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Share Your Secrets With Shamir</a></li>
+                    <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 1</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h2>References</h2>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/">/en/crittografia-sicurezza/how-i-fix-your-code-1/</a>
+                    </li>
+                    <li>
+                        <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/#let-us-straighten-this-out">/en/crittografia-sicurezza/how-i-fix-your-code-1/#let-us-straighten-this-out</a>
+                    </li>
+                    <li>
+                        <a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/#considerations">/en/crittografia-sicurezza/share-your-secrets-with-shamir/#considerations</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">/en/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Linear_independence" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Linear_independence</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Transpose" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Transpose</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#not-all-fields-come-to-harm">/en/teoria-matematica/qui-crescono-solo-polinomi/#not-all-fields-come-to-harm</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Hamming_code#Hamming_codes_with_additional_parity_(SECDED)" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Hamming_code#Hamming_codes_with_additional_parity_(SECDED)</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Identity_matrix" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Identity_matrix</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lucadivit/HowIFixYouCode/tree/master/part_2" rel="noopener noreferrer" target="_blank">https://github.com/lucadivit/HowIFixYouCode/tree/master/part_2</a>
+                    </li>
+                    <li>
+                        Introduction to Cryptography with Coding Theory - Trappe &amp; Washington
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="https://www.lucadivita.it/en/tag/math.html">math</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/information_theory.html">information_theory</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/codes.html">codes</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/error_correction_codes.html">error_correction_codes</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/repetition_codes.html">repetition_codes</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/parity_check.html">parity_check</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/linear_codes.html">linear_codes</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/hamming_code.html">hamming_code</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/generator_matrix.html">generator_matrix</a></li>
+                <li><a href="https://www.lucadivita.it/en/tag/syndrome.html">syndrome</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="https://www.lucadivita.it/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+</main>
+
+<script defer src="/theme/site.js"></script>
+
+<script defer src="/theme/umami-events.js"></script>
+
+<script type="module" defer src="/theme/vendor/instant.page/instantpage.js"></script>
+
+</body>
+</html>

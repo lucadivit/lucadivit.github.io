@@ -30,7 +30,7 @@
             <div>
                 <strong>
                     <a class="site-brand" href="https://www.lucadivita.it/">
-                        <img class="site-logo" src="/images/logo/logo.png" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <img class="site-logo" src="/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
                         <span>Bit Di Vita</span>
                     </a>
                 </strong>
@@ -55,13 +55,13 @@
         </li>
         <li>
             <a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" hreflang="it" title="Italian" aria-current="page">
-                <img class="lang-flag" src="/images/flags/it.jpg" alt="Italian" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
             <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" hreflang="en" title="English" >
-                <img class="lang-flag" src="/images/flags/en.jpg" alt="English" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
         </li>
@@ -94,13 +94,13 @@
         </li>
         <li>
             <a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" hreflang="it" title="Italian" aria-current="page">
-                <img class="lang-flag" src="/images/flags/it.jpg" alt="Italian" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
             <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" hreflang="en" title="English" >
-                <img class="lang-flag" src="/images/flags/en.jpg" alt="English" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
         </li>
@@ -457,7 +457,9 @@ come gestire i valori negativi no?! Per cui saltando i passaggi scriviamo:</p>
 GCD(2, \, 8) = 2
 \]</div>
 <p>Andando a controllare la divisibilità si ha che <span class="arithmatex">\(2 \nmid 1\)</span>, e possiamo concludere che <span class="arithmatex">\(2 \pmod{8}\)</span> non ha inverso moltiplicativo, e questo viola
-una delle proprietà richieste dai campi.</p>
+una delle proprietà richieste dai campi. </p>
+<p>Se tutte le proprietà viste sono vere ad eccezione dell'inverso moltiplicativo, allora non abbiamo un campo
+ma un <strong>anello</strong>. Possiamo quindi dire che <em>tutti i campi sono anelli, ma non tutti gli anelli sono campi</em>.</p>
 <h4 id="dallorticello-alla-piantagione">Dall'Orticello Alla Piantagione<a class="headerlink" href="#dallorticello-alla-piantagione" title="Permanent link"> </a></h4>
 <p>Abbiamo visto che <span class="arithmatex">\(p\)</span> deve essere primo per poter definire un campo di Galois. Ma se vi dicessi che invece si possono definire campi del tipo 
 <span class="arithmatex">\(\mathbb{F}_8\)</span>? No non sono impazzito. Si può fare, ma in maniera leggermente diversa rispetto a prima. Innanzi tutto iniziamo dicendo che l'argomento
@@ -538,7 +540,7 @@ q(x) = x^3 + x^2 + x
 <div class="arithmatex">\[
 q(x) = x^3 + x^2 + x = x \cdot (x^2 + x + 1)
 \]</div>
-<p>Essendo scrivibile come prodotto di due polinomi di grado inferiore, lo scartiamo perché vorrebbe dire introdurre elementi che non hanno inverso moltiplicativo.</p>
+<p>Essendo scrivibile come prodotto di due polinomi di grado inferiore, lo scartiamo perché vorrebbe dire introdurre elementi che non hanno inverso moltiplicativo, creando quindi un anello e non un campo.</p>
 </li>
 </ul>
 <p>Siamo quasi giunti alla fine. Ora che abbiamo i polinomi irriducibili ne scegliamo uno a <strong>piacere</strong>, quello che preferite (anche se io mi farei controllare se preferissi
@@ -687,6 +689,7 @@ perché la crittografia è sicura, sono le password <em>1234</em> e la <em>mamma
                 <ol class="article-related-list">
                     <li><a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Condividi I Tuoi Segreti Con Shamir</a></li>
                     <li><a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 1</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 2</a></li>
                 </ol>
             </aside>
 

@@ -30,7 +30,7 @@
             <div>
                 <strong>
                     <a class="site-brand" href="https://www.lucadivita.it/en/">
-                        <img class="site-logo" src="/images/logo/logo.png" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <img class="site-logo" src="/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
                         <span>Bit Di Vita</span>
                     </a>
                 </strong>
@@ -55,13 +55,13 @@
         </li>
         <li>
             <a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" hreflang="it" title="Italian" >
-                <img class="lang-flag" src="/images/flags/it.jpg" alt="Italian" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
             <a href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/" hreflang="en" title="English" aria-current="page">
-                <img class="lang-flag" src="/images/flags/en.jpg" alt="English" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
         </li>
@@ -94,13 +94,13 @@
         </li>
         <li>
             <a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" hreflang="it" title="Italian" >
-                <img class="lang-flag" src="/images/flags/it.jpg" alt="Italian" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
             <a href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/" hreflang="en" title="English" aria-current="page">
-                <img class="lang-flag" src="/images/flags/en.jpg" alt="English" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
         </li>
@@ -457,6 +457,8 @@ GCD(2, \, 8) = 2
 \]</div>
 <p>Checking the divisibility we have that <span class="arithmatex">\(2 \nmid 1\)</span>, and we can conclude that <span class="arithmatex">\(2 \pmod{8}\)</span> has no multiplicative inverse, and this violates
 one of the required properties of fields.</p>
+<p>If all the properties discussed hold except for the multiplicative inverse, then we do not have a field but a <strong>ring</strong>. 
+Therefore, we can say that <em>all fields are rings, but not all rings are fields</em>.</p>
 <h4 id="from-the-little-garden-to-the-plantation">From The Little Garden To The Plantation<a class="headerlink" href="#from-the-little-garden-to-the-plantation" title="Permanent link"> </a></h4>
 <p>We have seen that <span class="arithmatex">\(p\)</span> must be prime in order to define a Galois field. But what if I told you that instead you can define fields of the type
 <span class="arithmatex">\(\mathbb{F}_8\)</span>? No, I am not crazy. It can be done, but in a slightly different way than before. First of all let us start by saying that the argument
@@ -537,7 +539,7 @@ q(x) = x^3 + x^2 + x
 <div class="arithmatex">\[
 q(x) = x^3 + x^2 + x = x \cdot (x^2 + x + 1)
 \]</div>
-<p>Since it can be written as the product of two polynomials of lower degree, we discard it because it would mean introducing elements that do not have a multiplicative inverse.</p>
+<p>Since it can be written as the product of two polynomials of lower degree, we discard it because it would introduce elements that do not have a multiplicative inverse, thus creating a ring rather than a field.</p>
 </li>
 </ul>
 <p>We are almost at the end. Now that we have the irreducible polynomials we choose one <strong>at will</strong>, whichever you prefer (even if I would get myself checked if I preferred
@@ -685,6 +687,7 @@ because cryptography is secure, it is the passwords <em>1234</em> and <em>hot mo
                 <ol class="article-related-list">
                     <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Share Your Secrets With Shamir</a></li>
                     <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 1</a></li>
+                    <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 2</a></li>
                 </ol>
             </aside>
 

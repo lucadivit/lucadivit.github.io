@@ -340,31 +340,6 @@ body.redirect-page {
     opacity: 0.7;
 }
 
-:where(.article-body, .page-body, main#content > article > section)
-    :is(ul, ol):not(.link-rows):not(.latest-rows):not(.article-related-list):not(.article-reference-list):not(.article-tags-list):not(.contact-links):not(.site-nav-menu):not(.site-nav-lang):not(.tag-index-list) > li {
-    border-radius: var(--pico-border-radius);
-    transition: background-color 120ms ease;
-}
-
-:where(.article-body, .page-body, main#content > article > section)
-    :is(ul, ol):not(.link-rows):not(.latest-rows):not(.article-related-list):not(.article-reference-list):not(.article-tags-list):not(.contact-links):not(.site-nav-menu):not(.site-nav-lang):not(.tag-index-list) > li:hover,
-:where(.article-body, .page-body, main#content > article > section)
-    :is(ul, ol):not(.link-rows):not(.latest-rows):not(.article-related-list):not(.article-reference-list):not(.article-tags-list):not(.contact-links):not(.site-nav-menu):not(.site-nav-lang):not(.tag-index-list) > li:focus-within {
-    background-color: var(--link-rows-hover-bg);
-    background-color: color-mix(in oklab, var(--pico-muted-color) 12%, transparent);
-}
-
-:where(.article-body, .page-body, main#content > article > section)
-    .toc :is(ul, ol) > li,
-:where(.article-body, .page-body, main#content > article > section)
-    .toc :is(ul, ol) > li:hover,
-:where(.article-body, .page-body, main#content > article > section)
-    .toc :is(ul, ol) > li:focus-within {
-    background: transparent;
-    border-radius: 0;
-    transition: none;
-}
-
 .article-body blockquote,
 .page-body blockquote {
     margin: var(--pico-block-spacing-vertical, 1.5rem) 0;
@@ -870,6 +845,14 @@ main#content > article > header > p > .archive-meta {
     list-style: disc;
     list-style-position: outside;
     padding-inline-start: calc(var(--pico-block-spacing-horizontal, var(--pico-spacing)) + 1.1rem);
+}
+
+.page-body .link-rows.is-bulleted > li:hover,
+.page-body .link-rows.is-bulleted > li:focus-within,
+.page-body .link-rows.is-bulleted > .sz-item:hover,
+.page-body .link-rows.is-bulleted > .sz-item:focus-within {
+    background: transparent;
+    box-shadow: none;
 }
 
 .page-body .talks-list details {

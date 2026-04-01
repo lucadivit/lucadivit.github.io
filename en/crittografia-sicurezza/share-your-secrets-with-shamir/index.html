@@ -30,7 +30,7 @@
             <div>
                 <strong>
                     <a class="site-brand" href="https://www.lucadivita.it/en/">
-                        <img class="site-logo" src="/images/logo/logo.png" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <img class="site-logo" src="/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
                         <span>Bit Di Vita</span>
                     </a>
                 </strong>
@@ -55,13 +55,13 @@
         </li>
         <li>
             <a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" hreflang="it" title="Italian" >
-                <img class="lang-flag" src="/images/flags/it.jpg" alt="Italian" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
             <a href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/" hreflang="en" title="English" aria-current="page">
-                <img class="lang-flag" src="/images/flags/en.jpg" alt="English" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
         </li>
@@ -94,13 +94,13 @@
         </li>
         <li>
             <a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" hreflang="it" title="Italian" >
-                <img class="lang-flag" src="/images/flags/it.jpg" alt="Italian" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
             <a href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/" hreflang="en" title="English" aria-current="page">
-                <img class="lang-flag" src="/images/flags/en.jpg" alt="English" width="318" height="212" decoding="async">
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
         </li>
@@ -307,8 +307,8 @@ Let us consider a small example to solve by hand, just to help you understand wh
 <h5 id="example">Example<a class="headerlink" href="#example" title="Permanent link"> </a></h5>
 <p>Let us assume we want to compute a polynomial of degree <span class="arithmatex">\(2\)</span> that passes through the points:</p>
 <div class="arithmatex">\[
-(x_0, \, y_0) = (0, \, 1) \\[6pt][6pt]
-(x_1, \, y_1) = (1, \, 2) \\[6pt][6pt]
+(x_0, \, y_0) = (0, \, 1) \\[6pt]
+(x_1, \, y_1) = (1, \, 2) \\[6pt]
 (x_2, \, y_2) = (2, \, 5)
 \]</div>
 <p>The polynomial will have the form:</p>
@@ -400,7 +400,7 @@ y_n \cdot
 L_0(x)
 &amp;= \frac{x - x_1}{x_0 - x_1} \cdot \frac{x - x_2}{x_0 - x_2} \\[6pt]
 &amp;= \frac{x - 1}{0 - 1} \cdot \frac{x - 2}{0 - 2} \\[6pt]
-&amp;= \frac{x - 1}{-1} \cdot \frac{x - 2}{-2} \\[6pt][6pt]
+&amp;= \frac{x - 1}{-1} \cdot \frac{x - 2}{-2} \\[6pt]
 &amp;= \frac{(x - 1)(x - 2)}{2}
 \end{aligned}
 \]</div>
@@ -412,7 +412,7 @@ L_0(x)
 L_1(x)
 &amp;= \frac{x - x_0}{x_1 - x_0} \cdot \frac{x - x_2}{x_1 - x_2} \\[6pt]
 &amp;= \frac{x - 0}{1 - 0} \cdot \frac{x - 2}{1 - 2} \\[6pt]
-&amp;= x \cdot \frac{x - 2}{-1} \\[6pt][6pt]
+&amp;= x \cdot \frac{x - 2}{-1} \\[6pt]
 &amp;= -x(x - 2)
 \end{aligned}
 \]</div>
@@ -424,7 +424,7 @@ L_1(x)
 L_2(x)
 &amp;= \frac{x - x_0}{x_2 - x_0} \cdot \frac{x - x_1}{x_2 - x_1}\\[6pt]
 &amp;= \frac{x - 0}{2 - 0} \cdot \frac{x - 1}{2 - 1}\\[6pt]
-&amp;= \frac{x}{2}(x - 1)\\[6pt][6pt]
+&amp;= \frac{x}{2}(x - 1)\\[6pt]
 &amp;= \frac{x(x - 1)}{2}
 \end{aligned}
 \]</div>
@@ -440,15 +440,15 @@ y = y_0 \cdot L_0(x) + y_1 \cdot L_1(x) + y_2 \cdot L_2(x) \\[6pt][10pt]
 \begin{aligned}
 y &amp;= \frac{(x - 1)(x - 2)}{2}
      - 2x(x - 2)
-     + 5 \cdot \frac{x(x - 1)}{2} \\[6pt][6pt]
+     + 5 \cdot \frac{x(x - 1)}{2} \\[6pt]
   &amp;= \frac{x^2 - 3x + 2}{2}
      - 2x^2 + 4x
-     + \frac{5x^2 - 5x}{2} \\[6pt][6pt]
+     + \frac{5x^2 - 5x}{2} \\[6pt]
   &amp;= \left( \frac{x^2 - 3x + 2}{2}
            + \frac{5x^2 - 5x}{2} \right)
-     - 2x^2 + 4x \\[6pt][6pt]
+     - 2x^2 + 4x \\[6pt]
   &amp;= \frac{x^2 - 3x + 2 + 5x^2 - 5x}{2}
-     - 2x^2 + 4x \\[6pt][6pt]
+     - 2x^2 + 4x \\[6pt]
   &amp;= \frac{6x^2 - 8x + 2}{2}
      - 2x^2 + 4x \\[6pt]
   &amp;= 3x^2 - 4x + 1 - 2x^2 + 4x \\[10pt]
@@ -739,6 +739,7 @@ That said, I am going to <strong>share</strong> (in pieces, now that I can) my s
                 <h2>Related Posts</h2>
                 <ol class="article-related-list">
                     <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 1</a></li>
+                    <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 2</a></li>
                     <li><a href="https://www.lucadivita.it/en/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Where Only Polynomials Grow</a></li>
                 </ol>
             </aside>
