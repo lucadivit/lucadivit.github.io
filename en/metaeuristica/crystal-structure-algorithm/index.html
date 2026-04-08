@@ -269,12 +269,12 @@ The balance happens naturally, thanks to the update equations we’ve just seen.
 But let’s get back on track... we’ve created <strong>four new crystals</strong> starting from the previous ones. And what do we do with them?
 We’ll see that in a moment. First, let me explain the sorcery behind those mysterious names:</p>
 <ul>
-<li><span class="arithmatex">\(C_{r_{main}}\)</span> : A randomly selected old crystal.</li>
-<li><span class="arithmatex">\(C_{r_{new}}\)</span> : The new crystal created from previous ones.</li>
-<li><span class="arithmatex">\(C_{r_{old}}\)</span> : The original crystal, before the update.</li>
-<li><span class="arithmatex">\(C_{r_{b}}\)</span> : The crystal with the best configuration, i.e., the one that gives the best value for the function <span class="arithmatex">\(f\)</span>.</li>
-<li><span class="arithmatex">\(F_{c}\)</span> : An average of the values from a crystal randomly chosen among the existing ones.
-<span class="arithmatex">\(r, r_{1}, r_{2}, r_{3}\)</span> : Here they are, our old friends! These <span class="arithmatex">\(r\)</span>’s are no longer direction vectors, but random integers.
+<li><span class="arithmatex">\(C_{r_{main}}\)</span>: A randomly selected old crystal.</li>
+<li><span class="arithmatex">\(C_{r_{new}}\)</span>: The new crystal created from previous ones.</li>
+<li><span class="arithmatex">\(C_{r_{old}}\)</span>: The original crystal, before the update.</li>
+<li><span class="arithmatex">\(C_{r_{b}}\)</span>: The crystal with the best configuration, i.e., the one that gives the best value for the function <span class="arithmatex">\(f\)</span>.</li>
+<li><span class="arithmatex">\(F_{c}\)</span>: It is a crystal calculated by averaging the other crystals in the population, or a random subset of them.</li>
+<li><span class="arithmatex">\(r, r_{1}, r_{2}, r_{3}\)</span>: Here they are, our old friends! These <span class="arithmatex">\(r\)</span>’s are no longer direction vectors, but random integers.
 That’s what the authors of the paper decided… and who am I to argue?</li>
 </ul>
 <p>The newly created crystals are used, as will be seen in the pseudocode, to replace the "old and imperfect" ones with something newer and more refined.

@@ -404,6 +404,13 @@ body.redirect-page {
     -webkit-overflow-scrolling: touch;
 }
 
+.article-body table :is(th, td),
+.page-body table :is(th, td) {
+    white-space: nowrap;
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
 .article-body mjx-container[display="true"],
 .page-body mjx-container[display="true"] {
     display: block;
