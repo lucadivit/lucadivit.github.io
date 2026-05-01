@@ -330,13 +330,17 @@ body.redirect-page {
 .article-extra-related .article-related-list li,
 .article-extra-references .article-reference-list li {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     align-items: start;
     column-gap: calc(var(--pico-spacing) * 0.55);
     margin: 0 0 calc(var(--pico-spacing) * 0.45);
     padding: calc(var(--pico-spacing) * 0.45) calc(var(--pico-spacing) * 0.55);
     border-radius: var(--pico-border-radius);
     transition: background-color 120ms ease;
+}
+
+.article-extra-references .article-reference-list li > * {
+    min-width: 0;
 }
 
 .article-extra-related .article-related-list li::before,
@@ -533,6 +537,7 @@ body.redirect-page {
     -webkit-overflow-scrolling: touch;
 }
 
+/* Keep overflow scoped to display math blocks (KaTeX) on mobile. */
 .article-body .katex-display,
 .page-body .katex-display {
     display: block;
@@ -550,6 +555,22 @@ body.redirect-page {
     color: inherit;
 }
 
+.article-body .katex-mathml,
+.page-body .katex-mathml {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+}
+
 .article-body .katex-display + .formula-caption,
 .page-body .katex-display + .formula-caption {
     margin-top: 0;
@@ -564,6 +585,12 @@ body.redirect-page {
 .article-body :where(p, li, td, th, blockquote, code),
 .page-body :where(p, li, td, th, blockquote, code) {
     overflow-wrap: break-word;
+}
+
+.article-body :where(a, code),
+.page-body :where(a, code) {
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .article-body :where(p, li, td, th, blockquote) code,
@@ -596,6 +623,11 @@ body.redirect-page {
 .article-extra-related :where(a),
 .article-extra-references :where(a) {
     overflow-wrap: anywhere;
+}
+
+.article-extra-references .article-reference-list a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .article-extra-related :where(a:hover, a:focus-visible),
