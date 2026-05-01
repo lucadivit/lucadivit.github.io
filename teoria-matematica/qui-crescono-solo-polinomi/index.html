@@ -119,6 +119,9 @@
             <small class="archive-meta">
                 <time datetime="2025-12-01T00:00:00+01:00">01 dicembre 2025</time>
             </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--intermediate">Livello: Intermedio</span>
+            </small>
         </p>
     </header>
 
@@ -355,13 +358,13 @@ Le curve ellittiche sono <strong>ingorde</strong>, vogliono più elementi. Ed è
     allora avere un <strong>campo chiuso</strong> vuol dire che <span class="arithmatex">\(a + b \in \mathbb{A}\)</span> e <span class="arithmatex">\(a \cdot b \in \mathbb{A}\)</span>.</li>
 <li><strong>Gruppo Abeliano</strong>: le operazioni di somma e moltiplicazione, devono avere <strong>l'elemento neutro</strong>, il suo <strong>inverso</strong> e devono rispettare le proprietà <strong>associativa</strong>, <strong>commutativa</strong> e <strong>distributiva</strong>. 
    Questo in parole povere vuol dire che, dato il campo <span class="arithmatex">\(\mathbb{A}\)</span>, <span class="arithmatex">\(a, \, b, \, c \in \mathbb{A}\)</span> e <span class="arithmatex">\(a, \, b, \, c \neq 0\)</span>:<ul>
-<li>Esiste il termine <span class="arithmatex">\(0\)</span> che permette di scrivere <span class="arithmatex">\(a + 0 = a\)</span> (<strong>elemento neutro dell'addizione</strong>).</li>
-<li>Esiste il termine <span class="arithmatex">\(1\)</span> che permette di scrivere <span class="arithmatex">\(a \cdot 1 = a\)</span> (<strong>elemento neutro della moltiplicazione</strong>).</li>
-<li>Esiste il termine <span class="arithmatex">\(-a\)</span> che permette di scrivere <span class="arithmatex">\(a - a = 0\)</span> (<strong>inverso dell'addizione</strong>).</li>
-<li>Esiste il termine <span class="arithmatex">\(a^{-1}\)</span> che permette di scrivere <span class="arithmatex">\(a \cdot a^{-1} = 1\)</span> ad esclusione dello <span class="arithmatex">\(0\)</span> (<strong>inverso della moltiplicazione</strong>).</li>
-<li><span class="arithmatex">\(a + b = b + a\)</span> e <span class="arithmatex">\((a + b) + c = a + (b + c)\)</span> (<strong>proprietà commutativa e associativa dell'addizione</strong>).</li>
-<li><span class="arithmatex">\(a \cdot b = b \cdot a\)</span> e <span class="arithmatex">\((a \cdot b) \cdot c = a \cdot (b \cdot c)\)</span> (<strong>proprietà commutativa e associativa della moltiplicazione</strong>).</li>
-<li><span class="arithmatex">\(a \cdot (b + c) = a \cdot b + a \cdot c\)</span> (<strong>proprietà distributiva</strong>)</li>
+<li>Esiste il termine <span class="arithmatex">\(0\)</span> che permette di scrivere <span class="arithmatex">\(a + 0 = a \to\)</span> <strong>elemento neutro dell'addizione</strong>.</li>
+<li>Esiste il termine <span class="arithmatex">\(1\)</span> che permette di scrivere <span class="arithmatex">\(a \cdot 1 = a \to\)</span> <strong>elemento neutro della moltiplicazione</strong>.</li>
+<li>Esiste il termine <span class="arithmatex">\(-a\)</span> che permette di scrivere <span class="arithmatex">\(a - a = 0 \to\)</span> <strong>inverso dell'addizione</strong>.</li>
+<li>Esiste il termine <span class="arithmatex">\(a^{-1}\)</span> che permette di scrivere <span class="arithmatex">\(a \cdot a^{-1} = 1\)</span> ad esclusione dello <span class="arithmatex">\(0 \to\)</span> <strong>inverso della moltiplicazione</strong>.</li>
+<li><span class="arithmatex">\(a + b = b + a\)</span> e <span class="arithmatex">\((a + b) + c = a + (b + c) \to\)</span> <strong>proprietà commutativa e associativa dell'addizione</strong>.</li>
+<li><span class="arithmatex">\(a \cdot b = b \cdot a\)</span> e <span class="arithmatex">\((a \cdot b) \cdot c = a \cdot (b \cdot c) \to\)</span> <strong>proprietà commutativa e associativa della moltiplicazione</strong>.</li>
+<li><span class="arithmatex">\(a \cdot (b + c) = a \cdot b + a \cdot c \to\)</span> <strong>proprietà distributiva</strong>.</li>
 </ul>
 </li>
 </ol>
@@ -459,7 +462,13 @@ GCD(2, \, 8) = 2
 <p>Andando a controllare la divisibilità si ha che <span class="arithmatex">\(2 \nmid 1\)</span>, e possiamo concludere che <span class="arithmatex">\(2 \pmod{8}\)</span> non ha inverso moltiplicativo, e questo viola
 una delle proprietà richieste dai campi. </p>
 <p>Se tutte le proprietà viste sono vere ad eccezione dell'inverso moltiplicativo, allora non abbiamo un campo
-ma un <strong>anello</strong>. Possiamo quindi dire che <em>tutti i campi sono anelli, ma non tutti gli anelli sono campi</em>.</p>
+ma un <strong>anello</strong>. Possiamo quindi dire che <em>tutti i campi sono anelli, ma non tutti gli anelli sono campi</em>. In particolare, molto a grandi linee,
+possiamo dire che:</p>
+<ul>
+<li>Se <span class="arithmatex">\(n\)</span> non è primo, possiamo <strong>sempre</strong> costruire un anello i cui elemento sono i resti <span class="arithmatex">\(\pmod{n}\)</span>.</li>
+<li>Se <span class="arithmatex">\(n\)</span> è primo, l'anello è <strong>anche</strong> un campo.</li>
+<li>Se <span class="arithmatex">\(n\)</span> è potenza di primo... beh niente spoiler. Continuate a leggere.</li>
+</ul>
 <h4 id="dallorticello-alla-piantagione">Dall'Orticello Alla Piantagione<a class="headerlink" href="#dallorticello-alla-piantagione" title="Permanent link"> </a></h4>
 <p>Abbiamo visto che <span class="arithmatex">\(p\)</span> deve essere primo per poter definire un campo di Galois. Ma se vi dicessi che invece si possono definire campi del tipo 
 <span class="arithmatex">\(\mathbb{F}_8\)</span>? No non sono impazzito. Si può fare, ma in maniera leggermente diversa rispetto a prima. Innanzi tutto iniziamo dicendo che l'argomento
@@ -652,7 +661,7 @@ Qui interviene la proprietà di ciclicità. Infatti vale la regoletta:</p>
 <div class="arithmatex">\[
 x^a = x^{a \bmod{n}}
 \]</div>
-<p>dove <span class="arithmatex">\(n = p^m - 1\)</span>. E quindi possiamo scrivere:</p>
+<p>dove <span class="arithmatex">\(n = q - 1 = p^m - 1\)</span>. E quindi possiamo scrivere:</p>
 <div class="arithmatex">\[
 x^7 \equiv x^{7 \bmod 7} \equiv x^0 = 1
 \]</div>
@@ -685,16 +694,17 @@ perché la crittografia è sicura, sono le password <em>1234</em> e la <em>mamma
 
         <section class="article-extras">
             <aside class="article-extra-related" id="related-posts">
-                <h2>Consigliati</h2>
+                <h3>Consigliati</h3>
                 <ol class="article-related-list">
                     <li><a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Condividi I Tuoi Segreti Con Shamir</a></li>
                     <li><a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 1</a></li>
                     <li><a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 2</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-3/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 3</a></li>
                 </ol>
             </aside>
 
             <section class="article-extra-references" id="references">
-                <h2>Riferimenti</h2>
+                <h3>Riferimenti</h3>
                 <ol class="article-reference-list">
                     <li>
                         <a href="https://it.wikipedia.org/wiki/Algoritmo_esteso_di_Euclide" rel="noopener noreferrer" target="_blank">https://it.wikipedia.org/wiki/Algoritmo_esteso_di_Euclide</a>
@@ -728,6 +738,7 @@ perché la crittografia è sicura, sono le password <em>1234</em> e la <em>mamma
     </div>
 
 </article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
 </main>
 
 <script defer src="/theme/site.js"></script>
@@ -736,5 +747,8 @@ perché la crittografia è sicura, sono le password <em>1234</em> e la <em>mamma
 
 <script type="module" defer src="/theme/vendor/instant.page/instantpage.js"></script>
 
+
+<script defer src="/theme/collapsible-sections.js"></script>
+<script defer src="/theme/reading-progress.js"></script>
 </body>
 </html>

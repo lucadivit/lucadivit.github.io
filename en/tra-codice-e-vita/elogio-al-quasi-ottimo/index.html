@@ -17,9 +17,13 @@
     <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/tra-codice-e-vita/elogio-al-quasi-ottimo/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="/theme/site.css">
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
     <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
 </head>
-<body>
+<body data-katex-enabled="true">
 <header class="site-header">
     <nav aria-label="Primary navigation" class="site-nav">
         <div class="site-nav-inner container">
@@ -114,6 +118,9 @@
             </small>
             <small class="archive-meta">
                 <time datetime="2025-11-13T00:00:00+01:00">November 13, 2025</time>
+            </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--beginner">Level: Beginner</span>
             </small>
         </p>
     </header>
@@ -246,7 +253,7 @@ With that said, I’ll conclude by saying that I hope I’ve sparked your <stron
 
         <section class="article-extras">
             <aside class="article-extra-related" id="related-posts">
-                <h2>Related Posts</h2>
+                <h3>Related Posts</h3>
                 <ol class="article-related-list">
                     <li><a href="https://www.lucadivita.it/en/metaeuristica/chernobyl-disaster-optimization/" rel="noopener noreferrer" target="_blank">Chernobyl Disaster Optimization</a></li>
                     <li><a href="https://www.lucadivita.it/en/metaeuristica/crystal-structure-algorithm/" rel="noopener noreferrer" target="_blank">Crystal Structure Algorithm</a></li>
@@ -254,7 +261,7 @@ With that said, I’ll conclude by saying that I hope I’ve sparked your <stron
             </aside>
 
             <section class="article-extra-references" id="references">
-                <h2>References</h2>
+                <h3>References</h3>
                 <ol class="article-reference-list">
                     <li>
                         <a href="https://www.mi.sanu.ac.rs/~luka/resources/phd/AppendixA.pdf" rel="noopener noreferrer" target="_blank">https://www.mi.sanu.ac.rs/~luka/resources/phd/AppendixA.pdf</a>
@@ -288,6 +295,7 @@ With that said, I’ll conclude by saying that I hope I’ve sparked your <stron
     </div>
 
 </article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
 </main>
 
 <script defer src="/theme/site.js"></script>
@@ -296,5 +304,8 @@ With that said, I’ll conclude by saying that I hope I’ve sparked your <stron
 
 <script type="module" defer src="/theme/vendor/instant.page/instantpage.js"></script>
 
+
+<script defer src="/theme/collapsible-sections.js"></script>
+<script defer src="/theme/reading-progress.js"></script>
 </body>
 </html>

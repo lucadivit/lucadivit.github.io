@@ -27,6 +27,11 @@
                 if (emptyPreview) {
                     emptyPreview.hidden = true;
                 }
+
+                var emptyLevel = item.querySelector(".article-level-meta");
+                if (emptyLevel) {
+                    emptyLevel.hidden = true;
+                }
             }
 
             return;
@@ -42,6 +47,11 @@
             var preview = item.querySelector("p");
             if (preview) {
                 preview.hidden = !visible;
+            }
+
+            var levelMeta = item.querySelector(".article-level-meta");
+            if (levelMeta) {
+                levelMeta.hidden = !visible;
             }
         }
     }

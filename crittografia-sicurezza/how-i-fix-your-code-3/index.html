@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Come Ti Rettifico Il Codice - 3 - Bit Di Vita</title>
+    <meta name="description" content="Eccoci con un terzo articolo sui codici a correzione d&#39;errore. Va da sé, anche se l&#39;ho già scritto ma repetita iuvant, che ce ne sono tantissimi e che ognuno ha le sue caratteristiche. Non si può neanche lontanamente pensare di fare una panoramica completa, ma se volete una lista (non …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="Come Ti Rettifico Il Codice - 3 - Bit Di Vita">
+    <meta property="og:description" content="Eccoci con un terzo articolo sui codici a correzione d&#39;errore. Va da sé, anche se l&#39;ho già scritto ma repetita iuvant, che ce ne sono tantissimi e che ognuno ha le sue caratteristiche. Non si può neanche lontanamente pensare di fare una panoramica completa, ma se volete una lista (non …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-3/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-3/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-3/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-3/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="/theme/site.css">
+    <link rel="stylesheet" href="/theme/vendor/katex/katex.min.css">
+    <script defer src="/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/">
+                        <img class="site-logo" src="/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-3/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/how-i-fix-your-code-3/" hreflang="en" title="English" >
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-3/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/how-i-fix-your-code-3/" hreflang="en" title="English" >
+                <img class="lang-flag" src="/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>Come Ti Rettifico Il Codice - 3</h1>
+        <p>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/crittografia-sicurezza.html">Crittografia & Sicurezza</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-05-01T00:00:00+02:00">01 maggio 2026</time>
+            </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--intermediate">Livello: Intermedio</span>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contenuti</h2>
+                <div class="toc">
+<ul>
+<li><a href="#la-teoria-delleterno-ritorno">La Teoria Dell'Eterno Ritorno</a><ul>
+<li><a href="#ritorno-allinizio">Ritorno All'Inizio</a></li>
+</ul>
+</li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+<li><a href="#related-posts">Consigliati</a></li><li><a href="#references">Riferimenti</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>Eccoci con un terzo articolo sui codici a correzione d'errore. Va da sé, anche se l'ho già scritto ma repetita iuvant, che ce ne sono tantissimi e che ognuno 
+ha le sue caratteristiche. Non si può neanche lontanamente pensare di fare una panoramica completa, ma se volete una lista (non esaustiva), date
+uno sguardo <a href="https://errorcorrectionzoo.org/all">qui</a>. In ogni caso, noi siamo quasi giunti al termine di questo viaggio. Non perché non ci sia altro 
+di cui parlare ma perché se <em>alle scale piace cambiare</em>, io non sono da meno. Non ho ancora deciso ma oltre questo ve ne sarà un altro, magari qualcosa
+di più moderno. Boh si vedrà dai, non ci perdiamo in chiacchiere e iniziamo dicendo che in questo articolo in particolare, parlerò di <strong>codici ciclici</strong>
+ed in particolare del codice di <strong>Reed-Solomon</strong>, che è uno dei più famosi e utilizzati in assoluto. Vi basti sapere che ai bei tempi,
+quando masterizzavano illegalmente i DVD della videoteca per poi rivenderli a chi il PC neanche lo aveva (ma aveva un lettore DVD), alla modica cifra 
+di 5.99€, stavamo utilizzando proprio il codice di Reed-Solomon, in particolare per correggere errori di lettura dovuti a graffi o polvere sui dischi.
+Ma non è tutto. È stato utilizzato per anni nelle comunicazioni <strong>DSL</strong> e in quelle <strong>satellitari</strong>. Volete qualcosa di più moderno? Beh, viene utilizzato
+dai <strong>QR Code</strong> ad esempio. Ma non finisce qui, mi stoppo io perché sì, ma sappiate che ci sono tante altre applicazioni. 
+Direi quindi di smettere di flexare casi d'uso e passare ai fatti (non prima però, di aver recuperato <a href="/crittografia-sicurezza/how-i-fix-your-code-2/">l'articolo precedente</a>
+se lo avete perso).</p>
+<h3 id="la-teoria-delleterno-ritorno">La Teoria Dell'Eterno Ritorno<a class="headerlink" href="#la-teoria-delleterno-ritorno" title="Permanent link"> </a></h3>
+<p>Tranquilli qui non parlo di Nietzsche, se volete parlare di filosofia con me benissimo ma dovete <strong>offrirmi</strong> prima di bere. Il meglio di me lo do da ubriaco.
+In ogni caso qui parlo di <strong>ciclicità</strong> cioè di cose che, proprio come nella teoria dell'eterno ritorno, si <strong>ripetono</strong>. 
+Quando diciamo che un codice <span class="arithmatex">\(C\)</span> è ciclico?! Beh quando </p>
+<div class="arithmatex">\[
+\vec{c} = \left(c_0, \, c_1, \, \cdots, \, c_{n-1} \right) \in C \implies \left(c_{n-1}, \, c_0, \, c_1, \cdots, \, c_{n-2} \right) \in C
+\]</div>
+<p>dove la singola <span class="arithmatex">\(c_i\)</span> è una componente della codeword <span class="arithmatex">\(\vec{c}\)</span>. Questo cosa vuol dire in pratica? Che nel codice ciclico se ho una codeword del tipo</p>
+<div class="arithmatex">\[
+\left(1, \, 1, \, 0, \, 1 \right)
+\]</div>
+<p>allora anche la codeword</p>
+<div class="arithmatex">\[
+\left(1, \, 1, \, 1, \, 0 \right)
+\]</div>
+<p>è nel codice. Se non vi torna, abbiamo semplicemente fatto uno <strong>shift a destra</strong>, cioè spostato tutti i bit di una posizione verso destra, 
+e quello che era l'ultimo bit è diventato il primo. Questa definizione è applicabile sempre. Infatti anche</p>
+<div class="arithmatex">\[
+\left(0, \, 1, \, 1, \, 1 \right)
+\]</div>
+<p>fa parte del codice. E così via... Per farla breve diciamo che <em>tutti gli shift di una codeword di un codice ciclico, sono ancora delle codewords</em>.</p>
+<p>Un esempio di codice ciclico lo abbiamo già visto nella <a href="/crittografia-sicurezza/how-i-fix-your-code-1/">prima parte</a>, ed è il parity check monodimensionale. 
+Infatti se abbiamo una codeword del tipo</p>
+<div class="arithmatex">\[
+\left(1, \, 0, \, 0, \, 0, \, 1 \right)
+\]</div>
+<p>dove l'ultimo bit è il bit di parità, allora anche la codeword</p>
+<div class="arithmatex">\[
+\left(1, \, 1, \, 0, \, 0, \, 0 \right)
+\]</div>
+<p>fa parte del codice a correzione (anche se ricordiamo che fa solo detection) parity check. In fondo ci basta contare il numero di <span class="arithmatex">\(1\)</span> no? Nessuno
+ha mai detto che debba <strong>necessariamente</strong> essere alla fine il bit di parità. </p>
+<p>Fino ad ora tutto bello, ma ora la questione è</p>
+<blockquote>
+<p>Come min**** faccio a costruire un codice ciclico?</p>
+</blockquote>
+<p>Qui inizia il bello perché ora entra in gioco la teoria dei campi finiti di cui ho parlato <a href="/teoria-matematica/qui-crescono-solo-polinomi/">qui</a>
+quindi col cavolo che la rispiego. Vattela a <strong>leggere</strong>. In ogni caso quello di cui abbiamo bisogno qui non è un campo, ma un <strong>anello</strong>.</p>
+<p>In generale potremmo partire da un anello qualsiasi, ma per i nostri scopi consideriamo un campo finito (che vi ricordo essere comunque un anello).
+Quello che ci serve è </p>
+<ol>
+<li>
+<p>L'insieme <span class="arithmatex">\(\mathbb{F}_{p^m}\)</span> con <span class="arithmatex">\(p\)</span> primo. Per semplicità, diciamo che <span class="arithmatex">\(p=2\)</span> e che <span class="arithmatex">\(m=1\)</span>, del resto lavoriamo con i bit. Un po' come mostrato <a href="/crittografia-sicurezza/share-your-secrets-with-shamir/">qui</a>
+però, non ci bastano solo gli elementi di <span class="arithmatex">\(\mathbb{F}_2\)</span>, ma li vogliamo usare come coefficienti di polinomi. Scriviamo quindi</p>
+<div class="arithmatex">\[
+\mathbb{F}_2[X]
+\]</div>
+<p>che rappresenta <strong>l'insieme dei polinomi</strong> con coefficienti in <span class="arithmatex">\(\mathbb{F}_2\)</span>.</p>
+</li>
+<li>
+<p>Un <strong>polinomio di riduzione</strong>. Per quanto riguarda il polinomio invece il discorso è più complicato. Mentre per i campi di Galois il polinomio 
+di riduzione deve essere <strong>irriducibile</strong>, per gli anelli questa condizione <strong>non serve</strong>, ma al fine di creare un codice ciclico abbiamo
+bisogno di un polinomio di riduzione che ci <em>permetta di rimanere nell'anello in caso di shift</em> facendo sì che l'ultimo elemento torni 
+ad essere il primo. Detta così sembra chissà quale cosa complessa ma con un esempio vi sarà tutto più chiaro. Per il 
+momento continuiamo dicendo che il polinomio cercato è</p>
+</li>
+</ol>
+<div class="arithmatex">\[
+X^n - 1
+\]</div>
+<p>Abbiamo definito l'insieme dei polinomi e il polinomio di riduzione, ora possiamo definire l'anello come</p>
+<p><a id="ring"></a></p>
+<div class="arithmatex">\[
+\mathbb{F}_2[X] / (X^n - 1)
+\]</div>
+<p class="formula-caption">Formula 1. Anello Di Polinomi</p>
+<p>Anche se partiamo da un campo finito, lavorando modulo <span class="arithmatex">\(X^n - 1\)</span> otteniamo un anello. Questo perché con <span class="arithmatex">\(X^n - 1\)</span> non irriducibile,
+<em>non tutti gli elementi dell’anello sono invertibili</em>, quindi non stiamo più lavorando in un campo.</p>
+<p>Ora che abbiamo definito un anello, dobbiamo stabilire un altro paio di cosette. Iniziamo dal polinomio generatore. Il polinomio generatore
+è un polinomio che <strong>divide</strong> <span class="arithmatex">\(X^n - 1\)</span> senza resto. In altre parole, se <span class="arithmatex">\(g(X)\)</span> è il polinomio generatore, 
+allora esiste un polinomio <span class="arithmatex">\(h(X)\)</span> tale che</p>
+<p><a id="generator"></a></p>
+<div class="arithmatex">\[
+g(X) \cdot h(X) = X^n - 1
+\]</div>
+<p class="formula-caption">Formula 2. Polinomio Generatore</p>
+<p>con resto <span class="arithmatex">\(0\)</span>. Per cui si può scrivere:</p>
+<div class="arithmatex">\[
+g(X) \cdot h(X) \equiv 0 \pmod{X^n - 1} 
+\]</div>
+<p>Inoltre <span class="arithmatex">\(g(X)\)</span> e <span class="arithmatex">\(h(X)\)</span> devono appartenere a <span class="arithmatex">\(\mathbb{F}_2[X]\)</span>. Se non è chiaro tranquilli, con l'esempio
+proveremo a dissipare ogni dubbio. <span class="arithmatex">\(g(X)\)</span> è particolarmente importante perché <em>il suo grado stabilisce quanti bit possono essere trasmessi</em>.
+Dato che <span class="arithmatex">\(g(X)\)</span> deve <strong>dividere per intero</strong> il polinomio di riduzione abbiamo come vincolo che il suo grado, che indichiamo con <span class="arithmatex">\(r\)</span>, non può essere maggiore di <span class="arithmatex">\(n\)</span>. 
+È vera quindi la condizione </p>
+<div class="arithmatex">\[
+r \leq n
+\]</div>
+<p>e la differenza </p>
+<p><a id="bit-trasmessi"></a></p>
+<div class="arithmatex">\[
+k = n - r
+\]</div>
+<p class="formula-caption">Formula 3. Numero Di Bit Trasmissibili</p>
+<p>ci dice quanti bit possiamo trasmettere.</p>
+<p>A questo punto ci manca il pezzo più importante. Ho fatto tutta questa giostra per poter inviare un <strong>messaggio</strong> no? E a do sta' questo messaggio? 
+Lo definiamo come un polinomio, dove <em>ogni coefficiente è il corrispondente bit del messaggio</em></p>
+<p><a id="message"></a></p>
+<div class="arithmatex">\[
+f(X) = a_0 + a_1 \cdot X + a_2 \cdot X^2 + \cdots + a_{k-1} \cdot X^{k-1}
+\]</div>
+<p class="formula-caption">Formula 4. Messaggio</p>
+<p>Vi faccio notare che il grado massimo di <span class="arithmatex">\(f(X)\)</span> è <span class="arithmatex">\(k-1\)</span>. Abbiamo quindi <span class="arithmatex">\(k\)</span> coefficienti, che rappresentano i <span class="arithmatex">\(k\)</span> bit del messaggio che vogliamo trasmettere.</p>
+<p>Ora abbiamo tutto quello che ci serve per arrivare alla codeword, che è data da</p>
+<p><a id="codeword"></a></p>
+<div class="arithmatex">\[
+\begin{aligned}
+c(X) &amp;= f(X) \cdot g(X) \pmod{X^n - 1} 
+    &amp;\equiv a_0 \cdot g(X) + a_1 \cdot X \cdot g(X) + \cdots + a_{k-1} \cdot X^{k-1} \cdot g(X)
+\end{aligned}
+\]</div>
+<p class="formula-caption">Formula 5. Codeword</p>
+<p><strong>Giochiamo</strong> un poco con gli esponenti. Così, giusto perché ci piace. Dato che per costruzione <span class="arithmatex">\(g(X)\)</span> ha grado massimo <span class="arithmatex">\(r\)</span> e <span class="arithmatex">\(f(X)\)</span> ha grado 
+massimo <span class="arithmatex">\(k-1\)</span>, abbiamo che il prodotto tra i due elementi di grado massimo, risulti in un esponente <span class="arithmatex">\(r + k - 1\)</span>. Se riprendiamo inoltre la <a href="#bit-trasmessi">formula 3</a>
+abbiamo che:</p>
+<div class="arithmatex">\[
+k = n - r \Rightarrow r + k = n \Rightarrow r + k - 1 =  n - 1
+\]</div>
+<p>Da cui si deduce che il grado massimo di <span class="arithmatex">\(c(X)\)</span> è <span class="arithmatex">\(n - 1\)</span>. I coefficienti <span class="arithmatex">\(c_i\)</span> hanno la stessa natura degli <span class="arithmatex">\(a_i\)</span> cioè sono elementi di <span class="arithmatex">\(\mathbb{F}_2\)</span>,
+ma mentre gli <span class="arithmatex">\(a_i\)</span> rappresentavano i bit del messaggio, i <span class="arithmatex">\(c_i\)</span> rappresentano i bit della codeword che viene trasmessa. Per cui abbiamo</p>
+<div class="arithmatex">\[
+(c_0, \, c_1, \, c_2, \, \cdots, \, c_{n-1} ) \in C
+\]</div>
+<p>dove <span class="arithmatex">\(C\)</span> è il nostro <strong>codice</strong>. Riflettendoci bene, possiamo definire</p>
+<p><a id="insieme-polinomi"></a></p>
+<div class="arithmatex">\[
+\left\{ g(X), \, X \cdot g(X), \, \dots , \, X^{k - 1} \cdot g(X) \right\}
+\]</div>
+<p class="formula-caption">Formula 6. Insieme Di Polinomi Generatori</p>
+<p>come un <em>insieme di polinomi a partire dai quali si possono generare tutte le codewords</em>. Sono infatti i coefficienti <span class="arithmatex">\(a_i\)</span> di <span class="arithmatex">\(f(X)\)</span> a dire quali polinomi vengono 
+<strong>combinati</strong> per costruire una specifica codeword.</p>
+<p>Arrivati a questo punto la domanda è, ma perché sto cacchio di codice è ciclico? Andiamo a fare due supposizioni:</p>
+<ol>
+<li>
+<p>Supponiamo di avere <span class="arithmatex">\(g(X)\)</span> di grado <span class="arithmatex">\(r = n - 1\)</span> e con tutti i coefficienti <span class="arithmatex">\(g_i\)</span> diversi da zero. Sottolineo che questa assunzione 
+    serve solo a rendere più immediato il meccanismo dello shift e non è necessaria nel caso generale.</p>
+<div class="arithmatex">\[
+    g(X) = g_0 + g_1 \cdot X + g_2 \cdot X^2 + \cdots + g_{r} \cdot X^{r}
+\]</div>
+</li>
+<li>
+<p>Supponiamo di moltiplicare il generatore <span class="arithmatex">\(g(X)\)</span> per <span class="arithmatex">\(X\)</span> (che peraltro è quello che avviene, se vedete <a href="#insieme-polinomi">l'insieme dei generatori</a>).</p>
+</li>
+</ol>
+<p>Quello che otteniamo sarà</p>
+<p><a id="shift"></a></p>
+<div class="arithmatex">\[
+    \begin{aligned}
+        X \cdot g(X) \pmod{X^n - 1} &amp;\equiv g_0 \cdot X + g_1 \cdot X^2 + \cdots + g_{r-1} \cdot X^r + g_r \cdot X^{r + 1} \\
+                                    &amp;\equiv g_0 \cdot X + g_1 \cdot X^2 + \cdots + g_{r-1} \cdot X^{r} + g_r \cdot 1 \\
+                                    &amp;\equiv g_r + g_0 \cdot X + g_1 \cdot X^2 + \cdots + g_{r-1} \cdot X^r \pmod{X^n - 1}
+    \end{aligned}
+\]</div>
+<p class="formula-caption">Formula 7. Shift A Destra</p>
+<p>Questo perché:</p>
+<ol>
+<li>
+<p>dato che abbiamo supposto che <span class="arithmatex">\(g(X)\)</span> abbia grado <span class="arithmatex">\(r = n - 1\)</span>, allora</p>
+<div class="arithmatex">\[
+    n = r + 1 \Rightarrow X^{r + 1} = X^n
+\]</div>
+</li>
+<li>
+<p>essendo il polinomio di riduzione <span class="arithmatex">\(X^n - 1\)</span>, si ha</p>
+<div class="arithmatex">\[
+    X^n \equiv 1 \pmod{X^n - 1} \Rightarrow g_r \cdot X^{r + 1} = g_r \cdot X^n = g_r \cdot 1 = g_r
+\]</div>
+</li>
+</ol>
+<p>Cioè il <em>termine di grado massimo viene ridotto ad una costante</em>, lasciando il solo coefficiente.
+Quindi l'ultimo bit è diventato il primo, cosí come tutti gli altri sono stati shiftati di una posizione verso destra. 
+E questo è possibile grazie alla scelta <strong>oculata</strong> del polinomio di riduzione. Volendo shiftare di <span class="arithmatex">\(i\)</span> posizioni basta moltiplicare per <span class="arithmatex">\(X^i\)</span>.
+Se avessimo scelto un polinomio di riduzione diverso, il termine di grado massimo non verrebbe ricondotto ad una costante, 
+ma rimarrebbe associato ad una potenza di <span class="arithmatex">\(X\)</span>. Di conseguenza, la moltiplicazione per <span class="arithmatex">\(X\)</span> non corrisponderebbe più ad uno shift ciclico.
+Ma a cosa serve questa <strong>ciclicità</strong>? Abbiamo fatto tutto questo casino per un capriccio? Assolutamente no. La si vuole perché 
+permette di eseguire operazioni di codifica e decodifica in maniera estremamente efficiente, sfruttando 
+semplici operazioni di shift e XOR evitando di lavorare con matrici di grandi dimensioni.</p>
+<p>Benissimo ora un ultimo sforzo giuro (almeno per questo paragrafo). Fino ad ora abbiamo considerato un polinomio di riduzione di grado <span class="arithmatex">\(n\)</span> che permette
+di avere un codice con codewords di lunghezza <span class="arithmatex">\(n\)</span>, composte da <span class="arithmatex">\(k\)</span> bit di lunghezza del messaggio più <span class="arithmatex">\(r\)</span> di ridondanza introdotta dal polinomio generatore.
+Quello che facciamo ora, come abbiamo anche fatto per i <a href="/crittografia-sicurezza/how-i-fix-your-code-2/#il-codice-di-hamming">codici lineari</a>, è costruire la 
+matrice generatrice e possiamo farlo molto facilmente perché abbiamo già definito i <a href="#insieme-polinomi">polinomi di generazione</a>. Infatti quello che facciamo è 
+prendere tutti i <strong>coefficienti</strong> dei polinomi di generazione e li mettiamo in vettori <a href="https://en.wikipedia.org/wiki/Padding_(cryptography)"><strong>paddati</strong></a> con <span class="arithmatex">\(0\)</span> finale, 
+fino ad avere dimensione <span class="arithmatex">\(n\)</span>. Per cui dato che <span class="arithmatex">\(g(X)\)</span> ha grado <span class="arithmatex">\(r\)</span> e quindi <span class="arithmatex">\(r + 1\)</span> coefficienti, aggiungeremo <span class="arithmatex">\(n - r - 1\)</span> zeri alla fine, in questo modo:</p>
+<div class="arithmatex">\[
+g(X) \Rightarrow \left( g_0, \, g_1, \, \cdots, \, g_{r}, \, 0, \, \cdots, \, 0 \right)
+\]</div>
+<p>Andiamo a considerare il secondo elemento, <span class="arithmatex">\(X \cdot g(X)\)</span>. Abbiamo mostrato come moltiplicare per <span class="arithmatex">\(X\)</span>, corrisponde ad uno shift a destra per cui:</p>
+<div class="arithmatex">\[
+X \cdot g(X) \Rightarrow \left( 0, \, g_0, \, g_1, \, \cdots, \, g_r, \, 0, \, \cdots, \, 0 \right)
+\]</div>
+<p>Analogamente, per <span class="arithmatex">\(X^2 \cdot g(X)\)</span>, avremo i coefficienti di <span class="arithmatex">\(g(X)\)</span> shiftati di due posizioni, e così via. Avremo in totale <span class="arithmatex">\(k\)</span> vettori che è 
+la <strong>cardinalità</strong> <a href="#insieme-polinomi">dell'insieme dei polinomi</a>. Disponendo questi vettori come righe di matrice, otteniamo la <strong>matrice di generazione</strong> <span class="arithmatex">\(G\)</span>
+(concetto introdotto nella <a href="/crittografia-sicurezza/how-i-fix-your-code-2/#il-codice-di-hamming">seconda parte</a>), che ha dimensione
+<span class="arithmatex">\(k \times n\)</span>. Andiamo a farlo:</p>
+<p><a id="matrice-generazione"></a></p>
+<div class="arithmatex">\[
+G = \begin{bmatrix}
+g_0 &amp; g_1 &amp; \cdots &amp; g_r &amp; 0 &amp; 0 &amp; \cdots \\
+0 &amp; g_0 &amp; g_1 &amp; \cdots &amp; g_r &amp; 0 &amp; \cdots \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+0 &amp; \cdots &amp; 0 &amp; g_0 &amp; g_1 &amp; \cdots &amp; g_r \\
+\end{bmatrix}
+\]</div>
+<p class="formula-caption">Formula 8. Matrice Di Generazione</p>
+<p>Ora andiamo a considerare il vettore dei coefficienti </p>
+<div class="arithmatex">\[
+\vec{a} = (a_0, \, a_1, \, \cdots, \, a_{k-1})
+\]</div>
+<p>di <span class="arithmatex">\(f(X)\)</span> che vi ricordo rappresenta il nostro messaggio, possiamo calcolare la <strong>codeword</strong> semplicemente facendo </p>
+<div class="arithmatex">\[
+\vec{c} = \vec{a} \cdot G
+\]</div>
+<p>Ora che sappiamo come creare una codeword a partire dal messaggio, non ci resta che definire la <strong>matrice di controllo</strong> <span class="arithmatex">\(H\)</span> 
+che ci permette di eseguire la <strong>decodifica</strong> (concetto sempre introdotto nella seconda parte). Vi ricordate del nostro bel <a href="#generator">polinomio</a> <span class="arithmatex">\(h(X)\)</span>.
+Beh non era buttato lì a ca***, ma ci serve proprio a questo. Dato che </p>
+<div class="arithmatex">\[
+g(X) \mid X^n - 1
+\]</div>
+<p>e dato che il grado di <span class="arithmatex">\(g(X)\)</span> è <span class="arithmatex">\(r\)</span>, allora <span class="arithmatex">\(h(X)\)</span> ha necessariamente grado <span class="arithmatex">\(k = n - r\)</span> (se non vi torna, date uno sguardo <a href="#generator">qui</a>), il che vuol dire che avrà 
+<span class="arithmatex">\(k + 1\)</span> coefficienti. Facendo lo stesso giochetto del <strong>padding</strong> fatto in precedenza, possiamo costruire <span class="arithmatex">\(r\)</span> vettori usando i <strong>coefficienti</strong> 
+di <span class="arithmatex">\(h(X)\)</span> presi al <strong>contrario</strong>, cioè piuttosto che partire da <span class="arithmatex">\(h_0\)</span>, partiamo da <span class="arithmatex">\(h_k\)</span>. Andiamolo a fare:</p>
+<p><a id="matrice-parita"></a></p>
+<div class="arithmatex">\[
+H = \begin{bmatrix}
+h_k &amp; h_{k-1} &amp; \cdots &amp; h_0 &amp; 0 &amp; 0 &amp; \cdots \\
+0 &amp; h_k &amp; h_{k-1} &amp; \cdots &amp; h_0 &amp; 0 &amp; \cdots \\
+\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\
+0 &amp; \cdots &amp; 0 &amp; h_k &amp; h_{k-1} &amp; \cdots &amp; h_0 \\
+\end{bmatrix}
+\]</div>
+<p class="formula-caption">Formula 9. Matrice Di Parità</p>
+<p>Si può dimostrare (ma per vostra fortuna non lo farò) che questa matrice, di dimensione <span class="arithmatex">\(r \times n\)</span>, è un <strong>parity check</strong> per il codice <span class="arithmatex">\(C\)</span>.
+Per cui proprio come visto <a href="/crittografia-sicurezza/how-i-fix-your-code-2/#il-codice-di-hamming">qui</a>, dato </p>
+<div class="arithmatex">\[
+\vec{s} = H \cdot \vec{c^T}
+\]</div>
+<p>dove <span class="arithmatex">\(\vec{s}\)</span> è la sindrome, se risulta</p>
+<div class="arithmatex">\[
+\vec{s} = \vec{0}
+\]</div>
+<p>allora il messaggio è stato trasmesso <strong>correttamente</strong>. In caso contrario, se </p>
+<div class="arithmatex">\[
+\vec{s} \neq \vec{0}
+\]</div>
+<p>allora il messaggio si è politicizzato (è stato <strong>corrotto</strong> durante la trasmissione). Ma perché è così? Beh, 
+dato che <span class="arithmatex">\(g(X) \cdot h(X) \equiv 0 \pmod{X^n - 1}\)</span>, questo vale anche per la forma matriciale e quindi</p>
+<div class="arithmatex">\[
+G \cdot H^T = 0 \Rightarrow H \cdot G^T = 0
+\]</div>
+<p>Dalla definizione di <strong>sindrome</strong> abbiamo che</p>
+<div class="arithmatex">\[
+\vec{s} = H \cdot \vec{c^T} = H \cdot \left( \vec{a} \cdot G \right)^T = H \cdot G^T \cdot \vec{a^T} = 0
+\]</div>
+<p>e quindi <span class="arithmatex">\(\vec{s} = 0\)</span> solo se <span class="arithmatex">\(\vec{c}\)</span> è una codeword valida. Infatti se avessimo un messaggio corrotto</p>
+<div class="arithmatex">\[
+\vec{c}_e = \vec{c} + \vec{e}
+\]</div>
+<p>dove <span class="arithmatex">\(\vec{e}\)</span> è un vettore di errore (guardate <a href="/crittografia-sicurezza/how-i-fix-your-code-2/#una-piccola-precisazione">qui</a>),
+avremmo </p>
+<div class="arithmatex">\[
+\vec{s} = H \cdot \vec{c^T}_e = H \cdot \left( \vec{c} + \vec{e} \right)^T = H \cdot \vec{c^T} + H \cdot \vec{e^T} = H \cdot \vec{e^T} \neq 0
+\]</div>
+<p>cioè rimane una <strong>componente non nulla</strong>.</p>
+<p>Avvicinandoci alla conclusione, vi faccio notare il fatto che
+mentre c'è una <strong>analogia</strong> in termini di dimensioni tra la matrice <span class="arithmatex">\(G\)</span> nei codici ciclici e quella dei codici lineari, questa 
+non è immediata per quanto riguarda la matrice <span class="arithmatex">\(H\)</span>. Questo perché qui stiamo usando una <em>costruzione basata sui 
+polinomi</em>, diversa da quella vista per i codici lineari.</p>
+<p>Ok è tantissima roba ma è tutto qui, vi basta leggere e rileggere questo paragrafo per capire come si costruisce un codice ciclico.
+Non so se vi siete accorti ma quello che manca qui è la parte più importante ovvero</p>
+<blockquote>
+<p>Come faccio a correggere gli errori?</p>
+</blockquote>
+<p>In generale correggere errori con i codici ciclici è un po' più complesso rispetto ai codici lineari, 
+ma ciò non vuol dire che non lo mostrerò. Semplicemente lo farò più avanti. Per il momento limitiamoci a vedere un esempio
+in numeri di quanto visto fino ad ora.</p>
+<h4 id="ritorno-allinizio">Ritorno All'Inizio<a class="headerlink" href="#ritorno-allinizio" title="Permanent link"> </a></h4>
+<p>Finalmente, possiamo vedere un esempio con i <strong>numeri</strong>. Giusto per dare un senso a quanto visto.
+Supponiamo di voler <strong>costruire</strong> un codice ciclico con codewords di lunghezza <span class="arithmatex">\(n = 7\)</span>. Dalla <a href="#ring">teoria</a> sappiamo che il polinomio di riduzione
+sarà </p>
+<div class="arithmatex">\[
+X^7 - 1
+\]</div>
+<p>Applicando <a href="#generator">questa relazione</a> possiamo calcolare <span class="arithmatex">\(g(X)\)</span> e <span class="arithmatex">\(h(X)\)</span>. Supponiamo di scegliere</p>
+<div class="arithmatex">\[
+g(X) = X^4 + X^3 + X^2 + 1
+\]</div>
+<p>di conseguenza <span class="arithmatex">\(h(X)\)</span> sarà</p>
+<div class="arithmatex">\[
+h(X) = X^3 + X^2 + 1
+\]</div>
+<p>Se non ci credete, sviluppate il prodotto <span class="arithmatex">\(g(X) \cdot h(X)\)</span> e vedrete che è uguale a <span class="arithmatex">\(X^7 - 1\)</span> (vi ricordo che stiamo considerando coefficienti in <span class="arithmatex">\(\mathbb{F}_2\)</span>).
+Dato che da <span class="arithmatex">\(g(X)\)</span> abbiamo che <span class="arithmatex">\(r=4\)</span>, applicando <a href="#bit-trasmessi">questa formula</a> abbiamo <span class="arithmatex">\(k=3\)</span> e quindi possiamo trasmettere <em>3 bit di messaggio</em>. 
+Il polinomio <span class="arithmatex">\(f(X)\)</span> avrà quindi grado massimo <span class="arithmatex">\(k-1 = 2\)</span>. Supponendo di voler trasmettere il messaggio <span class="arithmatex">\(101\)</span>, allora avremo</p>
+<div class="arithmatex">\[
+f(X) = 1 + 0 \cdot X + 1 \cdot X^2 = 1 + X^2
+\]</div>
+<p>che impone di prendere polinomi di generazione </p>
+<div class="arithmatex">\[
+g(X), \, X^2 \cdot g(X)
+\]</div>
+<p>Dato che abbiamo definito la matrice di generazione <span class="arithmatex">\(G\)</span> appositamente per evitare questo tipo di calcoli, andiamo a costruirla.
+Dalla <a href="#matrice-generazione">definizione</a> sappiamo che la costruiamo semplicemente prendendo i <strong>coefficienti</strong> di <span class="arithmatex">\(g(X)\)</span>, <strong>paddando</strong> e <strong>shiftando</strong> di volta in volta.</p>
+<div class="arithmatex">\[
+G = \begin{bmatrix}
+1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+\end{bmatrix}
+\]</div>
+<p>Per quanto riguarda la matrice di parità <span class="arithmatex">\(H\)</span>, la costruiamo allo stesso modo, prendendo i <strong>coefficienti</strong> di <span class="arithmatex">\(h(X)\)</span> al <strong>contrario</strong>, paddando e shiftando:</p>
+<div class="arithmatex">\[
+H = \begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+\end{bmatrix}
+\]</div>
+<p>Andiamo a fare un test. Torniamo al nostro messaggio:</p>
+<div class="arithmatex">\[
+m = 101 \Rightarrow \vec{a} = (1, \, 0, \, 1)
+\]</div>
+<p>per cui la codeword trasmessa sarà:</p>
+<div class="arithmatex">\[
+\vec{c} = \vec{a} \cdot G = (1, \, 0, \, 1) \cdot \begin{bmatrix}
+1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+\end{bmatrix} = (1, \, 0, \, 0, \, 1, \, 0, \, 1, \, 1)
+\]</div>
+<p>e il suo controllo di paritá sará:</p>
+<div class="arithmatex">\[
+\vec{s} = H \cdot \vec{c^T} = \begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+\end{bmatrix} \cdot \begin{bmatrix}
+1 \\ 0 \\ 0 \\ 1 \\ 0 \\ 1 \\ 1
+\end{bmatrix} = \begin{bmatrix}
+0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+\]</div>
+<p>Quindi funziona! Non ho detto <strong>cazzate</strong>. Testate altri <span class="arithmatex">\(m\)</span> a vostro piacimento. </p>
+<p>Andiamo invece a considerare un errore nella codeword, ad esempio</p>
+<div class="arithmatex">\[
+\vec{c}_e = (1, \, \textcolor{red}{1}, \, 0, \, 1, \, 0, \, 1, \, 1)
+\]</div>
+<p>e andiamo a fare il <strong>controllo di paritá</strong>:</p>
+<div class="arithmatex">\[
+\vec{s}_e = H \cdot \vec{c^T}_e = \begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1 \\
+\end{bmatrix} \cdot \begin{bmatrix}
+1 \\ \textcolor{red}{1} \\ 0 \\ 1 \\ 0 \\ 1 \\ 1
+\end{bmatrix} = \begin{bmatrix}
+1 \\ 1 \\ 0 \\ 0
+\end{bmatrix}
+\]</div>
+<p>come si può vedere la sindrome non è il vettore nullo per cui il controllo di parità ha <strong>funzionato</strong>.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>E siamo arrivati alla <strong>fine</strong>. Sì, so cosa ho scritto nell'introduzione, ed inizialmente avevo scritto tutto giuro. Ma mi sono accorto
+che era veramente <strong>troppa</strong> roba e già digerire quanto scritto in questo articolo è <strong>impegnativo</strong>. Per cui ho deciso di spezzarlo. Non
+in due ma in ben <strong>tre parti</strong> (e quindi gli articoli di giugno e luglio sono giá scritti). Per farvi capire che razza di <strong>mostro</strong> era uscito. 
+E siccome sono troppo <strong>pigro</strong> per cambiare l'introduzione si sta così. In ogni caso a questo giro niente codice (intendo python questa volta). 
+Vi toccherà aspettare che arrivo alla fine dei tre. E se non vi sta bene, potete andare a <strong>rettificarvi</strong>.</p>
+<p>Alla Prossima.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h3>Consigliati</h3>
+                <ol class="article-related-list">
+                    <li><a href="https://www.lucadivita.it/machine-learning/neurons-for-dummies-1/" rel="noopener noreferrer" target="_blank">Neurons for Dummies - 1</a></li>
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Qui Crescono Solo Polinomi</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Condividi I Tuoi Segreti Con Shamir</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 1</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 2</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h3>Riferimenti</h3>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="https://errorcorrectionzoo.org/all" rel="noopener noreferrer" target="_blank">https://errorcorrectionzoo.org/all</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/how-i-fix-your-code-2/">/crittografia-sicurezza/how-i-fix-your-code-2/</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/how-i-fix-your-code-1/">/crittografia-sicurezza/how-i-fix-your-code-1/</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/qui-crescono-solo-polinomi/">/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/share-your-secrets-with-shamir/">/crittografia-sicurezza/share-your-secrets-with-shamir/</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/how-i-fix-your-code-2/#il-codice-di-hamming">/crittografia-sicurezza/how-i-fix-your-code-2/#il-codice-di-hamming</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Padding_(cryptography)" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Padding_(cryptography)</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/how-i-fix-your-code-2/#una-piccola-precisazione">/crittografia-sicurezza/how-i-fix-your-code-2/#una-piccola-precisazione</a>
+                    </li>
+                    <li>
+                        Introduction to Cryptography with Coding Theory - Trappe &amp; Washington
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="https://www.lucadivita.it/tag/matematica.html">matematica</a></li>
+                <li><a href="https://www.lucadivita.it/tag/teoria_dellinformazione.html">teoria_dellinformazione</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici.html">codici</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_a_correzione.html">codici_a_correzione</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_ciclici.html">codici_ciclici</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_lineari.html">codici_lineari</a></li>
+                <li><a href="https://www.lucadivita.it/tag/reed-solomon.html">reed-solomon</a></li>
+                <li><a href="https://www.lucadivita.it/tag/teoria_dei_campi.html">teoria_dei_campi</a></li>
+                <li><a href="https://www.lucadivita.it/tag/algebra_lineare.html">algebra_lineare</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
+</main>
+
+<script defer src="/theme/site.js"></script>
+
+<script defer src="/theme/umami-events.js"></script>
+
+<script type="module" defer src="/theme/vendor/instant.page/instantpage.js"></script>
+
+
+<script defer src="/theme/collapsible-sections.js"></script>
+<script defer src="/theme/reading-progress.js"></script>
+</body>
+</html>

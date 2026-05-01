@@ -119,6 +119,9 @@
             <small class="archive-meta">
                 <time datetime="2025-12-01T00:00:00+01:00">December 01, 2025</time>
             </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--intermediate">Level: Intermediate</span>
+            </small>
         </p>
     </header>
 
@@ -354,13 +357,13 @@ Elliptic curves are <strong>greedy</strong>, they want more elements. And this i
     then having a <strong>closed field</strong> means that <span class="arithmatex">\(a + b \in \mathbb{A}\)</span> and <span class="arithmatex">\(a \cdot b \in \mathbb{A}\)</span>.</li>
 <li><strong>Abelian Group</strong>: the operations of addition and multiplication must have <strong>the neutral element</strong>, their <strong>inverse</strong> and must satisfy the <strong>associative</strong>, <strong>commutative</strong> and <strong>distributive</strong> properties. 
    This in plain words means that, given the field <span class="arithmatex">\(\mathbb{A}\)</span>, <span class="arithmatex">\(a, \, b, \, c \in \mathbb{A}\)</span> and <span class="arithmatex">\(a, \, b, \, c \neq 0\)</span>:<ul>
-<li>The term <span class="arithmatex">\(0\)</span> exists which allows us to write <span class="arithmatex">\(a + 0 = a\)</span> (<strong>neutral element of addition</strong>).</li>
-<li>The term <span class="arithmatex">\(1\)</span> exists which allows us to write <span class="arithmatex">\(a \cdot 1 = a\)</span> (<strong>neutral element of multiplication</strong>).</li>
-<li>The term <span class="arithmatex">\(-a\)</span> exists which allows us to write <span class="arithmatex">\(a - a = 0\)</span> (<strong>inverse of addition</strong>).</li>
-<li>The term <span class="arithmatex">\(a^{-1}\)</span> exists which allows us to write <span class="arithmatex">\(a \cdot a^{-1} = 1\)</span> with the exception of <span class="arithmatex">\(0\)</span> (<strong>inverse of multiplication</strong>).</li>
-<li><span class="arithmatex">\(a + b = b + a\)</span> and <span class="arithmatex">\((a + b) + c = a + (b + c)\)</span> (<strong>commutative and associative properties of addition</strong>).</li>
-<li><span class="arithmatex">\(a \cdot b = b \cdot a\)</span> and <span class="arithmatex">\((a \cdot b) \cdot c = a \cdot (b \cdot c)\)</span> (<strong>commutative and associative properties of multiplication</strong>).</li>
-<li><span class="arithmatex">\(a \cdot (b + c) = a \cdot b + a \cdot c\)</span> (<strong>distributive property</strong>)</li>
+<li>The term <span class="arithmatex">\(0\)</span> exists which allows us to write <span class="arithmatex">\(a + 0 = a \to\)</span> <strong>neutral element of addition</strong>.</li>
+<li>The term <span class="arithmatex">\(1\)</span> exists which allows us to write <span class="arithmatex">\(a \cdot 1 = a \to\)</span> <strong>neutral element of multiplication</strong>.</li>
+<li>The term <span class="arithmatex">\(-a\)</span> exists which allows us to write <span class="arithmatex">\(a - a = 0 \to\)</span> <strong>inverse of addition</strong>.</li>
+<li>The term <span class="arithmatex">\(a^{-1}\)</span> exists which allows us to write <span class="arithmatex">\(a \cdot a^{-1} = 1\)</span> with the exception of <span class="arithmatex">\(0 \to\)</span> <strong>inverse of multiplication</strong>.</li>
+<li><span class="arithmatex">\(a + b = b + a\)</span> and <span class="arithmatex">\((a + b) + c = a + (b + c) \to\)</span> <strong>commutative and associative properties of addition</strong>.</li>
+<li><span class="arithmatex">\(a \cdot b = b \cdot a\)</span> and <span class="arithmatex">\((a \cdot b) \cdot c = a \cdot (b \cdot c) \to\)</span> <strong>commutative and associative properties of multiplication</strong>.</li>
+<li><span class="arithmatex">\(a \cdot (b + c) = a \cdot b + a \cdot c \to\)</span> <strong>distributive property</strong>.</li>
 </ul>
 </li>
 </ol>
@@ -458,7 +461,12 @@ GCD(2, \, 8) = 2
 <p>Checking the divisibility we have that <span class="arithmatex">\(2 \nmid 1\)</span>, and we can conclude that <span class="arithmatex">\(2 \pmod{8}\)</span> has no multiplicative inverse, and this violates
 one of the required properties of fields.</p>
 <p>If all the properties discussed hold except for the multiplicative inverse, then we do not have a field but a <strong>ring</strong>. 
-Therefore, we can say that <em>all fields are rings, but not all rings are fields</em>.</p>
+Therefore, we can say that <em>all fields are rings, but not all rings are fields</em>. More precisely, at a high level, we can say that:</p>
+<ul>
+<li>If <span class="arithmatex">\(n\)</span> is not prime, we can <strong>always</strong> construct a ring whose elements are the residues <span class="arithmatex">\(\pmod{n}\)</span>.</li>
+<li>If <span class="arithmatex">\(n\)</span> is prime, that ring is <strong>also</strong> a field.</li>
+<li>If <span class="arithmatex">\(n\)</span> is a power of a prime, the situation is more subtle... no spoilers. Keep reading.</li>
+</ul>
 <h4 id="from-the-little-garden-to-the-plantation">From The Little Garden To The Plantation<a class="headerlink" href="#from-the-little-garden-to-the-plantation" title="Permanent link"> </a></h4>
 <p>We have seen that <span class="arithmatex">\(p\)</span> must be prime in order to define a Galois field. But what if I told you that instead you can define fields of the type
 <span class="arithmatex">\(\mathbb{F}_8\)</span>? No, I am not crazy. It can be done, but in a slightly different way than before. First of all let us start by saying that the argument
@@ -651,7 +659,7 @@ This is where the cyclicity property comes into play. Indeed, the following simp
 <div class="arithmatex">\[
 x^a = x^{a \bmod{n}}
 \]</div>
-<p>where <span class="arithmatex">\(n = p^m - 1\)</span>. Therefore, we can write:</p>
+<p>where <span class="arithmatex">\(n = q - 1 = p^m - 1\)</span>. Therefore, we can write:</p>
 <div class="arithmatex">\[
 x^7 \equiv x^{7 \bmod 7} \equiv x^0 = 1
 \]</div>
@@ -683,16 +691,17 @@ because cryptography is secure, it is the passwords <em>1234</em> and <em>hot mo
 
         <section class="article-extras">
             <aside class="article-extra-related" id="related-posts">
-                <h2>Related Posts</h2>
+                <h3>Related Posts</h3>
                 <ol class="article-related-list">
                     <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Share Your Secrets With Shamir</a></li>
                     <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 1</a></li>
                     <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 2</a></li>
+                    <li><a href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-3/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 3</a></li>
                 </ol>
             </aside>
 
             <section class="article-extra-references" id="references">
-                <h2>References</h2>
+                <h3>References</h3>
                 <ol class="article-reference-list">
                     <li>
                         <a href="https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm</a>
@@ -726,6 +735,7 @@ because cryptography is secure, it is the passwords <em>1234</em> and <em>hot mo
     </div>
 
 </article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
 </main>
 
 <script defer src="/theme/site.js"></script>
@@ -734,5 +744,8 @@ because cryptography is secure, it is the passwords <em>1234</em> and <em>hot mo
 
 <script type="module" defer src="/theme/vendor/instant.page/instantpage.js"></script>
 
+
+<script defer src="/theme/collapsible-sections.js"></script>
+<script defer src="/theme/reading-progress.js"></script>
 </body>
 </html>
