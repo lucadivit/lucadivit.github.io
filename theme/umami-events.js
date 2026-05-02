@@ -1,16 +1,1 @@
-(function () {
-    "use strict";
-
-    var links = document.querySelectorAll("a");
-
-    links.forEach(function (link) {
-        if (link.host !== window.location.host && !link.getAttribute("data-umami-event")) {
-            var label = link.ariaLabel || link.textContent || link.href;
-            link.setAttribute("data-umami-event", "Click " + label.trim());
-            link.setAttribute("data-umami-event-element", "anchor");
-            link.setAttribute("data-umami-event-event", "onclick");
-            link.setAttribute("data-umami-event-id", link.id || "");
-            link.setAttribute("data-umami-event-url", link.href);
-        }
-    });
-})();
+document.querySelectorAll("a").forEach(function(t){if(t.host!==window.location.host&&!t.getAttribute("data-umami-event")){var e=t.ariaLabel||t.textContent||t.href;t.setAttribute("data-umami-event","Click "+e.trim()),t.setAttribute("data-umami-event-element","anchor"),t.setAttribute("data-umami-event-event","onclick"),t.setAttribute("data-umami-event-id",t.id||""),t.setAttribute("data-umami-event-url",t.href)}});
