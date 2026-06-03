@@ -11,10 +11,10 @@
     <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
-    <link rel="canonical" href="/en/crittografia-sicurezza/how-i-fix-your-code-2/">
-    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/">
-    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/">
-    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/how-i-fix-your-code-2/">
+    <link rel="canonical" href="/en/teoria-matematica/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/how-i-fix-your-code-2/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-2/">
     <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
     <link rel="stylesheet" href="https://www.lucadivita.it/theme/site.css">
     <link rel="stylesheet" href="https://www.lucadivita.it/theme/vendor/katex/katex.min.css">
@@ -54,13 +54,13 @@
             </a>
         </li>
         <li>
-            <a href="/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="it" title="Italian" >
+            <a href="/teoria-matematica/how-i-fix-your-code-2/" hreflang="it" title="Italian" >
                 <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
-            <a href="/en/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="en" title="English" aria-current="page">
+            <a href="/en/teoria-matematica/how-i-fix-your-code-2/" hreflang="en" title="English" aria-current="page">
                 <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
@@ -93,13 +93,13 @@
             </a>
         </li>
         <li>
-            <a href="/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="it" title="Italian" >
+            <a href="/teoria-matematica/how-i-fix-your-code-2/" hreflang="it" title="Italian" >
                 <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
                 <span class="sr-only">Italian</span>
             </a>
         </li>
         <li>
-            <a href="/en/crittografia-sicurezza/how-i-fix-your-code-2/" hreflang="en" title="English" aria-current="page">
+            <a href="/en/teoria-matematica/how-i-fix-your-code-2/" hreflang="en" title="English" aria-current="page">
                 <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
                 <span class="sr-only">English</span>
             </a>
@@ -114,7 +114,7 @@
         <h1>How I Fix Your Code - 2</h1>
         <p>
             <small class="archive-category">
-                <a href="/en/category/crittografia-sicurezza.html">Encryption & Security</a>
+                <a href="/en/category/teoria-matematica.html">Theory & Math</a>
             </small>
             <small class="archive-meta">
                 <time datetime="2026-04-01T00:00:00+02:00">April 01, 2026</time>
@@ -150,12 +150,12 @@
         <section>
             <div class="article-body">
                 
-<p>We left off <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/">last month</a> with some toy error-correcting codes.
+<p>We left off <a href="/en/teoria-matematica/how-i-fix-your-code-1/">last month</a> with some toy error-correcting codes.
 You could say we warmed up. I'm not saying we knocked out a mule, but at least we laid down the <strong>basics</strong> and a few <strong>fundamental concepts</strong> that, as everyone knows,
 are always at the base of everything. In this second article we still won't get rid of the basic concepts, something
 still needs to be said, but at least we get them out of the way and we will start looking at a more <strong>consolidated</strong> error-correcting code. After this premise I'd say we can start.</p>
 <h3 id="yes-still-theory">Yes, Still Theory<a class="headerlink" href="#yes-still-theory" title="Permanent link"> </a></h3>
-<p>We talked about <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/#let-us-straighten-this-out">nearest neighbor</a>, so I won't go back
+<p>We talked about <a href="/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out">nearest neighbor</a>, so I won't go back
 to the topic. But let's stop for a second. If we have a code of length <span class="arithmatex">\(n\)</span> and composed of <span class="arithmatex">\(M\)</span> codewords, you need to compute <span class="arithmatex">\(M\)</span> Hamming distances to see which codeword is the closest. And this is a huge pain in the ass because if <span class="arithmatex">\(M\)</span>
 is too large it becomes an <strong>impractical</strong> computation. As the great Sun Tzu said, to win you must know yourself and also your enemy. So let's start
 by giving a definition of code. A code is nothing more than a <strong>triple</strong></p>
@@ -195,7 +195,7 @@ C = \left \{ 00, \, 01, \, 10, \, 11 \right \}
 \]</div>
 <p>and by sending, for example, the message <span class="arithmatex">\(c=00\)</span>, if we received <span class="arithmatex">\(c=01\)</span> we would not notice the error, because it is a valid codeword.
 There are, in other words, no invalid codewords.</p>
-<p>Let us now consider the one-dimensional parity check seen in the <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/">first part</a>.
+<p>Let us now consider the one-dimensional parity check seen in the <a href="/en/teoria-matematica/how-i-fix-your-code-1/">first part</a>.
 There we had <span class="arithmatex">\(k=7\)</span> <strong>information bits</strong> so <span class="arithmatex">\(M=2^7\)</span>, and the messages were long <span class="arithmatex">\(n=8\)</span> because of the parity check. So <span class="arithmatex">\(R\)</span> is simply</p>
 <div class="arithmatex">\[
 R = \frac{log_2 2^7}{8} = 0.875
@@ -799,10 +799,11 @@ but we'll see.</p>
             <aside class="article-extra-related" id="related-posts">
                 <h3>Related Posts</h3>
                 <ol class="article-related-list">
-                    <li><a href="/en/crittografia-sicurezza/how-i-fix-your-code-3/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 3</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-3/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 3</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-4/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 4</a></li>
                     <li><a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Where Only Polynomials Grow</a></li>
                     <li><a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Share Your Secrets With Shamir</a></li>
-                    <li><a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 1</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 1</a></li>
                 </ol>
             </aside>
 
@@ -810,10 +811,10 @@ but we'll see.</p>
                 <h3>References</h3>
                 <ol class="article-reference-list">
                     <li>
-                        <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/">/en/crittografia-sicurezza/how-i-fix-your-code-1/</a>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-1/">/en/teoria-matematica/how-i-fix-your-code-1/</a>
                     </li>
                     <li>
-                        <a href="/en/crittografia-sicurezza/how-i-fix-your-code-1/#let-us-straighten-this-out">/en/crittografia-sicurezza/how-i-fix-your-code-1/#let-us-straighten-this-out</a>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out">/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out</a>
                     </li>
                     <li>
                         <a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/#considerations">/en/crittografia-sicurezza/share-your-secrets-with-shamir/#considerations</a>

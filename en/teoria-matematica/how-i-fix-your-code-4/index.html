@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How I Fix Your Code - 4 - Bit Di Vita</title>
+    <meta name="description" content="In the previous article, we focused on talking about cyclic codes. In this one we will look at the cyclic code par excellence, the Reed-Solomon code. Given it has been a while that I have been saying I want to talk about it, and if my calculations are correct this …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="How I Fix Your Code - 4 - Bit Di Vita">
+    <meta property="og:description" content="In the previous article, we focused on talking about cyclic codes. In this one we will look at the cyclic code par excellence, the Reed-Solomon code. Given it has been a while that I have been saying I want to talk about it, and if my calculations are correct this …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="/en/teoria-matematica/how-i-fix-your-code-4/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-4/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/how-i-fix-your-code-4/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-4/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/site.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/vendor/katex/katex.min.css">
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="/en/">
+                        <img class="site-logo" src="https://www.lucadivita.it/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="/en/" >Home</a></li>
+        <li><a href="/en/archives.html" >Archives</a></li>
+        <li><a href="/en/pages/info/" >Explore</a></li>
+        <li><a href="/en/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="/en/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="/teoria-matematica/how-i-fix-your-code-4/" hreflang="it" title="Italian" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/how-i-fix-your-code-4/" hreflang="en" title="English" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="/en/" >Home</a></li>
+        <li><a href="/en/archives.html" >Archives</a></li>
+        <li><a href="/en/pages/info/" >Explore</a></li>
+        <li><a href="/en/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="/en/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="/teoria-matematica/how-i-fix-your-code-4/" hreflang="it" title="Italian" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/how-i-fix-your-code-4/" hreflang="en" title="English" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>How I Fix Your Code - 4</h1>
+        <p>
+            <small class="archive-category">
+                <a href="/en/category/teoria-matematica.html">Theory & Math</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-06-03T00:00:00+02:00">June 03, 2026</time>
+            </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--intermediate">Level: Intermediate</span>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+                <div class="toc">
+<ul>
+<li><a href="#clavicula-salomonis">Clavicula Salomonis</a><ul>
+<li><a href="#ars-notoria-1">Ars Notoria 1</a></li>
+<li><a href="#ars-notoria-2">Ars Notoria 2</a></li>
+</ul>
+</li>
+<li><a href="#conclusions">Conclusions</a></li>
+<li><a href="#related-posts">Related Posts</a></li><li><a href="#references">References</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>In the previous article, we focused on talking about <a href="/en/teoria-matematica/how-i-fix-your-code-3/"><strong>cyclic codes</strong></a>. In this one we will look at the cyclic code par excellence, the <strong>Reed-Solomon code</strong>. Given it has been a while that I have been saying I want to talk about it, and if my calculations are correct this article will be published in June 2026, I would say it is time to keep my word. So let's begin...</p>
+<h3 id="clavicula-salomonis">Clavicula Salomonis<a class="headerlink" href="#clavicula-salomonis" title="Permanent link"> </a></h3>
+<p>We need to introduce the concept of a <strong>primitive root</strong>. Let's start with the simple case and consider a <strong>finite field</strong> <span class="arithmatex">\(\mathbb{F}_p\)</span> with <span class="arithmatex">\(p\)</span> <strong>prime</strong>. A primitive root is an element <span class="arithmatex">\(\alpha \in \mathbb{F}_p\)</span> such that:</p>
+<ol>
+<li>Its <strong>powers</strong> for <span class="arithmatex">\(x \in \{1, \dots, p - 1 \}\)</span> <strong>generate</strong> all the <strong>elements</strong> of <span class="arithmatex">\(\mathbb{F}_p\)</span> except <span class="arithmatex">\(0\)</span>.</li>
+<li>The power to <span class="arithmatex">\(p-1\)</span> generates <span class="arithmatex">\(1\)</span>.</li>
+</ol>
+<p>Yes, as usual said like this it sounds like some terribly complicated thing, but let's see it with an example. Consider <span class="arithmatex">\(p=7\)</span>, then</p>
+<div class="arithmatex">\[
+\mathbb{F}_7 = \{ 0, \, 1, \, 2, \, 3, \, 4, \, 5, \, 6 \}
+\]</div>
+<p>is a field. If you do not know why, read my article on <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">finite fields</a>. Given the field, take the element <span class="arithmatex">\(\alpha = 3\)</span> and start <strong>testing</strong> all the powers:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+3^1 &amp;\equiv 3 \pmod{7} \quad &amp; 3^2 &amp;\equiv 2 \pmod{7} \quad &amp; 3^3 &amp;\equiv 6 \pmod{7} \\
+3^4 &amp;\equiv 4 \pmod{7} \quad &amp; 3^5 &amp;\equiv 5 \pmod{7} \quad &amp; 3^6 &amp;\equiv 1 \pmod{7}
+\end{aligned}
+\]</div>
+<p>As you can see, the powers of <span class="arithmatex">\(\alpha\)</span> generate all the elements belonging to the field and for <span class="arithmatex">\(p-1=6\)</span> the result is <span class="arithmatex">\(1\)</span>. So <span class="arithmatex">\(\alpha = 3\)</span> is a primitive root of <span class="arithmatex">\(\mathbb{F}_7\)</span>, and we can say it is a <strong>generator of the multiplicative group</strong>.</p>
+<p>Good, let's continue. Suppose we have a finite field with <span class="arithmatex">\(q=p^m\)</span> elements where <span class="arithmatex">\(p\)</span> is a prime number, take a primitive root <span class="arithmatex">\(\alpha\)</span> and choose a value <span class="arithmatex">\(d\)</span> (which manages the <strong>redundancy</strong>) such that</p>
+<div class="arithmatex">\[
+1 \leq d &lt; n
+\]</div>
+<p>where <span class="arithmatex">\(n = q - 1\)</span>. Then the generator polynomial of the Reed-Solomon code, which is built over a Galois field and not over a ring, is given by</p>
+<p><a id="generatore-reed-solomon"></a></p>
+<div class="arithmatex">\[
+\begin{aligned}
+g(X) &amp;= \prod_{i=1}^{d - 1} \left( X - \alpha^i \right) \\
+     &amp;= \left( X - \alpha \right) \cdot \left( X - \alpha^2 \right) \dots \left( X - \alpha^{d - 1} \right) \pmod{q}
+\end{aligned}
+\]</div>
+<p class="formula-caption">Formula 1. Reed-Solomon Generator Polynomial</p>
+<p>Expanding this polynomial is not particularly difficult because the powers of <span class="arithmatex">\(\alpha\)</span> can be <strong>reduced</strong> as shown <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically">here</a>. As seen <a href="/en/teoria-matematica/how-i-fix-your-code-3/#the-theory-of-eternal-return">here</a>, starting from <span class="arithmatex">\(g(X)\)</span> and considering the product</p>
+<div class="arithmatex">\[
+g(X) \cdot f(X)
+\]</div>
+<p>we obtain the set of polynomials that form the <strong>generator matrix</strong> <span class="arithmatex">\(G\)</span>. In the Reed-Solomon case, moreover, <span class="arithmatex">\(f(X)\)</span> has maximum degree <span class="arithmatex">\(n - d\)</span> so the number of <strong>coefficients</strong> (that is, the number of message <strong>symbols</strong>) is</p>
+<div class="arithmatex">\[
+k = n - d + 1
+\]</div>
+<p>and <span class="arithmatex">\(n\)</span> is the length of the codeword. Note that here we talk about <strong>symbols</strong> and not bits, since we are working over a <strong>field</strong>. Having defined <span class="arithmatex">\(k\)</span> and <span class="arithmatex">\(n\)</span>, we can write that the generator matrix <span class="arithmatex">\(G\)</span> has size <span class="arithmatex">\(k \times n\)</span>, where for each row we put the coefficients of <span class="arithmatex">\(g(X)\)</span>, <strong>padding</strong> and <strong>shifting</strong> exactly as done <a href="/en/teoria-matematica/how-i-fix-your-code-3/#the-theory-of-eternal-return">here</a>. Since in the field <span class="arithmatex">\(\mathbb{F}_q\)</span> we have <span class="arithmatex">\(q\)</span> elements and the number of coefficients in <span class="arithmatex">\(f(X)\)</span> is <span class="arithmatex">\(k\)</span>, we have that the number of codewords in <span class="arithmatex">\(C\)</span> is <span class="arithmatex">\(q^k\)</span>. Moreover, it can be shown that the Reed-Solomon code is <a href="/en/teoria-matematica/how-i-fix-your-code-2/#an-upper-bound"><strong>MDS</strong></a> and <strong>maximizes</strong> the error <strong>correction</strong> capability for the same codeword <strong>length</strong>.</p>
+<p>We have defined the generator matrix, now we define the <strong>parity-check</strong> matrix <span class="arithmatex">\(H\)</span>. Starting from the condition that</p>
+<div class="arithmatex">\[
+G \cdot H^T = 0
+\]</div>
+<p>it can be shown (but we will not do it) that <span class="arithmatex">\(H\)</span> can be constructed as follows:</p>
+<div class="arithmatex">\[
+H_{i,j} = \alpha^{i \cdot j},
+\quad
+i = 1,\dots,d-1,\; \text{ e } \;
+j = 0,\dots,n-1
+\]</div>
+<p>with <span class="arithmatex">\(i\)</span> as the <strong>row</strong> index and <span class="arithmatex">\(j\)</span> as the <strong>column</strong> index. <span class="arithmatex">\(H\)</span> therefore has size <span class="arithmatex">\((d - 1) \times n\)</span> and by expanding it we have:</p>
+<p><a id="parity-reed-solomon"></a></p>
+<div class="arithmatex">\[
+H =
+\begin{bmatrix}
+\alpha^{1 \cdot 0} &amp; \alpha^{1 \cdot 1} &amp; \alpha^{1 \cdot 2} &amp; \cdots &amp; \alpha^{1 \cdot (n-1)} \\
+\alpha^{2 \cdot 0} &amp; \alpha^{2 \cdot 1} &amp; \alpha^{2 \cdot 2} &amp; \cdots &amp; \alpha^{2 \cdot (n-1)} \\
+\alpha^{3 \cdot 0} &amp; \alpha^{3 \cdot 1} &amp; \alpha^{3 \cdot 2} &amp; \cdots &amp; \alpha^{3 \cdot (n-1)} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\alpha^{(d-1) \cdot 0} &amp; \alpha^{(d-1) \cdot 1} &amp; \alpha^{(d-1) \cdot 2} &amp; \cdots &amp; \alpha^{(d-1) \cdot (n-1)}
+\end{bmatrix}
+\]</div>
+<p class="formula-caption">Formula 2. Reed-Solomon Parity Matrix</p>
+<p>For those of you who followed me through all the other articles, we have already seen a matrix of this type, it is the <a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/#the-naive-addition"><strong>Vandermonde</strong> matrix</a>.</p>
+<p>Perfect. Now that we have reached this point we can see two simple <strong>examples</strong>.</p>
+<h4 id="ars-notoria-1">Ars Notoria 1<a class="headerlink" href="#ars-notoria-1" title="Permanent link"> </a></h4>
+<p>Suppose we want to build a Reed-Solomon code built over a Galois field <span class="arithmatex">\(\mathbb{F}_{7}\)</span> choosing as primitive root <span class="arithmatex">\(\alpha = 3\)</span> and <span class="arithmatex">\(d = 4\)</span>. A Reed-Solomon code defined this way allows us to <strong>detect</strong> up to <span class="arithmatex">\(d - 1 = 3\)</span> errors and to <strong>correct</strong> up to <span class="arithmatex">\(1\)</span> error. The reason is <a href="/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out">here</a>. We can compute the generator polynomial <span class="arithmatex">\(g(X)\)</span> using <a href="#generatore-reed-solomon">formula 1</a>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+g(X) &amp;= \left( X - 3 \right) \cdot \left( X - 3^2 \right) \cdot \left( X - 3^3 \right) \\
+     &amp;= X^3 + 3 \cdot X^2 + X + 6 \pmod{7}
+\end{aligned}
+\]</div>
+<p>from which, knowing that <span class="arithmatex">\(G\)</span> will have size <span class="arithmatex">\(k \times n\)</span> with <span class="arithmatex">\(n = q - 1 = 6\)</span> and <span class="arithmatex">\(k = n - d + 1 = 3\)</span>, we can build the <strong>generator</strong> matrix <span class="arithmatex">\(G\)</span>:</p>
+<div class="arithmatex">\[
+G = \begin{bmatrix}
+6 &amp; 1 &amp; 3 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 6 &amp; 1 &amp; 3 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 6 &amp; 1 &amp; 3 &amp; 1 \\
+\end{bmatrix}
+\]</div>
+<p>and the parity-check matrix <span class="arithmatex">\(H\)</span>:</p>
+<div class="arithmatex">\[
+H =
+\begin{bmatrix}
+1 &amp; 3 &amp; 3^2 &amp; 3^3 &amp; 3^4 &amp; 3^5 \\
+1 &amp; 3^2 &amp; 3^4 &amp; 3^6 &amp; 3^8 &amp; 3^{10} \\
+1 &amp; 3^3 &amp; 3^6 &amp; 3^9 &amp; 3^{12} &amp; 3^{15}
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 3 &amp; 2 &amp; 6 &amp; 4 &amp; 5 \\
+1 &amp; 2 &amp; 4 &amp; 1 &amp; 2 &amp; 4 \\
+1 &amp; 6 &amp; 1 &amp; 6 &amp; 1 &amp; 6
+\end{bmatrix}
+\pmod{7}
+\]</div>
+<p>Since <span class="arithmatex">\(k=3\)</span> we can send messages of <span class="arithmatex">\(3\)</span> symbols. Take for example</p>
+<div class="arithmatex">\[
+\vec{m} = (1, \, 2, \, 3)
+\]</div>
+<p>we have that</p>
+<div class="arithmatex">\[
+\vec{c} = \vec{m} \cdot G = (6, \, 6, \, 2, \, 3, \, 4, \, 3)
+\]</div>
+<p>and the parity check will be:</p>
+<div class="arithmatex">\[
+\vec{s} = H \cdot \vec{c^T} = (0, \, 0, \, 0)^T
+\]</div>
+<p>Let's do a super quick test. Suppose a corruption during transmission:</p>
+<div class="arithmatex">\[
+\vec{c}_e = (6, \, 6, \, 2, \, 3, \, 4, \, \textcolor{red}{4})
+\]</div>
+<p>we have:</p>
+<div class="arithmatex">\[
+\vec{s} = H \cdot \vec{c_e^T} = (5, \, 4, \, 6)^T
+\]</div>
+<p>And we like it. Small note, this code allows us to have <span class="arithmatex">\(7^{6-4+1}=343\)</span> codewords.</p>
+<h4 id="ars-notoria-2">Ars Notoria 2<a class="headerlink" href="#ars-notoria-2" title="Permanent link"> </a></h4>
+<p>For this example we will not do tests and counter-tests, I will just <strong>build</strong> the generator matrix just to also use polynomials since finite fields allow us to (I will spare you again the link to field theory... nonsense, read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">here</a>). Suppose we are in the field</p>
+<div class="arithmatex">\[
+\mathbb{F}_{2^2} = \{ 0, \, 1, \, \omega, \, \omega + 1 \}
+\]</div>
+<p>we have <span class="arithmatex">\(q = 4\)</span> hence <span class="arithmatex">\(n = 3\)</span> and <span class="arithmatex">\(k = 2\)</span>. We also choose as primitive root <span class="arithmatex">\(\alpha = \omega\)</span>, and <span class="arithmatex">\(d = 2\)</span>. We have:</p>
+<div class="arithmatex">\[
+g(X) = X - \omega = X + \omega
+\]</div>
+<p>from which the generator matrix will be:</p>
+<div class="arithmatex">\[
+G = \begin{bmatrix}
+\omega &amp; 1 &amp; 0 \\
+0 &amp; \omega &amp; 1 \\
+\end{bmatrix}
+\]</div>
+<p>From this code we obtain <span class="arithmatex">\(4^{3-2+1} = 16\)</span> codewords, and we can transmit messages of <span class="arithmatex">\(2\)</span> symbols.</p>
+<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<p>And today, too, we finish tomorrow. In this article we have seen the <strong>Reed-Solomon</strong> code, and unlike the Hamming one, 
+the number of corrections we want it to handle is a <strong>parameter</strong> we can choose ourselves. So yeah, pretty cool. In any case, 
+even this time there will be no GitHub repo because a piece is missing. How do I correct errors?! Well for that, stay tuned until <strong>next month</strong>.</p>
+<p>Until next time.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h3>Related Posts</h3>
+                <ol class="article-related-list">
+                    <li><a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Where Only Polynomials Grow</a></li>
+                    <li><a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Share Your Secrets With Shamir</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 1</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 2</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-3/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 3</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h3>References</h3>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-3/">/en/teoria-matematica/how-i-fix-your-code-3/</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">/en/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically">/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-3/#the-theory-of-eternal-return">/en/teoria-matematica/how-i-fix-your-code-3/#the-theory-of-eternal-return</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-2/#an-upper-bound">/en/teoria-matematica/how-i-fix-your-code-2/#an-upper-bound</a>
+                    </li>
+                    <li>
+                        <a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/#the-naive-addition">/en/crittografia-sicurezza/share-your-secrets-with-shamir/#the-naive-addition</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out">/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out</a>
+                    </li>
+                    <li>
+                        Introduction to Cryptography with Coding Theory - Trappe &amp; Washington
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="/en/tag/math.html">math</a></li>
+                <li><a href="/en/tag/information_theory.html">information_theory</a></li>
+                <li><a href="/en/tag/codes.html">codes</a></li>
+                <li><a href="/en/tag/error_correction_codes.html">error_correction_codes</a></li>
+                <li><a href="/en/tag/cyclic_codes.html">cyclic_codes</a></li>
+                <li><a href="/en/tag/linear_codes.html">linear_codes</a></li>
+                <li><a href="/en/tag/solomon-reed.html">solomon-reed</a></li>
+                <li><a href="/en/tag/field_theory.html">field_theory</a></li>
+                <li><a href="/en/tag/linear_algebra.html">linear_algebra</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
+</main>
+
+<script defer src="https://www.lucadivita.it/theme/site.js"></script>
+
+<script defer src="https://www.lucadivita.it/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://www.lucadivita.it/theme/vendor/instant.page/instantpage.js"></script>
+
+
+<script defer src="https://www.lucadivita.it/theme/collapsible-sections.js"></script>
+<script defer src="https://www.lucadivita.it/theme/reading-progress.js"></script>
+</body>
+</html>

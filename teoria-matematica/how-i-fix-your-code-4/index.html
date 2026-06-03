@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Come Ti Rettifico Il Codice - 4 - Bit Di Vita</title>
+    <meta name="description" content="Nello scorso articolo, ci siamo concentrati a parlare dei codici ciclici. In questo vedremo il codice ciclico per eccellenza, il codice di Reed-Solomon. Dato che è un po&#39; di tempo che affermo di volerne parlare, e se i miei calcoli sono giusti questo articolo verrà pubblicato a giugno 2026, direi …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="Come Ti Rettifico Il Codice - 4 - Bit Di Vita">
+    <meta property="og:description" content="Nello scorso articolo, ci siamo concentrati a parlare dei codici ciclici. In questo vedremo il codice ciclico per eccellenza, il codice di Reed-Solomon. Dato che è un po&#39; di tempo che affermo di volerne parlare, e se i miei calcoli sono giusti questo articolo verrà pubblicato a giugno 2026, direi …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-4/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-4/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/how-i-fix-your-code-4/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-4/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/site.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/vendor/katex/katex.min.css">
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/">
+                        <img class="site-logo" src="https://www.lucadivita.it/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/teoria-matematica/how-i-fix-your-code-4/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/how-i-fix-your-code-4/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/teoria-matematica/how-i-fix-your-code-4/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/how-i-fix-your-code-4/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>Come Ti Rettifico Il Codice - 4</h1>
+        <p>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/teoria-matematica.html">Teoria & Matematica</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-06-03T00:00:00+02:00">03 giugno 2026</time>
+            </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--intermediate">Livello: Intermedio</span>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contenuti</h2>
+                <div class="toc">
+<ul>
+<li><a href="#clavicula-salomonis">Clavicula Salomonis</a><ul>
+<li><a href="#ars-notoria-1">Ars Notoria 1</a></li>
+<li><a href="#ars-notoria-2">Ars Notoria 2</a></li>
+</ul>
+</li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+<li><a href="#related-posts">Consigliati</a></li><li><a href="#references">Riferimenti</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>Nello scorso articolo, ci siamo concentrati a parlare dei <a href="/teoria-matematica/how-i-fix-your-code-3"><strong>codici ciclici</strong></a>. In questo vedremo il 
+codice ciclico per eccellenza, il <strong>codice di Reed-Solomon</strong>. Dato che è un po' di tempo che affermo di volerne parlare, e se i miei calcoli sono giusti 
+questo articolo verrà pubblicato a giugno 2026, direi che è arrivato il momento di mantenere la parola. Per cui iniziamo...</p>
+<h3 id="clavicula-salomonis">Clavicula Salomonis<a class="headerlink" href="#clavicula-salomonis" title="Permanent link"> </a></h3>
+<p>È necessario introdurre il concetto di <strong>radice primitiva</strong>. Partiamo dal caso semplice e consideriamo un <strong>campo finito</strong>
+<span class="arithmatex">\(\mathbb{F}_p\)</span> con <span class="arithmatex">\(p\)</span> <strong>primo</strong>. Una radice primitiva è un elemento <span class="arithmatex">\(\alpha \in \mathbb{F}_p\)</span>
+tale che:</p>
+<ol>
+<li>Le sue <strong>potenze</strong> per <span class="arithmatex">\(x \in \{1, \dots, p - 1 \}\)</span> <strong>generano</strong> tutti gli <strong>elementi</strong> di <span class="arithmatex">\(\mathbb{F}_p\)</span> escluso <span class="arithmatex">\(0\)</span>.</li>
+<li>La potenza per <span class="arithmatex">\(p-1\)</span> genera <span class="arithmatex">\(1\)</span>.</li>
+</ol>
+<p>Sì, come al solito detta così sembra chissà quale cosa complicata ma vediamolo con un esempio.
+Consideriamo <span class="arithmatex">\(p=7\)</span>, allora</p>
+<div class="arithmatex">\[
+\mathbb{F}_7 = \{ 0, \, 1, \, 2, \, 3, \, 4, \, 5, \, 6 \}
+\]</div>
+<p>è un campo. Se non sai il perché leggiti il mio articolo sui <a href="/teoria-matematica/qui-crescono-solo-polinomi/">campi finiti</a>.
+Dato il campo, prendiamo l'elemento <span class="arithmatex">\(\alpha = 3\)</span> e iniziamo <strong>testando</strong> tutte le potenze:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+3^1 &amp;\equiv 3 \pmod{7} \quad &amp; 3^2 &amp;\equiv 2 \pmod{7} \quad &amp; 3^3 &amp;\equiv 6 \pmod{7} \\
+3^4 &amp;\equiv 4 \pmod{7} \quad &amp; 3^5 &amp;\equiv 5 \pmod{7} \quad &amp; 3^6 &amp;\equiv 1 \pmod{7}
+\end{aligned}
+\]</div>
+<p>Come si può vedere, le potenze di <span class="arithmatex">\(\alpha\)</span> generano tutti gli elementi appartenenti al campo e per <span class="arithmatex">\(p-1=6\)</span> 
+il risultato è <span class="arithmatex">\(1\)</span>. Quindi <span class="arithmatex">\(\alpha = 3\)</span> è una radice primitiva di <span class="arithmatex">\(\mathbb{F}_7\)</span>, e possiamo dire che è 
+un <strong>generatore del gruppo moltiplicativo</strong>.</p>
+<p>Bene, riprendiamo. Supponiamo di avere un campo finito di <span class="arithmatex">\(q=p^m\)</span> elementi dove <span class="arithmatex">\(p\)</span> è un numero primo, prendiamo
+una radice primitiva <span class="arithmatex">\(\alpha\)</span> e scegliamo un valore <span class="arithmatex">\(d\)</span> (che gestisce la <strong>ridondanza</strong>) tale che</p>
+<div class="arithmatex">\[
+1 \leq d &lt; n
+\]</div>
+<p>dove <span class="arithmatex">\(n = q - 1\)</span>. Allora il polinomio generatore del codice di Reed-Solomon, che è costruito su un campo di Galois e non su un anello, 
+e' dato da</p>
+<p><a id="generatore-reed-solomon"></a></p>
+<div class="arithmatex">\[
+\begin{aligned}
+g(X) &amp;= \prod_{i=1}^{d - 1} \left( X - \alpha^i \right) \\
+     &amp;= \left( X - \alpha \right) \cdot \left( X - \alpha^2 \right) \dots \left( X - \alpha^{d - 1} \right) \pmod{q}
+\end{aligned}
+\]</div>
+<p class="formula-caption">Formula 1. Polinomio Generatore Di Reed-Solomon</p>
+<p>Sviluppare questo polinomio non è particolarmente difficile perché le potenze di <span class="arithmatex">\(\alpha\)</span> possono essere <strong>ridotte</strong> 
+come mostrato <a href="/teoria-matematica/qui-crescono-solo-polinomi/#le-erbacce-crescono-ciclicamente">qui</a>.
+Così come visto <a href="/teoria-matematica/how-i-fix-your-code-3/#la-teoria-delleterno-ritorno">qui</a>, a partire da <span class="arithmatex">\(g(X)\)</span> e considerando il prodotto</p>
+<div class="arithmatex">\[
+g(X) \cdot f(X)
+\]</div>
+<p>otteniamo l'insieme dei polinomi che formano la <strong>matrice di generazione</strong> <span class="arithmatex">\(G\)</span>. Nel caso di Reed-Solomon inoltre,
+<span class="arithmatex">\(f(X)\)</span> ha grado massimo <span class="arithmatex">\(n - d\)</span> per cui il numero di <strong>coefficienti</strong> (cioè il numero di <strong>simboli</strong> del messaggio) è </p>
+<div class="arithmatex">\[
+k = n - d + 1
+\]</div>
+<p>e <span class="arithmatex">\(n\)</span> è la lunghezza della codeword. Da notare che qui parliamo di <strong>simboli</strong> e non di bit dato che stiamo lavorando su un <strong>campo</strong>.
+Avendo definito <span class="arithmatex">\(k\)</span> ed <span class="arithmatex">\(n\)</span>, possiamo scrivere che la matrice di generazione <span class="arithmatex">\(G\)</span> ha dimensione <span class="arithmatex">\(k \times n\)</span>, dove per ogni riga
+mettiamo i coefficienti di <span class="arithmatex">\(g(X)\)</span>, <strong>paddando</strong> e <strong>shiftando</strong> esattamente come fatto <a href="/teoria-matematica/how-i-fix-your-code-3/#la-teoria-delleterno-ritorno">qui</a>.
+Dato che nel campo <span class="arithmatex">\(\mathbb{F}_q\)</span> abbiamo <span class="arithmatex">\(q\)</span> elementi e il numero di coefficienti in <span class="arithmatex">\(f(X)\)</span> è <span class="arithmatex">\(k\)</span>, abbiamo 
+che il numero di codewords in <span class="arithmatex">\(C\)</span> è <span class="arithmatex">\(q^k\)</span>. Inoltre si dimostra che il codice di Reed-Solomon è <a href="/teoria-matematica/how-i-fix-your-code-2/#un-limite-superiore"><strong>MDS</strong></a> 
+e <strong>massimizza</strong> la capacità di <strong>correzione</strong> di errore a parità di <strong>lunghezza</strong> della codeword.</p>
+<p>Abbiamo definito la matrice di generazione, ora definiamo la matrice di <strong>controllo</strong> <span class="arithmatex">\(H\)</span>. Partendo dalla condizione che</p>
+<div class="arithmatex">\[
+G \cdot H^T = 0
+\]</div>
+<p>si può dimostrare (ma non lo faremo) che <span class="arithmatex">\(H\)</span> può essere costruita come segue:</p>
+<div class="arithmatex">\[
+H_{i,j} = \alpha^{i \cdot j},
+\quad
+i = 1,\dots,d-1,\; \text{ e } \;
+j = 0,\dots,n-1
+\]</div>
+<p>con <span class="arithmatex">\(i\)</span> indice di <strong>riga</strong> e <span class="arithmatex">\(j\)</span> indice di <strong>colonna</strong>. <span class="arithmatex">\(H\)</span> ha quindi dimensione <span class="arithmatex">\((d - 1) \times n\)</span> e andandola a sviluppare abbiamo:</p>
+<p><a id="parity-reed-solomon"></a></p>
+<div class="arithmatex">\[
+H =
+\begin{bmatrix}
+\alpha^{1 \cdot 0} &amp; \alpha^{1 \cdot 1} &amp; \alpha^{1 \cdot 2} &amp; \cdots &amp; \alpha^{1 \cdot (n-1)} \\
+\alpha^{2 \cdot 0} &amp; \alpha^{2 \cdot 1} &amp; \alpha^{2 \cdot 2} &amp; \cdots &amp; \alpha^{2 \cdot (n-1)} \\
+\alpha^{3 \cdot 0} &amp; \alpha^{3 \cdot 1} &amp; \alpha^{3 \cdot 2} &amp; \cdots &amp; \alpha^{3 \cdot (n-1)} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\alpha^{(d-1) \cdot 0} &amp; \alpha^{(d-1) \cdot 1} &amp; \alpha^{(d-1) \cdot 2} &amp; \cdots &amp; \alpha^{(d-1) \cdot (n-1)}
+\end{bmatrix}
+\]</div>
+<p class="formula-caption">Formula 2. Matrice Parità Di Reed-Solomon</p>
+<p>Per chi di voi mi ha seguito in tutti gli altri articoli, abbiamo già visto una matrice di questo tipo, 
+è la <a href="/crittografia-sicurezza/share-your-secrets-with-shamir/#laggiunta-naive">matrice di <strong>Vandermonde</strong></a>.</p>
+<p>Benissimo. Ora che siamo arrivati a questo punto possiamo vedere due semplici <strong>esempi</strong>.</p>
+<h4 id="ars-notoria-1">Ars Notoria 1<a class="headerlink" href="#ars-notoria-1" title="Permanent link"> </a></h4>
+<p>Supponiamo di voler costruire un codice di Reed-Solomon costruito su un campo di Galois <span class="arithmatex">\(\mathbb{F}_{7}\)</span> scegliendo come 
+radice primitiva <span class="arithmatex">\(\alpha = 3\)</span> e <span class="arithmatex">\(d = 4\)</span>. Un codice di Reed-Solomon così definito, permette di <strong>rilevare</strong> fino a <span class="arithmatex">\(d - 1 = 3\)</span> errori e di 
+<strong>correggere</strong> fino a <span class="arithmatex">\(1\)</span> errore. Il perché lo trovi <a href="/teoria-matematica/how-i-fix-your-code-1/#raddrizziamo-sti-divisori">qui</a>.
+Possiamo calcolare il polinomio generatore <span class="arithmatex">\(g(X)\)</span> usando la <a href="#generatore-reed-solomon">formula 1</a>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+g(X) &amp;= \left( X - 3 \right) \cdot \left( X - 3^2 \right) \cdot \left( X - 3^3 \right) \\
+     &amp;= X^3 + 3 \cdot X^2 + X + 6 \pmod{7}
+\end{aligned}
+\]</div>
+<p>da cui, sapendo che <span class="arithmatex">\(G\)</span> avrà dimensione <span class="arithmatex">\(k \times n\)</span> con <span class="arithmatex">\(n = q - 1 = 6\)</span> e <span class="arithmatex">\(k = n - d + 1 = 3\)</span>, possiamo costruire la matrice di <strong>generazione</strong> <span class="arithmatex">\(G\)</span>:</p>
+<div class="arithmatex">\[
+G = \begin{bmatrix}
+6 &amp; 1 &amp; 3 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 6 &amp; 1 &amp; 3 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 6 &amp; 1 &amp; 3 &amp; 1 \\
+\end{bmatrix}
+\]</div>
+<p>e la matrice di controllo <span class="arithmatex">\(H\)</span>:</p>
+<div class="arithmatex">\[
+H =
+\begin{bmatrix}
+1 &amp; 3 &amp; 3^2 &amp; 3^3 &amp; 3^4 &amp; 3^5 \\
+1 &amp; 3^2 &amp; 3^4 &amp; 3^6 &amp; 3^8 &amp; 3^{10} \\
+1 &amp; 3^3 &amp; 3^6 &amp; 3^9 &amp; 3^{12} &amp; 3^{15}
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 3 &amp; 2 &amp; 6 &amp; 4 &amp; 5 \\
+1 &amp; 2 &amp; 4 &amp; 1 &amp; 2 &amp; 4 \\
+1 &amp; 6 &amp; 1 &amp; 6 &amp; 1 &amp; 6
+\end{bmatrix}
+\pmod{7}
+\]</div>
+<p>Dato che <span class="arithmatex">\(k=3\)</span> possiamo inviare messaggi di <span class="arithmatex">\(3\)</span> simboli. Prendiamo ad esempio </p>
+<div class="arithmatex">\[
+\vec{m} = (1, \, 2, \, 3)
+\]</div>
+<p>abbiamo che</p>
+<div class="arithmatex">\[
+\vec{c} = \vec{m} \cdot G = (6, \, 6, \, 2, \, 3, \, 4, \, 3)
+\]</div>
+<p>e il controllo di parità sarà:</p>
+<div class="arithmatex">\[
+\vec{s} = H \cdot \vec{c^T} = (0, \, 0, \, 0)^T
+\]</div>
+<p>Facciamo una prova rapidissima. Supponiamo una corruzione durante la trasmissione:</p>
+<div class="arithmatex">\[
+\vec{c}_e = (6, \, 6, \, 2, \, 3, \, 4, \, \textcolor{red}{4})
+\]</div>
+<p>abbiamo:</p>
+<div class="arithmatex">\[
+\vec{s} = H \cdot \vec{c_e^T} = (5, \, 4, \, 6)^T
+\]</div>
+<p>E ci piace. Piccola nota, questo codice permette di avere <span class="arithmatex">\(7^{6-4+1}=343\)</span> codewords.</p>
+<h4 id="ars-notoria-2">Ars Notoria 2<a class="headerlink" href="#ars-notoria-2" title="Permanent link"> </a></h4>
+<p>Per questo esempio non faremo prove e controprove, mi limiterò a <strong>costruire</strong> la matrice di generazione giusto per utilizzare anche i polinomi dato che i campi
+finiti ce lo permettono (vi risparmio di nuovo il link alla teoria dei campi finiti... cazzata, leggete <a href="/teoria-matematica/qui-crescono-solo-polinomi/">qui</a>).
+Supponiamo di essere nel campo </p>
+<div class="arithmatex">\[
+\mathbb{F}_{2^2} = \{ 0, \, 1, \, \omega, \, \omega + 1 \}
+\]</div>
+<p>abbiamo <span class="arithmatex">\(q = 4\)</span> da cui <span class="arithmatex">\(n = 3\)</span> e <span class="arithmatex">\(k = 2\)</span>. Scegliamo inoltre come radice primitiva <span class="arithmatex">\(\alpha = \omega\)</span>, e <span class="arithmatex">\(d = 2\)</span>.
+Abbiamo:</p>
+<div class="arithmatex">\[
+g(X) = X - \omega = X + \omega
+\]</div>
+<p>da cui la matrice di generazione sarà:</p>
+<div class="arithmatex">\[
+G = \begin{bmatrix}
+\omega &amp; 1 &amp; 0 \\
+0 &amp; \omega &amp; 1 \\
+\end{bmatrix}
+\]</div>
+<p>Da questo codice otteniamo <span class="arithmatex">\(4^{3-2+1} = 16\)</span> codewords, e possiamo trasmettere messaggi di <span class="arithmatex">\(2\)</span> simboli.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Ed anche oggi si conclude domani. In questo articolo abbiamo visto il codice di <strong>Reed-Solomon</strong>, e a differenza di quello di Hamming,
+il numero di correzioni che vogliamo possa gestire è un <strong>parametro</strong> che possiamo scegliere noi. Quindi dai, figata. In ogni caso
+anche per questa volta non ci sarà repo GitHub perché manca un pezzo. Come correggo gli errori?! Beh per questo,
+rimanete in attesa fino al <strong>mese prossimo</strong>.</p>
+<p>Alla Prossima.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h3>Consigliati</h3>
+                <ol class="article-related-list">
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Qui Crescono Solo Polinomi</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Condividi I Tuoi Segreti Con Shamir</a></li>
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 1</a></li>
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 2</a></li>
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-3/" rel="noopener noreferrer" target="_blank">Come Ti Rettifico Il Codice - 3</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h3>Riferimenti</h3>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/teoria-matematica/how-i-fix-your-code-3">/teoria-matematica/how-i-fix-your-code-3</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/qui-crescono-solo-polinomi/">/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/qui-crescono-solo-polinomi/#le-erbacce-crescono-ciclicamente">/teoria-matematica/qui-crescono-solo-polinomi/#le-erbacce-crescono-ciclicamente</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/how-i-fix-your-code-3/#la-teoria-delleterno-ritorno">/teoria-matematica/how-i-fix-your-code-3/#la-teoria-delleterno-ritorno</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/how-i-fix-your-code-2/#un-limite-superiore">/teoria-matematica/how-i-fix-your-code-2/#un-limite-superiore</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/share-your-secrets-with-shamir/#laggiunta-naive">/crittografia-sicurezza/share-your-secrets-with-shamir/#laggiunta-naive</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/how-i-fix-your-code-1/#raddrizziamo-sti-divisori">/teoria-matematica/how-i-fix-your-code-1/#raddrizziamo-sti-divisori</a>
+                    </li>
+                    <li>
+                        Introduction to Cryptography with Coding Theory - Trappe &amp; Washington
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="https://www.lucadivita.it/tag/matematica.html">matematica</a></li>
+                <li><a href="https://www.lucadivita.it/tag/teoria_dellinformazione.html">teoria_dellinformazione</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici.html">codici</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_a_correzione.html">codici_a_correzione</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_ciclici.html">codici_ciclici</a></li>
+                <li><a href="https://www.lucadivita.it/tag/codici_lineari.html">codici_lineari</a></li>
+                <li><a href="https://www.lucadivita.it/tag/solomon-reed.html">solomon-reed</a></li>
+                <li><a href="https://www.lucadivita.it/tag/teoria_dei_campi.html">teoria_dei_campi</a></li>
+                <li><a href="https://www.lucadivita.it/tag/algebra_lineare.html">algebra_lineare</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
+</main>
+
+<script defer src="https://www.lucadivita.it/theme/site.js"></script>
+
+<script defer src="https://www.lucadivita.it/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://www.lucadivita.it/theme/vendor/instant.page/instantpage.js"></script>
+
+
+<script defer src="https://www.lucadivita.it/theme/collapsible-sections.js"></script>
+<script defer src="https://www.lucadivita.it/theme/reading-progress.js"></script>
+</body>
+</html>

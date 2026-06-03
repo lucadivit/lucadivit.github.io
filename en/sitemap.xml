@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-1/</loc>
-  </url>
-  <url>
-    <loc>https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-2/</loc>
-  </url>
-  <url>
-    <loc>https://www.lucadivita.it/en/crittografia-sicurezza/how-i-fix-your-code-3/</loc>
-  </url>
-  <url>
     <loc>https://www.lucadivita.it/en/crittografia-sicurezza/share-your-secrets-with-shamir/</loc>
   </url>
   <url>
@@ -41,6 +32,18 @@
   </url>
   <url>
     <loc>https://www.lucadivita.it/en/pages/info/</loc>
+  </url>
+  <url>
+    <loc>https://www.lucadivita.it/en/teoria-matematica/how-i-fix-your-code-1/</loc>
+  </url>
+  <url>
+    <loc>https://www.lucadivita.it/en/teoria-matematica/how-i-fix-your-code-2/</loc>
+  </url>
+  <url>
+    <loc>https://www.lucadivita.it/en/teoria-matematica/how-i-fix-your-code-3/</loc>
+  </url>
+  <url>
+    <loc>https://www.lucadivita.it/en/teoria-matematica/how-i-fix-your-code-4/</loc>
   </url>
   <url>
     <loc>https://www.lucadivita.it/en/teoria-matematica/i-ode-you-ode-and-the-neural-ode-1/</loc>
