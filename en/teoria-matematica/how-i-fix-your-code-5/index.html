@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How I Fix Your Code - 5 - Bit Di Vita</title>
+    <meta name="description" content="Finally we made it to this last part. It has been a very long journey, but we got to the end. We started from simple concepts like parity, then reached linear codes and went through cyclic ones, with pit stops to talk about Hamming and Reed-Solomon. One last piece is …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="How I Fix Your Code - 5 - Bit Di Vita">
+    <meta property="og:description" content="Finally we made it to this last part. It has been a very long journey, but we got to the end. We started from simple concepts like parity, then reached linear codes and went through cyclic ones, with pit stops to talk about Hamming and Reed-Solomon. One last piece is …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="/en/teoria-matematica/how-i-fix-your-code-5/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-5/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/teoria-matematica/how-i-fix-your-code-5/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/teoria-matematica/how-i-fix-your-code-5/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/site.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/vendor/katex/katex.min.css">
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="/en/">
+                        <img class="site-logo" src="https://www.lucadivita.it/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="/en/" >Home</a></li>
+        <li><a href="/en/archives.html" >Archives</a></li>
+        <li><a href="/en/pages/info/" >Explore</a></li>
+        <li><a href="/en/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="/en/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="/teoria-matematica/how-i-fix-your-code-5/" hreflang="it" title="Italian" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/how-i-fix-your-code-5/" hreflang="en" title="English" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="/en/" >Home</a></li>
+        <li><a href="/en/archives.html" >Archives</a></li>
+        <li><a href="/en/pages/info/" >Explore</a></li>
+        <li><a href="/en/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="/en/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="/teoria-matematica/how-i-fix-your-code-5/" hreflang="it" title="Italian" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/teoria-matematica/how-i-fix-your-code-5/" hreflang="en" title="English" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>How I Fix Your Code - 5</h1>
+        <p>
+            <small class="archive-category">
+                <a href="/en/category/teoria-matematica.html">Theory & Math</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-07-01T00:00:00+02:00">July 01, 2026</time>
+            </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--advanced">Level: Advanced</span>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contents</h2>
+                <div class="toc">
+<ul>
+<li><a href="#duke-berlekamp-and-count-massey">Duke Berlekamp and Count Massey</a><ul>
+<li><a href="#ars-goetia-1">Ars Goetia 1</a></li>
+<li><a href="#ars-goetia-2">Ars Goetia 2</a></li>
+</ul>
+</li>
+<li><a href="#conclusions">Conclusions</a></li>
+<li><a href="#related-posts">Related Posts</a></li><li><a href="#references">References</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>Finally we made it to this last <strong>part</strong>. It has been a very <strong>long</strong> journey, but we got to the end. We started from simple concepts like <strong>parity</strong>,
+then reached <strong>linear codes</strong> and went through <strong>cyclic</strong> ones, with pit stops to talk about <strong>Hamming</strong> and <a href="/en/teoria-matematica/how-i-fix-your-code-4/"><strong>Reed-Solomon</strong></a>. One last piece is missing: understanding how <strong>error correction</strong> works in Reed-Solomon codes. For Hamming it was fairly simple; here it is much less intuitive, and by the end of this
+article you will understand why I chose to <strong>split it</strong> into three. It is time to talk about <strong>Berlekamp-Massey</strong>, let's begin.</p>
+<h3 id="duke-berlekamp-and-count-massey">Duke Berlekamp and Count Massey<a class="headerlink" href="#duke-berlekamp-and-count-massey" title="Permanent link"> </a></h3>
+<p>Let's start by saying that there are several <strong>algorithms</strong> to correct errors in Reed-Solomon codes,
+but the one we will see is the <a href="https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm"><strong>Berlekamp-Massey</strong></a> method, called <strong>BMA</strong>. We will not go too much into the details
+of the algorithm; we will stick to our goal, namely <strong>correcting the error</strong>. We already saw how to compute the <strong>syndrome</strong>, and we know
+that it is nothing more than a vector:</p>
+<div class="arithmatex">\[
+\vec{s} = (S_1, \, S_2, \, \cdots, \, S_{d-1})
+\]</div>
+<p>BMA uses the individual <strong>components</strong> of <span class="arithmatex">\(\vec{s}\)</span> starting from the idea that they are not <strong>independent</strong> from each other,
+but reflect the <strong>structure of the error</strong> (or errors) present in <span class="arithmatex">\(\vec{c}\)</span>.
+Let's see why. From the <a href="/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out"><strong>correction condition</strong></a>, we know that
+<span class="arithmatex">\(t\)</span> is the maximum number of errors we can <strong>correct</strong>. Now suppose we have a wrong codeword. This can be written as the
+<strong>sum</strong> of a correct codeword and an error vector:</p>
+<div class="arithmatex">\[
+\vec{c}_e = \vec{c} + \vec{e}
+\]</div>
+<p>and the error vector is a vector that has <span class="arithmatex">\(0\)</span> everywhere except in <span class="arithmatex">\(\nu\)</span> <strong>positions</strong>, with <span class="arithmatex">\(\nu \leq t\)</span>. Each error component is characterized by two pieces of information:</p>
+<ol>
+<li><strong>Where</strong> the error is, that is, in which position of the codeword</li>
+<li><strong>How much</strong> the error is, that is, the non-zero value that appears in that position</li>
+</ol>
+<p>This means that, in the worst case where there are exactly <span class="arithmatex">\(t\)</span> errors, we must determine <span class="arithmatex">\(t\)</span> <strong>positions</strong> and <span class="arithmatex">\(t\)</span> <strong>values</strong>,
+for a total of <span class="arithmatex">\(2t\)</span> <strong>unknowns</strong>. At this point the syndrome components come into play. As we have seen, the syndrome is <strong>completely</strong>
+determined by the received codeword and therefore by the error vector. In particular, each component <span class="arithmatex">\(S_i\)</span> depends on all the elements
+of <span class="arithmatex">\(\vec{e}\)</span> (if this step is not clear, read <a href="/en/teoria-matematica/how-i-fix-your-code-2/#a-small-clarification">here</a>),
+and therefore <span class="arithmatex">\(\vec{s}\)</span> contains <strong>information</strong> about the errors, and its components depend on the errors themselves.
+To fully determine the errors we need a sufficient amount of this information. Since, as any good engineer,
+you should always consider the <strong>worst</strong> case, and since the unknowns are <span class="arithmatex">\(2t\)</span>, we will need at least <span class="arithmatex">\(2t\)</span> syndrome components. Therefore BMA
+uses the first <span class="arithmatex">\(2t\)</span> components of <span class="arithmatex">\(\vec{s}\)</span>, that is</p>
+<div class="arithmatex">\[
+S_1, \, S_2, \, \cdots, \, S_{2t}
+\]</div>
+<p>It can be shown that the syndrome components <strong>satisfy</strong> a <strong>linear</strong> relation of the form</p>
+<p><a id="relazione-componenti-sindrome"></a></p>
+<div class="arithmatex">\[
+S_i + \Lambda_1 \cdot S_{i-1} + \Lambda_2 \cdot S_{i-2} + \cdots + \Lambda_{\nu} \cdot S_{i-\nu} = 0
+\]</div>
+<p class="formula-caption">Formula 1. Relation Between Syndrome Components</p>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(\nu\)</span> represents the order of the relation and depends on the <strong>number of errors</strong> present; in fact <span class="arithmatex">\(0 \leq \nu \leq t\)</span></li>
+<li><span class="arithmatex">\(i\)</span> is the index of the syndrome component considered and must satisfy the <strong>condition</strong> <span class="arithmatex">\(i \geq \nu + 1\)</span></li>
+</ul>
+<p>To better understand, if we have one error then <span class="arithmatex">\(\nu = 1\)</span> and <span class="arithmatex">\(i = 2\)</span> (but <span class="arithmatex">\(i = 3, 4, \dots\)</span> would also work), so we have</p>
+<div class="arithmatex">\[
+S_2 + \Lambda_1 \cdot S_1 = 0
+\]</div>
+<p>With two errors we would have <span class="arithmatex">\(\nu = 2\)</span> and <span class="arithmatex">\(i = 3\)</span>, hence</p>
+<div class="arithmatex">\[
+\begin{aligned}
+S_3 + \Lambda_1 \cdot S_2 + \Lambda_2 \cdot S_1 = 0 \\
+S_4 + \Lambda_1 \cdot S_3 + \Lambda_2 \cdot S_2 = 0 \\
+\end{aligned}
+\]</div>
+<p>Back to the general case. From the previous relation, what we want to do is <strong>determine</strong> the coefficients</p>
+<div class="arithmatex">\[
+\Lambda_1, \, \Lambda_2, \, \cdots, \, \Lambda_{\nu}
+\]</div>
+<p>which are our unknowns. For convenience, these coefficients are <strong>collected</strong> into a single object by introducing the polynomial</p>
+<p><a id="error-locator-polynomial"></a></p>
+<div class="arithmatex">\[
+\Lambda(X) = 1 + \Lambda_1 \cdot X + \Lambda_2 \cdot X^2 + \cdots + \Lambda_{\nu} \cdot X^{\nu}
+\]</div>
+<p class="formula-caption">Formula 2. Error Locator Polynomial</p>
+<p>called the <strong>error locator polynomial</strong>. The problem is that we do not know in advance either the <strong>degree</strong> <span class="arithmatex">\(\nu\)</span> or the <strong>coefficients</strong> of the polynomial,
+because we do not know how many errors occurred. For this reason, BMA builds <span class="arithmatex">\(\Lambda(X)\)</span> <strong>iteratively</strong>:
+we start from the simplest hypothesis and, using the syndrome components one at a time, we check whether the current
+polynomial is <strong>compatible</strong> with the data. If this compatibility does not hold at the next steps, the degree of the polynomial
+is <strong>increased</strong>. To perform this check, we evaluate the <a href="#relazione-componenti-sindrome">previous relation</a>
+by introducing a quantity called <strong>discrepancy</strong>:</p>
+<p><a id="discrepanza"></a></p>
+<div class="arithmatex">\[
+\Delta_i = S_i + \Lambda_1 \cdot S_{i-1} + \Lambda_2 \cdot S_{i-2} + \cdots + \Lambda_{\nu} \cdot S_{i-\nu}
+\]</div>
+<p class="formula-caption">Formula 3. Discrepancy</p>
+<p>The discrepancy is the <em>value of the relation between the syndrome components at step <span class="arithmatex">\(i\)</span></em> and it is studied at two levels: <strong>local</strong> and <strong>global</strong>.
+At the local level it allows us to determine the <strong>coefficients</strong> of the error locator polynomial, and it can be summarized like this:</p>
+<ul>
+<li>If <span class="arithmatex">\(\Delta_i = 0\)</span>: the current polynomial is <strong>compatible</strong> with the syndrome component <span class="arithmatex">\(S_i\)</span>.</li>
+<li>If <span class="arithmatex">\(\Delta_i \neq 0\)</span>: the current polynomial <strong>does not correctly describe</strong> the syndrome components
+considered up to that point, and therefore it must be updated.</li>
+</ul>
+<p>At the global level, instead, we check whether the choice made is compatible also with the <strong>next</strong> syndrome components.
+For example, we can use <span class="arithmatex">\(\Delta_i\)</span> to determine the coefficients <span class="arithmatex">\(\Lambda_k\)</span> of the polynomial and <span class="arithmatex">\(\Delta_{i+1}\)</span> to verify whether the
+obtained polynomial is still compatible:</p>
+<ul>
+<li>If <span class="arithmatex">\(\Delta_{i+1} = 0\)</span>: the choice is <strong>consistent</strong> and the <a href="#error-locator-polynomial">locator polynomial</a> is <strong>compatible</strong> with the syndrome components up to that point.</li>
+<li>If <span class="arithmatex">\(\Delta_{i+1} \neq 0\)</span>: the assumed degree <strong>is not sufficient</strong> and the <a href="#error-locator-polynomial">polynomial</a> must be updated to one of higher degree.</li>
+</ul>
+<p>(don't worry, with the examples it will be clearer). In this way, BMA progressively builds the locator polynomial,
+fixing it every time the discrepancy turns out <strong>non-zero</strong>, until it obtains a polynomial <strong>compatible</strong> with the first <span class="arithmatex">\(2t\)</span> syndrome components and
+of <strong>minimum degree</strong>, sufficient to describe the errors present. If additional syndrome components are available, it is possible
+to verify compatibility at later steps as well, <strong>reinforcing</strong> the validity of the chosen degree.</p>
+<p>Once we have the <a href="#error-locator-polynomial">polynomial</a>, we <strong>solve</strong> it by finding its <strong>roots</strong>, thus setting <span class="arithmatex">\(\Lambda(X)=0\)</span>.
+If the polynomial has degree <span class="arithmatex">\(1\)</span> it is fairly easy to solve, but if the degree is higher things get complicated. Since
+its <strong>roots</strong> belong to the finite <strong>field</strong> on which the code is built, we could just apply <strong>brute force</strong> to find them all, but if the
+field is very large then obviously this is not feasible. Luckily, there is an <strong>efficient algorithm</strong> to find the roots of a polynomial over a finite field,
+called the <a href="https://en.wikipedia.org/wiki/Chien_search"><strong>Chien algorithm</strong></a>, which, don't worry, I will not explain.</p>
+<p>You're welcome.</p>
+<p>In any case, it can be shown that its roots are <em>directly linked to the error positions in the codeword</em>.
+In particular, in Reed-Solomon codes this link is given by the definition of the <strong>parity-check matrix</strong>. It was in fact defined
+via powers of the <strong>primitive root</strong></p>
+<div class="arithmatex">\[
+H_{i,j} = \alpha^{i \cdot j}
+\]</div>
+<p>Therefore, to each position <span class="arithmatex">\(j\)</span> of the codeword we associate the element <span class="arithmatex">\(\alpha^j\)</span> of the field. The locator polynomial is built so as to
+<strong>cancel</strong> these powers, so its roots have the form</p>
+<div class="arithmatex">\[
+X = \alpha^{-j}
+\]</div>
+<p>So by solving</p>
+<p><a id="condizione-risoluzione"></a></p>
+<div class="arithmatex">\[
+\Lambda(X) = 0
+\]</div>
+<p class="formula-caption">Formula 4. Solving Condition</p>
+<p>we obtain the <span class="arithmatex">\(\alpha^{-j}\)</span> from which it is possible to recover the <strong>position</strong> <span class="arithmatex">\(j\)</span> of the error in the codeword.</p>
+<p>Once the error positions are identified, we still need to determine their <strong>value</strong>. This can also be done using the syndrome components,
+which contain all the necessary information about the errors. In particular, knowing the error positions, it is possible
+to build a <strong>system of equations</strong> using the syndrome components. In fact, each component can be expressed as</p>
+<p><a id="sindrome-errore"></a></p>
+<div class="arithmatex">\[
+S_i = \sum_{k=1}^{\nu} e_k \cdot \alpha^{i \cdot j_k}
+\]</div>
+<p class="formula-caption">Formula 5. Relation Between Syndrome And Error</p>
+<p>Where <span class="arithmatex">\(j_k\)</span> represents the position of the <span class="arithmatex">\(k\)</span>-th error, <span class="arithmatex">\(e_k\)</span> its <strong>value</strong>, and <span class="arithmatex">\(i\)</span> is the <span class="arithmatex">\(i\)</span>-th element of the syndrome <span class="arithmatex">\(\vec{s}\)</span>.
+This formula allows us to obtain a system of equations from which we can determine the error values <span class="arithmatex">\(e_k\)</span> and at that point
+the correction is <strong>immediate</strong>, we just need to do the <strong>subtraction</strong>:</p>
+<div class="arithmatex">\[
+\vec{c} = \vec{c}_e - \vec{e} = (c_{e_{1}}, \, c_{e_{2}}, \, \cdots, \, c_{e_{n}}) - (e_1, \, e_2, \, \cdots, \, e_n)
+\]</div>
+<p>to obtain the original codeword.</p>
+<p>Ok, it sounds complicated like this, but as usual let's see it with some examples.</p>
+<h4 id="ars-goetia-1">Ars Goetia 1<a class="headerlink" href="#ars-goetia-1" title="Permanent link"> </a></h4>
+<p>Let's go back to the example we started <a href="/en/teoria-matematica/how-i-fix-your-code-4/#ars-notoria-1">here</a>.
+The syndrome for the corrupted codeword was:</p>
+<div class="arithmatex">\[
+\vec{s} = (S_1, S_2, S_3) = (5, 4, 6)^T
+\]</div>
+<p>From the theory we know that we must take the first <span class="arithmatex">\(2t\)</span> elements of the <strong>syndrome</strong>, and since the code defined in the example
+can correct at most <span class="arithmatex">\(t=1\)</span> errors, we take the <strong>first two elements</strong> of the syndrome:</p>
+<div class="arithmatex">\[
+S_1 = 5, \quad S_2 = 4
+\]</div>
+<p>The <a href="#error-locator-polynomial">error locator polynomial</a> has the form:</p>
+<div class="arithmatex">\[
+\Lambda(X) = 1 + \Lambda_1 \cdot X
+\]</div>
+<p>and we must <strong>determine</strong> the coefficient <span class="arithmatex">\(\Lambda_1\)</span>. Once the polynomial is known, we can then determine its <strong>roots</strong>.
+We have one equation in two unknowns, but no worries, there is always the
+<a href="#discrepanza"><strong>discrepancy</strong></a> we can use. As said, its computation is iterative and since the condition holds:</p>
+<div class="arithmatex">\[
+i \geq \nu + 1 \implies i \geq 2
+\]</div>
+<p>we start from <span class="arithmatex">\(i=2\)</span>:</p>
+<div class="arithmatex">\[
+\Delta_2 = S_2 + \Lambda_1 \cdot S_1 = 4 + \Lambda_1 \cdot 5
+\]</div>
+<p>We impose <span class="arithmatex">\(\Delta_2 = 0\)</span> and solve for <span class="arithmatex">\(\Lambda_1\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\Lambda_1 \cdot 5 &amp;= -4 \pmod{7} \\
+\Lambda_1 \cdot 5 &amp;= 3 \pmod{7} \\
+\Lambda_1 &amp;= 5^{-1} \cdot 3 \pmod{7} \\
+\Lambda_1 &amp;= 3 \cdot 3 \pmod{7} \\
+\Lambda_1 &amp;= 2 \pmod{7}
+\end{aligned}
+\]</div>
+<p>(if you don't know why these steps work, read <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">here</a>).
+By imposing <span class="arithmatex">\(\Delta_2 = 0\)</span> we obtain the coefficient <span class="arithmatex">\(\Lambda_1\)</span>. We then check whether this choice also cancels the <strong>next discrepancy</strong>. Let's do it:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\Delta_3 &amp;= S_3 + \Lambda_1 S_2 \\
+         &amp;= 6 + 2 \cdot 4 \pmod{7} \\
+         &amp;= 6 + 8 \\
+         &amp;= 14 \equiv 0 \pmod{7}
+\end{aligned}
+\]</div>
+<p>Since the <span class="arithmatex">\(\Lambda_1\)</span> found from <span class="arithmatex">\(\Delta_2\)</span> also cancels <span class="arithmatex">\(\Delta_3\)</span>, we can conclude that the degree <span class="arithmatex">\(1\)</span> locator polynomial is sufficient
+(and thank goodness, since the code defined could correct at most <span class="arithmatex">\(t=1\)</span> error, so we could not go any further anyway).</p>
+<div class="arithmatex">\[
+\Lambda(X) = 1 + \Lambda_1 \cdot X
+\]</div>
+<p>and by setting <span class="arithmatex">\(\Lambda(X) = 0 \pmod{7}\)</span> we obtain:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+1 + \Lambda_1 \cdot X &amp;= 0 \\
+1 + 2 \cdot X &amp;= 0 \\
+2 \cdot X &amp;= -1 \pmod{7} \\
+2 \cdot X &amp;= 6 \pmod{7} \\
+X &amp;= 2^{-1} \cdot 6 \pmod{7} \\
+X &amp;= 4 \cdot 6 \pmod{7} \\
+X &amp;= 3 \pmod{7}
+\end{aligned}
+\]</div>
+<p>Since <span class="arithmatex">\(X = \alpha^{-j}\)</span>, and since the <a href="/en/teoria-matematica/how-i-fix-your-code-4/#clavicula-salomonis">primitive root</a> is <span class="arithmatex">\(\alpha = 3\)</span>,
+we have that</p>
+<div class="arithmatex">\[
+\begin{aligned}
+3 &amp;= 3^{-j} \pmod{7} \\
+3 \cdot 3^j &amp;= 3^{-j} \cdot 3^j \pmod{7} \\
+3^{j+1} &amp;= 1 \pmod{7} \\
+\end{aligned}
+\]</div>
+<p>By the <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically"><strong>cyclicity</strong></a> of powers in the
+<strong>multiplicative group</strong>, we have that <span class="arithmatex">\(3^{j+1} = 1 \pmod{7}\)</span> is true if:</p>
+<div class="arithmatex">\[
+j + 1 = 0 \pmod{6} \Rightarrow j = 5
+\]</div>
+<p>and therefore the error is in position <span class="arithmatex">\(j = 5\)</span> of the codeword. Now go check <a href="/en/teoria-matematica/how-i-fix-your-code-4/#ars-notoria-1">the example</a> and tell me if this is cool or not.
+Alright, I'll write it here: the <strong>wrong codeword</strong> was</p>
+<div class="arithmatex">\[
+\vec{c}_e = (6, \, 6, \, 2, \, 3, \, 4, \, \textcolor{red}{4})
+\]</div>
+<p>where the number in red is the error, and in which position is it?!</p>
+<p>At this point, by applying the <a href="#sindrome-errore"><strong>formula</strong></a> we can derive the value of the error itself:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+S_1 &amp;= e_1 \cdot \alpha^{1 \cdot 5} \\
+5 &amp;= e_1 \cdot 3^5 \pmod{7} \\
+5 &amp;= e_1 \cdot 5 \pmod{7} \\
+e_1 &amp;= 5^{-1} \cdot 5 \pmod{7} \\
+e_1 &amp;= 1 \pmod{7}
+\end{aligned}
+\]</div>
+<p>and therefore the error vector is</p>
+<div class="arithmatex">\[
+\vec{e} = (0, \, 0, \, 0, \, 0, \, 0, \, 1)
+\]</div>
+<p>and subtracting this from the wrong codeword we obtain the correct codeword:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\vec{c} &amp;= \vec{c}_e - \vec{e} \\
+\vec{c} &amp;= (6, \, 6, \, 2, \, 3, \, 4, \, \textcolor{red}{4}) - (0, \, 0, \, 0, \, 0, \, 0, \, 1) \\
+\vec{c} &amp;= (6, \, 6, \, 2, \, 3, \, 4, \, 3)
+\end{aligned}
+\]</div>
+<p>and go <a href="/en/teoria-matematica/how-i-fix-your-code-4/#ars-notoria-1">here</a> to see what the <strong>correct</strong> codeword was.
+If this isn't cool, then I don't know what is.</p>
+<p>Note that I used</p>
+<div class="arithmatex">\[
+S_1 = e_1 \cdot \alpha^{1 \cdot 5}
+\]</div>
+<p>but <strong>any</strong> syndrome component would have worked. For example, choosing <span class="arithmatex">\(i=2\)</span> we have:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+S_2 &amp;= e_1 \cdot \alpha^{2 \cdot 5} \\
+4 &amp;= e_1 \cdot 3^{10} \pmod{7} \\
+4 &amp;= e_1 \cdot 3^{4} \pmod{7} \\
+4 &amp;= e_1 \cdot 4 \pmod{7} \\
+e_1 &amp;= 1 \pmod{7}
+\end{aligned}
+\]</div>
+<p>and again with <span class="arithmatex">\(i=3\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+S_3 &amp;= e_1 \cdot \alpha^{3 \cdot 5} \\
+6 &amp;= e_1 \cdot 3^{15} \pmod{7} \\
+6 &amp;= e_1 \cdot 3^{3} \pmod{7} \\
+6 &amp;= e_1 \cdot 6 \pmod{7} \\
+e_1 &amp;= 1 \pmod{7}
+\end{aligned}
+\]</div>
+<h4 id="ars-goetia-2">Ars Goetia 2<a class="headerlink" href="#ars-goetia-2" title="Permanent link"> </a></h4>
+<p>This will not be a complete example like the previous one, but it is more for <strong>didactic</strong> purposes. In fact, the case with one error is fairly
+simple, but if there are two errors things get a bit more complicated. Suppose we have the following syndrome:</p>
+<div class="arithmatex">\[
+\vec{s} = (S_1, S_2, S_3, S_4) = (5, 6, 0, 6)^T
+\]</div>
+<p>and suppose that the code (built over <span class="arithmatex">\(\mathbb{F}_7\)</span> and with <span class="arithmatex">\(\alpha=3\)</span>) considered is able to correct up to <span class="arithmatex">\(t=2\)</span> errors,
+so we take the first <span class="arithmatex">\(2t = 4\)</span> syndrome elements. Since we are not <strong>Nostradamus</strong>, we cannot know whether
+<span class="arithmatex">\(\nu=1\)</span> or <span class="arithmatex">\(\nu=2\)</span> errors occurred, so we start by assuming that <span class="arithmatex">\(1\)</span> occurred. Therefore we compute the discrepancy at step <span class="arithmatex">\(i=2\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\Delta_2 &amp;= S_2 + \Lambda_1 \cdot S_1 \\
+         &amp;= 6 + \Lambda_1 \cdot 5 \pmod{7} \\
+6 + 5\Lambda_1 &amp;= 0 \pmod{7} \\
+5\Lambda_1 &amp;= -6 \equiv 1 \pmod{7} \\
+\Lambda_1 &amp;= 5^{-1} \cdot 1 \pmod{7} \\
+          &amp;= 3
+\end{aligned}
+\]</div>
+<p>Canceling <span class="arithmatex">\(\Delta_2\)</span> only tells us that a degree <span class="arithmatex">\(1\)</span> polynomial is <strong>compatible</strong> with the syndrome up to that step. To understand whether this
+hypothesis is actually sufficient, we must also check the next step, that is compute <span class="arithmatex">\(\Delta_3\)</span>.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\Delta_3 &amp;= S_3 + \Lambda_1 \cdot S_2 \\
+         &amp;= 0 + 3 \cdot 6 \pmod{7} \\
+         &amp;= 18 \equiv 4 \pmod{7}
+\end{aligned}
+\]</div>
+<p>So <span class="arithmatex">\(\Delta_3 \neq 0\)</span>, and this shows that the hypothesis <span class="arithmatex">\(\nu = 1\)</span> <strong>is not sufficient</strong> to describe the syndrome. Therefore we must increase
+the degree of the locator polynomial and move to the case <span class="arithmatex">\(\nu = 2\)</span>, that is consider a polynomial of the form</p>
+<div class="arithmatex">\[
+\Lambda(X) = 1 + \Lambda_1 \cdot X + \Lambda_2 \cdot X^2
+\]</div>
+<p>In this case, the discrepancy formula is</p>
+<div class="arithmatex">\[
+\Delta_i = S_i + \Lambda_1 \cdot S_{i-1} + \Lambda_2 \cdot S_{i-2}
+\]</div>
+<p>from the theory we know that</p>
+<div class="arithmatex">\[
+i \geq \nu + 1 \implies i \geq 3
+\]</div>
+<p>Note that this does <strong>not contradict</strong> the fact that before we started from <span class="arithmatex">\(i=2\)</span>, because we were still testing the hypothesis <span class="arithmatex">\(\nu = 1\)</span>, while now we moved to the case <span class="arithmatex">\(\nu = 2\)</span>.
+But back to us: we therefore consider steps <span class="arithmatex">\(i=3\)</span> and <span class="arithmatex">\(i=4\)</span>. In this way we obtain <strong>two equations</strong>
+in the two unknowns <span class="arithmatex">\(\Lambda_1\)</span> and <span class="arithmatex">\(\Lambda_2\)</span>, imposing again that the discrepancy is zero:</p>
+<div class="arithmatex">\[
+\begin{cases}
+\Delta_3 = 0 \\
+\Delta_4 = 0
+\end{cases}
+\Rightarrow
+\begin{cases}
+0 + 6 \cdot \Lambda_1 + 5 \cdot \Lambda_2 = 0 \\
+6 + 0 \cdot \Lambda_1 + 6 \cdot \Lambda_2 = 0
+\end{cases}
+\]</div>
+<p>from which</p>
+<div class="arithmatex">\[
+\Lambda_1 = 2, \quad \Lambda_2 = 6
+\]</div>
+<p>At this point it makes no sense to continue: we already used all the available syndrome components (<span class="arithmatex">\(2t\)</span>) and obtained a
+degree <span class="arithmatex">\(2\)</span> polynomial that cancels the discrepancies. This is the maximum degree compatible with the number of correctable errors, so
+the locator polynomial is <strong>determined</strong> and it is</p>
+<div class="arithmatex">\[
+\Lambda(X) = 1 + 2 \cdot X + 6 \cdot X^2
+\]</div>
+<p>and we must solve</p>
+<div class="arithmatex">\[
+\Lambda(X) = 0 \pmod{7}
+\]</div>
+<p>We will not do the calculations in full, so trust me when I say that the solutions are</p>
+<div class="arithmatex">\[
+X_1 = 4, \quad X_2 = 5
+\]</div>
+<p>Remembering that the roots have the form <span class="arithmatex">\(X = \alpha^{-j}\)</span>, we write</p>
+<div class="arithmatex">\[
+\begin{aligned}
+3^{-j_1} &amp;= 4 \pmod{7} \\
+3^{-j_2} &amp;= 5 \pmod{7}
+\end{aligned}
+\]</div>
+<p>from which, using the <strong>cyclicity</strong> of the multiplicative group,</p>
+<div class="arithmatex">\[
+j_1 = 2, \quad j_2 = 1
+\]</div>
+<p>and therefore we know that the errors are in positions <span class="arithmatex">\(1\)</span> and <span class="arithmatex">\(2\)</span>. Finally, by applying <a href="#sindrome-errore">this formula</a>
+and using <span class="arithmatex">\(S_1 = 5\)</span> and <span class="arithmatex">\(S_2 = 6\)</span> (therefore <span class="arithmatex">\(i=1\)</span> and <span class="arithmatex">\(i=2\)</span>) we can derive the error values:</p>
+<div class="arithmatex">\[
+\begin{cases}
+5 = e_1 \cdot 3^{1 \cdot 2} + e_2 \cdot 3^{1 \cdot 1} \pmod{7} \\
+6 = e_1 \cdot 3^{2 \cdot 2} + e_2 \cdot 3^{2 \cdot 1} \pmod{7}
+\end{cases}
+\Rightarrow
+\begin{cases}
+5 = 2 \cdot e_1 + 3 \cdot e_2 \pmod{7} \\
+6 = 4 \cdot e_1 + 2 \cdot e_2 \pmod{7}
+\end{cases}
+\]</div>
+<p>from which we derive <span class="arithmatex">\(e_1\)</span> and <span class="arithmatex">\(e_2\)</span> and then build the <strong>error vector</strong> by associating each value <span class="arithmatex">\(e_k\)</span> to the corresponding position <span class="arithmatex">\(j_k\)</span>.
+In this case, since we found <span class="arithmatex">\(j_1 = 2\)</span> and <span class="arithmatex">\(j_2 = 1\)</span>, we obtain:</p>
+<div class="arithmatex">\[
+\vec{e} = (0, \, e_2, \, e_1, \, 0, \, 0, \, 0)
+\]</div>
+<p>(obviously index counting starts from <span class="arithmatex">\(0\)</span>) and to conclude</p>
+<div class="arithmatex">\[
+\vec{c} = \vec{c}_e - \vec{e}
+\]</div>
+<p>If, after applying the correction, recomputing the syndrome we obtain</p>
+<div class="arithmatex">\[
+\vec{s}=0
+\]</div>
+<p>it means that the resulting word is <strong>compatible</strong> with the code (that is, it is a codeword).</p>
+<h3 id="conclusions">Conclusions<a class="headerlink" href="#conclusions" title="Permanent link"> </a></h3>
+<p>And we are (finally) at the end. We have seen a <strong>ton of stuff</strong>. I admit it was an intellectual <strong>beating</strong>,
+but if you got here and understood everything, you have my compliments. And anyway, it was tough
+for me too to write this article, I assure you. In any case, this time I will absolutely leave you the <a href="https://github.com/lucadivit/HowIFixYouCode/tree/master/part_5"><strong>repo</strong></a>. I hope
+you enjoyed this series. For now I will <strong>abandon</strong> error-correcting codes for a bit and talk about something else (what, I still don't know),
+but I promise that in the future I will pick it up again from part 6, maybe talking about convolutional codes.
+Time will tell.</p>
+<p>Until next time.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h3>Related Posts</h3>
+                <ol class="article-related-list">
+                    <li><a href="/en/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Where Only Polynomials Grow</a></li>
+                    <li><a href="/en/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Share Your Secrets With Shamir</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-1/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 1</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-2/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 2</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-3/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 3</a></li>
+                    <li><a href="/en/teoria-matematica/how-i-fix-your-code-4/" rel="noopener noreferrer" target="_blank">How I Fix Your Code - 4</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h3>References</h3>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-4/">/en/teoria-matematica/how-i-fix-your-code-4/</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Berlekamp%E2%80%93Massey_algorithm</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out">/en/teoria-matematica/how-i-fix-your-code-1/#let-us-straighten-this-out</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-2/#a-small-clarification">/en/teoria-matematica/how-i-fix-your-code-2/#a-small-clarification</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Chien_search" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Chien_search</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-4/#ars-notoria-1">/en/teoria-matematica/how-i-fix-your-code-4/#ars-notoria-1</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">/en/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/how-i-fix-your-code-4/#clavicula-salomonis">/en/teoria-matematica/how-i-fix-your-code-4/#clavicula-salomonis</a>
+                    </li>
+                    <li>
+                        <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically">/en/teoria-matematica/qui-crescono-solo-polinomi/#weeds-grow-cyclically</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lucadivit/HowIFixYouCode/tree/master/part_5" rel="noopener noreferrer" target="_blank">https://github.com/lucadivit/HowIFixYouCode/tree/master/part_5</a>
+                    </li>
+                    <li>
+                        Introduction to Cryptography with Coding Theory - Trappe &amp; Washington
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="/en/tag/math.html">math</a></li>
+                <li><a href="/en/tag/information_theory.html">information_theory</a></li>
+                <li><a href="/en/tag/codes.html">codes</a></li>
+                <li><a href="/en/tag/error_correction_codes.html">error_correction_codes</a></li>
+                <li><a href="/en/tag/cyclic_codes.html">cyclic_codes</a></li>
+                <li><a href="/en/tag/linear_codes.html">linear_codes</a></li>
+                <li><a href="/en/tag/solomon-reed.html">solomon-reed</a></li>
+                <li><a href="/en/tag/field_theory.html">field_theory</a></li>
+                <li><a href="/en/tag/linear_algebra.html">linear_algebra</a></li>
+                <li><a href="/en/tag/berlekamp_massey.html">berlekamp_massey</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Typos or fixes? <a href="/en/pages/contatti/">Write to me</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
+</main>
+
+<script defer src="https://www.lucadivita.it/theme/site.js"></script>
+
+<script defer src="https://www.lucadivita.it/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://www.lucadivita.it/theme/vendor/instant.page/instantpage.js"></script>
+
+
+<script defer src="https://www.lucadivita.it/theme/collapsible-sections.js"></script>
+<script defer src="https://www.lucadivita.it/theme/reading-progress.js"></script>
+</body>
+</html>
