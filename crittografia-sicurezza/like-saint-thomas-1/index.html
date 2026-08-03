@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Come San Tommaso - 1 - Bit Di Vita</title>
+    <meta name="description" content="Inizio questo nuovo articolo dicendo che avevo necessità di scriverlo per motivi che vi saranno chiari più avanti (intendo in termini di mesi). Ma questo non toglie nulla al fatto che quello che vedremo è veramente figo. Per farla breve? Supponete di dover fare delle operazioni matematiche su dati sensibili …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="Come San Tommaso - 1 - Bit Di Vita">
+    <meta property="og:description" content="Inizio questo nuovo articolo dicendo che avevo necessità di scriverlo per motivi che vi saranno chiari più avanti (intendo in termini di mesi). Ma questo non toglie nulla al fatto che quello che vedremo è veramente figo. Per farla breve? Supponete di dover fare delle operazioni matematiche su dati sensibili …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-1/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-1/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/like-saint-thomas-1/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-1/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/site.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/vendor/katex/katex.min.css">
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/">
+                        <img class="site-logo" src="https://www.lucadivita.it/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/crittografia-sicurezza/like-saint-thomas-1/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/like-saint-thomas-1/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/crittografia-sicurezza/like-saint-thomas-1/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/like-saint-thomas-1/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>Come San Tommaso - 1</h1>
+        <p>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/crittografia-sicurezza.html">Crittografia & Sicurezza</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-08-01T00:00:00+02:00">01 agosto 2026</time>
+            </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--beginner">Livello: Principiante</span>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contenuti</h2>
+                <div class="toc">
+<ul>
+<li><a href="#lomomorfismo-spiegato-a-mia-figlia">L'Omomorfismo Spiegato A Mia Figlia</a></li>
+<li><a href="#se-non-vedo-non-credo">Se Non Vedo, Non Credo</a></li>
+<li><a href="#non-tutti-gli-omomorfismi-escono-col-buco">Non Tutti Gli Omomorfismi Escono Col Buco</a><ul>
+<li><a href="#partially-homomorphic-encryption">Partially Homomorphic Encryption</a></li>
+<li><a href="#somewhat-homomorphic-encryption">Somewhat Homomorphic Encryption</a></li>
+<li><a href="#fully-homomorphic-encryption">Fully Homomorphic Encryption</a></li>
+</ul>
+</li>
+<li><a href="#rumore-rumore-ovunque">Rumore, Rumore Ovunque</a></li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+<li><a href="#related-posts">Consigliati</a></li><li><a href="#references">Riferimenti</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>Inizio questo nuovo articolo dicendo che avevo necessità di scriverlo per motivi che vi saranno chiari più avanti (intendo in termini di mesi). Ma
+questo non toglie nulla al fatto che quello che vedremo è veramente <strong>figo</strong>. Per farla breve? Supponete di dover fare delle operazioni matematiche su 
+<strong>dati sensibili</strong>. Che ne so! Volete ad esempio calcolare l'età media dei pazienti di un ospedale, ma per motivi di privacy non avete i dati in chiaro.
+Bene, con quello che vi mostrerò potrete fare tutte (o quasi) le operazioni che volete, mantenendo i <strong>dati cifrati</strong>. In altre parole non avete
+bisogno di <strong>decifrare</strong> i vostri dati per lavorarci sopra. Il massimo della <strong>privacy</strong> alla portata di tutti (certo anche se poi su facebook 
+ci raccontano quando e come sono andate di corpo ma vabbè, stendiamo un velo pietoso).</p>
+<h3 id="lomomorfismo-spiegato-a-mia-figlia">L'Omomorfismo Spiegato A Mia Figlia<a class="headerlink" href="#lomomorfismo-spiegato-a-mia-figlia" title="Permanent link"> </a></h3>
+<p>Partiamo dal fatto che il termine <strong>omomorfismo</strong> non è un termine utilizzato per indicare una avversione irrazionale nei confronti di qualcosa e/o qualcuno
+basato su pregiudizi e/o stereotipi. È qualcosa di un pochino più utile dell'odio immotivato. L’omomorfismo è un concetto <strong>dell’algebra astratta</strong> e indica 
+una funzione tra due gruppi che <strong>mantiene invariato il risultato delle operazioni</strong>. I due gruppi <span class="arithmatex">\(A\)</span> e <span class="arithmatex">\(B\)</span> non sono presi ad minchiam, ma devono essere
+scelti in modo che, data una funzione</p>
+<div class="arithmatex">\[
+\phi: A \to B
+\]</div>
+<p>le operazioni "si comportano bene" (sì lo so, tra un attimo vediamo cosa si intende). 
+Per cui, una volta costruiti, abbiamo un omomorfismo se data una operazione <span class="arithmatex">\(f\)</span> si ha che:</p>
+<ul>
+<li>Eseguire l'operazione <span class="arithmatex">\(f\)</span> su <span class="arithmatex">\(A\)</span> ottenendo <span class="arithmatex">\(f_A\)</span> e poi applicare <span class="arithmatex">\(\phi\)</span> su di essa</li>
+</ul>
+<p>oppure</p>
+<ul>
+<li>Applicare <span class="arithmatex">\(\phi\)</span> sugli elementi di <span class="arithmatex">\(A\)</span> ottenendo <span class="arithmatex">\(B\)</span> ed eseguendo l'operazione <span class="arithmatex">\(f\)</span> su <span class="arithmatex">\(B\)</span> ottenendo <span class="arithmatex">\(f_B\)</span></li>
+</ul>
+<p>ritorna lo <strong>stesso risultato</strong>. </p>
+<p>Quindi <span class="arithmatex">\(\phi\)</span> ci permette di fare calcoli <strong>indifferentemente</strong> in <span class="arithmatex">\(A\)</span> o <span class="arithmatex">\(B\)</span> perché il risultato è <strong>equivalente</strong>, ossia possiamo scrivere:</p>
+<p><a id="omomorfismo"></a></p>
+<div class="arithmatex">\[
+\phi (f_A (x_1, \, x_2, \, \dots , \, x_n) ) = f_B ( \phi(x_1), \, \phi(x_2), \,  \dots , \, \phi(x_n))
+\]</div>
+<p class="formula-caption">Formula 1. Omomorfismo</p>
+<p>Ah, in tutto questo mi sono scordato di dirvi cosa sia un <strong>gruppo</strong>. Niente di più semplice: </p>
+<blockquote>
+<p>Un gruppo è un <strong>insieme</strong> dotato di un’operazione interna cioè tale che, presi due elementi dell’insieme, restituisce ancora un elemento dello stesso insieme. </p>
+</blockquote>
+<p>Questa operazione deve rispettare tre proprietà:</p>
+<ol>
+<li>Deve essere <strong>associativa</strong>.</li>
+<li>Deve ammettere un elemento <strong>neutro</strong>.</li>
+<li>Ogni elemento deve avere un <strong>inverso</strong> rispetto a essa. </li>
+</ol>
+<p>In altre parole, il gruppo è una struttura in cui l’operazione resta sempre dentro l’insieme.
+Ad esempio, l’insieme dei numeri relativi con la somma</p>
+<div class="arithmatex">\[
+(\mathbb{Z}, +)
+\]</div>
+<p>è un gruppo. Infatti</p>
+<ol>
+<li>Sommando due numeri relativi otteniamo ancora un numero relativo.</li>
+<li>Lo <span class="arithmatex">\(0\)</span> è l’elemento neutro della somma.</li>
+<li>Ogni numero <span class="arithmatex">\(n\)</span> ha come inverso <span class="arithmatex">\(-n\)</span>.</li>
+</ol>
+<p>Attenzione però, <span class="arithmatex">\(\mathbb{Z}\)</span> non è automaticamente un gruppo con qualsiasi operazione. Per esempio</p>
+<div class="arithmatex">\[
+(\mathbb{Z}, \cdot)
+\]</div>
+<p>non è un gruppo, perché non tutti gli elementi hanno un <strong>inverso</strong> moltiplicativo in <span class="arithmatex">\(\mathbb{Z}\)</span> (o meglio, solo gli elementi <span class="arithmatex">\(1\)</span> e <span class="arithmatex">\(-1\)</span> lo hanno). 
+Infatti, l’inverso di <span class="arithmatex">\(2\)</span> sarebbe <span class="arithmatex">\(\frac12\)</span>, che non appartiene a <span class="arithmatex">\(\mathbb{Z}\)</span>.</p>
+<p>Ma andiamo oltre e consideriamo un <strong>anello</strong>, che è una struttura algebrica con <strong>due operazioni</strong>, tipicamente <strong>somma</strong> e <strong>prodotto</strong>. 
+Per ora non ci interessa entrare nei dettagli, ci basta sapere che rispetto a un gruppo 
+compaiono due operazioni invece di una. Ma torniamo a noi e continuiamo con un esempio in 
+modo da chiarire il tutto. Consideriamo l’operazione di somma e prendiamo come gruppi:</p>
+<ol>
+<li>L’insieme dei numeri relativi <span class="arithmatex">\(\to (\mathbb{Z}, +)\)</span></li>
+<li>L’insieme dei numeri modulo <span class="arithmatex">\(5 \to (\mathbb{Z}_5, +)\)</span></li>
+</ol>
+<p>Una funzione che permette il passaggio</p>
+<div class="arithmatex">\[
+(\mathbb{Z}, \, +) \to (\mathbb{Z}_5, \, +)
+\]</div>
+<p>è la seguente:</p>
+<div class="arithmatex">\[
+\phi(x) = x \pmod{5}
+\]</div>
+<p>(se non vi è familiare l'aritmetica modulare, potete leggere <a href="/teoria-matematica/qui-crescono-solo-polinomi/">questo mio articolo</a>).
+Essendo l'operazione la somma, dati due numeri <span class="arithmatex">\(a\)</span> e <span class="arithmatex">\(b\)</span> per avere un omomorfismo deve risultare vero che:</p>
+<div class="arithmatex">\[
+\phi(a + b) = \phi(a) + \phi(b)
+\]</div>
+<p>Andiamo a verificare prendendo <span class="arithmatex">\(a=7\)</span> e <span class="arithmatex">\(b=4\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\phi(a + b) &amp;= (7 + 4) \pmod{5} \\
+            &amp;= 11 \pmod{5} \\
+            &amp; \equiv 1 \pmod{5} \\[6pt]
+\phi(a) + \phi(b) &amp;= 7 \pmod{5} + 4 \pmod{5} \\
+                  &amp;= 2 \pmod{5} + 4 \pmod{5} \\
+                  &amp;= 6 \pmod{5} \\
+                  &amp; \equiv 1 \pmod{5}
+\end{aligned}
+\]</div>
+<p>Dato che il risultato è lo stesso, e lo si può dimostrare per <strong>qualsiasi</strong> valore di 
+<span class="arithmatex">\(a\)</span> e <span class="arithmatex">\(b\)</span>, abbiamo che <span class="arithmatex">\(\phi\)</span> è un omomorfismo tra i gruppi <span class="arithmatex">\((\mathbb{Z}, +)\)</span> e <span class="arithmatex">\((\mathbb{Z}_5, +)\)</span>.
+In questo esempio per semplicità ho considerato unicamente somma, ma si dimostra che vale anche per 
+la moltiplicazione:</p>
+<div class="arithmatex">\[
+\phi(a \cdot b) = \phi(a) \cdot \phi(b)
+\]</div>
+<p>Quindi <span class="arithmatex">\(\phi\)</span> è un omomorfismo tra gli anelli <span class="arithmatex">\((\mathbb{Z}, +, \cdot)\)</span> e <span class="arithmatex">\((\mathbb{Z}_5, +, \cdot)\)</span>.
+Essendo che la sottrazione è definita a partire dalla somma, anche lei è <strong>compatibile</strong> con <span class="arithmatex">\(\phi\)</span>. Ma non 
+è tutto oro quel che luccica e concludiamo questo paragrafo, dicendo che è inutile considerare 
+la divisione perché, come mostrato prima, non definisce un’operazione interna su questi insiemi. E dato 
+che <span class="arithmatex">\((\mathbb{Z}, \, \div)\)</span> non è un gruppo non ha neanche senso parlare di omomorfismo rispetto alla divisione.</p>
+<h3 id="se-non-vedo-non-credo">Se Non Vedo, Non Credo<a class="headerlink" href="#se-non-vedo-non-credo" title="Permanent link"> </a></h3>
+<p>Questo articolo non si intitola "Come San Tommaso" per caso. Come anticipato nell'introduzione possiamo sfruttare l'omomorfismo in un modo molto interessante.
+Dato che fare i calcoli in <span class="arithmatex">\(A\)</span> o <span class="arithmatex">\(B\)</span> è equivalente, chi ci impedisce di applicare questo principio per fare i calcoli su <strong>dati cifrati</strong>? Questo ci permetterebbe
+di fare <strong>trasformazioni</strong> sui dati senza doverli <strong>decifrare</strong>, e quindi mantenendo la <strong>privacy</strong>. Sì lo so, proprio come San Tommaso, se non lo vedete non ci credete.
+E quindi scopo di questo articolo è mostrarvi la <strong>crittografia omomorfica</strong> (in maniera meno sadica di San Tommaso, ovviamente). Basta piccola reinterpretazione di quello
+di cui abbiamo parlato:</p>
+<ul>
+<li><span class="arithmatex">\(A\)</span> è l'insieme dei <strong>dati in chiaro</strong></li>
+<li><span class="arithmatex">\(B\)</span> è l'insieme dei <strong>dati cifrati</strong></li>
+<li><span class="arithmatex">\(f_{A, B}\)</span> è <strong>l'operazione</strong> che vogliamo eseguire sui dati in chiaro e sui dati cifrati rispettivamente</li>
+<li><span class="arithmatex">\(\phi\)</span> è la funzione di <strong>cifratura</strong> <span class="arithmatex">\(Enc\)</span></li>
+</ul>
+<p>Quello che vogliamo fare è:</p>
+<div class="arithmatex">\[
+Enc \big( f_A (x_1, \, x_2, \, \dots , \, x_n) \big) = f_B \big( Enc(x_1), \, Enc(x_2), \,  \dots , \, Enc(x_n) \big)
+\]</div>
+<p>e di conseguenza</p>
+<div class="arithmatex">\[
+Dec \Big( Enc \big( f_A (x_1, x_2, \dots, x_n) \big) \Big) = Dec \Big( f_B \big( Enc (x_1), Enc (x_2), \dots, Enc (x_n) \big) \Big) \\[6pt]
+\Rightarrow f_A (x_1, x_2, \dots, x_n) = Dec \Big( f_B \big( Enc (x_1), Enc (x_2), \dots, Enc (x_n) \big) \Big)
+\]</div>
+<p>cioè <em>possiamo fare i calcoli prima o dopo aver cifrato i dati, ottenendo gli stessi risultati</em>. Questo vuol dire avere la possibilità
+di utilizzare un servizio per <strong>elaborare</strong> i nostri dati cifrati ottenendo un risultato (che decifreremo per 
+avere quello in chiaro) senza mai fornire di fatto, nessuna <strong>informazione</strong>. Vi faccio notare che si mantiene
+la dicitura <span class="arithmatex">\(f_A\)</span> e <span class="arithmatex">\(f_B\)</span> perché <em>non è detto che le operazioni sui dati in chiaro 
+e sui dati cifrati siano la stessa</em>. L'unica cosa richiesta è che una volta decifrato il ciphertext 
+ottenuto dopo aver eseguito l'operazione <span class="arithmatex">\(f_B\)</span>, il risultato sia lo stesso di quello ottenuto applicando <span class="arithmatex">\(f_A\)</span>
+in chiaro. In ogni caso, andiamo a stilare la lista della spesa di quello che ci serve:</p>
+<ul>
+<li><span class="arithmatex">\(KeyGen()\)</span> è una funzione che genera una <strong>coppia di chiavi</strong>, una pubblica <span class="arithmatex">\(pk\)</span> e una privata <span class="arithmatex">\(sk\)</span> per cifratura e decifratura. Per semplicità, limitiamoci a dire che
+genera una chiave <span class="arithmatex">\(k\)</span>.</li>
+<li><span class="arithmatex">\(Enc_k(m)\)</span> è una funzione che prende in input un <strong>messaggio</strong> <span class="arithmatex">\(m\)</span> e una chiave <span class="arithmatex">\(k\)</span> e restituisce un <strong>messaggio cifrato</strong> <span class="arithmatex">\(c\)</span>.</li>
+<li><span class="arithmatex">\(Dec_k(c)\)</span> è una funzione che prende in input un <strong>messaggio cifrato</strong> <span class="arithmatex">\(c\)</span> e una chiave <span class="arithmatex">\(k\)</span> e restituisce un <strong>messaggio in chiaro</strong> <span class="arithmatex">\(m\)</span>.</li>
+<li><span class="arithmatex">\(Eval(f, \, (c_1, \, \dots, \, c_n))\)</span> è una <strong>funzione</strong> che applica <strong>l'operazione</strong> <span class="arithmatex">\(f\)</span> su un insieme di messaggi cifrati <span class="arithmatex">\(c_1, \, \dots, \, c_n\)</span> 
+restituendo un risultato cifrato <span class="arithmatex">\(c'\)</span>.</li>
+</ul>
+<p>Supponiamo di usare il famoso e sofisticatissimo servizio "Cazzatometro" che è in grado di dirti quanto è <strong>stupida</strong> una dichiarazione fatta da una persona basandosi su età
+della persona, frequenza delle dichiarazioni e numero di contraddizioni precedenti. E supponiamo di voler stabilire quanto la dichiarazione</p>
+<blockquote>
+<p>Voglio l'Islanda (confondendola con la Groenlandia, ma vabbè di che parliamo...)</p>
+</blockquote>
+<p>sia stupida. Iniziamo definendo le variabili che ci servono:</p>
+<ul>
+<li><span class="arithmatex">\(x\)</span> = età della persona <span class="arithmatex">\(\to\)</span> tanti</li>
+<li><span class="arithmatex">\(y\)</span> = frequenza delle dichiarazioni <span class="arithmatex">\(\to\)</span> troppe</li>
+<li><span class="arithmatex">\(z\)</span> = numero di contraddizioni <span class="arithmatex">\(\to\)</span> molte</li>
+</ul>
+<p>dato che non possiamo inviare questi dati in chiaro perché le forze speciali <em>AIS</em> sono sempre in 
+agguato, li <strong>cifriamo</strong> e li <strong>inviamo</strong> al servizio. Essendo gli unici possessori della chiave sappiamo che il server 
+non potrà decifrare i dati, ma potrà comunque eseguire i <strong>calcoli</strong>. Immaginiamo che il calcolo per stabilire
+quanto una dichiarazione sia stupida sia molto pesante (per questo lo facciamo fare ad un servizio esterno) e che sia 
+dato dalla seguente formula:</p>
+<div class="arithmatex">\[
+f(x, \, y, \, z) = 2 \cdot x \cdot y + z
+\]</div>
+<p>quello che succede è riassunto dall'immagine che segue:</p>
+<p class="image-caption"><img alt="HE Flow" class="image" src="https://www.lucadivita.it/images/crittografia_sicurezza/like_saint_thomas/he_flow.svg"/>
+Figure 1. Flusso Di Lavoro</p>
+<p>Come si può vedere, abbiamo demandato i calcoli al servizio che lavora solo su <strong>elementi cifrati</strong>. Noi ci limitiamo
+a prendere il risultato e a decifrarlo per avere il risultato in chiaro. In questo modo abbiamo potuto sfruttare 
+la potenza di calcolo del servizio senza dover fornire nessuna <strong>informazione sensibile</strong>. Avremmo potuto eseguire anche
+noi i calcoli?! Certo che si. Ma magari non abbiamo la <strong>potenza</strong> di calcolo necessaria, o magari non sappiamo
+neanche quali <strong>operazioni</strong> eseguire sui dati.</p>
+<h3 id="non-tutti-gli-omomorfismi-escono-col-buco">Non Tutti Gli Omomorfismi Escono Col Buco<a class="headerlink" href="#non-tutti-gli-omomorfismi-escono-col-buco" title="Permanent link"> </a></h3>
+<p>Finora abbiamo visto che, se abbiamo un omomorfismo, possiamo sfruttarlo per fare calcoli su dati cifrati. 
+Ma si sa, le cose belle <strong>finiscono</strong>. E fare calcoli su dati cifrati è una cosa bella. Non possiamo fare
+proprio quello che ci pare con questi dati. </p>
+<p>Iniziamo dicendo che ci sono diversi <strong>schemi</strong> di crittografia omomorfica. Ognuno di 
+questi schemi permette di eseguire un certo <strong>insieme di operazioni</strong>, alcuni permettono solo le operazioni di somma,
+altri solo le operazioni di moltiplicazione, e così via. Gli schemi omomorfici sono, in generale, divisi in 
+tre <strong>categorie</strong>. Vediamole più nel dettaglio.</p>
+<h4 id="partially-homomorphic-encryption">Partially Homomorphic Encryption<a class="headerlink" href="#partially-homomorphic-encryption" title="Permanent link"> </a></h4>
+<p>Gli schemi <strong>PHE</strong>, cioè parzialmente omomorfici, permettono di eseguire <strong>un solo tipo</strong> di operazione 
+sui dati cifrati. In termini pratici questi schemi supportano o solo le somme o solo le moltiplicazioni, ma
+non entrambe le cose. Vedetelo come il <a href="https://it.wikipedia.org/wiki/Principio_di_indeterminazione_di_Heisenberg">principio di indeterminazione</a> della crittografia omomorfica. 
+Senza entrare troppo nel dettaglio (altrimenti poi dovrei spiegarvi come funziona) uno schema 
+PHE molto famoso è l'algoritmo <a href="https://it.wikipedia.org/wiki/RSA_(crittografia)"><strong>RSA</strong></a> che supporta le operazioni di moltiplicazione (almeno nella sua forma base). 
+Per par condicio, mi sembra corretto nominare almeno uno schema PHE che supporti la somma, 
+ed in questo caso degno di nota (a scopo didattico) è l'algoritmo di <a href="https://en.wikipedia.org/wiki/Benaloh_cryptosystem"><strong>Benaloh</strong></a>.</p>
+<h4 id="somewhat-homomorphic-encryption">Somewhat Homomorphic Encryption<a class="headerlink" href="#somewhat-homomorphic-encryption" title="Permanent link"> </a></h4>
+<p>Gli schemi <strong>SHE</strong>, si sforzano un pochino di più dei PHE. Permettono di eseguire sia somme che moltiplicazioni, e questo ci piace
+perché possiamo fare operazioni un poco più <strong>complesse</strong> sui dati cifrati. Ma c'è un ma..., non possiamo eseguire
+un numero <strong>arbitrario</strong> di operazioni. Infatti, dopo un certo numero di operazioni, il testo cifrato smette di essere
+decifrabile <strong>correttamente</strong>. Il perché lo vedremo. Una variante molto utilizzata di questo schema è lo schema <strong>LHE</strong>, Levelled Homomorphic Encryption.
+Consiste nello stabilire a <strong>priori</strong> quante operazioni vogliamo eseguire sui dati cifrati, e scegliamo di conseguenza i parametri dello schema.
+Giusto per farvi un nome, un algoritmo di questo tipo è il <a href="https://theory.stanford.edu/~dfreeman/cs259c-f11/lectures/bgn"><strong>BGN</strong> (Boneh-Goh-Nissim)</a>.</p>
+<h4 id="fully-homomorphic-encryption">Fully Homomorphic Encryption<a class="headerlink" href="#fully-homomorphic-encryption" title="Permanent link"> </a></h4>
+<p>L'ultima tipologia di schema è la <strong>FHE</strong>. A rigore di logica dovreste aver capito dove voglio andare a parare no!?
+È quella più <strong>potente</strong>. È quella in grado di eseguire <strong>tutte</strong> le tipologie di operazioni (o meglio tutte quelle esprimibili
+come somme e prodotti) e in numero <strong>arbitrario</strong>.
+Sembra troppo bello per essere vero no?! Ed infatti lo è. Per ottenere questo risultato si paga un <strong>costo</strong> enorme in
+termini sia <strong>computazionali</strong> che di <strong>memoria</strong>. Ma che volete che vi dica, se volete le cose fighe dovete <strong>pagarle</strong>, altrimenti
+acquistatele su Amazon Haul. In ogni caso, di questa famiglia abbiamo tanti schemi interessanti. A partire
+da <strong>BGV</strong> (Brakerski-Gentry-Vaikuntanathan) e <a href="https://faculty.kfupm.edu.sa/coe/mfelemban/SEC595/References/Introduction%20to%20the%20BFV%20FHE%20Scheme.pdf"><strong>BFV</strong> (Brakerski-Fan-Vercauteren)</a> che sono schemi <em>esatti</em>, cioè che lavorano
+con numeri interi. Abbiamo però anche schemi <em>approssimati</em> come <a href="https://ckks.org/"><strong>CKKS</strong> (Cheon-Kim-Kim-Song)</a> che lavorano con numeri reali.</p>
+<h3 id="rumore-rumore-ovunque">Rumore, Rumore Ovunque<a class="headerlink" href="#rumore-rumore-ovunque" title="Permanent link"> </a></h3>
+<p>Questo è l'ultimo paragrafo prima delle conclusioni, e il suo scopo è quello di non lasciarvi con il dubbio. Perché
+so che morite dalla voglia di sapere come funziona tutto questo. L'omomorfismo è chiaro (almeno spero, se no problema tuo), ma come 
+si arriva alla cifratura? Il segreto è in una cosetta che può essere <strong>bianca</strong> e che ti dà <strong>allegria</strong>.
+Ebbene sì, è il <strong>rumore</strong>. Il rumore (che può essere <a href="https://it.wikipedia.org/wiki/Rumore_bianco">bianco</a>) in linea di 
+massima non lo si desidera, ma in questo caso ci dà tanta <strong>gioia</strong>.</p>
+<p>Non vuole essere una spiegazione troppo <strong>dettagliata</strong>, perché tanto al prossimo articolo vedremo una <strong>implementazione</strong> e lì
+molte cose saranno più chiare. Iniziamo quindi, dicendo che non tutti gli schemi omomorfici sono basati sul rumore. Vi basti pensare
+ad RSA che ho nominato <a href="#partially-homomorphic-encryption">qui</a>. Nell'algoritmo RSA non c'è alcuna componente di rumore
+necessaria per il suo funzionamento. Al contrario, gli schemi moderni fanno tutti utilizzo di questo fantomatico rumore. 
+Andiamo a vedere come...</p>
+<p>Schemi come BFV, BGV o CKKS si basano su problemi matematici chiamati <a href="https://en.wikipedia.org/wiki/Learning_with_errors"><strong>LWE</strong> (Learning With Errors)</a> o <a href="https://en.wikipedia.org/wiki/Ring_learning_with_errors"><strong>RLWE</strong> (Ring Learning With Errors)</a>.
+L'idea alla base di LWE è molto semplice. Supponiamo di avere un <strong>sistema</strong> di equazioni lineari del tipo</p>
+<p><a id="generico-sistema-lineare"></a></p>
+<div class="arithmatex">\[
+A \cdot s = b
+\]</div>
+<p class="formula-caption">Formula 2. Generico Sistema Lineare</p>
+<p>dove <span class="arithmatex">\(A\)</span> è una <strong>matrice</strong>, <span class="arithmatex">\(s\)</span> è un vettore contenente il nostro <strong>segreto</strong> e <span class="arithmatex">\(b\)</span> è un vettore di <strong>costanti</strong>. Trovare
+<span class="arithmatex">\(s\)</span> è abbastanza semplice. Ad esempio con</p>
+<div class="arithmatex">\[
+A = \begin{bmatrix}
+2 &amp; 1 \\
+1 &amp; 3
+\end{bmatrix}
+\quad
+s = \begin{bmatrix}s_1 \\
+s_2
+\end{bmatrix}
+\quad
+b = \begin{bmatrix}8 \\
+9
+\end{bmatrix}
+\]</div>
+<p>avremmo</p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+2s_1 + s_2 &amp;= 8 \\
+s_1 + 3s_2 &amp;= 9
+\end{aligned}
+\right.
+\]</div>
+<p>da cui si ricava <span class="arithmatex">\(s_1 = 3\)</span> e <span class="arithmatex">\(s_2 = 2\)</span> in modo molto immediato.
+Ma cosa succede se <strong>aggiungessimo</strong> una variabile </p>
+<div class="arithmatex">\[
+e = \begin{bmatrix}
+e_1 \\
+e_2
+\end{bmatrix}
+\]</div>
+<p>Avremmo</p>
+<div class="arithmatex">\[
+A \cdot s + e = b
+\]</div>
+<p>da cui</p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+2s_1 + s_2 + e_1 &amp;= 8 \\
+s_1 + 3s_2 + e_2 &amp;= 9
+\end{aligned}
+\right.
+\]</div>
+<p>Ora abbiamo un problema. Mentre con due equazioni e due incognite il problema era risolvibile, 
+con l'aggiunta della componente <span class="arithmatex">\(e\)</span> (il rumore, scelto casualmente ma <strong>sufficientemente piccolo</strong>) il problema non è più risolvibile in modo <strong>univoco</strong>. 
+Quindi la componente <span class="arithmatex">\(s\)</span> non si può <strong>esplicitare</strong>, fortunatamente aggiungerei perché se è un segreto deve rimanere tale.
+LWE consiste proprio in questo, cioè nel lavorare con sistemi di equazioni con una componente di rumore e, per non farci 
+mancare nulla, in <strong>aritmetica modulare</strong> modulo <span class="arithmatex">\(q\)</span>. Per cui il <a href="#generico-sistema-lineare">sistema precedente</a> lo scriviamo come</p>
+<p><a id="sistema-lwe"></a></p>
+<div class="arithmatex">\[
+A \cdot s + e = b \pmod q
+\]</div>
+<p class="formula-caption">Formula 3. Sistema in LWE</p>
+<p>Il punto è che non bisogna risolvere il sistema di equazioni, ma solo <strong>nascondere</strong> il segreto. Come si
+vedrà, chi possiede la chiave <span class="arithmatex">\(sk\)</span> potrà comunque recuperare il messaggio ma questo è vero 
+fintanto che il rumore rimane piccolo, ed è proprio qui che nasce il problema della crittografia omomorfica.
+Ogni operazione eseguita sui dati cifrati, dato che il rumore fa parte del sistema, ne <strong>aumenta l'impatto</strong>. 
+Dopo troppe operazioni, diventa così grande da non permettere più di recuperare correttamente il messaggio <strong>originale</strong>. 
+È per questo motivo che gli schemi <a href="#somewhat-homomorphic-encryption">SHE</a> hanno un limite sul numero di operazioni eseguibili, 
+mentre gli schemi FHE devono utilizzare tecniche aggiuntive, come il <strong>bootstrapping</strong> (anche questo vedremo), 
+per gestire il rumore accumulato.</p>
+<p>Concludiamo questo paragrafo riportando la differenza tra LWE e RLWE. Mentre LWE si basa su sistemi di equazioni 
+lineari con rumore, RLWE estende questo concetto a strutture algebriche più complesse, 
+come gli anelli, sì proprio quegli anelli di cui ho parlato <a href="/teoria-matematica/qui-crescono-solo-polinomi/"><strong>qui</strong></a>. 
+In RLWE il sistema rimane del tipo</p>
+<div class="arithmatex">\[
+A \cdot s + e = b \pmod q
+\]</div>
+<p>ma questa volta <span class="arithmatex">\(A\)</span>, <span class="arithmatex">\(s\)</span>, <span class="arithmatex">\(e\)</span> e <span class="arithmatex">\(b\)</span> sono elementi di un <strong>anello polinomiale</strong>,
+per cui la versione "estesa" del sistema si scrive così:</p>
+<p><a id="sistema-rlwe"></a></p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+a_1(x) \cdot s(x) + e_1(x) &amp;= b_1(x)  \pmod q \\
+a_2(x) \cdot s(x) + e_2(x) &amp;= b_2(x)  \pmod q \\
+&amp;\vdots \\
+a_n(x) \cdot s(x) + e_n(x) &amp;= b_n(x)  \pmod q
+\end{aligned}
+\right.
+\]</div>
+<p class="formula-caption">Formula 4. Sistema in RLWE</p>
+<p>dove</p>
+<ul>
+<li><span class="arithmatex">\(a_i(x)\)</span>, <span class="arithmatex">\(b_i(x)\)</span>, <span class="arithmatex">\(e_i(x)\)</span> sono <strong>polinomi</strong> con coefficienti in <span class="arithmatex">\(\mathbb{Z}_q\)</span> (cioè numeri interi modulo <span class="arithmatex">\(q\)</span>)</li>
+<li><span class="arithmatex">\(s(x)\)</span> è il <strong>polinomio segreto</strong> con coefficienti in <span class="arithmatex">\(\mathbb{Z}_q\)</span> (vi consiglio di leggere <a href="/crittografia-sicurezza/share-your-secrets-with-shamir/">qui</a>)</li>
+<li><span class="arithmatex">\(q\)</span> è il <strong>modulo</strong> rispetto al quale vengono ridotti i coefficienti dei polinomi</li>
+</ul>
+<p>e tutte le operazioni sono eseguite all'interno di un anello del tipo</p>
+<div class="arithmatex">\[
+R_q = \mathbb{Z}_q[x]/(f(x))
+\]</div>
+<p>con <span class="arithmatex">\(f(x)\)</span> un polinomio scelto opportunamente, solitamente della forma <span class="arithmatex">\(x^n + 1\)</span> (sì, proprio come nei <a href="/teoria-matematica/how-i-fix-your-code-3">codici ciclici</a>). 
+Questo vuol dire che i polinomi non possono <strong>crescere</strong> indefinitamente di grado, ma vengono 
+sempre ridotti rispetto ad <span class="arithmatex">\(f(x)\)</span>. Questa struttura algebrica consente di ottenere schemi 
+omomorfici molto più efficienti e scalabili rispetto al caso LWE classico.</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Siamo giunti alla conclusione di questo articolo. Non voleva essere un <strong>compendio</strong> esaustivo sulla 
+crittografia omomorfica, ma solo un'introduzione a un argomento che personalmente reputo 
+molto affascinante. E se l'ho introdotto è perché so già dove voglio andare a parare.
+Per il momento accontentatevi di sapere che nel prossimo articolo farò una <strong>spiegazione</strong> 
+più dettagliata di uno schema specifico (ancora da stabilire), accompagnata da una implementazione from scratch.</p>
+<p>Alla prossima.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h3>Consigliati</h3>
+                <ol class="article-related-list">
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Qui Crescono Solo Polinomi</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Condividi I Tuoi Segreti Con Shamir</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h3>Riferimenti</h3>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/teoria-matematica/qui-crescono-solo-polinomi/">/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="https://it.wikipedia.org/wiki/Principio_di_indeterminazione_di_Heisenberg" rel="noopener noreferrer" target="_blank">https://it.wikipedia.org/wiki/Principio_di_indeterminazione_di_Heisenberg</a>
+                    </li>
+                    <li>
+                        <a href="https://it.wikipedia.org/wiki/RSA_(crittografia)" rel="noopener noreferrer" target="_blank">https://it.wikipedia.org/wiki/RSA_(crittografia)</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Benaloh_cryptosystem" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Benaloh_cryptosystem</a>
+                    </li>
+                    <li>
+                        <a href="https://theory.stanford.edu/~dfreeman/cs259c-f11/lectures/bgn" rel="noopener noreferrer" target="_blank">https://theory.stanford.edu/~dfreeman/cs259c-f11/lectures/bgn</a>
+                    </li>
+                    <li>
+                        <a href="https://faculty.kfupm.edu.sa/coe/mfelemban/SEC595/References/Introduction%20to%20the%20BFV%20FHE%20Scheme.pdf" rel="noopener noreferrer" target="_blank">https://faculty.kfupm.edu.sa/coe/mfelemban/SEC595/References/Introduction%20to%20the%20BFV%20FHE%20Scheme.pdf</a>
+                    </li>
+                    <li>
+                        <a href="https://ckks.org/" rel="noopener noreferrer" target="_blank">https://ckks.org/</a>
+                    </li>
+                    <li>
+                        <a href="https://it.wikipedia.org/wiki/Rumore_bianco" rel="noopener noreferrer" target="_blank">https://it.wikipedia.org/wiki/Rumore_bianco</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Learning_with_errors" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Learning_with_errors</a>
+                    </li>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Ring_learning_with_errors" rel="noopener noreferrer" target="_blank">https://en.wikipedia.org/wiki/Ring_learning_with_errors</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/share-your-secrets-with-shamir/">/crittografia-sicurezza/share-your-secrets-with-shamir/</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/how-i-fix-your-code-3">/teoria-matematica/how-i-fix-your-code-3</a>
+                    </li>
+                    <li>
+                        Homomorphic Encryption for Data Science (HE4DS)
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="https://www.lucadivita.it/tag/crittografia.html">crittografia</a></li>
+                <li><a href="https://www.lucadivita.it/tag/sicurezza.html">sicurezza</a></li>
+                <li><a href="https://www.lucadivita.it/tag/anelli.html">anelli</a></li>
+                <li><a href="https://www.lucadivita.it/tag/aritmetica_modulare.html">aritmetica_modulare</a></li>
+                <li><a href="https://www.lucadivita.it/tag/omomorfismo.html">omomorfismo</a></li>
+                <li><a href="https://www.lucadivita.it/tag/crittografia_omomorfica.html">crittografia_omomorfica</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
+</main>
+
+<script defer src="https://www.lucadivita.it/theme/site.js"></script>
+
+<script defer src="https://www.lucadivita.it/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://www.lucadivita.it/theme/vendor/instant.page/instantpage.js"></script>
+
+
+<script defer src="https://www.lucadivita.it/theme/collapsible-sections.js"></script>
+<script defer src="https://www.lucadivita.it/theme/reading-progress.js"></script>
+</body>
+</html>
