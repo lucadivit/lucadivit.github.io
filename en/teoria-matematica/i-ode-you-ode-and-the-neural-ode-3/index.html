@@ -294,19 +294,32 @@ k = 1
 y(t) = e^{-1 \cdot t}
 \]</div>
 <p>If you want the steps, <strong>do them yourself</strong>. You already know the <strong>tools</strong> to solve it. I chose this ODE (which can be solved analytically, as you've seen) to show the <strong>difference between an exact and a numerical solution</strong>. Let’s see the values at <span class="arithmatex">\(t=1\)</span> and <span class="arithmatex">\(t=2\)</span>.</p>
-<div class="arithmatex">\[
-\begin{array}{|c|c|c|}
-\hline
-t &amp; y(t) &amp; \text{Result} \\
-\hline
-0 &amp; e^0 &amp; 1 \\
-\hline
-1 &amp; e^{-1 \cdot 1} &amp; 0.367 \\
-\hline
-2 &amp; e^{-1 \cdot 2} &amp; 0.135 \\
-\hline
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(t\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(y(t)\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\text{Result}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^0\)</span></td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-1 \cdot 1}\)</span></td>
+<td style="text-align: center;">0.367</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="arithmatex">\(e^{-1 \cdot 2}\)</span></td>
+<td style="text-align: center;">0.135</td>
+</tr>
+</tbody>
+</table>
 <p>Now let’s solve it using Euler’s method. From the <a href="#tempo-discretizzato">time discretization formula</a>, we already know how many steps we need using <span class="arithmatex">\(h=0.1\)</span>, initial time <span class="arithmatex">\(t_0=0\)</span>, and final time <span class="arithmatex">\(t_n=2\)</span>:</p>
 <div class="arithmatex">\[
 t_{n} - t_0 = n \cdot h \Rightarrow 2 - 0 = n \cdot h \Rightarrow n = 20
@@ -343,64 +356,125 @@ y(0.2) \approx y(0.1) + 0.1 \cdot f(y(0.1), 0.1)
 y(0.2) \approx 0.9 + 0.1 \cdot (-1 \cdot 0.9) = 0.81
 \]</div>
 <p>And so on. Trust me when I say the <strong>results</strong> are those shown in this table:</p>
-<div class="arithmatex">\[
-\begin{array}{|c|c|c|}
-\hline
-n &amp; t_n &amp; \text{Result} \\
-\hline
-0 &amp; 0 &amp; 1 \\
-\hline
-1 &amp; 0.1 &amp; 0.9 \\
-\hline
-2 &amp; 0.2 &amp; 0.810 \\
-\hline
-\dots &amp; \dots &amp; \dots \\
-\hline
-10 &amp; 1 &amp; 0.349 \\
-\hline
-\dots &amp; \dots &amp; \dots \\
-\hline
-20 &amp; 2 &amp; 0.122 \\
-\hline
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(n\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(t_n\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\text{Result}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.9</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;">0.810</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.349</td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.122</td>
+</tr>
+</tbody>
+</table>
 <p>Now let’s see what happens with <span class="arithmatex">\(h=0.5\)</span>. I won’t go step by step because you know how it’s done now, so just <strong>take</strong> this table:</p>
-<div class="arithmatex">\[
-\begin{array}{|c|c|c|}
-\hline
-n &amp; t_n &amp; \text{Result} \\
-\hline
-0 &amp; 0 &amp; 1 \\
-\hline
-1 &amp; 0.5 &amp; 0.5 \\
-\hline
-2 &amp; 1 &amp; 0.250 \\
-\hline
-3 &amp; 1.5 &amp; 0.125 \\
-\hline
-4 &amp; 2 &amp; 0.062 \\
-\hline
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(n\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(t_n\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\text{Result}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.5</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.250</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">1.5</td>
+<td style="text-align: center;">0.125</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.062</td>
+</tr>
+</tbody>
+</table>
 <p>Here’s a <strong>summary comparison</strong> between the <strong>analytical solution</strong> and the two <strong>numerical approximations</strong>:</p>
 <ul>
 <li><span class="arithmatex">\(y(t)\)</span> is the analytical solution</li>
 <li><span class="arithmatex">\(E(h=0.1)\)</span> is Euler with <span class="arithmatex">\(h=0.1\)</span></li>
 <li><span class="arithmatex">\(E(h=0.5)\)</span> is Euler with <span class="arithmatex">\(h=0.5\)</span></li>
 </ul>
-<div class="arithmatex">\[
-\begin{array}{|c|c|c|c|}
-\hline
-t &amp; y(t) &amp; E(h=0.1) &amp; E(h=0.5) \\
-\hline
-0 &amp; 1 &amp; 1 &amp; 1 \\
-\hline
-1 &amp; 0.367 &amp; 0.349 &amp; 0.25 \\
-\hline
-2 &amp; 0.135 &amp; 0.122 &amp; 0.062 \\
-\hline
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(t\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(y(t)\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(E(h=0.1)\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(E(h=0.5)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.367</td>
+<td style="text-align: center;">0.349</td>
+<td style="text-align: center;">0.25</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.135</td>
+<td style="text-align: center;">0.122</td>
+<td style="text-align: center;">0.062</td>
+</tr>
+</tbody>
+</table>
 <p>As you can see, apart from <span class="arithmatex">\(n=0\)</span>, the <strong>known solution</strong>, <span class="arithmatex">\(h=0.1\)</span> gives a much <strong>better approximation</strong> than <span class="arithmatex">\(h=0.5\)</span>, but it also <strong>requires</strong> 20 steps compared to just 4 in the latter case.</p>
 <p>All of this can be <strong>summarized</strong> by the following image:</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="/images/teoria_matematica/neural_ode_3/comparison_euler.png"/>
@@ -586,27 +660,68 @@ y_1 = 5 + \frac{0.1}{6} \cdot (3 + 2 \cdot (2.85) + 2 \cdot (2.84) + 2.68) = 5.2
 \]</div>
 <p>Yeah, I know, <strong>it's a lot</strong> and seems overly complicated, but once you have the method’s formula, it’s just about making the <strong>right substitutions</strong> carefully.</p>
 <p>Just like with Euler’s method, let’s provide a <strong>comparison table</strong> here. This time, we’ll group by method rather than <span class="arithmatex">\(h\)</span>, and compare the results of RK4, Heun, and Euler. As we cannot compute the analytical solution here, all we have are <strong>approximations</strong>.</p>
-<div class="arithmatex">\[
-\begin{array}{|c|c|c|c|c|}
-\hline
-n &amp; t_n &amp; \text{Euler} &amp; \text{Heun} &amp; \text{RK4} \\
-\hline
-0 &amp; 0 &amp; x=10, y=5 &amp; x=10, y=5 &amp; x=10, y=5 \\
-\hline
-1 &amp; 0.1 &amp; x=9.1, y=5.3 &amp; x=9.08, y=5.28 &amp; x=9.08, y=5.28 \\
-\hline
-2 &amp; 0.2 &amp; x=8.17, y=5.57 &amp; x=8.16, y=5.53 &amp; x=8.16, y=5.53 \\
-\hline
-\dots &amp; \dots &amp; \dots &amp; \dots &amp; \dots \\
-\hline
-10 &amp; 1 &amp; x=2.61, y=6.19 &amp; x=2.88, y=6.06 &amp; x=2.88, y=6.06 \\
-\hline
-\dots &amp; \dots &amp; \dots &amp; \dots &amp; \dots \\
-\hline
-20 &amp; 2 &amp; x=0.83, y=4.97 &amp; x=0.96, y=4.8 &amp; x=0.95, y=4.81 \\
-\hline
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(n\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(t_n\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\text{Euler}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\text{Heun}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\text{RK4}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(x=10,\ y=5\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=10,\ y=5\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=10,\ y=5\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;"><span class="arithmatex">\(x=9.1,\ y=5.3\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=9.08,\ y=5.28\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=9.08,\ y=5.28\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: center;"><span class="arithmatex">\(x=8.17,\ y=5.57\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=8.16,\ y=5.53\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=8.16,\ y=5.53\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(x=2.61,\ y=6.19\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=2.88,\ y=6.06\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=2.88,\ y=6.06\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\dots\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"><span class="arithmatex">\(x=0.83,\ y=4.97\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=0.96,\ y=4.8\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x=0.95,\ y=4.81\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>As seen from the table, Heun and RK4 give <strong>very similar results</strong>, with differences appearing only after <span class="arithmatex">\(t=2\)</span> seconds. In contrast, Euler starts to <strong>deviate poorly</strong> as early as <span class="arithmatex">\(t=0.1\)</span>. The following image shows the <strong>phase behavior</strong>:</p>
 <p class="image-caption"><img alt="Comparison" class="image" src="/images/teoria_matematica/neural_ode_3/phase_comparison_1.png"/>
 Figure 2. Results Comparison at <span class="arithmatex">\(t=2\)</span></p>

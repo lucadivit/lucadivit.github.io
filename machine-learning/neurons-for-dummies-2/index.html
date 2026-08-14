@@ -151,31 +151,79 @@ Oggi, finalmente, proviamo a fare un po’ di chiarezza.</p>
 Perché sono l’unico punto su cui possiamo intervenire. Non possiamo certo modificare l'input. Quello arriva dal problema e ce lo becchiamo
 cosi com'è. Quindi se vogliamo cambiare il valore della <strong>funzione di trasferimento</strong>, e quindi anche <strong>l'output</strong>, dobbiamo per forza agire su di loro.
 Tenendo presente questa premessa e tenendo presente le predizioni fatte nella prima parte, l'obiettivo da raggiungere è passare da questi risultati:</p>
-<div class="arithmatex">\[
-\begin{array}{|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
-\hline 
-0 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \textcolor{green}{\mathbf{1}}\\ 
-\hline  
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(AND(x_1, x_2)\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\sigma(H)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{1}}\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>a questi:</p>
-<div class="arithmatex">\[
-\begin{array}{|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
-\hline 
-0 &amp; 0 &amp; 0 &amp; \textcolor{green}{\mathbf{0}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \textcolor{green}{\mathbf{0}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \textcolor{green}{\mathbf{0}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \textcolor{green}{\mathbf{1}}\\ 
-\hline  
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(AND(x_1, x_2)\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\sigma(H)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{1}}\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>In altre parole, vogliamo che tutte le predizioni siano corrette oppure, detto in termini più tecnici, che <strong>l'errore nelle predizioni sia il più piccolo possibile</strong>.
 Quindi il primo passo da fare è evidente: <strong>misurare l'errore</strong>.<br/>
 Per fare questo è necessario definire una <strong>Funzione di Errore</strong> o <a href="https://it.wikipedia.org/wiki/Funzione_obiettivo"><strong>Funzione di Loss</strong></a>, cioè un qualcosa che ci dice quanto siamo lontani dalla situazione ideale, che per semplicità, 
@@ -194,18 +242,42 @@ BCE_i = -[y_i \cdot \ln(p_i) + (1 - y_i) \cdot \ln(1 - p_i)]
 <li><span class="arithmatex">\(p_i\)</span> Probabilità predetta dal percettrone per quello stesso input.</li>
 </ul>
 <p>Applichiamo questa formula alla seguente tabella di verità:</p>
-<div class="arithmatex">\[
-\begin{array}{|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; AND(x_1, x_2) &amp; \sigma(H) \\ 
-\hline 
-0 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}} \\ 
-\hline 0 &amp; 1 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 0 &amp; 0 &amp; \textcolor{red}{\mathbf{1}}\\ 
-\hline 1 &amp; 1 &amp; 1 &amp; \textcolor{green}{\mathbf{1}}\\ 
-\hline  
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(AND(x_1, x_2)\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\sigma(H)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{1}}\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>Per la prima riga abbiamo:</p>
 <div class="arithmatex">\[
 y_0 = 0, p_0 = 1 \Rightarrow BCE_0 = -[0 \cdot \ln(1) + (1 - 0) \cdot \ln(1 - 1)] = -\infty
@@ -480,53 +552,251 @@ w_1=0.5, w_2=0.5, b = 1.
 </ul>
 <p>I risultati ottenuti su <strong>3 epoche</strong> sono i seguenti:</p>
 <p><strong>Epoca 1</strong></p>
-<div class="arithmatex">\[
-\begin{array}{|r|r|r|r|r|r|r|r|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
-\hline 
-0 &amp; 1 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.5 &amp; 0.5 &amp; 1.0 &amp; 0.81 &amp; 0.66 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{red}{\mathbf{1}} &amp; 0 \\ 
-\hline 
-1 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.5 &amp; 0.09 &amp; 0.59 &amp; 0.74 &amp; 0.58 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{red}{\mathbf{1}} &amp; 0 \\ 
-\hline 
-0 &amp; 0 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.12 &amp; 0.09 &amp; 0.21 &amp; 0.55 &amp; 0.48 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 1 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.12 &amp; 0.09 &amp; -0.06 &amp; 0.53 &amp; 0.70 &amp; \textcolor{green}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{1}} &amp; 1 \\ 
-\hline  
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(b\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_1^{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_2^{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(b_{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(p_{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(p\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\overline{p_{old}}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\overline{p}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(AND(x_1, x_2)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.09</td>
+<td style="text-align: center;">0.59</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: center;">0.81</td>
+<td style="text-align: center;">0.66</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.12</td>
+<td style="text-align: center;">0.09</td>
+<td style="text-align: center;">0.21</td>
+<td style="text-align: center;">0.5</td>
+<td style="text-align: center;">0.09</td>
+<td style="text-align: center;">0.59</td>
+<td style="text-align: center;">0.74</td>
+<td style="text-align: center;">0.58</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.12</td>
+<td style="text-align: center;">0.09</td>
+<td style="text-align: center;">-0.06</td>
+<td style="text-align: center;">0.12</td>
+<td style="text-align: center;">0.09</td>
+<td style="text-align: center;">0.21</td>
+<td style="text-align: center;">0.55</td>
+<td style="text-align: center;">0.48</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">0.32</td>
+<td style="text-align: center;">0.17</td>
+<td style="text-align: center;">0.12</td>
+<td style="text-align: center;">0.09</td>
+<td style="text-align: center;">-0.06</td>
+<td style="text-align: center;">0.53</td>
+<td style="text-align: center;">0.70</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Epoca 2</strong></p>
-<div class="arithmatex">\[
-\begin{array}{|r|r|r|r|r|r|r|r|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
-\hline 
-0 &amp; 1 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.35 &amp; 0.32 &amp; 0.17 &amp; 0.62 &amp; 0.46 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.35 &amp; 0.01 &amp; -0.13 &amp; 0.55 &amp; 0.41 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-0 &amp; 0 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.07 &amp; 0.01 &amp; -0.41 &amp; 0.39 &amp; 0.35 &amp; \textcolor{green}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 1 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.07 &amp; 0.01 &amp; -0.61 &amp; 0.37 &amp; 0.60 &amp; \textcolor{red}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{1}} &amp; 1 \\ 
-\hline  
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(b\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_1^{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_2^{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(b_{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(p_{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(p\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\overline{p_{old}}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\overline{p}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(AND(x_1, x_2)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">-0.13</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">0.32</td>
+<td style="text-align: center;">0.17</td>
+<td style="text-align: center;">0.62</td>
+<td style="text-align: center;">0.46</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">-0.41</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">-0.13</td>
+<td style="text-align: center;">0.55</td>
+<td style="text-align: center;">0.41</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">-0.61</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">-0.41</td>
+<td style="text-align: center;">0.39</td>
+<td style="text-align: center;">0.35</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.39</td>
+<td style="text-align: center;">0.32</td>
+<td style="text-align: center;">-0.30</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: center;">-0.61</td>
+<td style="text-align: center;">0.37</td>
+<td style="text-align: center;">0.60</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Epoca 3</strong></p>
-<div class="arithmatex">\[
-\begin{array}{|r|r|r|r|r|r|r|r|r|r|r|r|}
-\hline 
-x_1 &amp; x_2 &amp; w_1 &amp; w_2 &amp; b &amp; w_1^{old} &amp; w_2^{old} &amp; b_{old} &amp; p_{old} &amp; p &amp; \overline{p_{old}} &amp; \overline{p} &amp; \text{AND}(x_1, x_2) \\ 
-\hline 
-0 &amp; 1 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.39 &amp; 0.32 &amp; -0.30 &amp; 0.50 &amp; 0.38 &amp; \textcolor{red}{\mathbf{1}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.39 &amp; 0.07 &amp; -0.55 &amp; 0.45 &amp; 0.34 &amp; \textcolor{green}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-0 &amp; 0 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.16 &amp; 0.07 &amp; -0.78 &amp; 0.31 &amp; 0.28 &amp; \textcolor{green}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{0}} &amp; 0 \\ 
-\hline 
-1 &amp; 1 &amp; 0.49 &amp; 0.40 &amp; -0.60 &amp; 0.16 &amp; 0.07 &amp; -0.94 &amp; 0.33 &amp; 0.57 &amp; \textcolor{red}{\mathbf{0}} &amp; \textcolor{green}{\mathbf{1}} &amp; 1 \\ 
-\hline  
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(x_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(x_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_1\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_2\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(b\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_1^{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(w_2^{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(b_{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(p_{old}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(p\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\overline{p_{old}}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\overline{p}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(AND(x_1, x_2)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.39</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">-0.55</td>
+<td style="text-align: center;">0.39</td>
+<td style="text-align: center;">0.32</td>
+<td style="text-align: center;">-0.30</td>
+<td style="text-align: center;">0.50</td>
+<td style="text-align: center;">0.38</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.16</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">-0.78</td>
+<td style="text-align: center;">0.39</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">-0.55</td>
+<td style="text-align: center;">0.45</td>
+<td style="text-align: center;">0.34</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">0.16</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">-0.94</td>
+<td style="text-align: center;">0.16</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">-0.78</td>
+<td style="text-align: center;">0.31</td>
+<td style="text-align: center;">0.28</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0.49</td>
+<td style="text-align: center;">0.40</td>
+<td style="text-align: center;">-0.60</td>
+<td style="text-align: center;">0.16</td>
+<td style="text-align: center;">0.07</td>
+<td style="text-align: center;">-0.94</td>
+<td style="text-align: center;">0.33</td>
+<td style="text-align: center;">0.57</td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{red}{\mathbf{0}}\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(\textcolor{green}{\mathbf{1}}\)</span></td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">Perceptron</span> <span class="kn">import</span> <span class="n">Perceptron</span>
 
 <span class="k">class</span> <span class="nc">WeightedSum</span><span class="p">(</span><span class="n">TransferFunction</span><span class="p">):</span>

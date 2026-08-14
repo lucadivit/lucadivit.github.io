@@ -628,29 +628,66 @@ of the field that does not have a multiplicative inverse belonging to the field 
 has an exponent <span class="arithmatex">\(a &lt; m\)</span>, the element belongs to the field; however, when <span class="arithmatex">\(x^a\)</span> has an exponent <span class="arithmatex">\(a \geq m\)</span>, reductions begin to occur. 
 Up to this point, nothing new, right? Therefore, by considering our now <strong>well-known field</strong>, we can construct the table:</p>
 <p><a id="tabella-campo"></a></p>
-<div class="arithmatex">\[
-\begin{array}{|r|l|l|l|}
-\hline
-\textbf{Power} &amp; \textbf{Reduced Polynomial} &amp; \textbf{Coefficients} &amp; \textbf{Integer} \\
-\hline
-0 &amp; 0 &amp; 0, 0, 0 &amp; 0 \\
-\hline
-x^0 &amp; 1 &amp; 0, 0, 1 &amp; 1 \\
-\hline
-x^1 &amp; x &amp; 0, 1, 0 &amp; 2 \\
-\hline
-x^2 &amp; x^2 &amp; 1, 0, 0 &amp; 4 \\
-\hline
-x^3 &amp; x^2 + 1 &amp; 1, 0, 1 &amp; 5 \\
-\hline
-x^4 &amp; x^2 + x + 1 &amp; 1, 1, 1 &amp; 7 \\
-\hline
-x^5 &amp; x + 1 &amp; 0, 1, 1 &amp; 3 \\
-\hline
-x^6 &amp; x^2 + x &amp; 1, 1, 0 &amp; 6 \\
-\hline
-\end{array}
-\]</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;"><span class="arithmatex">\(\textbf{Power}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\textbf{Reduced Polynomial}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\textbf{Coefficients}\)</span></th>
+<th style="text-align: center;"><span class="arithmatex">\(\textbf{Integer}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0, 0, 0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x^0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0, 0, 1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x^1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0, 1, 0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(2\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x^2\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x^2\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1, 0, 0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(4\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x^3\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x^2 + 1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1, 0, 1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(5\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x^4\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x^2 + x + 1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1, 1, 1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(7\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x^5\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x + 1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(0, 1, 1\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(3\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span class="arithmatex">\(x^6\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(x^2 + x\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(1, 1, 0\)</span></td>
+<td style="text-align: center;"><span class="arithmatex">\(6\)</span></td>
+</tr>
+</tbody>
+</table>
 <p class="formula-caption">Table 1. Elements Of Field <span class="arithmatex">\(\mathbb{F}_{8}\)</span> reduced <span class="arithmatex">\(\pmod{x^3 + x^2 + 1}\)</span></p>
 <p>where the integer is constructed by treating the polynomial coefficients as <strong>binary values</strong>, which allows an association between integers and polynomials. 
 As you can see, up to the term <span class="arithmatex">\(x^2\)</span> the power is reported exactly as it is; starting from <span class="arithmatex">\(x^3\)</span> onward, reductions begin, generating the other elements of the field.
