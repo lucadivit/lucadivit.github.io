@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video - Bit Di Vita</title>
+    <meta name="description" content="Tutti a bordo delle Neural ODE! Evento: PyCon Italia Anno: 2026 Belle le reti neurali con layer discreti, vero? Ma cosa succede quando i layer diventano infiniti? In questo talk saliamo in macchina insieme per un viaggio che parte da derivate e integrali, attraversa equazioni differenziali e metodi numerici, fino …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="Video - Bit Di Vita">
+    <meta property="og:description" content="Tutti a bordo delle Neural ODE! Evento: PyCon Italia Anno: 2026 Belle le reti neurali con layer discreti, vero? Ma cosa succede quando i layer diventano infiniti? In questo talk saliamo in macchina insieme per un viaggio che parte da derivate e integrali, attraversa equazioni differenziali e metodi numerici, fino …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/pages/video/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/pages/video/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/pages/video/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/pages/video/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/site.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/vendor/katex/katex.min.css">
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/">
+                        <img class="site-logo" src="https://www.lucadivita.it/images/logo/logo.webp" alt="Bit Di Vita logo" width="378" height="376" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/pages/video/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/pages/video/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/pages/video/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/pages/video/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>Video</h1>
+    </header>
+
+
+    <section>
+        <div class="page-body article-body">
+            <ul class="link-rows talks-list">
+  <li>
+    <details>
+      <summary>Tutti a bordo delle Neural ODE!</summary>
+      <p><span class="events-meta-label">Evento:</span> PyCon Italia</p>
+      <p><span class="events-meta-label">Anno:</span> 2026</p>
+      <p>Belle le reti neurali con layer discreti, vero? Ma cosa succede quando i layer diventano infiniti? In questo talk saliamo in macchina insieme per un viaggio che parte da derivate e integrali, attraversa equazioni differenziali e metodi numerici, fino ad arrivare alle Neural ODE. Scopriremo cosa significa avere un modello che evolve in modo continuo nel tempo invece di crescere per layer, analizzeremo punti di forza e limiti e vedremo una piccola applicazione pratica.</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=HQnyHByNE9M">YouTube</a></p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>BackProp? Anche No</summary>
+      <p><span class="events-meta-label">Evento:</span> Oktober Py</p>
+      <p><span class="events-meta-label">Anno:</span> 2025</p>
+      <p>Chi l&#39;ha detto che per addestrare una rete neurale serva per forza la backpropagation? In questo talk scopriremo come un algoritmo metaeuristico può imparare a fare il lavoro del classico gradiente, trovando i pesi di una rete neurale senza mai calcolare una derivata. Un approccio alternativo, curioso a cavallo tra evoluzione, ottimizzazione e un pizzico di ribellione contro il dogma del backprop.</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=aodGcGG4BpM">YouTube</a></p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>Cifrari Fantastici E Come Violarli</summary>
+      <p><span class="events-meta-label">Evento:</span> PyCon Italia</p>
+      <p><span class="events-meta-label">Anno:</span> 2025</p>
+      <p>La crittografia è una delle colonne portanti della sicurezza moderna, ma cosa succede quando i cifrari che proteggono le nostre informazioni vengono messi alla prova? In questo talk, esploreremo insieme le basi matematiche che rendono sicuri alcuni dei cifrari più famosi, partendo da uno semplice come il Cesare, fino ad arrivare a quelli attualmente utilizzati come RSA e ElGamal. Con un pizzico di teoria dei numeri e un po&#39; di logica, mostreremo come la crittografia possa essere decifrata e come le vulnerabilità siano sempre dietro l&#39;angolo, pronte a essere sfruttate. Preparatevi a scoprire la bellezza dei numeri e la potenza della matematica per &#39;rompere&#39; quei sistemi che pensiamo invulnerabili. Un viaggio affascinante tra cifrari, codici e hack!</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=Mh1SOb_P9Kw">YouTube</a></p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>Cifrari Fantastici E Come Violarli</summary>
+      <p><span class="events-meta-label">Evento:</span> Python Happy GNU Year</p>
+      <p><span class="events-meta-label">Anno:</span> 2025</p>
+      <p>La crittografia è una delle colonne portanti della sicurezza moderna, ma cosa succede quando i cifrari che proteggono le nostre informazioni vengono messi alla prova? In questo talk, esploreremo insieme le basi matematiche che rendono sicuri alcuni dei cifrari più famosi, partendo da uno semplice come il Cesare, fino ad arrivare a quelli attualmente utilizzati come RSA e ElGamal. Con un pizzico di teoria dei numeri e un po&#39; di logica, mostreremo come la crittografia possa essere decifrata e come le vulnerabilità siano sempre dietro l&#39;angolo, pronte a essere sfruttate. Preparatevi a scoprire la bellezza dei numeri e la potenza della matematica per &#39;rompere&#39; quei sistemi che pensiamo invulnerabili. Un viaggio affascinante tra cifrari, codici e hack!</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=rbE1RFgfnvM">YouTube</a></p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>The Sound Of Malware</summary>
+      <p><span class="events-meta-label">Evento:</span> Codemotion Milano</p>
+      <p><span class="events-meta-label">Anno:</span> 2024</p>
+      <p>Ciao CVEs, miei vecchi amici, sono venuto a occuparmi di nuovo di voi Perché una backdoor si insinua silenziosamente... Ops, scusate, stavamo cantando a squarciagola. È una cosa che continuiamo a fare ogni volta che una nuova vulnerabilità irrompe nella nostra routine quotidiana. Ultimamente è successo sempre più spesso a causa delle dipendenze del nostro software. Log4J, avete detto? Oh, beh, non dimentichiamoci di XZUtils! Li chiamano attacchi alla catena di distribuzione. Abbiamo iniziato ad affrontarli a ritmo di SLSA (leggi &#34;salsa&#34;), ma poi abbiamo notato che potevamo fare di più. Molto di più! E abbiamo trasformato i nostri binari malevoli in... beh, in forme d&#39;onda. E abbiamo iniziato a farli dondolare! Leggendo questi binari come se fossero normali forme d&#39;onda e analizzandoli con un po&#39; di matematica (Cepstum, serie di Fourier, ecc.) abbiamo creato un modello che mira a rilevare se una dipendenza è dannosa. E anche di classificarla in base al tipo di malware. Affascinante, vero? Il suono del malware...</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=TdILDbCVSqI">YouTube</a></p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>Q&amp;A For Dummies</summary>
+      <p><span class="events-meta-label">Evento:</span> Python Pescara</p>
+      <p><span class="events-meta-label">Anno:</span> 2024</p>
+      <p>Durante questo talk abbiamo esplorato come costruire un sistema FAQ intelligente utilizzando modelli linguistici, embedding e ricerca vettoriale. Attraverso Python abbiamo visto come rappresentare i contenuti in forma semantica e recuperare le risposte più rilevanti in base alle domande degli utenti.</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=VxK4UoDBJ1s">YouTube</a></p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>E Se Le Macchine, Come L&#39;uomo, Evolvessero?</summary>
+      <p><span class="events-meta-label">Evento:</span> DataMasters</p>
+      <p><span class="events-meta-label">Anno:</span> 2023</p>
+      <p>La neuroevoluzione è un approccio alternativo alla classica backpropagazione per l&#39;addestramento delle reti neurali. Essa, se propriamente utilizzata, apporta vantaggi rispetto ai più comuni approcci di design di una rete neurale: riduzione della probabilità di overfitting e underfitting, scoparsa dei problemi di gradient vanishing e explosion, costruzione incrementale, ottima e del tutto automatica di una architettura di rete. Questo apre nuove frontiere nel Deep Learning facendo sì che non solo le macchine siano sempre più vicine all&#39;uomo nell&#39;eseguire task complessi, ma anche nel modo di apprenderli tramite meccanismi evolutivi spontanei.</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=EU-ZzGrR-CQ">YouTube</a></p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>Processi Evolutivi Attraverso Algoritmi Genetici</summary>
+      <p><span class="events-meta-label">Evento:</span> DevFest Italia</p>
+      <p><span class="events-meta-label">Anno:</span> 2020</p>
+      <p>Gli algoritmi genetici sono una classe di algoritmi di intelligenza artificiale ed in particolare della branca della computazione evolutiva. Sono utilizzati per tentare di risolvere problemi di ottimizzazione per i quali non sono note soluzioni a complessità lineare o polinomiale.</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=38_xxUii7NU">YouTube</a></p>
+    </details>
+  </li>
+  <li>
+    <details>
+      <summary>Errare Humanum Est, Le Macchine Invece Imparano</summary>
+      <p><span class="events-meta-label">Evento:</span> DevParty Together</p>
+      <p><span class="events-meta-label">Anno:</span> 2020</p>
+      <p>L&#39;apprendimento per rinforzo è uno dei paradigmi più affascinanti nell&#39;ambito dell&#39;apprendimento automatico e sta suscitando sempre più interesse dalla comunità scientifica che ne sta ampliando i contesti applicativi. In questo talk si illustreranno i concetti base di questo paradigma e la spiegazione del Q-Learning, un algoritmo risolutivo, nonché la sua applicazione nel caso di studio Maze game.</p>
+      <p><span class="events-meta-label">Video:</span> <a href="https://www.youtube.com/watch?v=lZzI1UPYA0A">YouTube</a></p>
+    </details>
+  </li>
+</ul>
+        </div>
+    </section>
+</article>
+</main>
+
+<script defer src="https://www.lucadivita.it/theme/site.js"></script>
+
+<script defer src="https://www.lucadivita.it/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://www.lucadivita.it/theme/vendor/instant.page/instantpage.js"></script>
+
+
+</body>
+</html>
