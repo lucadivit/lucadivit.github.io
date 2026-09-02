@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Come San Tommaso - 2 - Bit Di Vita</title>
+    <meta name="description" content="Nello scorso articolo abbiamo visto cosa è la crittografia omomorfica. Da non crederci vero? Vallo a dire a San Tommaso. Quindi ora dovremmo sapere che possiamo fare calcoli su dati cifrati senza doverli decifrare. Sì ok, ma in pratica? È quello che voglio affrontare in questo articolo, e lo faremo …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="Come San Tommaso - 2 - Bit Di Vita">
+    <meta property="og:description" content="Nello scorso articolo abbiamo visto cosa è la crittografia omomorfica. Da non crederci vero? Vallo a dire a San Tommaso. Quindi ora dovremmo sapere che possiamo fare calcoli su dati cifrati senza doverli decifrare. Sì ok, ma in pratica? È quello che voglio affrontare in questo articolo, e lo faremo …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-2/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-2/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/like-saint-thomas-2/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-2/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/site.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/vendor/katex/katex.min.css">
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/">
+                        <img class="site-logo" src="https://www.lucadivita.it/images/logo/logo.webp" alt="Bit Di Vita logo" width="128" height="128" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/crittografia-sicurezza/like-saint-thomas-2/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/like-saint-thomas-2/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/crittografia-sicurezza/like-saint-thomas-2/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/like-saint-thomas-2/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>Come San Tommaso - 2</h1>
+        <p>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/crittografia-sicurezza.html">Crittografia & Sicurezza</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-09-01T00:00:00+02:00">01 settembre 2026</time>
+            </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--intermediate">Livello: Intermedio</span>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contenuti</h2>
+                <div class="toc">
+<ul>
+<li><a href="#un-passo-la-volta">Un Passo La Volta</a></li>
+<li><a href="#dove-essi-vivono">(Dove) Essi Vivono</a><ul>
+<li><a href="#il-recinto-di-polinomi">Il Recinto Di Polinomi</a></li>
+<li><a href="#sommare-e-moltiplicare-nel-recinto">Sommare E Moltiplicare Nel Recinto</a></li>
+</ul>
+</li>
+<li><a href="#messaggi-scale-e-approssimazioni">Messaggi, Scale e Approssimazioni</a><ul>
+<li><a href="#il-prezzo-della-precisione">Il Prezzo Della Precisione</a></li>
+</ul>
+</li>
+<li><a href="#diamo-valore-al-nostro-messaggio">Diamo Valore Al Nostro Messaggio</a></li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+<li><a href="#related-posts">Consigliati</a></li><li><a href="#references">Riferimenti</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>Nello <a href="/crittografia-sicurezza/like-saint-thomas-1/">scorso articolo</a> abbiamo visto cosa è la <strong>crittografia omomorfica</strong>. Da non crederci vero? Vallo a dire a San Tommaso.
+Quindi ora dovremmo sapere che possiamo fare calcoli su dati cifrati senza doverli decifrare. Sì ok, ma in pratica?
+È quello che voglio affrontare in questo articolo, e lo faremo implementando concretamente un algoritmo.
+C'è l'imbarazzo della scelta e quindi perché non rendersi la vita difficile? Vai <a href="https://ckks.org/"><strong>CKKS</strong> (Cheon-Kim-Kim-Song)</a>, scelgo te.</p>
+<h3 id="un-passo-la-volta">Un Passo La Volta<a class="headerlink" href="#un-passo-la-volta" title="Permanent link"> </a></h3>
+<p>Prima di partire è bene chiarire una cosa: <strong>implementare</strong> <strong>CKKS</strong> per davvero, nel senso di "ora mi scrivo una libreria sicura, 
+efficiente e pronta per la produzione", è un ottimo modo per farsi del <strong>male</strong>. CKKS non è solo "due somme, due prodotti e via". Dentro ci 
+sono <strong>anelli polinomiali</strong>, <strong>rumore</strong>, <strong>scaling</strong>, <strong>rescaling</strong>, <strong>relinearization</strong>, <strong>modulus switching</strong>, <strong>encoding</strong> su 
+vettori complessi e tutta una serie di dettagli che, se affrontati tutti insieme, trasformano un articolo didattico in una 
+denuncia penale contro la matematica. Quindi faremo una cosa più sensata: procederemo un passo alla volta.
+In questo articolo (o meglio, serie di articoli) non implementeremo una versione completa e sicura di CKKS, ma una versione <strong>giocattolo</strong>. 
+Una Toy CKKS, se vogliamo darle un nome internazionale così sembra tutto più serio. L’obiettivo non è costruire 
+qualcosa da usare per cifrare davvero i dati della vostra azienda, della vostra banca o le vostre nefandezze.
+L’obiettivo è capire come sono collegati tra loro i mattoni fondamentali dello schema. Partiremo quindi dalle basi:</p>
+<ul>
+<li>costruiremo un anello polinomiale del tipo <span class="arithmatex">\(R_q = \mathbb{Z}_q[x] / (x^N + 1)\)</span></li>
+<li>implementeremo somma e moltiplicazione tra polinomi </li>
+<li>useremo questi polinomi per costruire una cifratura basata su RLWE</li>
+<li>aggiungeremo una codifica molto semplice per rappresentare numeri reali </li>
+<li>proveremo a fare somme e moltiplicazioni direttamente sui ciphertext </li>
+<li>osserveremo cosa succede a scala e rumore dopo le operazioni.</li>
+</ul>
+<p>In altre parole, non partiremo dal CKKS completo. Partiremo da ciò che serve per arrivarci senza perdere la <strong>sanità mentale</strong> lungo la strada.
+La prima tappa, quindi, è l’anello polinomiale.</p>
+<h3 id="dove-essi-vivono">(Dove) Essi Vivono<a class="headerlink" href="#dove-essi-vivono" title="Permanent link"> </a></h3>
+<p>No, non sto parlando degli alieni del film, per ora gli unici “essi” che ci interessano sono i nostri <strong>messaggi</strong>.
+Ma cosa sono questi fantomatici messaggi? Mi piacerebbe potervi dire che sono stringhe di testo, composte
+da caratteri appartenenti ad un alfabeto convenzionale, ma non è così semplice. Potrei dire che sono dei numeri,
+ma anche questo sarebbe <strong>mentire</strong>. In realtà, i messaggi vengono rappresentati come <strong>polinomi</strong>. E non polinomi qualsiasi, 
+ma polinomi con coefficienti interi modulo un certo numero <span class="arithmatex">\(q\)</span>. Più nel particolare, questi messaggi
+sono gli elementi appartenenti ad un <strong>anello polinomiale</strong> del tipo </p>
+<p><a id="anello"></a></p>
+<div class="arithmatex">\[
+R_q = \mathbb{Z}_q[x] / (x^N + 1)
+\]</div>
+<p class="formula-caption">Formula 1. Anello Polinomiale</p>
+<p>Non so se vi ricordate ma abbiamo già parlato di anelli polinomiali <a href="/teoria-matematica/how-i-fix-your-code-3/">qui</a>.
+C'è da fare però una distinzione importante. Nel caso dei codici ciclici, la <span class="arithmatex">\(N\)</span> dell'anello poteva essere qualsiasi numero intero 
+positivo, mentre nel caso di CKKS la <span class="arithmatex">\(N\)</span> deve essere una potenza di due. L'ho già scritto in altri articoli quindi
+dovresti saperlo, ma oggi mi sento generoso e te lo ripeto. Lavorare con un anello polinomiale vuol dire che 
+avrò dei polinomi i quali coefficienti sono interi modulo <span class="arithmatex">\(q\)</span> e che, quando moltiplico due polinomi, il risultato viene ridotto modulo <span class="arithmatex">\(x^N + 1\)</span>,
+tornando all'interno dell'anello stesso. Si differenzia da un campo perché non è assicurata l'esistenza di un <strong>inverso
+moltiplicativo</strong>. Più di così non ti dico, in caso vattelo a leggere <a href="/teoria-matematica/qui-crescono-solo-polinomi/">qui</a>.
+I nostri messaggi quindi sono dentro un recinto, ed ogni volta che un messaggio prova a scavalcare i confini, viene brutalmente 
+ributtato dentro.</p>
+<h4 id="il-recinto-di-polinomi">Il Recinto Di Polinomi<a class="headerlink" href="#il-recinto-di-polinomi" title="Permanent link"> </a></h4>
+<p>So che dire che i messaggi vivono in</p>
+<div class="arithmatex">\[
+R_q = \mathbb{Z}_q[x] / (x^N + 1)
+\]</div>
+<p>fa <strong>rimorchiare</strong>, ma bisogna anche essere concreti. Diamo quindi forma alla cosa e trasformiamo quanto detto in codice.</p>
+<p><a id="snippet1"></a></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">PolynomialRing</span><span class="p">:</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">reduced_coefficients</span> <span class="o">=</span> <span class="p">[</span><span class="n">coefficient</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modulus</span> <span class="k">for</span> <span class="n">coefficient</span> <span class="ow">in</span> <span class="n">coefficients</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">reduced_coefficients</span><span class="p">)</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_degree</span><span class="p">:</span>
+            <span class="n">reduced_coefficients</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_degree</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">reduced_coefficients</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">reduced_coefficients</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coefficients</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">coefficients</span><span class="p">[:]</span>
+
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_degree</span><span class="p">:</span>
+            <span class="n">coefficient</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">target_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_degree</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">target_index</span><span class="p">]</span> <span class="o">-=</span> <span class="n">coefficient</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">coefficient</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modulus</span> <span class="k">for</span> <span class="n">coefficient</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">second</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+        <span class="n">second</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">second</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[(</span><span class="n">first</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">second</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_modulus</span> <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_degree</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">first</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">second</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+        <span class="n">second</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">second</span><span class="p">)</span>
+        <span class="n">product</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_degree</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">first_index</span><span class="p">,</span> <span class="n">first_coefficient</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">first</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">second_index</span><span class="p">,</span> <span class="n">second_coefficient</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">second</span><span class="p">):</span>
+                <span class="n">product</span><span class="p">[</span><span class="n">first_index</span> <span class="o">+</span> <span class="n">second_index</span><span class="p">]</span> <span class="o">+=</span> <span class="p">(</span><span class="n">first_coefficient</span> <span class="o">*</span> <span class="n">second_coefficient</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">product</span><span class="p">)</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 1. Classe <code>PolynomialRing</code></p>
+<p>Ed usandola si ha:</p>
+<p><a id="snippet2"></a></p>
+<div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">ring</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+
+<span class="c1"># p(x) = 18x^4 + 4x^3 + 3x^2 + 2x + 1</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+<span class="n">polynomial</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="n">coefficients</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Anello polinomiale: R_</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2"> = Z_</span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">[x] / (x^</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> + 1)"</span><span class="p">)</span>
+<span class="c1"># 4x^3 + 3x^2 + 2x</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"p(x) mod (x^</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> + 1):"</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">polynomial</span><span class="p">))</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 2. Riduzione in anello polinomiale</p>
+<p>Questo snippet dovrebbe stampare <code>p(x) mod (x^4 + 1): 4x^3 + 3x^2 + 2x</code> che è il risultato della riduzione polinomiale di <span class="arithmatex">\(p(x)\)</span> modulo <span class="arithmatex">\(x^N + 1\)</span>.
+Il risultato deriva da due riduzioni distinte. Prima riduciamo i coefficienti <span class="arithmatex">\(\pmod{q}\)</span>, per cui <span class="arithmatex">\(18 \equiv 1 \pmod{17}\)</span>. Successivamente riduciamo il polinomio modulo <span class="arithmatex">\((x^N+1)\)</span>. 
+Poiché in questo anello vale <span class="arithmatex">\(x^4 \equiv -1\)</span>, il termine <span class="arithmatex">\(x^4\)</span> cancella il termine costante <span class="arithmatex">\(1\)</span>, lasciando <span class="arithmatex">\(4x^3+3x^2+2x\)</span>. Ed ecco che il polinomio
+di partenza (che ha provato ad uscire dal recinto dato che il suo grado era maggiore o uguale ad <span class="arithmatex">\(N\)</span>) viene brutalmente ributtato dentro <span class="arithmatex">\(R_q\)</span>.</p>
+<h4 id="sommare-e-moltiplicare-nel-recinto">Sommare E Moltiplicare Nel Recinto<a class="headerlink" href="#sommare-e-moltiplicare-nel-recinto" title="Permanent link"> </a></h4>
+<p>Ora che abbiamo capito come riportare un polinomio dentro il nostro recinto, possiamo iniziare a fare qualcosa di più interessante: sommare e moltiplicare polinomi.
+La somma è abbastanza <strong>tranquilla</strong>. Se sommiamo due polinomi, sommiamo i coefficienti dei termini dello <strong>stesso grado</strong> e poi riduciamo tutto modulo <span class="arithmatex">\(q\)</span>. 
+Difficile fare danni (o almeno più di quelli che faccio di solito, tipo nascere).</p>
+<p>La moltiplicazione invece è leggermente più interessante. Quando moltiplichiamo due polinomi, il grado del risultato può superare <span class="arithmatex">\((N - 1)\)</span>. 
+E quando succede, dobbiamo ridurre il risultato modulo polinomio per tornare in <span class="arithmatex">\(R_q\)</span>. Vediamo un esempio considerando i polinomi
+<span class="arithmatex">\(a(x) = 2x^2 + 2x + 3\)</span> e <span class="arithmatex">\(b(x) = 15x^2 + 1\)</span>, nell'anello polinomiale <span class="arithmatex">\(R_{17} = \mathbb{Z}_{17}[x] / (x^4 + 1)\)</span> definito nello <a href="/crittografia-sicurezza/like-saint-thomas-2/#snippet2">Snippet 2</a>.</p>
+<ul>
+<li>Somma:</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+a(x) + b(x) &amp;= 17x^2 + 2x + 4 \\[6pt]
+            &amp;\equiv 2x + 4 \pmod{17}
+\end{aligned}
+\]</div>
+<ul>
+<li>Moltiplicazione:</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+a(x) \cdot b(x)
+    &amp;= (2x^2 + 2x + 3) \cdot (15x^2 + 1) \\[6pt]
+    &amp;= 30x^4 + 30x^3 + 47x^2 + 2x + 3 \\[6pt]
+    &amp;\equiv 13x^4 + 13x^3 + 13x^2 + 2x + 3 \pmod{17} \\[6pt]
+    &amp;\equiv -13 + 13x^3 + 13x^2 + 2x + 3 \pmod{x^4 + 1} \\[6pt]
+    &amp;= 13x^3 + 13x^2 + 2x - 10 \\[6pt]
+    &amp;\equiv 13x^3 + 13x^2 + 2x + 7 \pmod{17}
+\end{aligned}
+\]</div>
+<p>Riportiamo lo snippet anche per queste operazioni:</p>
+<p><a id="snippet3"></a></p>
+<div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">ring</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+
+<span class="c1"># a(x) = 2x^2 + 2x + 3</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1"># b(x) = 15x^2 + 1</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">coefficients</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+
+<span class="n">sum_result</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+<span class="n">product_result</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="n">a</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># a(x) + b(x): 2x + 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a(x) + b(x):"</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sum_result</span><span class="p">))</span>
+<span class="c1"># a(x) * b(x): 13x^3 + 13x^2 + 2x + 7</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a(x) * b(x):"</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">product_result</span><span class="p">))</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 3. Somma e moltiplicazione in anello polinomiale</p>
+<h3 id="messaggi-scale-e-approssimazioni">Messaggi, Scale e Approssimazioni<a class="headerlink" href="#messaggi-scale-e-approssimazioni" title="Permanent link"> </a></h3>
+<p>Abbiamo iniziato a lavorare dentro un anello polinomiale: abbiamo visto come ridurre, sommare e moltiplicare polinomi rispettando la regola del recinto.
+Però non possiamo rimanere sempre nella comfort zone dei <strong>numeri interi</strong>.
+Dall'<a href="/teoria-matematica/qui-crescono-solo-polinomi/">articolo sui campi finiti</a>, sappiamo che possiamo riportare un numero 
+razionale in un campo finito, basta trovarne l'inverso moltiplicativo. Il punto è che gli anelli, per definizione, non richiedono un inverso moltiplicativo
+e quindi non è assicurato che esiste. Il bel discorsetto sugli inversi, qui <strong>non vale</strong>. E allora come facciamo a rappresentare numeri reali? 
+La risposta è semplice: <strong>non possiamo</strong>. Possiamo però rappresentare numeri reali <strong>approssimati</strong>. E per farlo, useremo una codifica molto semplice: 
+moltiplicheremo il numero reale per una <strong>scala</strong> <span class="arithmatex">\(s\)</span> e lo <strong>arrotonderemo</strong> all'intero più vicino. In pratica, dato un numero reale <span class="arithmatex">\(m\)</span>, scegliamo una scala <span class="arithmatex">\(s\)</span> e calcoliamo:</p>
+<p><a id="approssimazione"></a></p>
+<div class="arithmatex">\[
+\tilde{m} = \lfloor m \cdot s \rceil
+\]</div>
+<p class="formula-caption">Formula 2. Formula di Approssimazione</p>
+<p>Chiariamo subito con un esempio. Dato <span class="arithmatex">\(m=1.25\)</span> e <span class="arithmatex">\(s=100\)</span>, otteniamo:</p>
+<div class="arithmatex">\[
+\tilde{m} = \lfloor 1.25 \cdot 100 \rceil = 125
+\]</div>
+<p>Quindi non stiamo più lavorando con un numero reale, ma con un intero</p>
+<div class="arithmatex">\[
+1.25 \rightarrow 125
+\]</div>
+<p>Quando vogliamo tornare al numero reale, basta dividere per la scala <span class="arithmatex">\(s\)</span>:</p>
+<p><a id="approssimazione_inversa"></a></p>
+<div class="arithmatex">\[
+m = \frac{\tilde{m}}{s}
+\]</div>
+<p class="formula-caption">Formula 3. Formula di Approssimazione Inversa</p>
+<p>E quindi, tornando all'esempio, otteniamo:</p>
+<div class="arithmatex">\[
+m = \frac{125}{100} = 1.25
+\]</div>
+<p>Fin qui tutto chiaro e pulito. Ma dato che la fortuna non naviga nel mio mare da anni, ha veramente senso pensare di ricevere sempre e solo numeri a <span class="arithmatex">\(2\)</span> cifre decimali?
+Ovviamente no. E cosa succede quando riceviamo un numero con più di due cifre decimali? Supponiamo ad esempio di moltiplicare due numeri:</p>
+<div class="arithmatex">\[
+a = 1.23, \quad b = 1.01 \Rightarrow a \cdot b = 1.2423
+\]</div>
+<p>E approssimiamo usando sempre la stessa scala.</p>
+<div class="arithmatex">\[
+\tilde{m} = \lfloor 1.2423 \cdot 100 \rceil = \lfloor 124.23 \rceil = 124
+\]</div>
+<p>e quindi, tornando al numero reale, otteniamo:</p>
+<div class="arithmatex">\[
+m = \frac{124}{100} = 1.24
+\]</div>
+<p>Come si può vedere il numero non è lo stesso. Approssimando abbiamo <strong>perso informazione</strong>. E proprio per questo motivo CKKS si dice essere uno schema
+<strong>approssimato</strong>. Non promette di restituire il valore esatto, ma un valore sufficientemente vicino. Ed è la scala a controllare la
+precisione dell'approssimazione. Una scala più <strong>grande</strong> significa una maggiore <strong>precisione</strong>, ma anche maggiori <strong>rischi</strong> (come si vedrà).
+Diamo anche qui la nostra bella classe:</p>
+<p><a id="snippet4"></a></p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Encoder</span><span class="p">:</span>
+
+    <span class="o">...</span>
+
+    <span class="k">def</span> <span class="nf">encode_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">value</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">decode_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">value</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scale</span>
+
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="n">coefficients</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">encode_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">values</span><span class="p">]</span>
+        <span class="n">coefficients</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_polynomial_ring</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">polynomial</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">expected_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="n">coefficients</span> <span class="o">=</span> <span class="n">polynomial</span><span class="p">[:</span><span class="n">expected_length</span><span class="p">]</span>
+        <span class="n">coefficients</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">decode_value</span><span class="p">(</span><span class="n">coefficient</span><span class="p">)</span> <span class="k">for</span> <span class="n">coefficient</span> <span class="ow">in</span> <span class="n">coefficients</span><span class="p">]</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 4. Classe <code>Encoder</code></p>
+<h4 id="il-prezzo-della-precisione">Il Prezzo Della Precisione<a class="headerlink" href="#il-prezzo-della-precisione" title="Permanent link"> </a></h4>
+<p>Aumentare la scala ci permette di conservare più cifre decimali, ma per citare Sebastiano Barisoni, in economia non ci sono pasti gratis. 
+Il motivo è semplice: più la scala è grande, più diventa grande anche l’intero che rappresenta il nostro numero reale.
+Supponiamo di voler codificare <span class="arithmatex">\(m = 1.2345\)</span>. Se vogliamo conservarlo senza perdere cifre decimali, possiamo scegliere una scala
+<span class="arithmatex">\(s = 10\, 000\)</span> ottenendo:</p>
+<div class="arithmatex">\[
+\tilde{m} = 1.2345 \cdot 10\, 000 = 12345
+\]</div>
+<p>Il problema è che i coefficienti dei nostri polinomi vivono modulo <span class="arithmatex">\(q\)</span>. Quindi, se scegliamo un modulo <strong>troppo piccolo</strong>, il valore codificato viene ridotto modulo <span class="arithmatex">\(q\)</span> 
+e non rappresenta più il numero che pensavamo di aver codificato. Per esempio, se <span class="arithmatex">\(q = 17\)</span>, allora:</p>
+<div class="arithmatex">\[
+12345 \bmod 17 = 3
+\]</div>
+<p>Capite bene che <span class="arithmatex">\(3\)</span> non è esattamente il modo migliore per ricordarsi che volevamo rappresentare <span class="arithmatex">\(1.2345\)</span>.
+È qui che entra in gioco <strong>l’headroom</strong>, cioè il <strong>margine</strong> di spazio che lasciamo tra i valori che vogliamo rappresentare e il modulo <span class="arithmatex">\(q\)</span>. Questo margine serve perché, 
+durante le operazioni, i valori intermedi possono crescere. Se partiamo già troppo vicini al modulo, basta poco per ottenere una riduzione 
+modulare che cambia completamente il significato del valore codificato.
+In breve: la scala compra precisione, ma consuma spazio dentro il modulo. Più precisione vogliamo, 
+più dobbiamo scegliere con attenzione <span class="arithmatex">\(q\)</span>.</p>
+<p><a id="snippet5"></a></p>
+<div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="mi">17</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">ring</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">polynomial_ring</span><span class="o">=</span><span class="n">ring</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.83</span><span class="p">]:</span>
+    <span class="n">scaled_value</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encode_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">encoded_value</span> <span class="o">=</span> <span class="n">scaled_value</span> <span class="o">%</span> <span class="n">q</span>
+    <span class="n">decoded_value</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">decode_value</span><span class="p">(</span><span class="n">encoded_value</span><span class="p">)</span>
+    <span class="c1"># [1.2, 1.83]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Messaggio originale:"</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="c1"># [12, 18]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Messaggio scalato:"</span><span class="p">,</span> <span class="n">scaled_value</span><span class="p">)</span>
+    <span class="c1"># [12 % 17 = 12, 18 % 17 = 1]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Messaggio codificato modulo q:"</span><span class="p">,</span> <span class="n">encoded_value</span><span class="p">)</span>
+    <span class="c1"># [12 / 10 = 1.2, 1 / 10 = 0.1]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Messaggio decodificato:"</span><span class="p">,</span> <span class="n">decoded_value</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 5. Approssimazione di un numero reale tramite scala</p>
+<p>In questo esempio il secondo valore è volutamente <strong>problematico</strong>. Con <span class="arithmatex">\(q = 17\)</span> e <span class="arithmatex">\(s = 10\)</span>, il numero <span class="arithmatex">\(1.83\)</span> viene prima trasformato in 
+<span class="arithmatex">\(18\)</span>, ma poi <span class="arithmatex">\(18 \bmod 17 \equiv 1\)</span>. Decodificando otteniamo quindi <span class="arithmatex">\(0.1\)</span>, non <span class="arithmatex">\(1.83\)</span>. Non è la funzione a essere sbagliata: siamo noi ad aver 
+scelto un modulo troppo piccolo rispetto alla scala e ai valori che vogliamo rappresentare.</p>
+<h3 id="diamo-valore-al-nostro-messaggio">Diamo Valore Al Nostro Messaggio<a class="headerlink" href="#diamo-valore-al-nostro-messaggio" title="Permanent link"> </a></h3>
+<p>A questo punto facciamo finta di voler trasmettere, o elaborare, un messaggio senza lasciarlo in chiaro. Diciamo che il nostro messaggio di 
+partenza sia il vettore:</p>
+<div class="arithmatex">\[
+m = [1.2,\ 0.5,\ 2.1]
+\]</div>
+<p>Attenzione però, questo vettore non è ancora un messaggio nel senso dello schema. È solo l’insieme dei valori reali da cui vogliamo <strong>partire</strong>. 
+Per farlo vivere dentro il nostro sistema dobbiamo prima <strong>trasformarlo</strong> in qualcosa che sia compatibile con l’anello polinomiale <span class="arithmatex">\(R_q\)</span>.
+Il primo passo è applicare la <strong>scala</strong> a ogni <strong>elemento</strong> del vettore. Scegliamo:</p>
+<div class="arithmatex">\[
+s = 10
+\]</div>
+<p>e calcoliamo:</p>
+<div class="arithmatex">\[
+\tilde{m} = [12,\ 5,\ 21]
+\]</div>
+<p>Ora abbiamo un vettore di interi scalati. Ma neanche questo è ancora il messaggio finale: è solo una rappresentazione intermedia. 
+Il messaggio, nel nostro caso, deve essere un elemento dell’anello <span class="arithmatex">\(R_q\)</span>. Per questo prendiamo questi valori e 
+li usiamo come coefficienti di un polinomio. Guardando agli snippet precedenti, è facile intuire che 
+il polinomio che rappresenta il nostro messaggio sarà:</p>
+<div class="arithmatex">\[
+m(x) = 12x^2 + 5x + 21
+\]</div>
+<p><a id="snippet6"></a></p>
+<div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="mi">23</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">ring</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">polynomial_ring</span><span class="o">=</span><span class="n">ring</span><span class="p">)</span>
+
+<span class="n">message</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">]</span>
+<span class="n">message_polynomial</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+<span class="c1"># 12x^2 + 5x + 21</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Messaggio nell'anello:"</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">message_polynomial</span><span class="p">))</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 6. Creazione di un messaggio</p>
+<p>Vi faccio notare che questa non è ancora la codifica CKKS completa. Per arrivarci deve passare ancora un po' di acqua sotto i ponti,
+ma fornisce un'idea di massima delle cose che succedono.</p>
+<p>Ora che un vettore reale è diventato un polinomio dentro <span class="arithmatex">\(R_q\)</span>, possiamo usare le stesse operazioni definite prima. Non dobbiamo 
+inventarci nulla di nuovo: sommare due messaggi significa sommare i rispettivi polinomi nell’anello e moltiplicarli significa moltiplicare 
+i rispettivi polinomi e ridurre il risultato modulo <span class="arithmatex">\(x^N + 1\)</span>.</p>
+<p><a id="snippet7"></a></p>
+<div class="highlight"><pre><span></span><code><span class="n">q</span> <span class="o">=</span> <span class="mi">23</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">ring</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="n">q</span><span class="p">)</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">,</span> <span class="n">polynomial_ring</span><span class="o">=</span><span class="n">ring</span><span class="p">)</span>
+
+<span class="n">m1</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">]</span>
+<span class="n">m2</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]</span>
+<span class="n">poly_m1</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">m1</span><span class="p">)</span>
+<span class="n">poly_m2</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="n">m2</span><span class="p">)</span>
+
+<span class="n">sum_polynomial</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="n">poly_m1</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="n">poly_m2</span><span class="p">)</span>
+<span class="n">product_polynomial</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">first</span><span class="o">=</span><span class="n">poly_m1</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="n">poly_m2</span><span class="p">)</span>
+
+<span class="c1"># 12x^2 + 5x + 21</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"m1 nell'anello:"</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">poly_m1</span><span class="p">))</span>
+<span class="c1"># 3x^2 + 10x + 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"m2 nell'anello:"</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">poly_m2</span><span class="p">))</span>
+<span class="c1"># 15x^2 + 15x + 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Somma nell'anello:"</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sum_polynomial</span><span class="p">))</span>
+<span class="c1"># 20x^3 + 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Prodotto nell'anello:"</span><span class="p">,</span> <span class="n">ring</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">product_polynomial</span><span class="p">))</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 7. Operazioni tra messaggi nell'anello</p>
+<p>La somma è facile da interpretare, perché <strong>conserva la scala</strong>. La moltiplicazione invece è <strong>bastarda</strong>. Infatti
+moltiplicando due valori scalati per <span class="arithmatex">\(s\)</span>, il risultato avrà scala <span class="arithmatex">\(s^2\)</span>. Ed è da qui che nasce il prossimo problema 
+(che tranquilli, non affronteremo oggi).</p>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Siamo giunti alla fine della seconda parte di questa serie di articoli sulla crittografia omomorfica. In questo in particolare abbiamo iniziato
+ad arare il terreno per coltivare il CKKS. Ma ci mancano ancora un po' di domande da smarcare. Ad esempio: </p>
+<ul>
+<li>Se viene fuori un vegetale dobbiamo dargli l'eutanasia? </li>
+<li>Dove sono le chiavi? </li>
+<li>Dove sta la cifratura? </li>
+<li>Dove entra in gioco il rumore? </li>
+<li>E soprattutto, quando iniziamo davvero a fare calcoli su dati cifrati? </li>
+</ul>
+<p>Per avere le risposte a queste ed altre domande, aspettate il prossimo articolo. Fino ad allora, potete trovare il <strong>codice</strong> 
+che avete visto in questo articolo, al seguente <a href="https://github.com/lucadivit/LikeSaintThomas/tree/main/part_2"><strong>link</strong></a>.</p>
+<p>Alla prossima.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h3>Consigliati</h3>
+                <ol class="article-related-list">
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Qui Crescono Solo Polinomi</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Condividi I Tuoi Segreti Con Shamir</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-1/" rel="noopener noreferrer" target="_blank">Come San Tommaso - 1</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h3>Riferimenti</h3>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/crittografia-sicurezza/like-saint-thomas-1/">/crittografia-sicurezza/like-saint-thomas-1/</a>
+                    </li>
+                    <li>
+                        <a href="https://ckks.org/" rel="noopener noreferrer" target="_blank">https://ckks.org/</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/how-i-fix-your-code-3/">/teoria-matematica/how-i-fix-your-code-3/</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/qui-crescono-solo-polinomi/">/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/like-saint-thomas-2/#snippet2">/crittografia-sicurezza/like-saint-thomas-2/#snippet2</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lucadivit/LikeSaintThomas/tree/main/part_2" rel="noopener noreferrer" target="_blank">https://github.com/lucadivit/LikeSaintThomas/tree/main/part_2</a>
+                    </li>
+                    <li>
+                        Homomorphic Encryption for Data Science (HE4DS)
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="https://www.lucadivita.it/tag/crittografia.html">crittografia</a></li>
+                <li><a href="https://www.lucadivita.it/tag/sicurezza.html">sicurezza</a></li>
+                <li><a href="https://www.lucadivita.it/tag/anelli.html">anelli</a></li>
+                <li><a href="https://www.lucadivita.it/tag/aritmetica_modulare.html">aritmetica_modulare</a></li>
+                <li><a href="https://www.lucadivita.it/tag/omomorfismo.html">omomorfismo</a></li>
+                <li><a href="https://www.lucadivita.it/tag/crittografia_omomorfica.html">crittografia_omomorfica</a></li>
+                <li><a href="https://www.lucadivita.it/tag/ckks.html">ckks</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
+</main>
+
+<script defer src="https://www.lucadivita.it/theme/site.js"></script>
+
+<script defer src="https://www.lucadivita.it/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://www.lucadivita.it/theme/vendor/instant.page/instantpage.js"></script>
+
+
+<script defer src="https://www.lucadivita.it/theme/collapsible-sections.js"></script>
+<script defer src="https://www.lucadivita.it/theme/reading-progress.js"></script>
+</body>
+</html>
