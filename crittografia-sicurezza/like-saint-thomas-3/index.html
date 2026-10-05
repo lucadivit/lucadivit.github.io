@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Come San Tommaso - 3 - Bit Di Vita</title>
+    <meta name="description" content="La volta scorsa ci siamo lasciati con qualche domandina. Con questo articolo cerchiamo di rispondere (spero) ad almeno qualcuna di esse. Se non lo hai fatto recupera l&#39;introduzione al CKKS qui, ti servirà, anche perché riprenderemo proprio da dove ci eravamo lasciati. Auspico di finire il CKKS ma a dó …">
+    <meta property="og:site_name" content="Bit Di Vita">
+    <meta property="og:title" content="Come San Tommaso - 3 - Bit Di Vita">
+    <meta property="og:description" content="La volta scorsa ci siamo lasciati con qualche domandina. Con questo articolo cerchiamo di rispondere (spero) ad almeno qualcuna di esse. Se non lo hai fatto recupera l&#39;introduzione al CKKS qui, ti servirà, anche perché riprenderemo proprio da dove ci eravamo lasciati. Auspico di finire il CKKS ma a dó …">
+    <meta property="og:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.lucadivita.it/images/logo/logo_esteso.png">
+    <link rel="canonical" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-3/">
+    <link rel="alternate" hreflang="it" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-3/">
+    <link rel="alternate" hreflang="en" href="https://www.lucadivita.it/en/crittografia-sicurezza/like-saint-thomas-3/">
+    <link rel="alternate" hreflang="x-default" href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-3/">
+    <link rel="stylesheet" href="/theme/vendor/pico/pico.min.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/site.css">
+    <link rel="stylesheet" href="https://www.lucadivita.it/theme/vendor/katex/katex.min.css">
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/katex.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/vendor/katex/contrib/auto-render.min.js"></script>
+    <script defer src="https://www.lucadivita.it/theme/katex-init.js"></script>
+    <script defer src="/theme/vendor/umami/script.js" data-website-id="47e58b32-f06a-4bdf-92ac-69fafdb4e5a3"></script>
+</head>
+<body data-katex-enabled="true">
+<header class="site-header">
+    <nav aria-label="Primary navigation" class="site-nav">
+        <div class="site-nav-inner container">
+            <div>
+                <strong>
+                    <a class="site-brand" href="https://www.lucadivita.it/">
+                        <img class="site-logo" src="https://www.lucadivita.it/images/logo/logo.webp" alt="Bit Di Vita logo" width="128" height="128" loading="eager" decoding="async">
+                        <span>Bit Di Vita</span>
+                    </a>
+                </strong>
+            </div>
+            <div class="site-nav-right">
+                <div class="site-nav-panel site-nav-panel-desktop">
+                    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/crittografia-sicurezza/like-saint-thomas-3/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/like-saint-thomas-3/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+                </div>
+                <button type="button" class="site-nav-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="site-nav-backdrop" hidden></div>
+<div class="site-nav-panel site-nav-panel-drawer">
+    <ul class="site-nav-menu">
+        <li><a href="https://www.lucadivita.it/" >Home</a></li>
+        <li><a href="https://www.lucadivita.it/archives.html" >Articoli</a></li>
+        <li><a href="https://www.lucadivita.it/pages/info/" >Esplora</a></li>
+        <li><a href="https://www.lucadivita.it/pages/cv/" >CV</a></li>
+    </ul>
+    <ul class="site-nav-lang">
+        <li>
+            <a class="site-nav-search" href="https://www.lucadivita.it/search.html" aria-label="Search">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+                </svg>
+                <span class="sr-only">Cerca</span>
+            </a>
+        </li>
+        <li>
+            <a href="/crittografia-sicurezza/like-saint-thomas-3/" hreflang="it" title="Italian" aria-current="page">
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/it.webp" alt="Italian" width="318" height="212" decoding="async">
+                <span class="sr-only">Italian</span>
+            </a>
+        </li>
+        <li>
+            <a href="/en/crittografia-sicurezza/like-saint-thomas-3/" hreflang="en" title="English" >
+                <img class="lang-flag" src="https://www.lucadivita.it/images/flags/en.webp" alt="English" width="318" height="212" decoding="async">
+                <span class="sr-only">English</span>
+            </a>
+        </li>
+    </ul>
+
+</div>
+
+<main id="content" class="container">
+<article>
+    <header>
+        <h1>Come San Tommaso - 3</h1>
+        <p>
+            <small class="archive-category">
+                <a href="https://www.lucadivita.it/category/crittografia-sicurezza.html">Crittografia & Sicurezza</a>
+            </small>
+            <small class="archive-meta">
+                <time datetime="2026-10-05T00:00:00+02:00">05 ottobre 2026</time>
+            </small>
+            <small class="archive-meta article-level-meta">
+                <span class="level-badge level--beginner">Livello: Principiante</span>
+            </small>
+        </p>
+    </header>
+
+    <aside class="toc" aria-label="Table of contents">
+        <h2>Contenuti</h2>
+                <div class="toc">
+<ul>
+<li><a href="#le-dimensioni-contano">Le Dimensioni Contano</a><ul>
+<li><a href="#ridimensioniamoci">Ridimensioniamoci</a></li>
+</ul>
+</li>
+<li><a href="#una-dimensione-dopo-laltra">Una Dimensione Dopo L'Altra</a></li>
+<li><a href="#conclusioni">Conclusioni</a></li>
+<li><a href="#related-posts">Consigliati</a></li><li><a href="#references">Riferimenti</a></li></ul>
+</div>
+    </aside>
+
+    <div class="article-sections">
+        <section>
+            <div class="article-body">
+                
+<p>La volta scorsa ci siamo lasciati con qualche <strong>domandina</strong>. Con questo articolo cerchiamo di rispondere (spero) ad
+almeno qualcuna di esse. Se non lo hai fatto recupera l'introduzione al <strong>CKKS</strong> <a href="/crittografia-sicurezza/like-saint-thomas-2/">qui</a>,
+ti servirà, anche perché riprenderemo proprio da dove ci eravamo lasciati. Auspico di finire il CKKS ma a dó arrivo segno.
+Alla peggio gli si dedica un articolo in più. Ma dettagli. Iniziamo...</p>
+<h3 id="le-dimensioni-contano">Le Dimensioni Contano<a class="headerlink" href="#le-dimensioni-contano" title="Permanent link"> </a></h3>
+<p>Iniziamo affrontando il problema delle <strong>dimensioni</strong> (della <span class="arithmatex">\(s\)</span>) che abbiamo introdotto <a href="/crittografia-sicurezza/like-saint-thomas-2/#diamo-valore-al-nostro-messaggio">qui</a>. 
+Lo so, attanaglia gli uomini, ma cerchiamo di farci pace. So che suona come frase fatta, ma non contano le dimensioni della <span class="arithmatex">\(q\)</span>, bensí quanto riesci a cifrare.
+Ok, non era proprio così, ma ci siamo capiti. In ogni caso, il problema delle dimensioni è un problema <strong>reale</strong> e non possiamo far finta di niente. Prendiamo
+due numeri <span class="arithmatex">\(a\)</span> e <span class="arithmatex">\(b\)</span> ed andiamo a <strong>trasformarli</strong> in interi usando <a href="/crittografia-sicurezza/like-saint-thomas-2/#approssimazione">questa formula</a>.
+Abbiamo che:</p>
+<div class="arithmatex">\[
+\tilde{a} \approx a \cdot s, \quad \tilde{b} \approx b \cdot s
+\]</div>
+<p>da cui:</p>
+<div class="arithmatex">\[  
+\tilde{a} + \tilde{b} \approx (a + b) \cdot s
+\]</div>
+<p>e </p>
+<div class="arithmatex">\[
+\tilde{a} \cdot \tilde{b} \approx a \cdot s \cdot b \cdot s = a \cdot b \cdot s^2 
+\]</div>
+<p>Mentre per la somma continuiamo a lavorare con <strong>scala</strong> <span class="arithmatex">\(s\)</span>, per la moltiplicazione ci troviamo a lavorare su scala <span class="arithmatex">\(s^2\)</span>. 
+E questo è un problema. Perché, sempre come detto nella volta precedente, c'è un <strong>headroom</strong> da rispettare.
+Se il nostro <span class="arithmatex">\(s\)</span> diventa troppo grande, il nostro <span class="arithmatex">\(q\)</span> deve diventare ancora più grande e questo causa problemi di sicurezza (il
+perché, lo vedremo in seguito). E non va bene, l'ultima cosa che ci serve è un algoritmo di crittografia che non protegge
+una fava. Quindi dobbiamo trovare un modo per tenere sotto controllo le dimensioni del nostro <span class="arithmatex">\(s\)</span>.</p>
+<p>Per riportare la scala sotto controllo dobbiamo <strong>eliminare</strong> uno dei due fattori <span class="arithmatex">\(s\)</span> comparsi durante la moltiplicazione. 
+L’idea più immediata è dividere il risultato per <span class="arithmatex">\(s\)</span>. In questo modo otteniamo una nuova <strong>rappresentazione intera</strong> dello stesso valore, 
+nuovamente codificata con scala <span class="arithmatex">\(s\)</span>. Facciamo un esempio:</p>
+<div class="arithmatex">\[
+a=1.2,\qquad b=0.5,\qquad s=10 \\[6pt]
+\tilde{a}=12,\qquad \tilde{b}=5 \\[6pt]
+\tilde{a} \cdot \tilde{b}= 12 \cdot 5 = 60
+\]</div>
+<p>Ora siamo ancora su scala <span class="arithmatex">\(s^2 = 100\)</span>, quindi dobbiamo riportare il risultato su scala <span class="arithmatex">\(s\)</span>. Per farlo dividiamo per <span class="arithmatex">\(s\)</span>:</p>
+<div class="arithmatex">\[
+\frac{\tilde{a} \cdot \tilde{b}}{s} = \frac{60}{10} = 6
+\]</div>
+<p>Siamo tornati su scala <span class="arithmatex">\(s=10\)</span> e possiamo <strong>decodificare</strong> il risultato come segue:</p>
+<div class="arithmatex">\[
+\frac{6}{10}=0.6
+\]</div>
+<p>che corrisponde al risultato <strong>corretto</strong> della moltiplicazione <span class="arithmatex">\(1.2 \cdot 0.5 = 0.6\)</span>.
+Questa operazione prende il nome di <strong>rescaling</strong>. Il suo obiettivo è <strong>ridurre</strong> la scala dopo una 
+moltiplicazione, impedendole di crescere <strong>senza controllo</strong>. Ovviamente era troppo bello perché bastasse una semplice divisione. 
+Nel CKKS vero il rescaling viene applicato direttamente al ciphertext e comporta anche una modifica del modulo. 
+Ma per arrivarci dobbiamo prima costruire qualcosa da cifrare e, soprattutto, qualcosa con cui cifrarlo.</p>
+<h4 id="ridimensioniamoci">Ridimensioniamoci<a class="headerlink" href="#ridimensioniamoci" title="Permanent link"> </a></h4>
+<p>Abbiamo detto che nel CKKS il rescaling non si limita a <strong>dividere</strong> il risultato per la scala. 
+Insieme alla scala viene ridotto anche il <strong>modulo</strong> nel quale vivono i coefficienti del ciphertext. 
+Supponiamo di partire da un ciphertext definito nell’<strong>anello</strong>:</p>
+<div class="arithmatex">\[
+R_q=\mathbb{Z}_q[x]/(x^N+1)
+\]</div>
+<p>Dopo la moltiplicazione, la sua scala è diventata <span class="arithmatex">\(s^2\)</span>. Per riportarla a un valore vicino a 
+<span class="arithmatex">\(s\)</span>, scegliamo un fattore <span class="arithmatex">\(p\)</span> <strong>approssimativamente</strong> uguale alla scala <span class="arithmatex">\(p\approx s\)</span> e dividiamo le 
+componenti del ciphertext per <span class="arithmatex">\(p\)</span>, arrotondando il risultato:</p>
+<p><a id="scaling-cipher"></a></p>
+<div class="arithmatex">\[
+\left\lfloor\frac{ciphertext}{p}\right\rceil
+\]</div>
+<p class="formula-caption">Formula 1. Rescaling del Ciphertext</p>
+<p>La nuova scala diventa quindi <span class="arithmatex">\(\frac{s^2}{p}\approx s\)</span>. Tuttavia, dividendo le componenti del 
+ciphertext per <span class="arithmatex">\(p\)</span>, il risultato non è più <strong>naturalmente</strong> definito modulo <span class="arithmatex">\(q\)</span>, ma modulo <span class="arithmatex">\(\frac{q}{p}\)</span>. 
+Per questo, insieme alla scala, viene ridotto anche il modulo:</p>
+<p><a id="scaling-modulo"></a></p>
+<div class="arithmatex">\[
+q' = \frac{q}{p}
+\]</div>
+<p class="formula-caption">Formula 2. Rescaling del Modulo</p>
+<p>e quindi il ciphertext non vive più nell’anello <span class="arithmatex">\(R_q\)</span>, ma in uno <strong>nuovo</strong></p>
+<div class="arithmatex">\[
+R_{q'} = \mathbb{Z}_{q'}[x]/(x^N+1)
+\]</div>
+<p>Non abbiamo quindi recuperato <strong>gratuitamente</strong> lo spazio che stavamo consumando. 
+Ne abbiamo <strong>eliminato</strong> una parte. Il ciphertext è tornato ad avere una scala gestibile, 
+ma ora vive dentro un recinto più <strong>piccolo</strong>. Andiamo a vedere perché, dividendo il ciphertext, 
+dobbiamo ridurre anche il modulo. Non vi spiego nuovamente l'aritmetica modulare 
+(potete leggere qualcosa <a href="/teoria-matematica/qui-crescono-solo-polinomi/">qui</a>), 
+per cui partiamo da questa congruenza:</p>
+<div class="arithmatex">\[
+60 \equiv 1060 \pmod{1000}
+\]</div>
+<p>I due valori rappresentano lo stesso elemento modulo <span class="arithmatex">\(q=1000\)</span>.
+Supponiamo ora di voler applicare un <strong>rescaling</strong> dividendo per <span class="arithmatex">\(10\)</span>. Otteniamo: <span class="arithmatex">\(\frac{60}{10}=6\)</span> 
+e <span class="arithmatex">\(\frac{1060}{10}=106\)</span>. Il problema è che <span class="arithmatex">\(6\)</span> e <span class="arithmatex">\(106\)</span> non sono equivalenti modulo <span class="arithmatex">\(1000\)</span>:</p>
+<div class="arithmatex">\[
+6 \not\equiv 106 \pmod{1000}
+\]</div>
+<p>La divisione non è quindi <strong>ben definita</strong> se continuiamo a lavorare con lo stesso modulo. 
+Andiamo a vedere cosa succede se scaliamo anche il modulo. 
+Passiamo quindi da <span class="arithmatex">\(q=1000\)</span> a <span class="arithmatex">\(q'=\frac{1000}{10}=100\)</span>, e vediamo cosa succede:</p>
+<div class="arithmatex">\[
+6 \equiv 106 \pmod{100}
+\]</div>
+<p>Questa volta la congruenza è <strong>rispettata</strong>. Questo piccolo esempio mostra perché il rescaling
+impatta anche sul modulo. L'operazione di rescaling è abbastanza semplice <strong>programmaticamente</strong> parlando, infatti si tratta
+solo di una divisione in modulo (arrotondata) come mostrato nello snippet seguente:</p>
+<p><a id="snippet1"></a></p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_divide_and_round</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">divisor</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">divisor</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">RescalingError</span><span class="p">(</span><span class="s2">"Il fattore di rescaling deve essere positivo"</span><span class="p">)</span>
+
+    <span class="n">quotient</span><span class="p">,</span> <span class="n">remainder</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">divisor</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">remainder</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="n">divisor</span><span class="p">:</span>
+        <span class="n">quotient</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">quotient</span>
+
+    <span class="k">return</span> <span class="n">quotient</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">_divide_and_round</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">divisor</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># Output: 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">_divide_and_round</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">divisor</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span> <span class="c1"># Output: 2</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 1. Divisione con arrotondamento in modulo</p>
+<h3 id="una-dimensione-dopo-laltra">Una Dimensione Dopo L'Altra<a class="headerlink" href="#una-dimensione-dopo-laltra" title="Permanent link"> </a></h3>
+<p>Abbiamo visto che, dopo un rescaling per un fattore <span class="arithmatex">\(p\)</span>, il ciphertext passa da un modulo 
+<span class="arithmatex">\(q\)</span> a un modulo più <strong>piccolo</strong> <span class="arithmatex">\(q'\)</span>. Il fattore <span class="arithmatex">\(p\)</span>, però, non viene scelto a <strong>caso</strong>. 
+Il modulo iniziale infatti, viene costruito come <strong>prodotto di più fattori</strong>:</p>
+<p><a id="costruzione-modulo"></a></p>
+<div class="arithmatex">\[
+q^{(L)}=p_L\cdot p_{L-1}\cdots p_1\cdot p_0
+\]</div>
+<p class="formula-caption">Formula 3. Costruzione del Modulo</p>
+<p>Il ciphertext parte quindi dal modulo <span class="arithmatex">\(q^{(L)}\)</span>, il più grande a <strong>disposizione</strong>. Vi faccio notare
+che <span class="arithmatex">\(L\)</span> sta ad indicare un <strong>livello</strong> e non un valore numerico. Dopo vediamo, ma prima eseguiamo un 
+rescaling ed eliminiamo uno dei fattori, ad esempio <span class="arithmatex">\(p_L\)</span>. Vediamo cosa succede al modulo:</p>
+<div class="arithmatex">\[
+q^{(L-1)} = \frac{q^{(L)}}{p_L} = p_{L-1}\cdots p_1\cdot p_0
+\]</div>
+<p>Se facciamo un altro <strong>rescaling</strong> ed eliminiamo un altro <strong>fattore</strong>, ad esempio <span class="arithmatex">\(p_{L-1}\)</span> otteniamo</p>
+<div class="arithmatex">\[
+q^{(L-2)} = \frac{q^{(L - 1)}}{p_{L - 1}} = p_{L-2}\cdots p_1\cdot p_0
+\]</div>
+<p>e così via. Otteniamo quindi una sequenza di moduli <strong>progressivamente più piccoli</strong>:</p>
+<p><a id="catena-moduli"></a></p>
+<div class="arithmatex">\[
+q^{(L)} \longrightarrow q^{(L-1)} \longrightarrow \cdots \longrightarrow q^{(0)}
+\]</div>
+<p class="formula-caption">Formula 4. Catena di Moduli</p>
+<p>Questa sequenza prende il nome di <strong>catena dei moduli</strong>. Ogni elemento della catena rappresenta 
+un livello al quale può trovarsi il ciphertext. Facciamo un esempio. Supponiamo di costruire 
+il modulo iniziale come</p>
+<div class="arithmatex">\[
+q^{(3)}=11 \cdot 13 \cdot 17 \cdot 19= 46189
+\]</div>
+<p>Il livello è il <span class="arithmatex">\(3\)</span> perché costruiamo il modulo come prodotto di <span class="arithmatex">\(4\)</span> <strong>fattori</strong> (il conteggio parte da <span class="arithmatex">\(0\)</span>, non sono mica MATLAB). 
+Se il primo rescaling elimina il fattore <span class="arithmatex">\(19\)</span>, passiamo a</p>
+<div class="arithmatex">\[
+q^{(2)} = \frac{46189}{19} = 11 \cdot 13 \cdot 17 = 2431
+\]</div>
+<p>eliminando successivamente <span class="arithmatex">\(17\)</span>, otteniamo</p>
+<div class="arithmatex">\[
+q^{(1)} = \frac{2431}{17} = 11 \cdot 13 = 143
+\]</div>
+<p>infine, eliminando <span class="arithmatex">\(13\)</span>, rimane</p>
+<div class="arithmatex">\[
+q^{(0)} = \frac{143}{13} = 11
+\]</div>
+<p>La catena dei moduli è quindi:</p>
+<div class="arithmatex">\[
+q^{(3)} = 46189 \longrightarrow q^{(2)} = 2431 \longrightarrow q^{(1)} = 143 \longrightarrow q^{(0)} = 11
+\]</div>
+<p>Anche per la catena di moduli si riporta un piccolo snippet esplicativo:</p>
+<p><a id="snippet2"></a></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">prod</span>
+
+<span class="k">class</span> <span class="nc">ModulusChain</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">factors</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_factors</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_moduli</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_moduli</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_factors</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">modulus_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_moduli</span><span class="p">[</span><span class="n">level</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">next_modulus_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_moduli</span><span class="p">[</span><span class="n">level</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">rescaling_factor_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">current_modulus</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">modulus_at</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+        <span class="n">next_modulus</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next_modulus_at</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">current_modulus</span> <span class="o">//</span> <span class="n">next_modulus</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_build_moduli</span><span class="p">(</span><span class="n">factors</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span>
+            <span class="n">prod</span><span class="p">(</span><span class="n">factors</span><span class="p">[:</span><span class="n">remaining</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">remaining</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">factors</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+
+<span class="c1"># 3 Levels Chain</span>
+<span class="n">chain</span> <span class="o">=</span> <span class="n">ModulusChain</span><span class="p">(</span><span class="mi">1003</span><span class="p">,</span> <span class="mi">1009</span><span class="p">,</span> <span class="mi">1013</span><span class="p">)</span>
+
+<span class="c1"># Level 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">modulus_at</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># Output: 1003 * 1009 * 1013 = 1025183351</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">next_modulus_at</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># Output: 1003 * 1009 = 1012027</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">rescaling_factor_at</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="c1"># Output: 1025183351 // 1012027 = 1013</span>
+
+<span class="c1"># Level 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">modulus_at</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Output: 1003 * 1009 = 1012027</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">next_modulus_at</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Output: 1003</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">chain</span><span class="o">.</span><span class="n">rescaling_factor_at</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># Output: 1012027 // 1003 = 1009</span>
+</code></pre></div>
+<p class="code-snippet">Snippet 2. Catena dei Moduli</p>
+<p>Dopo ogni rescaling il ciphertext <strong>scende di un livello</strong>. La scala torna a essere gestibile, 
+ma il fattore eliminato dal modulo non può essere <strong>recuperato</strong>. In pratica, per ridurre 
+le dimensioni della scala consumiamo una parte dello spazio che avevamo <strong>preparato inizialmente</strong>.
+Questo significa che non possiamo eseguire rescaling all’infinito. Una volta raggiunto l’ultimo 
+livello della catena, non rimangono altri fattori da eliminare. Dato che sono soprattutto le 
+moltiplicazioni a far crescere la scala e a richiedere un rescaling, il numero di livelli 
+disponibili <strong>limita</strong> il numero di moltiplicazioni <strong>consecutive</strong> che possiamo eseguire. 
+Questo limite prende il nome di <strong>profondità moltiplicativa</strong>.
+La catena dei moduli deve quindi essere preparata tenendo conto del calcolo che vogliamo eseguire. 
+Se scegliamo pochi livelli, li consumeremo <strong>rapidamente</strong>. Se ne scegliamo troppi, dovremo partire 
+da un modulo iniziale molto più grande, ma le conseguenze di questa scelta le 
+vedremo quando parleremo di sicurezza.</p>
+<p>Per il momento ci basta sapere che ogni ciphertext avrà due informazioni da portarci 
+dietro: la sua <strong>scala</strong> e il <strong>livello</strong> della catena nel quale si trova.</p>
+<p>Così come per la <a href="/crittografia-sicurezza/like-saint-thomas-2/">parte 2</a>, ho cercato di sviluppare del codice
+con un minimo di organizzazione. Nel repo troverete tre classi:</p>
+<ul>
+<li><code>ModulusChain</code>: rappresenta la catena dei moduli e fornisce i metodi per accedere ai moduli e ai fattori di rescaling</li>
+<li><code>Level</code>: rappresenta un livello della catena dei moduli e permette di individuare il livello corrente e quello successivo.</li>
+<li><code>Rescaler</code>: si occupa di eseguire il rescaling dei coefficienti di un polinomio, dividendoli per il fattore associato al 
+livello corrente e passando al modulo successivo.</li>
+</ul>
+<h3 id="conclusioni">Conclusioni<a class="headerlink" href="#conclusioni" title="Permanent link"> </a></h3>
+<p>Siamo giunti alla fine di questa terza parte della serie sulla crittografia omomorfica. 
+Anche questa volta non abbiamo ancora cifrato nulla ma abbiamo sistemato, con il rescaling, un problema che sarebbe 
+diventato parecchio <strong>fastidioso</strong> più avanti. Ora quindi sappiamo che le dimensioni contano, ma abbiamo anche imparato a gestirle.
+Insomma, abbiamo imparato a tenere sotto controllo le dimensioni, ma continuiamo ad avere un problema piuttosto evidente: 
+fino a questo momento i nostri messaggi sono ancora completamente in chiaro. Al solito, potete trovare il codice <a href="https://github.com/lucadivit/LikeSaintThomas/tree/main/part_3"><strong>qui</strong></a>.</p>
+<p>Alla prossima.</p>
+            </div>
+        </section>
+
+        <section class="article-extras">
+            <aside class="article-extra-related" id="related-posts">
+                <h3>Consigliati</h3>
+                <ol class="article-related-list">
+                    <li><a href="https://www.lucadivita.it/teoria-matematica/qui-crescono-solo-polinomi/" rel="noopener noreferrer" target="_blank">Qui Crescono Solo Polinomi</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/share-your-secrets-with-shamir/" rel="noopener noreferrer" target="_blank">Condividi I Tuoi Segreti Con Shamir</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-1/" rel="noopener noreferrer" target="_blank">Come San Tommaso - 1</a></li>
+                    <li><a href="https://www.lucadivita.it/crittografia-sicurezza/like-saint-thomas-2/" rel="noopener noreferrer" target="_blank">Come San Tommaso - 2</a></li>
+                </ol>
+            </aside>
+
+            <section class="article-extra-references" id="references">
+                <h3>Riferimenti</h3>
+                <ol class="article-reference-list">
+                    <li>
+                        <a href="/crittografia-sicurezza/like-saint-thomas-2/">/crittografia-sicurezza/like-saint-thomas-2/</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/like-saint-thomas-2/#diamo-valore-al-nostro-messaggio">/crittografia-sicurezza/like-saint-thomas-2/#diamo-valore-al-nostro-messaggio</a>
+                    </li>
+                    <li>
+                        <a href="/crittografia-sicurezza/like-saint-thomas-2/#approssimazione">/crittografia-sicurezza/like-saint-thomas-2/#approssimazione</a>
+                    </li>
+                    <li>
+                        <a href="/teoria-matematica/qui-crescono-solo-polinomi/">/teoria-matematica/qui-crescono-solo-polinomi/</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/lucadivit/LikeSaintThomas/tree/main/part_3" rel="noopener noreferrer" target="_blank">https://github.com/lucadivit/LikeSaintThomas/tree/main/part_3</a>
+                    </li>
+                    <li>
+                        Homomorphic Encryption for Data Science (HE4DS)
+                    </li>
+                    <li>
+                        <a href="https://ckks.org/" rel="noopener noreferrer" target="_blank">https://ckks.org/</a>
+                    </li>
+                </ol>
+            </section>
+        </section>
+
+        <footer class="article-tags">
+            <p><strong>Tags</strong></p>
+            <ul class="article-tags-list">
+                <li><a href="https://www.lucadivita.it/tag/crittografia.html">crittografia</a></li>
+                <li><a href="https://www.lucadivita.it/tag/sicurezza.html">sicurezza</a></li>
+                <li><a href="https://www.lucadivita.it/tag/anelli.html">anelli</a></li>
+                <li><a href="https://www.lucadivita.it/tag/aritmetica_modulare.html">aritmetica_modulare</a></li>
+                <li><a href="https://www.lucadivita.it/tag/omomorfismo.html">omomorfismo</a></li>
+                <li><a href="https://www.lucadivita.it/tag/crittografia_omomorfica.html">crittografia_omomorfica</a></li>
+                <li><a href="https://www.lucadivita.it/tag/ckks.html">ckks</a></li>
+            </ul>
+        </footer>
+
+        <section class="article-feedback" aria-label="Feedback and corrections">
+            <p><small>Refusi o correzioni? <a href="https://www.lucadivita.it/pages/contatti/">Scrivimi</a>.</small></p>
+        </section>
+    </div>
+
+</article>
+<div class="reading-progress" id="reading-progress" aria-hidden="true"><div class="reading-progress__bar"></div></div>
+</main>
+
+<script defer src="https://www.lucadivita.it/theme/site.js"></script>
+
+<script defer src="https://www.lucadivita.it/theme/umami-events.js"></script>
+
+<script type="module" defer src="https://www.lucadivita.it/theme/vendor/instant.page/instantpage.js"></script>
+
+
+<script defer src="https://www.lucadivita.it/theme/collapsible-sections.js"></script>
+<script defer src="https://www.lucadivita.it/theme/reading-progress.js"></script>
+</body>
+</html>
