@@ -385,14 +385,14 @@ Diamo anche qui la nostra bella classe:</p>
 <p>Aumentare la scala ci permette di conservare più cifre decimali, ma per citare Sebastiano Barisoni, in economia non ci sono pasti gratis. 
 Il motivo è semplice: più la scala è grande, più diventa grande anche l’intero che rappresenta il nostro numero reale.
 Supponiamo di voler codificare <span class="arithmatex">\(m = 1.2345\)</span>. Se vogliamo conservarlo senza perdere cifre decimali, possiamo scegliere una scala
-<span class="arithmatex">\(s = 10\, 000\)</span> ottenendo:</p>
+<span class="arithmatex">\(s = 10\,000\)</span> ottenendo:</p>
 <div class="arithmatex">\[
-\tilde{m} = 1.2345 \cdot 10\, 000 = 12345
+\tilde{m} = 1.2345 \cdot 10\,000 = 12\,345
 \]</div>
 <p>Il problema è che i coefficienti dei nostri polinomi vivono modulo <span class="arithmatex">\(q\)</span>. Quindi, se scegliamo un modulo <strong>troppo piccolo</strong>, il valore codificato viene ridotto modulo <span class="arithmatex">\(q\)</span> 
 e non rappresenta più il numero che pensavamo di aver codificato. Per esempio, se <span class="arithmatex">\(q = 17\)</span>, allora:</p>
 <div class="arithmatex">\[
-12345 \bmod 17 = 3
+12\,345 \bmod 17 = 3
 \]</div>
 <p>Capite bene che <span class="arithmatex">\(3\)</span> non è esattamente il modo migliore per ricordarsi che volevamo rappresentare <span class="arithmatex">\(1.2345\)</span>.
 È qui che entra in gioco <strong>l’headroom</strong>, cioè il <strong>margine</strong> di spazio che lasciamo tra i valori che vogliamo rappresentare e il modulo <span class="arithmatex">\(q\)</span>. Questo margine serve perché, 

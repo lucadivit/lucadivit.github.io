@@ -224,17 +224,17 @@ dobbiamo ridurre anche il modulo. Non vi spiego nuovamente l'aritmetica modulare
 (potete leggere qualcosa <a href="/teoria-matematica/qui-crescono-solo-polinomi/">qui</a>), 
 per cui partiamo da questa congruenza:</p>
 <div class="arithmatex">\[
-60 \equiv 1060 \pmod{1000}
+60 \equiv 1\,060 \pmod{1\,000}
 \]</div>
-<p>I due valori rappresentano lo stesso elemento modulo <span class="arithmatex">\(q=1000\)</span>.
+<p>I due valori rappresentano lo stesso elemento modulo <span class="arithmatex">\(q=1\,000\)</span>.
 Supponiamo ora di voler applicare un <strong>rescaling</strong> dividendo per <span class="arithmatex">\(10\)</span>. Otteniamo: <span class="arithmatex">\(\frac{60}{10}=6\)</span> 
-e <span class="arithmatex">\(\frac{1060}{10}=106\)</span>. Il problema è che <span class="arithmatex">\(6\)</span> e <span class="arithmatex">\(106\)</span> non sono equivalenti modulo <span class="arithmatex">\(1000\)</span>:</p>
+e <span class="arithmatex">\(\frac{1\,060}{10}=106\)</span>. Il problema è che <span class="arithmatex">\(6\)</span> e <span class="arithmatex">\(106\)</span> non sono equivalenti modulo <span class="arithmatex">\(1\,000\)</span>:</p>
 <div class="arithmatex">\[
-6 \not\equiv 106 \pmod{1000}
+6 \not\equiv 106 \pmod{1\,000}
 \]</div>
 <p>La divisione non è quindi <strong>ben definita</strong> se continuiamo a lavorare con lo stesso modulo. 
 Andiamo a vedere cosa succede se scaliamo anche il modulo. 
-Passiamo quindi da <span class="arithmatex">\(q=1000\)</span> a <span class="arithmatex">\(q'=\frac{1000}{10}=100\)</span>, e vediamo cosa succede:</p>
+Passiamo quindi da <span class="arithmatex">\(q=1\,000\)</span> a <span class="arithmatex">\(q'=\frac{1\,000}{10}=100\)</span>, e vediamo cosa succede:</p>
 <div class="arithmatex">\[
 6 \equiv 106 \pmod{100}
 \]</div>
@@ -289,16 +289,16 @@ q^{(L)} \longrightarrow q^{(L-1)} \longrightarrow \cdots \longrightarrow q^{(0)}
 un livello al quale può trovarsi il ciphertext. Facciamo un esempio. Supponiamo di costruire 
 il modulo iniziale come</p>
 <div class="arithmatex">\[
-q^{(3)}=11 \cdot 13 \cdot 17 \cdot 19= 46189
+q^{(3)}=11 \cdot 13 \cdot 17 \cdot 19= 46\,189
 \]</div>
 <p>Il livello è il <span class="arithmatex">\(3\)</span> perché costruiamo il modulo come prodotto di <span class="arithmatex">\(4\)</span> <strong>fattori</strong> (il conteggio parte da <span class="arithmatex">\(0\)</span>, non sono mica MATLAB). 
 Se il primo rescaling elimina il fattore <span class="arithmatex">\(19\)</span>, passiamo a</p>
 <div class="arithmatex">\[
-q^{(2)} = \frac{46189}{19} = 11 \cdot 13 \cdot 17 = 2431
+q^{(2)} = \frac{46\,189}{19} = 11 \cdot 13 \cdot 17 = 2\,431
 \]</div>
 <p>eliminando successivamente <span class="arithmatex">\(17\)</span>, otteniamo</p>
 <div class="arithmatex">\[
-q^{(1)} = \frac{2431}{17} = 11 \cdot 13 = 143
+q^{(1)} = \frac{2\,431}{17} = 11 \cdot 13 = 143
 \]</div>
 <p>infine, eliminando <span class="arithmatex">\(13\)</span>, rimane</p>
 <div class="arithmatex">\[
@@ -306,7 +306,7 @@ q^{(0)} = \frac{143}{13} = 11
 \]</div>
 <p>La catena dei moduli è quindi:</p>
 <div class="arithmatex">\[
-q^{(3)} = 46189 \longrightarrow q^{(2)} = 2431 \longrightarrow q^{(1)} = 143 \longrightarrow q^{(0)} = 11
+q^{(3)} = 46\,189 \longrightarrow q^{(2)} = 2\,431 \longrightarrow q^{(1)} = 143 \longrightarrow q^{(0)} = 11
 \]</div>
 <p>Anche per la catena di moduli si riporta un piccolo snippet esplicativo:</p>
 <p><a id="snippet2"></a></p>

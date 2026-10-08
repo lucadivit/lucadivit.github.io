@@ -385,14 +385,14 @@ And here too, let's introduce our nice little class:</p>
 <p>Increasing the scale allows us to preserve more decimal digits, but to quote Sebastiano Barisoni, in economics there are no free lunches.
 The reason is simple: the larger the scale, the larger the integer that represents our real number also becomes.
 Suppose we want to encode <span class="arithmatex">\(m = 1.2345\)</span>. If we want to preserve it without losing decimal digits, we can choose a scale
-<span class="arithmatex">\(s = 10\, 000\)</span> obtaining:</p>
+<span class="arithmatex">\(s = 10\,000\)</span> obtaining:</p>
 <div class="arithmatex">\[
-\tilde{m} = 1.2345 \cdot 10\, 000 = 12345
+\tilde{m} = 1.2345 \cdot 10\,000 = 12\,345
 \]</div>
 <p>The problem is that the coefficients of our polynomials live modulo <span class="arithmatex">\(q\)</span>. So if we choose a modulus that is <strong>too small</strong>, the encoded value gets reduced modulo <span class="arithmatex">\(q\)</span>
 and no longer represents the number we thought we had encoded. For example, if <span class="arithmatex">\(q = 17\)</span>, then:</p>
 <div class="arithmatex">\[
-12345 \bmod 17 = 3
+12\,345 \bmod 17 = 3
 \]</div>
 <p>You can easily see that <span class="arithmatex">\(3\)</span> is not exactly the best way to remember that we wanted to represent <span class="arithmatex">\(1.2345\)</span>.
 This is where <strong>headroom</strong> comes into play, meaning the <strong>margin</strong> of space we leave between the values we want to represent and the modulus <span class="arithmatex">\(q\)</span>. This margin is needed because,

@@ -227,16 +227,16 @@ Let us see why, by dividing the ciphertext, we must also reduce the modulus. I w
 arithmetic again (you can read something <a href="/en/teoria-matematica/qui-crescono-solo-polinomi/">here</a>), 
 so let us start from this congruence:</p>
 <div class="arithmatex">\[
-60 \equiv 1060 \pmod{1000}
+60 \equiv 1\,060 \pmod{1\,000}
 \]</div>
-<p>The two values represent the same element modulo <span class="arithmatex">\(q=1000\)</span>. Let us now suppose we want to apply <strong>rescaling</strong> 
-by dividing by <span class="arithmatex">\(10\)</span>. We obtain: <span class="arithmatex">\(\frac{60}{10}=6\)</span> and <span class="arithmatex">\(\frac{1060}{10}=106\)</span>. The problem is that <span class="arithmatex">\(6\)</span> and <span class="arithmatex">\(106\)</span> are 
-not equivalent modulo <span class="arithmatex">\(1000\)</span>:</p>
+<p>The two values represent the same element modulo <span class="arithmatex">\(q=1\,000\)</span>. Let us now suppose we want to apply <strong>rescaling</strong> 
+by dividing by <span class="arithmatex">\(10\)</span>. We obtain: <span class="arithmatex">\(\frac{60}{10}=6\)</span> and <span class="arithmatex">\(\frac{1\,060}{10}=106\)</span>. The problem is that <span class="arithmatex">\(6\)</span> and <span class="arithmatex">\(106\)</span> are 
+not equivalent modulo <span class="arithmatex">\(1\,000\)</span>:</p>
 <div class="arithmatex">\[
-6 \not\equiv 106 \pmod{1000}
+6 \not\equiv 106 \pmod{1\,000}
 \]</div>
 <p>Division is therefore not <strong>well-defined</strong> if we continue to work with the same modulus. Let us see what 
-happens if we scale the modulus as well. So we move from <span class="arithmatex">\(q=1000\)</span> to <span class="arithmatex">\(q'=\frac{1000}{10}=100\)</span>, and see what happens:</p>
+happens if we scale the modulus as well. So we move from <span class="arithmatex">\(q=1\,000\)</span> to <span class="arithmatex">\(q'=\frac{1\,000}{10}=100\)</span>, and see what happens:</p>
 <div class="arithmatex">\[
 6 \equiv 106 \pmod{100}
 \]</div>
@@ -290,16 +290,16 @@ q^{(L)} \longrightarrow q^{(L-1)} \longrightarrow \cdots \longrightarrow q^{(0)}
 <p>This sequence is called the <strong>modulus chain</strong>. Each element of the chain represents a level at which the 
 ciphertext can be. Let us look at an example. Suppose we build the initial modulus as</p>
 <div class="arithmatex">\[
-q^{(3)}=11 \cdot 13 \cdot 17 \cdot 19= 46189
+q^{(3)}=11 \cdot 13 \cdot 17 \cdot 19= 46\,189
 \]</div>
 <p>The level is <span class="arithmatex">\(3\)</span> because we build the modulus as the product of <span class="arithmatex">\(4\)</span> <strong>factors</strong> (counting starts at <span class="arithmatex">\(0\)</span>, 
 this is not MATLAB). If the first rescaling eliminates factor <span class="arithmatex">\(19\)</span>, we move to</p>
 <div class="arithmatex">\[
-q^{(2)} = \frac{46189}{19} = 11 \cdot 13 \cdot 17 = 2431
+q^{(2)} = \frac{46\,189}{19} = 11 \cdot 13 \cdot 17 = 2\,431
 \]</div>
 <p>then, eliminating <span class="arithmatex">\(17\)</span>, we obtain</p>
 <div class="arithmatex">\[
-q^{(1)} = \frac{2431}{17} = 11 \cdot 13 = 143
+q^{(1)} = \frac{2\,431}{17} = 11 \cdot 13 = 143
 \]</div>
 <p>finally, eliminating <span class="arithmatex">\(13\)</span>, there remains</p>
 <div class="arithmatex">\[
@@ -307,7 +307,7 @@ q^{(0)} = \frac{143}{13} = 11
 \]</div>
 <p>The modulus chain is therefore:</p>
 <div class="arithmatex">\[
-q^{(3)} = 46189 \longrightarrow q^{(2)} = 2431 \longrightarrow q^{(1)} = 143 \longrightarrow q^{(0)} = 11
+q^{(3)} = 46\,189 \longrightarrow q^{(2)} = 2\,431 \longrightarrow q^{(1)} = 143 \longrightarrow q^{(0)} = 11
 \]</div>
 <p>For the modulus chain as well, here is a small explanatory snippet:</p>
 <p><a id="snippet2"></a></p>
